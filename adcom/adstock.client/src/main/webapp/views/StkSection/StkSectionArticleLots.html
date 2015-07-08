@@ -1,0 +1,33 @@
+<div ng-controller="stkSectionArticleLotsCtlr" >
+    <div class="col-lg-12" >
+	    <table class="table table-bordered table-striped">
+	        <tr>
+	            <th width="10%">{{stkSectionArticleLotsUtils.translations['StkSectionArticleLot_lotPic_description.title']}}</th>
+	            <th width="10%">{{stkSectionArticleLotsUtils.translations['StkSectionArticleLot_artPic_description.title']}}</th>
+	            <th>{{stkSectionArticleLotsUtils.translations['StkSectionArticleLot_artName_description.title']}}</th>
+	            <!-- 
+	            <th width="10%">{{stkSectionArticleLotsUtils.translations['StkSectionArticleLot_stockQty_description.title']}}</th>
+	            <th width="10%">{{stkSectionArticleLotsUtils.translations['StkSectionArticleLot_stockQtyDt_description.title']}}</th>
+	             -->
+	            <th width="10%">{{stkSectionArticleLotsUtils.translations['StkSectionArticleLot_lotQty_description.title']}}</th>
+	            <th width="10%">{{stkSectionArticleLotsUtils.translations['StkSectionArticleLot_lotQtyDt_description.title']}}</th>
+	            <th width="10%">{{stkSectionArticleLotsUtils.translations['StkSectionArticleLot_sppuTaxIncl_description.title']}}</th>
+	        </tr>
+	        <tr ng-repeat="stkSectionArticleLot in stkSectionArticleLots()">
+	            <td>{{stkSectionArticleLot.lotPic}}</td>
+	            <td>{{stkSectionArticleLot.artPic}}</td>
+	            <td>{{stkSectionArticleLot.sectionArticleLot.artFeatures.artName}}</td>
+	            <!-- 
+	            <td>{{stkSectionArticleLot.qty}}</td>
+	            <td>{{stkSectionArticleLot.qtyDt}}</td>
+	             -->
+	            <td>{{stkSectionArticleLot.sectionArticleLot.lotQty}}</td>
+	            <td>{{stkSectionArticleLot.sectionArticleLot.lotQtyDt|date:'dd MM yyyy'}}</td>
+	            <td>{{stkSectionArticleLot.sectionArticleLot.sppuTaxIncl}}</td>
+	        </tr>
+	    </table>
+        <ul  class="pull-right">
+            <pagination  total-items="totalItems()" items-per-page="itemPerPage()"  class="pagination-sm" ng-model="currentPage" ng-change="paginate()"></pagination>
+        </ul>
+    </div>
+</div>

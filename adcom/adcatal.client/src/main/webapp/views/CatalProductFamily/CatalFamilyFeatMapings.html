@@ -1,0 +1,25 @@
+<div ng-controller="catalArtFeatMappingsCtlr as featCtlr" >
+    <a class="btn btn-success margBott10 pull-right" ng-click="featCtlr.openCreateForm('md')"><i class="glyphicon glyphicon-plus"></i> {{'Entity_create.title' | translate}}</a>
+    <br/>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>{{"CatalAbstractFeatMapping_langIso2_description.title"|translate}}</th>
+            <th>{{"CatalArtFeatMapping_artName_description.title"|translate}}</th>
+            <th>{{"CatalAbstractFeatMapping_purpose_description.title"|translate}}</th>
+            <th>{{"CatalAbstractFeatMapping_usage_description.title"|translate}}</th>
+            <th>{{"CatalAbstractFeatMapping_warnings_description.title"|translate}}</th>
+            <th>{{"CatalAbstractFeatMapping_substances_description.title"|translate}}</th>
+            <th></th>
+        </tr>
+        <tr ng-repeat="catalArtFeatMapping in featCtlr.catalArtFeatMappings">
+            <td><a >{{catalArtFeatMapping.langIso2}}</a></td>
+            <td><a >{{catalArtFeatMapping.familyName}}</a></td>
+            <td><a >{{catalArtFeatMapping.purpose}}</a></td>
+            <td><a >{{catalArtFeatMapping.usage}}</a></td>
+            <td><a >{{catalArtFeatMapping.warnings}}</a></td>
+            <td><a >{{catalArtFeatMapping.substances}}</a></td>
+            <td><a class="btn btn-default" ng-click="featCtlr.openEditForm('md',$index);"><i class="glyphicon glyphicon-edit"></i> </a>
+            </td>
+        </tr>
+    </table>
+</div>

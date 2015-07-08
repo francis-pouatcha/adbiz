@@ -1,0 +1,100 @@
+<div class="row" ng-cloak>
+        <div class="panel panel-default  ng-scope">
+            <div class="panel-heading no-collapse">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <b>Etat de caisse</b>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="">
+                    <form role="form" class="">
+                        <div class="row" >
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class=" control-label">Caissier</label>
+                                    <div class="">
+                                        <input type="text"  ng-model="searchInput.entity.cashier" class="form-control"
+                                               typeahead="login.loginName as login.loginName for login in CshDrawerUtils.loadLogin($viewValue)" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class=" control-label">Du</label>
+                                    <div class="">
+                                        <input type="datetime" date-time  view="date" min-view="date" views="['date']" dismiss="true" format="dd-MM-yyyy"
+                                                ng-model="searchInput.from" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class=" control-label" >Au</label>
+                                    <div class="">
+                                        <input type="datetime" date-time  view="date" min-view="date" views="['date']" dismiss="true" format="dd-MM-yyyy"
+                                               ng-model="searchInput.to" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <button  ng-click="handleSearchRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                    <button  ng-click="handlePrintRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                                        <i class="glyphicon glyphicon-print"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <div class="panel panel-default ">
+            <div class="panel-heading no-collapse"><b>{{CshDrawerUtils.translations['CdrCshDrawer_description.title']}}</b></div>
+            <div class="panel-body">
+                <div class="col-lg-12">
+                    <div class="table-overflow-middle row">
+                        <table class="table table-bordered  table-striped pointer-element" >
+                            <thead>
+                            <tr>
+                                <th>{{CshDrawerUtils.translations['CdrCshDrawer_cashier_description.title']}}</th>
+                                <th>{{CshDrawerUtils.translations['CdrCshDrawer_cdrNbr_description.title']}}</th>
+                                <th>{{CshDrawerUtils.translations['CdrCshDrawer_closedBy_description.title']}}</th>
+                                <th>{{CshDrawerUtils.translations['CdrCshDrawer_clsngDt_description.title']}}</th>
+                                <th>{{CshDrawerUtils.translations['CdrCshDrawer_initialAmt_description.title']}}</th>
+                                <th>{{CshDrawerUtils.translations['CdrCshDrawer_opngDt_description.title']}}</th>
+                                <th>{{CshDrawerUtils.translations['CdrCshDrawer_ttlCashIn_description.title']}}</th>
+                                <th>{{CshDrawerUtils.translations['CdrCshDrawer_ttlCashOut_description.title']}}</th><th>{{CshDrawerUtils.translations['CdrCshDrawer_ttlCash_description.title']}}</th><th>{{CshDrawerUtils.translations['CdrCshDrawer_ttlCheck_description.title']}}</th><th>{{CshDrawerUtils.translations['CdrCshDrawer_ttlCredCard_description.title']}}</th><th>{{CshDrawerUtils.translations['CdrCshDrawer_ttlVchrIn_description.title']}}</th><th>{{CshDrawerUtils.translations['CdrCshDrawer_ttlVchrOut_description.title']}}</th>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="cdrCshDrawer in cdrCshDrawers" >
+                                <td>{{cdrCshDrawer.cashier}}</td>
+                                <td>{{cdrCshDrawer.cdrNbr}}</td>
+                                <td>{{cdrCshDrawer.closedBy}}</td>
+                                <td>{{cdrCshDrawer.clsngDt | date:'yyyy-MM-dd HH:mm'}}</td>
+                                <td>{{cdrCshDrawer.initialAmt}}</td>
+                                <td>{{cdrCshDrawer.opngDt | date:'yyyy-MM-dd HH:mm'}}</td>
+                                <td>{{cdrCshDrawer.ttlCashIn}}</td>
+                                <td>{{cdrCshDrawer.ttlCashOut}}</td>
+                                <td>{{cdrCshDrawer.ttlCash}}</td>
+                                <td>{{cdrCshDrawer.ttlCheck}}</td>
+                                <td>{{cdrCshDrawer.ttlCredCard}}</td>
+                                <td>{{cdrCshDrawer.ttlVchrIn}}</td>
+                                <td>{{cdrCshDrawer.ttlVchrOut}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul  class="pull-right">
+                        <pagination  total-items="totalItems" items-per-page="itemPerPage"  class="pagination-sm" ng-model="currentPage" ng-change="paginate()"></pagination>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+</div>

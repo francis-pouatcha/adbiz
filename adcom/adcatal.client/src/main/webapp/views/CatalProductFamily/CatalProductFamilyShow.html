@@ -1,0 +1,75 @@
+<div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Entity_show.title"| translate}}</b> </div>
+            <div class="panel-body">
+                <label class="error alert-danger" >{{catalProductFamilyShowCtlr.error}} </label>
+                <form  name="catalProductFamilyForm" class="form-horizontal" novalidate="">
+                       <div class="form-group" ng-show="catalProductFamilyShowCtlr.showParent">
+                           <label class="col-lg-2">{{"CatalProductFamily_parentIdentif_description.title"|translate}} :</label>
+                           <div class="col-lg-3" >
+                               <input type="text" ng-model="catalProductFamilyShowCtlr.catalProductFamily.parentIdentif" name="parentIdentif" class="form-control" disabled >
+                           </div>
+	                        <label class="col-lg-2">{{"CatalProductFamily_parent_description.title"|translate}} :</label>
+	                        <div class="col-lg-5">
+	                            <input type="text" ng-model="catalProductFamilyShowCtlr.catalProductFamily.parent.features.familyName" name="parent" class="form-control" disabled >
+	                        </div>
+                    	</div>
+                       <div class="form-group">
+                           <label class="col-lg-2">{{"CatalProductFamily_famCode_description.title"|translate}} :</label>
+                           <div class="col-lg-3" ng-class="{ 'has-error' : catalProductFamilyForm.famCode.$invalid }" >
+                               <input type="text" ng-model="catalProductFamilyShowCtlr.catalProductFamily.famCode" name="famCode" class="form-control" disabled >
+                           </div>
+	                        <label class="col-lg-2">{{"CatalFamilyFeatMaping_familyName_description.title"| translate}} :</label>
+	                        <div class="col-lg-5" ng-class="{ 'has-error' : catalProductFamilyForm.familyName.$invalid }" >
+	                            <input type="text" ng-model="catalProductFamilyShowCtlr.catalProductFamily.features.familyName" name="familyName" class="form-control" disabled >
+	                        </div>
+                    	</div>
+	                    <div class="form-group">
+	                        <label class="col-lg-2">{{"CatalAbstractFeatMapping_purpose_description.title"| translate}} :</label>
+	                        <div class="col-lg-10" >
+	                            <input type="text" ng-model="catalProductFamilyShowCtlr.catalProductFamily.features.purpose" name="purpose" class="form-control" disabled>
+	                        </div>
+	                    </div>
+                        <div class=" form-group ">
+	                        <label class="col-lg-2 ">{{"CatalAbstractFeatMapping_usage_description.title"| translate}} :</label>
+	                        <div class="col-lg-10" >
+	                            <input type="text" ng-model="catalProductFamilyShowCtlr.catalProductFamily.features.usage" name="usage" class="form-control" disabled>
+	                        </div>
+	                    </div>
+                        <div class=" form-group ">
+	                        <label class="col-lg-2 ">{{"CatalAbstractFeatMapping_warnings_description.title"| translate}} :</label>
+	                        <div class="col-lg-10" >
+	                            <input type="text" ng-model="catalProductFamilyShowCtlr.catalProductFamily.features.warnings" name="warnings" class="form-control" disabled>
+	                        </div>
+	                    </div>
+                        <div class=" form-group ">
+	                        <label class="col-lg-2 ">{{"CatalAbstractFeatMapping_substances_description.title"|translate}} :</label>
+	                        <div class="col-lg-10" >
+	                            <input type="text" ng-model="catalProductFamilyShowCtlr.catalProductFamily.features.substances" name="substances" class="form-control" disabled>
+	                        </div>
+	                    </div>
+                </form>
+                <div  class="row ">
+                    <tabset justified="false">
+                        <tab heading="{{'CatalFamilyFeatMaping_description.title'|translate}}">
+                            <br/>
+                            <div ng-include="'views/CatalProductFamily/CatalFamilyFeatMapings.html'" />
+                        </tab>
+                    </tabset>
+                </div>
+                <hr/>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <a class="btn-default btn" ng-click="catalProductFamilyShowCtlr.previousProductFamily(catalProductFamilyShowCtlr.catalProductFamily.famCode)" ><i class="glyphicon glyphicon-chevron-left"></i> {{'Entity_previous.title' | translate}}</a>
+                    </div>
+                    <div class="col-lg-4">
+                        <a class="btn-danger btn" href="#/CatalProductFamilies" ><i class="" ></i> {{'List' | translate}}</a>
+                    </div>
+                    <div class="col-lg-4">
+                        <a class="btn-default btn" ng-click="catalProductFamilyShowCtlr.nextProductFamily(catalProductFamilyShowCtlr.catalProductFamily.famCode)" >{{'Entity_next.title' | translate}} <i class="glyphicon glyphicon-chevron-right" ></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+</div>

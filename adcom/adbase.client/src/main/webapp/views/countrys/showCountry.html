@@ -1,0 +1,102 @@
+<div class="container">
+
+    <div class="col-xs-offset-2 col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Country_description.title"| translate}}</b> </div>
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{ctryShowCtrl.error}} </label>
+                <form  class="form-horizontal" novalidate="">
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_name_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ctryShowCtrl.country.name}}" name="name" class="form-control" required >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_iso3_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ctryShowCtrl.country.iso3}}" name="iso3" class="form-control" required >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_iso2_description.title"| translate}} :</label>
+                        <div class="col-lg-8" >
+                            <input type="text" disabled value="{{ctryShowCtrl.country.iso2}}" name="iso2" class="form-control" >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_dialCode_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ctryShowCtrl.country.dialCode}}" name="dialCode" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_telNbrSize_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ctryShowCtrl.country.telNbrSize}}" name="telNbrSize" class="form-control">
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_langsIso2_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ctryShowCtrl.country.langsIso2}}" name="langsIso2" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_currsIso2_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ctryShowCtrl.country.currsIso2}}" name="currsIso2" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_timeZones_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ctryShowCtrl.country.timeZones}}" name="timeZones" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validFrom.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ctryShowCtrl.country.validFrom | date : 'dd-MM-yyyy HH:mm'}}" name="shortName" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validTo.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ctryShowCtrl.country.validTo | date : 'dd-MM-yyyy HH:mm'}}" name="shortName" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4"  > </label>
+                        <div class="col-lg-8" >
+                            
+                            <div class="col-lg-3" >
+                                <a class="btn-default btn" href="#/countrys"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                            </div>
+                                  
+                            <div class="col-lg-3" >
+                                <a class="btn-danger btn" ng-click="ctryShowCtrl.remove(ctryShowCtrl.country.id)"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_delete.title" | translate }}</a>
+                            </div>                      
+
+                            <div class="col-lg-3" >
+                                <a class="btn-default btn" href="#/countrys/edit/{{ctryShowCtrl.country.identif}}"  ><i class="glyphicon glyphicon-edit" ></i> {{"Entity_edit.title" | translate}} </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

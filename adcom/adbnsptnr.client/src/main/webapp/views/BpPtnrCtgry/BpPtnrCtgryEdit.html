@@ -1,0 +1,41 @@
+<div class="container">
+   <div class="panel panel-default">
+       <div class="panel-heading"><b>{{bpPtnrCtgryUtils.translations['Entity_update.title']}} {{bpPtnrCtgryUtils.translations['BpPtnrCtgry_ptnrNbr_description.title']}} No. {{bpPtnrCtgry.ctgryCode}}</b> </div>
+       <div class="panel-body">
+           <label class="error col-lg-offset-3 alert-danger" >{{error}} </label>
+           <form  name="bpPtnrCtgryForm" class="form-horizontal" novalidate="">
+	            	<div class="form-group">
+                        <label class="col-lg-2 ">{{bpPtnrCtgryUtils.translations['BpPtnrCtgryDtls_name_description.title']}} :</label>
+                        <div class="col-lg-10" >
+	                  		<input type="text" ng-model="bpPtnrCtgry.ctgryDtls.name" name="name" class="form-control" disabled>
+                        </div>
+                    </div>
+	            	<div class="form-group">
+                        <label class="col-lg-2 ">{{bpPtnrCtgryUtils.translations['BpPtnrCtgry_parentCode_description.title']}} :</label>
+                        <div class="col-lg-4" >
+                            <input type="text" ng-model="bpPtnrCtgry.parentCtgryDtls" id="parentCode" name="parentCode" class="form-control"
+                                   autocomplete="off" typeahead="parentCtgryDtls as parentCtgryDtls.name for parentCtgryDtls in bpPtnrCtgryUtils.loadCtgryDtls($viewValue)"
+                                   typeahead-loading="loading">
+                        </div>
+		              <label class="col-lg-2">{{bpPtnrCtgryUtils.translations['BpPtnrCtgry_ptnrRole_description.title']}} :</label>
+		              <div class="col-lg-4" ng-class="{ 'has-error' : BpPtnrCtgryForm.ptnrRole.$invalid }" >
+				            <select class="form-control" name="ptnrRole" ng-model="bpPtnrCtgry.ptnrRole"
+				                    ng-options="ptnrRole.enumKey as bpPtnrCtgryUtils.ptnrRole18nMsgTitleValue(ptnrRole.translKey) for ptnrRole in bpPtnrCtgryUtils.ptnrRoles"  required>
+				                    <option value=""/>
+							</select>
+                           <p ng-show="BpPtnrCtgryForm.ptnrRole.$error.required" class="help-block">{{bpPtnrCtgryUtils.translations['Entity_required.title']}}</p>
+		              </div>
+	         		</div>
+               <br/>
+               <div class="form-group">
+                   <label class="col-lg-4" > </label>
+                   <div class="col-lg-8" >
+                       <a class="btn-danger btn" href="#/"  ><i class="glyphicon glyphicon-remove" ></i> {{bpPtnrCtgryUtils.translations['Entity_cancel.title'] }}</a>
+                       <button ng-click="update();" class="btn-success btn"  ><i class="glyphicon glyphicon-save"></i>  {{bpPtnrCtgryUtils.translations['Entity_save.title'] }}</button>
+                   </div>
+               </div>
+           </form>
+
+       </div>
+   </div>
+</div>

@@ -1,0 +1,107 @@
+<div class="row">
+<div class="col-xs-offset-2 col-xs-8">
+
+        <div class="panel panel-default  ng-scope">
+            <div class="panel-heading no-collapse">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <b>{{"Entity_search.title"|translate}}</b>
+                    </div>
+                </div>
+
+            </div>
+            <div class="panel-body">
+                <div class="">
+                    <form role="form" class="">
+                        <div class="row" >
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class=" control-label" for="">{{"OrgUnit_fullName_description.title"|translate}}</label>
+                                    <div class="">
+                                        <input class="form-control" type="text" id="" ng-model="orgUnitCtrl.searchInput.entity.fullName" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="control-label" for="">{{"OuType_description.title"|translate}}</label>
+                                    <div class="">
+                                        <select class="form-control"  ng-model="orgUnitCtrl.searchInput.entity.identif" name="identif" ng-options="outype.identif as outype.typeName for outype in orgUnitCtrl.outypes"></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="control-label" >{{"Country_description.title"|translate}}</label>
+                                    <div class="">
+                                        <select class="form-control" ng-model="orgUnitCtrl.searchInput.entity.ctryIso3" name="iso3" ng-options="country.iso3 as country.name for country in orgUnitCtrl.countrys"></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <button  ng-click="orgUnitCtrl.doSearch()" class="btn btn-default " style="margin-top: 23px;" >
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                    <button  ng-click="orgUnitCtrl.handlePrintRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                                        <i class="glyphicon glyphicon-print"></i>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="panel panel-default ">
+            <div class="panel-heading no-collapse"><b>{{"OrgUnit_description.title" | translate}}</b></div>
+            <div class="panel-body">
+                <div class="col-lg-12">
+                    <div  class="row">
+                        <a class="btn btn-primary pull-right margBott10" href="#/orgunits/create" >
+                            <i class="glyphicon-plus"></i> {{"Entity_create.title" | translate}}
+                        </a>
+
+                    </div>
+                    <div class="table-overflow-middle row">
+                        <table class="table table-bordered  table-striped pointer-element" >
+                            <thead>
+                            <tr>
+                                <th class="text-center">{{"OrgUnit_fullName_description.title"|translate}}</th>
+                                <th class="text-center">{{"OrgUnit_shortName_description.title"|translate}}</th>
+                                <th class="text-center">{{"OuType_typeName_description.title"|translate}}</th>
+                                <th class="text-center">{{"Country_name_description.title"|translate}}</th>
+                                <th class="text-center">{{"Country_iso3_description.title"|translate}}</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="orgunit in orgUnitCtrl.orgunits" >
+                                <td>{{orgunit.fullName}} </td>
+                                <td>{{orgunit.shortName}} </td>
+                                <td>{{orgunit.typeName}} </td>
+                                <td>{{orgunit.countryName}} </td>
+                                <td>{{orgunit.ctrIso3}} </td>
+                                <td><a href="#/orgunits/show/{{orgunit.identif}}" ><i class="glyphicon glyphicon-eye-open"></i></a></td>
+                                <td><a href="#/orgunits/edit/{{orgunit.identif}}" ><i class="glyphicon glyphicon-edit"></i></a></td>
+                                <td><a href="#/ouworkspaces/{{orgunit.identif}}" ><i class="glyphicon glyphicon-edit">Manage workspaces</i></a></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+	</div>
+</div>
+

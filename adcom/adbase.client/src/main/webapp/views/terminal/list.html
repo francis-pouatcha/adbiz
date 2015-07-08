@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="col-xs-12">
+    <div class="panel panel-default ">
+        <p class="panel-heading no-collapse"><b> {{"ListeSecureTerminal.title"|translate}} </b></p>
+        <div class="panel-body">
+            <form enctype="multipart/form-data" role="form" class="">
+                <div class="row" >
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                                <div class="">
+                                    <input capitalize type="text" placeholder="partenerId" ng-enter="secTermCtrl.handleSearchRequestEvent()" ng-model="secTermCtrl.searchInput.entity.partnerIds" class="form-control">
+                                </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div style=";" class="form-group">
+                            <button class="btn btn-default" ng-click="secTermCtrl.handleSearchRequestEvent()"><i class="glyphicon glyphicon-search"></i> {{"Entity_search.title" | translate}}</button>
+                        </div>
+                    </div>
+                    <div  class="col-lg-3 form-group">
+                        <a class="btn btn-primary " href="#/secTerm/create" >
+                            <i class="glyphicon-plus"></i> {{"Entity_create.title" | translate}}
+                        </a>
+
+                    </div>
+                </div>
+            </form>
+
+
+            <div class="table-overflow" >
+                
+            <table  class="table table-bordered table-striped" >
+                <thead>
+                <tr>
+                    <th>{{"SecTerminal_termName_description"|translate}}</th>
+                    <th>{{"SecTerminal_partnerId_description"|translate}} </th>
+                    <th>{{"SecTerminal_locality_description"|translate}}</th>
+                    <th>Time Zone </th>
+                    <th> {{"SecTerminal_accessTime_description"|translate}}</th>
+                    <th>{{"SecTerminal_authUsers_description"|translate}}</th>
+                    <th >{{"SecTerminal_authWorkspaces_description"|translate}}</th>
+                    <th ></th>
+                </tr>
+                </thead>
+                
+                <tbody>
+                    <tr ng-repeat="secTerminal in secTermCtrl.secTerminals">
+                        <td>{{secTerminal.termName}}</td>
+                        <td>{{secTerminal.partnerIds}}</td>
+                        <td>{{secTerminal.locality}}</td>
+                        <td>{{secTerminal.timeZone}}</td>
+                        <td>{{secTerminal.accessTime}}</td>
+                        <td>{{secTerminal.authUsers}}</td>
+                        <td style="max-width: 260px;word-wrap: break-word;" >{{secTerminal.authWorkspaces}}</td>
+                        <td><a href="#/secTerm/show/{{secTerminal.id}}" ><i class="glyphicon glyphicon-eye-open"></i></a></td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+            <ul  class="pull-right">
+                <pagination  total-items="secTermCtrl.totalItems" items-per-page="secTermCtrl.itemPerPage"  class="pagination-sm" ng-model="secTermCtrl.currentPage" ng-change="secTermCtrl.paginate()"></pagination>
+
+            </ul>
+            </div>
+        </div>
+
+  </div>
+</div>

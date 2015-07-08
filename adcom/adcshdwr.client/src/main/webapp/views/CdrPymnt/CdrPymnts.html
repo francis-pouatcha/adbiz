@@ -1,0 +1,95 @@
+<div class="row" ng-cloak>
+        <div class="panel panel-default  ng-scope">
+            <div class="panel-heading no-collapse">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <b>{{cdrUtils.translations['Entity_search.title']}}</b>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="">
+                    <form role="form" class="">
+                        <div class="row" >
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class=" control-label" for="pymntNbr">{{cdrUtils.translations['CdrPymnt_pymntNbr_description.title']}}</label>
+                                    <div class="">
+                                        <input type="text" id="pymntNbr" ng-model="searchInput.entity.pymntNbr" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class=" control-label" for="cdrNbr">{{cdrUtils.translations['CdrPymnt_cdrNbr_description.title']}}</label>
+                                    <div class="">
+                                        <input type="text" id="cdrNbr" ng-model="searchInput.entity.cdrNbr" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class=" control-label" for="rcptNbr">{{cdrUtils.translations['CdrPymnt_rcptNbr_description.title']}}</label>
+                                    <div class="">
+                                        <input type="text" id="rcptNbr" ng-model="searchInput.entity.rcptNbr" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="panel panel-default ">
+            <div class="panel-heading no-collapse"><b>{{cdrUtils.translations['CdrPymnt_description.title']}}</b></div>
+            <div class="panel-body">
+                <div class="col-lg-12">
+                    <div  class="row">
+                        <a class="btn btn-primary pull-right margBott10" href="#/CdrPymnts/new" >
+                            <i class="glyphicon-plus"></i> {{cdrUtils.translations['Entity_create.title']}}
+                        </a>
+
+                    </div>
+                    <div class="table-overflow-middle row">
+                        <table class="table table-bordered  table-striped pointer-element" >
+                            <thead>
+                            <tr>
+                                <th>{{cdrUtils.translations['CdrPymnt_pymntNbr_description.title']}}</th>
+                                <th>{{cdrUtils.translations['CdrPymnt_pymntDt_description.title']}}</th>
+                                <th>{{cdrUtils.translations['CdrPymnt_valueDt_description.title']}}</th>
+                                <th>{{cdrUtils.translations['CdrPymnt_amt_description.title']}}</th>
+                                <th>{{cdrUtils.translations['CdrPymnt_cashier_description.title']}}</th>
+                                <th>{{cdrUtils.translations['CdrPymnt_cdrNbr_description.title']}}</th>
+                                <th>{{cdrUtils.translations['CdrPymnt_paidBy_description.title']}}</th>
+                                <th>{{cdrUtils.translations['CdrPymnt_rcptNbr_description.title']}}</th>
+                                <th>{{cdrUtils.translations['CdrPymnt_rcptPrntDt_description.title']}}</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="cdrPymnt in cdrPymnts" ng-dblclick="editItem" >
+                                <td>{{cdrPymnt.pymntNbr}}</td>
+                                <td>{{cdrPymnt.pymntDt | date:'yyyy-MM-dd HH:mm'}}</td>
+                                <td>{{cdrPymnt.valueDt | date:'yyyy-MM-dd HH:mm'}}</td>
+                                <td>{{cdrPymnt.amt | currencyAccounting:cur:"2"}}</td>
+                                <td>{{cdrPymnt.cashier}}</td>
+                                <td>{{cdrPymnt.cdrNbr}}</td>
+                                <td>{{cdrPymnt.paidBy}}</td>
+                                <td>{{cdrPymnt.rcptNbr}}</td>
+                                <td>{{cdrPymnt.rcptPrntDta}}</td>
+                                <td><a href="#/CdrPymnts/show/{{cdrPymnt.id}}" ><i class="glyphicon glyphicon-eye-open"></i></a></td>
+                                <td><a href="#/CdrPymnts/edit/{{cdrPymnt.id}}" ><i class="glyphicon glyphicon-edit"></i></a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul  class="pull-right">
+                        <pagination  total-items="totalItems" items-per-page="itemPerPage"  class="pagination-sm" ng-model="currentPage" ng-change="paginate()"></pagination>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+</div>

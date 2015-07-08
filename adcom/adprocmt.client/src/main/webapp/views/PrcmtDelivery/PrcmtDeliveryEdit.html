@@ -1,0 +1,125 @@
+<div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Entity_update.title"| translate}}</b> </div>
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{prcmtDeliveryEditCtlr.error}} </label>
+                <form  name="PrcmtDeliveryForm" id="PrcmtDeliveryForm" class="form-horizontal" novalidate="">
+                    <div class="form-group">
+                        <label class="col-lg-3 ">{{"PrcmtDelivery_dlvrySlipNbr_description.title"| translate}} :</label>
+                        <div class="col-lg-3" ng-class="{ 'has-error' : PrcmtDeliveryForm.dlvrySlipNbr.$invalid }" >
+                            <input type="text" ng-model="prcmtDeliveryEditCtlr.prcmtDelivery.dlvrySlipNbr" id="dlvrySlipNbr" name="dlvrySlipNbr" class="form-control" required >
+                            <p  class="help-block">{{"PrcmtDelivery_dlvrySlipNbr_description.text"| translate}}</p>
+                        </div>
+                        <label class="col-lg-3">{{"PrcmtDelivery_netPPPreTax_description.title"| translate}} :</label>
+                        <div class="col-lg-3" >
+                            <input type="text" ng-model="prcmtDeliveryEditCtlr.prcmtDelivery.netPPPreTax" id="netPPPreTax" name="netPPPreTax" class="form-control">
+                            <p class="help-block">{{"PrcmtDelivery_netPPPreTax_description.text"| translate}}</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 ">{{"PrcmtDelivery_supplier_description.title"| translate}} :</label>
+                        <div class="col-lg-3" >
+                            <input type="text" ng-model="prcmtDeliveryEditCtlr.prcmtDelivery.supplier" id="supplier" name="supplier" class="form-control"
+                                   autocomplete="off" typeahead="businessPartner.ptnrNbr as businessPartner.cpnyName for businessPartner in prcmtDeliveryEditCtlr.loadBusinessPartner($viewValue)"
+                                   typeahead-loading="loading" placeholder="find a Supplier/Manufacturer">
+                            <p class="help-block">{{"PrcmtDelivery_supplier_description.text"| translate}}</p>
+                        </div>
+                        <label class="col-lg-3 ">{{"PrcmtDelivery_netPPTaxIncl_description.text"| translate}} :</label>
+                        <div class="col-lg-3" >
+                            <input type="text" ng-model="prcmtDeliveryEditCtlr.prcmtDelivery.netPPTaxIncl" id="netPPTaxIncl" name="netPPTaxIncl" class="form-control" >
+                            <p class="help-block">{{"PrcmtDelivery_netPPTaxIncl_description.text"| translate}}</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 ">{{"PrcmtDelivery_rcvngOrgUnit_description.title"| translate}} :</label>
+                        <div class="col-lg-3" >
+                            <input type="text" ng-model="prcmtDeliveryEditCtlr.prcmtDelivery.rcvngOrgUnit" id="rcvngOrgUnit" name="rcvngOrgUnit" class="form-control"
+                                   typeahead="orgUnit.identif as orgUnit.fullName for orgUnit in prcmtDeliveryEditCtlr.loadOrgUnit($viewValue)"
+                                   typeahead-loading="loading" placeholder="find an organisation" >
+                            <p class="help-block">{{"PrcmtDelivery_rcvngOrgUnit_description.text"| translate}}</p>
+                        </div>
+                        <label class="col-lg-3 ">{{"PrcmtDelivery_netAmtToPay_description.title"| translate}} :</label>
+                        <div class="col-lg-3" >
+                            <input type="text" ng-model="prcmtDeliveryEditCtlr.prcmtDelivery.netAmtToPay" id="netAmtToPay" name="netAmtToPay" class="form-control"  >
+                            <p class="help-block">{{"PrcmtDelivery_netAmtToPay_description.title"| translate}}</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 ">{{"PrcmtDelivery_dlvryDt_description.title"| translate}} :</label>
+                        <div class="col-lg-3" ng-class="{ 'has-error' : PrcmtDeliveryForm.dlvryDt.$invalid }" >
+                            <input type="datetime" date-time  view="date" min-view="date" views="['date']" dismiss="true" format="dd-MM-yyyy" required
+                                   ng-model="prcmtDeliveryEditCtlr.prcmtDelivery.dlvryDt" id="dlvryDt" name="dlvryDt" class="form-control"  >
+                            <p  class="help-block">{{"PrcmtDelivery_dlvryDt_description.text"| translate}}</p>
+                        </div>
+                        <label class="col-lg-3 ">{{"PrcmtDelivery_netPurchAmt_description.title"| translate}} :</label>
+                        <div class="col-lg-3">
+                            <input type="text" ng-model="prcmtDeliveryEditCtlr.prcmtDelivery.netPurchAmt" id="netPurchAmt" name="netPurchAmt" class="form-control" >
+                            <p  class="help-block">{{"PrcmtDelivery_netPurchAmt_description.text"| translate}}</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 ">{{"PrcmtDelivery_dtOnDlvrySlip_description.title"| translate}} :</label>
+                        <div class="col-lg-3" ng-class="{ 'has-error' : PrcmtDeliveryForm.dtOnDlvrySlip.$invalid }" >
+                            <input type="datetime" date-time  view="date" min-view="date" views="['date']" dismiss="true" format="dd-MM-yyyy" required
+                                   ng-model="prcmtDeliveryEditCtlr.prcmtDelivery.dtOnDlvrySlip" id="dtOnDlvrySlip" name="dtOnDlvrySlip" class="form-control" >
+                            <p  class="help-block">{{"PrcmtDelivery_dtOnDlvrySlip_description.text"| translate}}</p>
+                        </div>
+                        <label class="col-lg-3 ">{{"PrcmtDelivery_grossPPPreTax_description.title"| translate}} :</label>
+                        <div class="col-lg-3" >
+                            <input type="text" ng-model="prcmtDeliveryEditCtlr.prcmtDelivery.grossPPPreTax" id="grossPPPreTax" name="grossPPPreTax" class="form-control"  >
+                            <p  class="help-block">{{"PrcmtDelivery_grossPPPreTax_description.text"| translate}}</p>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 ">{{"PrcmtDelivery_rebate_description.title"| translate}} :</label>
+                        <div class="col-lg-3" >
+                            <input type="text" ng-model="prcmtDeliveryEditCtlr.prcmtDelivery.rebate" id="rebate" name="rebate" class="form-control"  >
+                            <p  class="help-block">{{"PrcmtDelivery_rebate_description.text"| translate}}</p>
+                        </div>
+                        <label class="col-lg-3 ">{{"PrcmtDelivery_rdngDscntAmt_description.title"| translate}} :</label>
+                        <div class="col-lg-3" >
+                            <input type="text" ng-model="prcmtDeliveryEditCtlr.prcmtDelivery.rdngDscntAmt" id="rdngDscntAmt" name="rdngDscntAmt" class="form-control"  >
+                            <p  class="help-block">{{"PrcmtDelivery_rdngDscntAmt_description.text"| translate}}</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 ">{{"PrcmtDelivery_vatAmount_description.title"| translate}} :</label>
+                        <div class="col-lg-3" >
+                            <input type="text" ng-model="prcmtDeliveryEditCtlr.prcmtDelivery.vatAmount" id="vatAmount" name="vatAmount" class="form-control"  >
+                            <p  class="help-block">{{"PrcmtDelivery_vatAmount_description.text"| translate}}</p>
+                        </div>
+                        <label class="col-lg-3 ">{{"PrcmtDelivery_pymtDscntPct_description.title"| translate}} :</label>
+                        <div class="col-lg-3" >
+                            <input type="text" ng-model="prcmtDeliveryEditCtlr.prcmtDelivery.pymtDscntPct" id="pymtDscntPct" name="pymtDscntPct" class="form-control"  >
+                            <p  class="help-block">{{"PrcmtDelivery_pymtDscntPct_description.text"| translate}}</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 ">{{"PrcmtDelivery_pymtDscntAmt_description.title"| translate}} :</label>
+                        <div class="col-lg-3" >
+                            <input type="text" ng-model="prcmtDeliveryEditCtlr.prcmtDelivery.pymtDscntAmt" id="pymtDscntAmt" name="vatAmount" class="form-control"  >
+                            <p  class="help-block">{{"PrcmtDelivery_pymtDscntAmt_description.text"| translate}}</p>
+                        </div>
+                        <label class="col-lg-3 ">{{"PrcmtDelivery_dlvryCur_description.title"| translate}} :</label>
+                        <div class="col-lg-3" >
+                            <select ng-options="currency for currency in prcmtDeliveryEditCtlr.currencys" ng-model="prcmtDeliveryEditCtlr.prcmtDelivery.dlvryCur" id="dlvryCur" name="dlvryCur" class="form-control" ></select>
+                            <p  class="help-block">{{"PrcmtDelivery_dlvryCur_description.text"| translate}}</p>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="form-group">
+                        <label class="col-lg-3"  > </label>
+                        <div class="col-lg-8" >
+                            <a class="btn-danger btn" href="#/"><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                            <button ng-click="prcmtDeliveryEditCtlr.update();" ng-disabled="catalArticleForm.$invalid" class="btn-success btn"  ><i class="glyphicon glyphicon-save"></i>  {{"Entity_save.title" | translate }}</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+  </div>

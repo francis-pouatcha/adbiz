@@ -1,0 +1,83 @@
+    <div class="container">
+        <div class="col-xs-10 col-lg-offset-1">
+           <div class="panel panel-default ">
+            <p class="panel-heading no-collapse"><b> {{"PricingCurrRate_description"|translate}} </b></p>
+            <div class="panel-body">
+                <form enctype="multipart/form-data" role="form" class="">
+                    <div class="row" >
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class=" control-label" for="">{{"PricingCurrRate_srcCurrISO3_description"|translate}}</label>
+                                <div class="">
+                                    <input type="text" id="" ng-model="pricingCurrRateCtrl.searchInput.entity.srcCurrISO3" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class="control-label" for="">{{"PricingCurrRate_destCurrISO3_description"|translate}}</label>
+                                <div class="">
+                                    <input type="text"  ng-model="pricingCurrRateCtrl.searchInput.entity.destCurrISO3" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <button  ng-click="pricingCurrRateCtrl.handleSearchRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                                <button  ng-click="pricingCurrRateCtrl.handlePrintRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                                    <i class="glyphicon glyphicon-print"></i>
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+      <div class="panel panel-default ">
+         <div class="panel-heading no-collapse"><b>Resultat </b></div>
+             <div class="panel-body">
+              <div class="col-lg-12">
+                        <div  class="row">
+                            <a class="btn btn-primary pull-right margBott10" href="#/pricingCurrRate/create" >
+                                <i class="glyphicon-plus"></i> {{"Entity_create.title" | translate}}
+                            </a>
+
+                        </div>
+               <div class="table-overflow" >
+                <table  class="table table-bordered table-striped" >
+                    <thead>
+                    <tr>
+                        <th>{{"PricingCurrRate_srcCurrISO3_description"|translate}}</th>
+                        <th>{{"PricingCurrRate_destCurrISO3_description"|translate}} </th>
+                        <th>{{"ConverterCurrRate_exRate_description"|translate}}</th>
+                        <th>{{"validFrom"|translate}}</th>
+                        <th> {{"validTo"|translate}}</th>
+                        <th ></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr ng-repeat="pricingCurrRate in pricingCurrRateCtrl.pricingCurrRates">
+                            <td>{{pricingCurrRate.srcCurrISO3}}</td>
+                            <td>{{pricingCurrRate.destCurrISO3}}</td>
+                            <td>{{pricingCurrRate.exRate}}</td>
+                            <td>{{pricingCurrRate.validFrom | date: 'dd-MM-yyyy'}}</td>
+                            <td>{{pricingCurrRate.validTo| date: 'dd-MM-yyyy'}}</td>
+                            <td><a href="#/pricingCurrRate/show/{{pricingCurrRate.id}}" ><i class="glyphicon glyphicon-eye-open"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+               </div>
+                <ul  class="pull-right">
+                    <pagination  total-items="pricingCurrRateCtrl.totalItems" items-per-page="pricingCurrRateCtrl.itemPerPage"  class="pagination-sm" ng-model="pricingCurrRateCtrl.currentPage" ng-change="pricingCurrRateCtrl.paginate()"></pagination>
+
+                </ul>
+         </div>
+        </div>
+      </div>
+   </div>
+</div>

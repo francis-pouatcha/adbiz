@@ -1,0 +1,97 @@
+<div class="container">
+
+    <div class="col-xs-offset-2 col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Entity_show.title"| translate}}</b> </div>
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{connHstryShowCtrl.error}} </label>
+                <form  class="form-horizontal" novalidate="">
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{"ConnectionHistory_loginName_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : connectionHistoryForm.loginName.$invalid }" >
+                            <input type="text" disabled value="{{connHstryShowCtrl.connectionHistory.loginName}}" name="loginName" class="form-control" required >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "ConnectionHistory_terminalName_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : connectionHistoryForm.terminalName.$invalid }" >
+                            <input type="text" disabled value="{{connHstryShowCtrl.connectionHistory.terminalName}}" name="terminalName" class="form-control" required >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "ConnectionHistory_workspaceId_description.title"| translate}} :</label>
+                        <div class="col-lg-8" >
+                            <input type="text" disabled value="{{connHstryShowCtrl.connectionHistory.workspaceId}}" name="workspaceId" class="form-control" >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "ConnectionHistory_partnerId_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{connHstryShowCtrl.connectionHistory.ouId}}" name="shortName" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "ConnectionHistory_ipAdress_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{connHstryShowCtrl.connectionHistory.ipAdress}}" name="connectionHistory" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "ConnectionHistory_firstLoginDate_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{connHstryShowCtrl.connectionHistory.firstLoginDate | date : 'dd-MM-yyyy HH:mm'}}" name="shortName" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "ConnectionHistory_lastLoginDate_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{connHstryShowCtrl.connectionHistory.lastLoginDate | date : 'dd-MM-yyyy HH:mm'}}" name="shortName" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "ConnectionHistory_counter_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{connHstryShowCtrl.connectionHistory.counter}}" name="counter" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "ConnectionHistory_termCdtl_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{connHstryShowCtrl.connectionHistory.termCdtl}}" name="termCdtl" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "ConnectionHistory_terminalId_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{connHstryShowCtrl.connectionHistory.terminalId}}" name="terminalId" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "ConnectionHistory_opr_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{connHstryShowCtrl.connectionHistory.opr}}" name="opr" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4"  > </label>
+                        <div class="col-lg-8" >
+                            
+                            <div class="col-lg-3" >
+                                <a class="btn-default btn" href="#/connectionhistorys"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

@@ -1,0 +1,45 @@
+﻿<div class="row">
+	<div class="col-xs-offset-1 col-xs-10">
+        <div class="panel panel-default ">
+            <div class="panel-heading no-collapse"><b>Workspace : {{userWorkspaceCtrl.loginName}} </b></div>
+            <div class="panel-body">
+                <div class="col-lg-12">
+                    <div  class="row">
+                        <a class="btn btn-default  margBott10" href="#/login/show/{{userWorkspaceCtrl.loginName}}" >
+                            <i class=""></i> {{"Entity_back.title" | translate}}
+                        </a>
+                        <a class="btn btn-primary margBott10 pull-right" ng-click="userWorkspaceCtrl.saveWorkspace()" >
+                            <i class="glyphicon-plus"></i> {{"Entity_save.title" | translate}}
+                        </a>
+                    </div>
+                    <div class="table-overflow-middle row">
+                        <table class="table table-bordered  table-striped pointer-element" >
+                            <thead>
+                            <tr>
+                                <th class="text-center">{{"OuWorkspace_orgUnit_description"|translate}}</th>
+                                <th class="text-center">{{"Workspace_roleIdentif_description"|translate}}</th>
+                                <th class="text-center">{{"Workspace_ouTypes_description"|translate}}</th>
+                                <th class="text-center">{{"Workspace_clientApp_description"|translate}}</th>
+                                <th class="text-center">{{"restriction"|translate}}</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="workspace in userWorkspaceCtrl.workspacesDto" >
+                                <td>{{workspace.ouIdentif}}</td>
+                                <td>{{workspace.roleIdentif}}</td>
+                                <td>{{workspace.ouTypeName}}</td>
+                                <td>{{workspace.clientApp }}</td>
+                                <td></td>
+                                <td><input type="checkbox" ng-model="workspace.assigned" ></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+	</div>
+</div>
+

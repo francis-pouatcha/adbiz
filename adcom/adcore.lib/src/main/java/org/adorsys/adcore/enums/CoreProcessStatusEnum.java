@@ -1,0 +1,16 @@
+package org.adorsys.adcore.enums;
+
+
+public enum CoreProcessStatusEnum
+{
+	INITIATED,
+	SUSPENDED, 
+	RESUMED, 
+	CLOSED,
+	MERGED,
+	POSTED, 
+	DELETED,
+	ITEM_UPDATED,
+	ITEM_CREATED,
+	ITEM_DELETED, CLOSING, POSTING, CREATED, MODIFIED
+}

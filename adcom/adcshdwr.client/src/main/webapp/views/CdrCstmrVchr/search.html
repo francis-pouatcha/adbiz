@@ -1,0 +1,138 @@
+<div class="form-horizontal">
+    <h3>Create a new CdrCstmrVchr</h3>
+    <div class="control-group">
+        <div class="controls">
+            <a id="Create" name="Create" class="btn btn-primary" href="#/CdrCstmrVchrs/new"><i class="icon-plus-sign icon-white"></i> Create</a>
+        </div>
+    </div>
+</div>
+<hr/>
+<div>
+    <h3>Search for CdrCstmrVchrs</h3>
+    <form id="CdrCstmrVchrSearch" class="form-horizontal">
+    <div class="control-group">
+        <label for="vchrNbr" class="control-label">Vchr Nbr</label>
+        <div class="controls">
+            <input id="vchrNbr" name="vchrNbr" type="text" ng-model="search.vchrNbr" placeholder="Enter the CdrCstmrVchr Vchr Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="dsNbr" class="control-label">Ds Nbr</label>
+        <div class="controls">
+            <input id="dsNbr" name="dsNbr" type="text" ng-model="search.dsNbr" placeholder="Enter the CdrCstmrVchr Ds Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="amt" class="control-label">Amt</label>
+        <div class="controls">
+            <input id="amt" name="amt" type="text" ng-model="search.amt" placeholder="Enter the CdrCstmrVchr Amt"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="cstmrNbr" class="control-label">Cstmr Nbr</label>
+        <div class="controls">
+            <input id="cstmrNbr" name="cstmrNbr" type="text" ng-model="search.cstmrNbr" placeholder="Enter the CdrCstmrVchr Cstmr Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="cstmrName" class="control-label">Cstmr Name</label>
+        <div class="controls">
+            <input id="cstmrName" name="cstmrName" type="text" ng-model="search.cstmrName" placeholder="Enter the CdrCstmrVchr Cstmr Name"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="canceled" class="control-label">Canceled</label>
+        <div class="controls">
+            <select id="canceled" name="canceled" ng-model="search.canceled" ng-options="c as c for c in canceledList">
+                <option value="">Choose a Canceled</option>
+            </select>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="cashier" class="control-label">Cashier</label>
+        <div class="controls">
+            <input id="cashier" name="cashier" type="text" ng-model="search.cashier" placeholder="Enter the CdrCstmrVchr Cashier"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="cdrNbr" class="control-label">Cdr Nbr</label>
+        <div class="controls">
+            <input id="cdrNbr" name="cdrNbr" type="text" ng-model="search.cdrNbr" placeholder="Enter the CdrCstmrVchr Cdr Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="amtUsed" class="control-label">Amt Used</label>
+        <div class="controls">
+            <input id="amtUsed" name="amtUsed" type="text" ng-model="search.amtUsed" placeholder="Enter the CdrCstmrVchr Amt Used"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="settled" class="control-label">Settled</label>
+        <div class="controls">
+            <select id="settled" name="settled" ng-model="search.settled" ng-options="s as s for s in settledList">
+                <option value="">Choose a Settled</option>
+            </select>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="restAmt" class="control-label">Rest Amt</label>
+        <div class="controls">
+            <input id="restAmt" name="restAmt" type="text" ng-model="search.restAmt" placeholder="Enter the CdrCstmrVchr Rest Amt"></input>
+        </div>
+    </div>
+        <div class="control-group">
+            <div class="controls">
+                <a id="Search" name="Search" class="btn btn-primary" ng-click="performSearch()"><i class="icon-search icon-white"></i> Search</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="search-results">
+    <table class="table table-bordered table-striped clearfix">
+        <thead>
+            <tr>
+                <th>Vchr Nbr</th>
+                <th>Ds Nbr</th>
+                <th>Amt</th>
+                <th>Cstmr Nbr</th>
+                <th>Cstmr Name</th>
+                <th>Canceled</th>
+                <th>Cashier</th>
+                <th>Cdr Nbr</th>
+                <th>Prnt Dt</th>
+                <th>Amt Used</th>
+                <th>Settled</th>
+                <th>Rest Amt</th>
+            </tr>
+        </thead>
+        <tbody id="search-results-body">
+            <tr ng-repeat="result in searchResults | searchFilter:searchResults | startFrom:currentPage*pageSize | limitTo:pageSize">
+                <td><a href="#/CdrCstmrVchrs/edit/{{result.id}}">{{result.vchrNbr}}</a></td>
+                <td><a href="#/CdrCstmrVchrs/edit/{{result.id}}">{{result.dsNbr}}</a></td>
+                <td><a href="#/CdrCstmrVchrs/edit/{{result.id}}">{{result.amt}}</a></td>
+                <td><a href="#/CdrCstmrVchrs/edit/{{result.id}}">{{result.cstmrNbr}}</a></td>
+                <td><a href="#/CdrCstmrVchrs/edit/{{result.id}}">{{result.cstmrName}}</a></td>
+                <td><a href="#/CdrCstmrVchrs/edit/{{result.id}}">{{result.canceled}}</a></td>
+                <td><a href="#/CdrCstmrVchrs/edit/{{result.id}}">{{result.cashier}}</a></td>
+                <td><a href="#/CdrCstmrVchrs/edit/{{result.id}}">{{result.cdrNbr}}</a></td>
+                <td><a href="#/CdrCstmrVchrs/edit/{{result.id}}">{{result.prntDt| date:'yyyy-MM-dd HH:mm:ss Z'}}</a></td>
+                <td><a href="#/CdrCstmrVchrs/edit/{{result.id}}">{{result.amtUsed}}</a></td>
+                <td><a href="#/CdrCstmrVchrs/edit/{{result.id}}">{{result.settled | currencyAccounting:slsInvoice.invceCur:"4"}}</a></td>
+                <td><a href="#/CdrCstmrVchrs/edit/{{result.id}}">{{result.restAmt | currencyAccounting:slsInvoice.invceCur:"4"}}</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pagination pagination-centered">
+        <ul>
+            <li ng-class="{disabled:currentPage == 0}">
+                <a id="prev" href ng-click="previous()">«</a>
+            </li>
+            <li ng-repeat="n in pageRange" ng-class="{active:currentPage == n}" ng-click="setPage(n)">
+                <a href ng-bind="n + 1">1</a>
+            </li>
+            <li ng-class="{disabled: currentPage == (numberOfPages() - 1)}">
+                <a id="next" href ng-click="next()">»</a>
+            </li>
+        </ul>
+    </div>
+</div>

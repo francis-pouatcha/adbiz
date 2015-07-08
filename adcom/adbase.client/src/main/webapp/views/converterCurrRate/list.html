@@ -1,0 +1,83 @@
+    <div class="container">
+        <div class="col-xs-10 col-lg-offset-1">
+           <div class="panel panel-default ">
+            <p class="panel-heading no-collapse"><b> {{"converterCurrRate_description"|translate}} </b></p>
+            <div class="panel-body">
+                <form enctype="multipart/form-data" role="form" class="">
+                    <div class="row" >
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class=" control-label" for="">{{"ConverterCurrRate_srcCurrISO3_description"|translate}}</label>
+                                <div class="">
+                                    <input type="text" id="" ng-model="converterCurrRateCtrl.searchInput.entity.srcCurrISO3" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class="control-label" for="">{{"ConverterCurrRate_destCurrISO3_description"|translate}}</label>
+                                <div class="">
+                                    <input type="text"  ng-model="converterCurrRateCtrl.searchInput.entity.destCurrISO3" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <button  ng-click="converterCurrRateCtrl.handleSearchRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                                <button  ng-click="converterCurrRateCtrl.handlePrintRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                                    <i class="glyphicon glyphicon-print"></i>
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+      <div class="panel panel-default ">
+         <div class="panel-heading no-collapse"><b>Resultat </b></div>
+             <div class="panel-body">
+              <div class="col-lg-12">
+                        <div  class="row">
+                            <a class="btn btn-primary pull-right margBott10" href="#/converterCurrRate/create" >
+                                <i class="glyphicon-plus"></i> {{"Entity_create.title" | translate}}
+                            </a>
+
+                        </div>
+               <div class="table-overflow" >
+                <table  class="table table-bordered table-striped" >
+                    <thead>
+                    <tr>
+                        <th>{{"ConverterCurrRate_srcCurrISO3_description"|translate}}</th>
+                        <th>{{"ConverterCurrRate_destCurrISO3_description"|translate}} </th>
+                        <th>{{"ConverterCurrRate_exRate_description"|translate}}</th>
+                        <th>{{"validFrom"|translate}}</th>
+                        <th> {{"validTo"|translate}}</th>
+                        <th ></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr ng-repeat="converterCurrRate in converterCurrRateCtrl.converterCurrRates">
+                            <td>{{converterCurrRate.srcCurrISO3}}</td>
+                            <td>{{converterCurrRate.destCurrISO3}}</td>
+                            <td>{{converterCurrRate.exRate}}</td>
+                            <td>{{converterCurrRate.validFrom | date: 'dd-MM-yyyy'}}</td>
+                            <td>{{converterCurrRate.validTo| date: 'dd-MM-yyyy'}}</td>
+                            <td><a href="#/converterCurrRate/show/{{converterCurrRate.id}}" ><i class="glyphicon glyphicon-eye-open"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+               </div>
+                <ul  class="pull-right">
+                    <pagination  total-items="converterCurrRateCtrl.totalItems" items-per-page="converterCurrRateCtrl.itemPerPage"  class="pagination-sm" ng-model="converterCurrRateCtrl.currentPage" ng-change="converterCurrRateCtrl.paginate()"></pagination>
+
+                </ul>
+         </div>
+        </div>
+      </div>
+   </div>
+</div>

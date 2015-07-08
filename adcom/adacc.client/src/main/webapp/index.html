@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="AdAcc">
+<head>
+    <meta charset="utf-8" />
+    <title>AngularJS Basic HTTP Authentication Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" type="text/css" href="/adres.client/vendors/bootstrap/css/bootstrap.min.css">
+     <link rel="stylesheet" type="text/css" href="/adres.client/styles/custom.css">
+    <script src="scripts/vendor/modernizr-2.6.2.min.js"></script>
+    <script src="/adres.client/vendors/jquery/jquery-2.1.1.min.js"></script>
+    <script src="/adres.client/vendors/bootstrap/js/bootstrap.js"></script>
+</head>
+<body class="theme-blue">
+	<div ng-include="'/adres.client/views/navbar.html'"></div>
+    <div class="container">
+        <div class="col-xs-offset-2 col-xs-8" ng-show="sessionManager.hasAuthErrors()">
+            <div class="has-error">
+            	<ul ng-repeat="error in sessionManager.authErrors()">
+            		<li>{{error}}</li>
+            	</ul>
+            </div>
+        </div>
+        <div ng-view></div>
+     	<div id="push"></div>
+    </div>
+
+    <script src="/adres.client/vendors/angular/angular.js"></script>
+    <script src="/adres.client/vendors/angular/angular-sanitize.js"></script>
+    <script src="/adres.client/vendors/angular/angular-route.js"></script>
+    <script src="scripts/vendor/angular-resource.js"></script>
+    <script src="/adres.client/vendors/angular/angular-cookies.js"></script>
+    <script src="/adres.client/vendors/angular-translate/angular-translate.js"></script>
+    <script src="/adres.client/vendors/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="/adres.client/vendors/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
+    <script src="/adres.client/vendors/base64/base64.js"></script>
+    <script src="/adres.client/services/ADUtils.js"></script>
+    <script src="/adres.client/services/SessionManager.js"></script>
+    <script src="/adres.client/services/AuthInterceptor.js"></script>
+    <script src="/adres.client/modules/NavBar.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/directives/datetimepicker.js"></script>
+    <script src="scripts/filters/startFromFilter.js"></script>
+    <script src="scripts/filters/genericSearchFilter.js"></script>
+    <script src="scripts/services/locationParser.js"></script>
+    <script src="scripts/services/AccAccountFactory.js"></script>
+    <script src="scripts/controllers/newAccAccountController.js"></script>
+    <script src="scripts/controllers/searchAccAccountController.js"></script>
+    <script src="scripts/controllers/editAccAccountController.js"></script>
+    <script src="scripts/services/AccBlncFactory.js"></script>
+    <script src="scripts/controllers/newAccBlncController.js"></script>
+    <script src="scripts/controllers/searchAccBlncController.js"></script>
+    <script src="scripts/controllers/editAccBlncController.js"></script>
+    <script src="scripts/services/AccBrrFactory.js"></script>
+    <script src="scripts/controllers/newAccBrrController.js"></script>
+    <script src="scripts/controllers/searchAccBrrController.js"></script>
+    <script src="scripts/controllers/editAccBrrController.js"></script>
+    <script src="scripts/services/AccCoAFactory.js"></script>
+    <script src="scripts/controllers/newAccCoAController.js"></script>
+    <script src="scripts/controllers/searchAccCoAController.js"></script>
+    <script src="scripts/controllers/editAccCoAController.js"></script>
+    <script src="scripts/services/AccPstgFactory.js"></script>
+    <script src="scripts/controllers/newAccPstgController.js"></script>
+    <script src="scripts/controllers/searchAccPstgController.js"></script>
+    <script src="scripts/controllers/editAccPstgController.js"></script>
+</body>
+</html>

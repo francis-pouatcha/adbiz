@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="AdStock">
+<head>
+    <meta charset="utf-8" />
+    <title>AD Stock</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" type="text/css" href="/adres.client/vendors/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/adres.client/vendors/angular-datepicker/datepicker.css">
+    <link rel="stylesheet" type="text/css" href="/adres.client/styles/custom.css">
+    <script src="/adres.client/vendors/modernizr/modernizr-2.6.2.min.js"></script>
+    <script src="/adres.client/vendors/jquery/jquery-2.1.1.min.js"></script>
+    <script src="/adres.client/vendors/bootstrap/js/bootstrap.js"></script>
+</head>
+<body class="theme-blue">
+	<div ng-include="'/adres.client/views/navbar.html'"></div>
+    <div class="container">
+        <div ng-show="sessionManager.hasAuthErrors()">
+            <div class="has-error">
+            	<ul ng-repeat="error in sessionManager.authErrors()">
+            		<li>{{error}}</li>
+            	</ul>
+            </div>
+        </div>
+        <div ng-view></div>
+     	<div id="push"></div>
+    </div>
+
+    <script src="/adres.client/vendors/angular/angular.js"></script>
+    <script src="/adres.client/vendors/angular/angular-sanitize.js"></script>
+    <script src="/adres.client/vendors/angular/angular-route.js"></script>
+    <script src="/adres.client/vendors/angular/angular-resource.js"></script>
+    <script src="/adres.client/vendors/angular/angular-cookies.js"></script>
+    <script src="/adres.client/vendors/angular-translate/angular-translate.js"></script>
+    <script src="/adres.client/vendors/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="/adres.client/vendors/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
+    <script src="/adres.client/vendors/angular/ui-bootstrap-tpls-0.12.0.js" ></script>
+    <script src="/adres.client/vendors/angular-datepicker/datepicker.js"></script>
+    <script src="/adres.client/vendors/base64/base64.js"></script>
+    <script src="/adres.client/vendors/numericInput.js"></script>
+    <script src="/adres.client/services/ADUtils.js"></script>
+    <script src="/adres.client/services/SessionManager.js"></script>
+    <script src="/adres.client/services/AuthInterceptor.js"></script>
+    <script src="/adres.client/modules/NavBar.js"></script>
+    <script src="/adres.client/modules/CountryNames.js"></script>
+
+    <script src="scripts/app.js"></script>
+    <script src="/adcatal.client/scripts/app.js"></script>
+
+    <script src="/adcatal.client/modules/CatalArticle/CatalArticleResource.js"></script>
+
+    <script src="modules/StkSection/StkSectionRoute.js"></script>
+    <script src="modules/StkSection/StkSectionCtlrs.js"></script>
+    <script src="modules/StkSection/StkSectionArticleLotsCtlr.js"></script>
+    <script src="modules/StkArticleLot/StkArticleLotCtlrs.js"></script>
+    <script src="modules/StkArticleLot/StkArticleLotRoute.js"></script>
+    <script src="modules/StkMvnt/StkMvntCtrlrs.js"></script>
+    <script src="modules/StkMvnt/StkMvntRoute.js"></script>
+
+
+    <script src="modules/StkArticleLot/StkArticleLotRoute.js"></script>
+    <script src="modules/StkArticleLot/StkArticleLotCtlrs.js"></script>
+
+
+
+    <script src="/adres.client/directives/datetimepicker.js"></script>
+    
+</body>
+</html>

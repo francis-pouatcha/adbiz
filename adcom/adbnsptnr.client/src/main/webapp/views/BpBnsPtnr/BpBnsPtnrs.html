@@ -1,0 +1,101 @@
+<div class="row">
+        <div class="panel panel-default  ng-scope">
+            <div class="panel-heading no-collapse">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <b>{{bpBnsPtnrUtils.translations['Entity_search.title']}}</b>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="">
+                    <form role="form" class="">
+                        <div class="row" >
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class=" control-label" for="ptnrNbr">{{bpBnsPtnrUtils.translations['BpBnsPtnr_ptnrNbr_description.title']}}</label>
+                                    <div class="">
+                                        <input type="text" id="ptnrNbr" ng-model="searchInput.entity.ptnrNbr" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class=" control-label" for="fullName">{{bpBnsPtnrUtils.translations['BpBnsPtnr_fullName_description.title']}}</label>
+                                    <div class="">
+                                        <input type="text" id="fullName" ng-model="searchInput.entity.fullName" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class=" control-label" for="ptnrType">{{bpBnsPtnrUtils.translations['BpBnsPtnr_ptnrType_description.title']}}</label>
+                                    <div class="">
+							            <select class="form-control" name="ptnrType" ng-model="searchInput.entity.ptnrType"
+							                    ng-options="bpBnsPtnrType.enumKey as bpBnsPtnrUtils.translations[bpBnsPtnrType.translKey]
+							                    	for bpBnsPtnrType in bpBnsPtnrUtils.bpBnsPtnrTypes" >
+							                    <option value=""/>
+										</select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <button  ng-click="handleSearchRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                    <button  ng-click="handlePrintRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                                        <i class="glyphicon glyphicon-print"></i>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default ">
+            <div class="panel-heading no-collapse"><b>{{bpBnsPtnrUtils.translations['Entity_Result.title']}}</b></div>
+            <div class="panel-body">
+                <div class="col-lg-12">
+                    <div  class="row">
+                        <a class="btn btn-primary pull-right margBott10" href="#/BpBnsPtnrs/new" >
+                            <i class="glyphicon-plus"></i> {{bpBnsPtnrUtils.translations['Entity_create.title']}}
+                        </a>
+
+                    </div>
+                    <div class="table-overflow-middle row">
+                        <table class="table table-bordered  table-striped pointer-element" >
+                            <thead>
+                            <tr>
+                                <th class="text-center">{{bpBnsPtnrUtils.translations['BpBnsPtnr_ptnrNbr_description.title']}}</th>
+                                <th class="text-center">{{bpBnsPtnrUtils.translations['BpBnsPtnr_fullName_description.title']}}</th>
+                                <th class="text-center">{{bpBnsPtnrUtils.translations['BpBnsPtnr_ptnrType_description.title']}}</th>
+                                <th class="text-center">{{bpBnsPtnrUtils.translations['BpBnsPtnr_ctryOfRsdnc_description.title']}}</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="bpBnsPtnr in bpBnsPtnrs()" >
+                                <td>{{bpBnsPtnr.ptnrNbr}}</td>
+                                <td>{{bpBnsPtnr.fullName}}</td>
+                                <td>{{bpBnsPtnrUtils.ptnrTypeI18nMsgTitleValue(bpBnsPtnr.ptnrType)}}</td>
+                                <td>{{bpBnsPtnr.countryName.name}}</td>
+                                <td><a href="" ng-click="show(bpBnsPtnr,$index)"><i class="glyphicon glyphicon-eye-open"></i></a></td>
+                                <td><a href="" ng-click="edit(bpBnsPtnr,$index)"><i class="glyphicon glyphicon-edit"></i></a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul  class="pull-right">
+                        <pagination  total-items="totalItems()" max-size="10" boundary-links="true" items-per-page="itemPerPage()"  class="pagination-sm" ng-model="currentPage" ng-change="paginate()"></pagination>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+</div>

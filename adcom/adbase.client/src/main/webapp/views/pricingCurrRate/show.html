@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="col-xs-offset-2 col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Entity_show.title"| translate}}</b> </div>
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{pricingCurrRateShowCtrl.error}} </label>
+                <form  name="pricingCurrRateForm" class="form-horizontal" novalidate="">
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "PricingCurrRate_srcCurrISO3_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : pricingCurrRateForm.srcCurrISO3.$invalid }" >
+                            <input type="text" ng-model="pricingCurrRateShowCtrl.pricingCurrRate.srcCurrISO3" name="srcCurrISO3" class="form-control" disabled >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "PricingCurrRate_destCurrISO3_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : pricingCurrRateForm.destCurrISO3.$invalid }" >
+                            <input type="text" ng-model="pricingCurrRateShowCtrl.pricingCurrRate.destCurrISO3" name="destCurrISO3" class="form-control" disabled >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "ConverterCurrRate_exRate_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : pricingCurrRateForm.exRate.$invalid }" >
+                            <input type="text" ng-model="pricingCurrRateShowCtrl.pricingCurrRate.exRate" name="exRate" class="form-control" disabled >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "validFrom"| translate}} :</label>
+                        <div class="col-lg-8"  >
+                            <input type="datetime-local" value="{{pricingCurrRateShowCtrl.pricingCurrRate.validFrom | date: 'dd-MM-yyyy'}}" name="validFrom" class="form-control" disabled  >
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "validTo"| translate}} :</label>
+                        <div class="col-lg-8" >
+                            <input type="datetime-local" value="{{pricingCurrRateShowCtrl.pricingCurrRate.validTo | date: 'dd-MM-yyyy'}}" name="validTo" class="form-control" disabled >
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4"  > </label>
+                        <div class="col-lg-8" >
+                            <a class="btn-default btn" href="#/pricingCurrRate"  ><i class="glyphicon glyphicon-" ></i> {{"Entity_back.title" | translate }}</a>
+                            <a class="btn-danger btn" ng-click="pricingCurrRateShowCtrl.remove(pricingCurrRateShowCtrl.pricingCurrRate.id)"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_delete.title" | translate }}</a>
+                            <a href="#/pricingCurrRate/edit/{{pricingCurrRateShowCtrl.pricingCurrRate.id}}"  class="btn-default btn"  ><i class="glyphicon glyphicon-edit"></i>  {{"Entity_update.title" | translate }}</a>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>

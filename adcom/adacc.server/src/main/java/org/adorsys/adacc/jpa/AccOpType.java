@@ -1,0 +1,45 @@
+package org.adorsys.adacc.jpa;
+
+import org.adorsys.javaext.description.Description;
+
+@Description("AccOpType_description")
+public enum AccOpType
+{
+   @Description("AccOpType_CAPITAL_PYMT_description")
+   CAPITAL_PYMT, @Description("AccOpType_CAPITAL_WDWL_description")
+   CAPITAL_WDWL, @Description("AccOpType_RENTAL_DPST_description")
+   RENTAL_DPST, @Description("AccOpType_TAX_ON_RENT_description")
+   TAX_ON_RENT, @Description("AccOpType_RENT_PYMT_description")
+   RENT_PYMT, @Description("AccOpType_UNMAT_EXPENSE_description")
+   UNMAT_EXPENSE, @Description("AccOpType_OP_EXPENSE_description")
+   OP_EXPENSE, @Description("AccOpType_NOOP_EXPENSE_description")
+   NOOP_EXPENSE, @Description("AccOpType_MAT_EXPENSE_description")
+   MAT_EXPENSE, @Description("AccOpType_UNREAL_INCOME_description")
+   UNREAL_INCOME, @Description("AccOpType_OP_INCOME_description")
+   OP_INCOME, @Description("AccOpType_NOOP_INCOME_description")
+   NOOP_INCOME, @Description("AccOpType_REAL_INCOME_description")
+   REAL_INCOME, @Description("AccOpType_TREASURY_MVMT_description")
+   TREASURY_MVMT, @Description("AccOpType_VAT_PYMT_description")
+   VAT_PYMT, @Description("AccOpType_INCOME_TAX_WH_description")
+   INCOME_TAX_WH, @Description("AccOpType_SALARY_description")
+   SALARY, @Description("AccOpType_SALARY_PYMT_description")
+   SALARY_PYMT, @Description("AccOpType_AUX_TAX_PYMT_description")
+   AUX_TAX_PYMT, @Description("AccOpType_AMORTISATION_description")
+   AMORTISATION, @Description("AccOpType_RISK_PROVISION_description")
+   RISK_PROVISION, @Description("AccOpType_WARANTY_description")
+   WARANTY, @Description("AccOpType_GRATUITY_description")
+   GRATUITY, @Description("AccOpType_DONNATION_description")
+   DONNATION, @Description("AccOpType_STOCK_CORRECT_description")
+   STOCK_CORRECT, @Description("AccOpType_SALES_COMM_description")
+   SALES_COMM, @Description("AccOpType_PURCHASE_COMM_description")
+   PURCHASE_COMM, @Description("AccOpType_SALES_description")
+   SALES, @Description("AccOpType_PURCHASE_description")
+   PURCHASE, @Description("AccOpType_ASSET_VAL_CORRECT_description")
+   ASSET_VAL_CORRECT, @Description("AccOpType_OTHER_SALES_EXP_description")
+   OTHER_SALES_EXP, @Description("AccOpType_OTHER_PURCHASE_EXP_description")
+   OTHER_PURCHASE_EXP, @Description("AccOpType_OTHER_SALES_INC_description")
+   OTHER_SALES_INC, @Description("AccOpType_OTHER_PURCHASE_INC_description")
+   OTHER_PURCHASE_INC, @Description("AccOpType_GENERAL_PYMT_description")
+   GENERAL_PYMT, @Description("AccOpType_GENERAL_ENCASHMT_description")
+   GENERAL_ENCASHMT
+}

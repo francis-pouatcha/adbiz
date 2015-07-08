@@ -1,0 +1,38 @@
+/target
+/bin
+/.apt_generated
+*/target/
+*/.forge_settings
+*/.settings/
+*/*/.settings/
+*/bin/
+*.prefs
+*/.classpath/
+*/*/.classpath/
+adpharma/*/.classpath
+*/*/.forge_settings
+.classpath
+.factorypath
+/  target
+/target
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+/managerAgent/.idea/
+# Package Files #
+*.jar
+*.war
+*.ear
+.DS_Store
+*/.DS_Store
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+target/
+.project
+.settings/
+.classpath
+flashtransfer/.forge_settings
+ftclient/.forge_settings
+/storyboard/cashierAgent/.~lock.cashierAgent.ppt#
+.forge_settings

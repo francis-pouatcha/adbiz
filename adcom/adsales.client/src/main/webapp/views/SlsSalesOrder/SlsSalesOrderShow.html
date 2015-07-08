@@ -1,0 +1,120 @@
+<div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <b>{{slsSalesOrderUtils.translations['Entity_show.title']}}</b>
+                <b> {{slsSalesOrderUtils.translations['SlsSalesOrder_description.title']}}</b> 
+            </div>
+            <div class="panel-body">
+                <label class="error alert-danger" >{{slsSalesOrderShowCtlr.error}} </label>
+                <form  name="slsOrderForm" class="form-horizontal" novalidate="">
+                    
+                       <div class="form-group">
+                           <label class="col-lg-2">{{slsSalesOrderUtils.translations['SlsSalesOrder_soNbr_description.title']}} :</label>
+                           <div class="col-lg-2">
+                               <input type="text" value="{{slsSalesOrder.soNbr}}" name="soNbr" class="form-control" disabled >
+                           </div>
+	                       <label class="col-lg-2">{{slsSalesOrderUtils.translations['SlsSalesOrder_soStatus_description.title']}}:</label>
+	                        <div class="col-lg-2">
+	                            <input type="text" value="{{slsSalesOrderUtils.slsSOStatusI18nMsgTitleValue(slsSalesOrder.soStatus)}}" name="soStatus" class="form-control" disabled >
+	                        </div>
+                            <label class="col-lg-2">{{slsSalesOrderUtils.translations['SlsSalesOrder_soDt_description.title']}}:</label>
+	                        <div class="col-lg-2">
+	                            <input type="text" value="{{slsSalesOrderUtils.formatDate(slsSalesOrder.soDt, null)}}" name="soDt" class="form-control" disabled >
+	                        </div>
+                    	</div>
+                    
+	                    <div class="form-group">
+                            <label class="col-lg-2">{{slsSalesOrderUtils.translations['SlsSalesOrder_soCur_description.title']}} :</label>
+	                        <div class="col-lg-2">
+	                            <input type="text" value="{{slsSalesOrder.soCur}}" name="soCur" class="form-control" disabled>
+	                        </div>
+                            <label class="col-lg-2">{{slsSalesOrderUtils.translations['SlsSalesOrder_grossSPPreTax_description.title']}} :</label>
+                            <div class="col-lg-2" >
+                                <input type="text" name="grossSPPreTax" class="form-control" numeric disabled ng-model="slsSalesOrder.grossSPPreTax">
+                            </div>
+	                        <label class="col-lg-2">{{slsSalesOrderUtils.translations['SlsSalesOrder_netSPPreTax_description.title']}} :</label>
+	                        <div class="col-lg-2">
+	                            <input type="text" name="netSPPreTax" class="form-control" numeric disabled  ng-model="slsSalesOrder.netSPPreTax">
+	                        </div>
+	                        
+	                    </div>
+                    
+                        <div class=" form-group ">
+                            <label class="col-lg-2 ">{{slsSalesOrderUtils.translations['SlsSalesOrder_vatAmount_description.title']}} :</label>
+	                        <div class="col-lg-2" >
+	                            <input type="text" value="{{slsSalesOrder.vatAmount}}" name="vatAmount" class="form-control" numeric disabled ng-model="slsSalesOrder.vatAmount">
+	                        </div>
+                            <label class="col-lg-2 ">{{slsSalesOrderUtils.translations['SlsSalesOrder_netSPTaxIncl_description.title']}} :</label>
+                            <div class="col-lg-2">
+                                <input type="text" value="{{slsSalesOrder.netSPTaxIncl}}" name="netSPTaxIncl" class="form-control" numeric disabled ng-model="slsSalesOrder.netSPTaxIncl">
+                            </div>
+                        
+                            <label class="col-lg-2 ">{{slsSalesOrderUtils.translations['SlsSalesOrder_netSalesAmt_description.title']}} :</label>
+                            <div class="col-lg-2" >
+                                <input type="text" value="{{slsSalesOrder.netSalesAmt}}" name="netSalesAmt" class="form-control" numeric disabled ng-model="slsSalesOrder.netSalesAmt">
+                            </div>
+                             
+                        </div>
+                        <div class=" form-group ">
+                            <label class="col-lg-2 ">{{slsSalesOrderUtils.translations['SlsSalesOrder_pymtDscntPct_description.title']}} :</label>
+                            <div class="col-lg-2" >
+                                <input type="text" value="{{slsSalesOrder.pymtDscntPct}}" name="pymtDscntPct" class="form-control" disabled>
+                            </div>
+                            <label class="col-lg-2">{{slsSalesOrderUtils.translations['SlsSalesOrder_pymtDscntAmt_description.title']}} :</label>
+                            <div class="col-lg-2" >
+                                <input type="text" name="pymtDscntAmt" class="form-control" numeric disabled ng-model="slsSalesOrder.pymtDscntAmt">
+                            </div>
+                            <label class="col-lg-2">{{slsSalesOrderUtils.translations['SlsSalesOrder_rdngDscntAmt_description.title']}} :</label>
+                            <div class="col-lg-2" >
+                                <input type="text" ng-model="slsSalesOrder.rdngDscntAmt" name="rdngDscntAmt" class="form-control" numeric disabled>
+                            </div>
+                            
+                            
+                        </div>
+                    
+                         <div class=" form-group ">
+                            <label class="col-lg-2 ">{{slsSalesOrderUtils.translations['SlsSalesOrder_rebate_description.title']}} :</label>
+                            <div class="col-lg-2" >
+                                <input type="text" ng-model="slsSalesOrder.rebate" name="rebate" class="form-control" numeric disabled >
+                            </div>
+                             <label class="col-lg-2">{{slsSalesOrderUtils.translations['SlsSalesOrder_netAmtToPay_description.title']}} :</label>
+                            <div class="col-lg-2" >
+                                <input type="text" ng-model="slsSalesOrder.netAmtToPay" name="netAmtToPay" class="form-control" numeric disabled>
+                            </div>
+                            
+                            
+                          </div>
+                </form>
+                <br><br>
+                <div  class="row">
+                    <tabset justified="true">
+                        
+                        <tab heading="{{slsSalesOrderUtils.translations['SlsSOItems_description.title']}}">
+                            <br/>
+                            <div ng-include="'views/SlsSalesOrder/SlsSalesOrderSoItemsTab.html'" />
+                        </tab>
+
+                        <tab heading="{{slsSalesOrderUtils.translations['SlsSOPtnrs_description.title']}}">
+                            <br/>
+                            <div ng-include="'views/SlsSalesOrder/SlsSalesOrderPtnrsTab.html'" />
+                        </tab>
+                    </tabset>
+                </div>
+                <div class="row">
+                    <div class="col-lg-offset-4 col-lg-4">
+                       <div class="text-center">
+                        <a class="btn btn-danger" href="#/SlsSalesOrders">
+                         <i class="glyphicon glyphicon-list"><!-- --></i>{{slsSalesOrderUtils.translations['Entity_list.title']}}
+                        </a>
+                        <button class="btn btn-primary" ng-click="generateInvoice(slsSalesOrder)">
+                            <i class="glyphicon glyphicon-plus"></i>Generer facture
+                        </button>
+                        <button  ng-click="handlePrintPreviewSlsSO(slsSalesOrder)" class="btn btn-default ">
+                            <i class="glyphicon glyphicon-print"></i>{{slsSalesOrderUtils.translations['Entity_print.title']}}
+                        </button>
+                       </div>        
+                    </div>
+                 </div>
+             </div>
+        </div>
+</div>

@@ -1,0 +1,82 @@
+<div class="row">
+<div class="col-xs-offset-2 col-xs-8">
+
+        <div class="panel panel-default  ng-scope">
+            <div class="panel-heading no-collapse">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <b>{{"Entity_search.title"|translate}}</b>
+                    </div>
+                </div>
+
+            </div>
+            <div class="panel-body">
+                <div class="">
+                    <form role="form" class="">
+                        <div class="row" >
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class=" control-label" for="">{{"ConnectionHistory_loginName_description.title"|translate}}</label>
+                                    <div class="">
+                                        <input class="form-control" type="text" id="" ng-model="connHstryCtrl.searchInput.entity.loginName" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <button  ng-click="connHstryCtrl.doSearch()" class="btn btn-default " style="margin-top: 23px;" >
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                    <button  ng-click="connHstryCtrl.handlePrintRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                                        <i class="glyphicon glyphicon-print"></i>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="panel panel-default ">
+            <div class="panel-heading no-collapse"><b>{{"ConnectionHistory_description.title" | translate}}</b></div>
+            <div class="panel-body">
+                <div class="col-lg-12">
+                    <div class="table-overflow-middle row">
+                        <table class="table table-bordered  table-striped pointer-element" >
+                            <thead>
+                            <tr>
+                                <th class="text-center">{{"ConnectionHistory_loginName_description.title"|translate}}</th>
+                                <th class="text-center">{{"ConnectionHistory_terminalName_description.title"|translate}}</th>
+                                <th class="text-center">{{"ConnectionHistory_workspaceId_description.title"|translate}}</th>
+                                <th class="text-center">{{"ConnectionHistory_partnerId_description.title"|translate}}</th>
+                                <th class="text-center">{{"ConnectionHistory_lastLoginDate_description.title"|translate}}</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="cnnHist in connHstryCtrl.connectionHistorys" >
+                                <td>{{cnnHist.loginName}} </td>
+                                <td>{{cnnHist.terminalName}} </td>
+                                <td>{{cnnHist.workspaceId}} </td>
+                                <td>{{cnnHist.partnerId}} </td>
+                                <td>{{cnnHist.lastLoginDate | date: 'dd-MM-yyyy HH:mm:ss'}} </td>
+                                <td><a href="#/connectionhistorys/show/{{cnnHist.loginName}}" ><i class="glyphicon glyphicon-eye-open"></i></a></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+	</div>
+</div>
+

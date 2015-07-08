@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" ng-app="adacc">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Adacc</title>
+    <link href="styles/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="styles/main.css" rel="stylesheet" media="screen">
+    <link href="styles/bootstrap-responsive.css" rel="stylesheet" media="screen">
+</head>
+<body>
+    <div id="wrap">
+    	
+    	<div class="navbar navbar-inverse navbar-fixed-top">
+    		<div class="navbar-inner">
+    			<div class="container">
+    				<a class="brand" href="#">Adacc</a>
+    			</div>
+    		</div>
+    	</div>
+        
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span3 well">
+                    <img class="hidden-phone" src="img/forge-logo.png" alt="JBoss Forge"></img>
+                    <nav class="sidebar-nav" ng-controller="NavController">
+                        <ul id="sidebar-entries" class="nav nav-list">
+                        	<li ng-class="{active: matchesRoute('AccAccounts')}"><a href="#/AccAccounts">AccAccounts</a></li>
+                        	<li ng-class="{active: matchesRoute('AccBlncs')}"><a href="#/AccBlncs">AccBlncs</a></li>
+                        	<li ng-class="{active: matchesRoute('AccBrrs')}"><a href="#/AccBrrs">AccBrrs</a></li>
+                        	<li ng-class="{active: matchesRoute('AccCoAs')}"><a href="#/AccCoAs">AccCoAs</a></li>
+                        	<li ng-class="{active: matchesRoute('AccPstgs')}"><a href="#/AccPstgs">AccPstgs</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="span9 well">
+                    <div id="main" ng-view>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="push"></div>
+    </div>
+    
+    <div id="footer">
+        <div class="container">
+            <p>Powered by <a href="http://jboss.org/forge">Forge</a></p>
+            <p><a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+        </div>
+    </div>
+    
+    <script src="scripts/vendor/modernizr-2.6.2.min.js"></script>
+    <script src="scripts/vendor/jquery-1.9.1.js"></script>
+    <script src="scripts/vendor/angular.js"></script>
+    <script src="scripts/vendor/angular-resource.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/directives/datetimepicker.js"></script>
+    <script src="scripts/filters/startFromFilter.js"></script>
+    <script src="scripts/filters/genericSearchFilter.js"></script>
+    <script src="scripts/services/locationParser.js"></script>
+    <script src="scripts/services/AccAccountFactory.js"></script>
+    <script src="scripts/controllers/newAccAccountController.js"></script>
+    <script src="scripts/controllers/searchAccAccountController.js"></script>
+    <script src="scripts/controllers/editAccAccountController.js"></script>
+    <script src="scripts/services/AccBlncFactory.js"></script>
+    <script src="scripts/controllers/newAccBlncController.js"></script>
+    <script src="scripts/controllers/searchAccBlncController.js"></script>
+    <script src="scripts/controllers/editAccBlncController.js"></script>
+    <script src="scripts/services/AccBrrFactory.js"></script>
+    <script src="scripts/controllers/newAccBrrController.js"></script>
+    <script src="scripts/controllers/searchAccBrrController.js"></script>
+    <script src="scripts/controllers/editAccBrrController.js"></script>
+    <script src="scripts/services/AccCoAFactory.js"></script>
+    <script src="scripts/controllers/newAccCoAController.js"></script>
+    <script src="scripts/controllers/searchAccCoAController.js"></script>
+    <script src="scripts/controllers/editAccCoAController.js"></script>
+    <script src="scripts/services/AccPstgFactory.js"></script>
+    <script src="scripts/controllers/newAccPstgController.js"></script>
+    <script src="scripts/controllers/searchAccPstgController.js"></script>
+    <script src="scripts/controllers/editAccPstgController.js"></script>
+</body>
+</html>

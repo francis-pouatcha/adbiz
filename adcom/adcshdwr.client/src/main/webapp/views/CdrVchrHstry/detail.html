@@ -1,0 +1,30 @@
+<header ng-switch on="$location.path().indexOf('/CdrVchrHstrys/new') > -1">
+    <h3 ng-switch-when="true">Create CdrVchrHstry</h3>
+    <h3 ng-switch-when="false">View or edit CdrVchrHstry</h3>
+</header>
+<form id="CdrVchrHstryForm" name="CdrVchrHstryForm" class="form-horizontal">
+    <div ng-show="displayError" class="alert alert-error">
+        <strong>Error!</strong> Something broke. Retry, or cancel and start afresh.
+    </div>
+    <div class="control-group" ng-class="{error: CdrVchrHstryForm.vchrNbr.$invalid}">
+        <label for="vchrNbr" class="control-label">Vchr Nbr</label>
+        <div id="vchrNbrControls" class="controls">
+            <input id="vchrNbr" name="vchrNbr" type="text" required ng-model="cdrVchrHstry.vchrNbr" placeholder="Enter the CdrVchrHstry Vchr Nbr"></input>
+            <span class="help-inline" ng-show="CdrVchrHstryForm.vchrNbr.$error.required">required</span> 
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: CdrVchrHstryForm.cdrNbr.$invalid}">
+        <label for="cdrNbr" class="control-label">Cdr Nbr</label>
+        <div id="cdrNbrControls" class="controls">
+            <input id="cdrNbr" name="cdrNbr" type="text" required ng-model="cdrVchrHstry.cdrNbr" placeholder="Enter the CdrVchrHstry Cdr Nbr"></input>
+            <span class="help-inline" ng-show="CdrVchrHstryForm.cdrNbr.$error.required">required</span> 
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <button id="saveCdrVchrHstry" name="saveCdrVchrHstry" class="btn btn-primary" ng-disabled="isClean() || CdrVchrHstryForm.$invalid" ng-click="save()"><i class="icon-ok-sign icon-white"></i> Save</button>
+            <button id="cancel" name="cancel" class="btn" ng-click="cancel()"><i class="icon-remove-sign"></i> Cancel</button>
+            <button id="deleteCdrVchrHstry" name="deleteCdrVchrHstry" class="btn btn-danger" ng-show="cdrVchrHstry.id" ng-click="remove()"><i class="icon-trash icon-white"></i> Delete</button>
+        </div>
+    <div>
+</form>

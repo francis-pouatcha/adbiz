@@ -1,0 +1,50 @@
+<div class="container">
+
+    <div class="col-xs-offset-2 col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Entity_create.title"| translate}}</b> </div>
+            
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{error}} </label>
+                <form  name="baseConfigCreateForm" class="form-horizontal" novalidate="">
+					
+					<div class="form-group">
+						<div growl></div>
+					 </div>
+					 
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{"BaseConfig_printMode_description.title" | translate}} : </label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : baseConfigCreateForm.printMode.$invalid }" >
+                            <input type="text" ng-model="baseConfigCreateCtrl.baseConfig.printMode" name="printMode" class="form-control" 
+                            required >
+                            <p ng-show="baseConfigCreateForm.printMode.$error.required" class="help-block">printMode est  requis !</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{"BaseConfig_nbrOfItemsPrcmtOrder_description.title" | translate}} : </label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : baseConfigCreateForm.nbrOfItemsPrcmtOrder.$invalid }" >
+                            <input type="text" ng-model="baseConfigCreateCtrl.baseConfig.nbrOfItemsPrcmtOrder" name="nbrOfItemsPrcmtOrder" class="form-control" 
+                            required >
+                            <p ng-show="baseConfigCreateForm.nbrOfItemsPrcmtOrder.$error.required" class="help-block">nbrOfItemsPrcmtOrder est  requis !</p>
+                        </div>
+                    </div>
+                    
+
+
+                    <div class="form-group">
+                        <label class="col-lg-4"  > </label>
+                        <div class="col-lg-8" >
+                            <a class="btn-danger btn" href="#/"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                            <button ng-click="baseConfigCreateCtrl.create();" ng-disabled="baseConfigCreateForm.$invalid" class="btn-success btn"  ><i class="glyphicon glyphicon-save"></i>  {{"Entity_save.title" | translate }}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+
+    </div>
+
+
+</div>

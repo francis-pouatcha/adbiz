@@ -1,0 +1,41 @@
+<div>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <div class="row">
+                <div class="col-lg-3">
+                      <input ng-model="q" id="search" class="form-control" placeholder="Recherche..."/>
+                </div> 
+            </div><br>
+        <tr>
+            <th>{{slsSalesOrderUtils.translations['SlsSOItem_artPic_description.title']}}</th>
+            <th>{{slsSalesOrderUtils.translations['SlsSOItem_artName_description.title']}}</th>
+            <th>{{slsSalesOrderUtils.translations['SlsSOItem_orderedQty_description.title']}}</th>
+            <th>{{slsSalesOrderUtils.translations['SlsSOItem_returnedQty_description.title']}}</th>
+            <th>{{slsSalesOrderUtils.translations['SlsSOItem_deliveredQty_description.title']}}</th>
+            <th>{{slsSalesOrderUtils.translations['SlsSOItem_sppuPreTax_description.title']}}</th>
+            <th>{{slsSalesOrderUtils.translations['SlsSOItem_vatAmount_description.title']}}</th>
+            <th>{{slsSalesOrderUtils.translations['SlsSOItem_rebate_description.title']}}</th>
+            <th>{{slsSalesOrderUtils.translations['SlsSOItem_netSPPreTax_description.title']}}</th>
+            <th>{{slsSalesOrderUtils.translations['SlsSOItem_netSPTaxIncl_description.title']}}</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr dir-paginate="slsSOItem in slsSalesOrder.slsSOItems | filter:q | itemsPerPage:itemPerPage()" current-page="currentPage">
+                <td>{{slsSOItem.artPic}}</td>
+                <td>{{slsSOItem.artName}}</td>
+                <td>{{slsSOItem.orderedQty}}</td>
+                <td>{{slsSOItem.returnedQty}}</td>
+                <td>{{slsSOItem.deliveredQty}}</td>
+                <td>{{slsSOItem.sppuPreTax}}</td>
+                <td>{{slsSOItem.vatAmount}}</td>
+                <td>{{slsSOItem.rebate}}</td>
+                <td>{{slsSOItem.netSPPreTax}}</td>
+                <td>{{slsSOItem.netSPTaxIncl}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="text-center">
+      <dir-pagination-controls max-size="maxSize" boundary-links="true" direction-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="views/SlsSalesOrder/dirPagination.tpl.html">
+      </dir-pagination-controls>
+    </div>
+</div>

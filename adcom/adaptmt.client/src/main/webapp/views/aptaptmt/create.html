@@ -1,0 +1,109 @@
+
+
+	
+
+	<div class="container">
+
+		<div class="col-xs-offset-0 col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<label class="error col-lg-offset-3 alert-danger">{{aptAptmtCreateCtrl.error}}
+					</label>
+					<form name="createAptAptmtForm" class="form-horizontal"
+						novalidate="">
+						<div class="form-group">
+							<label class="col-lg-4 ">{{"AptAptmt_title_description.title"|translate}}
+								:</label>
+							<div class="col-lg-8"
+								ng-class="{ 'has-error' : createAptAptmtForm.title.$invalid }">
+								<input type="text" ng-model="aptAptmts.title" name="title"
+									class="form-control" required>
+								<p ng-show="createAptAptmtForm.title.$error.required"
+									class="help-block">le title est requis !</p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-4 ">{{"AptAptmt_appointmentDate_description.title"|translate}}
+								:</label>
+							<div class="col-lg-8"
+								ng-class="{ 'has-error' : createAptAptmtForm.appointmentDate.$invalid }">
+								<input type="datetimes" date-time="" view="date"
+									views="['date']" format="dd-MM-yyyy-"
+									ng-model="aptAptmts.appointmentDate" name="appointmentDate"
+									class="form-control" required></input>
+								<p ng-show="createAptAptmtForm.appointmentDate.$error.required"
+									class="help-block">appointmentDate est requis !</p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-4 ">{{"AptAptmt_appointmentDateEnd_description.title"|translate}}
+								:</label>
+							<div class="col-lg-8"
+								ng-class="{ 'has-error' : createAptAptmtForm.appointmentDateEnd.$invalid }">
+								<input type="datetimes" date-time="" view="date"
+									views="['date']" format="dd-MM-yyyy-"
+									ng-model="aptAptmts.appointmentDateEnd"
+									name="appointmentDateEnd" class="form-control" required></input>
+								<p
+									ng-show="createAptAptmtForm.appointmentDateEnd.$error.required"
+									class="help-block">appointmentDateEnd est requis !</p>
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<label class="col-lg-4 ">{{ "AptAptmt_description.title"|
+								translate}} :</label>
+							<div class="col-lg-8"
+								ng-class="{ 'has-error' : createAptAptmtForm.description.$invalid }">
+								<textarea type="text" ng-model="aptAptmts.description"
+									name="description" class="form-control" required></textarea>
+								<p ng-show="createAptAptmtForm.description.$error.required"
+									class="help-block">description est requis</p>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-lg-4 ">{{
+								"AptAptmt_locality_description.title"| translate}} :</label>
+							<div class="col-lg-8"
+								ng-class="{ 'has-error' : createAptAptmtForm.locality.$invalid }">
+								<input type="text" ng-model="aptAptmts.locality" name="locality"
+									class="form-control"
+									onclick="window.open(views/aptaptmt/createLocality.html, createLocality).focus()"
+									required></a>
+								<p ng-show="createAptAptmtForm.locality.$error.required"
+									class="help-block">locality est requis !</p>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<div class="col-lg-8">
+								<a class="btn-danger btn" href="#/"><i
+									class="glyphicon glyphicon-remove"></i> {{"Entity_cancel.title"
+									| translate }}</a>
+								<button ng-click="aptAptmtCreateCtrl.create();"
+									ng-disabled="createContactForm.$invalid"
+									class="btn-success btn">
+									<i class="glyphicon glyphicon-save"></i> {{"Entity_save.title"
+									| translate }}
+								</button>
+							</div>
+
+
+						</div>
+
+
+
+
+					</form>
+
+				</div>
+			</div>
+
+		</div>
+
+
+	</div>
+
+	

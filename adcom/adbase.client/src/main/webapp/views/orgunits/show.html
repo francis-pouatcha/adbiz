@@ -1,0 +1,81 @@
+<div class="container">
+
+    <div class="col-xs-offset-2 col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Entity_create.title"| translate}}</b> </div>
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{orgUnitShowCtrl.error}} </label>
+                <form  class="form-horizontal" novalidate="">
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgUnit_fullName_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : orgUnitForm.fullName.$invalid }" >
+                            <input type="text" disabled value="{{orgUnitShowCtrl.orgUnit.fullName}}" name="fullName" class="form-control" required >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgUnit_shortName_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : orgUnitForm.shortName.$invalid }" >
+                            <input type="text" disabled value="{{orgUnitShowCtrl.orgUnit.shortName}}" name="shortName" class="form-control" required >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OuType_typeName_description.title"| translate}} :</label>
+                        <div class="col-lg-8" >
+                            <input type="text" disabled value="{{orgUnitShowCtrl.orgUnit.typeName}}" name="fullName" class="form-control" >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_name_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{orgUnitShowCtrl.orgUnit.countryName}}" name="shortName" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_iso3_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{orgUnitShowCtrl.orgUnit.ctrIso3}}" name="ctrIso3" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validFrom.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{orgUnitShowCtrl.orgUnit.validFrom | date : 'dd-MM-yyyy HH:mm'}}" name="shortName" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validTo.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{orgUnitShowCtrl.orgUnit.validTo | date : 'dd-MM-yyyy HH:mm'}}" name="shortName" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4"  > </label>
+                        <div class="col-lg-8" >
+                            
+                            <div class="col-lg-3" >
+                                <a class="btn-default btn" href="#/orgunits"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                            </div>
+                                                              
+                            <div class="col-lg-3" >
+                                <a class="btn-danger btn" ng-click="orgUnitShowCtrl.remove(orgUnitShowCtrl.orgUnit.id)"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_delete.title" | translate }}</a>
+                            </div>
+                            
+                            <div class="col-lg-3" >
+                                <a class="btn-default btn" href="#/orgunits/edit/{{orgUnitShowCtrl.orgUnit.identif}}"  ><i class="glyphicon glyphicon-edit" ></i> {{"Entity_edit.title" | translate}} </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

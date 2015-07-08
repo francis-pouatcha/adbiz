@@ -1,0 +1,920 @@
+<div class="container">
+
+
+	<div class="col-xs-3">
+
+		<div class="panel panel-default ">
+			<div class="panel-heading no-collapse">
+				<b>{{"Entity_show.title"|translate}}</b>
+			</div>
+			<div class="panel-body">
+				<accordion close-others="oneAtATime"> <accordion-group
+					is-open="status.open"> <accordion-heading>
+				Rapport <i class="pull-right glyphicon"
+					ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+				</accordion-heading> <a class="btn-default btn"
+					ng-disabled="aptAptmtShowCtlr.controlIfCancelable();"
+					href="#/aptaptmtRepport/add/{{aptAptmtShowCtlr.id}}">Ajouter
+					Commentaire</a> <a class="btn-default btn"
+					ng-disabled="aptAptmtShowCtlr.controlIfCancelable();" href="">Voir
+					Rapport</a> <a class="btn-default btn"
+					ng-disabled="aptAptmtShowCtlr.controlIfCancelable();" href="">Imprimer
+					Rapport</a></accordion-group> <accordion-group is-open="status.openTwo">
+				<accordion-heading> Participations<i
+					class="pull-right glyphicon"
+					ng-class="{'glyphicon-chevron-down': status.openTwo, 'glyphicon-chevron-right': !status.openTwo}"></i>
+				</accordion-heading> <a class="btn-default btn"
+					ng-disabled="aptAptmtShowCtlr.controlIfCancelable();"
+					ng-click='aptAptmtShowCtlr.newParticipant();'> Ajouter
+					Participant</a> <a class="btn-default btn" ng-disabled=""
+					ng-click="aptAptmtShowCtlr.newContact();" href="">Nouveau
+					Contact </a> </accordion-group> <accordion-group is-open="status.openThree">
+				<accordion-heading> RDV<i
+					class="pull-right glyphicon"
+					ng-class="{'glyphicon-chevron-down': status.openThree, 'glyphicon-chevron-right': !status.openThree}"></i>
+				</accordion-heading> <a class="btn-default btn"
+					ng-disabled="aptAptmtShowCtlr.controlIfCancelable();"
+					href="#/aptaptmt/cancel/{{aptAptmtShowCtlr.id}}">Annuler RDV</a> <a
+					class="btn-default btn"
+					ng-disabled="aptAptmtShowCtlr.controlIfCancelable();"
+					href="#/aptaptmt/close/{{aptAptmtShowCtlr.id}}">Cloturé RDV </a> </accordion-group> </accordion>
+			</div>
+		</div>
+
+	</div>
+
+
+
+	<div class="col-xs-9">
+
+		<!-- sho business parterns of appointment -->
+		<div class="panel panel-default">
+
+			<div class="panel-heading">
+				<span><b>See Appointment</b></span>
+				<button class="glyphicon glyphicon-collapse-down pull-right"
+					data-toggle="collapse" data-parent="#showAptAptmtBnsPtnrPanel"
+					data-target="#showAptAptmtBnsPtnrToggle"></button>
+			</div>
+			<div class="panel-collapse collapse" id="showAptAptmtBnsPtnrToggle">
+				<div class="panel-body">
+					<div class="col-lg-12">
+						
+						<b>Organisation:</b>{{aptAptmtShowCtlr.organisation}}<br>
+						<b>Crée par:</b>{{aptAptmtShowCtlr.aptAptmt.createdUserId}} le {{aptAptmtShowCtlr.aptAptmt.createDate| date:"fullDate"}} <br>
+						<b>Etat du rendez-vous:</b>{{aptAptmtShowCtlr.aptAptmt.status}}
+						<h2 align="center">Appointment N°:<label> {{aptAptmtShowCtlr.aptAptmt.aptmtnNbr}}</label> </h2>
+						<h3>Quoi :<label> {{aptAptmtShowCtlr.aptAptmt.title}} </label> </h3>
+						<h3>Quand :<label> {{aptAptmtShowCtlr.aptAptmt.appointmentDate| date:"fullDate"}} </label> BEGIN:{{aptAptmtShowCtlr.aptAptmt.appointmentDate | date:"HH:mm"}} END:{{aptAptmtShowCtlr.aptAptmt.appointmentDateEnd | date:"HH:mm"}} </h3>
+						<h3>Où:<label> {{aptAptmtShowCtlr.aptAptmt.locality}} </label> </h3>
+						<h3>Pourquoi:<label> {{aptAptmtShowCtlr.aptAptmt.description}} </label> </h3>
+						<hr>
+						<h4><u><b>Participants Conviés</b></u></h4>
+						<table align='center' width="90%" border="1">
+						<thead>
+									<tr>|
+										<th class="text-center">Société</th>
+										<th class="text-center">Nom Complet</th>
+										<th class="text-center">Title</th>
+										<th class="text-center">Personal Mobile</th>
+										<th class="text-center">Professional Mobile</th>
+										<th class="text-center">Email</th>
+									</tr>
+								</thead>
+						<tr
+										ng-repeat="contacts in aptAptmtShowCtlr.contactConfirm | limitTo: aptAptmtShowCtlr.itemPerPage">
+										<td>{{contacts.bnsptntIdentify}}</td>
+										<td>{{contacts.fullname}}</td>
+										<td>{{contacts.title}}</td>
+										<td>{{contacts.personalMobile}}</td>
+										<td>{{contacts.professionalMobile}}</td>
+										<td>{{contacts.email}}</td>
+									</tr>
+						</table>
+						<br>
+						<hr>
+						<br>
+						<h4><u><b>Participants Présents</b></u></h4>
+						<table align='center' width="90%" border="1">
+						<thead>
+									<tr>
+										<th class="text-center">Société</th>
+										<th class="text-center">Nom Complet</th>
+										<th class="text-center">Title</th>
+										<th class="text-center">Personal Mobile</th>
+										<th class="text-center">Professional Mobile</th>
+										<th class="text-center">Email</th>
+									</tr>
+								</thead>
+						<tr
+										ng-repeat="contacts in aptAptmtShowCtlr.contactPresentConfirm | limitTo: aptAptmtShowCtlr.itemPerPage">
+										<td>{{contacts.bnsptntIdentify}}</td>
+										<td>{{contacts.fullname}}</td>
+										<td>{{contacts.title}}</td>
+										<td>{{contacts.personalMobile}}</td>
+										<td>{{contacts.professionalMobile}}</td>
+										<td>{{contacts.email}}</td>
+									</tr>
+						</table><br><hr>
+						<b>Cloturé par:</b>{{aptAptmtShowCtlr.aptAptmt.closedUserId}} le {{aptAptmtShowCtlr.aptAptmt.closeDate | date:"fullDate"}}
+						
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<tabset> <tab active='aptAptmtShowCtlr.actAppointment'>
+		<tab-heading> <i class="glyphicon glyphicon-bell"></i>
+		Appointment </tab-heading>
+
+		<div class="panel panel-default  ng-scope">
+			<div class="panel-heading no-collapse">
+				<b>{{"Entity_show.title"|translate}}</b>
+			</div>
+			<div class="panel-body">
+				<form name="showAptAptmtForm" class="form-horizontal" novalidate>
+
+
+
+					<div class="form-group">
+						<label class="col-lg-4 ">{{"AptAptmt_title_description.title"|translate}}
+							:</label>
+						<div class="col-lg-8">
+							<input type="text" ng-model="aptAptmtShowCtlr.aptAptmt.title"
+								name="title" disabled class="form-control">
+
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-lg-4 ">{{"AptAptmt_appointmentDate_description.title"|translate}}
+							:</label>
+						<div class="col-lg-8">
+							<input type="text" name="appointmentDate" disabled
+								ng-model="aptAptmtShowCtlr.aptAptmt.appointmentDate | date:'fullDate'"
+								class="form-control">
+
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-4 ">Debut et fin :</label>
+						<div class="col-lg-4">
+							<input type="text" name="appointmentDate" disabled
+								ng-model="aptAptmtShowCtlr.aptAptmt.appointmentDate | date:'HH:mm'"
+								class="form-control">
+
+						</div>
+
+
+						<div class="col-lg-4">
+							<input type="text" name="appointmentDateEnd" disabled
+								ng-model="aptAptmtShowCtlr.aptAptmt.appointmentDateEnd | date:'HH:mm'"
+								class="form-control">
+
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-lg-4">{{ "AptAptmt_description.title"|
+							translate}} :</label>
+						<div class="col-lg-8">
+							<input type="text"
+								ng-model="aptAptmtShowCtlr.aptAptmt.description"
+								name="description" disabled class="form-control">
+
+						</div>
+
+					</div>
+
+					<div class="form-group">
+						<label class="col-lg-4 ">{{
+							"AptAptmt_locality_description.title"| translate}} :</label>
+						<div class="col-lg-8">
+							<input type="text" ng-model="aptAptmtShowCtlr.aptAptmt.locality"
+								name="locality" disabled class="form-control">
+
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-lg-4 ">{{
+							"AptAptmt_parentIdentify_description.title"| translate}} :</label>
+						<div class="col-lg-8">
+							<input type="text"
+								ng-model="aptAptmtShowCtlr.aptAptmt.parentIdentify" disabled
+								name="parentIdentify" class="form-control">
+
+						</div>
+					</div>
+
+
+
+					<div class="form-group">
+
+						<div class="col-lg-3">
+							<a class="btn-default btn"
+								ng-click="aptAptmtShowCtlr.previous();"><i
+								class="glyphicon glyphicon-circle-arrow-left"></i>
+								{{"Entity_previous.title"|translate}}</a>
+						</div>
+
+						<div class="col-lg-3">
+							<a class="btn-default btn" href="#/"><i
+								class="glyphicon glyphicon-remove"></i> {{"Entity_cancel.title"
+								| translate }}</a>
+						</div>
+						<div class="col-lg-3">
+							<a class="btn-default btn"
+								href="#/aptaptmt/update/{{aptAptmtShowCtlr.aptAptmt.id}}"><i
+								class="glyphicon glyphicon-edit"></i> Editer</a>
+						</div>
+						<div class="col-lg-3">
+							<a class="btn-default btn" ng-click="aptAptmtShowCtlr.next();"><i
+								class="fa glyphicon glyphicon-circle-arrow-right"></i>
+								{{"Entity_next.title"|translate}}</a>
+						</div>
+
+					</div>
+
+				</form>
+
+			</div>
+
+		</div>
+
+		</tab> </tab> <tab select="" active='aptAptmtShowCtlr.actPartner' disabled=''>
+		<tab-heading> <i class="glyphicon glyphicon-bell"></i>
+		New Partner </tab-heading>
+		<div class="container"></div>
+		<div class="col-xs-offset-0 col-xs-12">
+			<div class="panel panel-default">
+
+				<div class="panel-body">
+
+					<form name="bpBnsPtnrForm" class="form-horizontal" novalidate="">
+						<div class="form-group">
+							<label class="col-lg-2" style="text-align: center;">{{bpBnsPtnrUtils.translations['BpBnsPtnr_ptnrType_description.title']}}
+								:</label>
+							<div class="col-lg-4"
+								ng-class="{ 'has-error' : bpBnsPtnrForm.ptnrType.$invalid }"
+								ng-init="bpBnsPtnr.ptnrType='INDIVIDUAL'">
+								<select class="form-control" name="ptnrType"
+									ng-model="bpBnsPtnr.ptnrType"
+									ng-options="bpBnsPtnrType.enumKey as bpBnsPtnrType.translKey|translate for bpBnsPtnrType in bpBnsPtnrUtils.bpBnsPtnrTypes"
+									required>
+								</select>
+								<p ng-show="bpBnsPtnrForm.ptnrType.$error.required"
+									class="help-block">{{bpBnsPtnrUtils.translations['Entity_required.title']}}</p>
+							</div>
+							<label class="col-lg-2 " style="text-align: center;">{{bpBnsPtnrUtils.translations['BpBnsPtnr_ctryOfRsdnc_description.title']}}
+								:</label>
+							<div class="col-lg-4"
+								ng-class="{ 'has-error' : bpBnsPtnrForm.ctryOfRsdnc.$invalid }">
+								<input type="text" ng-model="bpBnsPtnr.countryName"
+									id="ctryOfRsdnc" name="ctryOfRsdnc" class="form-control"
+									required autocomplete="off"
+									typeahead="countryName as countryName.name for countryName in bpBnsPtnrUtils.loadCountryNames($viewValue)"
+									typeahead-loading="loading"
+									placeholder="{{'BpBnsPtnr_findACountry_description.title'|translate}}">
+								<p ng-show="bpBnsPtnrForm.ctryOfRsdnc.$error.required"
+									class="help-block">{{bpBnsPtnrUtils.translations['Entity_required.title']}}</p>
+							</div>
+						</div>
+						<div class=" form-group"
+							ng-show="bpBnsPtnrUtils.isIndividual(bpBnsPtnr)">
+							<label class="col-lg-2 " style="text-align: center;">{{bpBnsPtnrUtils.translations['BpIndivPtnrName_firstName_description.title']}}
+								:</label>
+							<div class="col-lg-4">
+								<input type="text" ng-model="bpBnsPtnr.indivPtnrName.firstName"
+									name="firstName" class="form-control">
+							</div>
+							<label class="col-lg-2 " style="text-align: center;">{{bpBnsPtnrUtils.translations['BpIndivPtnrName_lastName_description.title']}}
+								:</label>
+							<div class="col-lg-4">
+								<input type="text" ng-model="bpBnsPtnr.indivPtnrName.lastName"
+									name="lastName" class="form-control" required>
+								<p ng-show="bpBnsPtnrForm.lastName.$error.required"
+									class="help-block">{{bpBnsPtnrUtils.translations['Entity_required.title']}}</p>
+							</div>
+						</div>
+						<div class=" form-group"
+							ng-show="bpBnsPtnrUtils.isIndividual(bpBnsPtnr)">
+							<label class="col-lg-2 " style="text-align: center;">{{bpBnsPtnrUtils.translations['BpIndivPtnrName_gender_description.title']}}
+								:</label>
+							<div class="col-lg-4">
+								<select class="form-control" name="gender"
+									ng-model="bpBnsPtnr.indivPtnrName.gender"
+									ng-options="bpGender.enumKey as bpGender.translKey|translate for bpGender in bpBnsPtnrUtils.baseGenders"
+									required>
+									<option value="" />
+								</select>
+								<p ng-show="bpBnsPtnrForm.gender.$error.required"
+									class="help-block">{{bpBnsPtnrUtils.translations['Entity_required.title']}}</p>
+							</div>
+							<label class="col-lg-2 " style="text-align: center;">{{bpBnsPtnrUtils.translations['BpIndivPtnrName_brthDt_description.title']}}
+								:</label>
+							<div class="col-lg-4">
+								<input type="datetime" date-time view="date" min-view="date"
+									views="['date']" dismiss="true" format="dd-MM-yyyy"
+									ng-model="bpBnsPtnr.indivPtnrName.brthDt" id="brthDt"
+									name="brthDt" class="form-control">
+							</div>
+						</div>
+						<div class="form-group"
+							ng-show="bpBnsPtnrUtils.isInstitution(bpBnsPtnr)">
+							<label class="col-lg-2" style="text-align: center;">{{bpBnsPtnrUtils.translations['BpLegalPtnrId_cpnyName_description.title']}}
+								:</label>
+							<div class="col-lg-10">
+								<input type="text" ng-model="bpBnsPtnr.legalPtnrId.cpnyName"
+									name="cpnyName" class="form-control" required>
+								<p ng-show="bpBnsPtnrForm.cpnyName.$error.required"
+									class="help-block">{{bpBnsPtnrUtils.translations['Entity_required.title']}}</p>
+							</div>
+						</div>
+						<div class="form-group"
+							ng-show="bpBnsPtnrUtils.isInstitution(bpBnsPtnr)">
+							<label class="col-lg-2" style="text-align: center;">{{bpBnsPtnrUtils.translations['BpLegalPtnrId_legalForm_description.title']}}
+								:</label>
+							<div class="col-lg-4">
+								<input type="text" ng-model="bpBnsPtnr.legalPtnrId.legalForm"
+									name="legalForm" class="form-control">
+							</div>
+							<label class="col-lg-2 " style="text-align: center;">{{bpBnsPtnrUtils.translations['BpLegalPtnrId_equity_description.title']}}
+								:</label>
+							<div class="col-lg-4">
+								<input type="text" ng-model="bpBnsPtnr.legalPtnrId.equity"
+									name="equity" class="form-control">
+							</div>
+						</div>
+						<div class="form-group"
+							ng-show="bpBnsPtnrUtils.bpBnsPtnrUtils.isInstitution(bpBnsPtnr)">
+							<label class="col-lg-2 " style="text-align: center;">{{bpBnsPtnrUtils.translations['BpLegalPtnrId_taxPayerIdNbr_description.title']}}
+								:</label>
+							<div class="col-lg-4">
+								<input type="text"
+									ng-model="bpBnsPtnr.legalPtnrId.taxPayerIdNbr"
+									name="taxPayerIdNbr" class="form-control">
+							</div>
+							<label class="col-lg-2" style="text-align: center;">{{bpBnsPtnrUtils.translations['BpLegalPtnrId_cmrcRgstrNbr_description.title']}}
+								:</label>
+							<div class="col-lg-4">
+								<input type="text" ng-model="bpBnsPtnr.legalPtnrId.cmrcRgstrNbr"
+									name="cmrcRgstrNbr" class="form-control">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-lg-8">
+								<a class="btn-danger btn" href="#/"><i
+									class="glyphicon glyphicon-remove"></i> {{"Entity_cancel.title"
+									| translate }}</a>
+								<button ng-click="aptAptmtShowCtlr.createPartner();"
+									ng-disabled="createContactForm.$invalid"
+									class="btn-success btn">
+									<i class="glyphicon glyphicon-save"></i> {{"Entity_save.title"
+									| translate }}
+								</button>
+							</div>
+
+
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+		</tab> <tab select="" active='aptAptmtShowCtlr.actContact' disabled=''>
+		<tab-heading> <i class="glyphicon glyphicon-bell"></i>
+		Nouveau Contact </tab-heading>
+
+		<div class="container">
+
+			<div class="col-xs-offset-0 col-xs-9">
+				<div class="panel panel-default">
+
+					<div class="panel-body">
+						<label class="error col-lg-offset-3 alert-danger">{{aptAptmtShowCtrl.error}}
+						</label>
+						<form name="createContactForm" class="form-horizontal"
+							novalidate="">
+							<div class="form-group">
+								<label class="col-lg-4">Partner :</label>
+								<div class="col-lg-4" ng-hide="isAssociate">
+									<input type="text" ng-model="aptAptmtShowCtlr.partner"
+										id="bnsptntIdentify" name="bnsptntIdentify"
+										class="form-control" autocomplete="off"
+										typeahead="bnsptntIdentify as bnsptntIdentify.fullName for bnsptntIdentify in aptAptmtBsPtnrService.loadPartnersByName($viewValue) | filter:$viewValue"
+										typeahead-loading="loading" placeholder="find a Partner"
+										typeahead-on-select='onPartnerSelected($item, $model, $label)'>
+
+								</div>
+								<div class="col-lg-4" ng-show="isAssociate">
+									<input type="text" ng-model="aptAptmtShowCtlr.partner"
+										id="bnsptntIdentify" name="bnsptntIdentify"
+										class="form-control" autocomplete="off" disabled>
+								</div>
+								<a class="btn btn-success pull-right margBott10 col-lg-2"
+									ng-click="aptAptmtShowCtlr.associate();"> <i
+									class="glyphicon-plus"></i> Associate
+								</a> <a class="btn btn-primary pull-right margBott10 col-lg-2"
+									ng-click="aptAptmtShowCtlr.newPartner();"> <i
+									class="glyphicon-plus"></i> New Partner
+								</a>
+							</div>
+							<div class="form-group" ng-hide="isLogin();">
+								<label class="col-lg-4 ">Nom Complet :</label>
+								<div class="col-lg-8"
+									ng-class="{ 'has-error' : createContactForm.fullname.$invalid }">
+									<input type="text"
+										ng-model="aptAptmtShowCtlr.contacts.fullname" name="fullname"
+										class="form-control">
+									<p ng-show="createContactForm.fullname.$error.required"
+										class="help-block">le title est requis !</p>
+								</div>
+							</div>
+							<div class="form-group" ng-show="isLogin();">
+								<label class="col-lg-4">Nom Complet² :</label>
+								<div class="col-lg-8"
+									ng-class="{ 'has-error' : createContactForm.login.$invalid }">
+									<input type="text"
+										ng-model="aptAptmtShowCtlr.contacts.fullname" id="login"
+										name="login" class="form-control" autocomplete="off"
+										typeahead="loginName as loginName.fullName for loginName in aptAptmtsService.loadUsers($viewValue) | filter:$viewValue"
+										typeahead-loading="loading">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-4 ">Titre :</label>
+								<div class="col-lg-8"
+									ng-class="{ 'has-error' : createContactForm.title.$invalid }">
+									<input type="text" ng-model="aptAptmtShowCtlr.contacts.title"
+										name="title" class="form-control">
+									<p ng-show="createContactForm.title.$error.required"
+										class="help-block">description est requis</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-lg-4 ">Personnal Mobile :</label>
+								<div class="col-lg-8"
+									ng-class="{ 'has-error' : createContactForm.persoMobile.$invalid }">
+									<input type="text"
+										ng-model="aptAptmtShowCtlr.contacts.personalMobile"
+										name="persoMobile" class="form-control"></a>
+									<p ng-show="createContactForm.personalMobile.$error.required"
+										class="help-block">personal mobile est requis !</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-lg-4 ">Professional Mobile :</label>
+								<div class="col-lg-8"
+									ng-class="{ 'has-error' : createContactForm.proMobile.$invalid }">
+									<input type="text"
+										ng-model="aptAptmtShowCtlr.contacts.professionalMobile"
+										name="proMobile" class="form-control"></a>
+									<p ng-show="createContactForm.proMobile.$error.required"
+										class="help-block">professional mobile est requis !</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-lg-4 ">Email :</label>
+								<div class="col-lg-8"
+									ng-class="{ 'has-error' : createContactForm.email.$invalid }">
+									<input type="email" ng-model="aptAptmtShowCtlr.contacts.email"
+										name="email" class="form-control"></a>
+									<p ng-show="createContactForm.locality.$error.required"
+										class="help-block">email est requis !</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-lg-8">
+									<a class="btn-danger btn" href="#/"><i
+										class="glyphicon glyphicon-remove"></i>
+										{{"Entity_cancel.title" | translate }}</a>
+									<button ng-click="aptAptmtShowCtlr.createContact();"
+										ng-disabled="createContactForm.$invalid"
+										class="btn-success btn">
+										<i class="glyphicon glyphicon-save"></i> {{"Entity_save.title"
+										| translate }}
+									</button>
+								</div>
+
+
+							</div>
+
+
+
+
+						</form>
+
+					</div>
+				</div>
+
+			</div>
+
+
+		</div>
+
+
+		</tab> <tab select="" active='aptAptmtShowCtlr.actParticipant' disabled=''>
+		<tab-heading> <i class="glyphicon glyphicon-bell"></i>
+		Ajouter Participants </tab-heading>
+
+		<div class="container" ng-cloak>
+
+			<div class="col-xs-offset-0 col-xs-9">
+				<div class="panel panel-default">
+
+					<div class="panel-body">
+						<label class="error col-lg-offset-3 alert-danger">{{aptAptmtShowCtrl.error}}
+						</label>
+						<form name="createAptAptmtForm" class="form-horizontal"
+							novalidate="">
+							<div class="form-group">
+								<label class="col-lg-4 ">Contact :</label>
+								<div class="col-lg-3">
+									<input type="text"
+										ng-model="aptAptmtShowCtlr.aptAptmtBsPtnr.contactnNbr"
+										id="contact" name="contact" class="form-control"
+										autocomplete="off"
+										typeahead="contact as contact.fullname for contact in aptAptmtContactsService.loadContacts($viewValue) | filter:$viewValue"
+										typeahead-loading="loading" placeholder="find a Contact">
+									<p class="help-block">Contact of people assign to
+										appointment</p>
+								</div>
+								<a class="btn btn-primary pull-right margBott10 col-lg-2"
+									ng-click="aptAptmtShowCtlr.newContact();"> <i
+									class="glyphicon-plus"></i> New Contact
+								</a> <a class="btn btn-primary pull-right margBott10 col-lg-2"
+									ng-click="aptAptmtShowCtlr.add();"> <i
+									class="glyphicon-plus"></i> Add
+								</a>
+							</div>
+
+						</form>
+
+						<div class="table-overflow-middle row">
+							<b>{{"Entity_list.title"|translate}} :
+								{{aptAptmtsCtrl.totalItems}} Contact(s) </b>
+							<table
+								class="table table-bordered  table-striped pointer-element">
+								<thead>
+									<tr>
+										<th class="text-center">Société</th>
+										<th class="text-center">Nom Complet</th>
+										<th class="text-center">Title</th>
+										<th class="text-center">Personal Mobile</th>
+										<th class="text-center">Professional Mobile</th>
+										<th class="text-center">Email</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr
+										ng-repeat="contacts in aptAptmtShowCtlr.contactConfirm | limitTo: aptAptmtShowCtlr.itemPerPage">
+										<td>{{contacts.bnsptntIdentify}}</td>
+										<td>{{contacts.fullname}}</td>
+										<td>{{contacts.title}}</td>
+										<td>{{contacts.personalMobile}}</td>
+										<td>{{contacts.professionalMobile}}</td>
+										<td>{{contacts.email}}</td>
+										<td><a class="btn btn-danger col-lg-6"
+											ng-click="aptAptmtShowCtlr.remove($index);"> <i
+												class="glyphicon-plus"></i> Remove
+										</a></td>
+										<td ng-show="aptAptmtShowCtlr.isUnavailable($index)"><a
+											class="btn btn-success col-lg-6"
+											ng-click="aptAptmtShowCtlr.unavailable($index);"> <i
+												class="glyphicon-plus"></i>Indisponible
+										</a></td>
+										<td ng-hide="aptAptmtShowCtlr.isUnavailable($index)"><a
+											class="btn btn-success col-lg-6"
+											ng-click="aptAptmtShowCtlr.available($index);"> <i
+												class="glyphicon-plus"></i>Disponible
+										</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<ul class="pull-right">
+							<pagination total-items="aptAptmtShowCtlr.totalItems"
+								items-per-page="aptAptmtShowCtrl.itemPerPage"
+								class="pagination-sm" ng-model="aptAptmtShowCtlr.currentPage"
+								ng-change="aptAptmtCreateCtrl.paginate()"></pagination>
+
+						</ul>
+
+
+
+
+
+					</div>
+
+
+				</div>
+
+			</div>
+
+
+		</div>
+
+
+
+
+
+		</tab> <tab select="" active="" disabled=""> <tab-heading>
+		<i class="glyphicon glyphicon-bell"></i> Cloturation </tab-heading> <tabset>
+
+		<tab select="" active='' disabled=''> <tab-heading>
+		<i class="glyphicon glyphicon-bell"></i> Participants Présents </tab-heading>
+		<div class="container" ng-cloak>
+
+			<div class="col-xs-offset-0 col-xs-9">
+				<div class="panel panel-default">
+
+					<div class="panel-body">
+						<label class="error col-lg-offset-3 alert-danger">{{aptAptmtShowCtrl.error}}
+						</label>
+						<form name="createAptAptmtForm" class="form-horizontal"
+							novalidate="">
+							<div class="form-group">
+								<label class="col-lg-4 ">Contact :</label>
+								<div class="col-lg-3">
+									<input type="text"
+										ng-model="aptAptmtShowCtlr.aptAptmtBsPtnrPresent.contactnNbr"
+										id="contact" name="contact" class="form-control"
+										autocomplete="off"
+										typeahead="contact as contact.fullname for contact in aptAptmtContactsService.loadContacts($viewValue) | filter:$viewValue"
+										typeahead-loading="loading" placeholder="find a Contact">
+									<p class="help-block">Contact of people assign to
+										appointment</p>
+								</div>
+								<a class="btn btn-primary pull-right margBott10 col-lg-2"
+									ng-click="aptAptmtShowCtlr.newContact();"> <i
+									class="glyphicon-plus"></i> Add Participant
+								</a> <a class="btn btn-success pull-right margBott10 col-lg-2"
+									ng-click="aptAptmtShowCtlr.present();"> <i
+									class="glyphicon-plus"></i> Présent
+								</a>
+							</div>
+
+						</form>
+
+						<div class="table-overflow-middle row">
+							<b>{{"Entity_list.title"|translate}} :
+								{{aptAptmtsCtrl.totalItems}} Contact(s) </b>
+							<table
+								class="table table-bordered  table-striped pointer-element">
+								<thead>
+									<tr>
+										<th class="text-center">Société</th>
+										<th class="text-center">Nom Complet</th>
+										<th class="text-center">Title</th>
+										<th class="text-center">Personal Mobile</th>
+										<th class="text-center">Professional Mobile</th>
+										<th class="text-center">Email</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr
+										ng-repeat="contacts in aptAptmtShowCtlr.contactPresentConfirm | limitTo: aptAptmtShowCtlr.itemPerPage">
+										<td>{{contacts.bnsptntIdentify}}</td>
+										<td>{{contacts.fullname}}</td>
+										<td>{{contacts.title}}</td>
+										<td>{{contacts.personalMobile}}</td>
+										<td>{{contacts.professionalMobile}}</td>
+										<td>{{contacts.email}}</td>
+										<td><a class="btn btn-danger col-lg-6"
+											ng-click="aptAptmtShowCtlr.absent($index);"> <i
+												class="glyphicon-plus"></i> Absent
+										</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<ul class="pull-right">
+							<pagination total-items="aptAptmtShowCtlr.totalItems"
+								items-per-page="aptAptmtShowCtrl.itemPerPage"
+								class="pagination-sm" ng-model="aptAptmtShowCtlr.currentPage"
+								ng-change="aptAptmtCreateCtrl.paginate()"></pagination>
+
+						</ul>
+
+
+
+
+
+					</div>
+
+
+				</div>
+
+			</div>
+
+
+		</div>
+
+		</tab> <tab select="" active='' disabled=''> <tab-heading>
+		<i class="glyphicon glyphicon-bell"></i> Programmer un autres RDV </tab-heading>
+
+		<div class="container" ng-cloak>
+
+			<div class=" col-xs-9">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<b>{{ "Entity_create.title"| translate}}</b>
+					</div>
+					<div class="panel-body">
+						<label class="error col-lg-offset-3 alert-danger">{{aptAptmtShowCtlr.error}}
+						</label>
+						<form name="createAptAptmtForm" class="form-horizontal"
+							novalidate="">
+							<div class="form-group">
+								<label class="col-lg-4 ">{{"AptAptmt_title_description.title"|translate}}
+									:</label>
+								<div class="col-lg-8"
+									ng-class="{ 'has-error' : createAptAptmtForm.title.$invalid }">
+									<input type="text" ng-model="aptAptmtShowCtlr.aptAptmts.title"
+										name="title" class="form-control" required>
+									<p ng-show="createAptAptmtForm.aptAptmt.$error.required"
+										class="help-block">le title est requis !</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-4 ">{{"AptAptmt_appointmentDate_description.title"|translate}}
+									:</label>
+								<div class="col-lg-8"
+									ng-class="{ 'has-error' : createAptAptmtForm.appointmentDate.$invalid }">
+									<input type="datetimes" date-time="" view="date"
+										views="['date']" format="dd-MM-yyyy-"
+										ng-model="aptAptmtShowCtlr.aptAptmts.appointmentDate"
+										name="appointmentDate" class="form-control" required></input>
+									<p ng-show="createAptAptmtForm.appointmentDate.$error.required"
+										class="help-block">appointmentDate est requis !</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-4 ">{{"AptAptmt_appointmentDateEnd_description.title"|translate}}
+									:</label>
+								<div class="col-lg-8"
+									ng-class="{ 'has-error' : createAptAptmtForm.appointmentDateEnd.$invalid }">
+									<input type="datetimes" date-time="" view="date"
+										views="['date']" format="dd-MM-yyyy-"
+										ng-model="aptAptmtShowCtlr.aptAptmts.appointmentDateEnd"
+										name="appointmentDateEnd" class="form-control" required></input>
+									<p
+										ng-show="createAptAptmtForm.appointmentDateEnd.$error.required"
+										class="help-block">appointmentDateEnd est requis !</p>
+								</div>
+							</div>
+
+
+							<div class="form-group">
+								<label class="col-lg-4 ">{{
+									"AptAptmt_description.title"| translate}} :</label>
+								<div class="col-lg-8"
+									ng-class="{ 'has-error' : createAptAptmtForm.description.$invalid }">
+									<input type="text"
+										ng-model="aptAptmtShowCtlr.aptAptmts.description"
+										name="description" class="form-control" required>
+									<p ng-show="createAptAptmtForm.description.$error.required"
+										class="help-block">description est requis</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-lg-4 ">{{
+									"AptAptmt_locality_description.title"| translate}} :</label>
+								<div class="col-lg-8"
+									ng-class="{ 'has-error' : createAptAptmtForm.locality.$invalid }">
+									<input type="text"
+										ng-model="aptAptmtShowCtlr.aptAptmts.locality" name="locality"
+										class="form-control"
+										onclick="window.open(views/aptaptmt/createLocality.html, createLocality).focus()"
+										required></a>
+									<p ng-show="createAptAptmtForm.locality.$error.required"
+										class="help-block">locality est requis !</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-lg-4 ">{{
+									"AptAptmt_parentIdentify_description.title"| translate}} :</label>
+								<div class="col-lg-8"
+									ng-class="{ 'has-error' : createAptAptmtForm.parentIdentify.$invalid }">
+									<input class="form-control"
+										ng-model="aptAptmtShowCtlr.aptAptmts.parentIdentify" disabled
+										name="parentIdentify">
+
+									<p ng-show="createAptAptmtForm.parentIdentify.$error.required"
+										class="help-block">parentIdentify est requis !</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-lg-4">
+									<a class="btn-default btn"
+										ng-click="aptAptmtShowCtlr.createOtherAptmt();"><i
+										class="fa glyphicon glyphicon-circle-arrow-right"></i> OK </a>
+								</div>
+							</div>
+						</form>
+
+					</div>
+				</div>
+
+			</div>
+
+
+		</div>
+
+
+
+
+
+
+		</tab> <tab select="" active='' disabled=''> <tab-heading>
+		<i class="glyphicon glyphicon-bell"></i> Cloture du RDV </tab-heading>
+		<div class="container">
+
+			<div class="col-xs-9">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<b>{{ "Entity_createRepport.title"| translate}}</b>
+					</div>
+					<div class="panel-body">
+						<label class="error col-lg-offset-3 alert-danger">{{aptAptmtRepportCreateCtrl.error}}
+						</label>
+						<form name="createAptAptmtRepportForm" class="form-horizontal"
+							novalidate="">
+
+							<div class="form-group">
+								<label class="col-lg-4 ">{{"AptAptmt_title_description.title"|translate}}
+									:</label>
+								<div class="col-lg-8"
+									ng-class="{ 'has-error' : createAptAptmtRepportForm.aptmtIdentify.$invalid }">
+									<input class="form-control" type="text"
+										ng-model="aptAptmtShowCtlr.AptAptmtRepport.aptmtIdentify"
+										name="aptmtIdentify" disabled>
+
+									<p
+										ng-show="createAptAptmtRepportForm.aptAptmtRepport.$error.required"
+										class="help-block">le title est requis !</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-4 ">{{"AptAptmtReport_title_description.title"|translate}}
+									:</label>
+								<div class="col-lg-8"
+									ng-class="{ 'has-error' : createAptAptmtRepportForm.title.$invalid }">
+									<input ng-model="aptAptmtShowCtlr.AptAptmtRepport.title"
+										name="title" class="form-control" disabled>
+									<p
+										ng-show="createAptAptmtRepportForm.aptAptmtRepport.$error.required"
+										class="help-block">le title du rapport est requis !</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-4 ">
+									{{"AptAptmtReport_description.text"|translate}}:</label>
+								<div class="col-lg-8"
+									ng-class="{ 'has-error' :createAptAptmtRepportForm.description.$invalid }">
+									<textarea type="text"
+										ng-model="aptAptmtShowCtlr.AptAptmtRepport.description"
+										name="description" class="form-control" required> </textarea>
+									<p
+										ng-show="createAptAptmtRepportForm.aptAptmtRepport.$error.required"
+										class="help-block">la description est requise !</p>
+								</div>
+							</div>
+
+
+							<div class="form-group">
+								<div class="col-lg-2">
+									<a class="btn-default btn" ng-click="aptAptmtShowCtlr.close();"><i
+										class="glyphicon glyphicon-edit"></i> Cloturer</a>
+								</div>
+							</div>
+						</form>
+
+					</div>
+				</div>
+
+			</div>
+
+
+		</div>
+	</div>
+	</tab>
+	</tabset>
+	</tab>
+
+	</tabset>
+</div>
+
+
+
+</div>
+

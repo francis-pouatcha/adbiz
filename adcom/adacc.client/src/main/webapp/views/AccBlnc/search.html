@@ -1,0 +1,112 @@
+<div class="form-horizontal">
+    <h3>Create a new AccBlnc</h3>
+    <div class="control-group">
+        <div class="controls">
+            <a id="Create" name="Create" class="btn btn-primary" href="#/AccBlncs/new"><i class="icon-plus-sign icon-white"></i> Create</a>
+        </div>
+    </div>
+</div>
+<hr/>
+<div>
+    <h3>Search for AccBlncs</h3>
+    <form id="AccBlncSearch" class="form-horizontal">
+    <div class="control-group">
+        <label for="accCoA" class="control-label">Acc Co A</label>
+        <div class="controls">
+            <input id="accCoA" name="accCoA" type="text" ng-model="search.accCoA" placeholder="Enter the AccBlnc Acc Co A"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="accNbr" class="control-label">Acc Nbr</label>
+        <div class="controls">
+            <input id="accNbr" name="accNbr" type="text" ng-model="search.accNbr" placeholder="Enter the AccBlnc Acc Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="pstgDir" class="control-label">Pstg Dir</label>
+        <div class="controls">
+            <select id="pstgDir" name="pstgDir" ng-model="search.pstgDir" ng-options="p as p for p in pstgDirList">
+                <option value="">Choose a Pstg Dir</option>
+            </select>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="accCur" class="control-label">Acc Cur</label>
+        <div class="controls">
+            <input id="accCur" name="accCur" type="text" ng-model="search.accCur" placeholder="Enter the AccBlnc Acc Cur"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="amtInAccCur" class="control-label">Amt In Acc Cur</label>
+        <div class="controls">
+            <input id="amtInAccCur" name="amtInAccCur" type="text" ng-model="search.amtInAccCur" placeholder="Enter the AccBlnc Amt In Acc Cur"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="refCur" class="control-label">Ref Cur</label>
+        <div class="controls">
+            <input id="refCur" name="refCur" type="text" ng-model="search.refCur" placeholder="Enter the AccBlnc Ref Cur"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="amtInRefCur" class="control-label">Amt In Ref Cur</label>
+        <div class="controls">
+            <input id="amtInRefCur" name="amtInRefCur" type="text" ng-model="search.amtInRefCur" placeholder="Enter the AccBlnc Amt In Ref Cur"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="accBrr" class="control-label">Acc Brr</label>
+        <div class="controls">
+            <input id="accBrr" name="accBrr" type="text" ng-model="search.accBrr" placeholder="Enter the AccBlnc Acc Brr"></input>
+        </div>
+    </div>
+        <div class="control-group">
+            <div class="controls">
+                <a id="Search" name="Search" class="btn btn-primary" ng-click="performSearch()"><i class="icon-search icon-white"></i> Search</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="search-results">
+    <table class="table table-bordered table-striped clearfix">
+        <thead>
+            <tr>
+                <th>Acc Co A</th>
+                <th>Acc Nbr</th>
+                <th>Pstg Dir</th>
+                <th>Acc Cur</th>
+                <th>Amt In Acc Cur</th>
+                <th>Ref Cur</th>
+                <th>Amt In Ref Cur</th>
+                <th>Acc Brr</th>
+                <th>Blnc Dt</th>
+            </tr>
+        </thead>
+        <tbody id="search-results-body">
+            <tr ng-repeat="result in searchResults | searchFilter:searchResults | startFrom:currentPage*pageSize | limitTo:pageSize">
+                <td><a href="#/AccBlncs/edit/{{result.id}}">{{result.accCoA}}</a></td>
+                <td><a href="#/AccBlncs/edit/{{result.id}}">{{result.accNbr}}</a></td>
+                <td><a href="#/AccBlncs/edit/{{result.id}}">{{result.pstgDir}}</a></td>
+                <td><a href="#/AccBlncs/edit/{{result.id}}">{{result.accCur}}</a></td>
+                <td><a href="#/AccBlncs/edit/{{result.id}}">{{result.amtInAccCur}}</a></td>
+                <td><a href="#/AccBlncs/edit/{{result.id}}">{{result.refCur}}</a></td>
+                <td><a href="#/AccBlncs/edit/{{result.id}}">{{result.amtInRefCur}}</a></td>
+                <td><a href="#/AccBlncs/edit/{{result.id}}">{{result.accBrr}}</a></td>
+                <td><a href="#/AccBlncs/edit/{{result.id}}">{{result.blncDt| date:'yyyy-MM-dd HH:mm:ss Z'}}</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pagination pagination-centered">
+        <ul>
+            <li ng-class="{disabled:currentPage == 0}">
+                <a id="prev" href ng-click="previous()">«</a>
+            </li>
+            <li ng-repeat="n in pageRange" ng-class="{active:currentPage == n}" ng-click="setPage(n)">
+                <a href ng-bind="n + 1">1</a>
+            </li>
+            <li ng-class="{disabled: currentPage == (numberOfPages() - 1)}">
+                <a id="next" href ng-click="next()">»</a>
+            </li>
+        </ul>
+    </div>
+</div>

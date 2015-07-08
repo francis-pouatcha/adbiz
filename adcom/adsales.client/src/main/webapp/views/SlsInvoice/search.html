@@ -1,0 +1,164 @@
+<div class="form-horizontal">
+    <h3>Create a new SlsInvoice</h3>
+    <div class="control-group">
+        <div class="controls">
+            <a id="Create" name="Create" class="btn btn-primary" href="#/SlsInvoices/new"><i class="icon-plus-sign icon-white"></i> Create</a>
+        </div>
+    </div>
+</div>
+<hr/>
+<div>
+    <h3>Search for SlsInvoices</h3>
+    <form id="SlsInvoiceSearch" class="form-horizontal">
+    <div class="control-group">
+        <label for="invceType" class="control-label">Invce Type</label>
+        <div class="controls">
+            <input id="invceType" name="invceType" type="text" ng-model="search.invceType" placeholder="Enter the SlsInvoice Invce Type"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="invceNbr" class="control-label">Invce Nbr</label>
+        <div class="controls">
+            <input id="invceNbr" name="invceNbr" type="text" ng-model="search.invceNbr" placeholder="Enter the SlsInvoice Invce Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="soNbr" class="control-label">So Nbr</label>
+        <div class="controls">
+            <input id="soNbr" name="soNbr" type="text" ng-model="search.soNbr" placeholder="Enter the SlsInvoice So Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="invceStatus" class="control-label">Invce Status</label>
+        <div class="controls">
+            <input id="invceStatus" name="invceStatus" type="text" ng-model="search.invceStatus" placeholder="Enter the SlsInvoice Invce Status"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="invceCur" class="control-label">Invce Cur</label>
+        <div class="controls">
+            <input id="invceCur" name="invceCur" type="text" ng-model="search.invceCur" placeholder="Enter the SlsInvoice Invce Cur"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="grossSPPreTax" class="control-label">Gross SP Pre Tax</label>
+        <div class="controls">
+            <input id="grossSPPreTax" name="grossSPPreTax" type="text" ng-model="search.grossSPPreTax" placeholder="Enter the SlsInvoice Gross SP Pre Tax"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="rebate" class="control-label">Rebate</label>
+        <div class="controls">
+            <input id="rebate" name="rebate" type="text" ng-model="search.rebate" placeholder="Enter the SlsInvoice Rebate"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="netSPPreTax" class="control-label">Net SP Pre Tax</label>
+        <div class="controls">
+            <input id="netSPPreTax" name="netSPPreTax" type="text" ng-model="search.netSPPreTax" placeholder="Enter the SlsInvoice Net SP Pre Tax"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="vatAmount" class="control-label">Vat Amount</label>
+        <div class="controls">
+            <input id="vatAmount" name="vatAmount" type="text" ng-model="search.vatAmount" placeholder="Enter the SlsInvoice Vat Amount"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="netSPTaxIncl" class="control-label">Net SP Tax Incl</label>
+        <div class="controls">
+            <input id="netSPTaxIncl" name="netSPTaxIncl" type="text" ng-model="search.netSPTaxIncl" placeholder="Enter the SlsInvoice Net SP Tax Incl"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="pymtDscntPct" class="control-label">Pymt Dscnt Pct</label>
+        <div class="controls">
+            <input id="pymtDscntPct" name="pymtDscntPct" type="text" ng-model="search.pymtDscntPct" placeholder="Enter the SlsInvoice Pymt Dscnt Pct"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="pymtDscntAmt" class="control-label">Pymt Dscnt Amt</label>
+        <div class="controls">
+            <input id="pymtDscntAmt" name="pymtDscntAmt" type="text" ng-model="search.pymtDscntAmt" placeholder="Enter the SlsInvoice Pymt Dscnt Amt"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="netSalesAmt" class="control-label">Net Sales Amt</label>
+        <div class="controls">
+            <input id="netSalesAmt" name="netSalesAmt" type="text" ng-model="search.netSalesAmt" placeholder="Enter the SlsInvoice Net Sales Amt"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="rdngDscntAmt" class="control-label">Rdng Dscnt Amt</label>
+        <div class="controls">
+            <input id="rdngDscntAmt" name="rdngDscntAmt" type="text" ng-model="search.rdngDscntAmt" placeholder="Enter the SlsInvoice Rdng Dscnt Amt"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="netAmtToPay" class="control-label">Net Amt To Pay</label>
+        <div class="controls">
+            <input id="netAmtToPay" name="netAmtToPay" type="text" ng-model="search.netAmtToPay" placeholder="Enter the SlsInvoice Net Amt To Pay"></input>
+        </div>
+    </div>
+        <div class="control-group">
+            <div class="controls">
+                <a id="Search" name="Search" class="btn btn-primary" ng-click="performSearch()"><i class="icon-search icon-white"></i> Search</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="search-results">
+    <table class="table table-bordered table-striped clearfix">
+        <thead>
+            <tr>
+                <th>Invce Type</th>
+                <th>Invce Nbr</th>
+                <th>So Nbr</th>
+                <th>Invce Status</th>
+                <th>Invce Cur</th>
+                <th>Gross SP Pre Tax</th>
+                <th>Rebate</th>
+                <th>Net SP Pre Tax</th>
+                <th>Vat Amount</th>
+                <th>Net SP Tax Incl</th>
+                <th>Pymt Dscnt Pct</th>
+                <th>Pymt Dscnt Amt</th>
+                <th>Net Sales Amt</th>
+                <th>Rdng Dscnt Amt</th>
+                <th>Net Amt To Pay</th>
+            </tr>
+        </thead>
+        <tbody id="search-results-body">
+            <tr ng-repeat="result in searchResults | searchFilter:searchResults | startFrom:currentPage*pageSize | limitTo:pageSize">
+                <td><a href="#/SlsInvoices/edit/{{result.id}}">{{result.invceType}}</a></td>
+                <td><a href="#/SlsInvoices/edit/{{result.id}}">{{result.invceNbr}}</a></td>
+                <td><a href="#/SlsInvoices/edit/{{result.id}}">{{result.soNbr}}</a></td>
+                <td><a href="#/SlsInvoices/edit/{{result.id}}">{{result.invceStatus}}</a></td>
+                <td><a href="#/SlsInvoices/edit/{{result.id}}">{{result.invceCur}}</a></td>
+                <td><a href="#/SlsInvoices/edit/{{result.id}}">{{result.grossSPPreTax}}</a></td>
+                <td><a href="#/SlsInvoices/edit/{{result.id}}">{{result.rebate}}</a></td>
+                <td><a href="#/SlsInvoices/edit/{{result.id}}">{{result.netSPPreTax}}</a></td>
+                <td><a href="#/SlsInvoices/edit/{{result.id}}">{{result.vatAmount}}</a></td>
+                <td><a href="#/SlsInvoices/edit/{{result.id}}">{{result.netSPTaxIncl}}</a></td>
+                <td><a href="#/SlsInvoices/edit/{{result.id}}">{{result.pymtDscntPct}}</a></td>
+                <td><a href="#/SlsInvoices/edit/{{result.id}}">{{result.pymtDscntAmt}}</a></td>
+                <td><a href="#/SlsInvoices/edit/{{result.id}}">{{result.netSalesAmt}}</a></td>
+                <td><a href="#/SlsInvoices/edit/{{result.id}}">{{result.rdngDscntAmt}}</a></td>
+                <td><a href="#/SlsInvoices/edit/{{result.id}}">{{result.netAmtToPay}}</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pagination pagination-centered">
+        <ul>
+            <li ng-class="{disabled:currentPage == 0}">
+                <a id="prev" href ng-click="previous()">«</a>
+            </li>
+            <li ng-repeat="n in pageRange" ng-class="{active:currentPage == n}" ng-click="setPage(n)">
+                <a href ng-bind="n + 1">1</a>
+            </li>
+            <li ng-class="{disabled: currentPage == (numberOfPages() - 1)}">
+                <a id="next" href ng-click="next()">»</a>
+            </li>
+        </ul>
+    </div>
+</div>

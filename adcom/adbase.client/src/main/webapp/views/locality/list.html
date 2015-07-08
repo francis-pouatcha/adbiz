@@ -1,0 +1,110 @@
+    <div class="container">
+        <div class="col-xs-12">
+           <div class="panel panel-default ">
+            <p class="panel-heading no-collapse"><b> {{"Locality_description"|translate}} </b></p>
+            <div class="panel-body">
+                <form enctype="multipart/form-data" role="form" class="">
+                    <div class="row" >
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label class=" control-label" for="">{{"Locality_ouIdentif_description"|translate}}</label>
+                                <div class="">
+                                    <input type="text" id="" ng-model="localityCtrl.searchInput.entity.ouIdentif" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label class="control-label" for="">{{"Locality_ctryISO3_description"|translate}}</label>
+                                <div class="">
+                                    <select class="form-control" ng-model="localityCtrl.searchInput.entity.ctryISO3" name="ctryISO3"
+                                            ng-options="country.iso3 as country.name for country in localityCtrl.countrys">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label class="control-label" >{{"Locality_region_description"|translate}}</label>
+                                <div class="">
+                                    <input type="text" ng-model="localityCtrl.searchInput.entity.region" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label class="control-label" >{{"Locality_timeZone_description"|translate}}</label>
+                                <div class="">
+                                    <input type="text" ng-model="localityCtrl.searchInput.entity.locStr"  class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <button  ng-click="localityCtrl.handleSearchRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                                <button  ng-click="localityCtrl.handlePrintRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                                    <i class="glyphicon glyphicon-print"></i>
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+      <div class="panel panel-default ">
+         <div class="panel-heading no-collapse"><b>Resultat </b></div>
+             <div class="panel-body">
+              <div class="col-lg-12">
+                        <div  class="row">
+                            <a class="btn btn-primary pull-right margBott10" href="#/locality/create" >
+                                <i class="glyphicon-plus"></i> {{"Entity_create.title" | translate}}
+                            </a>
+
+                        </div>
+               <div class="table-overflow" >
+                <table  class="table table-bordered table-striped" >
+                    <thead>
+                    <tr>
+                        <th>{{"Locality_ouIdentif_description"|translate}}</th>
+                        <th>{{"Locality_langIso2_description"|translate}} </th>
+                        <th>{{"Locality_ctryISO3_description"|translate}}</th>
+                        <th>{{"Locality_region_description"|translate}}</th>
+                        <th> {{"Locality_city_description"|translate}}</th>
+                        <th>{{"Locality_locStr_description"|translate}}</th>
+                        <th>{{"Locality_hoursOfOp_description"|translate}}</th>
+                        <th>{{"Locality_ctryISO3_description"|translate}}</th>
+                        <th ></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr ng-repeat="locality in localityCtrl.localitys">
+                            <td>{{locality.ouIdentif}}</td>
+                            <td>{{locality.langIso2}}</td>
+                            <td>{{locality.ctryISO3}}</td>
+                            <td>{{locality.region}}</td>
+                            <td>{{locality.city}}</td>
+                            <td>{{locality.locStr}}</td>
+                            <td>{{locality.hoursOfOp}}</td>
+                            <td>{{locality.timeZone}}</td>
+                            <td><a href="#/locality/show/{{locality.id}}" ><i class="glyphicon glyphicon-eye-open"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+               </div>
+                <ul  class="pull-right">
+                    <pagination  total-items="localityCtrl.totalItems" items-per-page="localityCtrl.itemPerPage"  class="pagination-sm" ng-model="localityCtrl.currentPage" ng-change="localityCtrl.paginate()"></pagination>
+
+                </ul>
+         </div>
+        </div>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,52 @@
+@page {
+    /* dimensions for the whole page */
+    size: A5;
+
+    margin: 0;
+
+}
+
+html {
+    /* off-white, so body edge is visible in browser */
+    background: #eee;
+}
+
+body {
+    /* A5 dimensions */
+    height: 210mm;
+    width: 148.5mm;
+    padding-top:3cm;
+
+
+}
+
+td{
+    font-size: 11px;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif;
+    padding-top: 10px;
+    padding-left: 4px;
+}
+
+div{
+    font-size: 11px;
+    text-align: left;
+}
+
+/* fill half the height with each face */
+.print {
+    text-align: center;
+
+}
+
+.sign td{
+    border:2px solid black;
+    padding-top: -5px;
+    padding-left: -5px;
+    text-align: center;
+}
+
+.sign{
+    border:2px solid black;
+    width: 100%;
+}
+

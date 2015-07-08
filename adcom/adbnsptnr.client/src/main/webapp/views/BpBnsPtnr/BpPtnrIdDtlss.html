@@ -1,0 +1,31 @@
+<div ng-controller="bpPtnrIdDtlssCtlr" >
+    <div class="col-lg-12" >
+    <a class="btn btn-success margBott10 pull-right" ng-click="openCreateForm('md')">
+    	<i class="glyphicon glyphicon-plus"></i> {{bpPtnrIdDtlsUtils.translations['Entity_create.title']}}</a>
+	</div>
+    <br/>
+    <div class="col-lg-12" >
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>{{bpPtnrIdDtlsUtils.translations['BpPtnrIdDtls_ptnrIdType_description.title']}}</th>
+            <th>{{bpPtnrIdDtlsUtils.translations['BpPtnrIdDtls_issuingCtry_description.title']}}</th>
+            <th>{{bpPtnrIdDtlsUtils.translations['BpPtnrIdDtls_idNbr_description.title']}}</th>
+            <th>{{bpPtnrIdDtlsUtils.translations['BpPtnrIdDtls_issuedIn_description.title']}}</th>
+            <th>{{bpPtnrIdDtlsUtils.translations['BpPtnrIdDtls_issuedBy_description.title']}}</th>
+            <th>{{bpPtnrIdDtlsUtils.translations['BpPtnrIdDtls_issuedDt_description.title']}}</th>
+            <th>{{bpPtnrIdDtlsUtils.translations['BpPtnrIdDtls_expirdDt_description.title']}}</th>
+            <th></th>
+        </tr>
+        <tr ng-repeat="bpPtnrIdDtls in bpPtnrIdDtlss()">
+            <td>{{bpPtnrIdDtlsUtils.ptnrIdTypeI18nMsgTitleValue(bpPtnrIdDtls.ptnrIdType)}}</td>
+            <td>{{bpPtnrIdDtls.issuingCtryName.name}}</td>
+            <td>{{bpPtnrIdDtls.idNbr}}</td>
+            <td>{{bpPtnrIdDtls.issuedIn}}</td>
+            <td>{{bpPtnrIdDtls.issuedBy}}</td>
+            <td>{{bpPtnrIdDtls.issuedDt|date:'dd MM yyyy'}}</td>
+            <td>{{bpPtnrIdDtls.expirdDt|date:'dd MM yyyy'}}</td>
+            <td><a class="" ng-click="openEditForm('md',bpPtnrIdDtls);"><i class="glyphicon glyphicon-edit"></i></a></td>
+        </tr>
+    </table>
+	</div>
+</div>

@@ -1,0 +1,77 @@
+<div class="container">
+
+    <div class="col-xs-offset-2 col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Entity_create.title"| translate}}</b> </div>
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{orgUnitCreateCtrl.error}} </label>
+                <form  name="orgUnitForm" class="form-horizontal" novalidate="">
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgUnit_parentIdentif_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : orgUnitForm.parentIdentif.$invalid }" >
+                             <select class="form-control"  ng-model="orgUnitCreateCtrl.orgUnit.parentIdentif" required name="parentIdentif" ng-options="actifOrgUnit.identif as actifOrgUnit.fullName for actifOrgUnit in orgUnitCreateCtrl.actifOrgUnits"></select>
+                            <p ng-show="orgUnitForm.parentIdentif.$error.required" class="help-block"> {{"OrgUnit_parentIdentif_description.title" | translate}} req !</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgUnit_fullName_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : orgUnitForm.fullName.$invalid }" >
+                            <input type="text" ng-model="orgUnitCreateCtrl.orgUnit.fullName" name="fullName" class="form-control" required >
+                            <p ng-show="orgUnitForm.fullName.$error.required" class="help-block"> {{"OrgUnit_fullName_description.title" | translate}} req !</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgUnit_shortName_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : orgUnitForm.shortName.$invalid }" >
+                            <input type="text" ng-model="orgUnitCreateCtrl.orgUnit.shortName" name="shortName" class="form-control" required >
+                            <p ng-show="orgUnitForm.shortName.$error.required" class="help-block">{{ "OrgUnit_shortName_description.title"| translate}}  req !</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OuType_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : orgUnitForm.typeIdentif.$invalid }" >
+                            <select class="form-control"  ng-model="orgUnitCreateCtrl.orgUnit.typeIdentif" required name="typeIdentif" ng-options="outype.identif as outype.typeName for outype in orgUnitCreateCtrl.outypes"></select>
+                            <p ng-show="orgUnitForm.typeIdentif.$error.required" class="help-block"> {{"OuType_description.title" | translate}} req !</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : orgUnitForm.ctryIso3.$invalid }" >
+                             <select class="form-control" ng-model="orgUnitCreateCtrl.orgUnit.ctrIso3" name="ctryIso3" ng-options="country.iso3 as country.name for country in orgUnitCreateCtrl.countrys"></select>
+                            <p ng-show="orgUnitForm.ctryIso3.$error.required" class="help-block"> {{"Country_description.title" | translate}} req !</p>
+                        </div>
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validFrom.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : orgUnitForm.validFrom.$invalid }" >
+                            <input type="datetime-local" ng-model="orgUnitCreateCtrl.orgUnit.validFrom" name="validFrom" class="form-control" >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validTo.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : orgUnitForm.validTo.$invalid }" >
+                            <input type="datetime-local" ng-model="orgUnitCreateCtrl.orgUnit.validTo" name="validTo" class="form-control" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4"  > </label>
+                        <div class="col-lg-8" >
+                            <a class="btn-danger btn" href="#/orgunits"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                            <button ng-click="orgUnitCreateCtrl.create();" ng-disabled="orgUnitForm.$invalid" class="btn-success btn"  ><i class="glyphicon glyphicon-save"></i>  {{"Entity_save.title" | translate }}</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

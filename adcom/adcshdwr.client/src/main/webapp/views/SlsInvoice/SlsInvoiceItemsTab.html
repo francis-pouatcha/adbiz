@@ -1,0 +1,33 @@
+<div>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <div class="row">
+                <div class="col-lg-3">
+                      <input ng-model="q" id="search" class="form-control" placeholder="Recherche..."/>
+                </div> 
+            </div><br>
+        <tr>
+            <th>{{cdrSlsInvoicesUtils.translations['SlsInvceItem_artPic_description.title']}}</th>
+            <th>{{cdrSlsInvoicesUtils.translations['SlsInvceItem_artName_description.title']}}</th>
+            <th>{{cdrSlsInvoicesUtils.translations['SlsInvceItem_qty_description.title']}}</th>
+            <th>{{cdrSlsInvoicesUtils.translations['SlsInvceItem_sppuPreTax_description.title']}}</th>
+            <th>{{cdrSlsInvoicesUtils.translations['SlsInvceItem_netSPPreTax_description.title']}}</th>
+            <th>{{cdrSlsInvoicesUtils.translations['SlsInvceItem_vatAmount_description.title']}}</th>
+            <th>{{cdrSlsInvoicesUtils.translations['SlsInvceItem_rebate_description.title']}}</th>
+            <th>{{cdrSlsInvoicesUtils.translations['SlsInvceItem_netSPTaxIncl_description.title']}}</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="slsInvceItem in slsInvoice.slsInvceItems">
+                <td>{{slsInvceItem.artPic}}</td>
+                <td>{{slsInvceItem.artName}}</td>
+                <td>{{slsInvceItem.qty}}</td>
+                <td>{{slsInvceItem.sppuPreTax}}</td>
+                <td>{{slsInvceItem.netSPPreTax}}</td>
+                <td>{{slsInvceItem.vatAmount}}</td>
+                <td>{{slsInvceItem.rebate}}</td>
+                <td>{{slsInvceItem.netSPTaxIncl}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

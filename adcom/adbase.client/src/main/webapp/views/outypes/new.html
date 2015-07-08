@@ -1,0 +1,60 @@
+<div class="container">
+
+    <div class="col-xs-offset-2 col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Entity_create.title"| translate}}</b> </div>
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{orgUnitCreateCtrl.error}} </label>
+                <form  name="ouTypeForm" class="form-horizontal" novalidate="">
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{'parentType' | translate }} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : ouTypeForm.parentType.$invalid }" >
+                                            <select ng-model="ouType.parentType" class="form-control" required name="parentType" ng-options="parent.id as parent.typeName for parent in parents"></select>
+                            <p ng-show="ouTypeForm.parentType.$error.required" class="help-block"> The parent type of this org. unit type is required</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{'idSize' | translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : ouTypeForm.idSize.$invalid }" >
+                            <input type="text" name="idSize" id="idSize" class="form-control" ng-model="ouType.idSize" required />
+                            <p ng-show="ouTypeForm.idSize.$error.required" class="help-block"> The id size for this organization unit type is required</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{'typeName' | translate }} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : ouTypeForm.typeName.$invalid }" >
+                            <input type="text" name="typeName" id="typeName" class="form-control" ng-model="ouType.typeName" required />
+                            <p ng-show="ouTypeForm.typeName.$error.required" class="help-block">The type name for this organization unit is required</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validFrom.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : ouTypeForm.validFrom.$invalid }" >
+                            <input type="datetime" date-time ng-model="ouType.validFrom" name="validFrom" class="form-control" >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validTo.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : ouTypeForm.validTo.$invalid }" >
+                            <input type="datetime" date-time ng-model="ouType.validTo" name="validTo" class="form-control" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4"  > </label>
+                        <div class="col-lg-8" >
+                            <a class="btn-danger btn" href="#/outypes/list"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                            <button ng-click="create();" ng-disabled="ouTypeForm.$invalid" class="btn-success btn"  ><i class="glyphicon glyphicon-save"></i>  {{"Entity_save.title" | translate }}</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

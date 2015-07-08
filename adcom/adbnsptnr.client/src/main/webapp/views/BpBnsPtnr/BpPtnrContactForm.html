@@ -1,0 +1,47 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><b>{{currentAction}} {{bpPtnrContactUtils.translations['BpBnsPtnr_ptnrNbr_description.title']}} : {{bpBnsPtnr.ptnrNbr}}</b> </div>
+    <div class="panel-body">
+        <form id="BpPtnrContactForm" name="BpPtnrContactForm" class="form-horizontal" novalidate>
+            <div class="control-group" ng-class="{error: BpPtnrContactForm.langIso2.$invalid}">
+                <label for="langIso2" class="control-label">{{bpPtnrContactUtils.translations['BpPtnrContact_langIso2_description.title']}}</label>
+                <div id="langIso2Controls" class="controls">
+		            <select class="form-control" name="langIso2" ng-model="bpPtnrContact.langIso2" ng-show="formCreate"
+		                    ng-options="baseLanguage.enumKey as bpPtnrContactUtils.translations[baseLanguage.translKey] 
+		                    	for baseLanguage in bpPtnrContactUtils.baseLanguages" required>
+		                    <option value=""/>
+					</select>
+	                <input value="{{bpPtnrContactUtils.languageI18nMsgTitleValue(bpPtnrContact.langIso2)}}" type="text" name="langIso2" class="form-control" disabled ng-show="formEdit">
+                    <span class="help-inline" ng-show="BpPtnrContactForm.langIso2.$error.required">{{bpPtnrContactUtils.translations['Entity_required.title']}}</span>
+                </div>
+            </div>
+            <div class="control-group" ng-class="{error: BpPtnrContactForm.cntctRole.$invalid}">
+                <label for="cntctRole" class="control-label">{{bpPtnrContactUtils.translations['BpPtnrContact_cntctRole_description.title']}}</label>
+                <div id="cntctRoleControls" class="controls">
+		            <select class="form-control" name="cntctRole" ng-model="bpPtnrContact.cntctRole" ng-show="formCreate"
+		                    ng-options="bpPtnrContactRole.enumKey as bpPtnrContactUtils.translations[bpPtnrContactRole.translKey] 
+		                    	for bpPtnrContactRole in bpPtnrContactUtils.bpPtnrContactRoles" required>
+		                    <option value=""/>
+					</select>
+	                <input value="{{bpPtnrContactUtils.contactRoleI18nMsgTitleValue(bpPtnrContact.cntctRole)}}" type="text" name="cntctRole" class="form-control" disabled ng-show="formEdit">
+                    <span class="help-inline" ng-show="BpPtnrContactForm.cntctRole.$error.required">{{bpPtnrContactUtils.translations['Entity_required.title']}}</span>
+                </div>
+            </div>
+            <div class="control-group" ng-class="{error: BpPtnrContactForm.description.$invalid}">
+                <label for="description" class="control-label">{{bpPtnrContactUtils.translations['BpPtnrContact_description_description.title']}}</label>
+                <div id="descriptionControls" class="controls">
+                	<textarea rows="3" id="description" name="description" class="form-control" 
+                		ng-model="bpPtnrContact.description" placeholder="{{bpPtnrContactUtils.translations['BpPtnrContact_description_description.text']}}" maxlength="256" required>
+                	</textarea>
+                    <span class="help-inline" ng-show="BpPtnrContactForm.description.$error.required">{{bpPtnrContactUtils.translations['Entity_required.title']}}</span>
+                </div>
+            </div>
+            <div class="control-group">
+            	<br/>
+                <div class="controls">
+                    <button id="saveBpPtnrContact" name="saveBpPtnrContact" class="btn btn-primary" ng-disabled="isClean() || BpPtnrContactForm.$invalid" ng-click="save()"><i class="icon-ok-sign icon-white"></i> {{bpPtnrContactUtils.translations['Entity_save.title']}}</button>
+                    <button id="cancel" name="cancel" class="btn" ng-click="cancel()"><i class="icon-remove-sign"></i> {{bpPtnrContactUtils.translations['Entity_cancel.title']}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+  </div>

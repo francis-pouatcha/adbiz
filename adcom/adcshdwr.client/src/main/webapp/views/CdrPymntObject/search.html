@@ -1,0 +1,92 @@
+<div class="form-horizontal">
+    <h3>Create a new CdrPymntObject</h3>
+    <div class="control-group">
+        <div class="controls">
+            <a id="Create" name="Create" class="btn btn-primary" href="#/CdrPymntObjects/new"><i class="icon-plus-sign icon-white"></i> Create</a>
+        </div>
+    </div>
+</div>
+<hr/>
+<div>
+    <h3>Search for CdrPymntObjects</h3>
+    <form id="CdrPymntObjectSearch" class="form-horizontal">
+    <div class="control-group">
+        <label for="pymntNbr" class="control-label">Pymnt Nbr</label>
+        <div class="controls">
+            <input id="pymntNbr" name="pymntNbr" type="text" ng-model="search.pymntNbr" placeholder="Enter the CdrPymntObject Pymnt Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="origDocType" class="control-label">Orig Doc Type</label>
+        <div class="controls">
+            <input id="origDocType" name="origDocType" type="text" ng-model="search.origDocType" placeholder="Enter the CdrPymntObject Orig Doc Type"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="origDocNbr" class="control-label">Orig Doc Nbr</label>
+        <div class="controls">
+            <input id="origDocNbr" name="origDocNbr" type="text" ng-model="search.origDocNbr" placeholder="Enter the CdrPymntObject Orig Doc Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="origItemNbr" class="control-label">Orig Item Nbr</label>
+        <div class="controls">
+            <input id="origItemNbr" name="origItemNbr" type="text" ng-model="search.origItemNbr" placeholder="Enter the CdrPymntObject Orig Item Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="amt" class="control-label">Amt</label>
+        <div class="controls">
+            <input id="amt" name="amt" type="text" ng-model="search.amt" placeholder="Enter the CdrPymntObject Amt"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="orgUnit" class="control-label">Org Unit</label>
+        <div class="controls">
+            <input id="orgUnit" name="orgUnit" type="text" ng-model="search.orgUnit" placeholder="Enter the CdrPymntObject Org Unit"></input>
+        </div>
+    </div>
+        <div class="control-group">
+            <div class="controls">
+                <a id="Search" name="Search" class="btn btn-primary" ng-click="performSearch()"><i class="icon-search icon-white"></i> Search</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="search-results">
+    <table class="table table-bordered table-striped clearfix">
+        <thead>
+            <tr>
+                <th>Pymnt Nbr</th>
+                <th>Orig Doc Type</th>
+                <th>Orig Doc Nbr</th>
+                <th>Orig Item Nbr</th>
+                <th>Amt</th>
+                <th>Org Unit</th>
+            </tr>
+        </thead>
+        <tbody id="search-results-body">
+            <tr ng-repeat="result in searchResults | searchFilter:searchResults | startFrom:currentPage*pageSize | limitTo:pageSize">
+                <td><a href="#/CdrPymntObjects/edit/{{result.id}}">{{result.pymntNbr}}</a></td>
+                <td><a href="#/CdrPymntObjects/edit/{{result.id}}">{{result.origDocType}}</a></td>
+                <td><a href="#/CdrPymntObjects/edit/{{result.id}}">{{result.origDocNbr}}</a></td>
+                <td><a href="#/CdrPymntObjects/edit/{{result.id}}">{{result.origItemNbr}}</a></td>
+                <td><a href="#/CdrPymntObjects/edit/{{result.id}}">{{result.amt}}</a></td>
+                <td><a href="#/CdrPymntObjects/edit/{{result.id}}">{{result.orgUnit}}</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pagination pagination-centered">
+        <ul>
+            <li ng-class="{disabled:currentPage == 0}">
+                <a id="prev" href ng-click="previous()">«</a>
+            </li>
+            <li ng-repeat="n in pageRange" ng-class="{active:currentPage == n}" ng-click="setPage(n)">
+                <a href ng-bind="n + 1">1</a>
+            </li>
+            <li ng-class="{disabled: currentPage == (numberOfPages() - 1)}">
+                <a id="next" href ng-click="next()">»</a>
+            </li>
+        </ul>
+    </div>
+</div>

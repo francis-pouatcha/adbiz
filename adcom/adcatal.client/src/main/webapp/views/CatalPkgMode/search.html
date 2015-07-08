@@ -1,0 +1,86 @@
+<div class="row">
+	<div class="col-xs-offset-2 col-xs-8">
+
+        <div class="panel panel-default  ng-scope">
+            <div class="panel-heading no-collapse">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <b>{{"Entity_search.title"|translate}}</b>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="">
+                    <form role="form" class="">
+                        <div class="row" >
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class=" control-label" for="pkgCode">{{"CatalPkgMode_pkgCode_description.title"|translate}}</label>
+                                    <div class="">
+                                        <input type="text" id="pkgCode" ng-model="catalPkgModeCtrl.searchInput.entity.pkgCode" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class=" control-label" for="name">{{"CatalPkgMode_name_description.title"|translate}}</label>
+                                    <div class="">
+                                        <input type="text" id="name" ng-model="catalPkgModeCtrl.searchInput.entity.name" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <button  ng-click="catalPkgModeCtrl.handleSearchRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                    <button  ng-click="catalPkgModeCtrl.handlePrintRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                                        <i class="glyphicon glyphicon-print"></i>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="panel panel-default ">
+            <div class="panel-heading no-collapse"><b>{{"Entity_Result.title"|translate}}</b></div>
+            <div class="panel-body">
+                <div class="col-lg-12">
+                    <div class="table-overflow-middle row">
+                        <table class="table table-bordered  table-striped pointer-element" >
+                            <thead>
+                            <tr>
+                                <th class="text-center">{{"CatalPkgMode_pkgCode_description.title"|translate}}</th>
+                                <th class="text-center">{{"CatalPkgMode_name_description.title"|translate}}</th>
+                                <th class="text-center">{{"Entity_validFrom.title"|translate}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="catalPkgMode in catalPkgModeCtrl.catalPkgModes" >
+                                <td>{{catalPkgMode.enumKey}}</td>
+                                <td>{{catalPkgMode.name}}</td>
+                                <td>{{catalPkgMode.validFrom | date : 'dd-MM-yyyy hh:mm'}}</td>
+                                <td><a href="#/CatalPkgModes/show/{{catalPkgMode.identif}}" ><i class="glyphicon glyphicon-eye-open"></i></a></td>
+                                <td><a href="#/CatalPkgModes/edit/{{catalPkgMode.identif}}" ><i class="glyphicon glyphicon-edit"></i></a></td>
+                                <td><a href="" ng-click="catalPkgModeCtrl.delete(catalPkgMode.id)" ><i class="glyphicon glyphicon-remove"></i></a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul  class="pull-right">
+                        <pagination  total-items="catalPkgModeCtrl.totalItems" items-per-page="catalPkgModeCtrl.itemPerPage"  class="pagination-sm" ng-model="catalPkgModeCtrl.currentPage" ng-change="catalPkgModeCtrl.paginate()"></pagination>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+	</div>
+</div>

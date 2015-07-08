@@ -1,0 +1,254 @@
+
+
+<div class="modal-header">
+	<h3 class="modal-title">BsnPtnr for current Appointment</h3>
+</div>
+
+
+<div class="modal-body" style="min-height: 300px;">
+
+	<tabset justified="true">
+		
+		<tab heading="CREATE Business Partener">
+		
+		<br /><br />
+			<form name="bpBnsPtnrForm" class="form-horizontal" novalidate="">
+		<div class="form-group">
+			<label class="col-lg-2" style="text-align: center;">{{bpBnsPtnrUtils.translations['BpBnsPtnr_ptnrType_description.title']}}
+				:</label>
+			<div class="col-lg-4"
+				ng-class="{ 'has-error' : bpBnsPtnrForm.ptnrType.$invalid }"
+				ng-init="bpBnsPtnr.ptnrType='INDIVIDUAL'">
+				<select class="form-control" name="ptnrType"
+					ng-model="bpBnsPtnr.ptnrType"
+					ng-options="bpBnsPtnrType.enumKey as bpBnsPtnrType.translKey|translate for bpBnsPtnrType in bpBnsPtnrUtils.bpBnsPtnrTypes"
+					required>
+				</select>
+				<p ng-show="bpBnsPtnrForm.ptnrType.$error.required"
+					class="help-block">{{bpBnsPtnrUtils.translations['Entity_required.title']}}</p>
+			</div>
+			<label class="col-lg-2 " style="text-align: center;">{{bpBnsPtnrUtils.translations['BpBnsPtnr_ctryOfRsdnc_description.title']}}
+				:</label>
+			<div class="col-lg-4"
+				ng-class="{ 'has-error' : bpBnsPtnrForm.ctryOfRsdnc.$invalid }">
+				<input type="text" ng-model="bpBnsPtnr.countryName" id="ctryOfRsdnc"
+					name="ctryOfRsdnc" class="form-control" required autocomplete="off"
+					typeahead="countryName as countryName.name for countryName in bpBnsPtnrUtils.loadCountryNames($viewValue)"
+					typeahead-loading="loading"
+					placeholder="{{'BpBnsPtnr_findACountry_description.title'|translate}}">
+				<p ng-show="bpBnsPtnrForm.ctryOfRsdnc.$error.required"
+					class="help-block">{{bpBnsPtnrUtils.translations['Entity_required.title']}}</p>
+			</div>
+		</div>
+		<div class=" form-group"
+			ng-show="bpBnsPtnrUtils.isIndividual(bpBnsPtnr)">
+			<label class="col-lg-2 " style="text-align: center;">{{bpBnsPtnrUtils.translations['BpIndivPtnrName_firstName_description.title']}}
+				:</label>
+			<div class="col-lg-4">
+				<input type="text" ng-model="bpBnsPtnr.indivPtnrName.firstName"
+					name="firstName" class="form-control">
+			</div>
+			<label class="col-lg-2 " style="text-align: center;">{{bpBnsPtnrUtils.translations['BpIndivPtnrName_lastName_description.title']}}
+				:</label>
+			<div class="col-lg-4">
+				<input type="text" ng-model="bpBnsPtnr.indivPtnrName.lastName"
+					name="lastName" class="form-control" required>
+				<p ng-show="bpBnsPtnrForm.lastName.$error.required"
+					class="help-block">{{bpBnsPtnrUtils.translations['Entity_required.title']}}</p>
+			</div>
+		</div>
+		<div class=" form-group"
+			ng-show="bpBnsPtnrUtils.isIndividual(bpBnsPtnr)">
+			<label class="col-lg-2 " style="text-align: center;">{{bpBnsPtnrUtils.translations['BpIndivPtnrName_gender_description.title']}}
+				:</label>
+			<div class="col-lg-4">
+				<select class="form-control" name="gender"
+					ng-model="bpBnsPtnr.indivPtnrName.gender"
+					ng-options="bpGender.enumKey as bpGender.translKey|translate for bpGender in bpBnsPtnrUtils.baseGenders"
+					required>
+					<option value="" />
+				</select>
+				<p ng-show="bpBnsPtnrForm.gender.$error.required" class="help-block">{{bpBnsPtnrUtils.translations['Entity_required.title']}}</p>
+			</div>
+			<label class="col-lg-2 " style="text-align: center;">{{bpBnsPtnrUtils.translations['BpIndivPtnrName_brthDt_description.title']}}
+				:</label>
+			<div class="col-lg-4">
+				<input type="datetime" date-time view="date" min-view="date"
+					views="['date']" dismiss="true" format="dd-MM-yyyy"
+					ng-model="bpBnsPtnr.indivPtnrName.brthDt" id="brthDt" name="brthDt"
+					class="form-control">
+			</div>
+		</div>
+		<div class="form-group"
+			ng-show="bpBnsPtnrUtils.isInstitution(bpBnsPtnr)">
+			<label class="col-lg-2" style="text-align: center;">{{bpBnsPtnrUtils.translations['BpLegalPtnrId_cpnyName_description.title']}}
+				:</label>
+			<div class="col-lg-10">
+				<input type="text" ng-model="bpBnsPtnr.legalPtnrId.cpnyName"
+					name="cpnyName" class="form-control" required>
+				<p ng-show="bpBnsPtnrForm.cpnyName.$error.required"
+					class="help-block">{{bpBnsPtnrUtils.translations['Entity_required.title']}}</p>
+			</div>
+		</div>
+		<div class="form-group"
+			ng-show="bpBnsPtnrUtils.isInstitution(bpBnsPtnr)">
+			<label class="col-lg-2" style="text-align: center;">{{bpBnsPtnrUtils.translations['BpLegalPtnrId_legalForm_description.title']}}
+				:</label>
+			<div class="col-lg-4">
+				<input type="text" ng-model="bpBnsPtnr.legalPtnrId.legalForm"
+					name="legalForm" class="form-control">
+			</div>
+			<label class="col-lg-2 " style="text-align: center;">{{bpBnsPtnrUtils.translations['BpLegalPtnrId_equity_description.title']}}
+				:</label>
+			<div class="col-lg-4">
+				<input type="text" ng-model="bpBnsPtnr.legalPtnrId.equity"
+					name="equity" class="form-control">
+			</div>
+		</div>
+		<div class="form-group"
+			ng-show="bpBnsPtnrUtils.bpBnsPtnrUtils.isInstitution(bpBnsPtnr)">
+			<label class="col-lg-2 " style="text-align: center;">{{bpBnsPtnrUtils.translations['BpLegalPtnrId_taxPayerIdNbr_description.title']}}
+				:</label>
+			<div class="col-lg-4">
+				<input type="text" ng-model="bpBnsPtnr.legalPtnrId.taxPayerIdNbr"
+					name="taxPayerIdNbr" class="form-control">
+			</div>
+			<label class="col-lg-2" style="text-align: center;">{{bpBnsPtnrUtils.translations['BpLegalPtnrId_cmrcRgstrNbr_description.title']}}
+				:</label>
+			<div class="col-lg-4">
+				<input type="text" ng-model="bpBnsPtnr.legalPtnrId.cmrcRgstrNbr"
+					name="cmrcRgstrNbr" class="form-control">
+			</div>
+		</div>
+	</form>
+		
+		
+		
+		
+		<tab heading="SELECT Business Partener">
+			
+			<br /><br />
+			
+			<div class="panel panel-default  ng-scope">
+            <div class="panel-heading no-collapse">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <b>{{bpBnsPtnrUtils.translations['Entity_search.title']}}</b>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="">
+                    <form role="form" class="">
+                        <div class="row" >
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class=" control-label" for="ptnrNbr">{{bpBnsPtnrUtils.translations['BpBnsPtnr_ptnrNbr_description.title']}}</label>
+                                    <div class="">
+                                        <input type="text" id="ptnrNbr" ng-model="searchInput.entity.ptnrNbr" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class=" control-label" for="fullName">{{bpBnsPtnrUtils.translations['BpBnsPtnr_fullName_description.title']}}</label>
+                                    <div class="">
+                                        <input type="text" id="fullName" ng-model="searchInput.entity.fullName" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class=" control-label" for="ptnrType">{{bpBnsPtnrUtils.translations['BpBnsPtnr_ptnrType_description.title']}}</label>
+                                    <div class="">
+							            <select class="form-control" name="ptnrType" ng-model="searchInput.entity.ptnrType"
+							                    ng-options="bpBnsPtnrType.enumKey as bpBnsPtnrUtils.translations[bpBnsPtnrType.translKey]
+							                    	for bpBnsPtnrType in bpBnsPtnrUtils.bpBnsPtnrTypes" >
+							                    <option value=""/>
+										</select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <button  ng-click="handleSearchRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                    <button  ng-click="handlePrintRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                                        <i class="glyphicon glyphicon-print"></i>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default ">
+            <div class="panel-heading no-collapse"><b>{{bpBnsPtnrUtils.translations['Entity_Result.title']}}</b></div>
+            <div class="panel-body">
+                <div class="col-lg-12">
+                    <div  class="row">
+
+                    </div>
+                    <div class="table-overflow-middle row">
+                        <table class="table table-bordered  table-striped pointer-element" >
+                            <thead>
+                            <tr>
+                                <th class="text-center">{{bpBnsPtnrUtils.translations['BpBnsPtnr_ptnrNbr_description.title']}}</th>
+                                <th class="text-center">{{bpBnsPtnrUtils.translations['BpBnsPtnr_fullName_description.title']}}</th>
+                                <th class="text-center">{{bpBnsPtnrUtils.translations['BpBnsPtnr_ptnrType_description.title']}}</th>
+                                <th class="text-center">{{bpBnsPtnrUtils.translations['BpBnsPtnr_ctryOfRsdnc_description.title']}}</th>
+                                <th> Check me on</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="bpBnsPtnr in eventualBsnPtnrs()" >
+                                <td>{{bpBnsPtnr.ptnrNbr}}</td>
+                                <td>{{bpBnsPtnr.fullName}}</td>
+                                <td>{{bpBnsPtnrUtils.ptnrTypeI18nMsgTitleValue(bpBnsPtnr.ptnrType)}}</td>
+                                <td>{{bpBnsPtnr.countryName.name}}</td>
+<!--                                 <td>  <input type="checkbox" ng-model=""/>  </td> -->
+								<td> <input type="checkbox" ng-model="bpBnsPtnr.checkOn" name="checkOn" class="form-control"  /> </td>
+								
+																
+<!-- 								<td>  <input type="text" ng-model="bpBnsPtnr.ptnrNbr" name="title" disabled class="form-control"  >  </td> -->
+<!--                                 <td>  <input type="text" ng-model="bpBnsPtnr.fullName" name="title" disabled class="form-control"  >  </td> -->
+<!--                                 <td>  <input type="text" ng-model="bpBnsPtnrUtils.ptnrTypeI18nMsgTitleValue(bpBnsPtnr.ptnrType)" name="title" disabled class="form-control"  >  </td> -->
+<!--                                 <td>  <input type="text" ng-model="bpBnsPtnr.countryName.name" name="title" disabled class="form-control"  >   </td> -->
+<!--                                 <td>  <input type="checkbox" ng-model=""/>  </td> -->
+<!-- 								<td> <input type="text" ng-model="bpBnsPtnr.checkOn" name="title" class="form-control"  >   </td> -->
+   
+   
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul  class="pull-right">
+                        <pagination  total-items="totalItems()" max-size="10" boundary-links="true" items-per-page="5"  class="pagination-sm" ng-model="currentPage" ng-change="paginate()"></pagination>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+		
+		</tab>
+		
+	</tabset>
+
+</div>
+
+
+<div class="modal-footer">
+	<button ng-click="create();" class="btn-success btn pull-left">
+		<i class="glyphicon glyphicon-save"></i>
+		{{bpBnsPtnrUtils.translations['Entity_save.title']}}
+	</button>
+	<button ng-click="addBnsPtnr();" class="btn-primary btn pull-right">
+		<i class="glyphicon glyphicon-plus"></i>
+		Add Partener(s)
+	</button>
+</div>

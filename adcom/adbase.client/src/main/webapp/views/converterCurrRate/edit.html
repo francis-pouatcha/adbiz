@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="col-xs-offset-2 col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Entity_update.title"| translate}}</b> </div>
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{converterCurrRateEditCtrl.error}} </label>
+                <form  name="converterCurrRateForm" class="form-horizontal" novalidate="">
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "ConverterCurrRate_srcCurrISO3_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : converterCurrRateForm.srcCurrISO3.$invalid }" >
+                            <input type="text" ng-model="converterCurrRateEditCtrl.converterCurrRate.srcCurrISO3" name="srcCurrISO3" class="form-control" required >
+                            <p ng-show="converterCurrRateForm.srcCurrISO3.$error.required" class="help-block">source currency iso3 name is required !</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "ConverterCurrRate_destCurrISO3_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : converterCurrRateForm.destCurrISO3.$invalid }" >
+                            <input type="text" ng-model="converterCurrRateEditCtrl.converterCurrRate.destCurrISO3" name="destCurrISO3" class="form-control" required >
+                            <p ng-show="converterCurrRateForm.destCurrISO3.$error.required" class="help-block">destination currency iso3 required !</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "ConverterCurrRate_exRate_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : converterCurrRateForm.exRate.$invalid }" >
+                            <input type="text" ng-model="converterCurrRateEditCtrl.converterCurrRate.exRate" name="exRate" class="form-control" required >
+                            <p ng-show="converterCurrRateForm.exRate.$error.required" class="help-block">exchange rate est  requis !</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4"  > </label>
+                        <div class="col-lg-8" >
+                            <a class="btn-danger btn" href="#/converterCurrRate/show/{{converterCurrRateEditCtrl.converterCurrRate.id}}"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                            <button ng-click="converterCurrRateEditCtrl.edit();" ng-disabled="converterCurrRateForm.$invalid" class="btn-success btn"  ><i class="glyphicon glyphicon-save"></i>  {{"Entity_save.title" | translate }}</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+   </div>

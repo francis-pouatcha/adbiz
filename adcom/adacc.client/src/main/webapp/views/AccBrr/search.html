@@ -1,0 +1,86 @@
+<div class="form-horizontal">
+    <h3>Create a new AccBrr</h3>
+    <div class="control-group">
+        <div class="controls">
+            <a id="Create" name="Create" class="btn btn-primary" href="#/AccBrrs/new"><i class="icon-plus-sign icon-white"></i> Create</a>
+        </div>
+    </div>
+</div>
+<hr/>
+<div>
+    <h3>Search for AccBrrs</h3>
+    <form id="AccBrrSearch" class="form-horizontal">
+    <div class="control-group">
+        <label for="accCoA" class="control-label">Acc Co A</label>
+        <div class="controls">
+            <input id="accCoA" name="accCoA" type="text" ng-model="search.accCoA" placeholder="Enter the AccBrr Acc Co A"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="brrNbr" class="control-label">Brr Nbr</label>
+        <div class="controls">
+            <input id="brrNbr" name="brrNbr" type="text" ng-model="search.brrNbr" placeholder="Enter the AccBrr Brr Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="brrType" class="control-label">Brr Type</label>
+        <div class="controls">
+            <select id="brrType" name="brrType" ng-model="search.brrType" ng-options="b as b for b in brrTypeList">
+                <option value="">Choose a Brr Type</option>
+            </select>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="prntBrrNbr" class="control-label">Prnt Brr Nbr</label>
+        <div class="controls">
+            <input id="prntBrrNbr" name="prntBrrNbr" type="text" ng-model="search.prntBrrNbr" placeholder="Enter the AccBrr Prnt Brr Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="brrDesc" class="control-label">Brr Desc</label>
+        <div class="controls">
+            <input id="brrDesc" name="brrDesc" type="text" ng-model="search.brrDesc" placeholder="Enter the AccBrr Brr Desc"></input>
+        </div>
+    </div>
+        <div class="control-group">
+            <div class="controls">
+                <a id="Search" name="Search" class="btn btn-primary" ng-click="performSearch()"><i class="icon-search icon-white"></i> Search</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="search-results">
+    <table class="table table-bordered table-striped clearfix">
+        <thead>
+            <tr>
+                <th>Acc Co A</th>
+                <th>Brr Nbr</th>
+                <th>Brr Type</th>
+                <th>Prnt Brr Nbr</th>
+                <th>Brr Desc</th>
+            </tr>
+        </thead>
+        <tbody id="search-results-body">
+            <tr ng-repeat="result in searchResults | searchFilter:searchResults | startFrom:currentPage*pageSize | limitTo:pageSize">
+                <td><a href="#/AccBrrs/edit/{{result.id}}">{{result.accCoA}}</a></td>
+                <td><a href="#/AccBrrs/edit/{{result.id}}">{{result.brrNbr}}</a></td>
+                <td><a href="#/AccBrrs/edit/{{result.id}}">{{result.brrType}}</a></td>
+                <td><a href="#/AccBrrs/edit/{{result.id}}">{{result.prntBrrNbr}}</a></td>
+                <td><a href="#/AccBrrs/edit/{{result.id}}">{{result.brrDesc}}</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pagination pagination-centered">
+        <ul>
+            <li ng-class="{disabled:currentPage == 0}">
+                <a id="prev" href ng-click="previous()">«</a>
+            </li>
+            <li ng-repeat="n in pageRange" ng-class="{active:currentPage == n}" ng-click="setPage(n)">
+                <a href ng-bind="n + 1">1</a>
+            </li>
+            <li ng-class="{disabled: currentPage == (numberOfPages() - 1)}">
+                <a id="next" href ng-click="next()">»</a>
+            </li>
+        </ul>
+    </div>
+</div>

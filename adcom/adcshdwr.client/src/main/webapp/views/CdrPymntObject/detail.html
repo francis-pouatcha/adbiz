@@ -1,0 +1,56 @@
+<header ng-switch on="$location.path().indexOf('/CdrPymntObjects/new') > -1">
+    <h3 ng-switch-when="true">Create CdrPymntObject</h3>
+    <h3 ng-switch-when="false">View or edit CdrPymntObject</h3>
+</header>
+<form id="CdrPymntObjectForm" name="CdrPymntObjectForm" class="form-horizontal">
+    <div ng-show="displayError" class="alert alert-error">
+        <strong>Error!</strong> Something broke. Retry, or cancel and start afresh.
+    </div>
+    <div class="control-group" ng-class="{error: CdrPymntObjectForm.pymntNbr.$invalid}">
+        <label for="pymntNbr" class="control-label">Pymnt Nbr</label>
+        <div id="pymntNbrControls" class="controls">
+            <input id="pymntNbr" name="pymntNbr" type="text" required ng-model="cdrPymntObject.pymntNbr" placeholder="Enter the CdrPymntObject Pymnt Nbr"></input>
+            <span class="help-inline" ng-show="CdrPymntObjectForm.pymntNbr.$error.required">required</span> 
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: CdrPymntObjectForm.origDocType.$invalid}">
+        <label for="origDocType" class="control-label">Orig Doc Type</label>
+        <div id="origDocTypeControls" class="controls">
+            <input id="origDocType" name="origDocType" type="text" ng-model="cdrPymntObject.origDocType" placeholder="Enter the CdrPymntObject Orig Doc Type"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: CdrPymntObjectForm.origDocNbr.$invalid}">
+        <label for="origDocNbr" class="control-label">Orig Doc Nbr</label>
+        <div id="origDocNbrControls" class="controls">
+            <input id="origDocNbr" name="origDocNbr" type="text" required ng-model="cdrPymntObject.origDocNbr" placeholder="Enter the CdrPymntObject Orig Doc Nbr"></input>
+            <span class="help-inline" ng-show="CdrPymntObjectForm.origDocNbr.$error.required">required</span> 
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: CdrPymntObjectForm.origItemNbr.$invalid}">
+        <label for="origItemNbr" class="control-label">Orig Item Nbr</label>
+        <div id="origItemNbrControls" class="controls">
+            <input id="origItemNbr" name="origItemNbr" type="text" ng-model="cdrPymntObject.origItemNbr" placeholder="Enter the CdrPymntObject Orig Item Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: CdrPymntObjectForm.amt.$invalid}">
+        <label for="amt" class="control-label">Amt</label>
+        <div id="amtControls" class="controls">
+            <input id="amt" name="amt" type="text" required ng-model="cdrPymntObject.amt" placeholder="Enter the CdrPymntObject Amt"></input>
+            <span class="help-inline" ng-show="CdrPymntObjectForm.amt.$error.required">required</span> 
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: CdrPymntObjectForm.orgUnit.$invalid}">
+        <label for="orgUnit" class="control-label">Org Unit</label>
+        <div id="orgUnitControls" class="controls">
+            <input id="orgUnit" name="orgUnit" type="text" required ng-model="cdrPymntObject.orgUnit" placeholder="Enter the CdrPymntObject Org Unit"></input>
+            <span class="help-inline" ng-show="CdrPymntObjectForm.orgUnit.$error.required">required</span> 
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <button id="saveCdrPymntObject" name="saveCdrPymntObject" class="btn btn-primary" ng-disabled="isClean() || CdrPymntObjectForm.$invalid" ng-click="save()"><i class="icon-ok-sign icon-white"></i> Save</button>
+            <button id="cancel" name="cancel" class="btn" ng-click="cancel()"><i class="icon-remove-sign"></i> Cancel</button>
+            <button id="deleteCdrPymntObject" name="deleteCdrPymntObject" class="btn btn-danger" ng-show="cdrPymntObject.id" ng-click="remove()"><i class="icon-trash icon-white"></i> Delete</button>
+        </div>
+    <div>
+</form>

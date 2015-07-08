@@ -1,0 +1,159 @@
+<div class="container">
+
+    <div class="col-xs-offset-2 col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "OrgContact_description.title"| translate}}</b> </div>
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{ocShowCtrl.error}} </label>
+                <form  class="form-horizontal" novalidate="">
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgContact_contactPeople_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ocShowCtrl.orgContact.contactPeople}}" name="contactPeople" class="form-control" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgContact_email_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ocShowCtrl.orgContact.email}}" name="email" class="form-control" required >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgContact_phone_description.title"| translate}} :</label>
+                        <div class="col-lg-8" >
+                            <input type="text" disabled value="{{ocShowCtrl.orgContact.phone}}" name="phone" class="form-control" >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_name_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ocShowCtrl.orgContact.countryName}}" name="dialCode" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgContact_region_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ocShowCtrl.orgContact.region}}" name="region" class="form-control">
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgContact_street_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ocShowCtrl.orgContact.street}}" name="street" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgContact_street2_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ocShowCtrl.orgContact.street2}}" name="street2" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgContact_division_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ocShowCtrl.orgContact.division}}" name="division" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgContact_subdivision_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ocShowCtrl.orgContact.subdivision}}" name="subdivision" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgContact_fax_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ocShowCtrl.orgContact.fax}}" name="fax" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgContact_zipCode_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ocShowCtrl.orgContact.zipCode}}" name="zipCode" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgContact_contactIndex_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ocShowCtrl.orgContact.contactIndex}}" name="contactIndex" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgUnit_fullName_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ocShowCtrl.orgContact.ouName}}" name="ouName" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_name_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ocShowCtrl.orgContact.countryName}}" name="timeZones" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validFrom.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ocShowCtrl.orgContact.validFrom | date : 'dd-MM-yyyy HH:mm'}}" name="shortName" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validTo.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ocShowCtrl.orgContact.validTo | date : 'dd-MM-yyyy HH:mm'}}" name="shortName" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validFrom.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ocShowCtrl.orgContact.validFrom | date : 'dd-MM-yyyy HH:mm'}}" name="validFrom" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validTo.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{ocShowCtrl.orgContact.validTo | date : 'dd-MM-yyyy HH:mm'}}" name="validFrom" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4"  > </label>
+                        <div class="col-lg-8" >
+                            
+                            <div class="col-lg-3" >
+                                <a class="btn-default btn" href="#/orgcontacts"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                            </div>
+                                  
+                            <div class="col-lg-3" >
+                                <a class="btn-danger btn" ng-click="ocShowCtrl.remove(ocShowCtrl.orgContact.id)"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_delete.title" | translate }}</a>
+                            </div>                      
+
+                            <div class="col-lg-3" >
+                                <a class="btn-default btn" href="#/orgcontacts/edit/{{ocShowCtrl.orgContact.identif}}"  ><i class="glyphicon glyphicon-edit" ></i> {{"Entity_edit.title" | translate}} </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

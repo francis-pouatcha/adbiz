@@ -1,0 +1,73 @@
+<div class="container">
+
+    <div class="col-xs-offset-2 col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Entity_update.title"| translate}}</b> </div>
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{loginEditCtrl.error}} </label>
+                <form  name="loginForm" class="form-horizontal" novalidate="">
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Login_ouIdentif_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : loginForm.ouIdentif.$invalid }" >
+                            <input type="text" ng-model="loginEditCtrl.login.ouIdentif" name="ouIdentif" class="form-control" required >
+
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Login_loginAlias_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : loginForm.loginAlias.$invalid }" >
+                            <input type="text" ng-model="loginEditCtrl.login.loginAlias" name="loginAlias" class="form-control"  >
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Login_email_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : loginForm.email.$invalid }" >
+                            <input type="text" ng-model="loginEditCtrl.login.email" name="email" class="form-control"  >
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Login_fullName_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : loginForm.fullName.$invalid }" >
+                            <input type="text" ng-model="loginEditCtrl.login.fullName" name="fullName" class="form-control" required >
+                            <p ng-show="loginForm.fullName.$error.required" class="help-block">fullName est  requis !</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Login_credtlExpir_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : loginForm.credtlExpir.$invalid }" >
+                            <input type="date" ng-model="loginEditCtrl.login.credtlExpir" name="credtlExpir" class="form-control"  >
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Login_accountExpir_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : loginForm.accountExpir.$invalid }" >
+                            <input type="date" ng-model="loginEditCtrl.login.accountExpir" name="accountExpir" class="form-control" >
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4"  > </label>
+                        <div class="col-lg-8" >
+                            <a class="btn-danger btn" href="#/login/show/{{loginEditCtrl.login.identif}}"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                            <button ng-click="loginEditCtrl.edit();" ng-disabled="loginForm.$invalid" class="btn-success btn"  ><i class="glyphicon glyphicon-save"></i>  {{"Entity_save.title" | translate }}</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

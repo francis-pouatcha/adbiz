@@ -1,0 +1,36 @@
+
+<nav class="navbar navbar-inverse" ng-controller="navbarCtrl">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<span class="navbar-brand">
+				<img ng-src="/adres.client/img/logo.png" class="navbar-brand-logo" />
+				&nbsp;
+				<span ng-cloak ng-bind="appName" class="navbar-brand-version" />
+				&nbsp;
+				<span ng-cloak ng-bind="appVersion" class="navbar-brand-version" />
+			</span>			
+   		</div>
+   		<div>
+   			<ul class="nav navbar-nav navbar-center" ng-show="hasWorkspace()">
+   				<li><a><span class="navbar-brand col-lg-offset-2" style="text-align:center">{{navbar_ouWsIdentif}} : {{currentWs.roleIdentif}} {{currentWs.targetOuIdentif}} | {{navbar_user}} : {{currentWs.userFullName}} </span></a></li>
+   			</ul>
+
+   			<ul class="nav navbar-nav navbar-right">
+   				<li ng-show="appMenuUrl()" class="dropdown">
+					<a class="dropdown-toggle glyphicon glyphicon-list" data-toggle="dropdown" href="">
+						<b >{{navbar_appMenu}}</b>
+					</a>   					
+   					<ul class="dropdown-menu" ng-include="appMenuUrl()"></ul>
+   				</li>
+   				<li class="dropdown" ng-show="userSession()"><a class="dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown" href=""><b  ng-bind="loginName()"></b></a>
+   					<ul class="dropdown-menu">
+   						<li><a href="{{workspaceLink()}}" ng-click="workspaces()" class="pointer-element">{{navbar_ouWsIdentif}}</a></li>
+   						<li><a id="logout" href="#" ng-click="logout();" class="pointer-element">{{navbar_logOut}}</a></li>
+   						<li ng-show="switchTo('en')"><a href="#" ng-click="changeLanguage('en')" class="pointer-element">English</a></li>
+   						<li ng-show="switchTo('fr')"><a href="#" ng-click="changeLanguage('fr')" class="pointer-element">Francais</a></li>
+   					</ul>
+   				</li>
+   			</ul>
+   		</div>		
+	</div>
+</nav>

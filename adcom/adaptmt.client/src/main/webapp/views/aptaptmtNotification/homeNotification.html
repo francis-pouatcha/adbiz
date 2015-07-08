@@ -1,0 +1,59 @@
+<div class="container">
+
+
+	<div class="col-xs-3">
+
+		<div class="panel panel-default ">
+			<div class="panel-heading no-collapse">
+				<b>{{"Entity_show.title"|translate}}</b>
+			</div>
+			<div class="panel-body">
+				<accordion close-others="oneAtATime"> <accordion-group
+					is-open="status.open"> <accordion-heading>
+				Rapport <i class="pull-right glyphicon"
+					ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+				</accordion-heading> </accordion-group> <accordion-group is-open="status.openTwo">
+				<accordion-heading> Participations<i
+					class="pull-right glyphicon"
+					ng-class="{'glyphicon-chevron-down': status.openTwo, 'glyphicon-chevron-right': !status.openTwo}"></i>
+				</accordion-heading>  </accordion-group> <accordion-group is-open="status.openThree">
+				<accordion-heading> RDV<i
+					class="pull-right glyphicon"
+					ng-class="{'glyphicon-chevron-down': status.openThree, 'glyphicon-chevron-right': !status.openThree}"></i>
+				</accordion-heading> </accordion-group> </accordion>
+			</div>
+		</div>
+
+	</div>
+
+
+
+	<div class="col-xs-9">
+
+		<!-- sho business parterns of appointment -->
+		<div class="panel panel-default">
+
+			<div class="panel-heading">
+				<span><b>See Appointment</b></span>
+				<button class="glyphicon glyphicon-collapse-down pull-right"
+					data-toggle="collapse" data-parent="#showAptAptmtBnsPtnrPanel"
+					data-target="#showAptAptmtBnsPtnrToggle"></button>
+			</div>
+			<div class="panel-collapse collapse" id="showAptAptmtBnsPtnrToggle">
+				<div class="panel-body">
+					<div class="col-lg-12">
+						
+						
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		
+</div>
+
+
+
+</div>
+

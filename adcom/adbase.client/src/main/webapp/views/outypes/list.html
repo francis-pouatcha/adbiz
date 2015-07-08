@@ -1,0 +1,90 @@
+<div class="row">
+<div class="col-xs-offset-2 col-xs-8">
+
+        <div class="panel panel-default  ng-scope">
+            <div class="panel-heading no-collapse">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <b>{{"Entity_search.title"|translate}}</b>
+                    </div>
+                </div>
+
+            </div>
+            <div class="panel-body">
+                <div class="">
+                    <form role="form" class="">
+                        <div class="row" >
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class=" control-label" for="">Parent Type</label>
+                                    <div class="">
+                                        <select class="form-control" ng-model="searchInput.entity.parentType" name="parentType" ng-options="parent.id as parent.typeName for parent in parents"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="control-label" for="">Type Name</label>
+                                    <div class="">
+                                        <input type="text" ng-model="searchInput.entity.typeName" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                  <button  ng-click="doSearch()" class="btn btn-default " style="margin-top: 23px;" >
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                    <button  ng-click="print()" class="btn btn-default " style="margin-top: 23px;" >
+                                        <i class="glyphicon glyphicon-print"></i>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="panel panel-default ">
+            <div class="panel-heading no-collapse"><b>Organisation Units Types</b></div>
+            <div class="panel-body">
+                <div class="col-lg-12">
+                    <div  class="row">
+                        <a class="btn btn-primary pull-right margBott10" href="#/outypes/new" >
+                            <i class="glyphicon-plus"></i> {{"Entity_create.title" | translate}}
+                        </a>
+
+                    </div>
+                    <div class="table-overflow-middle row">
+                        <table class="table table-bordered  table-striped pointer-element" >
+                            <thead>
+                            <tr>
+                                <th class="text-center">Parent type Id</th>
+                                <th class="text-center">Type name</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                             <tr ng-repeat="outype in outypes">
+                                <td>{{outype.parentType}}</td>
+                                <td>{{outype.typeName}} </td>
+                                <td><a href="#/outypes/show/{{outype.id}}" ><i class="glyphicon glyphicon-eye-open"></i></a></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+	</div>
+</div>
+

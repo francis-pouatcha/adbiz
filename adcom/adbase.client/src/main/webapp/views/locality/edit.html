@@ -1,0 +1,98 @@
+<div class="container">
+    <div class="col-xs-offset-2 col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Entity_update.title"| translate}}</b> </div>
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{localityEditCtrl.error}} </label>
+                <form  name="localityForm" class="form-horizontal" novalidate="">
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Locality_ouIdentif_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : localityForm.ouIdentif.$invalid }" >
+                            <input type="text" ng-model="localityEditCtrl.locality.ouIdentif" name="ouIdentif" class="form-control" required >
+                            <p ng-show="localityForm.ouIdentif.$error.required" class="help-block">ouIdentif name is required !</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Locality_langIso2_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : localityForm.langIso2.$invalid }" >
+                            <input type="text" ng-model="localityEditCtrl.locality.langIso2" name="langIso2" class="form-control" required >
+                            <p ng-show="localityForm.langIso2.$error.required" class="help-block">langIso2 est  requis !</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Locality_ctryISO3_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : localityForm.ctryISO3.$invalid }" >
+                            <select class="form-control" ng-model="localityEditCtrl.locality.ctryISO3" required name="ctryISO3"
+                                    ng-options="country.iso3 as country.name for country in localityEditCtrl.countrys">
+                            </select>
+                            <p ng-show="localityForm.ctryISO3.$error.required" class="help-block">Pays est  requis !</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Locality_region_description"| translate}} :</label>
+                        <div class="col-lg-8"  >
+                            <input type="text" ng-model="localityEditCtrl.locality.region" name="region" class="form-control"  >
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Locality_city_description"| translate}} :</label>
+                        <div class="col-lg-8" >
+                            <input type="text" ng-model="localityEditCtrl.locality.city" name="city" class="form-control"  >
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Locality_locStr_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : localityForm.locStr.$invalid }" >
+                            <input type="text" ng-model="localityEditCtrl.locality.locStr" name="locStr" class="form-control" >
+                            <p ng-show="localityForm.locStr.$error.required" class="help-block">Localite est  requis !</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Locality_hoursOfOp_description"| translate}} :</label>
+                        <div class="col-lg-8"  >
+                            <textarea ng-model="localityEditCtrl.locality.hoursOfOp" name="hoursOfOp" class="form-control" ></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Locality_timeZone_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : localityForm.locStr.$invalid }" >
+                            <input type="text" ng-model="localityEditCtrl.locality.timeZone" name="timeZone" class="form-control" >
+                            <p ng-show="localityForm.timeZone.$error.required" class="help-block">timeZone est  requis !</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validFrom.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : localityForm.validFrom.$invalid }" >
+                            <input type="datime" date-time   ng-model="localityEditCtrl.locality.validFrom" name="validFrom" class="form-control" >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validTo.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : localityForm.validTo.$invalid }" >
+                            <input type="datime" date-time  ng-model="localityEditCtrl.locality.validTo" name="validTo" class="form-control" >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4"  > </label>
+                        <div class="col-lg-8" >
+                            <a class="btn-danger btn" href="#/locality/show/{{localityEditCtrl.locality.id}}"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                            <button ng-click="localityEditCtrl.edit();" ng-disabled="localityForm.$invalid" class="btn-success btn"  ><i class="glyphicon glyphicon-save"></i>  {{"Entity_save.title" | translate }}</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+   </div>

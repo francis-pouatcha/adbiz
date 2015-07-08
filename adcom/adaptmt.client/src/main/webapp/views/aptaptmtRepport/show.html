@@ -1,0 +1,80 @@
+<div class="container">
+
+    <div class="col-xs-offset-2 col-xs-8">
+
+        <div class="panel panel-default  ng-scope">
+            <div class="panel-heading no-collapse"><b>{{"Entity_show.title"|translate}}</b> </div>
+            <div class="panel-body">
+                    <form  name="showAptAptmtRepportForm" class="form-horizontal" novalidate >
+
+                        
+                        <div class="form-group">
+                            <label class="col-lg-4 ">{{"AptAptmt_title_description.title"|translate}} :</label>
+                            <div class="col-lg-8"  >
+                                <input type="text" ng-model="aptAptmtRepportShowCtlr.aptAptmtRepport.aptmtIdentify" name="aptmtIdentify" 
+                                 disabled class="form-control"  >
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-4 ">{{"AptAptmtReport_title_description.title"|translate}} :</label>
+                            <div class="col-lg-8">
+                                <input type="text" ng-model="aptAptmtRepportShowCtlr.aptAptmtRepport.title" name="title" disabled class="form-control"  >
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-4">{{"AptAptmtReport_description.text"|translate}} :</label>
+                            <div class="col-lg-8">
+                                <input type="text" ng-model="aptAptmtRepportShowCtlr.aptAptmtRepport.description" name="description" disabled class="form-control"  >
+
+                            </div>
+                            
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-4 ">{{"AptAptmtReport_CreateUser.text"|translate}} :</label>
+                            <div class="col-lg-8">
+                                <input type="text" ng-model="aptAptmtRepportShowCtlr.aptAptmtRepport.createUserId" name="createUserId" disabled class="form-control"  >
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-4 ">{{"AptAptmtReport_CreateDate.text"|translate}} :</label>
+                            <div class="col-lg-8"  >
+                                <input type="datetimes" date-time=""  view="date" views="['date']" format="dd-MM-yyyy-HH-mm"  ng-model="aptAptmtRepportShowCtlr.aptAptmtRepport.created" disabled name="created" class="form-control" >
+
+                            </div>
+                        </div>
+                        
+
+
+                        <div class="form-group">
+
+                            <div class="col-lg-3">
+                                <a class="btn-default btn" ng-click="aptAptmtRepportShowCtlr.previous();" ><i class="glyphicon glyphicon-circle-arrow-left"></i> {{"Entity_previous.title"|translate}}</a>
+                            </div>
+
+                            <div class="col-lg-3" >
+                                <a class="btn-default btn" href="#/aptaptmtRepport"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                            </div>
+                            <div class="col-lg-3" >
+                                <a class="btn-default btn" href="#/aptaptmtRepport/update/{{aptAptmtRepportShowCtlr.aptAptmtRepport.id}}"  ><i class="glyphicon glyphicon-edit" ></i> Editer</a>
+                            </div>
+                            <div class="col-lg-3">
+                                <a class="btn-default btn" ng-click="aptAptmtRepportShowCtlr.next();" ><i class="fa glyphicon glyphicon-circle-arrow-right"></i> {{"Entity_next.title"|translate}}</a>
+                            </div>
+
+                        </div>
+                    </form>
+                
+            </div>
+
+        </div>
+
+    </div>
+    
+</div>

@@ -1,0 +1,159 @@
+<div>
+    <div style="margin-bottom: 20px" >
+        <!--<a class="btn btn-default"  ng-click="saleCtlr.previous()" ng-disabled="saleCtlr.index==0" ><i class="glyphicon glyphicon-chevron-left"></i> Previous</a>
+        <a class="btn btn-default" ng-click="saleCtlr.next()" ng-disabled="saleCtlr.index==saleCtlr.tabLength()-1 || saleCtlr.tabLength()==0" >Next <i class="glyphicon glyphicon-chevron-right"></i></a>-->
+        <a class="btn btn-danger" ng-click="saleCtlr.annulerCmd()" ><i class="glyphicon glyphicon-trash" ></i> Annuler la commande</a>
+        <a class="btn btn-default" ng-click="saleCtlr.newCmd()"  ><i class="glyphicon glyphicon-plus" ></i> Nouvelle commande</a>
+        <a class="btn btn-warning" ng-click="saleCtlr.addBptnr()"><i class="glyphicon glyphicon-user" ></i> {{saleCtlr.slsSalesOrderHolder.slsSOPtnrsHolder[0].slsSOPtnr.ptnrNbr}}</a>
+        <label>{{saleCtlr.slsSalesOrderHolder.slsSalesOrder.soDt | date:'medium'}}</label>
+        <a class="btn btn-primary col-lg-offset-1" ng-disabled="saleCtlr.showBtnClose" ng-click="saleCtlr.cloturerCmd()"><i class="glyphicon glyphicon-ok" ></i> Cloturer la commande</a>
+    </div>
+    <form name="OrderItemForm" id="OrderItemForm" novalidate >
+    <div class="panel panel-default" >
+        <div class="panel-heading">
+            <b>{{'Add_Procurement_Order_Item' | translate}}</b>
+            ---- N# : {{saleCtlr.slsSalesOrderHolder.slsSalesOrder.soNbr}}
+            ---- Status : <label class="bg-warning" >{{saleCtlr.slsSalesOrderHolder.slsSalesOrder.soStatus}}</label>
+        </div>
+        <div class="panel-body">
+                <table class="table table-bordered  table-striped">
+                    <thead>
+                    <tr>
+                        <th class="clo-lg-2">CIP</th>
+                        <th class="col-lg-3">Designation</th>
+                        <th>Qte Stock</th>
+                        <th>Qte</th>
+                        <th>{{'CatalArticle_sppu_description.title' | translate}}</th>
+                        <th>{{'SlsSOItem_grossSPPreTax_description.title'|translate}}</th>
+                        <th>{{'SlsSOItem_rebate_description.title'|translate}}</th>
+                        <th>{{'SlsSOItem_rebate_description.title'|translate}} %</th>
+                        <th>{{'SlsSOItem_vatAmount_description.title'|translate}}</th>
+                        <th>{{'SlsSOItem_netSPTaxIncl_description.title' | translate}}</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div ng-class="{ 'has-error' : OrderItemForm.artPic.$invalid }" >
+                                <input type="text" style="width: 80px" ng- class="form-control" select-on-click name="artPic" id="artPic" required autocomplete="off" ng-model="saleCtlr.slsSalesOrderItemHolder.slsSOItem.artPic"
+                                       typeahead="article as article.displayableStr for article in saleCtlr.findArticleByCip($viewValue)"
+                                       typeahead-loading="loading"  typeahead-on-select='saleCtlr.onSelect($item, $model, $label)' >
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-class="{ 'has-error' : OrderItemForm.artName.$invalid }" >
+                                <input type="text" class="form-control" select-on-click required id="artName" autocomplete="off" ng-model="saleCtlr.slsSalesOrderItemHolder.slsSOItem.artName"
+                                       typeahead="article as article.displayableStr for article in saleCtlr.findArticleByName($viewValue)"
+                                       typeahead-loading="loading" typeahead-on-select='saleCtlr.onSelect($item, $model, $label)' name="artName" >
+                            </div>
+                        </td>
+                        <td><input type="text" class="form-control" disabled ng-model="saleCtlr.slsSalesOrderItemHolder.slsSOItem.stkQty" ></td>
+                        <td>
+                            <div ng-class="{ 'has-error' : OrderItemForm.orderedQty.$invalid }" >
+                                <input type="text" class="form-control" ng-change="saleCtlr.calculAmount()" required name="orderedQty" id="orderedQty" ng-model="saleCtlr.slsSalesOrderItemHolder.slsSOItem.orderedQty" >
+                            </div>
+                        </td>
+                        <td><input type="text" class="form-control" disabled ng-model="saleCtlr.slsSalesOrderItemHolder.slsSOItem.sppuPreTax" ></td>
+                        <td>
+                            <div>
+                                <input type="text" class="form-control" name="grossSPPreTax" disabled  ng-model="saleCtlr.slsSalesOrderItemHolder.slsSOItem.grossSPPreTax" >
+                            </div>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="rebate" ng-change="saleCtlr.calculAmount()" ng-model="saleCtlr.slsSalesOrderItemHolder.slsSOItem.rebate" numeric >
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="rebatePct" ng-change="saleCtlr.calculAmount()" ng-model="saleCtlr.slsSalesOrderItemHolder.slsSOItem.rebatePct" placeholder="%" >
+                        </td>
+                        <td>
+                            <div >
+                                <input type="text" class="form-control" name="vatAmount" disabled ng-model="saleCtlr.slsSalesOrderItemHolder.slsSOItem.vatAmount" numeric >
+                            </div>
+                        </td>
+                        <td>
+                            <div >
+                                <input type="text" class="form-control" name="netSPTaxIncl" disabled ng-model="saleCtlr.slsSalesOrderItemHolder.slsSOItem.netSPTaxIncl" numeric >
+                            </div>
+                        </td>
+                        <td><button class="btn btn-primary" ng-enter="saleCtlr.addItem()" ng-disabled="OrderItemForm.$invalid" ng-click="saleCtlr.addItem()" ><i class="glyphicon glyphicon-plus"></i> Add</button></td>
+                    </tr>
+                    </tbody>
+                </table>
+            <div class="row">
+                  <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="">{{'SlsSalesOrder_pymtDscntAmt_description.title' | translate}}</label><br/>
+                            <input  type="text" class="form-control" ng-model="saleCtlr.slsSalesOrderHolder.slsSalesOrder.pymtDscntAmt" price-green="price-green" round-converter="round-converter" numeric />
+                        </div>
+                  </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="">{{'SlsSalesOrder_pymtDscntPct_description.title' | translate}}</label><br/>
+                            <input  type="text" class="form-control" ng-model="saleCtlr.slsSalesOrderHolder.slsSalesOrder.pymtDscntPct" price-green="price-green" round-converter="round-converter" />
+                        </div>
+                    </div>
+                <div class="col-lg-1" style="margin-top: 24px">
+                    <input  type="submit" class="btn btn-primary" value="Apply" ng-click="saleCtlr.totalAmount()">
+                </div>
+                
+                 <div class="col-lg-2" style="margin-top: 24px">
+                        <select class="form-control" ng-model="cur" ng-options="cur for cur in conversionPrice.currency"></select>
+                 </div>
+                 
+                <div class="col-lg-5 col-lg-offset-3" style="margin-top: -24px" >
+                    <table class="table table-bordered  table-striped" style="text-align: center">
+                        <tr>
+                            <td>{{'SlsSalesOrder_netSPPreTax_description.text' | translate}}</td>
+                            <td>{{'SlsSalesOrder_pymtDscntAmt_description.title' | translate}}</td>
+                            <td >{{'SlsSalesOrder_vatAmount_description.title' | translate}}</td>
+                            <td>{{'SlsSalesOrder_netSalesAmt_description.title' | translate}}</td>
+                        </tr>
+                        <tr>
+                            <td price-style="price-style"><b>{{saleCtlr.slsSalesOrderHolder.slsSalesOrder.netSPPreTax | currencyAccounting:cur}}</b></td>
+                            <td price-style="price-style"><b>{{saleCtlr.slsSalesOrderHolder.slsSalesOrder.pymtDscntAm | currencyAccounting:cur}}</b></td>
+                            <td price-style="price-style"><b>{{saleCtlr.slsSalesOrderHolder.slsSalesOrder.vatAmount | currencyAccounting:cur}}</b></td>
+                            <td price-style="price-style"><b>{{saleCtlr.slsSalesOrderHolder.slsSalesOrder.netSalesAmt | currencyAccounting:cur}}</b></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+    <div class="panel panel-default">
+        <div class="panel-heading"><b>{{'SlsSOItem_description.title' | translate}}</b> </div>
+        <div class="panel-body">
+            <table class="table table-bordered  table-striped" >
+                <thead>
+                <tr>
+                    <th class="col-lg-2" >{{'SlsSOItem_artPic_description.title' | translate}}</th>
+                    <th class="col-lg-3" >Designation</th>
+                    <th>{{'SlsSOItem_orderedQty_description.title' |translate}}</th>
+                    <th>{{'SlsSOItem_sppuPreTax_description.title' | translate}}</th>
+                    <th>{{'SlsSOItem_grossSPPreTax_description.title' | translate}}</th>
+                    <th>{{'SlsSOItem_rebate_description.title'|translate}}</th>
+                    <th>{{'SlsSOItem_vatAmount_description.title'|translate}}</th>
+                    <th>{{'SlsSOItem_netSPTaxIncl_description.title' | translate}}</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="orderItemHolder in saleCtlr.slsSalesOrderHolder.slsSOItemsholder" >
+                    <td>{{orderItemHolder.slsSOItem.artPic}}</td>
+                    <td>{{orderItemHolder.slsSOItem.artName}}</td>
+                    <td>{{orderItemHolder.slsSOItem.orderedQty}}</td>
+                    <td>{{orderItemHolder.slsSOItem.sppuPreTax}}</td>
+                    <td>{{orderItemHolder.slsSOItem.grossSPPreTax}}</td>
+                    <td>{{orderItemHolder.slsSOItem.rebate}}</td>
+                    <td>{{orderItemHolder.slsSOItem.vatAmount}}</td>
+                    <td>{{orderItemHolder.slsSOItem.netSPTaxIncl}}</td>
+                    <td><a ng-click="saleCtlr.editItem($index)" class=""><i class="glyphicon glyphicon-edit"></i></a></td>
+                    <td><a ng-click="saleCtlr.deleteItem($index)" class=""><i class="glyphicon glyphicon-trash"></i></a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

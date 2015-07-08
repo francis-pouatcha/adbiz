@@ -1,0 +1,184 @@
+<div class="form-horizontal">
+    <h3>Create a new AccPstg</h3>
+    <div class="control-group">
+        <div class="controls">
+            <a id="Create" name="Create" class="btn btn-primary" href="#/AccPstgs/new"><i class="icon-plus-sign icon-white"></i> Create</a>
+        </div>
+    </div>
+</div>
+<hr/>
+<div>
+    <h3>Search for AccPstgs</h3>
+    <form id="AccPstgSearch" class="form-horizontal">
+    <div class="control-group">
+        <label for="refNbr" class="control-label">Ref Nbr</label>
+        <div class="controls">
+            <input id="refNbr" name="refNbr" type="text" ng-model="search.refNbr" placeholder="Enter the AccPstg Ref Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="accOpId" class="control-label">Acc Op Id</label>
+        <div class="controls">
+            <input id="accOpId" name="accOpId" type="text" ng-model="search.accOpId" placeholder="Enter the AccPstg Acc Op Id"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="pstgDir" class="control-label">Pstg Dir</label>
+        <div class="controls">
+            <select id="pstgDir" name="pstgDir" ng-model="search.pstgDir" ng-options="p as p for p in pstgDirList">
+                <option value="">Choose a Pstg Dir</option>
+            </select>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="accCoA" class="control-label">Acc Co A</label>
+        <div class="controls">
+            <input id="accCoA" name="accCoA" type="text" ng-model="search.accCoA" placeholder="Enter the AccPstg Acc Co A"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="accNbr" class="control-label">Acc Nbr</label>
+        <div class="controls">
+            <input id="accNbr" name="accNbr" type="text" ng-model="search.accNbr" placeholder="Enter the AccPstg Acc Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="accType" class="control-label">Acc Type</label>
+        <div class="controls">
+            <select id="accType" name="accType" ng-model="search.accType" ng-options="a as a for a in accTypeList">
+                <option value="">Choose a Acc Type</option>
+            </select>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="accCur" class="control-label">Acc Cur</label>
+        <div class="controls">
+            <input id="accCur" name="accCur" type="text" ng-model="search.accCur" placeholder="Enter the AccPstg Acc Cur"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="amtInAccCur" class="control-label">Amt In Acc Cur</label>
+        <div class="controls">
+            <input id="amtInAccCur" name="amtInAccCur" type="text" ng-model="search.amtInAccCur" placeholder="Enter the AccPstg Amt In Acc Cur"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="refCur" class="control-label">Ref Cur</label>
+        <div class="controls">
+            <input id="refCur" name="refCur" type="text" ng-model="search.refCur" placeholder="Enter the AccPstg Ref Cur"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="amtInRefCur" class="control-label">Amt In Ref Cur</label>
+        <div class="controls">
+            <input id="amtInRefCur" name="amtInRefCur" type="text" ng-model="search.amtInRefCur" placeholder="Enter the AccPstg Amt In Ref Cur"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="opType" class="control-label">Op Type</label>
+        <div class="controls">
+            <select id="opType" name="opType" ng-model="search.opType" ng-options="o as o for o in opTypeList">
+                <option value="">Choose a Op Type</option>
+            </select>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="opDesc" class="control-label">Op Desc</label>
+        <div class="controls">
+            <input id="opDesc" name="opDesc" type="text" ng-model="search.opDesc" placeholder="Enter the AccPstg Op Desc"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="pstgDesc" class="control-label">Pstg Desc</label>
+        <div class="controls">
+            <input id="pstgDesc" name="pstgDesc" type="text" ng-model="search.pstgDesc" placeholder="Enter the AccPstg Pstg Desc"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="opBrr" class="control-label">Op Brr</label>
+        <div class="controls">
+            <input id="opBrr" name="opBrr" type="text" ng-model="search.opBrr" placeholder="Enter the AccPstg Op Brr"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="pstgBrr" class="control-label">Pstg Brr</label>
+        <div class="controls">
+            <input id="pstgBrr" name="pstgBrr" type="text" ng-model="search.pstgBrr" placeholder="Enter the AccPstg Pstg Brr"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="docIds" class="control-label">Doc Ids</label>
+        <div class="controls">
+            <input id="docIds" name="docIds" type="text" ng-model="search.docIds" placeholder="Enter the AccPstg Doc Ids"></input>
+        </div>
+    </div>
+        <div class="control-group">
+            <div class="controls">
+                <a id="Search" name="Search" class="btn btn-primary" ng-click="performSearch()"><i class="icon-search icon-white"></i> Search</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="search-results">
+    <table class="table table-bordered table-striped clearfix">
+        <thead>
+            <tr>
+                <th>Ref Nbr</th>
+                <th>Acc Op Id</th>
+                <th>Pstg Dir</th>
+                <th>Acc Co A</th>
+                <th>Acc Nbr</th>
+                <th>Acc Type</th>
+                <th>Acc Cur</th>
+                <th>Amt In Acc Cur</th>
+                <th>Ref Cur</th>
+                <th>Amt In Ref Cur</th>
+                <th>Op Type</th>
+                <th>Op Desc</th>
+                <th>Pstg Desc</th>
+                <th>Op Brr</th>
+                <th>Pstg Brr</th>
+                <th>Pstg Dt</th>
+                <th>Value Dt</th>
+                <th>Doc Dt</th>
+                <th>Doc Ids</th>
+            </tr>
+        </thead>
+        <tbody id="search-results-body">
+            <tr ng-repeat="result in searchResults | searchFilter:searchResults | startFrom:currentPage*pageSize | limitTo:pageSize">
+                <td><a href="#/AccPstgs/edit/{{result.id}}">{{result.refNbr}}</a></td>
+                <td><a href="#/AccPstgs/edit/{{result.id}}">{{result.accOpId}}</a></td>
+                <td><a href="#/AccPstgs/edit/{{result.id}}">{{result.pstgDir}}</a></td>
+                <td><a href="#/AccPstgs/edit/{{result.id}}">{{result.accCoA}}</a></td>
+                <td><a href="#/AccPstgs/edit/{{result.id}}">{{result.accNbr}}</a></td>
+                <td><a href="#/AccPstgs/edit/{{result.id}}">{{result.accType}}</a></td>
+                <td><a href="#/AccPstgs/edit/{{result.id}}">{{result.accCur}}</a></td>
+                <td><a href="#/AccPstgs/edit/{{result.id}}">{{result.amtInAccCur}}</a></td>
+                <td><a href="#/AccPstgs/edit/{{result.id}}">{{result.refCur}}</a></td>
+                <td><a href="#/AccPstgs/edit/{{result.id}}">{{result.amtInRefCur}}</a></td>
+                <td><a href="#/AccPstgs/edit/{{result.id}}">{{result.opType}}</a></td>
+                <td><a href="#/AccPstgs/edit/{{result.id}}">{{result.opDesc}}</a></td>
+                <td><a href="#/AccPstgs/edit/{{result.id}}">{{result.pstgDesc}}</a></td>
+                <td><a href="#/AccPstgs/edit/{{result.id}}">{{result.opBrr}}</a></td>
+                <td><a href="#/AccPstgs/edit/{{result.id}}">{{result.pstgBrr}}</a></td>
+                <td><a href="#/AccPstgs/edit/{{result.id}}">{{result.pstgDt| date:'yyyy-MM-dd HH:mm:ss Z'}}</a></td>
+                <td><a href="#/AccPstgs/edit/{{result.id}}">{{result.valueDt| date:'yyyy-MM-dd HH:mm:ss Z'}}</a></td>
+                <td><a href="#/AccPstgs/edit/{{result.id}}">{{result.docDt| date:'yyyy-MM-dd HH:mm:ss Z'}}</a></td>
+                <td><a href="#/AccPstgs/edit/{{result.id}}">{{result.docIds}}</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pagination pagination-centered">
+        <ul>
+            <li ng-class="{disabled:currentPage == 0}">
+                <a id="prev" href ng-click="previous()">«</a>
+            </li>
+            <li ng-repeat="n in pageRange" ng-class="{active:currentPage == n}" ng-click="setPage(n)">
+                <a href ng-bind="n + 1">1</a>
+            </li>
+            <li ng-class="{disabled: currentPage == (numberOfPages() - 1)}">
+                <a id="next" href ng-click="next()">»</a>
+            </li>
+        </ul>
+    </div>
+</div>

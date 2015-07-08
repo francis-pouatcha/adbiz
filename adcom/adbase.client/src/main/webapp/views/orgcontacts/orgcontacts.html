@@ -1,0 +1,124 @@
+<div class="row">
+<div class="col-xs-offset-2 col-xs-8">
+
+        <div class="panel panel-default  ng-scope">
+            <div class="panel-heading no-collapse">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <b>{{"Entity_search.title"|translate}}</b>
+                    </div>
+                </div>
+
+            </div>
+            <div class="panel-body">
+                <div class="">
+                    <form role="form" class="">
+                        <div class="row" >
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class=" control-label" for="">{{"OrgContact_contactPeople_description.title"|translate}}</label>
+                                    <div class="">
+                                        <input class="form-control" type="text" id="" ng-model="orgcontactsCtrl.searchInput.entity.contactPeople" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class=" control-label" for="">{{"OrgContact_email_description.title"|translate}}</label>
+                                    <div class="">
+                                        <input class="form-control" type="text" id="" ng-model="orgcontactsCtrl.searchInput.entity.email" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class=" control-label" for="">{{"OrgContact_phone_description.title"|translate}}</label>
+                                    <div class="">
+                                        <input class="form-control" type="text" id="" ng-model="orgcontactsCtrl.searchInput.entity.phone" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="control-label" >{{"Country_description.title"|translate}}</label>
+                                    <div class="">
+                                        <select class="form-control" ng-model="orgcontactsCtrl.searchInput.entity.country" name="iso3" ng-options="country.iso3 as country.name for country in orgcontactsCtrl.countrys"></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <button  ng-click="orgcontactsCtrl.doSearch()" class="btn btn-default " style="margin-top: 23px;" >
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                    <button  ng-click="orgcontactsCtrl.handlePrintRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                                        <i class="glyphicon glyphicon-print"></i>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="panel panel-default ">
+            <div class="panel-heading no-collapse"><b>{{"OrgContact_description.title" | translate}}</b></div>
+            <div class="panel-body">
+                <div class="col-lg-12">
+                    <div  class="row">
+                        <a class="btn btn-primary pull-right margBott10" href="#/orgcontacts/create" >
+                            <i class="glyphicon-plus"></i> {{"Entity_create.title" | translate}}
+                        </a>
+
+                    </div>
+                    <div class="table-overflow-middle row">
+                        <table class="table table-bordered  table-striped pointer-element" >
+                            <thead>
+                            <tr>
+                                <th class="text-center">{{"OrgContact_contactPeople_description.title"|translate}}</th>
+                                <th class="text-center">{{"OrgContact_email_description.title"|translate}}</th>
+                                <th class="text-center">{{"OrgContact_phone_description.title"|translate}}</th>
+                                <th class="text-center">{{"OrgContact_city_description.title"|translate}}</th>
+                                <th class="text-center">{{"OrgContact_region_description.title"|translate}}</th>
+                                <th class="text-center">{{"OrgUnit_fullName_description.title"|translate}}</th>
+                                <th class="text-center">{{"Country_name_description.title"|translate}}</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="orgcontact in orgcontactsCtrl.orgcontacts" >
+                                <td>{{orgcontact.contactPeople}}</td>
+                                <td>{{orgcontact.email}}</td>
+                                <td>{{orgcontact.phone}}</td>
+                                <td>{{orgcontact.city}}</td>
+                                <td>{{orgcontact.region}}</td>
+                                <td> <a href="#/orgunits/show/{{orgcontact.ouIdentif}}">{{orgcontact.ouName}}</a> </td>
+                                <td> <a href="#/countrys/show/{{orgcontact.ctryIdentif}}" >{{orgcontact.countryName}}</a> </td>
+                                <td><a href="#/orgcontacts/show/{{orgcontact.identif}}" ><i class="glyphicon glyphicon-eye-open"></i></a></td>
+                                <td><a href="#/orgcontacts/edit/{{orgcontact.identif}}" ><i class="glyphicon glyphicon-edit"></i></a></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                     <ul  class="pull-right">
+                <pagination  total-items="orgcontactsCtrl.totalItems" items-per-page="orgcontactsCtrl.itemPerPage"  class="pagination-sm" ng-model="orgcontactsCtrl.currentPage" ng-change="orgcontactsCtrl.paginate()"></pagination>
+
+            </ul>
+
+                </div>
+
+            </div>
+        </div>
+	</div>
+</div>
+

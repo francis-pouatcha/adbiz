@@ -1,0 +1,46 @@
+{
+"Entity_create.title":"Creation of Appointment",
+"Entity_list.title":"List of Appointments",
+"Entity_list_bnsptnr.title":"List of partners",
+"AptAptmt_title_description.text":"Title of Appointment",
+"AptAptmt_title_description.title":"Title Apptmt",
+"AptAptmt_aptmtnNbr_description.text":"Number of Apptmt",
+"AptAptmt_aptmtnNbr_description.title":"Number",
+"AptAptmt_createdUserName":"Created login",
+"AptAptmt_lockedUserName":"user who locked",
+"AptAptmt_description.text":"Description",
+"AptAptmt_description.title":"Description",
+"AptAptmt_appointmentDate_description.text":"Date of Apt",
+"AptAptmt_appointmentDate_description.title":"Date of Apt"
+"AptAptmt_locality_description.title":"locality",
+"AptAptmt_locality_description.title":"locality of RDV",
+"AptAptmt_parentIdentify_description.title":"parent RDV",
+"AptAptmt_parentIdentify_description.text":"parent RDV",
+"AptAptmt_createDate_description":"Creation Date",
+"AptAptmt_status_description":"Status of Aptm",
+
+
+"AptAptmt_bnsPtnr_title":"business partners of appointments",
+"AptAptmt_BpBnsPtnr_ptnrNbr_description":"Partner No.",
+"AptAptmt_BpBnsPtnr_ptnrType_description":"Partner Type",
+"AptAptmt_BpBnsPtnr_fullName_description":"Name",
+"AptAptmt_BpBnsPtnr_country_description":"Country",
+
+
+"AptAptmt_appointmentDate_from_description":"From Date",
+"AptAptmt_appointmentDate_to_description":"To Date",
+
+
+
+"Entity_create_Report.title":"Creation Report of Appointment ",
+"Entity_list_Report.title":"Creation Report ",
+"AptAptmtReport_title_description.text":"Title of Report Appointment",
+"AptAptmtReport_title_description.title":"Title Report",
+"AptAptmtReport_description_description.text":"Description Report of Appointment",
+"AptAptmtReport_description_description.title":"Description Report",
+"AptAptmtReport_CreateUser.text":"Creator",
+"AptAptmtReport_CreateDate.text":"Creation Date",
+"Entity_createRepport.title":"Creation Report",
+"AptAptmtRepport_numero_description.title":"Report Number"
+
+}

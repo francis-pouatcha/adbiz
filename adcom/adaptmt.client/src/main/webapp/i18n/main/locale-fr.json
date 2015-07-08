@@ -1,0 +1,46 @@
+{
+"Entity_create.title":"Création de Rendez-vous",
+"Entity_list.title":"Liste des Rendez-vous",
+"Entity_list_bnsptnr.title":"Liste des partenaires",
+"AptAptmt_title_description.text":"Titre du Rendez-vous",
+"AptAptmt_title_description.title":"Titre RDV",
+"AptAptmt_aptmtnNbr_description.text":"Numero du rendez-vous",
+"AptAptmt_aptmtnNbr_description.title":"Numero",
+"AptAptmt_createdUserName":"Createur",
+"AptAptmt_lockedUserName":"Clôtureur",
+"AptAptmt_description.text":"Description",
+"AptAptmt_description.title":"Description",
+"AptAptmt_appointmentDate_description.text":"Date du debut du Rdv",
+"AptAptmt_appointmentDate_description.title":"Date de debut du Rdv",
+"AptAptmt_appointmentDateEnd_description.text":"Date de fin du Rdv",
+"AptAptmt_appointmentDateEnd_description.title":"Date de fin du Rdv",
+"AptAptmt_locality_description.title":"localité",
+"AptAptmt_locality_description.text":"localité du RDV",
+"AptAptmt_parentIdentify_description.title":"RDV parent",
+"AptAptmt_parentIdentify_description.text":"RDV parent RDV",
+"AptAptmt_createDate_description":"Date création",
+"AptAptmt_status_description":"Status du RDV",
+
+"AptAptmt_bnsPtnr_title":"partenaires du rendez-vous",
+"AptAptmt_BpBnsPtnr_ptnrNbr_description":"Partnernaire No.",
+"AptAptmt_BpBnsPtnr_ptnrType_description":"Type Partenaire",
+"AptAptmt_BpBnsPtnr_fullName_description":"Nom",
+"AptAptmt_BpBnsPtnr_country_description":"Pays",
+
+"AptAptmt_appointmentDate_from_description":"De la Date",
+"AptAptmt_appointmentDate_to_description":"A la Date",
+
+
+"Entity_create_Report.title":"Créer Rapport",
+"Entity_list_Report.title":"Créer",
+"AptAptmtReport_title_description.text":"Titre du Rapport du Rendez-Vous",
+"AptAptmtReport_title_description.title":"Titre Rapport RDV",
+"AptAptmtReport_description.text":"Description",
+"AptAptmtReport_description_description.title":"Description",
+"AptAptmtReport_CreateUser.text":"Créateur",
+"AptAptmtReport_CreateDate.text":"Date de Création",
+"Entity_createRepport.title":"Creation de Rapport",
+"Entity_cancel.title":"Annulation de RDV",
+"AptAptmtRepport_numero_description.title":"Numero de Rapport"
+
+}

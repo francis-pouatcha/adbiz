@@ -1,0 +1,48 @@
+<div class="container">
+
+    <div class="col-xs-offset-2 col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Entity_show.title"| translate}}</b> </div>
+            
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{error}} </label>
+                <form  name="baseConfigShowForm" class="form-horizontal" novalidate="">
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{"BaseConfig_printMode_description.title" | translate}} : </label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : baseConfigShowForm.printMode.$invalid }" >
+                            <input type="text" ng-model="baseConfigShowCtrl.baseConfig.printMode" name="printMode" class="form-control" 
+                            required disabled>
+                            <p ng-show="baseConfigShowForm.printMode.$error.required" class="help-block">printMode est  requis !</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{"BaseConfig_nbrOfItemsPrcmtOrder_description.title" | translate}} : </label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : baseConfigShowForm.nbrOfItemsPrcmtOrder.$invalid }" >
+                            <input type="text" ng-model="baseConfigShowCtrl.baseConfig.nbrOfItemsPrcmtOrder" name="nbrOfItemsPrcmtOrder" class="form-control" 
+                            required disabled >
+                            <p ng-show="baseConfigShowForm.nbrOfItemsPrcmtOrder.$error.required" class="help-block">nbrOfItemsPrcmtOrder est  requis !</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+
+                            <div class="col-lg-3 pull-left" >
+                                <a class="btn-default btn pull-right" href="#/baseconfigs"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                            </div>
+                            <div class="col-lg-3 pull-right" >
+                                <a class="btn-default btn pull-left" href="#/baseconfig/edit/{{baseConfigShowCtrl.baseConfig.id}}"  ><i class="glyphicon glyphicon-edit" ></i> {{"Entity_edit.title" | translate }} </a>
+                            </div>
+                            
+		            </div>
+                    
+                </form>
+            </div>
+            
+        </div>
+
+    </div>
+
+
+</div>

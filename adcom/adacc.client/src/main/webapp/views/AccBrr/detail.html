@@ -1,0 +1,48 @@
+<header ng-switch on="$location.path().indexOf('/AccBrrs/new') > -1">
+    <h3 ng-switch-when="true">Create AccBrr</h3>
+    <h3 ng-switch-when="false">View or edit AccBrr</h3>
+</header>
+<form id="AccBrrForm" name="AccBrrForm" class="form-horizontal">
+    <div ng-show="displayError" class="alert alert-error">
+        <strong>Error!</strong> Something broke. Retry, or cancel and start afresh.
+    </div>
+    <div class="control-group" ng-class="{error: AccBrrForm.accCoA.$invalid}">
+        <label for="accCoA" class="control-label">Acc Co A</label>
+        <div id="accCoAControls" class="controls">
+            <input id="accCoA" name="accCoA" type="text" ng-model="accBrr.accCoA" placeholder="Enter the AccBrr Acc Co A"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccBrrForm.brrNbr.$invalid}">
+        <label for="brrNbr" class="control-label">Brr Nbr</label>
+        <div id="brrNbrControls" class="controls">
+            <input id="brrNbr" name="brrNbr" type="text" ng-model="accBrr.brrNbr" placeholder="Enter the AccBrr Brr Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccBrrForm.brrType.$invalid}">
+        <label for="brrType" class="control-label">Brr Type</label>
+        <div id="brrTypeControls" class="controls">
+        <select id="brrType" name="brrType" ng-model="accBrr.brrType" ng-options="b for b in brrTypeList"  >
+            <option value="">Choose a Brr Type</option>
+        </select>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccBrrForm.prntBrrNbr.$invalid}">
+        <label for="prntBrrNbr" class="control-label">Prnt Brr Nbr</label>
+        <div id="prntBrrNbrControls" class="controls">
+            <input id="prntBrrNbr" name="prntBrrNbr" type="text" ng-model="accBrr.prntBrrNbr" placeholder="Enter the AccBrr Prnt Brr Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccBrrForm.brrDesc.$invalid}">
+        <label for="brrDesc" class="control-label">Brr Desc</label>
+        <div id="brrDescControls" class="controls">
+            <input id="brrDesc" name="brrDesc" type="text" ng-model="accBrr.brrDesc" placeholder="Enter the AccBrr Brr Desc"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <button id="saveAccBrr" name="saveAccBrr" class="btn btn-primary" ng-disabled="isClean() || AccBrrForm.$invalid" ng-click="save()"><i class="icon-ok-sign icon-white"></i> Save</button>
+            <button id="cancel" name="cancel" class="btn" ng-click="cancel()"><i class="icon-remove-sign"></i> Cancel</button>
+            <button id="deleteAccBrr" name="deleteAccBrr" class="btn btn-danger" ng-show="accBrr.id" ng-click="remove()"><i class="icon-trash icon-white"></i> Delete</button>
+        </div>
+    <div>
+</form>

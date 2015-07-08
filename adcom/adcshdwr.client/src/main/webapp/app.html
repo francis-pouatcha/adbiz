@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en" ng-app="adcshdwrserver">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Adcshdwr.server</title>
+    <link href="styles/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="styles/main.css" rel="stylesheet" media="screen">
+    <link href="styles/bootstrap-responsive.css" rel="stylesheet" media="screen">
+</head>
+<body>
+    <div id="wrap">
+    	
+    	<div class="navbar navbar-inverse navbar-fixed-top">
+    		<div class="navbar-inner">
+    			<div class="container">
+    				<a class="brand" href="#">Adcshdwr.server</a>
+    			</div>
+    		</div>
+    	</div>
+        
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span3 well">
+                    <img class="hidden-phone" src="img/forge-logo.png" alt="JBoss Forge"></img>
+                    <nav class="sidebar-nav" ng-controller="NavController">
+                        <ul id="sidebar-entries" class="nav nav-list">
+                        	<li ng-class="{active: matchesRoute('CdrCshDrawers')}"><a href="#/CdrCshDrawers">CdrCshDrawers</a></li>
+                        	<li ng-class="{active: matchesRoute('CdrCstmrVchrs')}"><a href="#/CdrCstmrVchrs">CdrCstmrVchrs</a></li>
+                        	<li ng-class="{active: matchesRoute('CdrDrctSaless')}"><a href="#/CdrDrctSaless">CdrDrctSaless</a></li>
+                        	<li ng-class="{active: matchesRoute('CdrDsArtItems')}"><a href="#/CdrDsArtItems">CdrDsArtItems</a></li>
+                        	<li ng-class="{active: matchesRoute('CdrDsHstrys')}"><a href="#/CdrDsHstrys">CdrDsHstrys</a></li>
+                        	<li ng-class="{active: matchesRoute('CdrDsPymntItems')}"><a href="#/CdrDsPymntItems">CdrDsPymntItems</a></li>
+                        	<li ng-class="{active: matchesRoute('CdrPymnts')}"><a href="#/CdrPymnts">CdrPymnts</a></li>
+                        	<li ng-class="{active: matchesRoute('CdrPymntItems')}"><a href="#/CdrPymntItems">CdrPymntItems</a></li>
+                        	<li ng-class="{active: matchesRoute('CdrPymntObjects')}"><a href="#/CdrPymntObjects">CdrPymntObjects</a></li>
+                        	<li ng-class="{active: matchesRoute('CdrPymtHstrys')}"><a href="#/CdrPymtHstrys">CdrPymtHstrys</a></li>
+                        	<li ng-class="{active: matchesRoute('CdrVchrHstrys')}"><a href="#/CdrVchrHstrys">CdrVchrHstrys</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="span9 well">
+                    <div id="main" ng-view>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="push"></div>
+    </div>
+    
+    <div id="footer">
+        <div class="container">
+            <p>Powered by <a href="http://jboss.org/forge">Forge</a></p>
+            <p><a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+        </div>
+    </div>
+    
+    <script src="scripts/vendor/modernizr-2.6.2.min.js"></script>
+    <script src="scripts/vendor/jquery-1.9.1.js"></script>
+    <script src="scripts/vendor/angular.js"></script>
+    <script src="scripts/vendor/angular-resource.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/directives/datetimepicker.js"></script>
+    <script src="scripts/filters/startFromFilter.js"></script>
+    <script src="scripts/filters/genericSearchFilter.js"></script>
+    <script src="scripts/services/locationParser.js"></script>
+    <script src="scripts/services/CdrCshDrawerFactory.js"></script>
+    <script src="scripts/controllers/newCdrCshDrawerController.js"></script>
+    <script src="scripts/controllers/searchCdrCshDrawerController.js"></script>
+    <script src="scripts/controllers/editCdrCshDrawerController.js"></script>
+    <script src="scripts/services/CdrCstmrVchrFactory.js"></script>
+    <script src="scripts/controllers/newCdrCstmrVchrController.js"></script>
+    <script src="scripts/controllers/searchCdrCstmrVchrController.js"></script>
+    <script src="scripts/controllers/editCdrCstmrVchrController.js"></script>
+    <script src="scripts/services/CdrDrctSalesFactory.js"></script>
+    <script src="scripts/controllers/newCdrDrctSalesController.js"></script>
+    <script src="scripts/controllers/searchCdrDrctSalesController.js"></script>
+    <script src="scripts/controllers/editCdrDrctSalesController.js"></script>
+    <script src="scripts/services/CdrDsArtItemFactory.js"></script>
+    <script src="scripts/controllers/newCdrDsArtItemController.js"></script>
+    <script src="scripts/controllers/searchCdrDsArtItemController.js"></script>
+    <script src="scripts/controllers/editCdrDsArtItemController.js"></script>
+    <script src="scripts/services/CdrDsHstryFactory.js"></script>
+    <script src="scripts/controllers/newCdrDsHstryController.js"></script>
+    <script src="scripts/controllers/searchCdrDsHstryController.js"></script>
+    <script src="scripts/controllers/editCdrDsHstryController.js"></script>
+    <script src="scripts/services/CdrDsPymntItemFactory.js"></script>
+    <script src="scripts/controllers/newCdrDsPymntItemController.js"></script>
+    <script src="scripts/controllers/searchCdrDsPymntItemController.js"></script>
+    <script src="scripts/controllers/editCdrDsPymntItemController.js"></script>
+    <script src="scripts/services/CdrPymntFactory.js"></script>
+    <script src="scripts/controllers/newCdrPymntController.js"></script>
+    <script src="scripts/controllers/searchCdrPymntController.js"></script>
+    <script src="scripts/controllers/editCdrPymntController.js"></script>
+    <script src="scripts/services/CdrPymntItemFactory.js"></script>
+    <script src="scripts/controllers/newCdrPymntItemController.js"></script>
+    <script src="scripts/controllers/searchCdrPymntItemController.js"></script>
+    <script src="scripts/controllers/editCdrPymntItemController.js"></script>
+    <script src="scripts/services/CdrPymntObjectFactory.js"></script>
+    <script src="scripts/controllers/newCdrPymntObjectController.js"></script>
+    <script src="scripts/controllers/searchCdrPymntObjectController.js"></script>
+    <script src="scripts/controllers/editCdrPymntObjectController.js"></script>
+    <script src="scripts/services/CdrPymtHstryFactory.js"></script>
+    <script src="scripts/controllers/newCdrPymtHstryController.js"></script>
+    <script src="scripts/controllers/searchCdrPymtHstryController.js"></script>
+    <script src="scripts/controllers/editCdrPymtHstryController.js"></script>
+    <script src="scripts/services/CdrVchrHstryFactory.js"></script>
+    <script src="scripts/controllers/newCdrVchrHstryController.js"></script>
+    <script src="scripts/controllers/searchCdrVchrHstryController.js"></script>
+    <script src="scripts/controllers/editCdrVchrHstryController.js"></script>
+</body>
+</html>

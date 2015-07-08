@@ -1,0 +1,98 @@
+<div class="container">
+
+    <div class="col-xs-offset-2 col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Entity_create.title"| translate}}</b> </div>
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{ctryCreateCtrl.error}} </label>
+                <form  name="countryForm" class="form-horizontal" novalidate="">
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_name_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : countryForm.name.$invalid }" >
+                            <input type="text" ng-model="ctryCreateCtrl.country.name" name="name" class="form-control" required >
+                            <p ng-show="countryForm.name.$error.required" class="help-block"> {{"Country_name_description.title" | translate}} req !</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_iso3_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : countryForm.iso3.$invalid }" >
+                            <input type="text" ng-model="ctryCreateCtrl.country.iso3" name="shortName" class="form-control" required >
+                            <p ng-show="countryForm.iso3.$error.required" class="help-block">{{ "Country_iso3_description.title"| translate}}  req !</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_iso2_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : countryForm.iso2.$invalid }" >
+                            <input type="text" ng-model="ctryCreateCtrl.country.iso2" name="shortName" class="form-control" required >
+                            <p ng-show="countryForm.iso2.$error.required" class="help-block">{{ "Country_iso2_description.title"| translate}}  req !</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_dialCode_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : countryForm.dialCode.$invalid }" >
+                            <input type="text" ng-model="ctryCreateCtrl.country.dialCode" name="shortName" class="form-control" required >
+                            <p ng-show="countryForm.dialCode.$error.required" class="help-block">{{ "Country_dialCode_description.title"| translate}}  req !</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_telNbrSize_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : countryForm.telNbrSize.$invalid }" >
+                            <input type="text" ng-model="ctryCreateCtrl.country.telNbrSize" name="telNbrSize" class="form-control" required >
+                            <p ng-show="countryForm.telNbrSize.$error.required" class="help-block">{{ "Country_telNbrSize_description.title"| translate}}  req !</p>
+                        </div>
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_langsIso2_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : countryForm.langsIso2.$invalid }" >
+                            <input type="text" ng-model="ctryCreateCtrl.country.langsIso2" name="langsIso2" class="form-control" >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_currsIso2_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : countryForm.currsIso2.$invalid }" >
+                            <input type="text" ng-model="ctryCreateCtrl.country.currsIso2" name="currsIso2" class="form-control" >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_timeZones_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : countryForm.timeZones.$invalid }" >
+                            <input type="text" ng-model="ctryCreateCtrl.country.timeZones" name="timeZones" class="form-control" >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validFrom.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : countryForm.validFrom.$invalid }" >
+                            <input type="datime" date-time  partial="true" ng-model="ctryCreateCtrl.country.validFrom" name="validFrom" class="form-control" >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validTo.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : countryForm.validTo.$invalid }" >
+                            <input type="datime" date-time  ng-model="ctryCreateCtrl.country.validTo" name="validTo" class="form-control" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4"  > </label>
+                        <div class="col-lg-8" >
+                            <a class="btn-danger btn" href="#/countrys"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                            <button ng-click="ctryCreateCtrl.create();" ng-disabled="countryForm.$invalid" class="btn-success btn"  ><i class="glyphicon glyphicon-save"></i>  {{"Entity_save.title" | translate }}</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

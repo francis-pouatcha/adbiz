@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="col-xs-offset-2 col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Entity_create.title"| translate}}</b> </div>
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{pricingCurrRateCreateCtrl.error}} </label>
+                <form  name="pricingCurrRateForm" class="form-horizontal" novalidate="">
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "PricingCurrRate_srcCurrISO3_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : pricingCurrRateForm.srcCurrISO3.$invalid }" >
+                            <input type="text" ng-model="pricingCurrRateCreateCtrl.pricingCurrRate.srcCurrISO3" name="srcCurrISO3" class="form-control" required >
+                            <p ng-show="pricingCurrRateForm.srcCurrISO3.$error.required" class="help-block">source currency iso3 name is required !</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "PricingCurrRate_destCurrISO3_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : pricingCurrRateForm.destCurrISO3.$invalid }" >
+                            <input type="text" ng-model="pricingCurrRateCreateCtrl.pricingCurrRate.destCurrISO3" name="destCurrISO3" class="form-control" required >
+                            <p ng-show="pricingCurrRateForm.destCurrISO3.$error.required" class="help-block">destination currency iso3 required !</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "ConverterCurrRate_exRate_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : pricingCurrRateForm.exRate.$invalid }" >
+                            <input type="text" ng-model="pricingCurrRateCreateCtrl.pricingCurrRate.exRate" name="exRate" class="form-control" required >
+                            <p ng-show="pricingCurrRateForm.exRate.$error.required" class="help-block">exchange rate est  requis !</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validFrom.title"| translate}} :</label>
+                        <div class="col-lg-8"  >
+                            <input type="datetime" date-time ng-model="pricingCurrRateCreateCtrl.pricingCurrRate.validTo" name="validTo" class="form-control"  >
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validTo.title"| translate}} :</label>
+                        <div class="col-lg-8" >
+                            <input type="datetime" date-time ng-model="pricingCurrRateCreateCtrl.pricingCurrRate.validTo" name="validTo" class="form-control"  >
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4"  > </label>
+                        <div class="col-lg-8" >
+                            <a class="btn-danger btn" href="#/pricingCurrRate"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                            <button ng-click="pricingCurrRateCreateCtrl.create();" ng-disabled="pricingCurrRateForm.$invalid" class="btn-success btn"  ><i class="glyphicon glyphicon-save"></i>  {{"Entity_save.title" | translate }}</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,143 @@
+<header ng-switch on="$location.path().indexOf('/AccPstgs/new') > -1">
+    <h3 ng-switch-when="true">Create AccPstg</h3>
+    <h3 ng-switch-when="false">View or edit AccPstg</h3>
+</header>
+<form id="AccPstgForm" name="AccPstgForm" class="form-horizontal">
+    <div ng-show="displayError" class="alert alert-error">
+        <strong>Error!</strong> Something broke. Retry, or cancel and start afresh.
+    </div>
+    <div class="control-group" ng-class="{error: AccPstgForm.refNbr.$invalid}">
+        <label for="refNbr" class="control-label">Ref Nbr</label>
+        <div id="refNbrControls" class="controls">
+            <input id="refNbr" name="refNbr" type="text" ng-model="accPstg.refNbr" placeholder="Enter the AccPstg Ref Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccPstgForm.accOpId.$invalid}">
+        <label for="accOpId" class="control-label">Acc Op Id</label>
+        <div id="accOpIdControls" class="controls">
+            <input id="accOpId" name="accOpId" type="text" ng-model="accPstg.accOpId" placeholder="Enter the AccPstg Acc Op Id"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccPstgForm.pstgDir.$invalid}">
+        <label for="pstgDir" class="control-label">Pstg Dir</label>
+        <div id="pstgDirControls" class="controls">
+        <select id="pstgDir" name="pstgDir" ng-model="accPstg.pstgDir" ng-options="p for p in pstgDirList"  >
+            <option value="">Choose a Pstg Dir</option>
+        </select>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccPstgForm.accCoA.$invalid}">
+        <label for="accCoA" class="control-label">Acc Co A</label>
+        <div id="accCoAControls" class="controls">
+            <input id="accCoA" name="accCoA" type="text" ng-model="accPstg.accCoA" placeholder="Enter the AccPstg Acc Co A"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccPstgForm.accNbr.$invalid}">
+        <label for="accNbr" class="control-label">Acc Nbr</label>
+        <div id="accNbrControls" class="controls">
+            <input id="accNbr" name="accNbr" type="text" ng-model="accPstg.accNbr" placeholder="Enter the AccPstg Acc Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccPstgForm.accType.$invalid}">
+        <label for="accType" class="control-label">Acc Type</label>
+        <div id="accTypeControls" class="controls">
+        <select id="accType" name="accType" ng-model="accPstg.accType" ng-options="a for a in accTypeList"  >
+            <option value="">Choose a Acc Type</option>
+        </select>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccPstgForm.accCur.$invalid}">
+        <label for="accCur" class="control-label">Acc Cur</label>
+        <div id="accCurControls" class="controls">
+            <input id="accCur" name="accCur" type="text" ng-model="accPstg.accCur" placeholder="Enter the AccPstg Acc Cur"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccPstgForm.amtInAccCur.$invalid}">
+        <label for="amtInAccCur" class="control-label">Amt In Acc Cur</label>
+        <div id="amtInAccCurControls" class="controls">
+            <input id="amtInAccCur" name="amtInAccCur" type="text" ng-model="accPstg.amtInAccCur" placeholder="Enter the AccPstg Amt In Acc Cur"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccPstgForm.refCur.$invalid}">
+        <label for="refCur" class="control-label">Ref Cur</label>
+        <div id="refCurControls" class="controls">
+            <input id="refCur" name="refCur" type="text" ng-model="accPstg.refCur" placeholder="Enter the AccPstg Ref Cur"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccPstgForm.amtInRefCur.$invalid}">
+        <label for="amtInRefCur" class="control-label">Amt In Ref Cur</label>
+        <div id="amtInRefCurControls" class="controls">
+            <input id="amtInRefCur" name="amtInRefCur" type="text" ng-model="accPstg.amtInRefCur" placeholder="Enter the AccPstg Amt In Ref Cur"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccPstgForm.opType.$invalid}">
+        <label for="opType" class="control-label">Op Type</label>
+        <div id="opTypeControls" class="controls">
+        <select id="opType" name="opType" ng-model="accPstg.opType" ng-options="o for o in opTypeList" required >
+            <option value="">Choose a Op Type</option>
+        </select>
+        <span class="help-inline" ng-show="AccPstgForm.opType.$error.required">required</span> 
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccPstgForm.opDesc.$invalid}">
+        <label for="opDesc" class="control-label">Op Desc</label>
+        <div id="opDescControls" class="controls">
+            <input id="opDesc" name="opDesc" type="text" ng-model="accPstg.opDesc" placeholder="Enter the AccPstg Op Desc"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccPstgForm.pstgDesc.$invalid}">
+        <label for="pstgDesc" class="control-label">Pstg Desc</label>
+        <div id="pstgDescControls" class="controls">
+            <input id="pstgDesc" name="pstgDesc" type="text" ng-model="accPstg.pstgDesc" placeholder="Enter the AccPstg Pstg Desc"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccPstgForm.opBrr.$invalid}">
+        <label for="opBrr" class="control-label">Op Brr</label>
+        <div id="opBrrControls" class="controls">
+            <input id="opBrr" name="opBrr" type="text" ng-model="accPstg.opBrr" placeholder="Enter the AccPstg Op Brr"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccPstgForm.pstgBrr.$invalid}">
+        <label for="pstgBrr" class="control-label">Pstg Brr</label>
+        <div id="pstgBrrControls" class="controls">
+            <input id="pstgBrr" name="pstgBrr" type="text" ng-model="accPstg.pstgBrr" placeholder="Enter the AccPstg Pstg Brr"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccPstgForm.pstgDt.$invalid}">
+        <label for="pstgDt" class="control-label">Pstg Dt</label>
+        <div id="pstgDtControls" class="controls">
+            <datetime id="pstgDt" name="pstgDt" required ng-model="accPstg.pstgDt" placeholder="Enter the AccPstg Pstg Dt"></datetime>
+            <span class="help-inline" ng-show="AccPstgForm.pstgDt.$error.required">required</span> 
+            <span class="help-inline" ng-show="AccPstgForm.pstgDt.$error.dateFormat">does not match format "yyyy-MM-dd hh:mm:ss"</span>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccPstgForm.valueDt.$invalid}">
+        <label for="valueDt" class="control-label">Value Dt</label>
+        <div id="valueDtControls" class="controls">
+            <datetime id="valueDt" name="valueDt" required ng-model="accPstg.valueDt" placeholder="Enter the AccPstg Value Dt"></datetime>
+            <span class="help-inline" ng-show="AccPstgForm.valueDt.$error.required">required</span> 
+            <span class="help-inline" ng-show="AccPstgForm.valueDt.$error.dateFormat">does not match format "yyyy-MM-dd hh:mm:ss"</span>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccPstgForm.docDt.$invalid}">
+        <label for="docDt" class="control-label">Doc Dt</label>
+        <div id="docDtControls" class="controls">
+            <datetime id="docDt" name="docDt" required ng-model="accPstg.docDt" placeholder="Enter the AccPstg Doc Dt"></datetime>
+            <span class="help-inline" ng-show="AccPstgForm.docDt.$error.required">required</span> 
+            <span class="help-inline" ng-show="AccPstgForm.docDt.$error.dateFormat">does not match format "yyyy-MM-dd hh:mm:ss"</span>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccPstgForm.docIds.$invalid}">
+        <label for="docIds" class="control-label">Doc Ids</label>
+        <div id="docIdsControls" class="controls">
+            <input id="docIds" name="docIds" type="text" ng-model="accPstg.docIds" placeholder="Enter the AccPstg Doc Ids"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <button id="saveAccPstg" name="saveAccPstg" class="btn btn-primary" ng-disabled="isClean() || AccPstgForm.$invalid" ng-click="save()"><i class="icon-ok-sign icon-white"></i> Save</button>
+            <button id="cancel" name="cancel" class="btn" ng-click="cancel()"><i class="icon-remove-sign"></i> Cancel</button>
+            <button id="deleteAccPstg" name="deleteAccPstg" class="btn btn-danger" ng-show="accPstg.id" ng-click="remove()"><i class="icon-trash icon-white"></i> Delete</button>
+        </div>
+    <div>
+</form>

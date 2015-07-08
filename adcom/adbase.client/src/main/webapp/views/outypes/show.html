@@ -1,0 +1,57 @@
+<div class="container">
+
+    <div class="col-xs-offset-2 col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Entity_show.title"| translate}}</b> </div>
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{orgUnitCreateCtrl.error}} </label>
+                <form  name="ouTypeForm" class="form-horizontal" novalidate="">
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{'parentType' | translate }} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : ouTypeForm.parentType.$invalid }" >
+                            <input type="text" value="{{ouType.parentType}}" disabled class="form-control" />
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{'idSize' | translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : ouTypeForm.idSize.$invalid }" >
+                            <input type="text" name="idSize" id="idSize" class="form-control" value="{{ouType.idSize}}" disabled/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{'typeName' | translate }} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : ouTypeForm.typeName.$invalid }" >
+                            <input type="text" name="typeName" id="typeName" class="form-control" value="{{ouType.typeName}}" disabled />
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validFrom.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : ouTypeForm.validFrom.$invalid }" >
+                            <input type="datetime" disabled value="{{ouType.validFrom | date : 'dd-MM-yyyy hh:mm'}}" name="validFrom" class="form-control" >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validTo.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : ouTypeForm.validTo.$invalid }" >
+                            <input type="datetime" disabled value="{{ouType.validTo | date : 'dd-MM-yyyy hh:mm'}}" name="validTo" class="form-control" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4"  > </label>
+                        <div class="col-lg-8" >
+                            <a class="btn-danger btn" href="#/outypes/list"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                            <button ng-click="goToUpdate();" class="btn-success btn"  ><i class="glyphicon glyphicon-save"></i>  {{"Entity_edit.title" | translate }}</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

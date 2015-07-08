@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html ng-app="adaptmt">
+<head>
+    <meta charset="utf-8" />
+    <title>Appointements</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" type="text/css" href="/adres.client/vendors/bootstrap/css/bootstrap.min.css">
+    <link href="styles/main.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" type="text/css" href="/adres.client/vendors/angular-datepicker/datepicker.css">
+    <link rel="stylesheet" type="text/css" href="/adres.client/styles/custom.css">
+    <link rel="stylesheet" type="text/css" href="/adres.client/vendors/ngprogress/ngProgress.css">
+    <script src="/adres.client/vendors/modernizr/modernizr-2.6.2.min.js"></script>
+    <script src="/adres.client/vendors/jquery/jquery-2.1.1.min.js"></script>
+    <script src="/adres.client/vendors/bootstrap/js/bootstrap.js"></script>
+</head>
+<body class="theme-blue">
+    
+	<div ng-include="'/adres.client/views/navbar.html'"></div>
+    <div class="container">
+        <div ng-show="sessionManager.hasAuthErrors()">
+            <div class="has-error">
+            	<ul ng-repeat="error in sessionManager.authErrors()">
+            		<li>{{error}}</li>
+            	</ul>
+            </div>
+        </div>
+        <div ng-view></div>
+     	<div id="push"></div>
+    </div>
+    
+    <script src="/adres.client/vendors/angular/angular.js"></script>
+    <script src="/adres.client/vendors/angular/angular-sanitize.js"></script>
+    <script src="/adres.client/vendors/angular/angular-route.js"></script>
+    <script src="/adres.client/vendors/angular/angular-resource.js"></script>
+    <script src="/adres.client/vendors/angular/angular-cookies.js"></script>
+    <script src="/adres.client/vendors/angular-translate/angular-translate.js"></script>
+    <script src="/adres.client/vendors/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="/adres.client/vendors/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
+    <script src="/adres.client/vendors/angular/ui-bootstrap-tpls-0.12.0.js" ></script>
+    <script src="/adres.client/vendors/angular-datepicker/datepicker.js"></script>
+    <script src="/adres.client/vendors/base64/base64.js"></script>
+    <script src="/adres.client/services/ADUtils.js"></script>
+    <script src="/adres.client/services/SessionManager.js"></script>
+    <script src="/adres.client/services/AuthInterceptor.js"></script>
+    <script src="/adres.client/modules/NavBar.js"></script>
+    <script src="/adres.client/vendors/angular-growl/angular-growl.js"></script>
+    
+    <!-- Progress Bar Loading -->
+    <script src="/adres.client/services/httpProgress.js"></script>
+    <script src="/adres.client/vendors/ngprogress/build/ngProgress.js"></script>
+    
+   
+    <script src="/adbnsptnr.client/scripts/app.js"></script>
+    <script src="/adbase.client/scripts/app.js"></script>
+    
+    <script src="/adbase.client/modules/login/services.js"></script>
+    <script src="/adbase.client/modules/orgunits/services.js"></script>
+    <script src="/adbase.client/modules/login/resources.js"></script>
+    <script src="/adbase.client/modules/orgunits/resources.js"></script>
+    
+    <script src="/adbnsptnr.client/modules/BpBnsPtnr/BpBnsPtnrCtlrs.js"></script>
+	<script src="/adbnsptnr.client/modules/BpBnsPtnr/BpBnsPtnrRoute.js"></script>
+    <script src="/adbnsptnr.client/modules/BpBnsPtnr/BpBnsPtnrCtlrs.js"></script>
+    <script src="/adbnsptnr.client/modules/BpBnsPtnr/BpPtnrContactCtlrs.js"></script>
+    <script src="/adbnsptnr.client/modules/BpBnsPtnr/BpPtnrIdDtlsCtlrs.js"></script>
+    <script src="/adbnsptnr.client/modules/BpBnsPtnr/BpInsurranceCtlrs.js"></script>
+
+    <script src="/adbnsptnr.client/modules/BpPtnrCtgry/BpPtnrCtgryRoute.js"></script>
+    <script src="/adbnsptnr.client/modules/BpPtnrCtgry/BpPtnrCtgryCtlrs.js"></script>
+    <script src="/adbnsptnr.client/modules/BpPtnrCtgry/BpPtnrCtgryDtlsCtlrs.js"></script>
+    <script src="/adbnsptnr.client/modules/BpPtnrCtgry/BpCtgryContractCtlrs.js"></script>
+	
+	
+	<script src="scripts/app.js"></script>
+	 
+	<script type="text/javascript" src="scripts/services/aptAptmtRepportLoginsService.js"></script>  
+	
+	<!--     AptAptmt -->
+    <script type="text/javascript" src="scripts/services/aptAptmtsService.js"></script>    
+    <script type="text/javascript" src="scripts/controllers/AptAptmtsController.js"></script>
+    <script type="text/javascript" src="scripts/controllers/AptAptmtShowController.js"></script>
+    <script type="text/javascript" src="scripts/controllers/AptAptmtUpdateController.js"></script>
+    <script type="text/javascript" src="scripts/controllers/AptAptmtCancelController.js"></script>
+    <script type="text/javascript" src="scripts/controllers/AptAptmtReportController.js"></script>
+    <script type="text/javascript" src="scripts/controllers/AptAptmtCloseController.js"></script>
+	
+    
+	<!--     AptAptmtRepport -->
+	<script type="text/javascript" src="scripts/services/aptAptmtRepportsService.js"></script>    
+    <script type="text/javascript" src="scripts/controllers/AptAptmtRepportsController.js"></script>
+    <script type="text/javascript" src="scripts/controllers/AptAptmtRepportsCreateController.js"></script>
+     <script type="text/javascript" src="scripts/controllers/AptAptmtRepportShowController.js"></script>
+     <script type="text/javascript" src="scripts/controllers/AptAptmtRepportsUpdateController.js"></script>
+     <script type="text/javascript" src="scripts/controllers/AptAptmtRepportListController.js"></script>
+     
+     
+	<!--      AptAptmtBsPtnr       -->
+	<script type="text/javascript" src="scripts/services/AptAptmtBsPtnrService.js"></script> 
+	<script type="text/javascript" src="scripts/services/AptAptmtBsPtnrPresentService.js"></script> 
+<!-- 	<script type="text/javascript" src="scripts/controllers/AptAptmtBsPtnrController.js"></script>  -->
+	
+	
+     
+	<!--     AptAptmtContact -->
+	<script type="text/javascript" src="scripts/services/aptAptmtContactsService.js"></script> 
+
+ 
+</body>
+</html>

@@ -1,0 +1,56 @@
+<div class="container">
+
+    <div class="col-xs-offset-2 col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Change_password"| translate}}</b> </div>
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{changePwdCtrl.error}} </label>
+                <form  name="loginForm" class="form-horizontal" novalidate="">
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Login_ouIdentif_description"| translate}} :</label>
+                        <div class="col-lg-8" >
+                            <input type="text" ng-model="changePwdCtrl.login.ouIdentif" name="ouIdentif" class="form-control" disabled >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Login_loginName_description"| translate}} :</label>
+                        <div class="col-lg-8" >
+                            <input type="text" ng-model="changePwdCtrl.login.loginName" name="loginName" class="form-control" disabled >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Login_fullName_description"| translate}} :</label>
+                        <div class="col-lg-8" >
+                            <input type="text" ng-model="changePwdCtrl.login.fullName" name="fullName" class="form-control" disabled >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Login_new_pwd"| translate}} :</label>
+                        <div class="col-lg-8" >
+                            <input type="password" ng-model="changePwdCtrl.newPwd"  class="form-control"  >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Login_new_confirm_pwd"| translate}} :</label>
+                        <div class="col-lg-8" >
+                            <input type="password" ng-model="changePwdCtrl.newConfirmPwd" class="form-control"  >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4"  > </label>
+                        <div class="col-lg-8" >
+                            <a class="btn-danger btn" href="#/login/show/{{changePwdCtrl.login.identif}}"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                            <button ng-click="changePwdCtrl.changePwd();" class="btn-success btn"  ><i class="glyphicon glyphicon-save"></i>  {{"Entity_save.title" | translate }}</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

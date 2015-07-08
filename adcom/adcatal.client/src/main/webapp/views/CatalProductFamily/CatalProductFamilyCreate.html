@@ -1,0 +1,69 @@
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<b>{{ "Entity_create.title"| translate}}</b>
+		</div>
+		<div class="panel-body">
+			<label class="error col-lg-offset-3 alert-danger">{{catalProductFamilyCreateCtlr.error}}</label>
+			<form name="catalProductFamilyForm" class="form-horizontal" novalidate="">
+				<div class="form-group">
+					<label class="col-lg-2">{{"CatalProductFamily_parent_description.title"|translate}} :</label>
+                  <div class="col-lg-8">
+                      <input type="text" ng-model="catalProductFamilyCreateCtlr.catalProductFamily.parent.features.familyName" name="parent" class="form-control" disabled>
+                  </div>
+					<div class="col-lg-2" style="padding-left: 5px;">
+	                    <button id="selectParentCatalProductFamily" name="selectParentCatalProductFamily" class="btn btn-primary" 
+	                    	ng-click="catalProductFamilyCreateCtlr.openSelectParentForm('lg')"><i class="icon-ok-sign icon-white"></i> {{'Entity_select.title'|translate}}</button>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-2">{{"CatalFamilyFeatMaping_familyName_description.title"|translate}} :</label>
+					<div class="col-lg-10" ng-class="{ 'has-error' : catalProductFamilyForm.familyName.$invalid }">
+						<input type="text" ng-model="catalProductFamilyCreateCtlr.catalProductFamily.features.familyName" name="familyName" class="form-control" required>
+                           <p ng-show="catalProductFamilyForm.familyName.$error.required" class="help-block">{{"CatalFamilyFeatMaping_familyName_required.title"|translate}}</p>
+					</div>
+				</div>
+	            <div class="control-group" ng-class="{error: CatalArtFeatMappingForm.purpose.$invalid}">
+	                <label for="purpose" class="control-label">{{'CatalAbstractFeatMapping_purpose_description.title'|translate}}</label>
+	                <div id="purposeControls" class="controls">
+	                	<textarea rows="3" id="purpose" name="purpose" class="form-control" 
+	                		ng-model="catalProductFamilyCreateCtlr.catalProductFamily.features.purpose" placeholder="{{'CatalAbstractFeatMapping_purpose_description.text'|translate}}" maxlength="256">
+	                	</textarea>
+	                </div>
+	            </div>
+	            <div class="control-group" ng-class="{error: CatalArtFeatMappingForm.usage.$invalid}">
+	                <label for="usage" class="control-label">{{'CatalAbstractFeatMapping_usage_description.title'|translate}}</label>
+	                <div id="usageControls" class="controls">
+	                	<textarea rows="3" id="usage" name="usage" class="form-control" 
+	                		ng-model="catalProductFamilyCreateCtlr.catalProductFamily.features.usage" placeholder="{{'CatalAbstractFeatMapping_usage_description.text'|translate}}" maxlength="256">
+	                	</textarea>
+	                </div>
+	            </div>
+	            <div class="control-group" ng-class="{error: CatalArtFeatMappingForm.warnings.$invalid}">
+	                <label for="warnings" class="control-label">{{'CatalAbstractFeatMapping_warnings_description.title'|translate}}</label>
+	                <div id="warningsControls" class="controls">
+	                	<textarea rows="3" id="warnings" name="warnings" class="form-control" 
+	                		ng-model="catalProductFamilyCreateCtlr.catalProductFamily.features.warnings" placeholder="{{'CatalAbstractFeatMapping_warnings_description.text'|translate}}" maxlength="256">
+	                	</textarea>
+	                </div>
+	            </div>
+	            <div class="control-group" ng-class="{error: CatalArtFeatMappingForm.substances.$invalid}">
+	                <label for="substances" class="control-label">{{'CatalAbstractFeatMapping_substances_description.title'|translate}}</label>
+	                <div id="substancesControls" class="controls">
+	                	<textarea rows="3" id="substances" name="substances" class="form-control" 
+	                		ng-model="catalProductFamilyCreateCtlr.catalProductFamily.features.substances" placeholder="{{'CatalAbstractFeatMapping_substances_description.text'|translate}}" maxlength="256">
+	                	</textarea>
+	                </div>
+	            </div>
+	            <div class="control-group">
+	            	<br/>
+	                <div class="controls">
+	                    <button id="saveCatalProductFamily" name="saveCatalProductFamily" class="btn btn-primary" ng-disabled="CatalArtFeatMappingForm.$invalid" ng-click="catalProductFamilyCreateCtlr.create()"><i class="icon-ok-sign icon-white"></i> {{'Entity_create.title'|translate}}</button>
+	                    <button id="cancel" name="cancel" class="btn" ng-click="catalProductFamilyCreateCtlr.cancel()"><i class="icon-remove-sign"></i> {{'Entity_cancel.title'|translate}}</button>
+	                </div>
+	            </div>
+			</form>
+
+		</div>
+	</div>
+</div>

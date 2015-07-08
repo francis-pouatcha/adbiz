@@ -1,0 +1,89 @@
+<div class="container">
+
+    <div class="col-xs-offset-2 col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Entity_create.title"| translate}}</b> </div>
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{loginCreateCtrl.error}} </label>
+                <form  name="loginForm" class="form-horizontal" novalidate="">
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Login_ouIdentif_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : loginForm.ouIdentif.$invalid }" >
+                            <select class="form-control" ng-model="loginCreateCtrl.login.ouIdentif" name="ouIdentif"
+                                    ng-options="orgUnit.identif as orgUnit.shortName for orgUnit in loginCreateCtrl.orgUnits">
+                            </select>
+                            <p ng-show="loginForm.ouIdentif.$error.required" class="help-block">ouIdentif est  requis !</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Login_loginName_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : loginForm.loginName.$invalid }" >
+                            <input type="text" ng-model="loginCreateCtrl.login.loginName" name="loginName" class="form-control" required >
+                            <p ng-show="loginForm.loginName.$error.required" class="help-block">loginName est  requis !</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Login_loginAlias_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : loginForm.loginAlias.$invalid }" >
+                            <input type="text" ng-model="loginCreateCtrl.login.loginAlias" name="loginAlias" class="form-control"  >
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Login_pwdHashed_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : loginForm.pwdHashed.$invalid }" >
+                            <input type="password" ng-model="loginCreateCtrl.login.pwdHashed" name="pwdHashed" class="form-control" required >
+                            <p ng-show="loginForm.pwdHashed.$error.required" class="help-block">pwdHashed est  requis !</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Login_email_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : loginForm.email.$invalid }" >
+                            <input type="text" ng-model="loginCreateCtrl.login.email" name="email" class="form-control"  >
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Login_fullName_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : loginForm.fullName.$invalid }" >
+                            <input type="text" ng-model="loginCreateCtrl.login.fullName" name="fullName" class="form-control" required >
+                            <p ng-show="loginForm.fullName.$error.required" class="help-block">fullName est  requis !</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Login_credtlExpir_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : loginForm.credtlExpir.$invalid }" >
+                            <input type="datetime" date-time ng-model="loginCreateCtrl.login.credtlExpir" name="credtlExpir" class="form-control"  >
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Login_accountExpir_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : loginForm.accountExpir.$invalid }" >
+                            <input type="datetime" date-time ng-model="loginCreateCtrl.login.accountExpir" name="accountExpir" class="form-control" >
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4"  > </label>
+                        <div class="col-lg-8" >
+                            <a class="btn-danger btn" href="#/"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                            <button ng-click="loginCreateCtrl.create();" ng-disabled="loginForm.$invalid" class="btn-success btn"  ><i class="glyphicon glyphicon-save"></i>  {{"Entity_save.title" | translate }}</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

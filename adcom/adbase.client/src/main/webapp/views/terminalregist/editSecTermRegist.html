@@ -1,0 +1,122 @@
+<div class="container">
+    <div class="col-xs-offset-2 col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Entity_update.title"| translate}}</b> </div>
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{secTermRegistEditCtrl.error}} </label>
+                <form  name="secTermForm" class="form-horizontal" novalidate="">
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "SecTerminal_termName_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : secTermForm.termName.$invalid }" >
+                            <input type="text" ng-model="secTermRegistEditCtrl.secTermRegist.termName" name="termName" class="form-control" required >
+                            <p ng-show="secTermForm.termName.$error.required" class="help-block">Terminal name is required !</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "SecTerminal_registrKey_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : secTermForm.registrKey.$invalid }" >
+                            <input type="text" ng-model="secTermRegistEditCtrl.secTermRegist.registrKey" name="registrKey" class="form-control" required >
+                            <p ng-show="secTermForm.registrKey.$error.required" class="help-block">Terminal registryation key is required !</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "SecTerminal_registrPwd_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : secTermForm.registrPwd.$invalid }" >
+                            <input type="text" ng-model="secTermRegistEditCtrl.secTermRegist.registrPwd" name="registrPwd" class="form-control" required >
+                            <p ng-show="secTermForm.registrPwd.$error.required" class="help-block">Terminal registration password is required !</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "SecTerminal_ipAddress_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : secTermForm.ipAddress.$invalid }" >
+                            <input type="text" ng-model="secTermRegistEditCtrl.secTermRegist.ipAddress" name="ipAddress" class="form-control" required >
+                            <p ng-show="secTermForm.ipAddress.$error.required" class="help-block">Terminal ip address is required !</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "SecTerminal_termId_description"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : secTermForm.termId.$invalid }" >
+                            <input type="text" ng-model="secTermRegistEditCtrl.secTermRegist.termId" name="termId" class="form-control" required >
+                            <p ng-show="secTermForm.termId.$error.required" class="help-block">termId est  requis !</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "SecTerminal_partnerId_description"| translate}} :</label>
+                        <div class="col-lg-8"  >
+                            <input type="text" ng-model="secTermRegistEditCtrl.secTermRegist.partnerIds" name="partnerIds" class="form-control"  >
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "SecTerminal_locality_description"| translate}} :</label>
+                        <div class="col-lg-8" >
+                            <input type="text" ng-model="secTermRegistEditCtrl.secTermRegist.locality" name="locality" class="form-control"  >
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "SecTerminal_timeZone_description"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" ng-model="secTermRegistEditCtrl.secTermRegist.timeZone" name="timeZone" class="form-control" >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "SecTerminal_accessTime_description"| translate}} :</label>
+                        <div class="col-lg-8"  >
+                            <textarea ng-model="secTermRegistEditCtrl.secTermRegist.accessTime" name="accessTime" class="form-control" ></textarea>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "SecTerminal_authUsers_description"| translate}} :</label>
+                        <div class="col-lg-8"  >
+                            <textarea ng-model="secTermRegistEditCtrl.secTermRegist.authUsers" name="authUsers" class="form-control" ></textarea>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "SecTerminal_authWorkspaces_description"| translate}} :</label>
+                        <div class="col-lg-8"  >
+                            <textarea ng-model="secTermRegistEditCtrl.secTermRegist.authWorkspaces" name="authWorkspaces" class="form-control" ></textarea>
+
+                        </div>
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validFrom.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : orgcontactForm.validFrom.$invalid }" >
+                            <input type="datime" date-time  partial="true" ng-model="secTermRegistCreateCtrl.secTermRegist.validFrom" name="validFrom" class="form-control" >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validTo.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : orgcontactForm.validTo.$invalid }" >
+                            <input type="datime" date-time  ng-model="secTermRegistCreateCtrl.secTermRegist.validTo" name="validTo" class="form-control" >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4"  > </label>
+                        <div class="col-lg-8" >
+                            <a class="btn-danger btn" href="#/sectermregistr/show/{{secTermRegistEditCtrl.secTermRegist.id}}"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                            <button ng-click="secTermRegistEditCtrl.edit();" ng-disabled="secTermForm.$invalid" class="btn-success btn"  ><i class="glyphicon glyphicon-save"></i>  {{"Entity_save.title" | translate }}</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

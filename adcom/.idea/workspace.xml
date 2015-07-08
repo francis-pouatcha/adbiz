@@ -1,0 +1,1514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b69bb98d-7d4a-4cd0-8b00-4f41f44894cd" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/modules/CdrPymnt/CdrPymntCtrls.js" afterPath="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/modules/CdrPymnt/CdrPymntCtrls.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/CdrPymnt/CdrPymnts.html" afterPath="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/CdrPymnt/CdrPymnts.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/SlsInvoice/SlsInvoices.html" afterPath="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/SlsInvoice/SlsInvoices.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
+    <ignored path="adcom.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="adcom" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+<<<<<<< HEAD
+      <file leaf-file-name="PrcmtOrderShow.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/adprocmt.client/src/main/webapp/views/PrcmtOrder/PrcmtOrderShow.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-2.5" vertical-offset="495" max-vertical-offset="2235">
+              <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+=======
+<<<<<<< HEAD
+      <file leaf-file-name="CdrDrctSalesCtrls.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/modules/CdrDrctSales/CdrDrctSalesCtrls.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.516129">
+              <caret line="477" column="31" selection-start-line="477" selection-start-column="31" selection-end-line="477" selection-end-column="31" />
+=======
+      <file leaf-file-name="CshDrawers.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admanager.client/src/main/webapp/views/CshDrawers.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.875" vertical-offset="105" max-vertical-offset="1575">
+              <caret line="18" column="121" selection-start-line="18" selection-start-column="121" selection-end-line="18" selection-end-column="121" />
+              <folding>
+                <element signature="n#style#0;n#button#0;n#div#0;n#div#3;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#button#1;n#div#0;n#div#3;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CdrDrctSalesCtrls.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/modules/CdrDrctSales/CdrDrctSalesCtrls.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.9615383" vertical-offset="1746" max-vertical-offset="10710">
+              <caret line="125" column="54" selection-start-line="125" selection-start-column="35" selection-end-line="125" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="createDrctSales.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/CdrDrctSale/createDrctSales.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-20.0" vertical-offset="855" max-vertical-offset="2355">
+              <caret line="89" column="73" selection-start-line="89" selection-start-column="73" selection-end-line="89" selection-end-column="73" />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+>>>>>>> d9e17e914fc2f583b46d8174000a39148996854b
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
+      <file leaf-file-name="PrcmtDeliveryAddItemCtrl.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/adprocmt.client/src/main/webapp/modules/PrcmtDeliverys/PrcmtDeliveryAddItemCtrl.js">
+=======
+<<<<<<< HEAD
+      <file leaf-file-name="createDrctSales.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/CdrDrctSale/createDrctSales.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-8.5">
+              <caret line="101" column="139" selection-start-line="101" selection-start-column="113" selection-end-line="101" selection-end-column="139" />
+              <folding>
+                <element signature="n#style#0;n#button#0;n#div#9;n#div#0;n#form#0;n#div#0;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#2;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#3;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#2;n#div#3;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#1;n#div#3;n#div#0;n#!!top" expanded="true" />
+              </folding>
+=======
+      <file leaf-file-name="CdrCshDrawers.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/CdrCshDrawer/CdrCshDrawers.html">
+>>>>>>> d9e17e914fc2f583b46d8174000a39148996854b
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1230" max-vertical-offset="4305">
+              <caret line="122" column="76" selection-start-line="109" selection-start-column="8" selection-end-line="122" selection-end-column="76" />
+              <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
+      <file leaf-file-name="PrcmtOrderShowCtrl.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/adprocmt.client/src/main/webapp/modules/PrcmtOrders/PrcmtOrderShowCtrl.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.3960217" vertical-offset="2541" max-vertical-offset="3690">
+              <caret line="184" column="0" selection-start-line="184" selection-start-column="0" selection-end-line="184" selection-end-column="0" />
+=======
+<<<<<<< HEAD
+      <file leaf-file-name="locale-fr.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/i18n/main/locale-fr.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.290909">
+              <caret line="248" column="36" selection-start-line="248" selection-start-column="1" selection-end-line="248" selection-end-column="36" />
+=======
+      <file leaf-file-name="ADUtils.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/adres.client/src/main/webapp/services/ADUtils.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2003" max-vertical-offset="7500">
+              <caret line="163" column="22" selection-start-line="163" selection-start-column="22" selection-end-line="163" selection-end-column="22" />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/scripts/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="29" column="4" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="4" />
+>>>>>>> d9e17e914fc2f583b46d8174000a39148996854b
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
+      <file leaf-file-name="PrcmtDeliveryAddItem.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/adprocmt.client/src/main/webapp/views/PrcmtDelivery/PrcmtDeliveryAddItem.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-10.666667" vertical-offset="539" max-vertical-offset="3045">
+              <caret line="53" column="33" selection-start-line="40" selection-start-column="28" selection-end-line="53" selection-end-column="33" />
+=======
+      <file leaf-file-name="SlsInvoices.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/SlsInvoice/SlsInvoices.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5487805">
+              <caret line="93" column="103" selection-start-line="93" selection-start-column="103" selection-end-line="93" selection-end-column="103" />
+=======
+      <file leaf-file-name="CshDrawerCtrls.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admanager.client/src/main/webapp/modules/CshDrawerCtrls.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4395">
+              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+>>>>>>> d9e17e914fc2f583b46d8174000a39148996854b
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="true" />
+    </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+        <option value="$PROJECT_DIR$/adsales.client/src/main/webapp/modules/SlsInvoice/SlsInvoiceRoute.js" />
+        <option value="$PROJECT_DIR$/adsales.client/src/main/webapp/index.html" />
+        <option value="$PROJECT_DIR$/adsales.client/src/main/webapp/views/SlsInvoice/SlsInvoiceNew.html" />
+        <option value="$PROJECT_DIR$/adprocmt.client/src/main/webapp/modules/PrcmtDeliverys/PrcmtDeliveryCtrl.js" />
+        <option value="$PROJECT_DIR$/adprocmt.client/src/main/webapp/modules/PrcmtDeliverys/PrcmtDeliveryAddItemCtrl.js" />
+        <option value="$PROJECT_DIR$/adprocmt.client/src/main/webapp/views/PrcmtDelivery/PrcmtDeliveryAddItem.html" />
+        <option value="$PROJECT_DIR$/adsales.client/src/main/webapp/views/SlsInvoice/SlsInvcePtnr.html" />
+>>>>>>> d9e17e914fc2f583b46d8174000a39148996854b
+        <option value="$PROJECT_DIR$/adsales.client/src/main/webapp/modules/SlsInvoice/SlsInvoiceNewCtrl.js" />
+        <option value="$PROJECT_DIR$/adinvtry.client/src/main/webapp/views/InvInvtry/InvInvtryCreate.html" />
+        <option value="$PROJECT_DIR$/adinvtry.client/src/main/webapp/views/InvInvtry/InvInvtrys.html" />
+        <option value="$PROJECT_DIR$/adinvtry.client/src/main/webapp/modules/InvInvtry/InvInvtryCtrls.js" />
+        <option value="$PROJECT_DIR$/adinvtry.client/src/main/webapp/index.html" />
+        <option value="$PROJECT_DIR$/adres.client/src/main/webapp/styles/custom.css" />
+        <option value="$PROJECT_DIR$/adres.client/src/main/webapp/vendors/bootstrap/css/bootstrap.min.css" />
+        <option value="$PROJECT_DIR$/adinvtry.client/src/main/webapp/menu.html" />
+        <option value="$PROJECT_DIR$/adinvtry.client/src/main/webapp/modules/InvInvtry/InvInvtryShowCtrl.js" />
+        <option value="$PROJECT_DIR$/adinvtry.client/src/main/webapp/views/InvInvtry/InvInvtryShow.html" />
+        <option value="$PROJECT_DIR$/adres.client/src/main/webapp/services/ADUtils.js" />
+        <option value="$PROJECT_DIR$/adres.client/src/main/webapp/i18n/shared/locale-en.json" />
+        <option value="$PROJECT_DIR$/adres.client/src/main/webapp/i18n/shared/locale-fr.json" />
+        <option value="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/i18n/main/locale-fr.json" />
+        <option value="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/CdrCshDrawer/showCdrCshDrawer.html" />
+        <option value="$PROJECT_DIR$/adsales.client/src/main/webapp/views/SlsSalesOrder/Sale.html" />
+        <option value="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/scripts/directives/selectOnClick.js" />
+        <option value="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/index.html" />
+        <option value="$PROJECT_DIR$/adsales.client/src/main/webapp/modules/SlsSalesOrder/SaleCtrl.js" />
+        <option value="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/i18n/main/locale-en.json" />
+        <option value="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/CdrDrctSale/CdrDrctSales.html" />
+        <option value="$PROJECT_DIR$/admanager.client/src/main/webapp/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/admanager.client/src/main/webapp/app.html" />
+        <option value="$PROJECT_DIR$/admanager.client/src/main/webapp/menu.html" />
+        <option value="$PROJECT_DIR$/full_deploy.sh" />
+        <option value="$PROJECT_DIR$/admanager.client/pom.xml" />
+        <option value="$PROJECT_DIR$/admanager.client/src/main/webapp/scripts/directives/focus.js" />
+        <option value="$PROJECT_DIR$/admanager.client/src/main/webapp/scripts/directives/ngEnter.js" />
+        <option value="$PROJECT_DIR$/admanager.client/src/main/webapp/scripts/directives/selectOnClick.js" />
+        <option value="$PROJECT_DIR$/admanager.client/src/main/webapp/scripts/directives/datetimepicker.js" />
+        <option value="$PROJECT_DIR$/admanager.client/src/main/webapp/scripts/filters/genericSearchFilter.js" />
+        <option value="$PROJECT_DIR$/admanager.client/src/main/webapp/scripts/filters/startFromFilter.js" />
+        <option value="$PROJECT_DIR$/admanager.client/.project" />
+        <option value="$PROJECT_DIR$/admanager.client/src/main/webapp/scripts/app.js" />
+        <option value="$PROJECT_DIR$/admanager.client/src/main/webapp/index.html" />
+        <option value="$PROJECT_DIR$/admanager.client/src/main/webapp/i18n/main/locale-en.json" />
+        <option value="$PROJECT_DIR$/admanager.client/src/main/webapp/i18n/main/locale-fr.json" />
+<<<<<<< HEAD
+=======
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        <option value="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/modules/CdrDrctSales/CdrDrctSalesCtrls.js" />
+>>>>>>> d9e17e914fc2f583b46d8174000a39148996854b
+        <option value="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/modules/CdrCshDrawer/CdrCshDrawerCtrls.js" />
+        <option value="$PROJECT_DIR$/admanager.client/src/main/webapp/views/CshDrawers.html" />
+        <option value="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/CdrDrctSale/createDrctSales.html" />
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/modules/CdrPymnt/CdrPymntCtrls.js" />
+        <option value="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/CdrPymnt/CdrPymnts.html" />
+        <option value="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/SlsInvoice/SlsInvoices.html" />
+=======
+        <option value="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/CdrCshDrawer/CdrCshDrawers.html" />
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/menu.html" />
+        <option value="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/scripts/app.js" />
+        <option value="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/CdrDrctSale/showDrctSales.html" />
+        <option value="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/CdrCshDrawer/createCdrCshDrawer.html" />
+        <option value="$PROJECT_DIR$/admanager.client/src/main/webapp/modules/CshDrawerCtrls.js" />
+        <option value="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/modules/CdrDrctSales/CdrDrctSalesCtrls.js" />
+        <option value="$PROJECT_DIR$/adprocmt.client/src/main/webapp/modules/PrcmtDeliverys/PrcmtDeliveryAddItemCtrl.js" />
+        <option value="$PROJECT_DIR$/adprocmt.client/src/main/webapp/views/PrcmtDelivery/PrcmtDeliveryAddItem.html" />
+        <option value="$PROJECT_DIR$/adprocmt.client/src/main/webapp/views/PrcmtOrder/PrcmtOrderShow.html" />
+        <option value="$PROJECT_DIR$/adprocmt.client/src/main/webapp/modules/PrcmtOrders/PrcmtOrderShowCtrl.js" />
+=======
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+>>>>>>> d9e17e914fc2f583b46d8174000a39148996854b
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="NamedScopeManager">
+    <order />
+  </component>
+  <component name="ProjectFrameBounds">
+<<<<<<< HEAD
+    <option name="x" value="65" />
+    <option name="y" value="-4" />
+    <option name="width" value="1301" />
+    <option name="height" value="772" />
+=======
+    <option name="y" value="22" />
+<<<<<<< HEAD
+    <option name="width" value="1206" />
+    <option name="height" value="686" />
+=======
+    <option name="width" value="1440" />
+    <option name="height" value="818" />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+>>>>>>> d9e17e914fc2f583b46d8174000a39148996854b
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adcom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adcom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adcom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adcom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adcom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adprocmt.client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adcom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adcom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adprocmt.client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adcom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adcom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adprocmt.client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adcom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adcom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adprocmt.client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PrcmtDelivery" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adcom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adcom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adprocmt.client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PrcmtOrders" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adcom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adcom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adprocmt.client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adcom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adcom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adprocmt.client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+<<<<<<< HEAD
+      <pane id="Scratches" />
+=======
+      <pane id="Scope" />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="options.lastSelected" value="project.scopes" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="FullScreen" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="DefaultHtmlFileTemplate" value="Html5" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/CdrDrctSale" />
+      <recent name="$PROJECT_DIR$/admanager.client/src/main/webapp/views" />
+      <recent name="$PROJECT_DIR$/admanager.client/src/main/webapp/modules" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/adcshdwr.client/src/main/webapp/scripts/directives" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/adbase.client/src/main/webapp/modules/login/controller" />
+      <recent name="$PROJECT_DIR$/adbase.client/src/main/webapp/views/login" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
+      <method />
+    </configuration>
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
+<<<<<<< HEAD
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+=======
+    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" />
+      <option name="executablePath" />
+      <option name="filePath" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="JsTestDriver-test-runner" factoryName="JsTestDriver">
+      <setting name="configLocationType" value="CONFIG_FILE" />
+      <setting name="settingsFile" value="" />
+      <setting name="serverType" value="INTERNAL" />
+      <setting name="preferredDebugBrowser" value="Chrome" />
+      <method />
+    </configuration>
+<<<<<<< HEAD
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" />
+      <option name="executablePath" />
+      <option name="filePath" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
+=======
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+      <method />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b69bb98d-7d4a-4cd0-8b00-4f41f44894cd" name="Default" comment="" />
+      <created>1420633067920</created>
+      <option name="number" value="Default" />
+      <updated>1420633067920</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+<<<<<<< HEAD
+    <frame x="0" y="22" width="1206" height="686" extended-state="6" />
+=======
+<<<<<<< HEAD
+    <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
+=======
+    <frame x="0" y="22" width="1440" height="818" extended-state="6" />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+>>>>>>> d9e17e914fc2f583b46d8174000a39148996854b
+    <editor active="true" />
+    <layout>
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292011" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24876674" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25316456" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+=======
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21137586" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+>>>>>>> d9e17e914fc2f583b46d8174000a39148996854b
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.06408346" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/adsales.client/src/main/webapp/views/SlsSalesOrder/SlsSOPtnr.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.375">
+          <caret line="15" column="103" selection-start-line="15" selection-start-column="94" selection-end-line="15" selection-end-column="103" />
+=======
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/CdrCshDrawer/showCdrCshDrawer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.791666" vertical-offset="92" max-vertical-offset="1965">
+          <caret line="33" column="80" selection-start-line="33" selection-start-column="80" selection-end-line="33" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/scripts/directives/datetimepicker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.06550218" vertical-offset="0" max-vertical-offset="1650">
+          <caret line="3" column="24" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adsales.client/src/main/webapp/scripts/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1560">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.75443786" vertical-offset="255" max-vertical-offset="960">
+          <caret line="51" column="63" selection-start-line="51" selection-start-column="63" selection-end-line="51" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adsales.client/src/main/webapp/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6139053" vertical-offset="440" max-vertical-offset="1140">
+          <caret line="57" column="63" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="63" />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adsales.client/src/main/webapp/modules/SlsSalesOrder/SaleCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.3970803">
+          <caret line="100" column="51" selection-start-line="100" selection-start-column="51" selection-end-line="100" selection-end-column="51" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="3858" max-vertical-offset="5205">
+          <caret line="262" column="68" selection-start-line="262" selection-start-column="68" selection-end-line="262" selection-end-column="68" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adsales.client/src/main/webapp/views/SlsSalesOrder/Sale.html">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.45385778">
+          <caret line="36" column="143" selection-start-line="35" selection-start-column="28" selection-end-line="36" selection-end-column="143" />
+=======
+        <state vertical-scroll-proportion="1.1800302" vertical-offset="75" max-vertical-offset="2385">
+          <caret line="57" column="28" selection-start-line="57" selection-start-column="28" selection-end-line="57" selection-end-column="28" />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adsales.client/src/main/webapp/i18n/main/locale-en.json">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="-0.0">
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="1426" max-vertical-offset="4020">
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adsales.client/src/main/webapp/views/SlsInvoice/SlsInvoices.html">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+        <state vertical-scroll-proportion="0.7034796" vertical-offset="420" max-vertical-offset="2340">
+          <caret line="59" column="30" selection-start-line="13" selection-start-column="24" selection-end-line="59" selection-end-column="30" />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+>>>>>>> d9e17e914fc2f583b46d8174000a39148996854b
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/scripts/directives/selectOnClick.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="-1.875">
+          <caret line="3" column="47" selection-start-line="3" selection-start-column="47" selection-end-line="3" selection-end-column="47" />
+=======
+        <state vertical-scroll-proportion="0.021489972" vertical-offset="0" max-vertical-offset="698">
+          <caret line="1" column="24" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/menu.html">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="109" selection-start-line="8" selection-start-column="109" selection-end-line="8" selection-end-column="109" />
+=======
+        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="330">
+          <caret line="0" column="79" selection-start-line="0" selection-start-column="64" selection-end-line="0" selection-end-column="79" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+>>>>>>> d9e17e914fc2f583b46d8174000a39148996854b
+    <entry file="file://$PROJECT_DIR$/admanager.client/src/main/resources/META-INF/validation.xml">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.0">
+          <caret line="113" column="6" selection-start-line="113" selection-start-column="6" selection-end-line="113" selection-end-column="6" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="698">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admanager.client/src/main/resources/META-INF/persistence.xml">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="21" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="21" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="685">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admanager.client/src/main/resources/META-INF/beans.xml">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.0">
+          <caret line="71" column="42" selection-start-line="71" selection-start-column="28" selection-end-line="71" selection-end-column="42" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="180">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admanager.client/src/main/webapp/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.34039333">
+          <caret line="16" column="102" selection-start-line="16" selection-start-column="102" selection-end-line="16" selection-end-column="102" />
+=======
+        <state vertical-scroll-proportion="0.04379562" vertical-offset="0" max-vertical-offset="685">
+          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admanager.client/src/main/webapp/WEB-INF/beans.xml">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.27231467">
+          <caret line="50" column="145" selection-start-line="50" selection-start-column="139" selection-end-line="50" selection-end-column="145" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="698">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/deploy.sh">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="28.958334">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="900">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/full_deploy.sh">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="3.678832">
+          <caret line="220" column="81" selection-start-line="220" selection-start-column="81" selection-end-line="220" selection-end-column="81" />
+=======
+        <state vertical-scroll-proportion="1.0666667" vertical-offset="390" max-vertical-offset="1455">
+          <caret line="74" column="34" selection-start-line="74" selection-start-column="34" selection-end-line="74" selection-end-column="34" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adinvtry.client/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.96556884">
+          <caret line="43" column="25" selection-start-line="43" selection-start-column="25" selection-end-line="43" selection-end-column="25" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="585">
+          <caret line="4" column="21" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="21" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adinvtry.client/src/main/webapp/scripts/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.22026432">
+          <caret line="10" column="2" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="82" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="945">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admanager.client/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.34042552">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="585">
+          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admanager.client/src/main/webapp/menu.html">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="-0.6516517">
+          <caret line="4755" column="6" selection-start-line="4755" selection-start-column="1" selection-end-line="4755" selection-end-column="6" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="674">
+          <caret line="0" column="59" selection-start-line="0" selection-start-column="59" selection-end-line="0" selection-end-column="59" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admanager.client/src/main/webapp/scripts/filters/startFromFilter.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.13513513">
+          <caret line="6" column="85889" selection-start-line="6" selection-start-column="85889" selection-end-line="6" selection-end-column="85889" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
+          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admanager.client/src/main/webapp/scripts/directives/selectOnClick.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="46" selection-start-line="0" selection-start-column="46" selection-end-line="0" selection-end-column="46" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
+          <caret line="1" column="25" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admanager.client/src/main/webapp/scripts/directives/ngEnter.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="3.271028">
+          <caret line="239" column="51" selection-start-line="239" selection-start-column="51" selection-end-line="239" selection-end-column="51" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="315">
+          <caret line="3" column="25" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="25" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admanager.client/src/main/webapp/scripts/directives/focus.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="43" selection-start-line="5" selection-start-column="43" selection-end-line="5" selection-end-column="43" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
+          <caret line="1" column="25" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admanager.client/src/main/webapp/scripts/directives/datetimepicker.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.35744682">
+          <caret line="547" column="8" selection-start-line="547" selection-start-column="8" selection-end-line="547" selection-end-column="8" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="675" max-vertical-offset="1650">
+          <caret line="3" column="25" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="25" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admanager.client/src/main/webapp/scripts/filters/genericSearchFilter.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="-16.25">
+          <caret line="52" column="45" selection-start-line="50" selection-start-column="35" selection-end-line="52" selection-end-column="45" />
+=======
+        <state vertical-scroll-proportion="0.042979944" vertical-offset="0" max-vertical-offset="975">
+          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adres.client/src/main/webapp/services/AuthInterceptor.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="-24.083334">
+          <caret line="99" column="7" selection-start-line="4" selection-start-column="0" selection-end-line="99" selection-end-column="7" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="698">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adlogin.client/src/main/webapp/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.33783785">
+          <caret line="15" column="73" selection-start-line="15" selection-start-column="73" selection-end-line="15" selection-end-column="73" />
+=======
+        <state vertical-scroll-proportion="-0.06676558" vertical-offset="45" max-vertical-offset="750">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adres.client/src/main/webapp/services/httpProgress.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="-7.5">
+          <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="698">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adres.client/src/main/webapp/vendors/angular-datepicker/datepicker.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.77134144">
+          <caret line="84" column="37" selection-start-line="84" selection-start-column="37" selection-end-line="84" selection-end-column="37" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="11430">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1422873752000" expanded="false" signature="-1:-1" placeholder="..." />
+          </folding>
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adres.client/src/main/webapp/modules/NavBar.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.839939">
+          <caret line="81" column="4" selection-start-line="81" selection-start-column="4" selection-end-line="82" selection-end-column="26" />
+=======
+        <state vertical-scroll-proportion="0.48424068" vertical-offset="337" max-vertical-offset="1035">
+          <caret line="45" column="12" selection-start-line="45" selection-start-column="12" selection-end-line="45" selection-end-column="12" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adlogin.client/src/main/webapp/scripts/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="-23.916666">
+          <caret line="293" column="49" selection-start-line="293" selection-start-column="49" selection-end-line="293" selection-end-column="49" />
+=======
+        <state vertical-scroll-proportion="-0.7836676" vertical-offset="547" max-vertical-offset="1620">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adlogin.client/src/main/webapp/modules/workspace/controllers.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="79" selection-start-line="0" selection-start-column="64" selection-end-line="0" selection-end-column="79" />
+=======
+        <state vertical-scroll-proportion="0.3008596" vertical-offset="0" max-vertical-offset="698">
+          <caret line="14" column="28" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adres.client/src/main/webapp/services/SessionManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.504298" vertical-offset="1523" max-vertical-offset="3975">
+          <caret line="125" column="23" selection-start-line="125" selection-start-column="23" selection-end-line="125" selection-end-column="23" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admanager.client/.project">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.0">
+          <caret line="233" column="24" selection-start-line="233" selection-start-column="12" selection-end-line="233" selection-end-column="24" />
+=======
+        <state vertical-scroll-proportion="0.044576522" vertical-offset="0" max-vertical-offset="720">
+          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admanager.client/src/main/webapp/scripts/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.0">
+          <caret line="298" column="72" selection-start-line="298" selection-start-column="72" selection-end-line="298" selection-end-column="72" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1140">
+          <caret line="23" column="77" selection-start-line="23" selection-start-column="77" selection-end-line="23" selection-end-column="77" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admanager.client/src/main/webapp/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="25" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="25" />
+=======
+        <state vertical-scroll-proportion="-23.708334" vertical-offset="136" max-vertical-offset="825">
+          <caret line="47" column="25" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/i18n/main/locale-en.json">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="-16.791666">
+          <caret line="33" column="80" selection-start-line="33" selection-start-column="80" selection-end-line="33" selection-end-column="80" />
+=======
+        <state vertical-scroll-proportion="-17.5" vertical-offset="0" max-vertical-offset="4545">
+          <caret line="28" column="69" selection-start-line="1" selection-start-column="4" selection-end-line="28" selection-end-column="69" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admanager.client/src/main/webapp/i18n/main/locale-en.json">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.06550218">
+          <caret line="3" column="24" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="24" />
+=======
+        <state vertical-scroll-proportion="-17.5" vertical-offset="0" max-vertical-offset="525">
+          <caret line="28" column="68" selection-start-line="28" selection-start-column="68" selection-end-line="28" selection-end-column="68" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/i18n/main/locale-fr.json">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+        <state vertical-scroll-proportion="-17.5" vertical-offset="0" max-vertical-offset="4485">
+          <caret line="28" column="63" selection-start-line="1" selection-start-column="0" selection-end-line="28" selection-end-column="63" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admanager.client/src/main/webapp/i18n/main/locale-fr.json">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.75443786">
+          <caret line="51" column="63" selection-start-line="51" selection-start-column="63" selection-end-line="51" selection-end-column="63" />
+=======
+        <state vertical-scroll-proportion="0.6231454" vertical-offset="0" max-vertical-offset="674">
+          <caret line="28" column="66" selection-start-line="28" selection-start-column="66" selection-end-line="28" selection-end-column="66" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/CdrDrctSale/CdrDrctSales.html">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.6139053">
+          <caret line="57" column="63" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="63" />
+=======
+        <state vertical-scroll-proportion="-0.5900151" vertical-offset="780" max-vertical-offset="1860">
+          <caret line="26" column="86" selection-start-line="26" selection-start-column="86" selection-end-line="26" selection-end-column="86" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+>>>>>>> d9e17e914fc2f583b46d8174000a39148996854b
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/modules/CdrCshDrawer/CdrCshDrawerCtrls.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1" column="24" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
+=======
+        <state vertical-scroll-proportion="0.10218978" vertical-offset="2750" max-vertical-offset="5595">
+          <caret line="188" column="38" selection-start-line="188" selection-start-column="38" selection-end-line="188" selection-end-column="38" />
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admanager.client/src/main/webapp/views/CshDrawers.html">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.8190328">
+          <caret line="207" column="8" selection-start-line="207" selection-start-column="8" selection-end-line="207" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adsales.client/src/main/webapp/views/SlsSalesOrder/Sale.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09724473">
+          <caret line="61" column="29" selection-start-line="61" selection-start-column="29" selection-end-line="61" selection-end-column="29" />
+=======
+        <state vertical-scroll-proportion="-6.875" vertical-offset="105" max-vertical-offset="1575">
+          <caret line="18" column="121" selection-start-line="18" selection-start-column="121" selection-end-line="18" selection-end-column="121" />
+          <folding>
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#3;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#3;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/menu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.375" vertical-offset="0" max-vertical-offset="315">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/CdrDrctSale/CdrDrctSales.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.25" vertical-offset="0" max-vertical-offset="1860">
+          <caret line="26" column="86" selection-start-line="26" selection-start-column="86" selection-end-line="26" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/CdrDrctSale/createDrctSales.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.625" vertical-offset="960" max-vertical-offset="2355">
+          <caret line="89" column="73" selection-start-line="89" selection-start-column="73" selection-end-line="89" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/scripts/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="1230">
+          <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/CdrCshDrawer/createCdrCshDrawer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.875" vertical-offset="0" max-vertical-offset="465">
+          <caret line="19" column="98" selection-start-line="19" selection-start-column="98" selection-end-line="19" selection-end-column="98" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adres.client/src/main/webapp/i18n/shared/locale-en.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="27.25" vertical-offset="654" max-vertical-offset="1350">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adres.client/src/main/webapp/i18n/shared/locale-fr.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.18894" vertical-offset="774" max-vertical-offset="1425">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adres.client/src/main/webapp/services/ADUtils.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.0" vertical-offset="930" max-vertical-offset="7500">
+          <caret line="70" column="28" selection-start-line="70" selection-start-column="10" selection-end-line="70" selection-end-column="28" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="2003" max-vertical-offset="7500">
+          <caret line="163" column="22" selection-start-line="163" selection-start-column="22" selection-end-line="163" selection-end-column="22" />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+>>>>>>> d9e17e914fc2f583b46d8174000a39148996854b
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/CdrCshDrawer/CdrCshDrawers.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44670847" vertical-offset="570" max-vertical-offset="1695">
+          <caret line="57" column="73" selection-start-line="57" selection-start-column="73" selection-end-line="57" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/CdrDrctSale/showDrctSales.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="19.4" vertical-offset="1060" max-vertical-offset="2430">
+          <caret line="6" column="129" selection-start-line="6" selection-start-column="129" selection-end-line="6" selection-end-column="129" />
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/CdrDrctSale/CdrDrctSales.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.2852511">
+          <caret line="94" column="32" selection-start-line="94" selection-start-column="32" selection-end-line="94" selection-end-column="32" />
+=======
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/modules/CdrDrctSales/CdrDrctSalesCtrls.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.9615383" vertical-offset="1746" max-vertical-offset="10710">
+          <caret line="125" column="54" selection-start-line="125" selection-start-column="35" selection-end-line="125" selection-end-column="54" />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+>>>>>>> d9e17e914fc2f583b46d8174000a39148996854b
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/CdrPymnt/CdrPymnts.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39547038">
+          <caret line="75" column="86" selection-start-line="75" selection-start-column="86" selection-end-line="75" selection-end-column="86" />
+=======
+    <entry file="file://$PROJECT_DIR$/admanager.client/src/main/webapp/modules/CshDrawerCtrls.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.22189781" vertical-offset="3208" max-vertical-offset="4395">
+          <caret line="224" column="37" selection-start-line="224" selection-start-column="37" selection-end-line="224" selection-end-column="37" />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4395">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+>>>>>>> d9e17e914fc2f583b46d8174000a39148996854b
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/modules/CdrDrctSales/CdrDrctSalesCtrls.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="10715" max-vertical-offset="11985">
+          <caret line="748" column="117" selection-start-line="748" selection-start-column="117" selection-end-line="748" selection-end-column="117" />
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/CdrPymnt/createCdrPymnt.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/CdrDrctSale/createDrctSales.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.0" vertical-offset="855" max-vertical-offset="2355">
+          <caret line="89" column="73" selection-start-line="89" selection-start-column="73" selection-end-line="89" selection-end-column="73" />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+>>>>>>> d9e17e914fc2f583b46d8174000a39148996854b
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adprocmt.client/src/main/webapp/views/PrcmtDelivery/PrcmtDeliveryAddItem.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.666667" vertical-offset="539" max-vertical-offset="3045">
+          <caret line="53" column="33" selection-start-line="40" selection-start-column="28" selection-end-line="53" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adprocmt.client/src/main/webapp/modules/PrcmtDeliverys/PrcmtDeliveryAddItemCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1230" max-vertical-offset="4305">
+          <caret line="122" column="76" selection-start-line="109" selection-start-column="8" selection-end-line="122" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adprocmt.client/src/main/webapp/views/PrcmtOrder/PrcmtOrderShow.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.5" vertical-offset="495" max-vertical-offset="2235">
+          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adprocmt.client/src/main/webapp/modules/PrcmtOrders/PrcmtOrderShowCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.3960217" vertical-offset="2541" max-vertical-offset="3690">
+          <caret line="184" column="0" selection-start-line="184" selection-start-column="0" selection-end-line="184" selection-end-column="0" />
+=======
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="-8.5">
+          <caret line="101" column="139" selection-start-line="101" selection-start-column="113" selection-end-line="101" selection-end-column="139" />
+          <folding>
+            <element signature="n#style#0;n#button#0;n#div#9;n#div#0;n#form#0;n#div#0;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#2;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#3;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#2;n#div#3;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#1;n#div#3;n#div#0;n#!!top" expanded="true" />
+          </folding>
+=======
+        <state vertical-scroll-proportion="0.3192133" vertical-offset="1034" max-vertical-offset="1695">
+          <caret line="83" column="64" selection-start-line="83" selection-start-column="64" selection-end-line="83" selection-end-column="64" />
+>>>>>>> d9e17e914fc2f583b46d8174000a39148996854b
+          <folding />
+>>>>>>> 58485ba0260e8cbb895aab68957c9fb44246feca
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/modules/CdrPymnt/CdrPymntCtrls.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4464883">
+          <caret line="341" column="23" selection-start-line="341" selection-start-column="23" selection-end-line="341" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/modules/CdrDrctSales/CdrDrctSalesCtrls.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.516129">
+          <caret line="477" column="31" selection-start-line="477" selection-start-column="31" selection-end-line="477" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/scripts/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="29" column="4" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/i18n/main/locale-fr.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.290909">
+          <caret line="248" column="36" selection-start-line="248" selection-start-column="1" selection-end-line="248" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adcshdwr.client/src/main/webapp/views/SlsInvoice/SlsInvoices.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5487805">
+          <caret line="93" column="103" selection-start-line="93" selection-start-column="103" selection-end-line="93" selection-end-column="103" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

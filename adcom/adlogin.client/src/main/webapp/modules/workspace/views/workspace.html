@@ -1,0 +1,15 @@
+﻿
+<table  class="table table-bordered  table-striped table-hover" ng-init="loadWorkspaces();">
+    <thead>
+    <tr>
+        <th class="text-center">{{"workspace_loginName"|translate}}</th>
+        <th class="text-center">{{"workspace_ouWsIdentif"|translate}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-click="switchWorkspace(ws.identif);" ng-repeat="ws in workspaces" >
+        <td>{{ws.loginName}}</td>
+        <td>{{ws.ouWsIdentif}}</td>
+    </tr>
+    </tbody>
+</table>

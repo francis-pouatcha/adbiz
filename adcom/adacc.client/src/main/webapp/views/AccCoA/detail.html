@@ -1,0 +1,28 @@
+<header ng-switch on="$location.path().indexOf('/AccCoAs/new') > -1">
+    <h3 ng-switch-when="true">Create AccCoA</h3>
+    <h3 ng-switch-when="false">View or edit AccCoA</h3>
+</header>
+<form id="AccCoAForm" name="AccCoAForm" class="form-horizontal">
+    <div ng-show="displayError" class="alert alert-error">
+        <strong>Error!</strong> Something broke. Retry, or cancel and start afresh.
+    </div>
+    <div class="control-group" ng-class="{error: AccCoAForm.cpyName.$invalid}">
+        <label for="cpyName" class="control-label">Cpy Name</label>
+        <div id="cpyNameControls" class="controls">
+            <input id="cpyName" name="cpyName" type="text" ng-model="accCoA.cpyName" placeholder="Enter the AccCoA Cpy Name"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccCoAForm.shortName.$invalid}">
+        <label for="shortName" class="control-label">Short Name</label>
+        <div id="shortNameControls" class="controls">
+            <input id="shortName" name="shortName" type="text" ng-model="accCoA.shortName" placeholder="Enter the AccCoA Short Name"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <button id="saveAccCoA" name="saveAccCoA" class="btn btn-primary" ng-disabled="isClean() || AccCoAForm.$invalid" ng-click="save()"><i class="icon-ok-sign icon-white"></i> Save</button>
+            <button id="cancel" name="cancel" class="btn" ng-click="cancel()"><i class="icon-remove-sign"></i> Cancel</button>
+            <button id="deleteAccCoA" name="deleteAccCoA" class="btn btn-danger" ng-show="accCoA.id" ng-click="remove()"><i class="icon-trash icon-white"></i> Delete</button>
+        </div>
+    <div>
+</form>

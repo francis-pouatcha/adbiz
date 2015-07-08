@@ -1,0 +1,89 @@
+/**
+ * Flasstransfert customs css.
+ */
+
+/* Make link without href, look nice */
+.pointer-element{
+    cursor: pointer;
+}
+.workspace tr{
+    cursor: pointer;
+}
+
+.workspace tr:hover{
+    color: blue;
+    font-weight: bold;
+}
+
+.small-blue{
+    color: blue;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.valid-secret{
+    border: solid;
+    color: green;
+    border-color: green;
+}
+
+.navbar-brand-logo {
+    float: left;
+    height: 60px;
+    padding: 10px 10px;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.navbar-brand-version {
+    float: left;
+    height: 25px;
+    padding: 10px 10px;
+    font-size: 11px;
+    line-height: 14px;
+    font-style: italic;
+    margin-top: 26px;
+}
+
+.login-img-background{
+    background: none repeat scroll 0 0;
+    display: block;
+    height: 300px;
+    position: relative;
+    padding-top: 26px;
+}
+
+.login-img-background:before{
+    background: url("../img/ft_logo_big.jpg") no-repeat scroll 50% 10% / 100% auto rgba(0, 0, 0, 0);
+    width: 350px;
+    height: 310px;
+    bottom: 0;
+    content: "";
+    left: 5;
+    opacity: 0.40;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+body { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAxMC8yOS8xMiKqq3kAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzVxteM2AAABHklEQVRIib2Vyw6EIAxFW5idr///Qx9sfG3pLEyJ3tAwi5EmBqRo7vHawiEEERHS6x7MTMxMVv6+z3tPMUYSkfTM/R0fEaG2bbMv+Gc4nZzn+dN4HAcREa3r+hi3bcuu68jLskhVIlW073tWaYlQ9+F9IpqmSfq+fwskhdO/AwmUTJXrOuaRQNeRkOd5lq7rXmS5InmERKoER/QMvUAPlZDHcZRhGN4CSeGY+aHMqgcks5RrHv/eeh455x5KrMq2yHQdibDO6ncG/KZWL7M8xDyS1/MIO0NJqdULLS81X6/X6aR0nqBSJcPeZnlZrzN477NKURn2Nus8sjzmEII0TfMiyxUuxphVWjpJkbx0btUnshRihVv70Bv8ItXq6Asoi/ZiCbU6YgAAAABJRU5ErkJggg);}
+.error-template {padding: 40px 15px;text-align: center;}
+.error-actions {margin-top:15px;margin-bottom:15px;}
+.error-actions .btn { margin-right:10px; }
+
+
+@media print {
+    a {
+        display:none;
+    }
+}
+
+.active {
+    background-color: #8989a6;
+}
+
+table .ng-binding {
+    background-color: #ffffff;
+    color: #000000;
+
+}

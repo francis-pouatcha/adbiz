@@ -1,0 +1,65 @@
+<div class="container">
+
+    <div class="col-xs-offset-2 col-xs-8">
+
+        <div class="panel panel-default  ng-scope">
+            <div class="panel-heading no-collapse"><b>{{"Entity_show.title"|translate}}</b> </div>
+            <div class="panel-body">
+                    <form  name="updateAptAptmtRepportForm" class="form-horizontal" novalidate >
+
+                        
+                      <div class="form-group">
+                        <label class="col-lg-4 ">{{"AptAptmt_title_description.title"|translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : updateAptAptmtRepportForm.aptmtIdentify.$invalid }" >
+                             <input type="text" ng-model="aptAptmtRepport.aptmtIdentify" disabled name="title" class="form-control" required >
+                            <p ng-show="updateAptAptmtRepportForm.aptAptmtRepport.$error.required" class="help-block">aptmtIdentify est  requis !</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{"AptAptmtReport_title_description.title"|translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : updateAptAptmtRepportForm.title.$invalid }" >
+                            <input type="text" ng-model="aptAptmtRepport.title" name="title" class="form-control"  >
+							<p ng-show="updateAptAptmtRepportForm.title.$error.required" class="help-block"> le titre est requis</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{"AptAptmtReport_description.text"|translate}}:</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : updateAptAptmtRepportForm.description.$invalid }" >
+                            <input type="text" ng-model="aptAptmtRepport.description" name="description" class="form-control"  >
+							<p ng-show="updateAptAptmtRepportForm.description.$error.required" class="help-block"> description est requis</p>
+                        </div>
+                    </div>
+                    
+                     <div class="form-group">
+                        <label class="col-lg-4 ">{{"AptAptmtReport_CreateUser.text"|translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : updateAptAptmtRepportForm.createUserId.$invalid }" >
+                            <input type="text" ng-model="aptAptmtRepport.createUserId" name="createUserId" class="form-control" required >
+                            <p ng-show="updateAptAptmtRepportForm.createUserId.$error.required" class="help-block">createUserId est  requis !</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{"AptAptmtReport_CreateDate.text"|translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : updateAptAptmtRepportForm.created.$invalid }" >
+                            <input type="datetimes" date-time=""  view="date" views="['date']" format="dd-MM-yyyy-HH-mm" 
+ng-model="aptAptmtRepport.created" name="created" class="form-control"  ></input>
+                            <p ng-show="updateAptAptmtRepportForm.created.$error.required" class="help-block">Date est  requis !</p>
+                        </div>
+                    </div>
+                        
+                        <div class="form-group">
+							 <div class="col-lg-8" >
+                              <a class="btn-danger btn" href="#/"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                              <button ng-click="update();" ng-disabled="updateAptAptmtRepportForm.$invalid" class="btn-success btn"  ><i class="glyphicon glyphicon-save"></i>  {{"Entity_save.title" | translate }}</button>
+                        </div>
+
+                        </div>
+                    </form>
+                
+            </div>
+
+        </div>
+
+    </div>
+    
+</div>

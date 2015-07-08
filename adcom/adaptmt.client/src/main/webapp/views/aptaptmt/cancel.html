@@ -1,0 +1,89 @@
+<div class="container">
+
+	<div class="col-xs-offset-2 col-xs-8">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<b>{{ "Entity_cancel.title"| translate}}</b>
+			</div>
+			<div class="panel-body">
+				<label class="error col-lg-offset-3 alert-danger">{{aptAptmtCancelCtrl.error}}
+				</label>
+				<form name="cancelAptAptmtForm" class="form-horizontal"
+					novalidate="">
+
+					<div class="form-group">
+						<label class="col-lg-4 ">{{"AptAptmt_aptmtnNbr_description.text"|translate}}
+							:</label>
+						<div class="col-lg-8"
+							ng-class="{ 'has-error' : cancelAptAptmtForm.aptmtIdentify.$invalid }">
+							<input ng-model="aptAptmtCancelCtrl.aptAptmt.aptmtnNbr"
+								name="aptmtIdentify" disabled class="form-control" required>
+
+							<p
+								ng-show="cancelAptAptmtForm.aptAptmt.$error.required"
+								class="help-block">le numero est requis !</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-4 ">{{"AptAptmt_title_description.title"|translate}}
+							:</label>
+						<div class="col-lg-8"
+							ng-class="{ 'has-error' : cancelAptAptmtForm.aptmtTitle.$invalid }">
+							<input ng-model="aptAptmtCancelCtrl.aptAptmt.title"
+								name="aptmtTitle" disabled class="form-control" required>
+
+							<p
+								ng-show="cancelAptAptmtForm.aptAptmt.$error.required"
+								class="help-block">le title est requis !</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-4 ">{{"AptAptmtReport_title_description.title"|translate}}
+							:</label>
+						<div class="col-lg-8"
+							ng-class="{ 'has-error' : cancelAptAptmtForm.title.$invalid }">
+							<input ng-model="aptAptmtCancelCtrl.AptAptmtRepport.title"
+								name="title" class="form-control" disabled  required>
+							<p
+								ng-show="cancelAptAptmtForm.aptAptmt.$error.required"
+								class="help-block">le title du rapport est requis !</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-4 ">
+							{{"AptAptmtReport_description.text"|translate}}:</label>
+						<div class="col-lg-8"
+							ng-class="{ 'has-error' :cancelAptAptmtForm.description.$invalid }">
+							<textarea type="text"
+								ng-model="aptAptmtCancelCtrl.AptAptmtRepport.description"
+								name="description" class="form-control" required> </textarea>
+							<p
+								ng-show="cancelAptAptmtForm.aptAptmt.$error.required"
+								class="help-block">la description est requise !</p>
+						</div>
+					</div>
+
+
+					<div class="form-group">
+						<label class="col-lg-4"> </label>
+						<div class="col-lg-8">
+							<a class="btn-danger btn" href="#/aptaptmtReport"><i
+								class="glyphicon glyphicon-remove"></i> {{"Entity_cancel.title"
+								| translate }}</a>
+							<button ng-click="aptAptmtCancelCtrl.cancel();"
+								ng-disabled="cancelAptAptmtForm.$invalid"
+								class="btn-success btn">
+								<i class="glyphicon glyphicon-save"></i> {{"Entity_save.title" |
+								translate }}
+							</button>
+						</div>
+					</div>
+				</form>
+
+			</div>
+		</div>
+
+	</div>
+
+
+</div>

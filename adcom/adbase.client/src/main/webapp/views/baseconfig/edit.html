@@ -1,0 +1,46 @@
+<div class="container">
+
+    <div class="col-xs-offset-2 col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Entity_edit.title"| translate}}</b> </div>
+            
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{error}} </label>
+                <form  name="baseConfigEditForm" class="form-horizontal" novalidate="">
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{"BaseConfig_printMode_description.title" | translate}} : </label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : baseConfigEditForm.printMode.$invalid }" >
+                            <input type="text" ng-model="baseConfigEditCtrl.baseConfig.printMode" name="printMode" class="form-control" 
+                            required >
+                            <p ng-show="baseConfigEditForm.printMode.$error.required" class="help-block">printMode est  requis !</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{"BaseConfig_nbrOfItemsPrcmtOrder_description.title" | translate}} : </label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : baseConfigEditForm.nbrOfItemsPrcmtOrder.$invalid }" >
+                            <input type="text" ng-model="baseConfigEditCtrl.baseConfig.nbrOfItemsPrcmtOrder" name="nbrOfItemsPrcmtOrder" class="form-control" 
+                            required >
+                            <p ng-show="baseConfigEditForm.nbrOfItemsPrcmtOrder.$error.required" class="help-block">nbrOfItemsPrcmtOrder est  requis !</p>
+                        </div>
+                    </div>
+                    
+
+
+                    <div class="form-group">
+                        <label class="col-lg-4"  > </label>
+                        <div class="col-lg-8" >
+                            <a class="btn-danger btn" href="#/baseconfigs"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                            <button ng-click="baseConfigEditCtrl.edit();" ng-disabled="baseConfigEditForm.$invalid" class="btn-success btn"  ><i class="glyphicon glyphicon-save"></i>  {{"Entity_edit.title" | translate }}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+
+    </div>
+
+
+</div>

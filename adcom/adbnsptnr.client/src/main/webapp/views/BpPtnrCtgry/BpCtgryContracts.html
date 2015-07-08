@@ -1,0 +1,27 @@
+<div ng-controller="bpCtgryContractsCtlr" >
+    <div class="col-lg-12" >
+    <a class="btn btn-success margBott10 pull-right" ng-click="openCreateForm('md')"><i class="glyphicon glyphicon-plus"></i> {{bpCtgryContractUtils.translations['Entity_create.title']}}</a>
+	</div>
+    <br/>
+    <div class="col-lg-12" >
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th width="30%">{{bpCtgryContractUtils.translations['BpPtnrContract_contractElt_description.title']}}</th>
+            <th width="20%">{{bpCtgryContractUtils.translations['BpPtnrContract_qualif_description.title']}}</th>
+            <th width="20%">{{bpCtgryContractUtils.translations['BpPtnrContract_eltValue_description.title']}}</th>
+            <th width="20%">{{bpCtgryContractUtils.translations['BpPtnrContract_eltConstraint_description.title']}}</th>
+            <th width="5%"></th>
+            <th width="5%"></th>
+        </tr>
+        <tr ng-repeat="bpCtgryContract in bpCtgryContracts()">
+            <td>{{bpCtgryContractUtils.contractEltI18nMsgTitleValue(bpCtgryContract.contractElt)}}</td>
+            <td>{{bpCtgryContract.qualif}}</td>
+            <td>{{bpCtgryContract.eltValue}}</td>
+            <td>{{bpCtgryContract.eltConstraint}}</td>
+            <td><a class="" ng-click="openEditForm('md',bpCtgryContract);"><i class="glyphicon glyphicon-edit"></i></a>
+            </td>
+            <td><a ng-click="deleteItem(bpCtgryContract)" ><i class="glyphicon glyphicon-trash" ></i></a></td>
+        </tr>
+    </table>
+    </div>
+</div>

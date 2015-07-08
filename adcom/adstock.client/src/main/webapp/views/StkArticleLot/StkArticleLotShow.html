@@ -1,0 +1,173 @@
+<div class="container">
+    <div class="panel panel-default">
+
+     <!--
+         -->
+
+        <div class="panel-body">
+            <form  name="stkArticleLotForm" novalidate="">
+                <div class="form-group col-lg-3">
+                    <label class=" control-label" >{{stkArticleLotUtils.translations['StkArticleLot_lotPic_description.title']}}</label>
+                    <input type="text" ng-model="stkArticleLot.lotPic" name="lotPic" class="form-control" disabled >
+                </div>
+                <div class="form-group col-lg-3">
+                    <label class=" control-label">{{stkArticleLotUtils.translations['StkArticleLot_artPic_description.title']}}</label>
+                    <div class="">
+                        <input type="text" ng-model="stkArticleLot.artPic" name="artPic" class="form-control" disabled >
+                    </div>
+                </div>
+                <div class="form-group col-lg-3">
+                    <label class=" control-label">{{stkArticleLotUtils.translations['StkArticleLot_supplierPic_description.title']}}</label>
+                    <div class="">
+                        <input type="text" ng-model="stkArticleLot.supplierPic" name="supplierPic" class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="form-group col-lg-3">
+                    <label class=" control-label">{{stkArticleLotUtils.translations['StkArticleLot_supplier_description.title']}}</label>
+                    <div class="">
+                        <input type="text" ng-model="stkArticleLot.supplier" name="supplier" class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="form-group col-lg-3">
+                    <label class=" control-label">{{stkArticleLotUtils.translations['StkArticleLot_stkgDt_description.title']}}</label>
+                    <div class="">
+                        <input type="text" value=" {{ stkArticleLot.stkgDt  | date:'longDate' }} " name="stkgDt" class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="form-group col-lg-3">
+                    <label class=" control-label">{{stkArticleLotUtils.translations['StkArticleLot_expirDt_description.title']}}</label>
+                    <div class="">
+                        <input type="text" value=" {{stkArticleLot.expirDt | date:'longDate' }} " name="expirDt" class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="form-group col-lg-3">
+                    <label class=" control-label">{{stkArticleLotUtils.translations['StkArticleLot_sppuHT_description.title']}}</label>
+                    <div class="">
+                        <input type="text" ng-model="stkArticleLot.sppuHT" name="sppuHT" class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="form-group col-lg-3">
+                    <label class=" control-label">{{stkArticleLotUtils.translations['StkArticleLot_sppuCur_description.title']}}</label>
+                    <div class="">
+                        <input type="text" ng-model="stkArticleLot.sppuCur" name="sppuCur" class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="form-group col-lg-3">
+                    <label class=" control-label">{{stkArticleLotUtils.translations['StkArticleLot_minSppuHT_description.title']}}</label>
+                    <div class="">
+                        <input type="text" ng-model="stkArticleLot.minSppuHT" name="minSppuHT" class="form-control" disabled>
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-3">
+                    <label class=" control-label">{{stkArticleLotUtils.translations['StkArticleLot_vatSalesPct_description.title']}}</label>
+                    <div class="">
+                        <input type="text" ng-model="stkArticleLot.vatSalesPct" name="vatSalesPct" class="form-control" disabled>
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-3">
+                    <label class=" control-label">{{stkArticleLotUtils.translations['StkArticleLot_salesRtrnDays_description.title']}}</label>
+                    <div class="">
+                        <input type="text" ng-model="stkArticleLot.salesRtrnDays" name="salesRtrnDays" class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="form-group col-lg-3">
+                    <label class=" control-label">{{stkArticleLotUtils.translations['StkArticleLot_pppuHT_description.title']}}</label>
+                    <div class="">
+                        <input type="text" ng-model="stkArticleLot.pppuHT" name="pppuHT" class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="form-group col-lg-3">
+                    <label class=" control-label">{{stkArticleLotUtils.translations['StkArticleLot_pppuCur_description.title']}}</label>
+                    <div class="">
+                        <input type="text" ng-model="stkArticleLot.pppuCur" name="pppuCur" class="form-control" disabled>
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-3">
+                    <label class=" control-label">{{stkArticleLotUtils.translations['StkArticleLot_vatPurchPct_description.title']}}</label>
+                    <div class="">
+                        <input type="text" ng-model="stkArticleLot.vatPurchPct" name="vatPurchPct" class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="form-group col-lg-3">
+                    <label class=" control-label">{{stkArticleLotUtils.translations['StkArticleLot_purchWrntyDys_description.title']}}</label>
+                    <div class="">
+                        <input type="text" ng-model="stkArticleLot.purchWrntyDys" name="purchWrntyDys" class="form-control" disabled>
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-3">
+                    <label class=" control-label">{{stkArticleLotUtils.translations['StkArticleLot_purchRtrnDt_description.title']}}</label>
+                    <div class="">
+                        <input type="text" value=" {{ stkArticleLot.purchRtrnDt  | date:'longDate' }} " name="purchRtrnDt" class="form-control" disabled>
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-3">
+                    <label class=" control-label">{{stkArticleLotUtils.translations['StkArticleLot_closedDt_description.title']}}</label>
+                    <div class="">
+                        <input type="text" value=" {{ stkArticleLot.closedDt  | date:'longDate' }}" name="closedDt" class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="form-group col-lg-3">
+                    <label class=" control-label">{{stkArticleLotUtils.translations['StkArticleLot_sppuTaxIncl_description.title']}}</label>
+                    <div class="">
+                        <input type="text" ng-model="stkArticleLot.sppuTaxIncl" name="sppuTaxIncl" class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="form-group col-lg-3">
+                    <label class=" control-label">{{stkArticleLotUtils.translations['StkArticleLot_artFeatures_artName_description.title']}}</label>
+                    <div class="">
+                        <input type="text" ng-model="stkArticleLot.artFeatures.artName" name="artName" class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="form-group col-lg-3">
+                    <label class=" control-label">{{stkArticleLotUtils.translations['StkArticleLot_lotQty_description.title']}}</label>
+                    <div class="">
+                        <input type="text" ng-model="stkArticleLot.lotQty" name="lotQty" class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="form-group col-lg-3">
+                    <label class=" control-label">{{stkArticleLotUtils.translations['StkArticleLot_lotQtyDt_description.title']}}</label>
+                    <div class="">
+                        <input type="text" value=" {{ stkArticleLot.lotQtyDt | date:'longDate' }} " name="lotQtyDt"  class="form-control" disabled>
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-3">
+                    <label class=" control-label">{{stkArticleLotUtils.translations['StkArticleLot_salesWrntyDys_description.title']}}</label>
+                    <div class="">
+                        <input type="text" ng-model="stkArticleLot.salesWrntyDys" name="salesWrntyDys" class="form-control" disabled>
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-3">
+                    <label class=" control-label">{{stkArticleLotUtils.translations['StkArticleLot_purchWrntyDt_description.title']}}</label>
+                    <div class="">
+                        <input type="text" value=" {{ stkArticleLot.purchWrntyDt | date:'longDate' }} " name="purchWrntyDt" class="form-control" disabled>
+                    </div>
+                </div>
+
+            </form>
+
+
+            <div class="row col-lg-12">
+                <div class="col-lg-3">
+                    <a class="btn-default btn" ng-click="previous()" ><i class="glyphicon glyphicon-chevron-left"></i> {{stkArticleLotUtils.translations['Entity_previous.title']}}</a>
+                </div>
+                <div class="col-lg-3">
+                    <a class="btn-info btn" href="#/StkArticleLots" ><i class="" ></i> {{stkArticleLotUtils.translations['Entity_list.title']}}</a>
+                </div>
+                  <div class="col-lg-3">
+                    <a class="btn-info btn" ng-click="edit()" ><i class="" ></i> {{stkArticleLotUtils.translations['Entity_edit.title']}} </a>
+                </div>
+                <div class="col-lg-3">
+                    <a class="btn-default btn" ng-click="next()" >{{stkArticleLotUtils.translations['Entity_next.title']}} <i class="glyphicon glyphicon-chevron-right" ></i></a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="form-horizontal">
+    <h3>Create a new AccCoA</h3>
+    <div class="control-group">
+        <div class="controls">
+            <a id="Create" name="Create" class="btn btn-primary" href="#/AccCoAs/new"><i class="icon-plus-sign icon-white"></i> Create</a>
+        </div>
+    </div>
+</div>
+<hr/>
+<div>
+    <h3>Search for AccCoAs</h3>
+    <form id="AccCoASearch" class="form-horizontal">
+    <div class="control-group">
+        <label for="cpyName" class="control-label">Cpy Name</label>
+        <div class="controls">
+            <input id="cpyName" name="cpyName" type="text" ng-model="search.cpyName" placeholder="Enter the AccCoA Cpy Name"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="shortName" class="control-label">Short Name</label>
+        <div class="controls">
+            <input id="shortName" name="shortName" type="text" ng-model="search.shortName" placeholder="Enter the AccCoA Short Name"></input>
+        </div>
+    </div>
+        <div class="control-group">
+            <div class="controls">
+                <a id="Search" name="Search" class="btn btn-primary" ng-click="performSearch()"><i class="icon-search icon-white"></i> Search</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="search-results">
+    <table class="table table-bordered table-striped clearfix">
+        <thead>
+            <tr>
+                <th>Cpy Name</th>
+                <th>Short Name</th>
+            </tr>
+        </thead>
+        <tbody id="search-results-body">
+            <tr ng-repeat="result in searchResults | searchFilter:searchResults | startFrom:currentPage*pageSize | limitTo:pageSize">
+                <td><a href="#/AccCoAs/edit/{{result.id}}">{{result.cpyName}}</a></td>
+                <td><a href="#/AccCoAs/edit/{{result.id}}">{{result.shortName}}</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pagination pagination-centered">
+        <ul>
+            <li ng-class="{disabled:currentPage == 0}">
+                <a id="prev" href ng-click="previous()">«</a>
+            </li>
+            <li ng-repeat="n in pageRange" ng-class="{active:currentPage == n}" ng-click="setPage(n)">
+                <a href ng-bind="n + 1">1</a>
+            </li>
+            <li ng-class="{disabled: currentPage == (numberOfPages() - 1)}">
+                <a id="next" href ng-click="next()">»</a>
+            </li>
+        </ul>
+    </div>
+</div>

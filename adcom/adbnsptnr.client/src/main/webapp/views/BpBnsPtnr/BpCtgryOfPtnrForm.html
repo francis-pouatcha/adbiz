@@ -1,0 +1,55 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><b>{{currentAction}} {{bpCtgryOfPtnrUtils.translations['BpBnsPtnr_ptnrNbr_description.title']}} : {{bpBnsPtnr.ptnrNbr}}</b> </div>
+    <div class="panel-body">
+        <form id="BpCtgryOfPtnrForm" name="BpCtgryOfPtnrForm" class="" novalidate>
+            <div class="control-group col-md-6" ng-class="{error: BpCtgryOfPtnrForm.ctgryCode.$invalid}">
+                <label for="ctgryCode" class="control-label">{{bpCtgryOfPtnrUtils.translations['BpCtgryOfPtnr_ctgryCode_description.title']}}</label>
+                <div id="ctgryCodeControls" class="controls" >
+                    <input type="text" ng-model="bpCtgryOfPtnr.ctgryDtls" id="ctgryCode" name="ctgryCode" class="form-control" required
+                         autocomplete="off" typeahead="ctgryDtls as ctgryDtls.name for ctgryDtls in loadCtgryDtls($viewValue)" typeahead-loading="loading">
+                   	<p ng-show="BpCtgryOfPtnrForm.ctgryCode.$error.required" class="help-block">{{bpCtgryOfPtnrUtils.translations['Entity_required.title']}}</p>
+                </div>
+            </div>
+            <div class="control-group col-md-6" ng-class="{error: BpCtgryOfPtnrForm.whenInRole.$invalid}">
+                <label for="whenInRole" class="control-label">{{bpCtgryOfPtnrUtils.translations['BpCtgryOfPtnr_whenInRole_description.title']}}</label>
+                <div id="whenInRoleControls" class="controls">
+		            <select class="form-control" name="whenInRole" ng-model="bpCtgryOfPtnr.whenInRole" ng-show="formCreate"
+		                    ng-options="bpCtgryOfPtnrRole.enumKey as bpCtgryOfPtnrUtils.translations[bpCtgryOfPtnrRole.translKey] 
+		                    	for bpCtgryOfPtnrRole in bpCtgryOfPtnrUtils.bpCtgryOfPtnrRoles" required>
+		                    <option value=""/>
+					</select>
+	                <input value="{{bpCtgryOfPtnrUtils.whenInRoleI18nMsgTitleValue(bpCtgryOfPtnr.whenInRole)}}" type="text" name="whenInRole" class="form-control" disabled ng-show="formEdit">
+                    <span class="help-inline" ng-show="BpCtgryOfPtnrForm.whenInRole.$error.required">{{bpCtgryOfPtnrUtils.translations['Entity_required.title']}}</span>
+                </div>
+            </div>
+            <div class="control-group col-md-6" ng-class="{error: BpCtgryOfPtnrForm.nbrInCtgry.$invalid}" >
+                <label for="nbrInCtgry" class="control-label">{{bpCtgryOfPtnrUtils.translations['BpCtgryOfPtnr_nbrInCtgry_description.title']}}</label>
+                <div id="nbrInCtgryControls" class="controls" >
+                    <input type="text" ng-model="bpCtgryOfPtnr.nbrInCtgry" name="nbrInCtgry" class="form-control">
+                </div>
+            </div>
+            <div class="control-group col-md-6" ng-class="{error: BpCtgryOfPtnrForm.titleInCtgry.$invalid}">
+                <label for="titleInCtgry" class="control-label">{{bpCtgryOfPtnrUtils.translations['BpCtgryOfPtnr_titleInCtgry_description.title']}}</label>
+                <div id="titleInCtgryControls" class="controls">
+                    <input type="text" ng-model="bpCtgryOfPtnr.titleInCtgry" name="titleInCtgry" class="form-control">
+                </div>
+            </div>
+            <div class="control-group col-md-12" ng-class="{error: BpCtgryOfPtnrForm.description.$invalid}">
+                <label for="description" class="control-label">{{bpCtgryOfPtnrUtils.translations['BpCtgryOfPtnr_description_description.title']}}</label>
+                <div id="descriptionControls" class="controls">
+                	<textarea rows="3" id="description" name="description" class="form-control" 
+                		ng-model="bpCtgryOfPtnr.description" placeholder="{{bpPtnrContactUtils.translations['BpCtgryOfPtnr_description_description.text']}}" maxlength="256" required>
+                	</textarea>
+                    <span class="help-inline" ng-show="BpCtgryOfPtnrForm.description.$error.required">{{bpPtnrContactUtils.translations['Entity_required.title']}}</span>
+                </div>
+            </div>
+            <div class="control-group col-md-12" >
+            	<br/>
+                <div class="controls">
+                    <button id="saveBpCtgryOfPtnr" name="saveBpCtgryOfPtnr" class="btn btn-primary" ng-click="save()"><i class="icon-ok-sign icon-white"></i> {{bpCtgryOfPtnrUtils.translations['Entity_save.title']}}</button>
+                    <button id="cancel" name="cancel" class="btn" ng-click="cancel()"><i class="icon-remove-sign"></i> {{bpCtgryOfPtnrUtils.translations['Entity_cancel.title']}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+  </div>

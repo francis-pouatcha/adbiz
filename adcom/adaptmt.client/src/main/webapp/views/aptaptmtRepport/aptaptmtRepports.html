@@ -1,0 +1,155 @@
+<div class="row">
+	<!-- 
+	<div class="col-lg-3">
+        <ng-include src="'views/menu.html'"  ></ng-include>
+	</div>
+	 -->
+	<div class="col-xs-offset-2 col-xs-8">
+
+		<div class="panel panel-default  ng-scope">
+			<div class="panel-heading no-collapse">
+				<div class="row">
+					<div class="col-lg-3">
+						<b>{{"Entity_search.title"|translate}}</b>
+					</div>
+				</div>
+
+			</div>
+			<div class="panel-body">
+				<div class="">
+					<form role="form" class="">
+						<div class="row">
+							<div class="col-lg-3">
+								<div class="form-group">
+									<label class=" control-label" for="">{{"AptAptmt_title_description.title"|translate}}</label>
+									<div class="">
+										<input type="text" id=""
+											ng-model="aptAptmtRepportsCtrl.searchInput.entity.aptmtIdentify"
+											class="form-control">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class=" control-label" for="">{{"AptAptmtReport_title_description.title"|translate}}</label>
+									<div class="">
+										<input type="text" id=""
+											ng-model="aptAptmtRepportsCtrl.searchInput.entity.title"
+											class="form-control">
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="form-group">
+									<label class="control-label" for="">{{"AptAptmtReport_description.text"|translate}}</label>
+									<div class="">
+										<input type="text"
+											ng-model="aptAptmtRepportsCtrl.searchInput.entity.description"
+											class="form-control">
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="form-group">
+									<label class="control-label" for="">{{"AptAptmtReport_CreateDate.text"|translate}}</label>
+									<div class="">
+										<input type="text"
+											ng-model="aptAptmtRepportsCtrl.searchInput.entity.created"
+											class="form-control">
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="form-group">
+									<label class="control-label" for="">{{"AptAptmtReport_CreateUser.text"|translate}}</label>
+									<div class="">
+										<input type="text"
+											ng-model="aptAptmtRepportsCtrl.searchInput.entity.createUserId"
+											class="form-control" autocomplete="off"
+											typeahead="loginName as (logins.loginName + ' : ' + logins.fullName) for loginName in invInvtryUtils.loadUsersByName($viewValue)"
+											typeahead-loading="loading" typeahead-min-length="3"
+											typeahead-on-select='onUserSelected($item, $model, $label)'>
+									</div>
+								</div>
+							</div>
+
+
+
+							<div class="col-lg-2">
+								<div class="form-group">
+									<button
+										ng-click="aptAptmtRepportsCtrl.handleSearchRequestEvent()"
+										class="btn btn-default " style="margin-top: 23px;">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+									<button
+										ng-click="aptAptmtRepportsCtrl.handlePrintRequestEvent()"
+										class="btn btn-default " style="margin-top: 23px;">
+										<i class="glyphicon glyphicon-print"></i>
+									</button>
+
+								</div>
+							</div>
+						</div>
+
+					</form>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="panel panel-default ">
+			<div class="panel-heading no-collapse">
+				<b>Resultat </b>
+			</div>
+			<div class="panel-body">
+				<div class="col-lg-12">
+					<div class="row">
+						<a class="btn btn-primary pull-right margBott10"
+							href="#/aptaptmtRepport/create"> <i class="glyphicon-plus"></i>
+							{{"Entity_create_Report.title" | translate}}
+						</a>
+
+					</div>
+					<div class="table-overflow-middle row">
+						<b>{{"Entity_list_Report.title"|translate}} : {{aptAptmtRepportsCtrl.totalItems}} Report(s) </b>
+						<table class="table table-bordered  table-striped pointer-element">
+							<thead>
+								<tr>
+									<th class="text-center">{{"AptAptmtRepport_numero_description.title"|translate}}</th>
+									<th class="text-center">{{"AptAptmt_title_description.title"|translate}}</th>
+									<th class="text-center">{{"AptAptmtReport_title_description.title"
+										| translate}}</th>
+									<th class="text-center">{{"AptAptmtReport_description.text"
+										| translate}}</th>
+									<th class="text-center">{{"AptAptmtReport_CreateUser.text"|translate}}</th>
+									<th class="text-center">{{"AptAptmtReport_CreateDate.text"|translate}}</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr
+									ng-repeat="aptAptmtRepport in aptAptmtRepportsCtrl.aptAptmtRepports">
+									<td>{{aptAptmtRepport.aptmtRepportnNbr}}</td>
+									<td>{{aptAptmtRepport.aptmtIdentify}}</td>
+									<td>{{aptAptmtRepport.title}}</td>
+									<td>{{aptAptmtRepport.description}}</td>
+									<td>{{aptAptmtRepport.createUserId}}</td>
+									<td>{{aptAptmtRepport.created | date:'yyyy-MM-dd HH:mm'}}</td>
+									<td><a href="#/aptaptmtRepport/show/{{aptAptmtRepport.id}}"><i
+											class="glyphicon glyphicon-eye-open"></i></a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<ul class="pull-right">
+						<pagination total-items="aptAptmtRepportsCtrl.totalItems"
+							items-per-page="loginCtrl.itemPerPage" class="pagination-sm"
+							ng-model="loginCtrl.currentPage" ng-change="loginCtrl.paginate()"></pagination>
+
+					</ul>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+

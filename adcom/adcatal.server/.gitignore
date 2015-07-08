@@ -1,0 +1,18 @@
+/target
+/bin
+/.apt_generated
+*/target/
+*/.forge_settings
+*/.settings/
+*/*/.settings/
+*/bin/
+*.prefs
+*/.classpath/
+*/*/.classpath/
+adpharma/*/.classpath
+*/*/.forge_settings
+.classpath
+.factorypath
+/  target
+/target
+/.target/

@@ -1,0 +1,93 @@
+<div class="container">
+    <div class="col-xs-offset-2 col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Entity_show.title"| translate}}</b> </div>
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{localityShowCtrl.error}} </label>
+                <form  name="localityForm" class="form-horizontal" novalidate="">
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Locality_ouIdentif_description"| translate}} :</label>
+                        <div class="col-lg-8" >
+                            <input type="text" ng-model="localityShowCtrl.locality.ouIdentif" name="ouIdentif" class="form-control disabled" disabled >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Locality_langIso2_description"| translate}} :</label>
+                        <div class="col-lg-8" >
+                            <input type="text" ng-model="localityShowCtrl.locality.langIso2" name="langIso2" class="form-control" disabled >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Locality_ctryISO3_description"| translate}} :</label>
+                        <div class="col-lg-8"  >
+                            <input type="text" ng-model="localityShowCtrl.locality.ctryISO3" name="ctryISO3" class="form-control" disabled >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Locality_region_description"| translate}} :</label>
+                        <div class="col-lg-8"  >
+                            <input type="text" ng-model="localityShowCtrl.locality.region" name="region" class="form-control" disabled >
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Locality_city_description"| translate}} :</label>
+                        <div class="col-lg-8" >
+                            <input type="text" ng-model="localityShowCtrl.locality.city" name="city" class="form-control" disabled >
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Locality_locStr_description"| translate}} :</label>
+                        <div class="col-lg-8"  >
+                            <input type="text" ng-model="localityShowCtrl.locality.locStr" name="locStr" class="form-control" disabled >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Locality_hoursOfOp_description"| translate}} :</label>
+                        <div class="col-lg-8"  >
+                            <input ng-model="localityShowCtrl.locality.hoursOfOp" name="hoursOfOp" class="form-control" disabled >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Locality_timeZone_description"| translate}} :</label>
+                        <div class="col-lg-8"  >
+                            <input type="text" ng-model="localityShowCtrl.locality.timeZone" name="timeZone" class="form-control" disabled >
+                        </div>
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validFrom.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{localityShowCtrl.locality.validFrom | date : 'dd-MM-yyyy HH:mm'}}" name="validFrom" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validTo.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{localityShowCtrl.locality.validTo | date : 'dd-MM-yyyy HH:mm'}}" name="validFrom" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4"  > </label>
+                        <div class="col-lg-8" >
+                            <a class="btn-default btn" href="#/locality"  ><i class="glyphicon glyphicon-" ></i> {{"Entity_back.title" | translate }}</a>
+                            <a class="btn-danger btn" ng-click="localityShowCtrl.remove(localityShowCtrl.locality.id)"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_delete.title" | translate }}</a>
+                            <a href="#/locality/edit/{{localityShowCtrl.locality.id}}"  class="btn-default btn"  ><i class="glyphicon glyphicon-edit"></i>  {{"Entity_update.title" | translate }}</a>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>

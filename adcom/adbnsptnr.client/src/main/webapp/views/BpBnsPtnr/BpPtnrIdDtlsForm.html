@@ -1,0 +1,68 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><b>{{currentAction}} {{bpPtnrIdDtlsUtils.translations['BpBnsPtnr_ptnrNbr_description.title']}} : {{bpBnsPtnr.ptnrNbr}}</b> </div>
+    <div class="panel-body">
+        <form id="BpPtnrIdDtlsForm" name="BpPtnrIdDtlsForm" class="" novalidate>
+            <div class="control-group col-md-6" ng-class="{error: BpPtnrIdDtlsForm.ptnrIdType.$invalid}">
+                <label for="ptnrIdType" class="control-label">{{bpPtnrIdDtlsUtils.translations['BpPtnrIdDtls_ptnrIdType_description.title']}}</label>
+                <div id="ptnrIdTypeControls" class="controls">
+		            <select class="form-control" name="ptnrIdType" ng-model="bpPtnrIdDtls.ptnrIdType" ng-show="formCreate"
+		                    ng-options="bpPtnrIdDtlsRole.enumKey as bpPtnrIdDtlsUtils.translations[bpPtnrIdDtlsRole.translKey] 
+		                    	for bpPtnrIdDtlsRole in bpPtnrIdDtlsUtils.bpPtnrIdDtlsRoles" required>
+		                    <option value=""/>
+					</select>
+	                <input value="{{bpPtnrIdDtlsUtils.ptnrIdTypeI18nMsgTitleValue(bpPtnrIdDtls.ptnrIdType)}}" type="text" name="ptnrIdType" class="form-control" disabled ng-show="formEdit">
+                    <span class="help-inline" ng-show="BpPtnrIdDtlsForm.ptnrIdType.$error.required">{{bpPtnrIdDtlsUtils.translations['Entity_required.title']}}</span>
+                </div>
+            </div>
+            <div class="control-group col-md-6" ng-class="{error: BpPtnrIdDtlsForm.issuingCtry.$invalid}">
+                <label for="issuingCtry" class="control-label">{{bpPtnrIdDtlsUtils.translations['BpPtnrIdDtls_issuingCtry_description.title']}}</label>
+                <div id="issuingCtryControls" class="controls" >
+                    <input type="text" ng-model="bpPtnrIdDtls.issuingCtryName" id="issuingCtry" name="issuingCtry" class="form-control" required
+                         autocomplete="off" typeahead="countryName as countryName.name for countryName in loadCountryNames($viewValue)"
+                         typeahead-loading="loading" placeholder="{{bpPtnrIdDtlsUtils.translations['BpBnsPtnr_findACountry_description.title']}}">
+                   	<p ng-show="BpPtnrIdDtlsForm.issuingCtry.$error.required" class="help-block">{{bpPtnrIdDtlsUtils.translations['Entity_required.title']}}</p>
+                </div>
+            </div>
+            <div class="control-group col-md-12" ng-class="{error: BpPtnrIdDtlsForm.idNbr.$invalid}" >
+                <label for="idNbr" class="control-label">{{bpPtnrIdDtlsUtils.translations['BpPtnrIdDtls_idNbr_description.title']}}</label>
+                <div id="idNbrControls" class="controls" >
+                    <input type="text" ng-model="bpPtnrIdDtls.idNbr" name="idNbr" class="form-control" required>
+                   	<p ng-show="BpPtnrIdDtlsForm.idNbr.$error.required" class="help-block">{{bpPtnrIdDtlsUtils.translations['Entity_required.title']}}</p>
+                </div>
+            </div>
+            <div class="control-group col-md-12" ng-class="{error: BpPtnrIdDtlsForm.issuedBy.$invalid}">
+                <label for="issuedBy" class="control-label">{{bpPtnrIdDtlsUtils.translations['BpPtnrIdDtls_issuedBy_description.title']}}</label>
+                <div id="issuedByControls" class="controls">
+                    <input type="text" ng-model="bpPtnrIdDtls.issuedBy" name="issuedBy" class="form-control">
+                </div>
+            </div>
+            <div class="control-group col-md-12" ng-class="{error: BpPtnrIdDtlsForm.issuedIn.$invalid}">
+                <label for="issuedIn" class="control-label">{{bpPtnrIdDtlsUtils.translations['BpPtnrIdDtls_issuedIn_description.title']}}</label>
+                <div id="issuedInControls" class="controls">
+                    <input type="text" ng-model="bpPtnrIdDtls.issuedIn" name="issuedIn" class="form-control">
+                </div>
+            </div>
+            <div class="control-group col-md-6" ng-class="{error: BpPtnrIdDtlsForm.issuedDt.$invalid}">
+                <label for="issuedDt" class="control-label">{{bpPtnrIdDtlsUtils.translations['BpPtnrIdDtls_issuedDt_description.title']}}</label>
+                <div id="issuedDtControls" class="controls">
+                    <input type="text" date-time  view="date" min-view="date" views="['date']" dismiss="true" format="dd-MM-yyyy" 
+                    	ng-model="bpPtnrIdDtls.issuedDt" name="issuedDt" id="issuedDt" class="form-control">
+                </div>
+            </div>
+            <div class="control-group col-md-6" ng-class="{error: BpPtnrIdDtlsForm.expirdDt.$invalid}">
+                <label for="expirdDt" class="control-label">{{bpPtnrIdDtlsUtils.translations['BpPtnrIdDtls_expirdDt_description.title']}}</label>
+                <div id="expirdDtControls" class="controls">
+                    <input type="text" date-time  view="date" min-view="date" views="['date']" format="dd-MM-yyyy" 
+                    	ng-model="bpPtnrIdDtls.expirdDt" name="expirdDt" id="expirdDt" class="form-control">
+                </div>
+            </div>
+            <div class="control-group col-md-12" >
+            	<br/>
+                <div class="controls">
+                    <button id="saveBpPtnrIdDtls" name="saveBpPtnrIdDtls" class="btn btn-primary" ng-click="save()"><i class="icon-ok-sign icon-white"></i> {{bpPtnrIdDtlsUtils.translations['Entity_save.title']}}</button>
+                    <button id="cancel" name="cancel" class="btn" ng-click="cancel()"><i class="icon-remove-sign"></i> {{bpPtnrIdDtlsUtils.translations['Entity_cancel.title']}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+  </div>

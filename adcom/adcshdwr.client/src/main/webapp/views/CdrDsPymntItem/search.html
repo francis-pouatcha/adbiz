@@ -1,0 +1,102 @@
+<div class="form-horizontal">
+    <h3>Create a new CdrDsPymntItem</h3>
+    <div class="control-group">
+        <div class="controls">
+            <a id="Create" name="Create" class="btn btn-primary" href="#/CdrDsPymntItems/new"><i class="icon-plus-sign icon-white"></i> Create</a>
+        </div>
+    </div>
+</div>
+<hr/>
+<div>
+    <h3>Search for CdrDsPymntItems</h3>
+    <form id="CdrDsPymntItemSearch" class="form-horizontal">
+    <div class="control-group">
+        <label for="dsNbr" class="control-label">Ds Nbr</label>
+        <div class="controls">
+            <input id="dsNbr" name="dsNbr" type="text" ng-model="search.dsNbr" placeholder="Enter the CdrDsPymntItem Ds Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="pymntMode" class="control-label">Pymnt Mode</label>
+        <div class="controls">
+            <select id="pymntMode" name="pymntMode" ng-model="search.pymntMode" ng-options="p as p for p in pymntModeList">
+                <option value="">Choose a Pymnt Mode</option>
+            </select>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="pymntDocType" class="control-label">Pymnt Doc Type</label>
+        <div class="controls">
+            <input id="pymntDocType" name="pymntDocType" type="text" ng-model="search.pymntDocType" placeholder="Enter the CdrDsPymntItem Pymnt Doc Type"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="pymntDocNbr" class="control-label">Pymnt Doc Nbr</label>
+        <div class="controls">
+            <input id="pymntDocNbr" name="pymntDocNbr" type="text" ng-model="search.pymntDocNbr" placeholder="Enter the CdrDsPymntItem Pymnt Doc Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="amt" class="control-label">Amt</label>
+        <div class="controls">
+            <input id="amt" name="amt" type="text" ng-model="search.amt" placeholder="Enter the CdrDsPymntItem Amt"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="rcvdAmt" class="control-label">Rcvd Amt</label>
+        <div class="controls">
+            <input id="rcvdAmt" name="rcvdAmt" type="text" ng-model="search.rcvdAmt" placeholder="Enter the CdrDsPymntItem Rcvd Amt"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="diffAmt" class="control-label">Diff Amt</label>
+        <div class="controls">
+            <input id="diffAmt" name="diffAmt" type="text" ng-model="search.diffAmt" placeholder="Enter the CdrDsPymntItem Diff Amt"></input>
+        </div>
+    </div>
+        <div class="control-group">
+            <div class="controls">
+                <a id="Search" name="Search" class="btn btn-primary" ng-click="performSearch()"><i class="icon-search icon-white"></i> Search</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="search-results">
+    <table class="table table-bordered table-striped clearfix">
+        <thead>
+            <tr>
+                <th>Ds Nbr</th>
+                <th>Pymnt Mode</th>
+                <th>Pymnt Doc Type</th>
+                <th>Pymnt Doc Nbr</th>
+                <th>Amt</th>
+                <th>Rcvd Amt</th>
+                <th>Diff Amt</th>
+            </tr>
+        </thead>
+        <tbody id="search-results-body">
+            <tr ng-repeat="result in searchResults | searchFilter:searchResults | startFrom:currentPage*pageSize | limitTo:pageSize">
+                <td><a href="#/CdrDsPymntItems/edit/{{result.id}}">{{result.dsNbr}}</a></td>
+                <td><a href="#/CdrDsPymntItems/edit/{{result.id}}">{{result.pymntMode}}</a></td>
+                <td><a href="#/CdrDsPymntItems/edit/{{result.id}}">{{result.pymntDocType}}</a></td>
+                <td><a href="#/CdrDsPymntItems/edit/{{result.id}}">{{result.pymntDocNbr}}</a></td>
+                <td><a href="#/CdrDsPymntItems/edit/{{result.id}}">{{result.amt}}</a></td>
+                <td><a href="#/CdrDsPymntItems/edit/{{result.id}}">{{result.rcvdAmt}}</a></td>
+                <td><a href="#/CdrDsPymntItems/edit/{{result.id}}">{{result.diffAmt}}</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pagination pagination-centered">
+        <ul>
+            <li ng-class="{disabled:currentPage == 0}">
+                <a id="prev" href ng-click="previous()">«</a>
+            </li>
+            <li ng-repeat="n in pageRange" ng-class="{active:currentPage == n}" ng-click="setPage(n)">
+                <a href ng-bind="n + 1">1</a>
+            </li>
+            <li ng-class="{disabled: currentPage == (numberOfPages() - 1)}">
+                <a id="next" href ng-click="next()">»</a>
+            </li>
+        </ul>
+    </div>
+</div>

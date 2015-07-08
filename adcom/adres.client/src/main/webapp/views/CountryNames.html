@@ -1,0 +1,65 @@
+ <div class="panel panel-default">
+     <div class="panel-heading no-collapse">
+         <div class="row">
+            <b>{{"Entity_select.title"|translate}}</b>
+         </div>
+     </div>
+     <div class="panel-body">
+         <div class="row">
+	        <form role="form" class="">
+	                <div class="col-lg-5">
+	                    <div class="form-group">
+	                        <label class=" control-label" for="name">{{"BaseCountryName_name_description.title"|translate}}</label>
+	                        <div class="">
+	                            <input type="text" id="name" ng-model="countryNamesCtlr.searchInput.entity.name" class="form-control">
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="col-lg-5">
+	                    <div class="form-group">
+	                        <label class=" control-label" for="isoCode">{{"BaseCountryName_isoCode_description.title"|translate}}</label>
+	                        <div class="">
+	                            <input type="text" id="isoCode" ng-model="countryNamesCtlr.searchInput.entity.iso3" class="form-control">
+	                        </div>
+	                    </div>
+	                </div>
+	            <div class="col-lg-2">
+	                <div class="form-group">
+	                    <button  ng-click="countryNamesCtlr.handleSearchRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+	                        <i class="glyphicon glyphicon-search"></i>
+	                    </button>
+	                </div>
+	            </div>
+	        </form>
+         </div>
+
+         <div class="row">
+            <table class="table table-bordered  table-striped pointer-element" >
+                <thead>
+                <tr>
+                    <th class="text-center">{{"BaseCountryName_name_description.title"|translate}}</th>
+                    <th class="text-center">{{"BaseCountryName_iso3_description.title"|translate}}</th>
+                    <th class="text-center">{{"BaseCountryName_iso2_description.title"|translate}}</th>
+                    <th class="text-center">{{"BaseCountryName_langsIso2_description.title"|translate}}</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="countryName in countryNamesCtlr.entities" >
+                    <td>{{countryName.name}}</td>
+                    <td>{{countryName.iso3}}</td>
+                    <td>{{countryName.iso2}}</td>
+                    <td>{{countryName.langsIso2}}</td>
+               		<td><button ng-click="countryNamesCtlr.select(countryName)"><i class="glyphicon glyphicon-eye-open"></i></button></td>
+                </tr>
+                </tbody>
+            </table>
+            <ul  class="pull-right">
+                <pagination  total-items="countryNamesCtlr.totalItems" items-per-page="countryNamesCtlr.itemPerPage"  
+                	class="pagination-sm" ng-model="countryNamesCtlr.currentPage" 
+                	ng-change="countryNamesCtlr.paginate()"></pagination>
+            </ul>
+        </div>
+        
+    </div>
+</div>

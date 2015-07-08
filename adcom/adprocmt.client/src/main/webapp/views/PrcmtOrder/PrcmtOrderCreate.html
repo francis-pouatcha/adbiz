@@ -1,0 +1,68 @@
+<div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Entity_create.title"| translate}}</b> </div>
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{prcmtOrderCreateCtlr.error}} </label>
+                <form  name="PrcmtOrderForm" id="PrcmtOrderForm" class="form-horizontal" novalidate="">
+                    <div class="form-group">
+                        <label class="col-lg-3 ">{{"PrcmtProcOrder_supplier_description.title"| translate}} :</label>
+                        <div class="col-lg-3" >
+                            <input type="text" ng-model="prcmtOrderCreateCtlr.prcmtOrder.supplier" id="supplier" name="supplier" class="form-control" required
+                                   autocomplete="off" typeahead="businessPartner as businessPartner.cpnyName for businessPartner in prcmtOrderCreateCtlr.loadBusinessPartner($viewValue)"
+                                   typeahead-loading="loading" placeholder="find a Supplier/Manufacturer">
+                        </div>
+                        <label class="col-lg-3 ">{{"PrcmtProcOrder_netPPTaxIncl_description.title"| translate}} :</label>
+                        <div class="col-lg-3">
+                            <input type="text" ng-model="prcmtOrderCreateCtlr.prcmtOrder.netPPTaxIncl" id="netPPTaxIncl" name="netPPTaxIncl" class="form-control" required >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 ">{{"PrcmtProcOrder_ordrngOrgUnit_description.title"| translate}} :</label>
+                        <div class="col-lg-3" >
+                            <input type="text" ng-model="prcmtOrderCreateCtlr.prcmtOrder.ordrngOrgUnit" id="ordrngOrgUnit" name="ordrngOrgUnit" class="form-control"
+                                   typeahead="orgUnit as orgUnit.fullName for orgUnit in prcmtOrderCreateCtlr.loadOrgUnit($viewValue)"
+                                   typeahead-loading="loading" placeholder="find an organisation" >
+                        </div>
+                        <label class="col-lg-3 ">{{"PrcmtProcOrder_netAmtToPay_description.title"| translate}} :</label>
+                        <div class="col-lg-3" >
+                            <input type="text" ng-model="prcmtOrderCreateCtlr.prcmtOrder.netAmtToPay" id="netAmtToPay" name="netAmtToPay" class="form-control" >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 ">{{"PrcmtProcOrder_poType_description.title"| translate}} :</label>
+                        <div class="col-lg-3" >
+                            <select ng-options="orderType.enumKey as orderType.name for orderType in prcmtOrderCreateCtlr.orderTypes"
+                                    ng-model="prcmtOrderCreateCtlr.prcmtOrder.poType" id="poType" name="poType" class="form-control" ></select>
+                        </div>
+                        <label class="col-lg-3 ">{{"PrcmtProcOrder_poTriggerMode_description.title"| translate}} :</label>
+                        <div class="col-lg-3"  >
+                            <select ng-options="triggerMode.enumKey as triggerMode.name for triggerMode in prcmtOrderCreateCtlr.triggerModes"
+                                    ng-model="prcmtOrderCreateCtlr.prcmtOrder.poTriggerMode" id="poTriggerMode" name="poTriggerMode" class="form-control" ></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 ">{{"PrcmtProcOrder_orderDt_description.title"| translate}} :</label>
+                        <div class="col-lg-3" >
+                            <input type="datetime" date-time  view="date" min-view="date" views="['date']" dismiss="true" format="dd-MM-yyyy"
+                                   ng-model="prcmtOrderCreateCtlr.prcmtOrder.orderDt" id="orderDt" name="orderDt" class="form-control" >
+                        </div>
+                        <label class="col-lg-3 ">{{"PrcmtProcOrder_poCur_description.title"| translate}} :</label>
+                        <div class="col-lg-3" ng-class="{ 'has-error' : PrcmtOrderForm.poCur.$invalid }" >
+                            <select ng-options="currency for currency in prcmtOrderCreateCtlr.currencys" ng-model="prcmtOrderCreateCtlr.prcmtOrder.poCur" id="poCur" name="poCur" class="form-control" ></select>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="form-group">
+                        <label class="col-lg-3"  > </label>
+                        <div class="col-lg-8" >
+                            <a class="btn-danger btn" href="#/PrcmtOrders"><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                            <button ng-click="prcmtOrderCreateCtlr.create();" ng-disabled="catalArticleForm.$invalid" class="btn-success btn"  ><i class="glyphicon glyphicon-save"></i>  {{"Entity_save.title" | translate }}</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+  </div>

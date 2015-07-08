@@ -1,0 +1,136 @@
+<div class="container">
+
+    <div class="col-xs-offset-2 col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Entity_create.title"| translate}}</b> </div>
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{ctryCreateCtrl.error}} </label>
+                <form  name="orgcontactForm" class="form-horizontal" novalidate="">
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : orgcontactForm.country.$invalid }" >
+                            <select class="form-control" name="country" ng-model="ocEditCtrl.orgContact.country" ng-options="country.iso3 as country.name for country in ocEditCtrl.countrys" ></select>
+                            <p ng-show="orgcontactForm.country.$error.required" class="help-block"> {{"Country_name_description.title" | translate}} req !</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgUnit_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : orgcontactForm.ouIdentif.$invalid }" >
+                            <select class="form-control" name="ouIdentif" ng-model="ocEditCtrl.orgContact.ouIdentif" ng-options="ou.identif as ou.fullName for ou in  ocEditCtrl.orgunits" ></select>
+                            <p ng-show="orgcontactForm.ouIdentif.$error.required" class="help-block"> {{"OrgUnit_description.title" | translate}} req !</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgContact_contactPeople_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" required ng-model="ocEditCtrl.orgContact.contactPeople" name="contactPeople" class="form-control" >
+                            <p ng-show="orgcontactForm.contactPeople.$error.required" class="help-block"> {{"OrgContact_contactPeople_description.title" | translate}} req !</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgContact_email_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" required ng-model="ocEditCtrl.orgContact.email" name="email" class="form-control" required >
+                            <p ng-show="orgcontactForm.email.$error.required" class="help-block"> {{"OrgContact_email_description.title" | translate}} req !</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgContact_phone_description.title"| translate}} :</label>
+                        <div class="col-lg-8" >
+                            <input type="text" required ng-model="ocEditCtrl.orgContact.phone" name="phone" class="form-control" >
+                            <p ng-show="orgcontactForm.ouIdentif.$error.required" class="help-block"> {{"OuType_description.title" | translate}} req !</p>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgContact_region_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" required ng-model="ocEditCtrl.orgContact.region" name="region" class="form-control">
+                            <p ng-show="orgcontactForm.region.$error.required" class="help-block"> {{"OrgContact_region_description.title" | translate}} req !</p>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgContact_street_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" required ng-model="ocEditCtrl.orgContact.street" name="street" class="form-control">
+                            <p ng-show="orgcontactForm.street.$error.required" class="help-block"> {{"OrgContact_street_description.title" | translate}} req !</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgContact_street2_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" required ng-model="ocEditCtrl.orgContact.street2" name="street2" class="form-control">
+                            <p ng-show="orgcontactForm.street2.$error.required" class="help-block"> {{"OrgContact_street2_description.title" | translate}} req !</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgContact_division_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" required ng-model="ocEditCtrl.orgContact.division" name="division" class="form-control">
+                            <p ng-show="orgcontactForm.orgContact.$error.required" class="help-block"> {{"OrgContact_division_description.title" | translate}} req !</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgContact_subdivision_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" required ng-model="ocEditCtrl.orgContact.subdivision" name="subdivision" class="form-control">
+                            <p ng-show="orgcontactForm.subdivision.$error.required" class="help-block"> {{"OrgContact_subdivision_description.title" | translate}} req !</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgContact_fax_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" required ng-model="ocEditCtrl.orgContact.fax" name="fax" class="form-control">
+                            <p ng-show="orgcontactForm.fax.$error.required" class="help-block"> {{"OrgContact_fax_description.title" | translate}} req !</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "OrgContact_zipCode_description.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" required ng-model="ocEditCtrl.orgContact.zipCode" name="zipCode" class="form-control">
+                            <p ng-show="orgcontactForm.zipCode.$error.required" class="help-block"> {{"OrgContact_zipCode_description.title" | translate}} req !</p>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validFrom.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : orgcontactForm.validFrom.$invalid }" >
+                            <input type="datime" date-time  partial="true" ng-model="ocCreateCtrl.orgContact.validFrom" name="validFrom" class="form-control" >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validTo.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : orgcontactForm.validTo.$invalid }" >
+                            <input type="datime" date-time  ng-model="ocCreateCtrl.orgContact.validTo" name="validTo" class="form-control" >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4"  > </label>
+                        <div class="col-lg-8" >
+                            <a class="btn-danger btn" href="#/orgcontacts"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                            <button ng-click="ocEditCtrl.update();" ng-disabled="orgcontactForm.$invalid" class="btn-success btn"  ><i class="glyphicon glyphicon-save"></i>  {{"Entity_update.title" | translate }}</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

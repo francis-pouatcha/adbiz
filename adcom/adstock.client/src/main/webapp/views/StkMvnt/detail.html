@@ -1,0 +1,85 @@
+<header ng-switch on="$location.path().indexOf('/StkMvnts/new') > -1">
+    <h3 ng-switch-when="true">Create StkMvnt</h3>
+    <h3 ng-switch-when="false">View or edit StkMvnt</h3>
+</header>
+<form id="StkMvntForm" name="StkMvntForm" class="form-horizontal">
+    <div ng-show="displayError" class="alert alert-error">
+        <strong>Error!</strong> Something broke. Retry, or cancel and start afresh.
+    </div>
+    <div class="control-group" ng-class="{error: StkMvntForm.lotPic.$invalid}">
+        <label for="lotPic" class="control-label">Lot Pic</label>
+        <div id="lotPicControls" class="controls">
+            <input id="lotPic" name="lotPic" type="text" required ng-model="stkMvnt.lotPic" placeholder="Enter the StkMvnt Lot Pic"></input>
+            <span class="help-inline" ng-show="StkMvntForm.lotPic.$error.required">required</span> 
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: StkMvntForm.artPic.$invalid}">
+        <label for="artPic" class="control-label">Art Pic</label>
+        <div id="artPicControls" class="controls">
+            <input id="artPic" name="artPic" type="text" required ng-model="stkMvnt.artPic" placeholder="Enter the StkMvnt Art Pic"></input>
+            <span class="help-inline" ng-show="StkMvntForm.artPic.$error.required">required</span> 
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: StkMvntForm.mvntDt.$invalid}">
+        <label for="mvntDt" class="control-label">Mvnt Dt</label>
+        <div id="mvntDtControls" class="controls">
+            <datetime id="mvntDt" name="mvntDt" required ng-model="stkMvnt.mvntDt" placeholder="Enter the StkMvnt Mvnt Dt"></datetime>
+            <span class="help-inline" ng-show="StkMvntForm.mvntDt.$error.required">required</span> 
+            <span class="help-inline" ng-show="StkMvntForm.mvntDt.$error.dateFormat">does not match format "yyyy-MM-dd hh:mm:ss"</span>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: StkMvntForm.mvgUser.$invalid}">
+        <label for="mvgUser" class="control-label">Mvg User</label>
+        <div id="mvgUserControls" class="controls">
+            <input id="mvgUser" name="mvgUser" type="text" required ng-model="stkMvnt.mvgUser" placeholder="Enter the StkMvnt Mvg User"></input>
+            <span class="help-inline" ng-show="StkMvntForm.mvgUser.$error.required">required</span> 
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: StkMvntForm.movedQty.$invalid}">
+        <label for="movedQty" class="control-label">Moved Qty</label>
+        <div id="movedQtyControls" class="controls">
+            <input id="movedQty" name="movedQty" type="text" required ng-model="stkMvnt.movedQty" placeholder="Enter the StkMvnt Moved Qty"></input>
+            <span class="help-inline" ng-show="StkMvntForm.movedQty.$error.required">required</span> 
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: StkMvntForm.mvntType.$invalid}">
+        <label for="mvntType" class="control-label">Mvnt Type</label>
+        <div id="mvntTypeControls" class="controls">
+        <select id="mvntType" name="mvntType" ng-model="stkMvnt.mvntType" ng-options="m for m in mvntTypeList" required >
+            <option value="">Choose a Mvnt Type</option>
+        </select>
+        <span class="help-inline" ng-show="StkMvntForm.mvntType.$error.required">required</span> 
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: StkMvntForm.mvntOrigin.$invalid}">
+        <label for="mvntOrigin" class="control-label">Mvnt Origin</label>
+        <div id="mvntOriginControls" class="controls">
+        <select id="mvntOrigin" name="mvntOrigin" ng-model="stkMvnt.mvntOrigin" ng-options="m for m in mvntOriginList" required >
+            <option value="">Choose a Mvnt Origin</option>
+        </select>
+        <span class="help-inline" ng-show="StkMvntForm.mvntOrigin.$error.required">required</span> 
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: StkMvntForm.mvntDest.$invalid}">
+        <label for="mvntDest" class="control-label">Mvnt Dest</label>
+        <div id="mvntDestControls" class="controls">
+        <select id="mvntDest" name="mvntDest" ng-model="stkMvnt.mvntDest" ng-options="m for m in mvntDestList" required >
+            <option value="">Choose a Mvnt Dest</option>
+        </select>
+        <span class="help-inline" ng-show="StkMvntForm.mvntDest.$error.required">required</span> 
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: StkMvntForm.origDocNbrs.$invalid}">
+        <label for="origDocNbrs" class="control-label">Orig Doc Nbrs</label>
+        <div id="origDocNbrsControls" class="controls">
+            <input id="origDocNbrs" name="origDocNbrs" type="text" ng-model="stkMvnt.origDocNbrs" placeholder="Enter the StkMvnt Orig Doc Nbrs"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <button id="saveStkMvnt" name="saveStkMvnt" class="btn btn-primary" ng-disabled="isClean() || StkMvntForm.$invalid" ng-click="save()"><i class="icon-ok-sign icon-white"></i> Save</button>
+            <button id="cancel" name="cancel" class="btn" ng-click="cancel()"><i class="icon-remove-sign"></i> Cancel</button>
+            <button id="deleteStkMvnt" name="deleteStkMvnt" class="btn btn-danger" ng-show="stkMvnt.id" ng-click="remove()"><i class="icon-trash icon-white"></i> Delete</button>
+        </div>
+    <div>
+</form>

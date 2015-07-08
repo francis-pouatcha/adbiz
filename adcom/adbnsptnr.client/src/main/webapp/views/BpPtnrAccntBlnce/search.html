@@ -1,0 +1,72 @@
+<div class="form-horizontal">
+    <h3>Create a new BpPtnrAccntBlnce</h3>
+    <div class="control-group">
+        <div class="controls">
+            <a id="Create" name="Create" class="btn btn-primary" href="#/BpPtnrAccntBlnces/new"><i class="icon-plus-sign icon-white"></i> Create</a>
+        </div>
+    </div>
+</div>
+<hr/>
+<div>
+    <h3>Search for BpPtnrAccntBlnces</h3>
+    <form id="BpPtnrAccntBlnceSearch" class="form-horizontal">
+    <div class="control-group">
+        <label for="ptnrNbr" class="control-label">Ptnr Nbr</label>
+        <div class="controls">
+            <input id="ptnrNbr" name="ptnrNbr" type="text" ng-model="search.ptnrNbr" placeholder="Enter the BpPtnrAccntBlnce Ptnr Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="side" class="control-label">Side</label>
+        <div class="controls">
+            <select id="side" name="side" ng-model="search.side" ng-options="s as s for s in sideList">
+                <option value="">Choose a Side</option>
+            </select>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="accBalance" class="control-label">Acc Balance</label>
+        <div class="controls">
+            <input id="accBalance" name="accBalance" type="text" ng-model="search.accBalance" placeholder="Enter the BpPtnrAccntBlnce Acc Balance"></input>
+        </div>
+    </div>
+        <div class="control-group">
+            <div class="controls">
+                <a id="Search" name="Search" class="btn btn-primary" ng-click="performSearch()"><i class="icon-search icon-white"></i> Search</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="search-results">
+    <table class="table table-bordered table-striped clearfix">
+        <thead>
+            <tr>
+                <th>Ptnr Nbr</th>
+                <th>Side</th>
+                <th>Acc Balance</th>
+                <th>Balance Dt</th>
+            </tr>
+        </thead>
+        <tbody id="search-results-body">
+            <tr ng-repeat="result in searchResults | searchFilter:searchResults | startFrom:currentPage*pageSize | limitTo:pageSize">
+                <td><a href="#/BpPtnrAccntBlnces/edit/{{result.id}}">{{result.ptnrNbr}}</a></td>
+                <td><a href="#/BpPtnrAccntBlnces/edit/{{result.id}}">{{result.side}}</a></td>
+                <td><a href="#/BpPtnrAccntBlnces/edit/{{result.id}}">{{result.accBalance}}</a></td>
+                <td><a href="#/BpPtnrAccntBlnces/edit/{{result.id}}">{{result.balanceDt| date:'yyyy-MM-dd HH:mm:ss Z'}}</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pagination pagination-centered">
+        <ul>
+            <li ng-class="{disabled:currentPage == 0}">
+                <a id="prev" href ng-click="previous()">«</a>
+            </li>
+            <li ng-repeat="n in pageRange" ng-class="{active:currentPage == n}" ng-click="setPage(n)">
+                <a href ng-bind="n + 1">1</a>
+            </li>
+            <li ng-class="{disabled: currentPage == (numberOfPages() - 1)}">
+                <a id="next" href ng-click="next()">»</a>
+            </li>
+        </ul>
+    </div>
+</div>

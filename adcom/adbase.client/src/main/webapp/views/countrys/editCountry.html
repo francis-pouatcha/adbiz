@@ -1,0 +1,92 @@
+<div class="container">
+
+    <div class="col-xs-offset-2 col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Entity_create.title"| translate}}</b> </div>
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{ctryEditCtrl.error}} </label>
+                <form  name="countryForm" class="form-horizontal" novalidate="">
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_name_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : countryForm.name.$invalid }" >
+                            <input type="text" ng-model="ctryEditCtrl.country.name" name="name" class="form-control" required >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_iso3_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : countryForm.iso3.$invalid }" >
+                            <input type="text" ng-model="ctryEditCtrl.country.iso3" name="iso3" class="form-control" required >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_iso2_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : countryForm.iso2.$invalid }" >
+                            <input type="text" ng-model="ctryEditCtrl.country.iso2" name="iso2" class="form-control" required >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_dialCode_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : countryForm.dialCode.$invalid }" >
+                            <input type="text" ng-model="ctryEditCtrl.country.dialCode" name="dialCode" class="form-control" required >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_telNbrSize_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : countryForm.telNbrSize.$invalid }" >
+                            <input type="text" ng-model="ctryEditCtrl.country.telNbrSize" name="telNbrSize" class="form-control" required >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_langsIso2_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : countryForm.langsIso2.$invalid }" >
+                            <input type="text" ng-model="ctryEditCtrl.country.langsIso2" name="langsIso2" class="form-control" >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_currsIso2_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : countryForm.currsIso2.$invalid }" >
+                            <input type="text" ng-model="ctryEditCtrl.country.currsIso2" name="currsIso2" class="form-control" >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Country_timeZones_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : countryForm.timeZones.$invalid }" >
+                            <input type="text" ng-model="ctryEditCtrl.country.timeZones" name="timeZones" class="form-control" >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validFrom.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : countryForm.validFrom.$invalid }" >
+                            <input type="datetime" date-time ng-model="ctryEditCtrl.country.validFrom" name="validFrom" class="form-control" >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validTo.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : countryForm.validTo.$invalid }" >
+                            <input type="datetime" date-time ng-model="ctryEditCtrl.country.validTo" name="validTo" class="form-control" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4"  > </label>
+                        <div class="col-lg-8" >
+                            <a class="btn-danger btn" href="#/countrys"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                            <button ng-click="ctryEditCtrl.update();" ng-disabled="countryForm.$invalid" class="btn-success btn"  ><i class="glyphicon glyphicon-save"></i>  {{"Entity_save.title" | translate }}</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

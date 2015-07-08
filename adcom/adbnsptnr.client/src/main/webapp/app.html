@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en" ng-app="adbnsptnrserver">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Adbnsptnr.server</title>
+    <link href="styles/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="styles/main.css" rel="stylesheet" media="screen">
+    <link href="styles/bootstrap-responsive.css" rel="stylesheet" media="screen">
+</head>
+<body>
+    <div id="wrap">
+    	
+    	<div class="navbar navbar-inverse navbar-fixed-top">
+    		<div class="navbar-inner">
+    			<div class="container">
+    				<a class="brand" href="#">Adbnsptnr.server</a>
+    			</div>
+    		</div>
+    	</div>
+        
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span3 well">
+                    <img class="hidden-phone" src="img/forge-logo.png" alt="JBoss Forge"></img>
+                    <nav class="sidebar-nav" ng-controller="NavController">
+                        <ul id="sidebar-entries" class="nav nav-list">
+                        	<li ng-class="{active: matchesRoute('BpBnsPtnrs')}"><a href="#/BpBnsPtnrs">BpBnsPtnrs</a></li>
+                        	<li ng-class="{active: matchesRoute('BpCtgryDscnts')}"><a href="#/BpCtgryDscnts">BpCtgryDscnts</a></li>
+                        	<li ng-class="{active: matchesRoute('BpCtgryOfPtnrs')}"><a href="#/BpCtgryOfPtnrs">BpCtgryOfPtnrs</a></li>
+                        	<li ng-class="{active: matchesRoute('BpIndivPtnrNames')}"><a href="#/BpIndivPtnrNames">BpIndivPtnrNames</a></li>
+                        	<li ng-class="{active: matchesRoute('BpLegalPtnrIds')}"><a href="#/BpLegalPtnrIds">BpLegalPtnrIds</a></li>
+                        	<li ng-class="{active: matchesRoute('BpPtnrAccntBlnces')}"><a href="#/BpPtnrAccntBlnces">BpPtnrAccntBlnces</a></li>
+                        	<li ng-class="{active: matchesRoute('BpPtnrContacts')}"><a href="#/BpPtnrContacts">BpPtnrContacts</a></li>
+                        	<li ng-class="{active: matchesRoute('BpPtnrCreditDtlss')}"><a href="#/BpPtnrCreditDtlss">BpPtnrCreditDtlss</a></li>
+                        	<li ng-class="{active: matchesRoute('BpPtnrCtgrys')}"><a href="#/BpPtnrCtgrys">BpPtnrCtgrys</a></li>
+                        	<li ng-class="{active: matchesRoute('BpPtnrCtgryDtlss')}"><a href="#/BpPtnrCtgryDtlss">BpPtnrCtgryDtlss</a></li>
+                        	<li ng-class="{active: matchesRoute('BpPtnrIdDtlss')}"><a href="#/BpPtnrIdDtlss">BpPtnrIdDtlss</a></li>
+                        	<li ng-class="{active: matchesRoute('Insurrances')}"><a href="#/Insurrances">Insurrances</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="span9 well">
+                    <div id="main" ng-view>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="push"></div>
+    </div>
+    
+    <div id="footer">
+        <div class="container">
+            <p>Powered by <a href="http://jboss.org/forge">Forge</a></p>
+            <p><a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+        </div>
+    </div>
+    
+    <script src="scripts/vendor/modernizr-2.6.2.min.js"></script>
+    <script src="scripts/vendor/jquery-1.9.1.js"></script>
+    <script src="scripts/vendor/angular.js"></script>
+    <script src="scripts/vendor/angular-resource.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/directives/datetimepicker.js"></script>
+    <script src="scripts/filters/startFromFilter.js"></script>
+    <script src="scripts/filters/genericSearchFilter.js"></script>
+    <script src="scripts/services/locationParser.js"></script>
+    <script src="scripts/services/BpBnsPtnrFactory.js"></script>
+    <script src="scripts/controllers/newBpBnsPtnrController.js"></script>
+    <script src="scripts/controllers/searchBpBnsPtnrController.js"></script>
+    <script src="scripts/controllers/editBpBnsPtnrController.js"></script>
+    <script src="scripts/services/BpCtgryDscntFactory.js"></script>
+    <script src="scripts/controllers/newBpCtgryDscntController.js"></script>
+    <script src="scripts/controllers/searchBpCtgryDscntController.js"></script>
+    <script src="scripts/controllers/editBpCtgryDscntController.js"></script>
+    <script src="scripts/services/BpCtgryOfPtnrFactory.js"></script>
+    <script src="scripts/controllers/newBpCtgryOfPtnrController.js"></script>
+    <script src="scripts/controllers/searchBpCtgryOfPtnrController.js"></script>
+    <script src="scripts/controllers/editBpCtgryOfPtnrController.js"></script>
+    <script src="scripts/services/BpIndivPtnrNameFactory.js"></script>
+    <script src="scripts/controllers/newBpIndivPtnrNameController.js"></script>
+    <script src="scripts/controllers/searchBpIndivPtnrNameController.js"></script>
+    <script src="scripts/controllers/editBpIndivPtnrNameController.js"></script>
+    <script src="scripts/services/BpLegalPtnrIdFactory.js"></script>
+    <script src="scripts/controllers/newBpLegalPtnrIdController.js"></script>
+    <script src="scripts/controllers/searchBpLegalPtnrIdController.js"></script>
+    <script src="scripts/controllers/editBpLegalPtnrIdController.js"></script>
+    <script src="scripts/services/BpPtnrAccntBlnceFactory.js"></script>
+    <script src="scripts/controllers/newBpPtnrAccntBlnceController.js"></script>
+    <script src="scripts/controllers/searchBpPtnrAccntBlnceController.js"></script>
+    <script src="scripts/controllers/editBpPtnrAccntBlnceController.js"></script>
+    <script src="scripts/services/BpPtnrContactFactory.js"></script>
+    <script src="scripts/controllers/newBpPtnrContactController.js"></script>
+    <script src="scripts/controllers/searchBpPtnrContactController.js"></script>
+    <script src="scripts/controllers/editBpPtnrContactController.js"></script>
+    <script src="scripts/services/BpPtnrCreditDtlsFactory.js"></script>
+    <script src="scripts/controllers/newBpPtnrCreditDtlsController.js"></script>
+    <script src="scripts/controllers/searchBpPtnrCreditDtlsController.js"></script>
+    <script src="scripts/controllers/editBpPtnrCreditDtlsController.js"></script>
+    <script src="scripts/services/BpPtnrCtgryFactory.js"></script>
+    <script src="scripts/controllers/newBpPtnrCtgryController.js"></script>
+    <script src="scripts/controllers/searchBpPtnrCtgryController.js"></script>
+    <script src="scripts/controllers/editBpPtnrCtgryController.js"></script>
+    <script src="scripts/services/BpPtnrCtgryDtlsFactory.js"></script>
+    <script src="scripts/controllers/newBpPtnrCtgryDtlsController.js"></script>
+    <script src="scripts/controllers/searchBpPtnrCtgryDtlsController.js"></script>
+    <script src="scripts/controllers/editBpPtnrCtgryDtlsController.js"></script>
+    <script src="scripts/services/BpPtnrIdDtlsFactory.js"></script>
+    <script src="scripts/controllers/newBpPtnrIdDtlsController.js"></script>
+    <script src="scripts/controllers/searchBpPtnrIdDtlsController.js"></script>
+    <script src="scripts/controllers/editBpPtnrIdDtlsController.js"></script>
+    <script src="scripts/services/InsurranceFactory.js"></script>
+    <script src="scripts/controllers/newInsurranceController.js"></script>
+    <script src="scripts/controllers/searchInsurranceController.js"></script>
+    <script src="scripts/controllers/editInsurranceController.js"></script>
+</body>
+</html>

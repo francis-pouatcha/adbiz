@@ -1,0 +1,15 @@
+<div class="modal-header">
+    <h3 class="modal-title">Edit Article Lot</h3>
+</div>
+
+<div class="modal-body">
+
+    <input type="text" ng-model="entityToEdit.unitPrice" name="unitPrice" class="form-control" numeric />
+    <input type="datetime" date-time ng-model="entityToEdit.expirDt" name="expirDt" class="form-control" />
+
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary pull-right" ng-click="updateStkArtLot()">Update</button>
+    <button class="btn btn-warning pull-left" ng-click="cancel()">Cancel</button>
+</div>

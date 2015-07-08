@@ -1,0 +1,21 @@
+<div ng-controller="catalArtDetailConfigCtlr as artDetConfigCtlr" >
+    <a class="btn btn-success margBott10 pull-right" ng-click="artDetConfigCtlr.openCreateForm('md')"><i class="glyphicon glyphicon-plus"></i> {{'Entity_create.title' | translate}}</a>
+    <br/>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>{{"CatalArtDetailConfig_artDetCode_description.title"|translate}}</th>
+            <th>{{"CatalArtDetailConfig_qtyOfDtldInMain_description.title"|translate}}</th>
+            <th>{{"CatalArtDetailConfig_pptnOfDtldInMain_description.title"|translate}}</th>
+            <th>{{"CatalArtDetailConfig_mngInPptn_description.title"|translate}}</th>
+        </tr>
+        <tr ng-repeat="result in artDetConfigCtlr.catalArtDetailConfigs">
+            <td>{{result.artDetCode}}</td>
+            <td>{{result.qtyOfDtldInMain}}</td>
+            <td>{{result.pptnOfDtldInMain}}</td>
+            <td>{{result.mngInPptn}}</td>
+            <td><a class="" ng-click="artDetConfigCtlr.openEditForm('md',$index);"><i class="glyphicon glyphicon-edit"></i></a>
+            </td>
+            <td><a ng-click="artDetConfigCtlr.deleteItem()" ><i class="glyphicon glyphicon-trash" ></i></a></td>
+        </tr>
+    </table>
+</div>

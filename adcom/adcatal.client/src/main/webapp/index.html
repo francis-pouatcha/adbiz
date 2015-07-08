@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html ng-app="AdCatal">
+<head>
+    <meta charset="utf-8" />
+    <title>Adcom Catalogue</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" type="text/css" href="/adres.client/vendors/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/adres.client/styles/custom.css">
+    <script src="scripts/vendor/modernizr-2.6.2.min.js"></script>
+    <script src="/adres.client/vendors/jquery/jquery-2.1.1.min.js"></script>
+    <script src="/adres.client/vendors/bootstrap/js/bootstrap.js"></script>
+</head>
+<body class="theme-blue">
+	<div ng-include="'/adres.client/views/navbar.html'"></div>
+    <div class="container">
+        <div class="col-xs-offset-2 col-xs-8" ng-show="sessionManager.hasAuthErrors()">
+            <div class="has-error">
+            	<ul ng-repeat="error in sessionManager.authErrors()">
+            		<li>{{error}}</li>
+            	</ul>
+            </div>
+        </div>
+        <div ng-view></div>
+     	<div id="push"></div>
+    </div>
+
+	<!-- common resources -->
+    <script src="/adres.client/vendors/angular/angular.js"></script>
+    <script src="/adres.client/vendors/angular/angular-sanitize.js"></script>
+    <script src="/adres.client/vendors/angular/angular-route.js"></script>
+    <script src="/adres.client/vendors/angular/angular-resource.js"></script>
+    <script src="/adres.client/vendors/angular/angular-cookies.js"></script>
+    <script src="/adres.client/vendors/angular-translate/angular-translate.js"></script>
+    <script src="/adres.client/vendors/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="/adres.client/vendors/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
+    <script src="/adres.client/vendors/base64/base64.js"></script>
+    <script src="/adres.client/vendors/angular/ui-bootstrap-tpls-0.12.0.js" ></script>
+    <script src="/adres.client/services/ADUtils.js"></script>
+    <script src="/adres.client/services/SessionManager.js"></script>
+    <script src="/adres.client/services/AuthInterceptor.js"></script>
+    <script src="/adres.client/modules/NavBar.js"></script>
+    
+    <!-- Startup -->
+    <script src="scripts/app.js"></script>
+    
+    <!-- CatalArticle Resources -->
+    <script src="modules/CatalArticle/CatalArtFeatMappingResources.js"></script>
+    <script src="modules/CatalArticle/CatalArticleResource.js"></script>
+    <script src="modules/CatalArticle/CatalPicMappingResource.js"></script>
+    <script src="modules/CatalArticle/CatalArtManufSuppResource.js"></script>
+    <script src="modules/CatalArticle/CatalArtDetailConfigResource.js"></script>
+    <script src="modules/CatalArticle/CatalArt2ProductFamilyResource.js"></script>
+    <script src="modules/CatalArticle/BpLegalPtnrIdResource.js"></script>
+        
+    <!-- CatalArticle Controllers -->
+    <script src="modules/CatalArticle/CatalArtFeatMappingCtlrs.js"></script>
+    <script src="modules/CatalArticle/CatalArticleCtlrs.js"></script>
+    <script src="modules/CatalArticle/CatalPicMappingCtlrs.js"></script>
+    <script src="modules/CatalArticle/CatalArtDetailConfigCtlrs.js"></script>
+    <script src="modules/CatalArticle/CatalArt2ProductFamilyCtlrs.js"></script>
+    <script src="modules/CatalArticle/CatalArtManufSuppCtlrs.js"></script>
+
+    <!-- CatalProductFamily Resources -->
+    <script src="modules/CatalProductFamily/CatalProductFamilyRoute.js"></script>
+    <script src="modules/CatalProductFamily/CatalFamilyFeatMapingResources.js"></script>
+    <script src="modules/CatalProductFamily/CatalProductFamilyResource.js"></script>
+
+    <!-- CatalProductFamily Controllers -->
+    <script src="modules/CatalProductFamily/CatalFamilyFeatMapingCtlrs.js"></script>
+    <script src="modules/CatalProductFamily/CatalProductFamilyCtlrs.js"></script>
+    
+    <!-- CatalArt2ProducFamily-->
+    <!-- CatalPkgMode -->
+    <script src="modules/CatalPkgMode/resources.js"></script>
+    <script src="modules/CatalPkgMode/services.js"></script>
+    <script src="modules/CatalPkgMode/controllers.js"></script>
+    
+    
+    <!-- Equivalanece articles scripts-->
+     <script src="modules/CatalArtEquivalence/CatalArtEquivalenceCtlrs.js"></script>
+    <script src="modules/CatalArtEquivalence/CatalArtEquivalenceResource.js"></script>
+   
+
+    <script src="scripts/services/CatalPkgModeFactory.js"></script>
+    <script src="scripts/controllers/newCatalPkgModeController.js"></script>
+    <script src="scripts/controllers/searchCatalPkgModeController.js"></script>
+    <script src="scripts/controllers/editCatalPkgModeController.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<header ng-switch on="$location.path().indexOf('/CatalPkgModes/new') > -1">
+    <h3 ng-switch-when="true">Create CatalPkgMode</h3>
+    <h3 ng-switch-when="false">View or edit CatalPkgMode</h3>
+</header>
+<form id="CatalPkgModeForm" name="CatalPkgModeForm" class="form-horizontal">
+    <div ng-show="displayError" class="alert alert-error">
+        <strong>Error!</strong> Something broke. Retry, or cancel and start afresh.
+    </div>
+    <div class="control-group" ng-class="{error: CatalPkgModeForm.name.$invalid}">
+        <label for="name" class="control-label">Name</label>
+        <div id="nameControls" class="controls">
+            <input id="name" name="name" type="text" required ng-model="catalPkgMode.name" placeholder="Enter the CatalPkgMode Name"></input>
+            <span class="help-inline" ng-show="CatalPkgModeForm.name.$error.required">required</span> 
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <button id="saveCatalPkgMode" name="saveCatalPkgMode" class="btn btn-primary" ng-disabled="isClean() || CatalPkgModeForm.$invalid" ng-click="save()"><i class="icon-ok-sign icon-white"></i> Save</button>
+            <button id="cancel" name="cancel" class="btn" ng-click="cancel()"><i class="icon-remove-sign"></i> Cancel</button>
+            <button id="deleteCatalPkgMode" name="deleteCatalPkgMode" class="btn btn-danger" ng-show="catalPkgMode.id" ng-click="remove()"><i class="icon-trash icon-white"></i> Delete</button>
+        </div>
+    <div>
+</form>

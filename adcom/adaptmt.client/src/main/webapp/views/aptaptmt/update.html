@@ -1,0 +1,71 @@
+<div class="container">
+
+    <div class="col-xs-offset-2 col-xs-8">
+
+        <div class="panel panel-default  ng-scope">
+            <div class="panel-heading no-collapse"><b>{{"Entity_show.title"|translate}}</b> </div>
+            <div class="panel-body">
+                    <form  name="updateAptAptmtForm" class="form-horizontal" novalidate >
+
+                        
+                      <div class="form-group">
+                        <label class="col-lg-4 ">{{"AptAptmt_title_description.title"|translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : updateAptAptmtForm.title.$invalid }" >
+                             <input type="text" ng-model="aptAptmt.title" name="title" class="form-control" required >
+                            <p ng-show="updateAptAptmtForm.aptAptmt.$error.required" class="help-block">le title est  requis !</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{"AptAptmt_appointmentDate_description.title"|translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : updateAptAptmtForm.appointmentDate.$invalid }" >
+                            <input type="datetimes" date-time=""  view="date" views="['date']" format="dd-MM-yyyy-" 
+ng-model="aptAptmt.appointmentDate" name="appointmentDate" class="form-control"  ></input>
+                            <p ng-show="updateAptAptmtForm.appointmentDate.$error.required" class="help-block">appointmentDate est  requis !</p>
+                        </div>
+                    </div>
+                
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "AptAptmt_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : updateAptAptmtForm.description.$invalid }" >
+                            <input type="text" ng-model="aptAptmt.description" name="description" class="form-control"  >
+							<p ng-show="updateAptAptmtForm.description.$error.required" class="help-block"> description est requis</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "AptAptmt_locality_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : updateAptAptmtForm.locality.$invalid }" >
+                            <input type="text" ng-model="aptAptmt.locality" name="locality" class="form-control" required >
+                            <p ng-show="updateAptAptmtForm.locality.$error.required" class="help-block">locality est  requis !</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "AptAptmt_parentIdentify_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : updateAptAptmtForm.parentIdentify.$invalid }" >
+                             <select class="form-control" ng-model="aptAptmt.parentIdentify" name="aptAptmt"
+                                    ng-options="aptAptmts.identif as aptAptmts.title for aptAptmts in aptAptmtUpdateCtlr.aptAptmts">
+                            </select>
+<!--                             <p ng-show="createAptAptmtForm.parentIdentify.$error.required" class="help-block">parentIdentify est  requis !</p> -->
+                        </div>
+                    </div>
+                        
+
+
+                        <div class="form-group">
+							 <div class="col-lg-8" >
+                              <a class="btn-danger btn" href="#/"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                              <button ng-click="update();" ng-disabled="updateAptAptmtForm.$invalid" class="btn-success btn"  ><i class="glyphicon glyphicon-save"></i>  {{"Entity_save.title" | translate }}</button>
+                        </div>
+
+                        </div>
+                    </form>
+                
+            </div>
+
+        </div>
+
+    </div>
+    
+</div>

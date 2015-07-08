@@ -1,0 +1,122 @@
+<div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading" id="panel-heading">
+                <b>Prévisualisation</b>
+                <b>{{slsSalesOrderUtils.translations['SlsSalesOrder_description.title']}}</b> 
+            </div>
+            <div id="print-slsso" class="panel-body">
+                <div class="row row-space">
+                     <div class="col-lg-3" id="organisation">
+                            <img ng-src="/adsales.client/img/adorsys.png" alt="logo" /> 
+                     </div>
+                     <div class="pull-right" style="margin-top:50px; margin-right:20px;">
+                          <ul class="list-unstyled">
+                            <li>M. Hsimo Franklin</li> 
+                            <li>BP 5798 Douala</li>
+                            <li>(+237)676699918</li>
+                        </ul>
+                     </div>
+                </div>
+                
+                <div class="row-space"></div>
+                
+                <div class="row row-space">
+                    <div class="col-lg-3" id="customer">
+                        <ul class="list-unstyled">
+                                 <li>Pharmacie Alliance</li>
+                                 <li>Camp Yabassi, Akwa</li>
+                                 <li>BP 237, Douala</li>
+                                 <li>(+237)237789098</li>
+                        </ul>
+                    </div>
+                    <div class="pull-right" style="margin-right:20px;" id="invoice-details">
+                        <ul class="list-unstyled">
+                            <li><b>Commande N<sup>o</sup></b>  {{slsSalesOrder.soNbr}}</li> 
+                            <li><b>Date de commande</b>  {{slsSalesOrderUtils.formatDate(slsSalesOrder.soDt, null)}}</li>
+                        </ul>    
+                    </div>
+                </div>
+                
+                <div class="row-space"></div>
+                
+                <div class="row row-space">
+                  <div class="col-lg-12">  
+                    <div id="invoice-items">
+                        <table class="table table-bordered table-striped">
+                               <thead>
+                                   <tr>
+                                    <th>{{slsSalesOrderUtils.translations['SlsSOItem_artPic_description.title']}}</th>
+                                    <th>{{slsSalesOrderUtils.translations['SlsSOItem_artName_description.title']}}</th>
+                                    <th>{{slsSalesOrderUtils.translations['SlsSOItem_sppuPreTax_description.title']}}</th>
+                                    <th>{{slsSalesOrderUtils.translations['SlsSOItem_orderedQty_description.title']}}</th>
+                                    <th>{{slsSalesOrderUtils.translations['SlsSOItem_netSPTaxIncl_description.title']}}</th>
+                                   </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="slsSOItem in slsSalesOrder.slsSOItems">
+                                        <td>{{slsSOItem.artPic}}</td>
+                                        <td>{{slsSOItem.artName}}</td>
+                                        <td>{{slsSOItem.sppuPreTax}}</td>
+                                        <td>{{slsSOItem.orderedQty}}</td>
+                                        <td>{{slsSOItem.netSPTaxIncl}}</td>                                        
+                                    </tr>
+                                    <tr>
+                                       <td rowspan="4" colspan="3">
+                                          <h2 class="text-right">TOTAUX: </h2>
+                                       </td>
+                                       <td colspan="2">
+                                          <h5>
+                                              {{slsSalesOrderUtils.translations['SlsSalesOrder_netSPPreTax_description.title']}} :
+                                              <span class="pull-right" style="font-weight: normal;">{{slsSalesOrder.netSPPreTax}}</span>
+                                          </h5>
+                                          
+                                       </td>    
+                                    </tr>
+                                    <tr>
+                                       <td colspan="2">
+                                          <h5>
+                                              {{slsSalesOrderUtils.translations['SlsSalesOrder_vatAmount_description.title']}} :
+                                              <span class="pull-right" style="font-weight: normal;">{{slsSalesOrder.vatAmount}}</span>
+                                          </h5>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td colspan="2">
+                                          <h5>
+                                              {{slsSalesOrderUtils.translations['SlsSalesOrder_pymtDscntPct_description.title']}} :
+                                              <span ng-if="slsSalesOrder.pymtDscntPct == null" class="pull-right">0</span>              
+                                              <span class="pull-right" style="font-weight: normal;">{{slsSalesOrder.pymtDscntPct}}</span>
+                                          </h5>
+                                          
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td colspan="2">
+                                          <h5>
+                                              {{slsSalesOrderUtils.translations['SlsSalesOrder_netSPTaxIncl_description.title']}} :
+                                              <span class="pull-right" style="font-weight: normal;">{{slsSalesOrder.netSPTaxIncl}}</span>
+                                          </h5>
+                                       </td>
+                                    </tr>
+                                </tbody>
+                           </table>
+                      </div>
+                    </div>    
+                </div>
+             </div>
+            <div class="row">
+                   
+            </div>
+            <div class="row row-space">
+                    <div class="col-lg-12">
+                        <button  ng-click="returnSlsSO(slsSalesOrder)" id="print-button" class="btn btn-danger pull-left">
+                            <i class="glyphicon glyphicon-chevron-left"></i>Retour a la commande
+                        </button>
+                         <button  ng-click="printPdf('print-slsso')" id="print-button" class="btn btn-default pull-right">
+                            <i class="glyphicon glyphicon-print"></i>{{slsSalesOrderUtils.translations['Entity_print.title']}}
+                        </button>
+                    </div>
+                
+            </div> 
+        </div>
+</div>

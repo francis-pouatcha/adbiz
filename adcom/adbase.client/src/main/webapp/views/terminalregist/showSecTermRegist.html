@@ -1,0 +1,115 @@
+<div class="container">
+    <div class="col-xs-offset-2 col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Entity_show.title"| translate}}</b> </div>
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{secTermRegistShowCtrl.error}} </label>
+                <form  name="secTermForm" class="form-horizontal" novalidate="">
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "SecTerminal_termName_description"| translate}} :</label>
+                        <div class="col-lg-8" >
+                            <input type="text" ng-model="secTermRegistShowCtrl.secTermRegist.termName" name="termName" class="form-control disabled" disabled >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "SecTerminal_registrKey_description"| translate}} :</label>
+                        <div class="col-lg-8" >
+                            <input type="text" ng-model="secTermRegistShowCtrl.secTermRegist.registrKey" name="registrKey" class="form-control disabled" disabled >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "SecTerminal_registrPwd_description"| translate}} :</label>
+                        <div class="col-lg-8" >
+                            <input type="text" ng-model="secTermRegistShowCtrl.secTermRegist.registrPwd" name="registrPwd" class="form-control disabled" disabled >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "SecTerminal_ipAddress_description"| translate}} :</label>
+                        <div class="col-lg-8" >
+                            <input type="text" ng-model="secTermRegistShowCtrl.secTermRegist.ipAddress" name="ipAddress" class="form-control disabled" disabled >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "SecTerminal_termId_description"| translate}} :</label>
+                        <div class="col-lg-8" >
+                            <input type="text" ng-model="secTermRegistShowCtrl.secTermRegist.termId" name="termId" class="form-control disabled" disabled >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "SecTerminal_partnerId_description"| translate}} :</label>
+                        <div class="col-lg-8"  >
+                            <input type="text" ng-model="secTermRegistShowCtrl.secTermRegist.partnerIds" name="partnerIds" class="form-control disabled" disabled  >
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "SecTerminal_locality_description"| translate}} :</label>
+                        <div class="col-lg-8" >
+                            <input type="text" ng-model="secTermRegistShowCtrl.secTermRegist.locality" name="locality" class="form-control disabled" disabled >
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "SecTerminal_timeZone_description"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" ng-model="secTermRegistShowCtrl.secTermRegist.timeZone" name="timeZone" class="form-control"  disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "SecTerminal_accessTime_description"| translate}} :</label>
+                        <div class="col-lg-8"  >
+                            <textarea  ng-model="secTermRegistShowCtrl.secTermRegist.accessTime" name="accessTime" disabled class="form-control disabled" ></textarea>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "SecTerminal_authUsers_description"| translate}} :</label>
+                        <div class="col-lg-8"  >
+                            <textarea ng-model="secTermRegistShowCtrl.secTermRegist.authUsers" disabled name="authUsers" class="form-control disabled" ></textarea>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "SecTerminal_authWorkspaces_description"| translate}} :</label>
+                        <div class="col-lg-8"  >
+                            <textarea  ng-model="secTermRegistShowCtrl.secTermRegist.authWorkspaces" name="authWorkspaces" disabled class="form-control disabled" ></textarea>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validFrom.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{secTermRegistShowCtrl.secTermRegist.validFrom | date : 'dd-MM-yyyy HH:mm'}}" name="validFrom" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validTo.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{secTermRegistShowCtrl.secTermRegist.validTo | date : 'dd-MM-yyyy HH:mm'}}" name="validFrom" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4"  > </label>
+                        <div class="col-lg-8" >
+                            <a class="btn-default btn" href="#/sectermregistr"  ><i class="glyphicon glyphicon-" ></i> {{"Entity_back.title" | translate }}</a>
+                            <a class="btn-danger btn" ng-click="secTermRegistShowCtrl.remove(secTermRegistShowCtrl.secTermRegist.id)"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_delete.title" | translate }}</a>
+                            <a href="#/sectermregistr/edit/{{secTermRegistShowCtrl.secTermRegist.id}}"  class="btn-default btn"  ><i class="glyphicon glyphicon-edit"></i>  {{"Entity_update.title" | translate }}</a>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

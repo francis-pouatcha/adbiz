@@ -1,0 +1,47 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><b>{{currentAction}} {{bpCtgryContractUtils.translations['BpPtnrCtgry_holderIdentif_description.title']}} : {{bpPtnrCtgry.holderIdentif}}</b> </div>
+    <div class="panel-body">
+        <form id="BpCtgryContractForm" name="BpCtgryContractForm" class="form-horizontal" novalidate>
+            <div class="control-group" ng-class="{error: BpCtgryContractForm.contractElt.$invalid}">
+                <label for="contractElt" class="control-label">{bpCtgryContractUtils.translations['BpPtnrContract_contractElt_description.title']}}</label>
+                <div id="contractEltControls" class="controls">
+		            <select class="form-control" name="contractElt" ng-model="bpCtgryContract.contractElt" ng-show="formCreate"
+		                    ng-options="contractElt.enumKey as bpCtgryContractUtils.translations[contractElt.translKey] 
+		                    	for contractElt in bpCtgryContractUtils.contractElts" required>
+		                    <option value=""/>
+					</select>
+	                <input value="{{bpCtgryContractUtils.contractEltI18nMsgTitleValue(bpCtgryContract.contractElt)}}" type="text" name="contractElt" class="form-control" disabled ng-show="formEdit">
+                    <span class="help-inline" ng-show="BpCtgryContractForm.contractElt.$error.required">{{bpCtgryContractUtils.translations['Entity_required.title']}}</span>
+                </div>
+            </div>
+            <div class="control-group" ng-class="{error: BpCtgryContractForm.qualif.$invalid}">
+                <label for="qualif" class="control-label">{{bpCtgryContractUtils.translations['BpPtnrContract_qualif_description.title']}}</label>
+                <div id="qualifControls" class="controls">
+                    <input type="text" ng-model="bpCtgryContract.qualif" name="qualif" class="form-control" required>
+                    <span class="help-inline" ng-show="BpCtgryContractForm.qualif.$error.required">{{bpCtgryContractUtils.translations['Entity_required.title']}}</span>
+                </div>
+            </div>
+            <div class="control-group" ng-class="{error: BpCtgryContractForm.eltValue.$invalid}">
+                <label for="eltValue" class="control-label">{{bpCtgryContractUtils.translations['BpPtnrContract_eltValue_description.title']}}</label>
+                <div id="eltValueControls" class="controls">
+                    <input type="text" ng-model="bpCtgryContract.eltValue" name="eltValue" min="0" max="100" class="form-control" required>
+                    <span class="help-inline" ng-show="BpCtgryContractForm.eltValue.$error.required">{{bpCtgryContractUtils.translations['Entity_required.title']}}</span>
+                </div>
+            </div>
+            <div class="control-group" ng-class="{error: BpCtgryContractForm.eltConstraint.$invalid}">
+                <label for="eltConstraint" class="control-label">{{bpCtgryContractUtils.translations['BpPtnrContract_eltConstraint_description.title']}}</label>
+                <div id="eltConstraintControls" class="controls">
+                    <input type="text" ng-model="bpCtgryContract.eltConstraint" name="eltConstraint" min="0" max="100" class="form-control" required>
+                    <span class="help-inline" ng-show="BpCtgryContractForm.eltConstraint.$error.required">{{bpCtgryContractUtils.translations['Entity_required.title']}}</span>
+                </div>
+            </div>
+            <div class="control-group">
+            	<br/>
+                <div class="controls">
+                    <button id="saveBpCtgryContract" name="saveBpCtgryContract" class="btn btn-primary" ng-disabled="isClean() || BpCtgryContractForm.$invalid" ng-click="save()"><i class="icon-ok-sign icon-white"></i> {{bpCtgryContractUtils.translations['Entity_save.title']}}</button>
+                    <button id="cancel" name="cancel" class="btn" ng-click="cancel()"><i class="icon-remove-sign"></i> {{bpCtgryContractUtils.translations['Entity_cancel.title']}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+  </div>

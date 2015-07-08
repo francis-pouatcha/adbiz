@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html ng-app="AdBase">
+<head>
+    <meta charset="utf-8" />
+    <title>AngularJS Basic HTTP Authentication Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" type="text/css" href="/adres.client/vendors/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/adres.client/vendors/angular-datepicker/datepicker.css">
+    <link rel="stylesheet" type="text/css" href="/adres.client/styles/custom.css">
+    <link rel="stylesheet" type="text/css" href="/adres.client/vendors/angular-growl/angular-growl.min.css">
+
+    <script src="/adres.client/vendors/jquery/jquery-2.1.1.min.js"></script>
+    <script src="/adres.client/vendors/bootstrap/js/bootstrap.js"></script>
+</head>
+<body class="theme-blue">
+	<div ng-include="'/adres.client/views/navbar.html'"></div>
+    <div class="container">
+        <div class="col-xs-offset-2 col-xs-8" ng-show="sessionManager.hasAuthErrors()">
+            <div class="has-error">
+            	<ul ng-repeat="error in sessionManager.authErrors()">
+            		<li>{{error}}</li>
+            	</ul>
+            </div>
+        </div>
+        <div ng-view></div>
+        
+     </div>
+
+    <script src="/adres.client/vendors/angular/angular.js"></script>
+    <script src="/adres.client/vendors/angular/angular-sanitize.js"></script>
+    <script src="/adres.client/vendors/angular/angular-route.js"></script>
+    <script src="/adres.client/vendors/angular/angular-cookies.js"></script>
+    <script src="/adres.client/vendors/angular-translate/angular-translate.js"></script>
+    <script src="/adres.client/vendors/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="/adres.client/vendors/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
+    <script src="/adres.client/vendors/angular-growl/angular-growl.js"></script>
+    <script src="/adres.client/vendors/base64/base64.js"></script>
+    <script src="/adres.client/vendors/angular-datepicker/datepicker.js"></script>
+    <script src="/adres.client/services/ADUtils.js"></script>
+    <script src="/adres.client/services/SessionManager.js"></script>
+    <script src="/adres.client/services/AuthInterceptor.js"></script>
+    <script src="/adres.client/vendors/angularutils-paginate/dirPagination.js"></script>
+    <script src="/adres.client/vendors/angular/ui-bootstrap-tpls-0.12.0.js" ></script>
+    <script src="/adres.client/modules/NavBar.js"></script>
+    <script src="modules/login/module.js"></script>
+    <script src="scripts/app.js"></script>
+    <!-- resources and services -->
+    <script src="modules/login/resources.js"></script>
+    <script src="modules/login/services.js"></script>
+    <script src="modules/outypes/ouTypeResource.js"></script>
+    <script src="modules/outypes/ouTypeService.js"></script>
+    <script src="modules/countrys/countryResource.js"></script>
+    <script src="modules/countrys/countryService.js"></script>
+    <script src="modules/orgunits/resources.js"></script>
+    <script src="modules/orgunits/services.js"></script>
+    <script src="modules/terminal/resources.js" ></script>
+    <script src="modules/terminal/services.js" ></script>
+    <script src="modules/locality/resources.js" ></script>
+    <script src="modules/locality/services.js" ></script>
+    <script src="modules/orgcontacts/orgcontactResource.js" ></script>
+    <script src="modules/orgcontacts/orgcontactService.js" ></script>
+    <script src="modules/converterCurrRate/resources.js" ></script>
+    <script src="modules/converterCurrRate/services.js" ></script>
+    <script src="modules/pricingCurrRate/resources.js" ></script>
+    <script src="modules/pricingCurrRate/services.js" ></script>
+    <script src="modules/terminalregist/resources.js"></script>
+    <script src="modules/terminalregist/services.js"></script>
+    <script src="modules/userworkspace/resources.js"></script>
+    <script src="modules/userworkspace/services.js"></script>
+    <script src="modules/ouworkspaces/resources.js"></script>
+    <script src="modules/ouworkspaces/services.js"></script>
+    <script src="modules/baseconfig/resources.js"></script>
+    <script src="modules/baseconfig/services.js"></script>
+
+    <script src="modules/connectionhistorys/resources.js"></script>
+    <script src="modules/connectionhistorys/services.js"></script>
+
+    <!-- login controllers -->
+    <script src="modules/login/controller/logins.js"></script>
+    <script src="modules/login/controller/loginsCreateController.js"></script>
+    <script src="modules/login/controller/loginShowController.js"></script>
+    <script src="modules/login/controller/loginsEditController.js"></script>
+    <script src="modules/login/controller/loginsChangePwdController.js"></script>
+    <script src="modules/login/controllers.js"></script>
+    
+    <!-- outypes controllers -->
+
+    <script src="modules/outypes/ouTypeResource.js"></script>
+    <script src="modules/outypes/ouTypeService.js"></script>
+    <script src="modules/outypes/newOutTypeController.js"></script>
+    <script src="modules/outypes/listOuTypeController.js"></script>
+    <script src="modules/outypes/showOuTypeController.js"></script>
+    <script src="modules/outypes/updateOuTypeController.js"></script>
+    
+    <!-- orgunits -->
+    <script src="modules/orgunits/controller/orgunits.js"></script>
+    <script src="modules/orgunits/controller/orgunitsCreateController.js"></script>
+    <script src="modules/orgunits/controller/orgunitsEditController.js"></script>
+    <script src="modules/orgunits/controller/orgunitsShowController.js"></script>
+
+    <!-- terminal -->
+    <script src="modules/terminal/controller/secTerminal.js" ></script>
+    <script src="modules/terminal/controller/secTermEditController.js" ></script>
+    <script src="modules/terminal/controller/secTermShowController.js" ></script>
+    <script src="modules/terminal/controller/secTermCreateController.js" ></script>
+
+    <!-- locality ctrl -->
+    <script src="modules/locality/controller/localityController.js" ></script>
+    <script src="modules/locality/controller/localityEditController.js" ></script>
+    <script src="modules/locality/controller/localityShowController.js" ></script>
+    <script src="modules/locality/controller/localityCreateController.js" ></script>
+    
+    <!-- Country controller -->
+    <script src="modules/countrys/controller/countrys.js"></script>
+    <script src="modules/countrys/controller/countrysCreateController.js"></script>
+    <script src="modules/countrys/controller/countrysEditController.js"></script>
+    <script src="modules/countrys/controller/countrysShowController.js"></script>
+
+    <!-- converterCurrRate controller -->
+    <script src="modules/converterCurrRate/controller/converterCurrRateController.js"></script>
+    <script src="modules/converterCurrRate/controller/converterCurrRateCreateController.js"></script>
+    <script src="modules/converterCurrRate/controller/converterCurrRateEditController.js"></script>
+    <script src="modules/converterCurrRate/controller/converterCurrRateShowController.js"></script>
+    
+    <!-- OrgContact Ctrl-->
+    <script src="modules/orgcontacts/controller/orgcontacts.js"></script>
+    <script src="modules/orgcontacts/controller/orgcontactsCreateController.js"></script>
+    <script src="modules/orgcontacts/controller/orgcontactsEditController.js"></script>
+    <script src="modules/orgcontacts/controller/orgcontactsShowController.js"></script>
+
+    <!-- pricingCurrRate controller -->
+    <script src="modules/pricingCurrRate/controller/pricingCurrRateController.js"></script>
+    <script src="modules/pricingCurrRate/controller/pricingCurrRateCreateController.js"></script>
+    <script src="modules/pricingCurrRate/controller/pricingCurrRateEditController.js"></script>
+    <script src="modules/pricingCurrRate/controller/pricingCurrRateShowController.js"></script>
+    
+    <!-- Secure terminal registration -->
+    <script src="modules/terminalregist/controller/secTerminalRegist.js"></script>
+    <script src="modules/terminalregist/controller/secTermRegistCreateController.js"></script>
+    <script src="modules/terminalregist/controller/secTermRegistEditController.js"></script>
+    <script src="modules/terminalregist/controller/secTermRegistShowController.js"></script>
+
+    <!-- workspace -->
+    <script src="modules/userworkspace/userWorkspaceController.js"></script>
+    
+    <!-- Connections historys -->
+    <script src="modules/connectionhistorys/controller/connectionhistorys.js"></script>
+    <script src="modules/connectionhistorys/controller/connectionhistorysShowController.js"></script>
+    
+    <!-- Ou Workspaces-->
+    <script src="modules/ouworkspaces/ouWorkspaceController.js"></script>
+    
+     <!-- Base Config controller -->
+    <script src="modules/baseconfig/controller/baseConfigs.js"></script>
+    <script src="modules/baseconfig/controller/baseConfigCreateController.js"></script>
+    <script src="modules/baseconfig/controller/baseConfigEditController.js"></script>
+    <script src="modules/baseconfig/controller/baseConfigShowController.js"></script>
+   
+</body>
+</html>

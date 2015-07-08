@@ -1,0 +1,74 @@
+<header ng-switch on="$location.path().indexOf('/AccBlncs/new') > -1">
+    <h3 ng-switch-when="true">Create AccBlnc</h3>
+    <h3 ng-switch-when="false">View or edit AccBlnc</h3>
+</header>
+<form id="AccBlncForm" name="AccBlncForm" class="form-horizontal">
+    <div ng-show="displayError" class="alert alert-error">
+        <strong>Error!</strong> Something broke. Retry, or cancel and start afresh.
+    </div>
+    <div class="control-group" ng-class="{error: AccBlncForm.accCoA.$invalid}">
+        <label for="accCoA" class="control-label">Acc Co A</label>
+        <div id="accCoAControls" class="controls">
+            <input id="accCoA" name="accCoA" type="text" ng-model="accBlnc.accCoA" placeholder="Enter the AccBlnc Acc Co A"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccBlncForm.accNbr.$invalid}">
+        <label for="accNbr" class="control-label">Acc Nbr</label>
+        <div id="accNbrControls" class="controls">
+            <input id="accNbr" name="accNbr" type="text" ng-model="accBlnc.accNbr" placeholder="Enter the AccBlnc Acc Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccBlncForm.pstgDir.$invalid}">
+        <label for="pstgDir" class="control-label">Pstg Dir</label>
+        <div id="pstgDirControls" class="controls">
+        <select id="pstgDir" name="pstgDir" ng-model="accBlnc.pstgDir" ng-options="p for p in pstgDirList"  >
+            <option value="">Choose a Pstg Dir</option>
+        </select>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccBlncForm.accCur.$invalid}">
+        <label for="accCur" class="control-label">Acc Cur</label>
+        <div id="accCurControls" class="controls">
+            <input id="accCur" name="accCur" type="text" ng-model="accBlnc.accCur" placeholder="Enter the AccBlnc Acc Cur"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccBlncForm.amtInAccCur.$invalid}">
+        <label for="amtInAccCur" class="control-label">Amt In Acc Cur</label>
+        <div id="amtInAccCurControls" class="controls">
+            <input id="amtInAccCur" name="amtInAccCur" type="text" ng-model="accBlnc.amtInAccCur" placeholder="Enter the AccBlnc Amt In Acc Cur"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccBlncForm.refCur.$invalid}">
+        <label for="refCur" class="control-label">Ref Cur</label>
+        <div id="refCurControls" class="controls">
+            <input id="refCur" name="refCur" type="text" ng-model="accBlnc.refCur" placeholder="Enter the AccBlnc Ref Cur"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccBlncForm.amtInRefCur.$invalid}">
+        <label for="amtInRefCur" class="control-label">Amt In Ref Cur</label>
+        <div id="amtInRefCurControls" class="controls">
+            <input id="amtInRefCur" name="amtInRefCur" type="text" ng-model="accBlnc.amtInRefCur" placeholder="Enter the AccBlnc Amt In Ref Cur"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccBlncForm.accBrr.$invalid}">
+        <label for="accBrr" class="control-label">Acc Brr</label>
+        <div id="accBrrControls" class="controls">
+            <input id="accBrr" name="accBrr" type="text" ng-model="accBlnc.accBrr" placeholder="Enter the AccBlnc Acc Brr"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: AccBlncForm.blncDt.$invalid}">
+        <label for="blncDt" class="control-label">Blnc Dt</label>
+        <div id="blncDtControls" class="controls">
+            <datetime id="blncDt" name="blncDt" required ng-model="accBlnc.blncDt" placeholder="Enter the AccBlnc Blnc Dt"></datetime>
+            <span class="help-inline" ng-show="AccBlncForm.blncDt.$error.required">required</span> 
+            <span class="help-inline" ng-show="AccBlncForm.blncDt.$error.dateFormat">does not match format "yyyy-MM-dd hh:mm:ss"</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <button id="saveAccBlnc" name="saveAccBlnc" class="btn btn-primary" ng-disabled="isClean() || AccBlncForm.$invalid" ng-click="save()"><i class="icon-ok-sign icon-white"></i> Save</button>
+            <button id="cancel" name="cancel" class="btn" ng-click="cancel()"><i class="icon-remove-sign"></i> Cancel</button>
+            <button id="deleteAccBlnc" name="deleteAccBlnc" class="btn btn-danger" ng-show="accBlnc.id" ng-click="remove()"><i class="icon-trash icon-white"></i> Delete</button>
+        </div>
+    <div>
+</form>

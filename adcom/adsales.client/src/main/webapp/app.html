@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en" ng-app="adsalesserver">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Adsales.server</title>
+    <link href="styles/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="styles/main.css" rel="stylesheet" media="screen">
+    <link href="styles/bootstrap-responsive.css" rel="stylesheet" media="screen">
+</head>
+<body>
+    <div id="wrap">
+    	
+    	<div class="navbar navbar-inverse navbar-fixed-top">
+    		<div class="navbar-inner">
+    			<div class="container">
+    				<a class="brand" href="#">Adsales.server</a>
+    			</div>
+    		</div>
+    	</div>
+        
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span3 well">
+                    <img class="hidden-phone" src="img/forge-logo.png" alt="JBoss Forge"></img>
+                    <nav class="sidebar-nav" ng-controller="NavController">
+                        <ul id="sidebar-entries" class="nav nav-list">
+                        	<li ng-class="{active: matchesRoute('DynEnums')}"><a href="#/DynEnums">DynEnums</a></li>
+                        	<li ng-class="{active: matchesRoute('HistoryTypes')}"><a href="#/HistoryTypes">HistoryTypes</a></li>
+                        	<li ng-class="{active: matchesRoute('ProcSteps')}"><a href="#/ProcSteps">ProcSteps</a></li>
+                        	<li ng-class="{active: matchesRoute('SlsAccts')}"><a href="#/SlsAccts">SlsAccts</a></li>
+                        	<li ng-class="{active: matchesRoute('SlsInvceHistorys')}"><a href="#/SlsInvceHistorys">SlsInvceHistorys</a></li>
+                        	<li ng-class="{active: matchesRoute('SlsInvceItems')}"><a href="#/SlsInvceItems">SlsInvceItems</a></li>
+                        	<li ng-class="{active: matchesRoute('SlsInvcePtnrs')}"><a href="#/SlsInvcePtnrs">SlsInvcePtnrs</a></li>
+                        	<li ng-class="{active: matchesRoute('SlsInvceStatuss')}"><a href="#/SlsInvceStatuss">SlsInvceStatuss</a></li>
+                        	<li ng-class="{active: matchesRoute('SlsInvoices')}"><a href="#/SlsInvoices">SlsInvoices</a></li>
+                        	<li ng-class="{active: matchesRoute('SlsInvoiceTypes')}"><a href="#/SlsInvoiceTypes">SlsInvoiceTypes</a></li>
+                        	<li ng-class="{active: matchesRoute('SlsRoleInSaless')}"><a href="#/SlsRoleInSaless">SlsRoleInSaless</a></li>
+                        	<li ng-class="{active: matchesRoute('SlsSOHstrys')}"><a href="#/SlsSOHstrys">SlsSOHstrys</a></li>
+                        	<li ng-class="{active: matchesRoute('SlsSOItems')}"><a href="#/SlsSOItems">SlsSOItems</a></li>
+                        	<li ng-class="{active: matchesRoute('SlsSOPtnrs')}"><a href="#/SlsSOPtnrs">SlsSOPtnrs</a></li>
+                        	<li ng-class="{active: matchesRoute('SlsSalesOrders')}"><a href="#/SlsSalesOrders">SlsSalesOrders</a></li>
+                        	<li ng-class="{active: matchesRoute('SlsSalesStatuss')}"><a href="#/SlsSalesStatuss">SlsSalesStatuss</a></li>
+                        	<li ng-class="{active: matchesRoute('SlsSttlmtOps')}"><a href="#/SlsSttlmtOps">SlsSttlmtOps</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="span9 well">
+                    <div id="main" ng-view>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="push"></div>
+    </div>
+    
+    <div id="footer">
+        <div class="container">
+            <p>Powered by <a href="http://jboss.org/forge">Forge</a></p>
+            <p><a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+        </div>
+    </div>
+    
+    <script src="scripts/vendor/modernizr-2.6.2.min.js"></script>
+    <script src="scripts/vendor/jquery-1.9.1.js"></script>
+    <script src="scripts/vendor/angular.js"></script>
+    <script src="scripts/vendor/angular-resource.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/directives/datetimepicker.js"></script>
+    <script src="scripts/filters/startFromFilter.js"></script>
+    <script src="scripts/filters/genericSearchFilter.js"></script>
+    <script src="scripts/services/locationParser.js"></script>
+    <script src="scripts/services/DynEnumFactory.js"></script>
+    <script src="scripts/controllers/newDynEnumController.js"></script>
+    <script src="scripts/controllers/searchDynEnumController.js"></script>
+    <script src="scripts/controllers/editDynEnumController.js"></script>
+    <script src="scripts/services/HistoryTypeFactory.js"></script>
+    <script src="scripts/controllers/newHistoryTypeController.js"></script>
+    <script src="scripts/controllers/searchHistoryTypeController.js"></script>
+    <script src="scripts/controllers/editHistoryTypeController.js"></script>
+    <script src="scripts/services/ProcStepFactory.js"></script>
+    <script src="scripts/controllers/newProcStepController.js"></script>
+    <script src="scripts/controllers/searchProcStepController.js"></script>
+    <script src="scripts/controllers/editProcStepController.js"></script>
+    <script src="scripts/services/SlsAcctFactory.js"></script>
+    <script src="scripts/controllers/newSlsAcctController.js"></script>
+    <script src="scripts/controllers/searchSlsAcctController.js"></script>
+    <script src="scripts/controllers/editSlsAcctController.js"></script>
+    <script src="scripts/services/SlsInvceHistoryFactory.js"></script>
+    <script src="scripts/controllers/newSlsInvceHistoryController.js"></script>
+    <script src="scripts/controllers/searchSlsInvceHistoryController.js"></script>
+    <script src="scripts/controllers/editSlsInvceHistoryController.js"></script>
+    <script src="scripts/services/SlsInvceItemFactory.js"></script>
+    <script src="scripts/controllers/newSlsInvceItemController.js"></script>
+    <script src="scripts/controllers/searchSlsInvceItemController.js"></script>
+    <script src="scripts/controllers/editSlsInvceItemController.js"></script>
+    <script src="scripts/services/SlsInvcePtnrFactory.js"></script>
+    <script src="scripts/controllers/newSlsInvcePtnrController.js"></script>
+    <script src="scripts/controllers/searchSlsInvcePtnrController.js"></script>
+    <script src="scripts/controllers/editSlsInvcePtnrController.js"></script>
+    <script src="scripts/services/SlsInvceStatusFactory.js"></script>
+    <script src="scripts/controllers/newSlsInvceStatusController.js"></script>
+    <script src="scripts/controllers/searchSlsInvceStatusController.js"></script>
+    <script src="scripts/controllers/editSlsInvceStatusController.js"></script>
+    <script src="scripts/services/SlsInvoiceFactory.js"></script>
+    <script src="scripts/controllers/newSlsInvoiceController.js"></script>
+    <script src="scripts/controllers/searchSlsInvoiceController.js"></script>
+    <script src="scripts/controllers/editSlsInvoiceController.js"></script>
+    <script src="scripts/services/SlsInvoiceTypeFactory.js"></script>
+    <script src="scripts/controllers/newSlsInvoiceTypeController.js"></script>
+    <script src="scripts/controllers/searchSlsInvoiceTypeController.js"></script>
+    <script src="scripts/controllers/editSlsInvoiceTypeController.js"></script>
+    <script src="scripts/services/SlsRoleInSalesFactory.js"></script>
+    <script src="scripts/controllers/newSlsRoleInSalesController.js"></script>
+    <script src="scripts/controllers/searchSlsRoleInSalesController.js"></script>
+    <script src="scripts/controllers/editSlsRoleInSalesController.js"></script>
+    <script src="scripts/services/SlsSOHstryFactory.js"></script>
+    <script src="scripts/controllers/newSlsSOHstryController.js"></script>
+    <script src="scripts/controllers/searchSlsSOHstryController.js"></script>
+    <script src="scripts/controllers/editSlsSOHstryController.js"></script>
+    <script src="scripts/services/SlsSOItemFactory.js"></script>
+    <script src="scripts/controllers/newSlsSOItemController.js"></script>
+    <script src="scripts/controllers/searchSlsSOItemController.js"></script>
+    <script src="scripts/controllers/editSlsSOItemController.js"></script>
+    <script src="scripts/services/SlsSOPtnrFactory.js"></script>
+    <script src="scripts/controllers/newSlsSOPtnrController.js"></script>
+    <script src="scripts/controllers/searchSlsSOPtnrController.js"></script>
+    <script src="scripts/controllers/editSlsSOPtnrController.js"></script>
+    <script src="scripts/services/SlsSalesOrderFactory.js"></script>
+    <script src="scripts/controllers/newSlsSalesOrderController.js"></script>
+    <script src="scripts/controllers/searchSlsSalesOrderController.js"></script>
+    <script src="scripts/controllers/editSlsSalesOrderController.js"></script>
+    <script src="scripts/services/SlsSalesStatusFactory.js"></script>
+    <script src="scripts/controllers/newSlsSalesStatusController.js"></script>
+    <script src="scripts/controllers/searchSlsSalesStatusController.js"></script>
+    <script src="scripts/controllers/editSlsSalesStatusController.js"></script>
+    <script src="scripts/services/SlsSttlmtOpFactory.js"></script>
+    <script src="scripts/controllers/newSlsSttlmtOpController.js"></script>
+    <script src="scripts/controllers/searchSlsSttlmtOpController.js"></script>
+    <script src="scripts/controllers/editSlsSttlmtOpController.js"></script>
+</body>
+</html>

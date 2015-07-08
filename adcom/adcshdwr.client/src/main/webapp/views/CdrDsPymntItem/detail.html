@@ -1,0 +1,63 @@
+<header ng-switch on="$location.path().indexOf('/CdrDsPymntItems/new') > -1">
+    <h3 ng-switch-when="true">Create CdrDsPymntItem</h3>
+    <h3 ng-switch-when="false">View or edit CdrDsPymntItem</h3>
+</header>
+<form id="CdrDsPymntItemForm" name="CdrDsPymntItemForm" class="form-horizontal">
+    <div ng-show="displayError" class="alert alert-error">
+        <strong>Error!</strong> Something broke. Retry, or cancel and start afresh.
+    </div>
+    <div class="control-group" ng-class="{error: CdrDsPymntItemForm.dsNbr.$invalid}">
+        <label for="dsNbr" class="control-label">Ds Nbr</label>
+        <div id="dsNbrControls" class="controls">
+            <input id="dsNbr" name="dsNbr" type="text" required ng-model="cdrDsPymntItem.dsNbr" placeholder="Enter the CdrDsPymntItem Ds Nbr"></input>
+            <span class="help-inline" ng-show="CdrDsPymntItemForm.dsNbr.$error.required">required</span> 
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: CdrDsPymntItemForm.pymntMode.$invalid}">
+        <label for="pymntMode" class="control-label">Pymnt Mode</label>
+        <div id="pymntModeControls" class="controls">
+        <select id="pymntMode" name="pymntMode" ng-model="cdrDsPymntItem.pymntMode" ng-options="p for p in pymntModeList" required >
+            <option value="">Choose a Pymnt Mode</option>
+        </select>
+        <span class="help-inline" ng-show="CdrDsPymntItemForm.pymntMode.$error.required">required</span> 
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: CdrDsPymntItemForm.pymntDocType.$invalid}">
+        <label for="pymntDocType" class="control-label">Pymnt Doc Type</label>
+        <div id="pymntDocTypeControls" class="controls">
+            <input id="pymntDocType" name="pymntDocType" type="text" ng-model="cdrDsPymntItem.pymntDocType" placeholder="Enter the CdrDsPymntItem Pymnt Doc Type"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: CdrDsPymntItemForm.pymntDocNbr.$invalid}">
+        <label for="pymntDocNbr" class="control-label">Pymnt Doc Nbr</label>
+        <div id="pymntDocNbrControls" class="controls">
+            <input id="pymntDocNbr" name="pymntDocNbr" type="text" ng-model="cdrDsPymntItem.pymntDocNbr" placeholder="Enter the CdrDsPymntItem Pymnt Doc Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: CdrDsPymntItemForm.amt.$invalid}">
+        <label for="amt" class="control-label">Amt</label>
+        <div id="amtControls" class="controls">
+            <input id="amt" name="amt" type="text" required ng-model="cdrDsPymntItem.amt" placeholder="Enter the CdrDsPymntItem Amt"></input>
+            <span class="help-inline" ng-show="CdrDsPymntItemForm.amt.$error.required">required</span> 
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: CdrDsPymntItemForm.rcvdAmt.$invalid}">
+        <label for="rcvdAmt" class="control-label">Rcvd Amt</label>
+        <div id="rcvdAmtControls" class="controls">
+            <input id="rcvdAmt" name="rcvdAmt" type="text" ng-model="cdrDsPymntItem.rcvdAmt" placeholder="Enter the CdrDsPymntItem Rcvd Amt"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: CdrDsPymntItemForm.diffAmt.$invalid}">
+        <label for="diffAmt" class="control-label">Diff Amt</label>
+        <div id="diffAmtControls" class="controls">
+            <input id="diffAmt" name="diffAmt" type="text" ng-model="cdrDsPymntItem.diffAmt" placeholder="Enter the CdrDsPymntItem Diff Amt"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <button id="saveCdrDsPymntItem" name="saveCdrDsPymntItem" class="btn btn-primary" ng-disabled="isClean() || CdrDsPymntItemForm.$invalid" ng-click="save()"><i class="icon-ok-sign icon-white"></i> Save</button>
+            <button id="cancel" name="cancel" class="btn" ng-click="cancel()"><i class="icon-remove-sign"></i> Cancel</button>
+            <button id="deleteCdrDsPymntItem" name="deleteCdrDsPymntItem" class="btn btn-danger" ng-show="cdrDsPymntItem.id" ng-click="remove()"><i class="icon-trash icon-white"></i> Delete</button>
+        </div>
+    <div>
+</form>

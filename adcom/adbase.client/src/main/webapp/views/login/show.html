@@ -1,0 +1,136 @@
+<div class="container">
+
+    <div class="col-xs-offset-2 col-xs-8">
+
+        <div class="panel panel-default  ng-scope">
+            <div class="panel-heading no-collapse"><b>{{"Entity_show.title"|translate}}</b> </div>
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{loginShowCtrl.error}} </label>
+                <a class="btn btn-default pull-right margBott10" href="#/userworkspace/{{loginShowCtrl.login.ouIdentif}}/{{loginShowCtrl.login.loginName}}" >
+                    <i class="glyphicon glyphicon-share-alt"></i> {{"Workspace" | translate}}
+                </a>
+                    <form  name="loginForm" class="form-horizontal" novalidate >
+                        <div class="form-group">
+                            <label class="col-lg-4 ">{{ "Login_ouIdentif_description"| translate}} :</label>
+                            <div class="col-lg-8" >
+                                <input type="text" ng-model="loginShowCtrl.login.ouIdentif" name="ouIdentif" disabled class="form-control" required >
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 ">{{ "Login_loginName_description"| translate}} :</label>
+                            <div class="col-lg-8"  >
+                                <input type="text" ng-model="loginShowCtrl.login.loginName" name="loginName" disabled class="form-control"  >
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-4 ">{{ "Login_loginAlias_description"| translate}} :</label>
+                            <div class="col-lg-8" ng-class="{ 'has-error' : loginForm.loginAlias.$invalid }" >
+                                <input type="text" ng-model="loginShowCtrl.login.loginAlias" name="loginAlias" disabled class="form-control"  >
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-4 ">{{ "Login_pwdHashed_description"| translate}} :</label>
+                            <div class="col-lg-5" >
+                                <input type="password" ng-model="loginShowCtrl.login.pwdHashed" name="pwdHashed" disabled class="form-control"  >
+
+                            </div>
+                            <div class="col-lg-3">
+                                <a href="#/login/changepass/{{loginShowCtrl.login.id}}" class="form-control btn btn-primary"> {{ "Entity_change.title"| translate}}</a>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-4 ">{{ "Login_email_description"| translate}} :</label>
+                            <div class="col-lg-8" ng-class="{ 'has-error' : loginForm.email.$invalid }" >
+                                <input type="text" ng-model="loginShowCtrl.login.email" name="email" disabled class="form-control"  >
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-4 ">{{ "Login_fullName_description"| translate}} :</label>
+                            <div class="col-lg-8"  >
+                                <input type="text" ng-model="loginShowCtrl.login.fullName" disabled name="fullName" class="form-control" >
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-5" for="">{{"Login_accountLocked_description"|translate}} :</label>
+                            <div class="col-lg-4">
+                                <input type="checkbox" ng-model="loginShowCtrl.login.disableLogin" class="disabled form-control checkbox" disabled >
+                            </div>
+                            <div class="col-lg-3">
+                                <div ng-switch on="loginShowCtrl.login.disableLogin">
+                                    <div ng-switch-when="true">
+                                        <button ng-really-message="Etes vous sure de vouloir activer  ce compte ? " ng-click="loginShowCtrl.enableOrDisableLogin();"  class="form-control btn btn-success">{{"Entity_activate.title"|translate}}</button>
+                                    </div>
+                                    <div ng-switch-when="false">
+                                        <button ng-click="loginShowCtrl.enableOrDisableLogin();"  class="form-control btn btn-danger">{{"Entity_desactivate.title"|translate}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-5" for="">{{"Login_disableLogin_description"|translate}} :</label>
+                            <div class="col-lg-4">
+                                <input type="checkbox" ng-model="loginShowCtrl.login.accountLocked" disabled class="checkbox disabled form-control" >
+                            </div>
+                            <div class="col-lg-3">
+                                <div ng-switch on="loginShowCtrl.login.accountLocked">
+                                    <div ng-switch-when="true">
+                                        <button ng-click="loginShowCtrl.lockOrUnlockLogin();"  class="form-control btn btn-success">{{"Entity_unblock.title"|translate}}</button>
+                                    </div>
+                                    <div ng-switch-when="false">
+                                        <button ng-really-message="Etes vous sure de vouloir bloquer ce compte ? " ng-click="loginShowCtrl.lockOrUnlockLogin();" class="form-control btn btn-danger">{{"Entity_block.title"|translate}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-4 ">{{ "Login_credtlExpir_description"| translate}} :</label>
+                            <div class="col-lg-8" ng-class="{ 'has-error' : loginForm.credtlExpir.$invalid }" >
+                                <input type="date" ng-model="loginShowCtrl.login.credtlExpir" disabled name="credtlExpir" class="form-control"  >
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-4 ">{{ "Login_accountExpir_description"| translate}} :</label>
+                            <div class="col-lg-8" ng-class="{ 'has-error' : loginForm.accountExpir.$invalid }" >
+                                <input type="date" ng-model="loginShowCtrl.login.accountExpir" disabled name="accountExpir" class="form-control" >
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="col-lg-3">
+                                <a class="btn-default btn" ng-click="loginShowCtrl.previous();" ><i class="glyphicon glyphicon-circle-arrow-left"></i> {{"Entity_previous.title"|translate}}</a>
+                            </div>
+
+                            <div class="col-lg-3" >
+                                <a class="btn-default btn" href="#/"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                            </div>
+                            <div class="col-lg-3" >
+                                <a class="btn-default btn" href="#/login/edit/{{loginShowCtrl.login.identif}}"  ><i class="glyphicon glyphicon-edit" ></i> Editer</a>
+                            </div>
+                            <div class="col-lg-3">
+                                <a class="btn-default btn" ng-click="loginShowCtrl.next();" ><i class="fa glyphicon glyphicon-circle-arrow-right"></i> {{"Entity_next.title"|translate}}</a>
+                            </div>
+
+                        </div>
+                    </form>
+                
+            </div>
+
+        </div>
+
+    </div>
+    
+</div>

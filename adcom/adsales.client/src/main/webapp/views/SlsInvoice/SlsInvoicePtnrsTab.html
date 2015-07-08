@@ -1,0 +1,14 @@
+<div>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>{{slsInvoicesUtils.translations['SlsInvcePtnr_invceNbr_description.title']}}</th>
+            <th>{{slsInvoicesUtils.translations['SlsInvcePtnr_ptnrNbr_description.title']}}</th>
+            <th>{{slsInvoicesUtils.translations['SlsInvcePtnr_roleInInvce_description.title']}}</th>
+        </tr>
+        <tr ng-repeat="slsInvcePtnr in slsInvoice.slsInvcePtnrs">
+            <td>{{slsInvcePtnr.slsInvcePtnr.invceNbr}}</td>
+            <td>{{slsInvcePtnr.slsInvcePtnr.ptnrNbr}}</td>
+            <td>{{slsInvcePtnr.slsInvcePtnr.roleInInvce}}</td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,52 @@
+<div class="container">
+
+    <div class="col-xs-offset-2 col-xs-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>{{ "Entity_create.title"| translate}}</b> </div>
+            <div class="panel-body">
+                <label class="error col-lg-offset-3 alert-danger" >{{catalPkgModeShowCtrl.error}} </label>
+                <form  name="catalPkgModeForm" class="form-horizontal" novalidate="">
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{"CatalPkgMode_pkgCode_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : catalPkgModeForm.pkgCode.$invalid }" >
+                            <input type="text" disabled value="{{catalPkgModeShowCtrl.catalPkgMode.pkgCode}}" name="pkgCode" class="form-control"  >
+                            <p ng-show="catalPkgModeForm.pkgCode.$error.required" class="help-block">{{"catalPkgMode_pkgCode_required.title"| translate}}</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{"CatalPkgMode_name_description.title"| translate}} :</label>
+                        <div class="col-lg-8" ng-class="{ 'has-error' : catalPkgModeForm.name.$invalid }" >
+                            <input type="text" disabled value="{{catalPkgModeShowCtrl.catalPkgMode.name}}" name="name" class="form-control"  >
+                            <p ng-show="catalPkgModeForm.name.$error.required" class="help-block">{{"catalPkgMode_name_required.title"| translate}}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validFrom.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{catalPkgModeShowCtrl.catalPkgMode.validFrom | date : 'dd-MM-yyyy HH:mm'}}" name="validFrom" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-4 ">{{ "Entity_validTo.title"| translate}} :</label>
+                        <div class="col-lg-8">
+                            <input type="text" disabled value="{{catalPkgModeShowCtrl.catalPkgMode.validTo | date : 'dd-MM-yyyy HH:mm'}}" name="validTo" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4"  > </label>
+                        <div class="col-lg-8" >
+                            <a class="btn" href="#/CatalPkgModes"  ><i class="glyphicon glyphicon-remove" ></i> {{"Entity_cancel.title" | translate }}</a>
+                            <a class="btn-success btn" href="#/CatalPkgModes/edit/{{catalPkgModeShowCtrl.catalPkgMode.identif}}"  ><i class="glyphicon glyphicon-remove" ></i>  {{"Entity_edit.title" | translate }}</a>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

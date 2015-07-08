@@ -1,0 +1,48 @@
+<div class="row">
+
+	<div class="col-xs-offset-2 col-xs-8">
+
+        <div class="panel panel-default ">
+            <div class="panel-heading no-collapse"><b>Resultats : </b></div>
+            <div class="panel-body">
+                <div class="col-lg-12">
+                   
+                   <div class="row pull-left">
+						<div growl></div>
+					 </div>
+					 
+                    <div  class="row pull-right">
+                        <a class="btn btn-primary pull-right margBott10" ng-click="baseConfigsCtrl.create();" >
+                            <i class="glyphicon-plus"></i> {{"Entity_create.title" | translate}}
+                        </a>
+                    </div>
+                    
+                    <div class="table-overflow-middle row">
+                        <table class="table table-bordered  table-striped pointer-element" >
+                            <thead>
+                            <tr>
+                                <th class="text-center">{{"BaseConfig_printMode_description.title" | translate}}</th>
+                                <th class="text-center">{{"BaseConfig_nbrOfItemsPrcmtOrder_description.title" | translate}}</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="baseconfig in baseConfigsCtrl.baseConfigs" >
+                                <td>{{baseconfig.printMode}}</td>
+                                <td>{{baseconfig.nbrOfItemsPrcmtOrder}}</td>
+                                <td><a href="#/baseconfig/show/{{baseconfig.id}}" ><i class="glyphicon glyphicon-eye-open"></i></a></td>
+                                <td><a href="#/baseconfig/edit/{{baseconfig.id}}" ><i class="glyphicon glyphicon-edit"></i></a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+
+            </div>
+        </div>
+        
+	</div>
+	
+</div>

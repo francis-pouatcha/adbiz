@@ -1,0 +1,100 @@
+<header ng-switch on="$location.path().indexOf('/CdrCshDrawers/new') > -1">
+    <h3 ng-switch-when="true">Create CdrCshDrawer</h3>
+    <h3 ng-switch-when="false">View or edit CdrCshDrawer</h3>
+</header>
+<form id="CdrCshDrawerForm" name="CdrCshDrawerForm" class="form-horizontal">
+    <div ng-show="displayError" class="alert alert-error">
+        <strong>Error!</strong> Something broke. Retry, or cancel and start afresh.
+    </div>
+    <div class="control-group" ng-class="{error: CdrCshDrawerForm.cdrNbr.$invalid}">
+        <label for="cdrNbr" class="control-label">Cdr Nbr</label>
+        <div id="cdrNbrControls" class="controls">
+            <input id="cdrNbr" name="cdrNbr" type="text" required ng-model="cdrCshDrawer.cdrNbr" placeholder="Enter the CdrCshDrawer Cdr Nbr"></input>
+            <span class="help-inline" ng-show="CdrCshDrawerForm.cdrNbr.$error.required">required</span> 
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: CdrCshDrawerForm.cashier.$invalid}">
+        <label for="cashier" class="control-label">Cashier</label>
+        <div id="cashierControls" class="controls">
+            <input id="cashier" name="cashier" type="text" required ng-model="cdrCshDrawer.cashier" placeholder="Enter the CdrCshDrawer Cashier"></input>
+            <span class="help-inline" ng-show="CdrCshDrawerForm.cashier.$error.required">required</span> 
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: CdrCshDrawerForm.closedBy.$invalid}">
+        <label for="closedBy" class="control-label">Closed By</label>
+        <div id="closedByControls" class="controls">
+            <input id="closedBy" name="closedBy" type="text" required ng-model="cdrCshDrawer.closedBy" placeholder="Enter the CdrCshDrawer Closed By"></input>
+            <span class="help-inline" ng-show="CdrCshDrawerForm.closedBy.$error.required">required</span> 
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: CdrCshDrawerForm.opngDt.$invalid}">
+        <label for="opngDt" class="control-label">Opng Dt</label>
+        <div id="opngDtControls" class="controls">
+            <datetime id="opngDt" name="opngDt" required ng-model="cdrCshDrawer.opngDt" placeholder="Enter the CdrCshDrawer Opng Dt"></datetime>
+            <span class="help-inline" ng-show="CdrCshDrawerForm.opngDt.$error.required">required</span> 
+            <span class="help-inline" ng-show="CdrCshDrawerForm.opngDt.$error.dateFormat">does not match format "yyyy-MM-dd hh:mm:ss"</span>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: CdrCshDrawerForm.clsngDt.$invalid}">
+        <label for="clsngDt" class="control-label">Clsng Dt</label>
+        <div id="clsngDtControls" class="controls">
+            <datetime id="clsngDt" name="clsngDt" ng-model="cdrCshDrawer.clsngDt" placeholder="Enter the CdrCshDrawer Clsng Dt"></datetime>
+            <span class="help-inline" ng-show="CdrCshDrawerForm.clsngDt.$error.dateFormat">does not match format "yyyy-MM-dd hh:mm:ss"</span>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: CdrCshDrawerForm.initialAmt.$invalid}">
+        <label for="initialAmt" class="control-label">Initial Amt</label>
+        <div id="initialAmtControls" class="controls">
+            <input id="initialAmt" name="initialAmt" type="text" ng-model="cdrCshDrawer.initialAmt" placeholder="Enter the CdrCshDrawer Initial Amt"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: CdrCshDrawerForm.ttlCashIn.$invalid}">
+        <label for="ttlCashIn" class="control-label">Ttl Cash In</label>
+        <div id="ttlCashInControls" class="controls">
+            <input id="ttlCashIn" name="ttlCashIn" type="text" ng-model="cdrCshDrawer.ttlCashIn" placeholder="Enter the CdrCshDrawer Ttl Cash In"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: CdrCshDrawerForm.ttlCashOut.$invalid}">
+        <label for="ttlCashOut" class="control-label">Ttl Cash Out</label>
+        <div id="ttlCashOutControls" class="controls">
+            <input id="ttlCashOut" name="ttlCashOut" type="text" ng-model="cdrCshDrawer.ttlCashOut" placeholder="Enter the CdrCshDrawer Ttl Cash Out"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: CdrCshDrawerForm.ttlCash.$invalid}">
+        <label for="ttlCash" class="control-label">Ttl Cash</label>
+        <div id="ttlCashControls" class="controls">
+            <input id="ttlCash" name="ttlCash" type="text" ng-model="cdrCshDrawer.ttlCash" placeholder="Enter the CdrCshDrawer Ttl Cash"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: CdrCshDrawerForm.ttlCheck.$invalid}">
+        <label for="ttlCheck" class="control-label">Ttl Check</label>
+        <div id="ttlCheckControls" class="controls">
+            <input id="ttlCheck" name="ttlCheck" type="text" ng-model="cdrCshDrawer.ttlCheck" placeholder="Enter the CdrCshDrawer Ttl Check"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: CdrCshDrawerForm.ttlCredCard.$invalid}">
+        <label for="ttlCredCard" class="control-label">Ttl Cred Card</label>
+        <div id="ttlCredCardControls" class="controls">
+            <input id="ttlCredCard" name="ttlCredCard" type="text" ng-model="cdrCshDrawer.ttlCredCard" placeholder="Enter the CdrCshDrawer Ttl Cred Card"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: CdrCshDrawerForm.ttlVchrIn.$invalid}">
+        <label for="ttlVchrIn" class="control-label">Ttl Vchr In</label>
+        <div id="ttlVchrInControls" class="controls">
+            <input id="ttlVchrIn" name="ttlVchrIn" type="text" ng-model="cdrCshDrawer.ttlVchrIn" placeholder="Enter the CdrCshDrawer Ttl Vchr In"></input>
+        </div>
+    </div>
+    <div class="control-group" ng-class="{error: CdrCshDrawerForm.ttlVchrOut.$invalid}">
+        <label for="ttlVchrOut" class="control-label">Ttl Vchr Out</label>
+        <div id="ttlVchrOutControls" class="controls">
+            <input id="ttlVchrOut" name="ttlVchrOut" type="text" ng-model="cdrCshDrawer.ttlVchrOut" placeholder="Enter the CdrCshDrawer Ttl Vchr Out"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <button id="saveCdrCshDrawer" name="saveCdrCshDrawer" class="btn btn-primary" ng-disabled="isClean() || CdrCshDrawerForm.$invalid" ng-click="save()"><i class="icon-ok-sign icon-white"></i> Save</button>
+            <button id="cancel" name="cancel" class="btn" ng-click="cancel()"><i class="icon-remove-sign"></i> Cancel</button>
+            <button id="deleteCdrCshDrawer" name="deleteCdrCshDrawer" class="btn btn-danger" ng-show="cdrCshDrawer.id" ng-click="remove()"><i class="icon-trash icon-white"></i> Delete</button>
+        </div>
+    <div>
+</form>

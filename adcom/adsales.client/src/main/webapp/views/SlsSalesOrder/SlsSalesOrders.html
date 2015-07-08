@@ -1,0 +1,152 @@
+<div class="row">
+        <div class="panel panel-default  ng-scope">
+            <div class="panel-heading no-collapse">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <b>{{slsSalesOrderUtils.translations['Entity_search.title']}} </b>
+                        <b>{{slsSalesOrderUtils.translations['SlsSalesOrders_description.title']}}</b>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="">
+                    <form role="form" class="">
+                        <div class="row" >
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class=" control-label" tooltips="" tooltip-title="{{slsSalesOrderUtils.translations['SlsSalesOrder_soNbr_description.text']}}" tooltip-side="top" for="soNbr">{{slsSalesOrderUtils.translations['SlsSalesOrder_soNbr_description.title']}}</label>
+                                    <div class="">
+                                        <input type="text" id="soNbr" ng-model="searchInput.entity.soNbr" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class=" control-label" tooltips="" tooltip-title="{{'SlsSalesOrder_soStatus_description.text' | translate}}" tooltip-side="top" for="soStatus">{{slsSalesOrderUtils.translations['SlsSalesOrder_soStatus_description.title']}}</label>
+                                    <div class="">
+                                        <select id="soStatus" class="form-control" name="soStatus" id="invtryStatus" ng-model="searchInput.entity.soStatus"
+							                    ng-options="soStatus.enumKey as slsSalesOrderUtils.translations[soStatus.translKey]
+							                    	for soStatus in slsSalesOrderUtils.slsSOStatus" >
+							                    <option value=""/>
+										</select>
+                                    </div>
+                                </div>
+                             </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label class=" control-label" tooltips="" tooltip-title="{{'SlsSalesOrder_soDtFrom_description.text' | translate}}" tooltip-side="top" for="soDtFrom">{{slsSalesOrderUtils.translations['SlsSalesOrder_soDtFrom_description.title']}}</label>
+                                    <div class="">
+                                        <input type="datetime" date-time  view="date" min-view="date" views="['date']" dismiss="true" format="dd-MM-yyyy"
+                                               id="soDtFrom" ng-model="searchInput.slsSODtFrom" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label class=" control-label" tooltips="" tooltip-title="{{'SlsSalesOrder_soDtTo_description.text' | translate}}" tooltip-side="top" for="soDtTo">{{slsSalesOrderUtils.translations['SlsSalesOrder_soDtTo_description.title']}}</label>
+                                    <div class="">
+                                        <input type="datetime" date-time  view="date" min-view="date" views="['date']" dismiss="true" format="dd-MM-yyyy"
+                                               id="soDtTo" ng-model="searchInput.slsSODtTo" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <button  ng-click="handleSearchRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                    <button  ng-click="handlePrintRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                                        <i class="glyphicon glyphicon-print"></i>
+                                    </button>
+
+                                </div>
+                              </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3">
+                            <div class="form-group">
+                               <label class=" control-label" tooltips="" tooltip-title="{{'SlsSalesOrder_acsngUser_description.text' | translate}}" tooltip-side="top" for="acsngUser">{{slsSalesOrderUtils.translations['SlsSalesOrder_acsngUser_description.title']}}</label>
+                               <div class="">
+                                <input type="text" id="acsngUser" ng-model="searchParam.acsngUser" autocomplete="off" typeahead="acsngUser as acsngUser.loginName for acsngUser in slsSalesOrderUtils.loadUsers($viewValue) | filter:$viewValue" typeahead-loading="loading" class="form-control">
+                               </div>
+                            </div>
+                            </div>
+                            <div class="col-lg-3">
+                            <div class="form-group">
+                               <label class=" control-label" tooltips="" tooltip-title="{{'SlsSOPtnr_description.text' | translate}}" tooltip-side="top" for="ptnr">{{slsSalesOrderUtils.translations['SlsSOPtnr_description.title']}}</label>
+                               <div class="">
+                                <input type="text" name="ptnr" id="ptnr" ng-model="searchInput.ptnr" autocomplete="off" typeahead="ptnr as ptnr.fullName for ptnr in slsSalesOrderUtils.loadPartnersByName($viewValue) | filter:$viewValue" typeahead-loading="loading" class="form-control">
+                               </div>
+                            </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default ">
+            <div class="panel-heading no-collapse"><b>{{slsSalesOrderUtils.translations['Entity_Result.title']}}</b></div>
+            <div class="panel-body">
+                <div class="col-lg-12">
+                    <div  class="row">
+                        <a class="btn btn-primary pull-right margBott10" href="#/SlsSalesOrders/sale" >
+                           <i class="glyphicon-plus"></i> {{slsSalesOrderUtils.translations['Entity_create.title']}}
+                        </a>
+
+                    </div>
+                    <div class="table-overflow-middle row">
+                        <table class="table table-bordered  table-striped pointer-element" >
+                            <thead>
+                            <div class="row">
+                              <div class="col-lg-3">
+                                 <input ng-model="q" id="search" class="form-control" placeholder="Recherche..."/>
+                              </div> 
+                            </div><br>
+                            <tr>
+                                <th class="text-center">{{slsSalesOrderUtils.translations['SlsSalesOrder_soNbr_description.title']}}</th>
+                                <th class="text-center">{{slsSalesOrderUtils.translations['SlsSalesOrder_soStatus_description.title']}}</th>
+                                <th class="text-center">{{slsSalesOrderUtils.translations['SlsSalesOrder_soDt_description.title']}}</th>
+                                <th class="text-center">{{slsSalesOrderUtils.translations['SlsSalesOrder_acsngUser_description.title']}}</th>
+                                <th class="text-center">{{slsSalesOrderUtils.translations['SlsSalesOrder_netSPPreTax_description.title']}}</th>
+                                <th class="text-center">{{slsSalesOrderUtils.translations['SlsSalesOrder_vatAmount_description.title']}}</th>
+                                <th class="text-center">{{slsSalesOrderUtils.translations['SlsSalesOrder_netSPTaxIncl_description.title']}}</th>
+                                <th class="text-center">{{slsSalesOrderUtils.translations['SlsSalesOrder_netSalesAmt_description.title']}}</th>
+                                <th class="text-center">{{slsSalesOrderUtils.translations['SlsSalesOrder_netAmtToPay_description.title']}}</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr dir-paginate="slsSO in slsSalesOrders() | filter:q | itemsPerPage:itemPerPage()" >
+                                <td>{{slsSO.soNbr}}</td>
+                                <td>{{slsSalesOrderUtils.slsSOStatusI18nMsgTitleValue(slsSO.soStatus)}}</td>
+                                <td>{{slsSalesOrderUtils.formatDate(slsSO.soDt, null)}}</td>
+                                <td>{{slsSO.acsngUser}}</td>
+                                <td>{{slsSO.netSPPreTax}}</td>
+                                <td>{{slsSO.vatAmount}}</td>
+                                <td>{{slsSO.netSPTaxIncl}}</td>
+                                <td>{{slsSO.netSalesAmt}}</td>
+                                <td>{{slsSO.netAmtToPay}}</td>
+                                <td><a href="" ng-click="show(slsSO,$index)"><i class="glyphicon glyphicon-eye-open"></i></a></td>
+                                <td><a href="" ng-click="edit(slsSO, slsSO.slsSOItems, $index)"><i class="glyphicon glyphicon-edit"></i></a></td>
+                            </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                    <ul class="pull-right">
+                        <pagination total-items="totalItems()" 
+                          previous-text="{{slsSalesOrderUtils.translations['Entity_previous.title']}}" 
+                          next-text="{{slsSalesOrderUtils.translations['Entity_next.title']}}" 
+                          first-text="{{slsSalesOrderUtils.translations['Entity_first.title']}}" 
+                          last-text="{{slsSalesOrderUtils.translations['Entity_last.title']}}" 
+                          max-size="maxSize" boundary-links="true" items-per-page="itemPerPage()"  class="pagination-sm" 
+                          ng-model="currentPage" ng-change="paginate()">
+                        </pagination>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+</div>

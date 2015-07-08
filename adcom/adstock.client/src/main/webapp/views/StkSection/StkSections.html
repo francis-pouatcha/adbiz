@@ -1,0 +1,103 @@
+<div class="row">
+<div class="panel panel-default  ng-scope">
+    <div class="panel-heading no-collapse">    
+     <div class="row">
+        <div class="col-lg-3">
+            <b>{{stkSectionUtils.translations['Entity_search.title']}} </b>
+            <b>{{stkSectionUtils.translations['StkSections_description.title']}}</b>
+        </div>
+     </div>
+    </div> 
+    <div class="panel-body">
+        <div class="row" >
+            <form role="form" class="">
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <label class=" control-label" for="sectionCode">{{stkSectionUtils.translations['StkSection_sectionCode_description.title']}}</label>
+                        <div class="">
+                            <input type="text" id="sectionCode" ng-model="searchInput.entity.sectionCode" class="form-control" 
+                            typeahead="displayable.sectionCode as displayable.sectionCode for displayable in stkSectionUtils.loadSectionCodes($viewValue)" typeahead-loading="loading" typeahead-on-select='onArticleSelectedInSearch($item, $model, $label)' >
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label class=" control-label" for="name">{{stkSectionUtils.translations['StkSection_name_description.title']}}</label>
+                        <div class="">
+                            <input type="text" id="name" ng-model="searchInput.entity.name" class="form-control" 
+                            typeahead="displayable as displayable.name for displayable in stkSectionUtils.loadSectionNames($viewValue)" typeahead-loading="loading" typeahead-on-select='onArticleSelectedInSearch($item, $model, $label)' >
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label class=" control-label" for="wharehouse">{{stkSectionUtils.translations['StkSection_wharehouse_description.title']}}</label>
+                        <div class="">
+                            <input type="text" id="wharehouse" ng-model="searchInput.entity.wharehouse" class="form-control" 
+                            typeahead="displayable as displayable.wharehouse for displayable in stkSectionUtils.loadWharehouses($viewValue)" typeahead-loading="loading" typeahead-on-select='onArticleSelectedInSearch($item, $model, $label)' >
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <label class=" control-label" for="parentCode">{{stkSectionUtils.translations['StkSection_parentCode_description.title']}}</label>
+                        <div class="">
+                            <input type="text" id="parentCode" ng-model="searchInput.entity.parentCode" class="form-control" 
+                            typeahead="displayable.sectionCode as displayable.sectionCode for displayable in stkSectionUtils.loadSectionCodes($viewValue)" typeahead-loading="loading" typeahead-on-select='onArticleSelectedInSearch($item, $model, $label)' >
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <button  ng-click="handleSearchRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                        <button  ng-click="handlePrintRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                            <i class="glyphicon glyphicon-print"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+    <div class="panel panel-default ">
+         <div class="panel-heading no-collapse"><b>{{stkSectionUtils.translations['Entity_Result.title']}}</b></div>
+              <div class="panel-body">
+                 <div class="col-lg-12">
+                     <div  class="row">
+                        <a class="btn btn-primary pull-right margBott10" href="#/StkSections/new" >
+                           <i class="glyphicon-plus"></i> {{stkSectionUtils.translations['Entity_create.title']}}
+                        </a>
+                    </div>
+                     <div class="table-overflow-middle row">
+                         <table class="table table-bordered  table-striped pointer-element" >
+                             <thead>
+                             <tr>
+                                 <th class="text-center">{{stkSectionUtils.translations['StkSection_sectionCode_description.title']}}</th>
+                                 <th class="text-center">{{stkSectionUtils.translations['StkSection_name_description.title']}}</th>
+                                 <th class="text-center">{{stkSectionUtils.translations['StkSection_wharehouse_description.title']}}</th>
+                                 <th class="text-center">{{stkSectionUtils.translations['StkSection_parentCode_description.title']}}</th>
+                                 <th></th>
+                                 <th></th>
+                             </tr>
+                             </thead>
+                             <tbody>
+                             <tr ng-repeat="stkSection in stkSections()" >
+                                 <td>{{stkSection.sectionCode}}</td>
+                                 <td>{{stkSection.name}}</td>
+                                 <td>{{stkSection.wharehouse}}</td>
+                                 <td>{{stkSection.parentCode}}</td>
+                                 <td><a href="" ng-click="show(stkSection,$index)"><i class="glyphicon glyphicon-eye-open"></i></a></td>
+                                 <td><a href="" ng-click="edit(stkSection,$index)"><i class="glyphicon glyphicon-edit"></i></a></td>
+                             </tr>
+                             </tbody>
+                         </table>
+                     </div>
+                     <ul  class="pull-right">
+                         <pagination  total-items="totalItems()" items-per-page="itemPerPage()"  class="pagination-sm" ng-model="currentPage" ng-change="paginate()"></pagination>
+                     </ul>
+                 </div>
+             </div>      
+	   </div>
+</div>
