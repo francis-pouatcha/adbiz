@@ -76,30 +76,30 @@ cd $JBOSS_HOME/adcom/adsales/data/ && rm ad*
 
 echo 'cnfiguring jboss'
 cp $ADCOM_HOME/adcom.configuration/jboss-eap-6.3/standalone/configuration/standalone.xml $JBOSS_HOME/standalone/configuration/standalone.xml
-cp $ADCOM_HOME/adcom.configuration/jboss-eap-6.3/standalone/security/adcom.jks $JBOSS_HOME/standalone/security/adcom.jks
+# cp $ADCOM_HOME/adcom.configuration/jboss-eap-6.3/standalone/security/adcom.jks $JBOSS_HOME/standalone/security/adcom.jks
 
 
 echo 'starting jboss'
 cd $JBOSS_HOME
 cd $JBOSS_HOME && bin/standalone.sh >/dev/null &
-
+	 		
 echo 'switching to projet directory'
 cd $ADCOM_HOME
 echo 'cleanning the projet'
 mvn clean install -DskipTests
 
 echo 'deploying new artifacts'
-cp adbase.server/target/adbase.server.war $JBOSS_HOME/standalone/deployments/
-cp adcatal.server/target/adcatal.server.war $JBOSS_HOME/standalone/deployments/
-cp adstock.server/target/adstock.server.war $JBOSS_HOME/standalone/deployments/
-cp adprocmt.server/target/adprocmt.server.war $JBOSS_HOME/standalone/deployments/
-cp adinvtry.server/target/adinvtry.server.war $JBOSS_HOME/standalone/deployments/
-cp adbnsptnr.server/target/adbnsptnr.server.war $JBOSS_HOME/standalone/deployments/
-cp adsales.server/target/adsales.server.war $JBOSS_HOME/standalone/deployments/
-cp adcshdwr.server/target/adcshdwr.server.war $JBOSS_HOME/standalone/deployments/
-cp adacc.server/target/adacc.server.war $JBOSS_HOME/standalone/deployments/
-cp adterm.server/target/adterm.server.war $JBOSS_HOME/standalone/deployments/
-cp adaptmt.server/target/adaptmt.server.war $JBOSS_HOME/standalone/deployments/
+# cp adbase.server/target/adbase.server.war $JBOSS_HOME/standalone/deployments/
+# cp adcatal.server/target/adcatal.server.war $JBOSS_HOME/standalone/deployments/
+# cp adstock.server/target/adstock.server.war $JBOSS_HOME/standalone/deployments/
+# cp adprocmt.server/target/adprocmt.server.war $JBOSS_HOME/standalone/deployments/
+# cp adinvtry.server/target/adinvtry.server.war $JBOSS_HOME/standalone/deployments/
+# cp adbnsptnr.server/target/adbnsptnr.server.war $JBOSS_HOME/standalone/deployments/
+# cp adsales.server/target/adsales.server.war $JBOSS_HOME/standalone/deployments/
+# cp adcshdwr.server/target/adcshdwr.server.war $JBOSS_HOME/standalone/deployments/
+# cp adacc.server/target/adacc.server.war $JBOSS_HOME/standalone/deployments/
+# cp adterm.server/target/adterm.server.war $JBOSS_HOME/standalone/deployments/
+# cp adaptmt.server/target/adaptmt.server.war $JBOSS_HOME/standalone/deployments/
 
 cp adres.client/target/adres.client.war $JBOSS_HOME/standalone/deployments/
 cp adbase.client/target/adbase.client.war $JBOSS_HOME/standalone/deployments/
