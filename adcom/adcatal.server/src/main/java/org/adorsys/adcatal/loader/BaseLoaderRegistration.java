@@ -14,11 +14,12 @@ import javax.inject.Inject;
 import org.adorsys.adcatal.jpa.CatalArt2ProductFamily;
 import org.adorsys.adcatal.jpa.CatalArtDetailConfig;
 import org.adorsys.adcatal.jpa.CatalArtEquivalence;
+import org.adorsys.adcatal.jpa.CatalArtLangMapping;
 import org.adorsys.adcatal.jpa.CatalArtManufSupp;
 import org.adorsys.adcatal.jpa.CatalArticle;
-import org.adorsys.adcatal.jpa.CatalFamilyFeatMaping;
 import org.adorsys.adcatal.jpa.CatalPicMapping;
-import org.adorsys.adcatal.jpa.CatalProductFamily;
+import org.adorsys.adcatal.jpa.CatalProdFmly;
+import org.adorsys.adcatal.jpa.CatalProdFmlyLangMap;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 @Startup
@@ -34,13 +35,15 @@ public class BaseLoaderRegistration {
 	@Inject
 	private CatalArticleLoader catalArticleLoader;
 	@Inject
+	private CatalArtLangMappingLoader catalArtLangMappingLoader;
+	@Inject
 	private CatalArtManufSuppLoader catalArtManufSuppLoader;
 	@Inject
 	private CatalPicMappingLoader catalPicMappingLoader;
 	@Inject
-	private CatalProductFamilyLoader catalProductFamilyLoader;
+	private CatalProdFmlyLoader catalProductFamilyLoader;
 	@Inject
-	private CatalArtLangMappingLoader catalFamilyFeatMapingLoader;
+	private CatalProdFmlyLangMapLoader catalProdFmlyLangMapLoader;
 	@Inject
 	private CatalArt2ProductFamilyLoader catalArt2ProductFamilyLoader;
 	
@@ -49,10 +52,11 @@ public class BaseLoaderRegistration {
 		dataSheetLoader.registerLoader(CatalArtDetailConfig.class.getSimpleName(), catalArtDetailConfigLoader);
 		dataSheetLoader.registerLoader(CatalArtEquivalence.class.getSimpleName(), catalArtEquivalenceLoader);
 		dataSheetLoader.registerLoader(CatalArticle.class.getSimpleName(), catalArticleLoader);
+		dataSheetLoader.registerLoader(CatalArtLangMapping.class.getSimpleName(), catalArtLangMappingLoader);
 		dataSheetLoader.registerLoader(CatalArtManufSupp.class.getSimpleName(), catalArtManufSuppLoader);
 		dataSheetLoader.registerLoader(CatalPicMapping.class.getSimpleName(), catalPicMappingLoader);
-		dataSheetLoader.registerLoader(CatalProductFamily.class.getSimpleName(), catalProductFamilyLoader);
-		dataSheetLoader.registerLoader(CatalFamilyFeatMaping.class.getSimpleName(), catalFamilyFeatMapingLoader);
+		dataSheetLoader.registerLoader(CatalProdFmly.class.getSimpleName(), catalProductFamilyLoader);
+		dataSheetLoader.registerLoader(CatalProdFmlyLangMap.class.getSimpleName(), catalProdFmlyLangMapLoader);
 		dataSheetLoader.registerLoader(CatalArt2ProductFamily.class.getSimpleName(), catalArt2ProductFamilyLoader);
 
 		createTemplate();
@@ -68,8 +72,9 @@ public class BaseLoaderRegistration {
 	public void createTemplate(){
 		HSSFWorkbook workbook = new HSSFWorkbook();
 		catalProductFamilyLoader.createTemplate(workbook);
-		catalFamilyFeatMapingLoader.createTemplate(workbook);
+		catalProdFmlyLangMapLoader.createTemplate(workbook);
 		catalArticleLoader.createTemplate(workbook);
+		catalArtLangMappingLoader.createTemplate(workbook);
 		catalArt2ProductFamilyLoader.createTemplate(workbook);
 		catalPicMappingLoader.createTemplate(workbook);
 		catalArtManufSuppLoader.createTemplate(workbook);

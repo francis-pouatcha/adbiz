@@ -6,6 +6,7 @@ import javax.persistence.metamodel.SingularAttribute;
 
 import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
+import org.apache.commons.lang3.StringUtils;
 
 public abstract class CoreAbstIdentifiedLookup<E extends CoreAbstIdentifObject> {
 
@@ -16,11 +17,20 @@ public abstract class CoreAbstIdentifiedLookup<E extends CoreAbstIdentifObject> 
 	}
 
 	public E findByIdentif(String identif) {
+		if(StringUtils.isBlank(identif)) return null;
 		return getRepo().findOptionalByIdentif(identif);
 	}
 	
 	public Long countByIdentif(String identif){
 		return getRepo().findByIdentif(identif).count();
+	}
+
+	public List<E> findByCntnrIdentif(String cntnrIdentif, int start, int max) {
+		return getRepo().findByCntnrIdentif(cntnrIdentif).firstResult(start).maxResults(max).getResultList();
+	}
+
+	public Long countByCntnrIdentif(String cntnrIdentif){
+		return getRepo().findByCntnrIdentif(cntnrIdentif).count();
 	}
 	
 	public List<E> listAll(int start, int max) {

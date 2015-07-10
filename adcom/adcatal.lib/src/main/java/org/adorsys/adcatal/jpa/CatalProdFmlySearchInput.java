@@ -12,5 +12,5 @@ import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
  *
  */
 @XmlRootElement
-public class CatalProductFamilySearchInput extends CoreAbstIdentifObjectSearchInput<CatalProductFamily>
+public class CatalProdFmlySearchInput extends CoreAbstIdentifObjectSearchInput<CatalProdFmly>
 {}

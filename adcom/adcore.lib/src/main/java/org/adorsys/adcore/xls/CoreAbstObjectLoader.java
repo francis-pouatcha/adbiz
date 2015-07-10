@@ -1,6 +1,7 @@
 package org.adorsys.adcore.xls;
 
 import java.beans.PropertyDescriptor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -67,7 +68,7 @@ public abstract class CoreAbstObjectLoader<T extends CoreAbstIdentifObject> {
 
 	protected void save(T entity, List<PropertyDesc> fields){
 		String identif = entity.getIdentif();
-		if(StringUtils.isBlank(identif)) return;
+//		if(StringUtils.isNotBlank(identif))
 		T found = getLookup().findByIdentif(identif);
 		if(found!=null){
 			if(!objectEquals(found, entity, fields)){
@@ -142,6 +143,14 @@ public abstract class CoreAbstObjectLoader<T extends CoreAbstIdentifObject> {
 			} catch (IllegalAccessException | InvocationTargetException
 					| NoSuchMethodException e) {
 				throw new IllegalStateException(e);
+			}
+			if(propertyType==null) {
+				try {
+					Field field = newObject.getClass().getField(propertyName);
+					propertyType = field.getType();
+				} catch (NoSuchFieldException | SecurityException e) {
+					continue;
+				}
 			}
 			if(propertyType==null) continue;
 			String propertyTypeName = propertyType.getName();

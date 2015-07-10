@@ -16,11 +16,6 @@ public abstract class CatalAbstractArticle extends CoreAbstIdentifObject {
 	private static final long serialVersionUID = -2884028781983739994L;
 
 	@Column
-	@Description("CatalArticle_pic_description")
-	@NotNull
-	private String pic;
-
-	@Column
 	@Description("CatalArticle_active_description")
 	private Boolean active;
 
@@ -61,14 +56,6 @@ public abstract class CatalAbstractArticle extends CoreAbstIdentifObject {
 	@Description("CatalArticle_manageLot_description")
 	@NotNull
 	private Boolean mngByLot = Boolean.TRUE;
-
-	public String getPic() {
-		return this.pic;
-	}
-
-	public void setPic(final String pic) {
-		this.pic = pic;
-	}
 
 	public Boolean getActive() {
 		return this.active;
@@ -142,11 +129,6 @@ public abstract class CatalAbstractArticle extends CoreAbstIdentifObject {
 		this.lotMgtScheme = lotMgtScheme;
 	}
 
-	@Override
-	protected String makeIdentif() {
-		return pic;
-	}
-
 	public Boolean getMngByLot() {
 		return mngByLot;
 	}
@@ -154,21 +136,10 @@ public abstract class CatalAbstractArticle extends CoreAbstIdentifObject {
 	public void setMngByLot(Boolean mngByLot) {
 		this.mngByLot = mngByLot;
 	}
-	
-	public void copyTo(CatalAbstractArticle target) {
-		target.active=active;
-		target.authorizedSale=authorizedSale;
-		target.identif=identif;
-		target.lotMgtScheme=lotMgtScheme;
-		target.maxDisctRate=maxDisctRate;
-		target.maxStockQty=maxStockQty;
-		target.minStockQty=minStockQty;
-		target.mngByLot=mngByLot;
-		target.pic=pic;
-		target.sppu=sppu;
-		target.sppuCurrIso3=sppuCurrIso3;
-		target.vatRate=vatRate;		
+
+	@Override
+	protected String makeIdentif() {
+		throw new IllegalStateException("Identifier is supposed to be set before persist.");
 	}
-	
 	
 }

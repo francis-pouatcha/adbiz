@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.adorsys.adcore.annotation.Description;
@@ -29,20 +28,6 @@ public class CatalArtManufSupp extends CoreAbstIdentifObject {
 	@Column
 	@Description("CatalArtManufSupp_msType_description")
 	private String msType;
-	
-	/*
-	 * Titlee value of msType
-	 */
-	@Transient
-	@Description("CatalArtManufSupp_msType_description.title")
-	private String msTypeName;
-
-	/*
-	 * Text value of msType
-	 */
-	@Transient
-	@Description("CatalArtManufSupp_msType_description.text")
-	private String msTypeDescription;
 
 	@Column
 	@Description("CatalArtManufSupp_warrantyMonths_description")
@@ -55,22 +40,6 @@ public class CatalArtManufSupp extends CoreAbstIdentifObject {
 	@Column
 	@Description("CatalArtManufSupp_pppu_description")
 	private BigDecimal pppu;
-
-	public String getMsTypeName() {
-		return msTypeName;
-	}
-
-	public void setMsTypeName(String msTypeName) {
-		this.msTypeName = msTypeName;
-	}
-
-	public String getMsTypeDescription() {
-		return msTypeDescription;
-	}
-
-	public void setMsTypeDescription(String msTypeDescription) {
-		this.msTypeDescription = msTypeDescription;
-	}
 
 	@Column
 	@Description("CatalArtManufSupp_pppuCurrIso3_description")

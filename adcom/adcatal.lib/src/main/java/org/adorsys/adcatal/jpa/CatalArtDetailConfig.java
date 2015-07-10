@@ -8,10 +8,11 @@ import javax.validation.constraints.NotNull;
 
 import org.adorsys.adcore.annotation.Description;
 import org.adorsys.adcore.utils.SequenceGenerator;
-import org.apache.commons.lang3.StringUtils;
 
 /**
- * Product Details Config
+ * Product Details Config.
+ * 
+ * The field container identifier is used to reference the main article.
  * 
  * @author francis
  *
@@ -21,11 +22,6 @@ import org.apache.commons.lang3.StringUtils;
 public class CatalArtDetailConfig extends CatalAbstractArticle {
 
 	private static final long serialVersionUID = -2136313145008332965L;
-
-	@Column
-	@Description("CatalArtDetailConfig_artDetCode_description")
-	@NotNull
-	private String artDetCode;
 
 	/*
 	 * This describes the quantity of units of the detailed article in the main article.
@@ -50,14 +46,6 @@ public class CatalArtDetailConfig extends CatalAbstractArticle {
 	@Column
 	@Description("CatalArtDetailConfig_mngInPptn_description")
 	private Boolean mngInPptn;
-
-	public String getArtDetCode() {
-		return artDetCode;
-	}
-
-	public void setArtDetCode(String artDetCode) {
-		this.artDetCode = artDetCode;
-	}
 
 	public BigDecimal getQtyOfDtldInMain() {
 		return qtyOfDtldInMain;
@@ -85,9 +73,6 @@ public class CatalArtDetailConfig extends CatalAbstractArticle {
 
 	@Override
 	protected String makeIdentif() {
-		if(StringUtils.isBlank(artDetCode)) {
-			artDetCode = SequenceGenerator.getSequence(SequenceGenerator.ARTICLE_DETAIL_SEQUENCE_PREFIXE);
-		}
-		return artDetCode;
+		return SequenceGenerator.getSequence(SequenceGenerator.ARTICLE_DETAIL_SEQUENCE_PREFIXE);
 	}
 }

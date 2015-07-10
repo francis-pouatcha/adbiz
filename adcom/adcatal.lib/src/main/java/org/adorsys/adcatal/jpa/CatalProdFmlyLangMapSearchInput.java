@@ -12,6 +12,6 @@ import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
  *
  */
 @XmlRootElement
-public class CatalFamilyFeatMapingSearchInput extends CoreAbstIdentifObjectSearchInput<CatalFamilyFeatMaping>
+public class CatalProdFmlyLangMapSearchInput extends CoreAbstIdentifObjectSearchInput<CatalProdFmlyLangMap>
 {
 }

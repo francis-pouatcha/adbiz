@@ -2,7 +2,6 @@ package org.adorsys.adcatal.jpa;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.adorsys.adcore.annotation.Description;
@@ -30,20 +29,6 @@ public class CatalPicMapping extends CoreAbstIdentifObject {
 	@Column
 	@Description("CatalPicMapping_codeOrigin_description")
 	private String codeOrigin;
-
-	/*
-	 * Tite value of codeOrigin
-	 */
-	@Description("CatalPicMapping_codeOrigin_description.title")
-	@Transient
-	private String codeOriginTitle;
-
-	/*
-	 * Text value of codeOrigin
-	 */
-	@Transient
-	@Description("CatalPicMapping_codeOrigin_description.text")
-	private String codeOriginText;
 
 	@Column
 	@Description("CatalPicMapping_addInfo_description")
@@ -97,21 +82,4 @@ public class CatalPicMapping extends CoreAbstIdentifObject {
 	protected String makeIdentif() {
 		return artIdentif;
 	}
-
-	public String getCodeOriginTitle() {
-		return codeOriginTitle;
-	}
-
-	public void setCodeOriginTitle(String codeOriginTitle) {
-		this.codeOriginTitle = codeOriginTitle;
-	}
-
-	public String getCodeOriginText() {
-		return codeOriginText;
-	}
-
-	public void setCodeOriginText(String codeOriginText) {
-		this.codeOriginText = codeOriginText;
-	}
-
 }

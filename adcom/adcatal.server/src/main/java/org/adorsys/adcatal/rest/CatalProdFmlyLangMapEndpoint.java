@@ -8,8 +8,8 @@ import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 
-import org.adorsys.adcatal.jpa.CatalProductFamily;
-import org.adorsys.adcatal.jpa.CatalProductFamily_;
+import org.adorsys.adcatal.jpa.CatalProdFmlyLangMap;
+import org.adorsys.adcatal.jpa.CatalProdFmlyLangMap_;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEndpoint;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
@@ -19,27 +19,28 @@ import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
  */
 @Stateless
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-@Path("/catalproductfamilys")
-public class CatalProductFamilyEndpoint extends
-		CoreAbstIdentifiedEndpoint<CatalProductFamily> {
+@Path("/catalfamilyfeatmapings")
+public class CatalProdFmlyLangMapEndpoint extends
+		CoreAbstIdentifiedEndpoint<CatalProdFmlyLangMap> {
 
 	@Inject
-	private CatalProductFamilyEJB ejb;
+	private CatalProdFmlyLangMapEJB ejb;
 	@Inject
-	private CatalProductFamilyLookup lookup;
+	private CatalProdFmlyLangMapLookup lookup;
 
 	@Override
-	protected CoreAbstIdentifiedLookup<CatalProductFamily> getLookup() {
+	protected CoreAbstIdentifiedLookup<CatalProdFmlyLangMap> getLookup() {
 		return lookup;
 	}
 
 	@Override
-	protected CoreAbstIdentifiedEJB<CatalProductFamily> getEjb() {
+	protected CoreAbstIdentifiedEJB<CatalProdFmlyLangMap> getEjb() {
 		return ejb;
 	}
 
 	@Override
 	protected Field[] getEntityFields() {
-		return CatalProductFamily_.class.getFields();
+		return CatalProdFmlyLangMap_.class.getFields();
 	}
+
 }

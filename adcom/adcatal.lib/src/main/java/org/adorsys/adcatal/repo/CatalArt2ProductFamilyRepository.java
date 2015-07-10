@@ -9,6 +9,4 @@ import org.apache.deltaspike.data.api.Repository;
 public interface CatalArt2ProductFamilyRepository extends CoreAbstIdentifDataRepo<CatalArt2ProductFamily>
 {
 	public QueryResult<CatalArt2ProductFamily> findByArtPic(String artPic);
-
-	public QueryResult<CatalArt2ProductFamily> findByFamCode(String famCode);
 }

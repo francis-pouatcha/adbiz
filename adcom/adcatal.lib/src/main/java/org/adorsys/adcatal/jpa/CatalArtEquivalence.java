@@ -2,7 +2,6 @@ package org.adorsys.adcatal.jpa;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.adorsys.adcore.annotation.Description;
@@ -28,30 +27,6 @@ public class CatalArtEquivalence extends CoreAbstIdentifObject {
 	@Description("CatalArtEquivalence_equivArtIdentif_description")
 	@NotNull
 	private String equivArtIdentif;
-	
-	@Transient
-	@Description("CatalArtEquivalence_mainArtName_description")
-	private String mainArtName;
-	
-	@Transient
-	@Description("CatalArtEquivalence_mainArtEquiv_description")
-	private String equivArtName;
-	
-    public String getMainArtName() {
-		return mainArtName;
-	}
-    
-    public String getEquivArtName() {
-		return equivArtName;
-	}
-    
-    public void setMainArtName(String mainArtName) {
-		this.mainArtName = mainArtName;
-	}
-    
-    public void setEquivArtName(String equivArtName) {
-		this.equivArtName = equivArtName;
-	}
 
 	public String getArtEquivCode() {
 		return this.artEquivCode;

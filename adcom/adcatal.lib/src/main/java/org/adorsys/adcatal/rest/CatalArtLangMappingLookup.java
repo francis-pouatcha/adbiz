@@ -6,10 +6,9 @@ import javax.inject.Inject;
 import org.adorsys.adcatal.jpa.CatalArtLangMapping;
 import org.adorsys.adcatal.repo.CatalArtLangMappingRepository;
 import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
-import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
 
 @Stateless
-public class CatalArtLangMappingLookup  extends CoreAbstIdentifiedLookup<CatalArtLangMapping>{
+public class CatalArtLangMappingLookup  extends CatalAbstArtLangMapLookup<CatalArtLangMapping>{
 
 	@Inject
 	private CatalArtLangMappingRepository repository;

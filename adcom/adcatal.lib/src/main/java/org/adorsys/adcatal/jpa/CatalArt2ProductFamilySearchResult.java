@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.adorsys.adcore.jpa.CoreAbstLangObjectSearchResult;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 
 @XmlRootElement
-public class CatalArt2ProductFamilySearchResult extends CoreAbstLangObjectSearchResult<CatalArt2ProductFamily, CatalArt2ProductFamilySearchInput> {
+public class CatalArt2ProductFamilySearchResult extends CoreAbstIdentifObjectSearchResult<CatalArt2ProductFamily, CatalArt2ProductFamilySearchInput> {
 
 	public CatalArt2ProductFamilySearchResult() {
 		super();

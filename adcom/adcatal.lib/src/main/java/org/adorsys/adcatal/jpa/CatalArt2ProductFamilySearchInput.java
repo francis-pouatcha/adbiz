@@ -2,7 +2,7 @@ package org.adorsys.adcatal.jpa;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.adorsys.adcore.jpa.CoreAbstLangObjectSearchInput;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 
 /**
  * Holds an entity and corresponding field descriptions 
@@ -12,5 +12,5 @@ import org.adorsys.adcore.jpa.CoreAbstLangObjectSearchInput;
  *
  */
 @XmlRootElement
-public class CatalArt2ProductFamilySearchInput extends CoreAbstLangObjectSearchInput<CatalArt2ProductFamily>
+public class CatalArt2ProductFamilySearchInput extends CoreAbstIdentifObjectSearchInput<CatalArt2ProductFamily>
 {}
