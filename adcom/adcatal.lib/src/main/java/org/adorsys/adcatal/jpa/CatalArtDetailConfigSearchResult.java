@@ -4,10 +4,11 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 
 @XmlRootElement
-public class CatalArtDetailConfigSearchResult extends CoreAbstIdentifObjectSearchResult<CatalArtDetailConfig, CatalArtDetailConfigSearchInput>{
+public class CatalArtDetailConfigSearchResult extends CoreAbstIdentifObjectSearchResult<CatalArtDetailConfig>{
 
 	public CatalArtDetailConfigSearchResult() {
 		super();
@@ -15,7 +16,7 @@ public class CatalArtDetailConfigSearchResult extends CoreAbstIdentifObjectSearc
 
 	public CatalArtDetailConfigSearchResult(Long count,
 			List<CatalArtDetailConfig> resultList,
-			CatalArtDetailConfigSearchInput searchInput) {
+			CoreAbstIdentifObjectSearchInput<CatalArtDetailConfig> searchInput) {
 		super(count, resultList, searchInput);
 	}
 	

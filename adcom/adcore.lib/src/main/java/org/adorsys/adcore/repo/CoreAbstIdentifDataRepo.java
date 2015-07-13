@@ -12,6 +12,8 @@ public interface CoreAbstIdentifDataRepo<E extends CoreAbstIdentifObject> extend
 	
 	public QueryResult<E> findByIdentif(String identif);
 
+	public QueryResult<E> findByIdentifBetween(String identifStart, String identifEnd);
+	
 	public QueryResult<E> findByCntnrIdentif(String cntnrIdentif);
 	
 	public QueryResult<E> findByValueDtBetween(Date valueDtFrom, Date valueDtTo);

@@ -25,9 +25,10 @@ public abstract class CoreAbstBsnsObjectHeader extends CoreAbstIdentifObject {
 	@Column
 	private String ouIdentif;
 
-	protected static final Collection<String> coreAbstBsnsObjectHeaderExcludeFields =FluentArray.asList("identif").addAll(coreAbstIdentifObjectExcludeFields).toCol(); 
-	public void contentEquals(CoreAbstEntity rhs){
-		EqualsBuilder.reflectionEquals(this, rhs, coreAbstBsnsObjectHeaderExcludeFields);
+	protected static final Collection<String> coreAbstBsnsObjectHeaderExcludeFields =FluentArray.asList("identif").addAll(coreAbstIdentifObjectExcludeFields).toCol();
+	@Override
+	public boolean contentEquals(CoreAbstEntity rhs){
+		return EqualsBuilder.reflectionEquals(this, rhs, coreAbstBsnsObjectHeaderExcludeFields);
 	}
 	
 	private static CoreAbstBsnsObjectHeader singleton = new CoreAbstBsnsObjectHeader() {

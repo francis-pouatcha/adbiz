@@ -5,15 +5,15 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public abstract class CoreAbstBsnsObjectSearchResult<E extends CoreAbstBsnsObject, I extends CoreAbstBsnsObjectSearchInput<E>>
-		extends CoreAbstIdentifObjectSearchResult<E, I> {
+public abstract class CoreAbstBsnsObjectSearchResult<E extends CoreAbstBsnsObject>
+		extends CoreAbstIdentifObjectSearchResult<E> {
 
 	public CoreAbstBsnsObjectSearchResult() {
 		super();
 	}
 
 	public CoreAbstBsnsObjectSearchResult(Long count, List<E> resultList,
-			I searchInput) {
+			CoreAbstBsnsObjectSearchInput<E> searchInput) {
 		super(count, resultList, searchInput);
 	}
 	

@@ -33,7 +33,7 @@ public abstract class CoreAbstBsnsObjectManager<E extends CoreAbstBsnsObject, I 
 	protected abstract CoreAbstBsnsObjInjector<E, I, H, J, S, C> getInjector();	
 	
 	protected abstract Field[] getEntityFields();
-	protected abstract CoreAbstBsnsObjectSearchResult<E, SI> newSearchResult(Long size, List<E> resultList,CoreAbstBsnsObjectSearchInput<E> searchInput);
+	protected abstract CoreAbstBsnsObjectSearchResult<E> newSearchResult(Long size, List<E> resultList,CoreAbstBsnsObjectSearchInput<E> searchInput);
 	protected abstract CoreAbstBsnsObjectSearchInput<E> newSearchInput();
 
 	@Inject

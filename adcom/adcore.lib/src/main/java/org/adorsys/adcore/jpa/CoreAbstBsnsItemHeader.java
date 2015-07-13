@@ -11,7 +11,6 @@ import javax.persistence.MappedSuperclass;
  */
 @MappedSuperclass
 public abstract class CoreAbstBsnsItemHeader extends CoreAbstIdentifObject {
-
 	private static final long serialVersionUID = 6817986076266080624L;
 
 	private static final CoreAbstBsnsItemHeader singleton = new CoreAbstBsnsItemHeader() {

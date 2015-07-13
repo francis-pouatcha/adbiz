@@ -19,5 +19,8 @@ public class CatalPicMappingLookup  extends CoreAbstIdentifiedLookup<CatalPicMap
 		return repository;
 	}
 
-
+	@Override
+	protected Class<CatalPicMapping> getEntityClass() {
+		return CatalPicMapping.class;
+	}
 }

@@ -4,12 +4,12 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 
 @XmlRootElement
-public class CatalProdFmlyLangMapSearchResult
-		extends
-		CoreAbstIdentifObjectSearchResult<CatalProdFmlyLangMap, CatalProdFmlyLangMapSearchInput> {
+public class CatalProdFmlyLangMapSearchResult extends
+		CoreAbstIdentifObjectSearchResult<CatalProdFmlyLangMap> {
 
 	public CatalProdFmlyLangMapSearchResult() {
 		super();
@@ -17,7 +17,7 @@ public class CatalProdFmlyLangMapSearchResult
 
 	public CatalProdFmlyLangMapSearchResult(Long count,
 			List<CatalProdFmlyLangMap> resultList,
-			CatalProdFmlyLangMapSearchInput searchInput) {
+			CoreAbstIdentifObjectSearchInput<CatalProdFmlyLangMap> searchInput) {
 		super(count, resultList, searchInput);
 	}
 }

@@ -1,6 +1,7 @@
 package org.adorsys.adcatal.rest;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -9,7 +10,11 @@ import javax.inject.Inject;
 import javax.ws.rs.Path;
 
 import org.adorsys.adcatal.jpa.CatalProdFmly;
+import org.adorsys.adcatal.jpa.CatalProdFmlySearchInput;
+import org.adorsys.adcatal.jpa.CatalProdFmlySearchResult;
 import org.adorsys.adcatal.jpa.CatalProdFmly_;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEndpoint;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
@@ -41,5 +46,17 @@ public class CatalProdFmlyEndpoint extends
 	@Override
 	protected Field[] getEntityFields() {
 		return CatalProdFmly_.class.getFields();
+	}
+
+	@Override
+	protected CoreAbstIdentifObjectSearchInput<CatalProdFmly> newSearchInput() {
+		return new CatalProdFmlySearchInput();
+	}
+
+	@Override
+	protected CoreAbstIdentifObjectSearchResult<CatalProdFmly> newSearchResult(
+			Long count, List<CatalProdFmly> resultList,
+			CoreAbstIdentifObjectSearchInput<CatalProdFmly> searchInput) {
+		return new CatalProdFmlySearchResult(count, resultList, searchInput);
 	}
 }

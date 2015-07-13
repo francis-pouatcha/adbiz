@@ -19,4 +19,9 @@ public class CatalArtEquivalenceLookup extends
 	protected CoreAbstIdentifDataRepo<CatalArtEquivalence> getRepo() {
 		return repository;
 	}
+
+	@Override
+	protected Class<CatalArtEquivalence> getEntityClass() {
+		return CatalArtEquivalence.class;
+	}
 }

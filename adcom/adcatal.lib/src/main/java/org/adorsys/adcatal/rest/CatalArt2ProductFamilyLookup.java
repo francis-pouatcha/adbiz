@@ -18,4 +18,9 @@ public class CatalArt2ProductFamilyLookup extends CoreAbstIdentifiedLookup<Catal
 	protected CoreAbstIdentifDataRepo<CatalArt2ProductFamily> getRepo() {
 		return repository;
 	}
+
+	@Override
+	protected Class<CatalArt2ProductFamily> getEntityClass() {
+		return CatalArt2ProductFamily.class;
+	}
 }

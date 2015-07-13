@@ -8,9 +8,7 @@ import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 
 @XmlRootElement
-public class CatalArticleSearchResult
-		extends
-		CoreAbstIdentifObjectSearchResult<CatalArticle, CoreAbstIdentifObjectSearchInput<CatalArticle>> {
+public class CatalArticleSearchResult extends CoreAbstIdentifObjectSearchResult<CatalArticle> {
 
 	public CatalArticleSearchResult() {
 		super();

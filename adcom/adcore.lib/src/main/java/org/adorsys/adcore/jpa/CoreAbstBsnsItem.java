@@ -26,7 +26,7 @@ import org.apache.commons.lang3.time.DateUtils;
 public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 
 	private static final long serialVersionUID = -3126732425840962068L;
-
+	
 	@Column
 	private String lotPic;
 

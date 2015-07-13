@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
 
 import org.adorsys.adcore.utils.FluentArray;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.EqualsBuilder;
 
 /**
  * This is an entity with a business key. The business key is an information
@@ -87,9 +86,9 @@ public abstract class CoreAbstIdentifObject extends CoreAbstEntity {
 
 	protected abstract String makeIdentif();
 	
-	protected static final Collection<String> coreAbstIdentifObjectExcludeFields =FluentArray.asList("identif").addAll(coreAbstEntityExcludedFields).toCol(); 
-	public void contentEquals(CoreAbstEntity rhs){
-		EqualsBuilder.reflectionEquals(this, rhs, coreAbstIdentifObjectExcludeFields);
+	protected static final Collection<String> coreAbstIdentifObjectExcludeFields =FluentArray.asList("identif").addAll(coreAbstEntityExcludedFields).toCol();
+	public boolean contentEquals(CoreAbstEntity rhs){
+		return contentEqualsInternal(rhs, coreAbstIdentifObjectExcludeFields);
 	}
 
 	public Date getValueDt() {

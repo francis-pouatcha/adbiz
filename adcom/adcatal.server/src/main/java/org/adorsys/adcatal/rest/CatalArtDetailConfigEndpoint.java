@@ -1,6 +1,7 @@
 package org.adorsys.adcatal.rest;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -9,7 +10,11 @@ import javax.inject.Inject;
 import javax.ws.rs.Path;
 
 import org.adorsys.adcatal.jpa.CatalArtDetailConfig;
+import org.adorsys.adcatal.jpa.CatalArtDetailConfigSearchInput;
+import org.adorsys.adcatal.jpa.CatalArtDetailConfigSearchResult;
 import org.adorsys.adcatal.jpa.CatalArtDetailConfig_;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEndpoint;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
@@ -38,6 +43,18 @@ public class CatalArtDetailConfigEndpoint extends
 	@Override
 	protected Field[] getEntityFields() {
 		return CatalArtDetailConfig_.class.getFields();
+	}
+
+	@Override
+	protected CoreAbstIdentifObjectSearchInput<CatalArtDetailConfig> newSearchInput() {
+		return new CatalArtDetailConfigSearchInput();
+	}
+
+	@Override
+	protected CoreAbstIdentifObjectSearchResult<CatalArtDetailConfig> newSearchResult(
+			Long count, List<CatalArtDetailConfig> resultList,
+			CoreAbstIdentifObjectSearchInput<CatalArtDetailConfig> searchInput) {
+		return new CatalArtDetailConfigSearchResult(count, resultList, searchInput);
 	}
 
 }

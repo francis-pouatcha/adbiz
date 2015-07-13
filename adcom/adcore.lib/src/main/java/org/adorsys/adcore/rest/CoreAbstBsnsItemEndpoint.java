@@ -27,7 +27,7 @@ import org.adorsys.adcore.pdfreport.PdfReportTemplate;
 import org.adorsys.adcore.props.AbstEntiyProps;
 import org.apache.commons.io.FileUtils;
 
-public abstract class CoreAbstBsnsItemEndpoint<E extends CoreAbstBsnsItem, SI extends CoreAbstBsnsItemSearchInput<E>, SR extends CoreAbstBsnsItemSearchResult<E, SI>> {
+public abstract class CoreAbstBsnsItemEndpoint<E extends CoreAbstBsnsItem, SI extends CoreAbstBsnsItemSearchInput<E>, SR extends CoreAbstBsnsItemSearchResult<E>> {
 
 	protected abstract CoreAbstBsnsItemLookup<E> getLookup();
 	protected abstract Field[] getEntityFields();

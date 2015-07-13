@@ -24,7 +24,7 @@ public abstract class CoreAbstBsnsManagerEndpoint<E extends CoreAbstBsnsObject, 
 
 	protected abstract CoreAbstBsnsObjInjector<E, I, H, J, S, C> getInjector();
 	protected abstract CoreAbstBsnsItemSearchInput<I> newItemSearchInput();
-	protected abstract CoreAbstBsnsItemSearchResult<I, CoreAbstBsnsItemSearchInput<I>> newItemSearchResult(long count, List<I> resultList, CoreAbstBsnsItemSearchInput<I> itemSearchInput);
+	protected abstract CoreAbstBsnsItemSearchResult<I> newItemSearchResult(long count, List<I> resultList, CoreAbstBsnsItemSearchInput<I> itemSearchInput);
 
 	@PUT
 	@Path("/prepare")
@@ -86,7 +86,7 @@ public abstract class CoreAbstBsnsManagerEndpoint<E extends CoreAbstBsnsObject, 
 	@Path("/disableItem")
 	@Consumes({ "application/json"})
 	@Produces({ "application/json"})
-	public CoreAbstBsnsItemSearchResult<I, CoreAbstBsnsItemSearchInput<I>> disableItem(I item) throws AdException {
+	public CoreAbstBsnsItemSearchResult<I> disableItem(I item) throws AdException {
 		getBsnsObjManager().disableItem(item);
 		return findByCntnrIdentifAndSalIndex(item);
 	}
@@ -95,12 +95,12 @@ public abstract class CoreAbstBsnsManagerEndpoint<E extends CoreAbstBsnsObject, 
 	@Path("/enableItem")
 	@Consumes({ "application/json"})
 	@Produces({ "application/json"})
-	public CoreAbstBsnsItemSearchResult<I, CoreAbstBsnsItemSearchInput<I>> enableItem(I item) throws AdException {
+	public CoreAbstBsnsItemSearchResult<I> enableItem(I item) throws AdException {
 		getBsnsObjManager().enableItem(item);
 		return findByCntnrIdentifAndSalIndex(item);
 	}
 
-	private CoreAbstBsnsItemSearchResult<I, CoreAbstBsnsItemSearchInput<I>> findByCntnrIdentifAndSalIndex(I item) {
+	private CoreAbstBsnsItemSearchResult<I> findByCntnrIdentifAndSalIndex(I item) {
 		int count = getInjector().getItemLookup().countByCntnrIdentifAndSalIndex(
 				item.getCntnrIdentif(), item.getSalIndex()).intValue();
 		

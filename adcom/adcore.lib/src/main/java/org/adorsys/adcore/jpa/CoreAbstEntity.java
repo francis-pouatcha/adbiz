@@ -2,9 +2,13 @@ package org.adorsys.adcore.jpa;
 
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -13,9 +17,10 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.Version;
 
+import org.adorsys.adcore.utils.BigDecimalUtils;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.EqualsBuilder;
 
 /**
  * This class define core entity fields for all other entities.
@@ -102,7 +107,32 @@ public abstract class CoreAbstEntity implements Serializable {
 	}
 	
 	protected static final Collection<String> coreAbstEntityExcludedFields = Collections.unmodifiableList(Arrays.asList("id","version","class"));
-	public void contentEquals(CoreAbstEntity rhs){
-		EqualsBuilder.reflectionEquals(this, rhs, coreAbstEntityExcludedFields);
+	public boolean contentEquals(CoreAbstEntity rhs){
+		return contentEqualsInternal(rhs, coreAbstEntityExcludedFields);
+	}
+	protected boolean contentEqualsInternal(CoreAbstEntity rhs, Collection<String> excludedFields){
+		try {
+			Map<String, Object> describe = PropertyUtils.describe(this);
+			Map<String, Object> describe2 = PropertyUtils.describe(rhs);
+			Set<Entry<String,Object>> entrySet = describe.entrySet();
+			for (Entry<String, Object> entry : entrySet) {
+				String key = entry.getKey();
+				if(excludedFields.contains(key)) continue;
+				Object value = entry.getValue();
+				Object value2 = describe2.get(key);
+				if(value==null){
+					if(value2!=null) return false;
+				} else if(value instanceof BigDecimal){
+					if(!(value2 instanceof BigDecimal)) return false;
+					if(!BigDecimalUtils.numericEquals((BigDecimal)value, (BigDecimal)value2)) return false;
+				} else {
+					if(!value.equals(value2)) return false;
+				}
+			}
+			return true;
+		} catch (IllegalAccessException | InvocationTargetException
+				| NoSuchMethodException e) {
+			throw new IllegalStateException(e);
+		}
 	}
 }

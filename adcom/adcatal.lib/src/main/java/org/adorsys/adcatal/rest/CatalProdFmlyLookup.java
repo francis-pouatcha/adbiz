@@ -19,5 +19,8 @@ public class CatalProdFmlyLookup  extends CoreAbstIdentifiedLookup<CatalProdFmly
 		return repository;
 	}
 
-
+	@Override
+	protected Class<CatalProdFmly> getEntityClass() {
+		return CatalProdFmly.class;
+	}
 }

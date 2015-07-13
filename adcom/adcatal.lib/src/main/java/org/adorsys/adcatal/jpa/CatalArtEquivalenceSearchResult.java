@@ -4,10 +4,11 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 
 @XmlRootElement
-public class CatalArtEquivalenceSearchResult extends CoreAbstIdentifObjectSearchResult<CatalArtEquivalence, CatalArtEquivalenceSearchInput>
+public class CatalArtEquivalenceSearchResult extends CoreAbstIdentifObjectSearchResult<CatalArtEquivalence>
 {
 
 	public CatalArtEquivalenceSearchResult() {
@@ -16,7 +17,7 @@ public class CatalArtEquivalenceSearchResult extends CoreAbstIdentifObjectSearch
 
 	public CatalArtEquivalenceSearchResult(Long count,
 			List<CatalArtEquivalence> resultList,
-			CatalArtEquivalenceSearchInput searchInput) {
+			CoreAbstIdentifObjectSearchInput<CatalArtEquivalence> searchInput) {
 		super(count, resultList, searchInput);
 	}
 }

@@ -10,5 +10,4 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  */
 @XmlRootElement
-public abstract class CoreAbstLangObjectSearchInput<E extends CoreAbstLangObject> extends CoreAbstIdentifObjectSearchInput<E> {
-}
+public abstract class CoreAbstLangObjectSearchInput<E extends CoreAbstLangObject> extends CoreAbstIdentifObjectSearchInput<E> {}

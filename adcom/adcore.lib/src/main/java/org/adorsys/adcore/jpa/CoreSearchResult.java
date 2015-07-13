@@ -2,10 +2,7 @@ package org.adorsys.adcore.jpa;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement
-public class CoreSearchResult<T>
+public abstract class CoreSearchResult<T>
 {
 
    /*
@@ -66,5 +63,4 @@ public class CoreSearchResult<T>
    {
       this.searchInput = searchInput;
    }
-
 }

@@ -1,6 +1,7 @@
 package org.adorsys.adcatal.rest;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -9,7 +10,11 @@ import javax.inject.Inject;
 import javax.ws.rs.Path;
 
 import org.adorsys.adcatal.jpa.CatalArticle;
+import org.adorsys.adcatal.jpa.CatalArticleSearchInput;
+import org.adorsys.adcatal.jpa.CatalArticleSearchResult;
 import org.adorsys.adcatal.jpa.CatalArticle_;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEndpoint;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
@@ -42,12 +47,16 @@ public class CatalArticleEndpoint extends
 	protected Field[] getEntityFields() {
 		return CatalArticle_.class.getFields();
 	}
-//
-//
-//	@GET
-//	@Produces({ "application/json"})
-//	public CoreSearchResult<CatalArticle> listAll(
-//			@QueryParam("start") int start, @QueryParam("max") int max) {
-//		return super.listAll(start, max);
-//	}
+
+	@Override
+	protected CoreAbstIdentifObjectSearchInput<CatalArticle> newSearchInput() {
+		return new CatalArticleSearchInput();
+	}
+
+	@Override
+	protected CoreAbstIdentifObjectSearchResult<CatalArticle> newSearchResult(
+			Long count, List<CatalArticle> resultList,
+			CoreAbstIdentifObjectSearchInput<CatalArticle> searchInput) {
+		return new CatalArticleSearchResult(count, resultList, searchInput);
+	}
 }

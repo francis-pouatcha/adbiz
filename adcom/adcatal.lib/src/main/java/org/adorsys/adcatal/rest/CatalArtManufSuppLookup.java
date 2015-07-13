@@ -20,4 +20,8 @@ public class CatalArtManufSuppLookup extends
 		return repository;
 	}
 
+	@Override
+	protected Class<CatalArtManufSupp> getEntityClass() {
+		return CatalArtManufSupp.class;
+	}
 }

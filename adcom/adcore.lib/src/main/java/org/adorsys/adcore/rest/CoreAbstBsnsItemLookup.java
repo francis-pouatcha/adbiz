@@ -1,29 +1,24 @@
 package org.adorsys.adcore.rest;
 
-import java.lang.reflect.Field;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
 import org.adorsys.adcore.jpa.CoreAbstBsnsItem;
 import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchInput;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreSortOrder;
 import org.adorsys.adcore.repo.CoreAbstBsnsItemRepo;
 import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.deltaspike.data.api.QueryResult;
 
 public abstract class CoreAbstBsnsItemLookup<E extends CoreAbstBsnsItem> extends CoreAbstIdentifiedLookup<E>{
 
 	protected abstract CoreAbstBsnsItemRepo<E> getBsnsRepo();
-	protected abstract Class<E> getBsnsObjClass();
-	protected abstract EntityManager getEntityManager();
 
 	protected CoreAbstIdentifDataRepo<E> getRepo(){
 		return getBsnsRepo();
@@ -39,7 +34,7 @@ public abstract class CoreAbstBsnsItemLookup<E extends CoreAbstBsnsItem> extends
 	
 	public List<E> findByCntnrIdentifOrdered(String cntnrIdentif, int start, int max, List<CoreSortOrder> sortFieldNames){
 		QueryResult<E> q = getBsnsRepo().findByCntnrIdentif(cntnrIdentif);
-		Class<E> bsnsObjClass = getBsnsObjClass();
+		Class<E> bsnsObjClass = getEntityClass();
 		Set<String> processedFields =  new HashSet<String>();
 		for (CoreSortOrder coreSortOrder : sortFieldNames) {
 			String fieldName = validateSortField(bsnsObjClass, processedFields, coreSortOrder.getFieldName());
@@ -243,29 +238,16 @@ public abstract class CoreAbstBsnsItemLookup<E extends CoreAbstBsnsItem> extends
 		}
 		return true;
 	}
-
-	private final String FIND_CUSTOM_QUERY = "SELECT e FROM "+ getBsnsObjClass().getSimpleName() +" AS e";
-	private final String COUNT_CUSTOM_QUERY = "SELECT count(e.id) FROM "+ getBsnsObjClass().getSimpleName() +" AS e";
-	String whereClause = " WHERE ";
-	String andClause = " AND ";
-	String orderBy = "ORDER BY e.";
-	String orderASC = " ASC";
-	String orderDESC = " DESC";
 	
-	private StringBuilder preprocessQuery(String findOrCount, CoreAbstBsnsItemSearchInput<E> searchInput){
+	@Override
+	protected StringBuilder preprocessQuery(String findOrCount, CoreAbstIdentifObjectSearchInput<E> si){
+		
+		// Super
+		StringBuilder qBuilder = super.preprocessQuery(findOrCount, si);
+
+		CoreAbstBsnsItemSearchInput<E> searchInput = (CoreAbstBsnsItemSearchInput<E>) si;
+		boolean whereSet = qBuilder.indexOf(whereClause)>-1;
 		E entity = searchInput.getEntity();
-
-
-		StringBuilder qBuilder = new StringBuilder(findOrCount);
-		boolean whereSet = false;
-		
-		if(searchInput.getFieldNames().contains("cntnrIdentif") && StringUtils.isNotBlank(entity.getCntnrIdentif())) whereSet = prep(whereSet, qBuilder, "e.cntnrIdentif=:cntnrIdentif");
-		
-		if(searchInput.getValueDtFrom()!=null) whereSet = prep(whereSet, qBuilder, "e.valueDt >= :valueDtFrom");
-		if(searchInput.getValueDtTo()!=null) whereSet = prep(whereSet, qBuilder, "e.valueDt <= :valueDtTo");
-
-		if(searchInput.getIdentifFrom()!=null) whereSet = prep(whereSet, qBuilder, "e.identif >= :identifFrom");
-		if(searchInput.getIdentifTo()!=null) whereSet = prep(whereSet, qBuilder, "e.identif <= :identifTo");
 		
 		if(searchInput.getFieldNames().contains("lotPic") && StringUtils.isNotBlank(entity.getLotPic())) whereSet = prep(whereSet, qBuilder, "LOWER(e.lotPic) LIKE(LOWER(:lotPic))");
 		if(searchInput.getFieldNames().contains("artPic") && StringUtils.isNotBlank(entity.getArtPic())) whereSet = prep(whereSet, qBuilder, "LOWER(e.artPic) LIKE(LOWER(:artPic))");
@@ -385,46 +367,17 @@ public abstract class CoreAbstBsnsItemLookup<E extends CoreAbstBsnsItem> extends
 		
 		if(searchInput.getDisabledDtFrom()!=null) whereSet = prep(whereSet, qBuilder, "e.disabledDtFrom >= :disabledDtFrom");
 		if(searchInput.getDisabledDtTo()!=null) whereSet = prep(whereSet, qBuilder, "e.disabledDtTo >= :disabledDtTo");
-		
-		List<CoreSortOrder> sortFieldNames = searchInput.getSortFieldNames();
-		Set<String> processedFields =  new HashSet<String>();
-		Class<E> bsnsObjClass = getBsnsObjClass();
-		for (CoreSortOrder coreSortOrder : sortFieldNames) {
-			String fieldName = validateSortField(bsnsObjClass, processedFields, coreSortOrder.getFieldName());
-			if(StringUtils.isBlank(fieldName)) continue;
-			qBuilder.append(orderBy).append(fieldName);
-			if(coreSortOrder.getASC()){
-				qBuilder.append(orderASC);	
-			} else {
-				qBuilder.append(orderDESC);	
-			}
-		}
+
 		return qBuilder;
 	}
-	
-	private String validateSortField(Class<E> bsnsObjClass, Set<String> processedFields, String fieldName){
-		fieldName = StringUtils.trim(fieldName);
-		if(StringUtils.isBlank(fieldName)) return null;
-		if(processedFields.contains(fieldName)) return null;
-		Field field = FieldUtils.getField(bsnsObjClass, fieldName, true);
-		if(field==null) return null;
-		
-		processedFields.add(fieldName);
-		return fieldName;
-	}
-	
-	public void setParameters(CoreAbstBsnsItemSearchInput<E> searchInput, Query query)
+
+	@Override
+	protected void setParameters(CoreAbstIdentifObjectSearchInput<E> si, Query query)
 	{
+		super.setParameters(si, query);
+
+		CoreAbstBsnsItemSearchInput<E> searchInput = (CoreAbstBsnsItemSearchInput<E>) si;
 		E entity = searchInput.getEntity();
-
-		if(searchInput.getFieldNames().contains("cntnrIdentif") && StringUtils.isNotBlank(entity.getCntnrIdentif())) query.setParameter("cntnrIdentif", entity.getCntnrIdentif());;
-
-		
-		if(searchInput.getValueDtFrom()!=null) query.setParameter("valueDtFrom", searchInput.getValueDtFrom());
-		if(searchInput.getValueDtTo()!=null) query.setParameter("valueDtTo", searchInput.getValueDtTo());
-		
-		if(searchInput.getIdentifFrom()!=null) query.setParameter("identifFrom", searchInput.getIdentifFrom());
-		if(searchInput.getIdentifTo()!=null) query.setParameter("identifTo", searchInput.getIdentifTo());
 
 		if(searchInput.getFieldNames().contains("lotPic") && StringUtils.isNotBlank(entity.getLotPic())) query.setParameter("lotPic", suffix(entity.getLotPic()));
 		if(searchInput.getFieldNames().contains("artPic") && StringUtils.isNotBlank(entity.getArtPic())) query.setParameter("artPic", suffix(entity.getArtPic()));
@@ -434,8 +387,8 @@ public abstract class CoreAbstBsnsItemLookup<E extends CoreAbstBsnsItem> extends
 
 		if(searchInput.getFieldNames().contains("supplierPic") && StringUtils.isNotBlank(entity.getSupplierPic())) query.setParameter("supplierPic", suffix(entity.getSupplierPic()));
 
-		if(searchInput.getExpirDtFrom()!=null) query.setParameter("valueDtFrom", searchInput.getExpirDtFrom());
-		if(searchInput.getExpirDtTo()!=null) query.setParameter("valueDtTo", searchInput.getExpirDtTo());
+		if(searchInput.getExpirDtFrom()!=null) query.setParameter("expirDtFrom", searchInput.getExpirDtFrom());
+		if(searchInput.getExpirDtTo()!=null) query.setParameter("expirDtTo", searchInput.getExpirDtTo());
 
 		if(searchInput.getPrchUnitPrcPreTaxFrom()!=null) query.setParameter("prchUnitPrcPreTaxFrom", searchInput.getPrchUnitPrcPreTaxFrom());
 		if(searchInput.getPrchUnitPrcPreTaxTo()!=null) query.setParameter("prchUnitPrcPreTaxTo", searchInput.getPrchUnitPrcPreTaxTo());
@@ -544,55 +497,5 @@ public abstract class CoreAbstBsnsItemLookup<E extends CoreAbstBsnsItem> extends
 		
 		if(searchInput.getDisabledDtFrom()!=null) query.setParameter("disabledDtFrom", searchInput.getDisabledDtFrom());
 		if(searchInput.getDisabledDtTo()!=null) query.setParameter("disabledDtTo", searchInput.getDisabledDtTo());
-	}	
-	
-	private String suffix(String section) {
-		if(StringUtils.isBlank(section)) return section;
-		if(!StringUtils.endsWith(section, "%")) return section + "%";
-		return section;
-	}
-
-	private String prefixSuffix(String section) {
-		if(StringUtils.isBlank(section)) return section;
-		if(!StringUtils.endsWith(section, "%")) return section + "%";
-		if(!StringUtils.startsWith(section, "%")) return "%" + section;
-		return section;
-	}
-
-	public List<E> findCustom(CoreAbstBsnsItemSearchInput<E> searchInput)
-	{
-		StringBuilder qBuilder = preprocessQuery(FIND_CUSTOM_QUERY, searchInput);
-		TypedQuery<E> query = getEntityManager().createQuery(qBuilder.toString(), getBsnsObjClass());
-		setParameters(searchInput, query);
-
-		int start = searchInput.getStart();
-		int max = searchInput.getMax();
-
-		if(start < 0)  start = 0;
-		query.setFirstResult(start);
-		if(max >= 1) 
-			query.setMaxResults(max);
-		
-		
-		return query.getResultList();
-	}
-
-	public Long countCustom(CoreAbstBsnsItemSearchInput<E> searchInput)
-	{
-		StringBuilder qBuilder = preprocessQuery(COUNT_CUSTOM_QUERY, searchInput);
-		TypedQuery<Long> query = getEntityManager().createQuery(qBuilder.toString(), Long.class);
-		setParameters(searchInput, query);
-		return query.getSingleResult();
-	}
-	
-	private boolean prep(boolean whereSet, StringBuilder qBuilder, String whereOp){
-		if(!whereSet){
-			qBuilder.append(whereClause);
-			whereSet = true;
-		} else {
-			qBuilder.append(andClause);
-		}
-		qBuilder.append(whereOp);
-		return whereSet;
-	}
+	}		
 }

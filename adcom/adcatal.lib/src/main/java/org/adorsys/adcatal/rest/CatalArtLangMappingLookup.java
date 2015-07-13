@@ -18,4 +18,8 @@ public class CatalArtLangMappingLookup  extends CatalAbstArtLangMapLookup<CatalA
 		return repository;
 	}
 
+	@Override
+	protected Class<CatalArtLangMapping> getEntityClass() {
+		return CatalArtLangMapping.class;
+	}
 }

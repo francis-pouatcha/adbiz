@@ -17,4 +17,9 @@ public class CatalArticleLookup extends CatalAbstractArticleLookup<CatalArticle>
 	protected CoreAbstIdentifDataRepo<CatalArticle> getRepo() {
 		return repository;
 	}
+
+	@Override
+	protected Class<CatalArticle> getEntityClass() {
+		return CatalArticle.class;
+	}
 }

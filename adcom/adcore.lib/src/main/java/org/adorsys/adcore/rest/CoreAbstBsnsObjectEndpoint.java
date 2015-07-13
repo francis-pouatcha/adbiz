@@ -20,7 +20,7 @@ import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchResult;
 
 
-public abstract class CoreAbstBsnsObjectEndpoint<E extends CoreAbstBsnsObject, SI extends CoreAbstBsnsObjectSearchInput<E>, SR extends CoreAbstBsnsObjectSearchResult<E, SI>> {
+public abstract class CoreAbstBsnsObjectEndpoint<E extends CoreAbstBsnsObject, SI extends CoreAbstBsnsObjectSearchInput<E>, SR extends CoreAbstBsnsObjectSearchResult<E>> {
 
 	protected abstract CoreAbstBsnsObjectLookup<E> getLookup();
 	protected abstract Field[] getEntityFields();
