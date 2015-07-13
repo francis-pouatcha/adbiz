@@ -1,10 +1,6 @@
 package org.adorsys.adstock.jpa;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import javax.xml.bind.annotation.XmlRootElement;
 
 import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchInput;
 
@@ -15,7 +11,6 @@ import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchInput;
  * @author francis pouatcha
  *
  */
-@XmlRootElement
 public class StkArticleLotSearchInput extends CoreAbstBsnsItemSearchInput<StkArticleLot>{
 
 	private boolean withStrgSection;

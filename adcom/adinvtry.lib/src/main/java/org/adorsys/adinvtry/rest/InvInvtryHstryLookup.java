@@ -15,7 +15,7 @@ public class InvInvtryHstryLookup extends CoreAbstBsnsObjectHstryLookup<InvInvtr
 	private InvInvtryHstryRepository repository;
 
 	@Override
-	protected CoreAbstBsnsObjHstryRepo<InvInvtryHstry> getRepo() {
+	protected InvInvtryHstryRepository getRepo() {
 		return repository;
 	}
 

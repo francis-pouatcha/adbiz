@@ -33,8 +33,6 @@ import com.itextpdf.text.pdf.draw.LineSeparator;
  *
  */
 public abstract class PdfReportTemplate<T> {
-		
-	protected abstract AbstEntiyProps<T> getEntiyProps();
 
 	/* The document. */
 	private Document document;
@@ -82,12 +80,12 @@ public abstract class PdfReportTemplate<T> {
 		return this;
 	}
 	
-	public PdfReportTemplate<T> setup() throws DocumentException {
+	private PdfReportTemplate<T> setup(AbstEntiyProps<T> props) throws DocumentException {
 		checkDone();
 		document = new Document(PageSize.A4.rotate(),5,5,5,5);
 		FileOutputStream fos = null;
 		try {
-			file = File.createTempFile(username + "_" + getEntiyProps().getEntityClass().getSimpleName() + "_" + UUID.randomUUID().toString(), "."+ userLanguage +".pdf");
+			file = File.createTempFile(username + "_" + props.getEntityClass().getSimpleName() + "_" + UUID.randomUUID().toString(), "."+ userLanguage +".pdf");
 			fos = new FileOutputStream(file);
 			PdfWriter.getInstance(document, fos);
 		} catch (IOException | DocumentException e) {
@@ -96,7 +94,7 @@ public abstract class PdfReportTemplate<T> {
 			throw new IllegalStateException(e);
 		}
 		
-		resetDocument();
+		resetDocument(props);
 		
 		return this;
 	}
@@ -109,10 +107,10 @@ public abstract class PdfReportTemplate<T> {
 	 *            the items
 	 * @throws DocumentException 
 	 */
-	public PdfReportTemplate<T> addItems(List<T> items) throws DocumentException {
-		if(document==null) setup();
+	public PdfReportTemplate<T> addItems(List<T> items, AbstEntiyProps<T> props) throws DocumentException {
+		if(document==null) setup(props);
 		for(T entity:items){
-			newTableRow(getEntiyProps().fieldValues(fieldsName, entity));
+			newTableRow(props.fieldValues(fieldsName, entity));
 		}
 		return this;
 	}
@@ -160,9 +158,9 @@ public abstract class PdfReportTemplate<T> {
 		}
 	}
 
-	private void printReportHeader() throws DocumentException {
+	private void printReportHeader(AbstEntiyProps<T> props) throws DocumentException {
 
-		Paragraph paragraph = new Paragraph(new Phrase("LISTE "+getEntiyProps().getEntityClass().getSimpleName(),boldFont));
+		Paragraph paragraph = new Paragraph(new Phrase("LISTE "+props.getEntityClass().getSimpleName(),boldFont));
 		paragraph.setAlignment(Element.ALIGN_CENTER);
 		document.add(paragraph);
 
@@ -268,7 +266,7 @@ public abstract class PdfReportTemplate<T> {
 	/**
 	 * Close document.
 	 */
-	public void closeDocument() {
+	private void closeDocument() {
 		try {
 			document.add(reportTable);
 			document.close();
@@ -283,9 +281,9 @@ public abstract class PdfReportTemplate<T> {
 	 * @throws DocumentException
 	 *             the document exception
 	 */
-	public void resetDocument() throws DocumentException{
+	private void resetDocument(AbstEntiyProps<T> props) throws DocumentException{
 		document.open();
-		printReportHeader();
+		printReportHeader(props);
 		fillTableHaeder();
 	}
 }

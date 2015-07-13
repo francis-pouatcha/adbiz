@@ -3,8 +3,6 @@ package org.adorsys.adcore.jpa;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 /**
  * Holds an entity and corresponding field descriptions for a search by example
  * call.
@@ -12,7 +10,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author francis pouatcha
  *
  */
-@XmlRootElement
 public abstract class CoreAbstBsnsItemSearchInput<E extends CoreAbstBsnsItem> extends CoreAbstIdentifObjectSearchInput<E>{
 
 	private Date acsngDtFrom;
@@ -25,12 +22,8 @@ public abstract class CoreAbstBsnsItemSearchInput<E extends CoreAbstBsnsItem> ex
 
 	private Date expirDtTo;
 
-	private String nmlzdArtNameLg1Start; 
-	private String nmlzdArtNameLg1End; 
-	private String nmlzdArtNameLg2Start; 
-	private String nmlzdArtNameLg2End; 
-	private String nmlzdArtNameLg3Start; 
-	private String nmlzdArtNameLg3End;
+	private String nmlzdArtNameStart; 
+	private String nmlzdArtNameEnd; 
 
 	private BigDecimal prchUnitPrcPreTaxFrom;
 	private BigDecimal prchUnitPrcPreTaxTo;
@@ -174,52 +167,20 @@ public abstract class CoreAbstBsnsItemSearchInput<E extends CoreAbstBsnsItem> ex
 		this.expirDtTo = expirDtTo;
 	}
 
-	public String getNmlzdArtNameLg1Start() {
-		return nmlzdArtNameLg1Start;
+	public String getNmlzdArtNameStart() {
+		return nmlzdArtNameStart;
 	}
 
-	public void setNmlzdArtNameLg1Start(String nmlzdArtNameLg1Start) {
-		this.nmlzdArtNameLg1Start = nmlzdArtNameLg1Start;
+	public void setNmlzdArtNameStart(String nmlzdArtNameStart) {
+		this.nmlzdArtNameStart = nmlzdArtNameStart;
 	}
 
-	public String getNmlzdArtNameLg1End() {
-		return nmlzdArtNameLg1End;
+	public String getNmlzdArtNameEnd() {
+		return nmlzdArtNameEnd;
 	}
 
-	public void setNmlzdArtNameLg1End(String nmlzdArtNameLg1End) {
-		this.nmlzdArtNameLg1End = nmlzdArtNameLg1End;
-	}
-
-	public String getNmlzdArtNameLg2Start() {
-		return nmlzdArtNameLg2Start;
-	}
-
-	public void setNmlzdArtNameLg2Start(String nmlzdArtNameLg2Start) {
-		this.nmlzdArtNameLg2Start = nmlzdArtNameLg2Start;
-	}
-
-	public String getNmlzdArtNameLg2End() {
-		return nmlzdArtNameLg2End;
-	}
-
-	public void setNmlzdArtNameLg2End(String nmlzdArtNameLg2End) {
-		this.nmlzdArtNameLg2End = nmlzdArtNameLg2End;
-	}
-
-	public String getNmlzdArtNameLg3Start() {
-		return nmlzdArtNameLg3Start;
-	}
-
-	public void setNmlzdArtNameLg3Start(String nmlzdArtNameLg3Start) {
-		this.nmlzdArtNameLg3Start = nmlzdArtNameLg3Start;
-	}
-
-	public String getNmlzdArtNameLg3End() {
-		return nmlzdArtNameLg3End;
-	}
-
-	public void setNmlzdArtNameLg3End(String nmlzdArtNameLg3End) {
-		this.nmlzdArtNameLg3End = nmlzdArtNameLg3End;
+	public void setNmlzdArtNameEnd(String nmlzdArtNameEnd) {
+		this.nmlzdArtNameEnd = nmlzdArtNameEnd;
 	}
 
 	public BigDecimal getPrchUnitPrcPreTaxFrom() {

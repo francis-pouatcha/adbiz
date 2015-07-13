@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class CoreSearchInput<T>
 {
+	public static final int MAX_MAX = 200;
 
    /**
     * The entity holding search inputs.
@@ -73,6 +74,11 @@ public class CoreSearchInput<T>
 
    public void setMax(int max)
    {
-      this.max = max;
+      this.max = checkMax(max);
+   }
+   
+   public static final int checkMax(int max){
+	   if(max <=0 || max>MAX_MAX) throw new IllegalArgumentException("Max must be more than 0 less than or equals: " + MAX_MAX);
+	   return max;
    }
 }

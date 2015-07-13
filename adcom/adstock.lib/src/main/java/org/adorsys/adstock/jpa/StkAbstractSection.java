@@ -4,12 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
-import org.adorsys.adcore.jpa.CoreAbstTimedData;
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 
 @MappedSuperclass
 @Description("StkSection_description")
-public class StkAbstractSection extends CoreAbstTimedData {
+public class StkAbstractSection extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = 1441848160823566249L;
 

@@ -28,8 +28,8 @@ public abstract class CoreAbstIdentifiedEndpoint<E extends CoreAbstIdentifObject
 	protected abstract Field[] getEntityFields();
 
 	@POST
-	@Consumes({ "application/json", "application/xml" })
-	@Produces({ "application/json", "application/xml" })
+	@Consumes({ "application/json"})
+	@Produces({ "application/json"})
 	public E create(E entity) {
 		return detach(getEjb().create(entity));
 	}
@@ -46,15 +46,15 @@ public abstract class CoreAbstIdentifiedEndpoint<E extends CoreAbstIdentifObject
 
 	@PUT
 	@Path("/{id}")
-	@Produces({ "application/json", "application/xml" })
-	@Consumes({ "application/json", "application/xml" })
+	@Produces({ "application/json"})
+	@Consumes({ "application/json"})
 	public E update(E entity) {
 		return detach(getEjb().update(entity));
 	}
 
 	@GET
 	@Path("/{id}")
-	@Produces({ "application/json", "application/xml" })
+	@Produces({ "application/json"})
 	public Response findById(@PathParam("id") String id) {
 		E found = getLookup().findById(id);
 		if (found == null)
@@ -63,9 +63,11 @@ public abstract class CoreAbstIdentifiedEndpoint<E extends CoreAbstIdentifObject
 	}
 
 	@GET
-	@Produces({ "application/json", "application/xml" })
+	@Produces({ "application/json"})
 	public CoreSearchResult<E> listAll(
 			@QueryParam("start") int start, @QueryParam("max") int max) {
+		// Limit the max of items queryable.
+		max = CoreSearchInput.checkMax(max);
 		List<E> resultList = getLookup().listAll(start, max);
 		CoreSearchInput<E> searchInput = new CoreSearchInput<E>();
 		searchInput.setStart(start);
@@ -82,8 +84,8 @@ public abstract class CoreAbstIdentifiedEndpoint<E extends CoreAbstIdentifObject
 
 	@POST
 	@Path("/findBy")
-	@Produces({ "application/json", "application/xml" })
-	@Consumes({ "application/json", "application/xml" })
+	@Produces({ "application/json"})
+	@Consumes({ "application/json"})
 	public CoreSearchResult<E> findBy(
 			CoreSearchInput<E> searchInput) {
 		SingularAttribute<E, ?>[] attributes = readSeachAttributes(searchInput);
@@ -97,7 +99,7 @@ public abstract class CoreAbstIdentifiedEndpoint<E extends CoreAbstIdentifObject
 
 	@POST
 	@Path("/countBy")
-	@Consumes({ "application/json", "application/xml" })
+	@Consumes({ "application/json"})
 	public Long countBy(CoreSearchInput<E> searchInput) {
 		SingularAttribute<E, ?>[] attributes = readSeachAttributes(searchInput);
 		return getLookup().countBy(searchInput.getEntity(), attributes);
@@ -105,8 +107,8 @@ public abstract class CoreAbstIdentifiedEndpoint<E extends CoreAbstIdentifObject
 
 	@POST
 	@Path("/findByLike")
-	@Produces({ "application/json", "application/xml" })
-	@Consumes({ "application/json", "application/xml" })
+	@Produces({ "application/json"})
+	@Consumes({ "application/json"})
 	public CoreSearchResult<E> findByLike(
 			CoreSearchInput<E> searchInput) {
 		SingularAttribute<E, ?>[] attributes = readSeachAttributes(searchInput);
@@ -120,7 +122,7 @@ public abstract class CoreAbstIdentifiedEndpoint<E extends CoreAbstIdentifObject
 
 	@POST
 	@Path("/countByLike")
-	@Consumes({ "application/json", "application/xml" })
+	@Consumes({ "application/json"})
 	public Long countByLike(CoreSearchInput<E> searchInput) {
 		SingularAttribute<E, ?>[] attributes = readSeachAttributes(searchInput);
 		return getLookup().countByLike(searchInput.getEntity(), attributes);

@@ -1,20 +1,19 @@
 package org.adorsys.adstock.jpa;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
-import org.adorsys.adcore.jpa.CoreAbstIdentifData;
-import org.adorsys.javaext.description.Description;
-import org.apache.commons.lang3.StringUtils;
+import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 
 @MappedSuperclass
-public class StkAbstractLot2Section extends CoreAbstIdentifData {
+public class StkAbstractLot2Section extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = -8174913096678489715L;
 
@@ -23,20 +22,6 @@ public class StkAbstractLot2Section extends CoreAbstIdentifData {
 	@NotNull
 	private String lotPic;
 
-	@Column
-	@Description("StkAbstractLot2Section_artPic_description")
-	@NotNull
-	private String artPic;
-
-	/*
-	 * The name of the article is store here to simplify search.
-	 * In the language of the creator of this item.
-	 */
-	@Column
-	@Description("StkAbstractLot2Section_artName_description")
-	@NotNull
-	private String artName;
-	
 	/*
 	 * The section code
 	 */
@@ -44,15 +29,7 @@ public class StkAbstractLot2Section extends CoreAbstIdentifData {
 	@Description("StkAbstractLot2Section_strgSection_description")
 	@NotNull
 	private String strgSection;
-	
-	/*
-	 * The section name
-	 */
-	@Column
-	@Description("StkAbstractLot2Section_artName_description")
-	@NotNull
-	private String sectionName;
-	
+
 	/*
 	 * Closed at the inventory process. Waiting for cleanup.
 	 */
@@ -67,12 +44,24 @@ public class StkAbstractLot2Section extends CoreAbstIdentifData {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Description("StkAbstractLot2Section_outOfStockDt_description")
 	private Date outOfStockDt;	
+
+	@Column
+	@Description("StkAbstractStockQty_stockQty_description")
+	@NotNull
+	private BigDecimal stockQty = BigDecimal.ZERO;
+
+	@Column
+	@Description("StkAbstractStockQty_rsvrdQty_description")
+	@NotNull
+	private BigDecimal rsvrdQty = BigDecimal.ZERO;
 	
-	@Transient
-	private StkAbstractSection stkSection;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Description("StkAbstractStockQty_qtyDt_description")
+	@NotNull
+	private Date qtyDt;
 	
-	@Transient
-	private StkAbstractArticleLot sectionArticleLot;
+	@Description("StkAbstractStockQty_seqNbr_description")
+	private Integer seqNbr;
 	
 	public String getStrgSection() {
 		return strgSection;
@@ -82,36 +71,21 @@ public class StkAbstractLot2Section extends CoreAbstIdentifData {
 		this.strgSection = strgSection;
 	}
 
-	public static String toId(String artPic, String lotPic, String strgSection){
-		return artPic + "_" +lotPic +"_"+ strgSection;
-	}
-	@Override
-	protected String makeIdentif() {
-		return toId(artPic, lotPic, strgSection);
+	public static String toId(String lotPic, String strgSection){
+		return lotPic +"_"+ strgSection;
 	}
 	
+	@Override
+	protected String makeIdentif() {
+		return toId(lotPic, strgSection);
+	}
+
 	public String getLotPic() {
 		return lotPic;
 	}
 
 	public void setLotPic(String lotPic) {
 		this.lotPic = lotPic;
-	}
-
-	public String getArtPic() {
-		return artPic;
-	}
-
-	public void setArtPic(String artPic) {
-		this.artPic = artPic;
-	}
-
-	public String getArtName() {
-		return artName;
-	}
-
-	public void setArtName(String artName) {
-		this.artName = artName;
 	}
 
 	public Date getClosedDt() {
@@ -130,45 +104,35 @@ public class StkAbstractLot2Section extends CoreAbstIdentifData {
 		this.outOfStockDt = outOfStockDt;
 	}
 
-	public String getSectionName() {
-		return sectionName;
+	public BigDecimal getStockQty() {
+		return stockQty;
 	}
 
-	public void setSectionName(String sectionName) {
-		this.sectionName = sectionName;
+	public void setStockQty(BigDecimal stockQty) {
+		this.stockQty = stockQty;
 	}
 
-	public void copyTo(StkAbstractLot2Section target){
-		target.artPic = artPic;
-		target.lotPic = lotPic;
-		target.strgSection=strgSection;
-		target.sectionName = sectionName;
-		target.artName = artName;
-		target.stkSection = stkSection;
-		target.sectionArticleLot =sectionArticleLot;
-	}
-	
-	public boolean contentEquals(StkAbstractLot2Section target){
-		if(!StringUtils.equals(target.strgSection,strgSection)) return false;
-		if(!StringUtils.equals(target.lotPic, lotPic)) return false;
-		if(!StringUtils.equals(target.artPic, artPic)) return false;
-		return true;
-	}
-	
-	public StkAbstractSection getStkSection() {
-		return stkSection;
+	public BigDecimal getRsvrdQty() {
+		return rsvrdQty;
 	}
 
-	public void setStkSection(StkAbstractSection stkSection) {
-		this.stkSection = stkSection;
+	public void setRsvrdQty(BigDecimal rsvrdQty) {
+		this.rsvrdQty = rsvrdQty;
 	}
 
-	public StkAbstractArticleLot getSectionArticleLot() {
-		return sectionArticleLot;
+	public Date getQtyDt() {
+		return qtyDt;
 	}
 
-	public void setSectionArticleLot(StkAbstractArticleLot sectionArticleLot) {
-		this.sectionArticleLot = sectionArticleLot;
+	public void setQtyDt(Date qtyDt) {
+		this.qtyDt = qtyDt;
 	}
-	
+
+	public Integer getSeqNbr() {
+		return seqNbr;
+	}
+
+	public void setSeqNbr(Integer seqNbr) {
+		this.seqNbr = seqNbr;
+	}
 }

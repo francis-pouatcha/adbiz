@@ -1,10 +1,13 @@
 package org.adorsys.adcore.rest;
 
+import java.io.File;
+import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.metamodel.SingularAttribute;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -12,20 +15,26 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.adorsys.adcore.exceptions.AdException;
 import org.adorsys.adcore.jpa.CoreAbstBsnsItem;
 import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchResult;
+import org.adorsys.adcore.pdfreport.PdfReportTemplate;
+import org.adorsys.adcore.props.AbstEntiyProps;
+import org.apache.commons.io.FileUtils;
 
 public abstract class CoreAbstBsnsItemEndpoint<E extends CoreAbstBsnsItem, SI extends CoreAbstBsnsItemSearchInput<E>, SR extends CoreAbstBsnsItemSearchResult<E, SI>> {
 
 	protected abstract CoreAbstBsnsItemLookup<E> getLookup();
-	protected abstract CoreAbstBsnsItemEJB<?, E, ?, ?, ?, ?> getEjb();
 	protected abstract Field[] getEntityFields();
 	protected abstract SR newSearchResult(Long size, List<E> resultList,CoreAbstBsnsItemSearchInput<E> searchInput);
 	protected abstract SI newSearchInput();
+	protected abstract PdfReportTemplate<E> getReportTemplate();
+	protected abstract AbstEntiyProps<E> getEntityProps();
 
 	@GET
 	@Path("/{id}")
@@ -195,4 +204,58 @@ public abstract class CoreAbstBsnsItemEndpoint<E extends CoreAbstBsnsItem, SI ex
 	       return newSearchResult(count, detach(resultList),
 		              detach(searchInput));
 	}
+	
+	@GET
+	@Path("/{cntnrIdentif}/{lg}/report.pdf")
+	@Produces({"application/pdf","application/octet-stream" })
+	public Response buildCshdwrreportPdfReport(
+			@PathParam("cntnrIdentif") String cntnrIdentif,@PathParam("lg") String lang,
+			@Context HttpServletResponse response) throws AdException {
+		AbstEntiyProps<E> entityProps = getEntityProps();
+//		int headerwidths[] = { 9, 4, 8, 10, 8, 11, 9, 7, 9, 10, 4, 10 };
+//		10, 10, 10, 10
+//		String loginName = securityUtil.getCurrentLoginName();
+		Long count = getLookup().countByCntnrIdentifAndDisabledDtIsNull(cntnrIdentif);
+		int start = 0;
+		int pageSize = 100;
+		OutputStream os = null;
+		List<String> fields = new ArrayList<String>();
+		fields.add("section");
+		fields.add("lotPic");
+		fields.add("artPic");
+		fields.add("artName");
+		fields.add("asseccedQty");
+		fields.add("asseccedQty");
+		fields.add("expirDt");
+		fields.add("acsngUser");
+		PdfReportTemplate<E> reportTemplate = getReportTemplate();
+		while (start < count) {
+			int firstResult = start;
+			start += pageSize;
+			List<E> resultList = getLookup().findByCntnrIdentifAndDisabledDtIsNullOrderByAcsngDtAsc(cntnrIdentif, firstResult, pageSize);
+			try {
+				reportTemplate.addItems(resultList, entityProps);
+			} catch (Exception e) {
+				throw new AdException("Error printing", e);
+			}
+		}
+		try {
+			File file = reportTemplate.build();
+			// the contentlength
+			int sizeOf = (int) FileUtils.sizeOf(file);
+			response.setContentLength(sizeOf);
+			os = response.getOutputStream();
+			FileUtils.copyFile(file, os);
+			os.flush();
+			os.close();
+		} catch (Exception e) {
+			throw new AdException("Error printing", e);
+		}
+
+		return Response
+				.ok(os)
+				.header("Content-Disposition",
+						"attachment; filename=report.pdf").build();
+	}
+	
 }

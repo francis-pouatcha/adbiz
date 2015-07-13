@@ -270,19 +270,6 @@ public abstract class CoreAbstBsnsItemLookup<E extends CoreAbstBsnsItem> extends
 		if(searchInput.getFieldNames().contains("lotPic") && StringUtils.isNotBlank(entity.getLotPic())) whereSet = prep(whereSet, qBuilder, "LOWER(e.lotPic) LIKE(LOWER(:lotPic))");
 		if(searchInput.getFieldNames().contains("artPic") && StringUtils.isNotBlank(entity.getArtPic())) whereSet = prep(whereSet, qBuilder, "LOWER(e.artPic) LIKE(LOWER(:artPic))");
 
-		if(searchInput.getFieldNames().contains("artNameLg1") && StringUtils.isNotBlank(entity.getArtNameLg1())) whereSet = prep(whereSet, qBuilder, "LOWER(e.artNameLg1) LIKE(LOWER(:artNameLg1))");
-		if(searchInput.getFieldNames().contains("artNameLg2") && StringUtils.isNotBlank(entity.getArtNameLg2())) whereSet = prep(whereSet, qBuilder, "LOWER(e.artNameLg2) LIKE(LOWER(:artNameLg2))");
-		if(searchInput.getFieldNames().contains("artNameLg3") && StringUtils.isNotBlank(entity.getArtNameLg3())) whereSet = prep(whereSet, qBuilder, "LOWER(e.artNameLg3) LIKE(LOWER(:artNameLg3))");
-
-		if(StringUtils.isNotBlank(searchInput.getNmlzdArtNameLg1Start())) whereSet = prep(whereSet, qBuilder, "LOWER(e.nmlzdArtNameLg1) >= (LOWER(:nmlzdArtNameLg1))");
-		if(StringUtils.isNotBlank(searchInput.getNmlzdArtNameLg1End())) whereSet = prep(whereSet, qBuilder, "LOWER(e.nmlzdArtNameLg1) <= (LOWER(:nmlzdArtNameLg1))");
-
-		if(StringUtils.isNotBlank(searchInput.getNmlzdArtNameLg2Start())) whereSet = prep(whereSet, qBuilder, "LOWER(e.nmlzdArtNameLg2) >= (LOWER(:nmlzdArtNameLg2))");
-		if(StringUtils.isNotBlank(searchInput.getNmlzdArtNameLg2End())) whereSet = prep(whereSet, qBuilder, "LOWER(e.nmlzdArtNameLg2) <= (LOWER(:nmlzdArtNameLg2))");
-
-		if(StringUtils.isNotBlank(searchInput.getNmlzdArtNameLg3Start())) whereSet = prep(whereSet, qBuilder, "LOWER(e.nmlzdArtNameLg3) >= (LOWER(:nmlzdArtNameLg3))");
-		if(StringUtils.isNotBlank(searchInput.getNmlzdArtNameLg3End())) whereSet = prep(whereSet, qBuilder, "LOWER(e.nmlzdArtNameLg3) <= (LOWER(:nmlzdArtNameLg3))");
-
 		if(searchInput.getFieldNames().contains("section") && StringUtils.isNotBlank(entity.getSection())) whereSet = prep(whereSet, qBuilder, "LOWER(e.section) LIKE(LOWER(:section))");
 		if(searchInput.getFieldNames().contains("supplier") && StringUtils.isNotBlank(entity.getSupplier())) whereSet = prep(whereSet, qBuilder, "LOWER(e.supplier) LIKE(LOWER(:supplier))");
 
@@ -441,19 +428,6 @@ public abstract class CoreAbstBsnsItemLookup<E extends CoreAbstBsnsItem> extends
 
 		if(searchInput.getFieldNames().contains("lotPic") && StringUtils.isNotBlank(entity.getLotPic())) query.setParameter("lotPic", suffix(entity.getLotPic()));
 		if(searchInput.getFieldNames().contains("artPic") && StringUtils.isNotBlank(entity.getArtPic())) query.setParameter("artPic", suffix(entity.getArtPic()));
-
-		if(searchInput.getFieldNames().contains("artNameLg1") && StringUtils.isNotBlank(entity.getArtNameLg1())) query.setParameter("artNameLg1", prefixSuffix(entity.getArtNameLg1()));
-		if(searchInput.getFieldNames().contains("artNameLg2") && StringUtils.isNotBlank(entity.getArtNameLg2())) query.setParameter("artNameLg2", prefixSuffix(entity.getArtNameLg2()));
-		if(searchInput.getFieldNames().contains("artNameLg3") && StringUtils.isNotBlank(entity.getArtNameLg3())) query.setParameter("artNameLg3", prefixSuffix(entity.getArtNameLg3()));
-
-		if(StringUtils.isNotBlank(searchInput.getNmlzdArtNameLg1Start())) query.setParameter("nmlzdArtNameLg1", entity.getNmlzdArtNameLg1());
-		if(StringUtils.isNotBlank(searchInput.getNmlzdArtNameLg1End())) query.setParameter("nmlzdArtNameLg1", entity.getNmlzdArtNameLg1());
-
-		if(StringUtils.isNotBlank(searchInput.getNmlzdArtNameLg2Start())) query.setParameter("nmlzdArtNameLg2", entity.getNmlzdArtNameLg2());
-		if(StringUtils.isNotBlank(searchInput.getNmlzdArtNameLg2End())) query.setParameter("nmlzdArtNameLg2", entity.getNmlzdArtNameLg2());
-
-		if(StringUtils.isNotBlank(searchInput.getNmlzdArtNameLg3Start())) query.setParameter("nmlzdArtNameLg3", entity.getNmlzdArtNameLg3());
-		if(StringUtils.isNotBlank(searchInput.getNmlzdArtNameLg3End())) query.setParameter("nmlzdArtNameLg3", entity.getNmlzdArtNameLg3());
 
 		if(searchInput.getFieldNames().contains("section") && StringUtils.isNotBlank(entity.getSection())) query.setParameter("section", suffix(entity.getSection()));
 		if(searchInput.getFieldNames().contains("supplier") && StringUtils.isNotBlank(entity.getSupplier())) query.setParameter("supplier", suffix(entity.getSupplier()));

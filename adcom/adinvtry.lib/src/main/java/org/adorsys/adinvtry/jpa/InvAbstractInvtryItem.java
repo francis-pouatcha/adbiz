@@ -5,11 +5,16 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
+import org.adorsys.adcore.annotation.Description;
 import org.adorsys.adcore.jpa.CoreAbstBsnsItem;
 import org.adorsys.adcore.utils.BigDecimalUtils;
-import org.adorsys.adcore.utils.FinancialOps;
-import org.adorsys.javaext.description.Description;
 
+/**
+ * The gap is the target qty.
+ * 
+ * @author francis
+ *
+ */
 @MappedSuperclass
 @Description("InvInvtryItem_description")
 public abstract class InvAbstractInvtryItem extends CoreAbstBsnsItem {
@@ -24,23 +29,11 @@ public abstract class InvAbstractInvtryItem extends CoreAbstBsnsItem {
 	@Description("InvInvtryItem_asseccedQty_description")
 	private BigDecimal asseccedQty;
 
-	@Column
-	@Description("InvInvtryItem_gap_description")
-	private BigDecimal gap;
-
 	protected void normalize(){
 		this.expectedQty = BigDecimalUtils.zeroIfNull(this.expectedQty);
 		this.asseccedQty = BigDecimalUtils.zeroIfNull(this.asseccedQty);
-		this.gap = BigDecimalUtils.subs(this.expectedQty,this.asseccedQty);
+		setTrgtQty(BigDecimalUtils.subs(this.expectedQty,this.asseccedQty));
 		super.normalize();
-	}
-
-	@Override
-	public void evlte() {
-		normalize();
-		setSlsGrossPrcPreTax(FinancialOps.qtyTmsPrice(this.gap, getSlsUnitPrcPreTax(), getSlsUnitPrcCur()));
-		setPrchGrossPrcPreTax(FinancialOps.qtyTmsPrice(this.gap, getPrchUnitPrcPreTax(), getPrchUnitPrcCur()));
-		setStkValPreTax(FinancialOps.qtyTmsPrice(this.gap, getStkUnitValPreTax(), getStkUnitValCur()));
 	}
 
 	public BigDecimal getExpectedQty() {
@@ -57,21 +50,5 @@ public abstract class InvAbstractInvtryItem extends CoreAbstBsnsItem {
 
 	public void setAsseccedQty(final BigDecimal asseccedQty) {
 		this.asseccedQty = asseccedQty;
-	}
-
-	public BigDecimal getGap() {
-		return this.gap;
-	}
-
-	public void setGap(final BigDecimal gap) {
-		this.gap = gap;
-	}
-	
-	public boolean contentEquals(InvAbstractInvtryItem target) {
-		if (!super.contentEquals(target)) return false;
-		if(!BigDecimalUtils.numericEquals(target.asseccedQty,this.asseccedQty)) return false;
-		if(!BigDecimalUtils.numericEquals(target.expectedQty,this.expectedQty)) return false;
-		if(!BigDecimalUtils.numericEquals(target.gap,this.gap)) return false;
-		return true;
 	}
 }

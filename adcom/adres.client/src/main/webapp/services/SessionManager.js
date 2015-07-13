@@ -5,8 +5,6 @@
 
 'use strict';
 
-//angular.module('Base64Factory');
-//angular.module('ADUtils');
 angular.module('SessionManager',['Base64Factory','ADUtils','pascalprecht.translate'])
 .factory('sessionManager',['Base64','adUtils','$http','$translate',function(Base64,adUtils,$http,$translate){
     var auth = {};
@@ -73,15 +71,12 @@ angular.module('SessionManager',['Base64Factory','ADUtils','pascalprecht.transla
     };
     
     auth.logout = function(){
-    	sess.opr='logout';
-        $http.get('/adbase.server/rest/session/logout')
-        .success(function(data, status, headers, config){
-            clearCredentials();
-    		adUtils.loadApp('/adlogin.client/#/login');
-        })
-        .error(function(data, status, headers, config){});
+        console.log('*** LOGOUT');
+        auth.loggedIn = false;
+        auth.authz = null;
+        window.location = auth.logoutUrl;
     };
-            
+
     auth.wsin = function(trm,usr,successCallback){
         // operation
     	sess.opr='wsin';

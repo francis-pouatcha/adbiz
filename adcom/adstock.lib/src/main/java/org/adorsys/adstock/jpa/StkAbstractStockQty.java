@@ -9,11 +9,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-import org.adorsys.adcore.jpa.AbstractMvmtData;
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
+import org.apache.commons.lang3.StringUtils;
 
 @MappedSuperclass
-public abstract class StkAbstractStockQty extends AbstractMvmtData {
+public abstract class StkAbstractStockQty extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = 5437976674412946410L;
 
@@ -37,6 +38,11 @@ public abstract class StkAbstractStockQty extends AbstractMvmtData {
 	@NotNull
 	private BigDecimal stockQty = BigDecimal.ZERO;
 
+	@Column
+	@Description("StkAbstractStockQty_rsvrdQty_description")
+	@NotNull
+	private BigDecimal rsvrdQty = BigDecimal.ZERO;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Description("StkAbstractStockQty_qtyDt_description")
 	@NotNull
@@ -68,7 +74,19 @@ public abstract class StkAbstractStockQty extends AbstractMvmtData {
 	// will be no prntRecord.
 	@Description("StkAbstractStockQty_cnsldtd_description")
 	private Boolean cnsldtd;
+	
+	@Description("StkAbstractStockQty_resvtnTime_description")
+	private Date resvdDt;
 
+	@Description("StkAbstractStockQty_resvdCncldDt_description")
+	private Date resvdCncldDt;
+
+	// The identifier of the origin process.
+	@Column
+	@Description("StkAbstractStockQty_stkMvntIdentif_description")
+	@NotNull
+	private String stkMvntIdentif;
+	
 	public String getArtPic() {
 		return this.artPic;
 	}
@@ -149,7 +167,29 @@ public abstract class StkAbstractStockQty extends AbstractMvmtData {
 		this.section = section;
 	}
 	
+	public Date getResvdDt() {
+		return resvdDt;
+	}
+
+	public void setResvdDt(Date resvdDt) {
+		this.resvdDt = resvdDt;
+	}
+
+	public Date getResvdCncldDt() {
+		return resvdCncldDt;
+	}
+
+	public void setResvdCncldDt(Date resvdCncldDt) {
+		this.resvdCncldDt = resvdCncldDt;
+	}
+
 	public String artPicAndLotPicAndSection(){
 		return getArtPic() + "_" + getLotPic() + "_" + getSection();
+	}
+
+	@Override
+	protected String makeIdentif() {
+		if(StringUtils.isNotBlank(stkMvntIdentif)) return stkMvntIdentif;
+		return getArtPic() + "_" + getLotPic() + "_" + getSection() + "_" + getSeqNbr();
 	}
 }

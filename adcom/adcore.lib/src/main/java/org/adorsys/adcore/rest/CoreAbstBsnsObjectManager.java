@@ -5,10 +5,13 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import org.adorsys.adcore.auth.TermWsUserPrincipal;
+import javax.enterprise.event.Event;
+import javax.inject.Inject;
+
 import org.adorsys.adcore.enums.CoreHistoryTypeEnum;
-import org.adorsys.adcore.enums.CoreProcStepEnum;
-import org.adorsys.adcore.enums.CoreProcessStatusEnum;
+import org.adorsys.adcore.event.EntityClosingEvent;
+import org.adorsys.adcore.event.EntityPostingEvent;
+import org.adorsys.adcore.event.EntityUpdatingEvent;
 import org.adorsys.adcore.exceptions.AdException;
 import org.adorsys.adcore.jpa.CoreAbstBsnsItem;
 import org.adorsys.adcore.jpa.CoreAbstBsnsObject;
@@ -18,7 +21,6 @@ import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchResult;
 import org.adorsys.adcore.jpa.CoreAbstEntityCstr;
 import org.adorsys.adcore.jpa.CoreAbstEntityJob;
 import org.adorsys.adcore.jpa.CoreAbstEntityStep;
-import org.adorsys.adcore.repo.CoreAbstBsnsObjectRepo;
 import org.adorsys.adcore.utils.BigDecimalUtils;
 import org.adorsys.adcore.utils.CalendarUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -28,27 +30,24 @@ public abstract class CoreAbstBsnsObjectManager<E extends CoreAbstBsnsObject, I 
 	H extends CoreAbstBsnsObjectHstry, J extends CoreAbstEntityJob,
 	S extends CoreAbstEntityStep, C extends CoreAbstEntityCstr, SI extends CoreAbstBsnsObjectSearchInput<E>> {
 
-	protected abstract CoreAbstBsnsObjectLookup<E> getLookup();
+	protected abstract CoreAbstBsnsObjInjector<E, I, H, J, S, C> getInjector();	
+	
 	protected abstract Field[] getEntityFields();
 	protected abstract CoreAbstBsnsObjectSearchResult<E, SI> newSearchResult(Long size, List<E> resultList,CoreAbstBsnsObjectSearchInput<E> searchInput);
 	protected abstract CoreAbstBsnsObjectSearchInput<E> newSearchInput();
-	protected abstract CoreAbstBsnsObjectRepo<E> getBsnsRepo();
-	protected abstract CoreAbstBsnsObjectEJB<E, I, H, J, S, C> getEjb();
-	protected abstract CoreAbstBsnsItemLookup<I> getItemLookup();
-	protected abstract CoreAbstBsnsItemEJB<E, I, H, J, S, C> getItemEjb();
-	protected abstract CoreAbstBsnsObjectHstryLookup<H> getHistoryLookup();
-	protected abstract CoreAbstBsnsObjectHstryEJB<E, I, H, J, S, C> getHistoryEjb();
-	protected abstract String getSequenceGeneratorPrefix();
-	protected abstract TermWsUserPrincipal getCallerPrincipal();
-	protected abstract String prinHstryInfo(E entity);
-	protected abstract CoreAbstBsnsObjLifeCycle<H> getLifeCycle();
-	protected abstract CoreAbstEntityJobEJB<J> getJobEjb();
-	protected abstract CoreAbstEntityJobLookup<J> getJobLookup();
-	protected abstract CoreAbstEntityStepEJB<S> getStepEjb();
-	protected abstract CoreAbstEntityStepLookup<S> getStepLookup();
-	protected abstract CoreAbstEntityCstrEJB<C> getCstrEjb();
-	protected abstract CoreAbstEntityCstrLookup<C> getCstrLookup();
 
+	@Inject
+	@EntityClosingEvent
+	private Event<E> entityClosingEvent;
+
+	@Inject
+	@EntityPostingEvent
+	private Event<E> entityPostingEvent;
+
+	@Inject
+	@EntityUpdatingEvent
+	private Event<E> entityUpdatingEvent;
+	
 	/**
 	 * New business processs. The object is created if necessary.
 	 * 
@@ -61,7 +60,7 @@ public abstract class CoreAbstBsnsObjectManager<E extends CoreAbstBsnsObject, I 
 			if(bsnsObj.getValueDt()==null)
 				bsnsObj.setValueDt(now);
 
-			bsnsObj = getEjb().create(bsnsObj);
+			bsnsObj = getInjector().getBsnsObjEjb().create(bsnsObj);
 		}
 		return bsnsObj;
 	}
@@ -72,64 +71,63 @@ public abstract class CoreAbstBsnsObjectManager<E extends CoreAbstBsnsObject, I 
 	 * @return
 	 */
 	public E update(E entity){
-		getLifeCycle().onUpdate(entity.getIdentif()); 
-		return getEjb().update(entity);
+		entityUpdatingEvent.fire(entity);
+		return getInjector().getBsnsObjEjb().update(entity);
 	}
 	
 	public E close(E entity){
-		getHistoryEjb().createHstry(entity.getIdentif(), CoreProcessStatusEnum.CLOSING.name(), CoreHistoryTypeEnum.CLOSING.name(),CoreProcStepEnum.CLOSING.name(), CoreHistoryTypeEnum.CLOSING.name(), prinHstryInfo(entity));
+		entityClosingEvent.fire(entity);
 
-		entity = getLookup().findById(entity.getId());
+		entity = getInjector().getBsnsObjLookup().findById(entity.getId());
 		Date conflictDt = entity.getConflictDt();
-		getEjb().validateBusinessObject(entity.getIdentif());
+		getInjector().getBsnsObjEjb().validateBusinessObject(entity.getIdentif());
 		// Conflict detected. Save and return
 		if(conflictDt==null && entity.getConflictDt()!=null) 
-			return getEjb().update(entity);
+			return getInjector().getBsnsObjEjb().update(entity);
 		
 		// conflict still there. Just return
 		if(entity.getConflictDt()!=null)return entity;
 
-		return getEjb().close(entity);
+		return getInjector().getBsnsObjEjb().close(entity);
 	}	
 
 	public E validate(E entity){
-		if(getHistoryLookup().hasAnyStatus(entity.getIdentif(), Arrays.asList(CoreHistoryTypeEnum.CLOSED.name()))) return entity;
+		if(getInjector().getHstrLookup().hasAnyStatus(entity.getIdentif(), Arrays.asList(CoreHistoryTypeEnum.CLOSED.name()))) return entity;
 		
-		entity = getLookup().findById(entity.getId());
+		entity = getInjector().getBsnsObjLookup().findById(entity.getId());
 		Date conflictDt = entity.getConflictDt();
-		getEjb().validateBusinessObject(entity.getIdentif());
+		getInjector().getBsnsObjEjb().validateBusinessObject(entity.getIdentif());
 
-		if(conflictDt!=entity.getConflictDt()) entity = getEjb().update(entity);
+		if(conflictDt!=entity.getConflictDt()) entity = getInjector().getBsnsObjEjb().update(entity);
 		
-		return getLookup().findById(entity.getId());
+		return getInjector().getBsnsObjLookup().findById(entity.getId());
 	}	
 	
 	public E post(E entity){
-		getHistoryEjb().createHstry(entity.getIdentif(), CoreProcessStatusEnum.POSTING.name(), CoreHistoryTypeEnum.POSTING.name(),CoreProcStepEnum.POSTING.name(), CoreHistoryTypeEnum.POSTING.name(), prinHstryInfo(entity));
-
+		entityPostingEvent.fire(entity);
 
 		Date conflictDt = entity.getConflictDt();
-		getEjb().validateBusinessObject(entity.getIdentif());
+		getInjector().getBsnsObjEjb().validateBusinessObject(entity.getIdentif());
 		// Conflict detected. Save and return
-		if(conflictDt==null && entity.getConflictDt()!=null) return getEjb().update(entity);
+		if(conflictDt==null && entity.getConflictDt()!=null) return getInjector().getBsnsObjEjb().update(entity);
 		
 		// conflict still there. Just return
 		if(entity.getConflictDt()!=null)return entity;
-		return getEjb().post(entity);
+		return getInjector().getBsnsObjEjb().post(entity);
 	}	
 	
 	public I addItem(I item) throws AdException {
 		loadExistingBsnsObject(item);
 
-		item.setAcsngUser(getCallerPrincipal().getLoginName());
+		item.setAcsngUser(getInjector().getCallerPrincipal().getLoginName());
 		String identifier = I.toIdentifier(item.getCntnrIdentif(), item.getAcsngUser(), item.getLotPic(), item.getArtPic(), item.getSection());
 		
-		I existing = getItemLookup().findByIdentif(identifier);
+		I existing = getInjector().getItemLookup().findByIdentif(identifier);
 		if(existing!=null){
 			item.setId(existing.getId());
 			return updateItem(item);
 		}else {
-			return getItemEjb().create(item);
+			return getInjector().getItemEjb().create(item);
 		}
 	}
 	
@@ -148,22 +146,22 @@ public abstract class CoreAbstBsnsObjectManager<E extends CoreAbstBsnsObject, I 
 	public I updateItem(I item) throws AdException {
 		loadExistingBsnsObject(item); 
 
-		I existing = getItemLookup().findById(item.getId());
+		I existing = getInjector().getItemLookup().findById(item.getId());
 		if(existing==null)
 			throw new AdException("Business Item inexistant");
 		if(!CalendarUtil.isSameInstant(item.getDisabledDt(), existing.getDisabledDt()))
 			throw new IllegalStateException("Use disableItem/enableItem to change the status of an business item.");
 
-		String currentLoginName = getCallerPrincipal().getLoginName();
+		String currentLoginName = getInjector().getCallerPrincipal().getLoginName();
 
 		boolean changed = false;
-		if(!BigDecimalUtils.strictEquals(item.getAssdQty(), existing.getAssdQty())){
+		if(!BigDecimalUtils.strictEquals(item.getTrgtQty(), existing.getTrgtQty())){
 
 			if(item.getAcsngDt()==null){
 				item.setAcsngDt(new Date());
 			}
 
-			existing.setAssdQty(item.getAssdQty());
+			existing.setTrgtQty(item.getTrgtQty());
 			existing.setAcsngDt(item.getAcsngDt());
 			existing.setAcsngUser(currentLoginName);
 			existing.evlte();
@@ -174,7 +172,7 @@ public abstract class CoreAbstBsnsObjectManager<E extends CoreAbstBsnsObject, I 
 			changed = true;
 		}
 		if(changed) {
-			existing = getItemEjb().update(existing);
+			existing = getInjector().getItemEjb().update(existing);
 		}
 
 		return existing;
@@ -182,35 +180,35 @@ public abstract class CoreAbstBsnsObjectManager<E extends CoreAbstBsnsObject, I 
 
 	public void disableItem(I item) throws AdException {
 		loadExistingBsnsObject(item);
-		I existing = getItemLookup().findById(item.getId());
+		I existing = getInjector().getItemLookup().findById(item.getId());
 		if(existing==null)
 			throw new AdException("Business Item inexistant");
 		
 		if(existing.getDisabledDt()==null){
 			Date disabledDt = item.getDisabledDt()!=null?item.getDisabledDt():new Date();
 			existing.setDisabledDt(disabledDt);
-			existing = getItemEjb().update(existing);
+			existing = getInjector().getItemEjb().update(existing);
 		}
 	}
 
 	public void enableItem(I item) throws AdException {
 		loadExistingBsnsObject(item);
 
-		I existing = getItemLookup().findById(item.getId());
+		I existing = getInjector().getItemLookup().findById(item.getId());
 		if(existing==null)
 			throw new AdException("Business Item inexistant");
 
 		if(existing.getDisabledDt()!=null) {
 			existing.setDisabledDt(null);
-			existing = getItemEjb().update(existing);
+			existing = getInjector().getItemEjb().update(existing);
 		}
 	}
 	
 	private E loadExistingBsnsObject(I item) throws AdException{
-		E entity = getLookup().findByIdentif(item.getCntnrIdentif());
+		E entity = getInjector().getBsnsObjLookup().findByIdentif(item.getCntnrIdentif());
 		if(entity==null) 
 			throw new AdException("Missing business object");
-		if(getHistoryLookup().hasAnyStatus(entity.getIdentif(), CoreHistoryTypeEnum.CLOSED.name()))
+		if(getInjector().getHstrLookup().hasAnyStatus(entity.getIdentif(), CoreHistoryTypeEnum.CLOSED.name()))
 			throw new AdException("Business object closed");	
 		
 		return entity;

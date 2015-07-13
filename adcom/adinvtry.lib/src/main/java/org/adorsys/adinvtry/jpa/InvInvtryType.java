@@ -1,6 +1,6 @@
 package org.adorsys.adinvtry.jpa;
 
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
 
 @Description("InvInvtryType_description")
 public enum InvInvtryType

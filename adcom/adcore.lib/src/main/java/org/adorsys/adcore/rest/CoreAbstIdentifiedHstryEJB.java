@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.enterprise.event.Observes;
 
-import org.adorsys.adcore.auth.TermWsUserPrincipal;
+import org.adorsys.adcore.auth.AdcomUser;
 import org.adorsys.adcore.enums.CoreHistoryTypeEnum;
 import org.adorsys.adcore.enums.CoreProcStepEnum;
 import org.adorsys.adcore.enums.CoreProcessStatusEnum;
@@ -20,7 +20,7 @@ public abstract class CoreAbstIdentifiedHstryEJB<H extends CoreAbstIdentifObject
 
 	protected abstract CoreAbstIdentifObjectHstryRepo<H> getRepo();
 	protected abstract H newHstryObj();
-	protected abstract TermWsUserPrincipal getCallerPrincipal();
+	protected abstract AdcomUser getCallerPrincipal();
 
 	public H create(H entity) {
 		H saved = getRepo().save(entity);
@@ -78,9 +78,9 @@ public abstract class CoreAbstIdentifiedHstryEJB<H extends CoreAbstIdentifObject
 		H h = newHstryObj();
 		h.setEntIdentif(entity.getIdentif());
 		h.setHstryDt(new Date());
-		TermWsUserPrincipal callerPrincipal = getCallerPrincipal();
+		AdcomUser callerPrincipal = getCallerPrincipal();
 		if(callerPrincipal!=null){
-			h.setOrignLogin(callerPrincipal.getName());
+			h.setOrignLogin(callerPrincipal.getLoginName());
 			h.setOrignWrkspc(callerPrincipal.getWorkspaceId());
 		}
 		h.setAddtnlInfo(printHstryInfo(entity));

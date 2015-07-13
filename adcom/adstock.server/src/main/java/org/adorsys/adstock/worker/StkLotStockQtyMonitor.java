@@ -9,7 +9,7 @@ import javax.ejb.Singleton;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
-import org.adorsys.adstock.event.StkLotStockQtyEvent;
+import org.adorsys.adcore.event.EntityCreatedEvent;
 import org.adorsys.adstock.jpa.StkLotStockQty;
 
 /**
@@ -27,7 +27,7 @@ public class StkLotStockQtyMonitor {
 	@Inject
 	private StkStockQtyCtrlWkr wkr;
 	
-	public void handleNewLotStockQtyEvent(@Observes @StkLotStockQtyEvent StkLotStockQty lotStockQty){
+	public void handleNewLotStockQtyEvent(@Observes @EntityCreatedEvent StkLotStockQty lotStockQty){
 		newEntry(lotStockQty);
 	}
 	

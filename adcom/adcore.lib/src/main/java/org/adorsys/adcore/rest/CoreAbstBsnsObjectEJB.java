@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.adorsys.adcore.auth.TermWsUserPrincipal;
 import org.adorsys.adcore.enums.CoreHistoryTypeEnum;
 import org.adorsys.adcore.enums.CoreProcStepEnum;
 import org.adorsys.adcore.enums.CoreProcessStatusEnum;
@@ -14,6 +13,7 @@ import org.adorsys.adcore.jpa.CoreAbstBsnsObjectHstry;
 import org.adorsys.adcore.jpa.CoreAbstEntityCstr;
 import org.adorsys.adcore.jpa.CoreAbstEntityJob;
 import org.adorsys.adcore.jpa.CoreAbstEntityStep;
+import org.adorsys.adcore.jpa.CoreBsnsObjInfo;
 import org.adorsys.adcore.repo.CoreAbstBsnsObjectRepo;
 import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
 import org.adorsys.adcore.utils.SequenceGenerator;
@@ -24,23 +24,11 @@ public abstract class CoreAbstBsnsObjectEJB<
 	H extends CoreAbstBsnsObjectHstry, J extends CoreAbstEntityJob,
 	S extends CoreAbstEntityStep, C extends CoreAbstEntityCstr> extends CoreAbstIdentifiedEJB<E>{
 
+	protected abstract CoreAbstBsnsObjInjector<E, I, H, J, S, C> getInjector();	
 	protected abstract CoreAbstBsnsObjectRepo<E> getBsnsRepo();
-	protected abstract CoreAbstBsnsObjectLookup<E> getLookup();
-	protected abstract CoreAbstBsnsObjectEJB<E, I, H, J, S, C> getEjb();
-	protected abstract CoreAbstBsnsItemLookup<I> getItemLookup();
-	protected abstract CoreAbstBsnsItemEJB<E, I, H, J, S, C> getItemEjb();
-	protected abstract CoreAbstBsnsObjectHstryLookup<H> getHistoryLookup();
-	protected abstract CoreAbstBsnsObjectHstryEJB<E, I, H, J, S, C> getHistoryEjb();
-	protected abstract String getSequenceGeneratorPrefix();
-	protected abstract TermWsUserPrincipal getCallerPrincipal();
-	protected abstract String prinHstryInfo(E entity);
-	protected abstract CoreAbstBsnsObjLifeCycle<H> getLifeCycle();
-	protected abstract CoreAbstEntityJobEJB<J> getJobEjb();
-	protected abstract CoreAbstEntityJobLookup<J> getJobLookup();
-	protected abstract CoreAbstEntityStepEJB<S> getStepEjb();
-	protected abstract CoreAbstEntityStepLookup<S> getStepLookup();
-	protected abstract CoreAbstEntityCstrEJB<C> getCstrEjb();
-	protected abstract CoreAbstEntityCstrLookup<C> getCstrLookup();
+	protected String prinHstryInfo(E entity){
+		return CoreBsnsObjInfo.prinInfo(entity);
+	};
 	
 	protected CoreAbstIdentifDataRepo<E> getRepo(){
 		return getBsnsRepo();
@@ -49,12 +37,12 @@ public abstract class CoreAbstBsnsObjectEJB<
 	public E create(E entity)
 	{
 		if(StringUtils.isBlank(entity.getIdentif())){
-			String sequence = SequenceGenerator.getSequence(getSequenceGeneratorPrefix());
+			String sequence = SequenceGenerator.getSequence(getInjector().getSequenceGeneratorPrefix());
 			entity.setIdentif(sequence);
 		}
 
 		E saved = getBsnsRepo().save(attach(entity));
-		getHistoryEjb().createHstry(saved.getIdentif(), CoreProcessStatusEnum.INITIATED.name(), CoreHistoryTypeEnum.INITIATED.name(),CoreProcStepEnum.INITIATING.name(), CoreHistoryTypeEnum.INITIATED.name(), prinHstryInfo(saved));
+		getInjector().getHstrEjb().createHstry(saved.getIdentif(), CoreProcessStatusEnum.INITIATED.name(), CoreHistoryTypeEnum.INITIATED.name(),CoreProcStepEnum.INITIATING.name(), CoreHistoryTypeEnum.INITIATED.name(), prinHstryInfo(saved));
 		return saved;
 	}
 	
@@ -65,7 +53,7 @@ public abstract class CoreAbstBsnsObjectEJB<
 
 		E saved = getBsnsRepo().save(attach(entity));
 		
-		getHistoryEjb().createHstry(saved.getIdentif(), CoreProcessStatusEnum.CLOSED.name(), CoreHistoryTypeEnum.CLOSED.name(),CoreProcStepEnum.CLOSING.name(), CoreHistoryTypeEnum.CLOSED.name(), prinHstryInfo(saved));
+		getInjector().getHstrEjb().createHstry(saved.getIdentif(), CoreProcessStatusEnum.CLOSED.name(), CoreHistoryTypeEnum.CLOSED.name(),CoreProcStepEnum.CLOSING.name(), CoreHistoryTypeEnum.CLOSED.name(), prinHstryInfo(saved));
 		return saved;
 	}
 
@@ -77,7 +65,7 @@ public abstract class CoreAbstBsnsObjectEJB<
 
 		E saved = getBsnsRepo().save(attach(entity));
 		
-		getHistoryEjb().createHstry(saved.getIdentif(), CoreProcessStatusEnum.POSTED.name(), CoreHistoryTypeEnum.POSTED.name(),CoreProcStepEnum.POSTING.name(), CoreHistoryTypeEnum.POSTED.name(), prinHstryInfo(saved));
+		getInjector().getHstrEjb().createHstry(saved.getIdentif(), CoreProcessStatusEnum.POSTED.name(), CoreHistoryTypeEnum.POSTED.name(),CoreProcStepEnum.POSTING.name(), CoreHistoryTypeEnum.POSTED.name(), prinHstryInfo(saved));
 		return saved;
 	}
 	
@@ -88,7 +76,7 @@ public abstract class CoreAbstBsnsObjectEJB<
 		if(entity==null) return null;
 
 		getBsnsRepo().remove(entity);
-		getHistoryEjb().createHstry(entity.getIdentif(), CoreProcessStatusEnum.DELETED.name(), CoreHistoryTypeEnum.DELETED.name(),CoreProcStepEnum.DELETING.name(), CoreHistoryTypeEnum.DELETED.name(), prinHstryInfo(entity));
+		getInjector().getHstrEjb().createHstry(entity.getIdentif(), CoreProcessStatusEnum.DELETED.name(), CoreHistoryTypeEnum.DELETED.name(),CoreProcStepEnum.DELETING.name(), CoreHistoryTypeEnum.DELETED.name(), prinHstryInfo(entity));
 
 		return entity;
 	}
@@ -100,13 +88,13 @@ public abstract class CoreAbstBsnsObjectEJB<
 	public E recompute(E entity){
 		entity.clearValues();
 		String bsnsObjNbr = entity.getIdentif();
-		Long itemCount = getItemLookup().countByCntnrIdentif(bsnsObjNbr);
+		Long itemCount = getInjector().getItemLookup().countByCntnrIdentif(bsnsObjNbr);
 		int start = 0;
 		int max = 100;
 		List<I> currentItems = new ArrayList<I>();
 		String currentSalIndex = null;
 		while(start<itemCount){
-			List<I> list = getItemLookup().findByCntnrIdentifOrderBySalIndexAsc(bsnsObjNbr, start, max);
+			List<I> list = getInjector().getItemLookup().findByCntnrIdentifOrderBySalIndexAsc(bsnsObjNbr, start, max);
 			for (I item : list) {
 				if(currentSalIndex==null){
 					currentSalIndex = item.getSalIndex();
@@ -177,7 +165,7 @@ public abstract class CoreAbstBsnsObjectEJB<
 	
 	public void validateBusinessObject(String cntnrIdentif){
 
-		Long countByCntnrIdentif = getItemLookup().countByCntnrIdentif(cntnrIdentif);
+		Long countByCntnrIdentif = getInjector().getItemLookup().countByCntnrIdentif(cntnrIdentif);
 		int start = 0;
 		int max = 100;
 		String salIndex = null;
@@ -187,16 +175,16 @@ public abstract class CoreAbstBsnsObjectEJB<
 			// @WARNIGN increase counter before request to avoid endless loop on error. 
 			int firstResult = start;
 			start +=max;
-			List<I> found = getItemLookup().findByCntnrIdentifOrderBySalIndexAsc(cntnrIdentif, firstResult, max);
+			List<I> found = getInjector().getItemLookup().findByCntnrIdentifOrderBySalIndexAsc(cntnrIdentif, firstResult, max);
 			for (I item : found) {
 				if(StringUtils.equals(salIndex, item.getSalIndex()) && !cleanIndex){
-					Long enbld = getItemLookup().countByCntnrIdentifAndSalIndexAndDisabledDtIsNull(cntnrIdentif, salIndex);
+					Long enbld = getInjector().getItemLookup().countByCntnrIdentifAndSalIndexAndDisabledDtIsNull(cntnrIdentif, salIndex);
 					if(enbld==1) {
 						cleanIndex=true;
 						continue;
 					} else {
 						clean = false;
-						getItemEjb().makeConsistent(cntnrIdentif, salIndex);
+						getInjector().getItemEjb().makeConsistent(cntnrIdentif, salIndex);
 					}
 				} else {
 					salIndex = item.getSalIndex();
@@ -210,13 +198,13 @@ public abstract class CoreAbstBsnsObjectEJB<
 	}	
 	
 	public CoreAbstBsnsObject recomputeBusinessObject(String hldrNbr, CoreAbstBsnsObject accumulator){
-		Long count = getItemLookup().countByCntnrIdentifAndDisabledDtIsNull(hldrNbr);
+		Long count = getInjector().getItemLookup().countByCntnrIdentifAndDisabledDtIsNull(hldrNbr);
 		int start = 0;
 		int max = 100;
 		while(start<=count){
 			int firstResult = start;
 			start +=max;
-			List<I> found = getItemLookup().findByCntnrIdentifOrderBySalIndexAsc(hldrNbr, firstResult, max);
+			List<I> found = getInjector().getItemLookup().findByCntnrIdentifOrderBySalIndexAsc(hldrNbr, firstResult, max);
 			for (I e : found) {
 				accumulator.addItemValue(e);
 			}
@@ -225,7 +213,7 @@ public abstract class CoreAbstBsnsObjectEJB<
 	}	
 	
 	public void handleInconsistentBsnsObj(String bsnsObjNbr){
-		E entity = getLookup().findByIdentif(bsnsObjNbr);
+		E entity = getInjector().getBsnsObjLookup().findByIdentif(bsnsObjNbr);
 		if(entity==null) return;
 		if(entity.getConflictDt()!=null) return;
 		entity.setConflictDt(new Date());
@@ -233,7 +221,7 @@ public abstract class CoreAbstBsnsObjectEJB<
 	}
 
 	public void handleConsistentBsnsObj(String bsnsObjNbr){
-		E entity = getLookup().findByIdentif(bsnsObjNbr);
+		E entity = getInjector().getBsnsObjLookup().findByIdentif(bsnsObjNbr);
 		if(entity==null) return;
 		if(entity.getConflictDt()==null) return;
 		entity.setConflictDt(null);

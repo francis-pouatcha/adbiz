@@ -4,29 +4,22 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.NotNull;
 
 import org.adorsys.adcore.utils.BigDecimalUtils;
 import org.adorsys.adcore.utils.FinancialOps;
 import org.jboss.annotation.javaee.Description;
 
+/**
+ * The qty delivered is the target qty,
+ * 
+ * @author francis
+ *
+ */
 @MappedSuperclass
 public abstract class CoreAbstTxctedItem extends CoreAbstBsnsItem {
 
 	private static final long serialVersionUID = 6828053643617751154L;
 
-	/*
-	 * The quantity delivered. This can match the quantity ordered or not.
-	 * In the normal case, qtyOrdered = qtyDlvrd - freeQty = qtyBilled
-	 * 
-	 * But in some cases the delivery might be erroneous.
-	 * 
-	 */
-	@Column
-	@Description("PrcmtDlvryItem_qtyDlvrd_description")
-	@NotNull
-	private BigDecimal qtyDlvrd;
-	
 	/*
 	 * The free quantity. This might be a promotion of the supplier.
 	 * 
@@ -58,12 +51,11 @@ public abstract class CoreAbstTxctedItem extends CoreAbstBsnsItem {
 	@Column
 	private String origItemNbr;
 
-	public BigDecimal getQtyDlvrd() {
-		return this.qtyDlvrd;
+	public BigDecimal qtyDlvrd() {
+		return getTrgtQty();
 	}
-
-	public void setQtyDlvrd(final BigDecimal qtyDlvrd) {
-		this.qtyDlvrd = qtyDlvrd;
+	public void qtyDlvrd(BigDecimal qty) {
+		setTrgtQty(qty);
 	}
 
 	public BigDecimal getFreeQty() {
@@ -97,24 +89,14 @@ public abstract class CoreAbstTxctedItem extends CoreAbstBsnsItem {
 	public void setOrigItemNbr(String origItemNbr) {
 		this.origItemNbr = origItemNbr;
 	}
-	
-	@Override
-	public void setAssdQty(BigDecimal assdQty) {
-		super.setAssdQty(assdQty);
-		setQtyDlvrd(assdQty);
-	}
 
 	public boolean contentEquals(CoreAbstTxctedItem target){
-		if(!BigDecimalUtils.numericEquals(target.qtyDlvrd,qtyDlvrd)) return false;
+		if(!BigDecimalUtils.numericEquals(target.qtyDlvrd(),qtyDlvrd())) return false;
 		if(!BigDecimalUtils.numericEquals(target.freeQty,freeQty)) return false;
 		if(!BigDecimalUtils.numericEquals(target.qtyBilled,qtyBilled)) return false;
 		return true;
 	}
 	
-	public void addQtyDlvrd(BigDecimal qtyDlvrd) {
-		this.qtyDlvrd = BigDecimalUtils.sum(this.qtyDlvrd, qtyDlvrd);
-	}
-
 	public void addFreeQty(BigDecimal freeQty) {
 		this.freeQty = BigDecimalUtils.sum(this.freeQty, freeQty);
 	}
@@ -124,9 +106,9 @@ public abstract class CoreAbstTxctedItem extends CoreAbstBsnsItem {
 	}
 
 	private void evltePrch() {
-		qtyBilled = BigDecimalUtils.subs(qtyDlvrd, freeQty);
+		qtyBilled = BigDecimalUtils.subs(qtyDlvrd(), freeQty);
 		if(Boolean.TRUE.equals(this.rtndItem)){
-			qtyDlvrd = BigDecimalUtils.negate(qtyDlvrd);
+			qtyDlvrd(BigDecimalUtils.negate(qtyDlvrd()));
 			freeQty = BigDecimalUtils.negate(freeQty);
 			if(getPrchRstckgFeesType()==CoreRstkgFeesType.FLAT_ONCE || getPrchRstckgFeesType()==CoreRstkgFeesType.FLAT_PER_RTRN){
 				BigDecimal grossPrchsd = FinancialOps.qtyTmsPrice(qtyBilled, getPrchUnitPrcPreTax(), getPrchUnitPrcCur());
@@ -144,9 +126,9 @@ public abstract class CoreAbstTxctedItem extends CoreAbstBsnsItem {
 	}
 
 	private void evlteSls() {
-		qtyBilled = BigDecimalUtils.subs(qtyDlvrd, freeQty);
+		qtyBilled = BigDecimalUtils.subs(qtyDlvrd(), freeQty);
 		if(Boolean.TRUE.equals(this.rtndItem)){
-			qtyDlvrd = BigDecimalUtils.negate(qtyDlvrd);
+			qtyDlvrd(BigDecimalUtils.negate(qtyDlvrd()));
 			freeQty = BigDecimalUtils.negate(freeQty);
 			if(getSlsRstckgFeesType()==CoreRstkgFeesType.FLAT_ONCE || getSlsRstckgFeesType()==CoreRstkgFeesType.FLAT_PER_RTRN){
 				BigDecimal grossSold = FinancialOps.qtyTmsPrice(qtyBilled, getSlsUnitPrcPreTax(), getSlsUnitPrcCur());
@@ -169,7 +151,7 @@ public abstract class CoreAbstTxctedItem extends CoreAbstBsnsItem {
 		evlteSls();
 	}
 	protected void normalize(){
-		qtyDlvrd = BigDecimalUtils.zeroIfNull(qtyDlvrd);
+		qtyDlvrd(BigDecimalUtils.zeroIfNull(qtyDlvrd()));
 		freeQty = BigDecimalUtils.zeroIfNull(freeQty);
 		qtyBilled=BigDecimalUtils.zeroIfNull(qtyBilled);
 		super.normalize();

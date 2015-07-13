@@ -24,6 +24,7 @@ import org.adorsys.adcore.jpa.CoreAbstBsnsObjectHstry;
 import org.adorsys.adcore.jpa.CoreAbstEntityCstr;
 import org.adorsys.adcore.jpa.CoreAbstEntityJob;
 import org.adorsys.adcore.jpa.CoreAbstEntityStep;
+import org.adorsys.adcore.jpa.CoreBsnsItemInfo;
 import org.adorsys.adcore.repo.CoreAbstBsnsItemRepo;
 import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
 import org.adorsys.adcore.utils.BigDecimalUtils;
@@ -34,19 +35,13 @@ public abstract class CoreAbstBsnsItemEJB<
 	E extends CoreAbstBsnsObject, I extends CoreAbstBsnsItem, 
 	H extends CoreAbstBsnsObjectHstry, J extends CoreAbstEntityJob,
 	S extends CoreAbstEntityStep, C extends CoreAbstEntityCstr> extends CoreAbstIdentifiedEJB<I>{
-
+	
+	protected abstract CoreAbstBsnsObjInjector<E, I, H, J, S, C> getInjector();
 	protected abstract CoreAbstBsnsItemRepo<I> getBsnsRepo();
-	protected abstract CoreAbstBsnsItemLookup<I> getLookup();
-	protected abstract CoreAbstBsnsItemEJB<E, I, H, J, S, C> getEjb();
-	protected abstract CoreAbstEntityJobEJB<J> getJobEjb();
-	protected abstract CoreAbstEntityJobLookup<J> getJobLookup();
-	protected abstract CoreAbstEntityStepEJB<S> getStepEjb();
-	protected abstract CoreAbstEntityStepLookup<S> getStepLookup();
-	protected abstract CoreAbstBsnsItemBatch<E, I, H, J, S, C> getBatch();	
-	protected abstract CoreAbstBsnsObjectEJB<E, I, H, J, S, C> getBsnsObjEjb();
-	protected abstract CoreAbstBsnsObjectLookup<E> getBsnsObjLookup();
-	protected abstract String prinHstryInfo(I item);
-	protected abstract CoreAbstBsnsObjectHstryEJB<E, I, H, J, S, C> getHistoryEjb();
+	
+	protected String prinHstryInfo(I item){
+		return CoreBsnsItemInfo.prinInfo(item);
+	};
 	
 	protected CoreAbstIdentifDataRepo<I> getRepo(){
 		return getBsnsRepo();
@@ -55,10 +50,10 @@ public abstract class CoreAbstBsnsItemEJB<
 	public I create(I entity)
 	{
 		String salIndex = entity.getSalIndex();
-		Long cnt = getLookup().countByCntnrIdentifAndSalIndex(entity.getCntnrIdentif(), salIndex);
+		Long cnt = getInjector().getItemLookup().countByCntnrIdentifAndSalIndex(entity.getCntnrIdentif(), salIndex);
 		List<I> found = null;
 		if(cnt>0){
-			found = getLookup().findByCntnrIdentifAndSalIndex(entity.getCntnrIdentif(), salIndex, 0, cnt.intValue());
+			found = getInjector().getItemLookup().findByCntnrIdentifAndSalIndex(entity.getCntnrIdentif(), salIndex, 0, cnt.intValue());
 		} else {
 			found = Collections.emptyList();
 		}
@@ -99,11 +94,11 @@ public abstract class CoreAbstBsnsItemEJB<
 		for (I item : compareList) {
 			if(item.getDisabledDt()!=null) continue;
 			if(count==0){
-				qty = item.getAssdQty();
+				qty = item.getTrgtQty();
 				if(qty!=null)
 					sameQty = Boolean.TRUE;
 			} else {
-				if(item.getAssdQty()==null || !BigDecimalUtils.strictEquals(qty, item.getAssdQty())){
+				if(item.getTrgtQty()==null || !BigDecimalUtils.strictEquals(qty, item.getTrgtQty())){
 					sameQty = Boolean.FALSE;
 				} else {
 					sameQty = Boolean.TRUE;
@@ -118,9 +113,9 @@ public abstract class CoreAbstBsnsItemEJB<
 		boolean created = StringUtils.isBlank(item.getId());
 		item = getBsnsRepo().save(attach(item));
 		if(created)
-			getHistoryEjb().createItemHstry(item.getCntnrIdentif(), item.getIdentif(), CoreProcessStatusEnum.ITEM_CREATED.name(), CoreHistoryTypeEnum.ITEM_CREATED.name(),CoreProcStepEnum.EDITING.name(), CoreHistoryTypeEnum.ITEM_CREATED.name(), prinHstryInfo(item));
+			getInjector().getHstrEjb().createItemHstry(item.getCntnrIdentif(), item.getIdentif(), CoreProcessStatusEnum.ITEM_CREATED.name(), CoreHistoryTypeEnum.ITEM_CREATED.name(),CoreProcStepEnum.EDITING.name(), CoreHistoryTypeEnum.ITEM_CREATED.name(), prinHstryInfo(item));
 		else 
-			getHistoryEjb().createItemHstry(item.getCntnrIdentif(), item.getIdentif(), CoreProcessStatusEnum.ITEM_UPDATED.name(), CoreHistoryTypeEnum.ITEM_UPDATED.name(),CoreProcStepEnum.EDITING.name(), CoreHistoryTypeEnum.ITEM_UPDATED.name(), prinHstryInfo(item));			
+			getInjector().getHstrEjb().createItemHstry(item.getCntnrIdentif(), item.getIdentif(), CoreProcessStatusEnum.ITEM_UPDATED.name(), CoreHistoryTypeEnum.ITEM_UPDATED.name(),CoreProcStepEnum.EDITING.name(), CoreHistoryTypeEnum.ITEM_UPDATED.name(), prinHstryInfo(item));			
 		return item;
 	}
 	
@@ -197,10 +192,10 @@ public abstract class CoreAbstBsnsItemEJB<
 		I item = getBsnsRepo().findBy(id);
 		if (item != null)
 		{
-			Long bsnsObjCount = getBsnsObjLookup().countByIdentif(item.getCntnrIdentif());
+			Long bsnsObjCount = getInjector().getBsnsObjLookup().countByIdentif(item.getCntnrIdentif());
 			getBsnsRepo().remove(item);
 			if(bsnsObjCount>0)
-				getHistoryEjb().createItemHstry(item.getCntnrIdentif(), item.getIdentif(), CoreProcessStatusEnum.ITEM_DELETED.name(), CoreHistoryTypeEnum.ITEM_DELETED.name(),CoreProcStepEnum.EDITING.name(), CoreHistoryTypeEnum.ITEM_DELETED.name(), prinHstryInfo(item));			
+				getInjector().getHstrEjb().createItemHstry(item.getCntnrIdentif(), item.getIdentif(), CoreProcessStatusEnum.ITEM_DELETED.name(), CoreHistoryTypeEnum.ITEM_DELETED.name(),CoreProcStepEnum.EDITING.name(), CoreHistoryTypeEnum.ITEM_DELETED.name(), prinHstryInfo(item));			
 		}
 		return item;
 	}
@@ -223,7 +218,7 @@ public abstract class CoreAbstBsnsItemEJB<
 		Boolean sameQty = checkSameQty(resultList);
 		if(!sameQty) {
 			setConflicting(resultList, new Date());
-			getBsnsObjEjb().handleInconsistentBsnsObj(cntnrIdentif);
+			getInjector().getBsnsObjEjb().handleInconsistentBsnsObj(cntnrIdentif);
 			return;
 		}
 		I oldest = null;
@@ -293,7 +288,7 @@ public abstract class CoreAbstBsnsItemEJB<
 	
 	private static final int ITEM_COUNT_TRESHOLD = 100;
 	protected void processDeleteItems(H hstry){
-		Long itemsCount = getLookup().countByCntnrIdentif(hstry.getEntIdentif());
+		Long itemsCount = getInjector().getItemLookup().countByCntnrIdentif(hstry.getEntIdentif());
 		if(itemsCount<ITEM_COUNT_TRESHOLD) { // delete directly
 			removeByCntnrIdentif(hstry.getEntIdentif(),0,itemsCount.intValue());
 		} else { // create constraint object and delete gradually.
@@ -303,37 +298,37 @@ public abstract class CoreAbstBsnsItemEJB<
 	}
 
 	private void createDeleteJob(H hstry) {
-		J job = getJobEjb().newJobInstance();
+		J job = getInjector().getJobEjb().newJobInstance();
 		job.setExecutorId(CoreJobExecutorIdEnum.bsnsItemEJB.name());
 		job.setExecutorId(CoreJobTaskIdEnum.DELETE.name());
 		job.setJobStatus(CoreJobStatusEnum.INITIATED.name());
-		getJobEjb().create(job);
+		getInjector().getJobEjb().create(job);
 	
-		S s = getStepEjb().newStepInstance();
+		S s = getInjector().getStepEjb().newStepInstance();
 		s.setEntIdentif(hstry.getEntIdentif());
 		s.setJobIdentif(job.getIdentif());
 		s.setExecutorId(job.getExecutorId());
 		s.setTaskId(CoreStepExecutorIdEnum.PREPARE_DELETE.name());
 		s.setSchdldStart(DateUtils.addMinutes(new Date(), 1));
-		getStepEjb().create(s);
+		getInjector().getStepEjb().create(s);
 	}
 
 	private void prepareDeleteJob(String jobIdentif, String stepIdentif){
 		// use the get ejb interface to activate new transaction
-		getBatch().lease(stepIdentif, 300);// 5 mins for the preparation.
+		getInjector().getBatch().lease(stepIdentif, 300);// 5 mins for the preparation.
 		
 		// Only do this job, if you controle the prepare job
-		J job = getJobLookup().findByIdentif(jobIdentif);
+		J job = getInjector().getJobLookup().findByIdentif(jobIdentif);
 		String entIdentif = job.getEntIdentif();
-		Long itemsCount = getLookup().countByCntnrIdentif(entIdentif);
+		Long itemsCount = getInjector().getItemLookup().countByCntnrIdentif(entIdentif);
 		int itemStart = 0;
 		while(itemStart<itemsCount){
 			int firstResult = itemStart;
 			itemStart+=ITEM_COUNT_TRESHOLD;
-			List<I> list = getLookup().findByCntnrIdentifOrderByIdentifAsc(entIdentif, firstResult, ITEM_COUNT_TRESHOLD);
+			List<I> list = getInjector().getItemLookup().findByCntnrIdentifOrderByIdentifAsc(entIdentif, firstResult, ITEM_COUNT_TRESHOLD);
 			LinkedList<I> linkedList = new LinkedList<I>(list);
 
-			S s = getStepEjb().newStepInstance();
+			S s = getInjector().getStepEjb().newStepInstance();
 			s.setEntIdentif(entIdentif);
 			s.setJobIdentif(job.getIdentif());
 			s.setStepStartId(linkedList.getFirst().getIdentif());
@@ -341,12 +336,12 @@ public abstract class CoreAbstBsnsItemEJB<
 			s.setExecutorId(job.getExecutorId());
 			s.setTaskId(CoreStepExecutorIdEnum.DELETE_ITEMS.name());
 			s.setPreceedingStep(stepIdentif);
-			getStepEjb().create(s);
+			getInjector().getStepEjb().create(s);
 		}
 
-		S step = getStepLookup().findByIdentif(stepIdentif);// Refresh the step object
+		S step = getInjector().getStepLookup().findByIdentif(stepIdentif);// Refresh the step object
 		step.setEnded(new Date());
-		getStepEjb().update(step);
+		getInjector().getStepEjb().update(step);
 	}
 	
 	public void processStep(S step){
@@ -359,7 +354,7 @@ public abstract class CoreAbstBsnsItemEJB<
 	}
 	
 	public void recoverStep(S step){
-		step = getStepLookup().findByIdentif(step.getIdentif());// Refresh the step object
+		step = getInjector().getStepLookup().findByIdentif(step.getIdentif());// Refresh the step object
 		if(step.getEnded()!=null) return;
 		Date now = new Date();
 		if(now.after(step.getLeaseEnd())){ // take over.
@@ -368,21 +363,21 @@ public abstract class CoreAbstBsnsItemEJB<
 	}
 
 	private void deleteItems(String jobIdentif, String stepIdentif) {
-		getBatch().lease(stepIdentif, 300);// 5 mins for the preparation.
+		getInjector().getBatch().lease(stepIdentif, 300);// 5 mins for the preparation.
 		
 		// Only do this job, if you controle the prepare job
-		J job = getJobLookup().findByIdentif(jobIdentif);
+		J job = getInjector().getJobLookup().findByIdentif(jobIdentif);
 		String entIdentif = job.getEntIdentif();
-		S step = getStepLookup().findByIdentif(stepIdentif);// Refresh the step object
-		Long count = getLookup().countByCntnrIdentifAndIdentifBetween(entIdentif, step.getStepStartId(), step.getStepEndId());
+		S step = getInjector().getStepLookup().findByIdentif(stepIdentif);// Refresh the step object
+		Long count = getInjector().getItemLookup().countByCntnrIdentifAndIdentifBetween(entIdentif, step.getStepStartId(), step.getStepEndId());
 		if(count>0){
-			List<I> list = getLookup().findByCntnrIdentifAndIdentifBetweenOrderByIdentifAsc(entIdentif, step.getStepStartId(), step.getStepEndId(), 0, count.intValue());
+			List<I> list = getInjector().getItemLookup().findByCntnrIdentifAndIdentifBetweenOrderByIdentifAsc(entIdentif, step.getStepStartId(), step.getStepEndId(), 0, count.intValue());
 			for (I e : list) {
-				getEjb().deleteById(e.getId());
+				getInjector().getItemEjb().deleteById(e.getId());
 			}
 		}
 		step.setEnded(new Date());
-		getStepEjb().update(step);
+		getInjector().getStepEjb().update(step);
 	}
 	
 	

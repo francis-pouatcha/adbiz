@@ -2,7 +2,7 @@ package org.adorsys.adstock.jpa;
 
 import javax.persistence.Entity;
 
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
 
 @Entity
 @Description("StkArticleLot2StrgSctn_description")

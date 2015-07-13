@@ -15,6 +15,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.adorsys.adcore.annotation.DateFormatPattern;
+import org.adorsys.adcore.annotation.Description;
 import org.adorsys.adcore.utils.BigDecimalUtils;
 import org.adorsys.adcore.utils.FinancialOps;
 import org.apache.commons.beanutils.BeanUtils;
@@ -221,7 +222,7 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 	private String acsngUser;
 	
 	@Column
-	private BigDecimal assdQty;	
+	private BigDecimal trgtQty;	
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateFormatPattern(pattern = "dd-MM-yyyy HH:mm")
@@ -252,6 +253,30 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 	@DateFormatPattern(pattern = "dd-MM-yyyy HH:mm")
 	private Date acsngDt;
 	
+	@Column
+	@Description("StkMvnt_mvntType_description")
+	@Enumerated(EnumType.STRING)
+	@NotNull
+	private CoreStkMvtType mvntType;
+
+	@Column
+	@Description("StkMvnt_mvntOrigin_description")
+	@Enumerated(EnumType.STRING)
+	@NotNull
+	private CoreStkMvtTerminal mvntOrigin;
+
+	@Column
+	private String mvntOriginIdentif;
+	
+	@Column
+	@Description("StkMvnt_mvntDest_description")
+	@Enumerated(EnumType.STRING)
+	@NotNull
+	private CoreStkMvtTerminal mvntDest;
+
+	@Column
+	private String mvntDestIdentif;
+	
 	@PrePersist
 	public void prePersist() {
 		super.prePersist();
@@ -276,6 +301,14 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 		return bsnsObjNbr + "_" + acsngUser + "_" + lotPic + "_" + artPic + "_" + section;
 	}
 	
+	public CoreStkMvtType getMvntType() {
+		return mvntType;
+	}
+
+	public void setMvntType(CoreStkMvtType mvntType) {
+		this.mvntType = mvntType;
+	}
+
 	@Override
 	protected String makeIdentif() {
 		return toIdentifier(getCntnrIdentif(), acsngUser, getLotPic(), getArtPic(), getSection());
@@ -812,8 +845,9 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 	public void addPrchRebateAmt(BigDecimal prchRebateAmt) {
 		this.prchRebateAmt = BigDecimalUtils.sum(this.prchRebateAmt, prchRebateAmt);
 	}
-
-	public abstract void evlte();
+	public void addAccsdQty(BigDecimal trgtQty) {
+		this.trgtQty = BigDecimalUtils.sum(this.trgtQty, trgtQty);
+	}
 
 	public void evltPrchWrntyDt(){
 		if(getValueDt()!=null && prchWrntyDays!=null)
@@ -834,16 +868,17 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 		if(getValueDt()!=null && slsRtrnDays!=null)
 			slsRtrnDt = DateUtils.addDays(getValueDt(), slsRtrnDays.intValue());
 	}
-	
-	public BigDecimal getAssdQty() {
-		return assdQty;
+
+	public BigDecimal getTrgtQty() {
+		return trgtQty;
 	}
 
-	public void setAssdQty(BigDecimal assdQty) {
-		this.assdQty = assdQty;
+	public void setTrgtQty(BigDecimal trgtQty) {
+		this.trgtQty = trgtQty;
 	}
 
 	protected void normalize(){
+		this.trgtQty = BigDecimalUtils.zeroIfNull(this.trgtQty);
 		this.prchVatPct=BigDecimalUtils.zeroIfNull(this.prchVatPct);
 		this.prchVatAmt=BigDecimalUtils.zeroIfNull(this.prchVatAmt);
 		this.prchUnitPrcPreTax = BigDecimalUtils.zeroIfNull(this.prchUnitPrcPreTax);
@@ -927,4 +962,14 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 
 		this.prchNetPrcTaxIncl = FinancialOps.add(this.prchNetPrcPreTax, this.prchVatAmt, this.prchUnitPrcCur);
 	}
+	
+	public void evlte() {
+		normalize();
+		setSlsGrossPrcPreTax(FinancialOps.qtyTmsPrice(this.trgtQty, getSlsUnitPrcPreTax(), getSlsUnitPrcCur()));
+		computeSlsNetPrcTaxIncl();
+		setPrchGrossPrcPreTax(FinancialOps.qtyTmsPrice(this.trgtQty, getPrchUnitPrcPreTax(), getPrchUnitPrcCur()));
+		computeSlsNetPrcTaxIncl();
+		setStkValPreTax(FinancialOps.qtyTmsPrice(this.trgtQty, getStkUnitValPreTax(), getStkUnitValCur()));
+	}
+	
 }

@@ -42,5 +42,12 @@ public class CatalArticleEndpoint extends
 	protected Field[] getEntityFields() {
 		return CatalArticle_.class.getFields();
 	}
-
+//
+//
+//	@GET
+//	@Produces({ "application/json"})
+//	public CoreSearchResult<CatalArticle> listAll(
+//			@QueryParam("start") int start, @QueryParam("max") int max) {
+//		return super.listAll(start, max);
+//	}
 }

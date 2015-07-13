@@ -9,7 +9,7 @@ import javax.ejb.TransactionAttributeType;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
-import org.adorsys.adcore.auth.TermWsUserPrincipal;
+import org.adorsys.adcore.auth.AdcomUser;
 import org.adorsys.adcore.enums.CoreJobExecutorIdEnum;
 import org.adorsys.adcore.enums.CoreJobStatusEnum;
 import org.adorsys.adcore.enums.CoreJobTaskIdEnum;
@@ -33,20 +33,9 @@ public abstract class CoreAbstBsnsObjectHstryEJB<E extends CoreAbstBsnsObject,
 	@EntityHstryEvent
 	private Event<H> entityHistoryEvent;
 
-	protected abstract CoreAbstBsnsObjectHstryLookup<H> getLookup();
-
-	protected abstract CoreAbstEntityJobEJB<J> getJobEjb();
-
-	protected abstract CoreAbstEntityJobLookup<J> getJobLookup();
-
-	protected abstract CoreAbstEntityStepEJB<S> getStepEjb();
-
-	protected abstract CoreAbstEntityStepLookup<S> getStepLookup();
-
-	protected abstract CoreAbstBsnsItemBatch<E, I, H, J, S, C> getBatch();
+	protected abstract CoreAbstBsnsObjInjector<E, I, H, J, S, C> getInjector();		
 
 	protected abstract H newHstryObj();
-	protected abstract TermWsUserPrincipal getCallerPrincipal();
 
 	public H create(H entity) {
 		H saved = getRepo().save(entity);
@@ -84,38 +73,38 @@ public abstract class CoreAbstBsnsObjectHstryEJB<E extends CoreAbstBsnsObject,
 	
 
 	private void createDeleteJob(H hstry) {
-		J job = getJobEjb().newJobInstance();
+		J job = getInjector().getJobEjb().newJobInstance();
 		job.setExecutorId(CoreJobExecutorIdEnum.historyEJB.name());
 		job.setExecutorId(CoreJobTaskIdEnum.DELETE.name());
 		job.setJobStatus(CoreJobStatusEnum.INITIATED.name());
-		getJobEjb().create(job);
+		getInjector().getJobEjb().create(job);
 
-		S s = getStepEjb().newStepInstance();
+		S s = getInjector().getStepEjb().newStepInstance();
 		s.setEntIdentif(hstry.getEntIdentif());
 		s.setJobIdentif(job.getIdentif());
 		s.setExecutorId(job.getExecutorId());
 		s.setTaskId(CoreStepExecutorIdEnum.PREPARE_DELETE.name());
 		s.setSchdldStart(DateUtils.addMinutes(new Date(), 1));
-		getStepEjb().create(s);
+		getInjector().getStepEjb().create(s);
 	}
 
 	private void prepareDeleteJob(String jobIdentif, String stepIdentif) {
 		// use the get ejb interface to activate new transaction
-		getBatch().lease(stepIdentif, 300);// 5 mins for the preparation.
+		getInjector().getBatch().lease(stepIdentif, 300);// 5 mins for the preparation.
 
 		// Only do this job, if you controle the prepare job
-		J job = getJobLookup().findByIdentif(jobIdentif);
+		J job = getInjector().getJobLookup().findByIdentif(jobIdentif);
 		String entIdentif = job.getEntIdentif();
-		Long itemsCount = getLookup().countByEntIdentif(entIdentif);
+		Long itemsCount = getInjector().getHstrLookup().countByEntIdentif(entIdentif);
 		int itemStart = 0;
 		while (itemStart < itemsCount) {
 			int firstResult = itemStart;
 			itemStart += HSTRY_COUNT_TRESHOLD;
-			List<H> list = getLookup().findByEntIdentifOrderByIdAsc(
+			List<H> list = getInjector().getHstrLookup().findByEntIdentifOrderByIdAsc(
 					entIdentif, firstResult, HSTRY_COUNT_TRESHOLD);
 			LinkedList<H> linkedList = new LinkedList<H>(list);
 
-			S s = getStepEjb().newStepInstance();
+			S s = getInjector().getStepEjb().newStepInstance();
 			s.setEntIdentif(entIdentif);
 			s.setJobIdentif(job.getIdentif());
 			s.setStepStartId(linkedList.getFirst().getId());
@@ -123,13 +112,13 @@ public abstract class CoreAbstBsnsObjectHstryEJB<E extends CoreAbstBsnsObject,
 			s.setExecutorId(job.getExecutorId());
 			s.setTaskId(CoreStepExecutorIdEnum.DELETE_ITEMS.name());
 			s.setPreceedingStep(stepIdentif);
-			getStepEjb().create(s);
+			getInjector().getStepEjb().create(s);
 		}
 
-		S step = getStepLookup().findByIdentif(stepIdentif);// Refresh the step
+		S step = getInjector().getStepLookup().findByIdentif(stepIdentif);// Refresh the step
 															// object
 		step.setEnded(new Date());
-		getStepEjb().update(step);
+		getInjector().getStepEjb().update(step);
 	}
 
 	public void processStep(S step) {
@@ -143,17 +132,17 @@ public abstract class CoreAbstBsnsObjectHstryEJB<E extends CoreAbstBsnsObject,
 	}
 
 	private void deleteHstries(String jobIdentif, String stepIdentif) {
-		getBatch().lease(stepIdentif, 300);// 5 mins for the preparation.
+		getInjector().getBatch().lease(stepIdentif, 300);// 5 mins for the preparation.
 
 		// Only do this job, if you controle the prepare job
-		J job = getJobLookup().findByIdentif(jobIdentif);
-		S step = getStepLookup().findByIdentif(stepIdentif);// Refresh the step
+		J job = getInjector().getJobLookup().findByIdentif(jobIdentif);
+		S step = getInjector().getStepLookup().findByIdentif(stepIdentif);// Refresh the step
 															// object
 		String entIdentif = job.getEntIdentif();
-		Long count = getLookup().countByEntIdentifAndIdBetween(
+		Long count = getInjector().getHstrLookup().countByEntIdentifAndIdBetween(
 				entIdentif, step.getStepStartId(), step.getStepEndId());
 		if (count > 0) {
-			List<H> list = getLookup().findByEntIdentifAndIdBetweenOrderByIdAsc(
+			List<H> list = getInjector().getHstrLookup().findByEntIdentifAndIdBetweenOrderByIdAsc(
 							entIdentif, step.getStepStartId(),
 							step.getStepEndId(), 0, count.intValue());
 			for (H h : list) {
@@ -161,7 +150,7 @@ public abstract class CoreAbstBsnsObjectHstryEJB<E extends CoreAbstBsnsObject,
 			}
 		}
 		step.setEnded(new Date());
-		getStepEjb().update(step);
+		getInjector().getStepEjb().update(step);
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
@@ -176,7 +165,7 @@ public abstract class CoreAbstBsnsObjectHstryEJB<E extends CoreAbstBsnsObject,
 	}
 	public H createItemHstry(String entIdentif, String itemIdentif, String txStatus,
 			String hstryType, String processingStep, String comment, String addInfo){
-		TermWsUserPrincipal p = getCallerPrincipal();
+		AdcomUser p = getInjector().getCallerPrincipal();
 		H hstry = newHstryObj();
 		hstry.setComment(comment);
 		hstry.setAddtnlInfo(addInfo);
@@ -185,7 +174,7 @@ public abstract class CoreAbstBsnsObjectHstryEJB<E extends CoreAbstBsnsObject,
 		hstry.setHstryDt(new Date());
 		hstry.setHstryType(hstryType);
 		
-		hstry.setOrignLogin(p.getName());
+		hstry.setOrignLogin(p.getLoginName());
 		hstry.setOrignWrkspc(p.getWorkspaceId());
 		hstry.setProcStep(processingStep);
 		return create(hstry);		
@@ -195,4 +184,8 @@ public abstract class CoreAbstBsnsObjectHstryEJB<E extends CoreAbstBsnsObject,
 		entityHistoryEvent.fire(hstry);
 	}
 
+	@Override
+	protected AdcomUser getCallerPrincipal() {
+		return getInjector().getCallerPrincipal();
+	}
 }
