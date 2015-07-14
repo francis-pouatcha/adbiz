@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import org.adorsys.adcatal.jpa.CatalArticle;
 import org.adorsys.adcatal.jpa.CatalArticleSearchInput;
+import org.adorsys.adcatal.jpa.CatalArticleSearchResult;
 import org.adorsys.adcatal.rest.integ.utils.RestAssuredITConfig;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
@@ -27,8 +28,7 @@ public class CatalArticleEndpointIT extends RestAssuredITConfig {
 		String identif = catalArticle2.getIdentif();
 		
 		CatalArticle catalArticle3 = RestAssured.get(PATH + "/"+ identif).as(CatalArticle.class);
-		Assert.assertTrue("Created Object must be equals", catalArticle.contentEquals(catalArticle3));
-		
+		Assert.assertTrue("Created Object must be equals", catalArticle.contentEquals(catalArticle3));	
 	}
 
 	@Test
@@ -45,7 +45,10 @@ public class CatalArticleEndpointIT extends RestAssuredITConfig {
 		CatalArticleSearchInput catalArticleSearchInput = new CatalArticleSearchInput();
 		catalArticleSearchInput.setIdentifFrom(identif);
 		catalArticleSearchInput.setIdentifTo(identif);
-		CatalArticle catalArticle3 = RestAssured.get(PATH + "/"+ identif).as(CatalArticle.class);
+		CatalArticleSearchResult catalArticleSearchResult = RestAssured.expect().statusCode(200).when().given().contentType(ContentType.JSON).body(catalArticleSearchInput).post(PATH + "/findCustom").as(CatalArticleSearchResult.class);
+		Assert.assertNotNull(catalArticleSearchResult);
+		Assert.assertTrue("Expecting one result", catalArticleSearchResult.getCount()==1);
+		CatalArticle catalArticle3 = catalArticleSearchResult.getResultList().iterator().next();
 		Assert.assertTrue("Created Object must be equals", catalArticle.contentEquals(catalArticle3));
 		
 	}

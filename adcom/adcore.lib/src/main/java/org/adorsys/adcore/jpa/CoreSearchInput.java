@@ -3,6 +3,10 @@ package org.adorsys.adcore.jpa;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.annotate.JsonTypeInfo.As;
+import org.codehaus.jackson.annotate.JsonTypeInfo.Id;
+
 /**
  * Holds an entity and corresponding field descriptions for a search by example
  * call.
@@ -10,6 +14,7 @@ import java.util.List;
  * @author francis pouatcha
  *
  */
+@JsonTypeInfo(use=Id.CLASS, include=As.PROPERTY, property="className")
 public abstract class CoreSearchInput<T> {
 	public static final int MAX_MAX = 200;
 
@@ -26,7 +31,7 @@ public abstract class CoreSearchInput<T> {
 	/**
 	 * The max number of records to return.
 	 */
-	private int max = -1;
+	private int max = 200;
 
 	/**
 	 * The field names to be included in the search.
@@ -34,6 +39,12 @@ public abstract class CoreSearchInput<T> {
 	private List<String> fieldNames = new ArrayList<String>();
 
 	private List<CoreSortOrder> sortFieldNames = new ArrayList<CoreSortOrder>();
+
+	private String className;
+	
+	protected CoreSearchInput() {
+		className = this.getClass().getName();
+	}
 
 	public T getEntity() {
 		return entity;
@@ -80,5 +91,14 @@ public abstract class CoreSearchInput<T> {
 			throw new IllegalArgumentException(
 					"Max must be more than 0 less than or equals: " + MAX_MAX);
 		return max;
+	}
+
+
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
 	}
 }

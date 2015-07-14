@@ -13,7 +13,6 @@ import java.lang.annotation.Target;
 @Retention(RUNTIME)
 @Documented
 public @interface Description {
-	
 	/**
 	 * The value of this description. This can be either a plain text description or a
 	 * resource key..

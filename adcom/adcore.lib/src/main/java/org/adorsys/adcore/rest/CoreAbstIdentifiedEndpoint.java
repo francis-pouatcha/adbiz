@@ -124,8 +124,8 @@ public abstract class CoreAbstIdentifiedEndpoint<E extends CoreAbstIdentifObject
 
 	@POST
 	@Path("/findCustom")
-	@Produces({ "application/json", "application/xml" })
-	@Consumes({ "application/json", "application/xml" })
+	@Produces({ "application/json" })
+	@Consumes({ "application/json" })
 	public CoreAbstIdentifObjectSearchResult<E> findCustom(CoreAbstIdentifObjectSearchInput<E> searchInput) {
 		Long countLike = getLookup().countCustom(searchInput);
 		List<E> resultList = getLookup().findCustom(searchInput);

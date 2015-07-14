@@ -1,7 +1,5 @@
 package org.adorsys.adcatal.jpa;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 
 /**
@@ -11,6 +9,5 @@ import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
  * @author francis pouatcha
  *
  */
-@XmlRootElement
 public class CatalArticleSearchInput extends CoreAbstIdentifObjectSearchInput<CatalArticle>{
 }

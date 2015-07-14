@@ -1,5 +1,6 @@
 package org.adorsys.adcore.jpa;
 
+
 /**
  * Holds an entity and corresponding field descriptions for a search by example
  * call.
@@ -47,5 +48,4 @@ public abstract class CoreAbstIdentifObjectSearchInput<E extends CoreAbstIdentif
 	public void setIdentifTo(String identifTo) {
 		this.identifTo = identifTo;
 	}
-
 }

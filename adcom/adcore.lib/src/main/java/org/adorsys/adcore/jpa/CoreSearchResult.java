@@ -2,65 +2,72 @@ package org.adorsys.adcore.jpa;
 
 import java.util.List;
 
-public abstract class CoreSearchResult<T>
-{
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.annotate.JsonTypeInfo.As;
+import org.codehaus.jackson.annotate.JsonTypeInfo.Id;
 
-   /*
-    * The number of entities matching this search.
-    */
-   private Long count;
+@JsonTypeInfo(use=Id.CLASS, include=As.PROPERTY, property="className")
+public abstract class CoreSearchResult<T> {
 
-   /*
-    * The result list.
-    */
-   private List<T> resultList;
+	/*
+	 * The number of entities matching this search.
+	 */
+	private Long count;
 
-   /*
-    * The original search input object. For stateless clients.
-    */
-   private CoreSearchInput<T> searchInput;
+	/*
+	 * The result list.
+	 */
+	private List<T> resultList;
 
-   public CoreSearchResult()
-   {
-      super();
-   }
+	private String className;
 
-   public CoreSearchResult(Long count, List<T> resultList,
-         CoreSearchInput<T> searchInput)
-   {
-      super();
-      this.count = count;
-      this.resultList = resultList;
-      this.searchInput = searchInput;
-   }
+	/*
+	 * The original search input object. For stateless clients.
+	 */
+	private CoreSearchInput<T> searchInput;
 
-   public Long getCount()
-   {
-      return count;
-   }
+	public CoreSearchResult() {
+		this.className = this.getClass().getName();
+	}
 
-   public List<T> getResultList()
-   {
-      return resultList;
-   }
+	public CoreSearchResult(Long count, List<T> resultList,
+			CoreSearchInput<T> searchInput) {
+		super();
+		this.count = count;
+		this.resultList = resultList;
+		this.searchInput = searchInput;
+	}
 
-   public CoreSearchInput<T> getSearchInput()
-   {
-      return searchInput;
-   }
+	public Long getCount() {
+		return count;
+	}
 
-   public void setCount(Long count)
-   {
-      this.count = count;
-   }
+	public List<T> getResultList() {
+		return resultList;
+	}
 
-   public void setResultList(List<T> resultList)
-   {
-      this.resultList = resultList;
-   }
+	public CoreSearchInput<T> getSearchInput() {
+		return searchInput;
+	}
 
-   public void setSearchInput(CoreSearchInput<T> searchInput)
-   {
-      this.searchInput = searchInput;
-   }
+	public void setCount(Long count) {
+		this.count = count;
+	}
+
+	public void setResultList(List<T> resultList) {
+		this.resultList = resultList;
+	}
+
+	public void setSearchInput(CoreSearchInput<T> searchInput) {
+		this.searchInput = searchInput;
+	}
+
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
+	}
+	
 }
