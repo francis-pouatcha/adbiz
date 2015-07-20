@@ -7,7 +7,7 @@ import org.adorsys.adcatal.jpa.CatalArtEquivalence;
 import org.adorsys.adcatal.rest.CatalArtEquivalenceEJB;
 import org.adorsys.adcatal.rest.CatalArtEquivalenceLookup;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
-import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 import org.adorsys.adcore.xls.CoreAbstObjectLoader;
 
 @Stateless
@@ -18,7 +18,7 @@ public class CatalArtEquivalenceLoader extends
 	@Inject
 	private CatalArtEquivalenceLookup lookup;
 	@Override
-	protected CoreAbstIdentifiedLookup<CatalArtEquivalence> getLookup() {
+	protected CoreAbstIdentifLookup<CatalArtEquivalence> getLookup() {
 		return lookup;
 	}
 	@Override

@@ -15,7 +15,7 @@ import org.adorsys.adcore.jpa.CoreAbstEntityJob;
 import org.adorsys.adcore.jpa.CoreAbstEntityStep;
 import org.adorsys.adcore.jpa.CoreBsnsObjInfo;
 import org.adorsys.adcore.repo.CoreAbstBsnsObjectRepo;
-import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
+import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 import org.adorsys.adcore.utils.SequenceGenerator;
 import org.apache.commons.lang3.StringUtils;
 
@@ -30,7 +30,7 @@ public abstract class CoreAbstBsnsObjectEJB<
 		return CoreBsnsObjInfo.prinInfo(entity);
 	};
 	
-	protected CoreAbstIdentifDataRepo<E> getRepo(){
+	protected CoreAbstIdentifRepo<E> getRepo(){
 		return getBsnsRepo();
 	};
 

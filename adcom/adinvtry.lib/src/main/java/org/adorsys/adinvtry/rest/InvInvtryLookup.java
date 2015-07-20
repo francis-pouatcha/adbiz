@@ -2,7 +2,6 @@ package org.adorsys.adinvtry.rest;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 
 import org.adorsys.adcore.repo.CoreAbstBsnsObjectRepo;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjectLookup;
@@ -15,14 +14,6 @@ public class InvInvtryLookup extends CoreAbstBsnsObjectLookup<InvInvtry>
 
 	@Inject
 	private InvInvtryRepository repository;
-	
-	@Inject
-	private EntityManager em;
-
-	@Override
-	protected EntityManager getEntityManager() {
-		return em;
-	}
 
 	@Override
 	protected CoreAbstBsnsObjectRepo<InvInvtry> getBsnsRepo() {
@@ -30,8 +21,7 @@ public class InvInvtryLookup extends CoreAbstBsnsObjectLookup<InvInvtry>
 	}
 
 	@Override
-	protected Class<InvInvtry> getBsnsObjClass() {
+	protected Class<InvInvtry> getEntityClass() {
 		return InvInvtry.class;
 	}
-
 }

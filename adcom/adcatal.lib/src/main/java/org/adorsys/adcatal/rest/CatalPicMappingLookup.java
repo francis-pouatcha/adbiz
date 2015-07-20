@@ -5,17 +5,17 @@ import javax.inject.Inject;
 
 import org.adorsys.adcatal.jpa.CatalPicMapping;
 import org.adorsys.adcatal.repo.CatalPicMappingRepository;
-import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
-import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
+import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 
 @Stateless
-public class CatalPicMappingLookup  extends CoreAbstIdentifiedLookup<CatalPicMapping>{
+public class CatalPicMappingLookup  extends CoreAbstIdentifLookup<CatalPicMapping>{
 
 	@Inject
 	private CatalPicMappingRepository repository;
 
 	@Override
-	protected CoreAbstIdentifDataRepo<CatalPicMapping> getRepo() {
+	protected CoreAbstIdentifRepo<CatalPicMapping> getRepo() {
 		return repository;
 	}
 

@@ -5,7 +5,7 @@ import javax.inject.Inject;
 
 import org.adorsys.adcatal.jpa.CatalArticle;
 import org.adorsys.adcatal.repo.CatalArticleRepository;
-import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
+import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 
 @Stateless
@@ -16,7 +16,7 @@ CoreAbstIdentifiedEJB<CatalArticle> {
 	private CatalArticleRepository repository;
 
 	@Override
-	protected CoreAbstIdentifDataRepo<CatalArticle> getRepo() {
+	protected CoreAbstIdentifRepo<CatalArticle> getRepo() {
 		return repository;
 	}
 }

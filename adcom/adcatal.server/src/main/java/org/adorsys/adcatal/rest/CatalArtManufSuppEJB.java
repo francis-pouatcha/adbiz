@@ -5,7 +5,7 @@ import javax.inject.Inject;
 
 import org.adorsys.adcatal.jpa.CatalArtManufSupp;
 import org.adorsys.adcatal.repo.CatalArtManufSuppRepository;
-import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
+import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 
 @Stateless
@@ -16,7 +16,7 @@ public class CatalArtManufSuppEJB extends
 	private CatalArtManufSuppRepository repository;
 
 	@Override
-	protected CoreAbstIdentifDataRepo<CatalArtManufSupp> getRepo() {
+	protected CoreAbstIdentifRepo<CatalArtManufSupp> getRepo() {
 		return repository;
 	}
 

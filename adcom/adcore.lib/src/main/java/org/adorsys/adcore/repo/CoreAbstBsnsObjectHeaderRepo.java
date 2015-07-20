@@ -5,7 +5,7 @@ import java.util.Date;
 import org.adorsys.adcore.jpa.CoreAbstBsnsObjectHeader;
 import org.apache.deltaspike.data.api.QueryResult;
 
-public interface CoreAbstBsnsObjectHeaderRepo<E extends CoreAbstBsnsObjectHeader> extends CoreAbstIdentifDataRepo<E>{
+public interface CoreAbstBsnsObjectHeaderRepo<E extends CoreAbstBsnsObjectHeader> extends CoreAbstIdentifRepo<E>{
 
 	public QueryResult<E> findByOrgIdentif(String orgIdentif);
 	

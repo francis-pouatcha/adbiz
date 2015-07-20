@@ -5,7 +5,7 @@ import javax.inject.Inject;
 
 import org.adorsys.adcatal.jpa.CatalProdFmlyLangMap;
 import org.adorsys.adcatal.repo.CatalProdFmlyLangMapRepo;
-import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
+import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 
 @Stateless
 public class CatalProdFmlyLangMapLookup  extends CatalAbstArtLangMapLookup<CatalProdFmlyLangMap>{
@@ -14,7 +14,7 @@ public class CatalProdFmlyLangMapLookup  extends CatalAbstArtLangMapLookup<Catal
 	private CatalProdFmlyLangMapRepo repository;
 
 	@Override
-	protected CoreAbstIdentifDataRepo<CatalProdFmlyLangMap> getRepo() {
+	protected CoreAbstIdentifRepo<CatalProdFmlyLangMap> getRepo() {
 		return repository;
 	}
 

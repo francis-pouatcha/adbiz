@@ -7,7 +7,7 @@ import org.adorsys.adcatal.jpa.CatalArtDetailConfig;
 import org.adorsys.adcatal.rest.CatalArtDetailConfigEJB;
 import org.adorsys.adcatal.rest.CatalArtDetailConfigLookup;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
-import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 import org.adorsys.adcore.xls.CoreAbstObjectLoader;
 
 @Stateless
@@ -20,7 +20,7 @@ public class CatalArtDetailConfigLoader extends
 	private CatalArtDetailConfigLookup lookup;
 
 	@Override
-	protected CoreAbstIdentifiedLookup<CatalArtDetailConfig> getLookup() {
+	protected CoreAbstIdentifLookup<CatalArtDetailConfig> getLookup() {
 		return lookup;
 	}
 

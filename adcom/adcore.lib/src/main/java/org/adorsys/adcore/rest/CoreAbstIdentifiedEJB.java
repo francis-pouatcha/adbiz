@@ -7,11 +7,11 @@ import org.adorsys.adcore.event.EntityCreatedEvent;
 import org.adorsys.adcore.event.EntityDeletedEvent;
 import org.adorsys.adcore.event.EntityUpdatedEvent;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
-import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
+import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 
 public abstract class CoreAbstIdentifiedEJB<E extends CoreAbstIdentifObject> {
 
-	protected abstract CoreAbstIdentifDataRepo<E> getRepo();
+	protected abstract CoreAbstIdentifRepo<E> getRepo();
 	
 	@Inject
 	@EntityCreatedEvent

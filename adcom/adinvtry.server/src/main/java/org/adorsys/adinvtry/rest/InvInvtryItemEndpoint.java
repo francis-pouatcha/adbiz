@@ -24,7 +24,7 @@ import org.adorsys.adinvtry.jpa.InvInvtryItem;
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 @Path("/invinvtryitems")
 public class InvInvtryItemEndpoint extends
-		CoreAbstBsnsItemEndpoint<InvInvtryItem, CoreAbstBsnsItemSearchInput<InvInvtryItem>, CoreAbstBsnsItemSearchResult<InvInvtryItem,CoreAbstBsnsItemSearchInput<InvInvtryItem>>> {
+		CoreAbstBsnsItemEndpoint<InvInvtryItem, CoreAbstBsnsItemSearchInput<InvInvtryItem>, CoreAbstBsnsItemSearchResult<InvInvtryItem>> {
 
 	@Inject
 	private InvInvtryItemLookup lookup;
@@ -38,7 +38,7 @@ public class InvInvtryItemEndpoint extends
 	}
 
 	@Override
-	protected CoreAbstBsnsItemSearchResult<InvInvtryItem, CoreAbstBsnsItemSearchInput<InvInvtryItem>> newSearchResult(Long size,
+	protected CoreAbstBsnsItemSearchResult<InvInvtryItem> newSearchResult(Long size,
 			List<InvInvtryItem> resultList,
 			CoreAbstBsnsItemSearchInput<InvInvtryItem> searchInput) {
 		return new InvInvtryItemSearchResult();

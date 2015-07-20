@@ -52,7 +52,7 @@ public class InvInvtryManagerEndpoint extends CoreAbstBsnsManagerEndpoint<InvInv
 	}
 
 	@Override
-	protected CoreAbstBsnsItemSearchResult<InvInvtryItem, CoreAbstBsnsItemSearchInput<InvInvtryItem>> newItemSearchResult(
+	protected CoreAbstBsnsItemSearchResult<InvInvtryItem> newItemSearchResult(
 			long count, List<InvInvtryItem> resultList,
 			CoreAbstBsnsItemSearchInput<InvInvtryItem> itemSearchInput) {
 		return new InvInvtryItemSearchResult(count, resultList, itemSearchInput);

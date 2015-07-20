@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.adorsys.adcore.jpa.CoreAbstEntityJob;
 import org.adorsys.adcore.repo.CoreAbstEntityJobRepo;
-import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
+import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 
-public abstract class CoreAbstEntityJobLookup<E extends CoreAbstEntityJob> extends CoreAbstIdentifiedLookup<E>{
+public abstract class CoreAbstEntityJobLookup<E extends CoreAbstEntityJob> extends CoreAbstIdentifLookup<E>{
 	protected abstract CoreAbstEntityJobRepo<E> getJobRepo();
-	protected CoreAbstIdentifDataRepo<E> getRepo(){
+	protected CoreAbstIdentifRepo<E> getRepo(){
 		return getJobRepo();
 	};
 

@@ -12,15 +12,15 @@ import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreSortOrder;
 import org.adorsys.adcore.repo.CoreAbstBsnsItemRepo;
-import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
+import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.deltaspike.data.api.QueryResult;
 
-public abstract class CoreAbstBsnsItemLookup<E extends CoreAbstBsnsItem> extends CoreAbstIdentifiedLookup<E>{
+public abstract class CoreAbstBsnsItemLookup<E extends CoreAbstBsnsItem> extends CoreAbstIdentifLookup<E>{
 
 	protected abstract CoreAbstBsnsItemRepo<E> getBsnsRepo();
 
-	protected CoreAbstIdentifDataRepo<E> getRepo(){
+	protected CoreAbstIdentifRepo<E> getRepo(){
 		return getBsnsRepo();
 	};
 	

@@ -13,7 +13,7 @@ import javax.inject.Inject;
 
 import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
-import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -30,7 +30,7 @@ public abstract class CoreAbstObjectLoader<T extends CoreAbstIdentifObject> {
 	private XlsConverterFactory xlsConverterFactory;
 		
 	protected abstract T newObject();
-	protected abstract CoreAbstIdentifiedLookup<T> getLookup();
+	protected abstract CoreAbstIdentifLookup<T> getLookup();
 	protected abstract CoreAbstIdentifiedEJB<T> getEjb();
 
 

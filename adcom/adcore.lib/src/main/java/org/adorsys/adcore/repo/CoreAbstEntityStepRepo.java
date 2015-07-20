@@ -5,7 +5,7 @@ import java.util.Date;
 import org.adorsys.adcore.jpa.CoreAbstEntityStep;
 import org.apache.deltaspike.data.api.QueryResult;
 
-public interface CoreAbstEntityStepRepo<E extends CoreAbstEntityStep> extends CoreAbstIdentifDataRepo<E>{
+public interface CoreAbstEntityStepRepo<E extends CoreAbstEntityStep> extends CoreAbstIdentifRepo<E>{
 
 	public QueryResult<E> findByJobIdentif(String entIdentif);
 

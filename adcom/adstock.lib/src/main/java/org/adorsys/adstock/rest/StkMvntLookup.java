@@ -2,7 +2,6 @@ package org.adorsys.adstock.rest;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 
 import org.adorsys.adcore.repo.CoreAbstBsnsItemRepo;
 import org.adorsys.adcore.rest.CoreAbstBsnsItemLookup;
@@ -14,8 +13,6 @@ public class StkMvntLookup extends CoreAbstBsnsItemLookup<StkMvnt> {
 
 	@Inject
 	private StkMvntRepository repository;
-	@Inject
-	private EntityManager em;
 
 	@Override
 	protected CoreAbstBsnsItemRepo<StkMvnt> getBsnsRepo() {
@@ -23,13 +20,8 @@ public class StkMvntLookup extends CoreAbstBsnsItemLookup<StkMvnt> {
 	}
 
 	@Override
-	protected Class<StkMvnt> getBsnsObjClass() {
+	protected Class<StkMvnt> getEntityClass() {
 		return StkMvnt.class;
-	}
-
-	@Override
-	protected EntityManager getEntityManager() {
-		return em;
 	}
 
 }

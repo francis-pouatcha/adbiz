@@ -13,10 +13,10 @@ import org.adorsys.adcore.event.EntityCreatedEvent;
 import org.adorsys.adcore.event.EntityDeletedEvent;
 import org.adorsys.adcore.event.EntityUpdatedEvent;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
-import org.adorsys.adcore.jpa.CoreAbstIdentifObjectHstry;
+import org.adorsys.adcore.jpa.CoreAbstIdentifHstry;
 import org.adorsys.adcore.repo.CoreAbstIdentifObjectHstryRepo;
 
-public abstract class CoreAbstIdentifiedHstryEJB<H extends CoreAbstIdentifObjectHstry, E extends CoreAbstIdentifObject> {
+public abstract class CoreAbstIdentifiedHstryEJB<H extends CoreAbstIdentifHstry, E extends CoreAbstIdentifObject> {
 
 	protected abstract CoreAbstIdentifObjectHstryRepo<H> getRepo();
 	protected abstract H newHstryObj();

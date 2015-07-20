@@ -90,7 +90,7 @@ public class StkStockQtyCtrlWkr {
 		base.setStockQty(baseQty);
 		base.setSeqNbr(seqNbr);
 		if(!BigDecimalUtils.greaterZero(baseQty)){
-			StkArticleLot2StrgSctn stkArticleLot2StrgSctn = articleLot2StrgSctnLookup.findByStrgSectionAndLotPic(section, lotPic);
+			StkArticleLot2StrgSctn stkArticleLot2StrgSctn = articleLot2StrgSctnLookup.findBySectionAndLotPic(section, lotPic);
 			stkArticleLot2StrgSctn.setOutOfStockDt(now);
 			if(BigDecimalUtils.isNullOrZero(baseQty)){
 				if(StringUtils.isNotBlank(orgiProcess) && "InvInvtry".equals(orgiProcess)){

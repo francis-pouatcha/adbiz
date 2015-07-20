@@ -19,4 +19,9 @@ public class InvInvtryJobLookup extends CoreAbstEntityJobLookup<InvInvtryJob>{
 		return repository;
 	}
 
+	@Override
+	protected Class<InvInvtryJob> getEntityClass() {
+		return InvInvtryJob.class;
+	}
+
 }

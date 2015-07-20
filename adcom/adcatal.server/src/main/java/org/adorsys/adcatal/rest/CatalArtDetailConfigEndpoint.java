@@ -17,7 +17,7 @@ import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEndpoint;
-import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
@@ -31,7 +31,7 @@ public class CatalArtDetailConfigEndpoint extends
 	private CatalArtDetailConfigLookup lookup;
 
 	@Override
-	protected CoreAbstIdentifiedLookup<CatalArtDetailConfig> getLookup() {
+	protected CoreAbstIdentifLookup<CatalArtDetailConfig> getLookup() {
 		return lookup;
 	}
 

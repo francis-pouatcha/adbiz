@@ -7,7 +7,7 @@ import org.adorsys.adcatal.jpa.CatalArtLangMapping;
 import org.adorsys.adcatal.rest.CatalArtLangMappingEJB;
 import org.adorsys.adcatal.rest.CatalArtLangMappingLookup;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
-import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 import org.adorsys.adcore.xls.CoreAbstObjectLoader;
 
 @Stateless
@@ -19,7 +19,7 @@ public class CatalArtLangMappingLoader extends
 	private CatalArtLangMappingLookup lookup;
 	
 	@Override
-	protected CoreAbstIdentifiedLookup<CatalArtLangMapping> getLookup() {
+	protected CoreAbstIdentifLookup<CatalArtLangMapping> getLookup() {
 		return lookup;
 	}
 	@Override

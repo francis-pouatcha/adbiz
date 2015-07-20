@@ -23,7 +23,7 @@ import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 
 public abstract class CoreAbstIdentifiedEndpoint<E extends CoreAbstIdentifObject> {
 
-	protected abstract CoreAbstIdentifiedLookup<E> getLookup();
+	protected abstract CoreAbstIdentifLookup<E> getLookup();
 	protected abstract CoreAbstIdentifiedEJB<E> getEjb();
 	protected abstract Field[] getEntityFields();
 	protected abstract CoreAbstIdentifObjectSearchInput<E> newSearchInput();

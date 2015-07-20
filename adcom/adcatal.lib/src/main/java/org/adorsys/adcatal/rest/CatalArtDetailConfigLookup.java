@@ -5,7 +5,7 @@ import javax.inject.Inject;
 
 import org.adorsys.adcatal.jpa.CatalArtDetailConfig;
 import org.adorsys.adcatal.repo.CatalArtDetailConfigRepository;
-import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
+import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 
 @Stateless
 public class CatalArtDetailConfigLookup extends
@@ -15,7 +15,7 @@ public class CatalArtDetailConfigLookup extends
 	private CatalArtDetailConfigRepository repository;
 
 	@Override
-	protected CoreAbstIdentifDataRepo<CatalArtDetailConfig> getRepo() {
+	protected CoreAbstIdentifRepo<CatalArtDetailConfig> getRepo() {
 		return repository;
 	}
 

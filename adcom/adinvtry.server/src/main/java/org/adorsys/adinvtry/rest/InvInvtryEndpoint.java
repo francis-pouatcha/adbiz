@@ -14,7 +14,6 @@ import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjectEndpoint;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjectLookup;
 import org.adorsys.adinvtry.jpa.InvInvtry;
-import org.adorsys.adinvtry.jpa.InvInvtry_;
 
 /**
  * 
@@ -22,7 +21,7 @@ import org.adorsys.adinvtry.jpa.InvInvtry_;
 @Stateless
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 @Path("/invinvtrys")
-public class InvInvtryEndpoint extends CoreAbstBsnsObjectEndpoint<InvInvtry, CoreAbstBsnsObjectSearchInput<InvInvtry>, CoreAbstBsnsObjectSearchResult<InvInvtry,CoreAbstBsnsObjectSearchInput<InvInvtry>>>
+public class InvInvtryEndpoint extends CoreAbstBsnsObjectEndpoint<InvInvtry, CoreAbstBsnsObjectSearchInput<InvInvtry>, CoreAbstBsnsObjectSearchResult<InvInvtry>>
 {
 
 	@Inject
@@ -39,7 +38,7 @@ public class InvInvtryEndpoint extends CoreAbstBsnsObjectEndpoint<InvInvtry, Cor
 	}
 
 	@Override
-	protected CoreAbstBsnsObjectSearchResult<InvInvtry, CoreAbstBsnsObjectSearchInput<InvInvtry>> newSearchResult(
+	protected CoreAbstBsnsObjectSearchResult<InvInvtry> newSearchResult(
 			Long size, List<InvInvtry> resultList,
 			CoreAbstBsnsObjectSearchInput<InvInvtry> searchInput) {
 		return new InvInvtrySearchResult(size, resultList, searchInput);

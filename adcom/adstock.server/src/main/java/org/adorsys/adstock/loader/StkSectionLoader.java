@@ -6,7 +6,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
-import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 import org.adorsys.adcore.xls.CoreAbstObjectLoader;
 import org.adorsys.adstock.jpa.StkSection;
 import org.adorsys.adstock.rest.StkSectionEJB;
@@ -26,7 +26,7 @@ public class StkSectionLoader extends CoreAbstObjectLoader<StkSection> {
 	}
 
 	@Override
-	protected CoreAbstIdentifiedLookup<StkSection> getLookup() {
+	protected CoreAbstIdentifLookup<StkSection> getLookup() {
 		return lookup;
 	}
 

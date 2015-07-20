@@ -5,7 +5,7 @@ import java.util.Date;
 import org.adorsys.adcore.jpa.CoreAbstEntityCstr;
 import org.apache.deltaspike.data.api.QueryResult;
 
-public interface CoreAbstEntityCstrRepo<E extends CoreAbstEntityCstr> extends CoreAbstIdentifDataRepo<E>{
+public interface CoreAbstEntityCstrRepo<E extends CoreAbstEntityCstr> extends CoreAbstIdentifRepo<E>{
 	public QueryResult<E> findByEntIdentif(String entIdentif);
 	public QueryResult<E> findByEntIdentifAndCstrType(String entIdentif, String cstrType);
 	public QueryResult<E> findByCstrType(String cstrType);

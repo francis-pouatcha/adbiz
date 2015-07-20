@@ -5,7 +5,7 @@ import javax.inject.Inject;
 
 import org.adorsys.adcatal.jpa.CatalArticle;
 import org.adorsys.adcatal.repo.CatalArticleRepository;
-import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
+import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 
 @Stateless
 public class CatalArticleLookup extends CatalAbstractArticleLookup<CatalArticle>{
@@ -14,7 +14,7 @@ public class CatalArticleLookup extends CatalAbstractArticleLookup<CatalArticle>
 	private CatalArticleRepository repository;
 
 	@Override
-	protected CoreAbstIdentifDataRepo<CatalArticle> getRepo() {
+	protected CoreAbstIdentifRepo<CatalArticle> getRepo() {
 		return repository;
 	}
 

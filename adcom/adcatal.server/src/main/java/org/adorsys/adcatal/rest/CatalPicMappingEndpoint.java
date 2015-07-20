@@ -17,7 +17,7 @@ import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEndpoint;
-import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 
 /**
  * 
@@ -34,7 +34,7 @@ public class CatalPicMappingEndpoint extends
 	private CatalPicMappingLookup lookup;
 
 	@Override
-	protected CoreAbstIdentifiedLookup<CatalPicMapping> getLookup() {
+	protected CoreAbstIdentifLookup<CatalPicMapping> getLookup() {
 		return lookup;
 	}
 

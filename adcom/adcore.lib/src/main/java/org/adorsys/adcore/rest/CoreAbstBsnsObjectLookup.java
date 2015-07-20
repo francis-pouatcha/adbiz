@@ -3,24 +3,21 @@ package org.adorsys.adcore.rest;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
 import org.adorsys.adcore.jpa.CoreAbstBsnsObject;
 import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchInput;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.repo.CoreAbstBsnsObjectRepo;
-import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
+import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 import org.apache.commons.lang3.StringUtils;
 
 public abstract class CoreAbstBsnsObjectLookup<E extends CoreAbstBsnsObject>
-		extends CoreAbstIdentifiedLookup<E> {
+		extends CoreAbstIdentifLookup<E> {
 
 	protected abstract CoreAbstBsnsObjectRepo<E> getBsnsRepo();
-	protected abstract Class<E> getBsnsObjClass();
-	protected abstract EntityManager getEntityManager();
 
-	protected CoreAbstIdentifDataRepo<E> getRepo() {
+	protected CoreAbstIdentifRepo<E> getRepo() {
 		return getBsnsRepo();
 	}
 
@@ -63,278 +60,56 @@ public abstract class CoreAbstBsnsObjectLookup<E extends CoreAbstBsnsObject>
 		return getBsnsRepo().findByCntnrIdentifIsNotNullAndMergedDateIsNotNull()
 				.firstResult(start).maxResults(max).getResultList();
 	}
-
-	private final String FIND_CUSTOM_QUERY = "SELECT e FROM " + getBsnsObjClass().getSimpleName() + " AS e";
-	private final String COUNT_CUSTOM_QUERY = "SELECT count(e.id) FROM " + getBsnsObjClass().getSimpleName() + " AS e";
 	
-	private StringBuilder preprocessQuery(String findOrCount, CoreAbstBsnsObjectSearchInput<E> searchInput){
+	@Override
+	protected StringBuilder preprocessQuery(String findOrCount, CoreAbstIdentifObjectSearchInput<E> si){
+		// Super
+		StringBuilder qBuilder = super.preprocessQuery(findOrCount, si);
+
+		CoreAbstBsnsObjectSearchInput<E> searchInput = (CoreAbstBsnsObjectSearchInput<E>) si;
+		boolean whereSet = qBuilder.indexOf(whereClause)>-1;
 		E entity = searchInput.getEntity();
-
-		String whereClause = " WHERE ";
-		String andClause = " AND ";
-
-		StringBuilder qBuilder = new StringBuilder(findOrCount);
-		boolean whereSet = false;
 		
-		if(searchInput.getFieldNames().contains("identif") && StringUtils.isNotBlank(entity.getIdentif())){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("e.identif=:identif");
-		}
+		if(searchInput.getFieldNames().contains("txGroup") && StringUtils.isNotBlank(entity.getTxGroup())) whereSet = prep(whereSet, qBuilder, "LOWER(e.txGroup) LIKE(LOWER(:txGroup))");
+		if(searchInput.getFieldNames().contains("txType") && StringUtils.isNotBlank(entity.getTxType())) whereSet = prep(whereSet, qBuilder, "e.txType=:txType");
+		if(searchInput.getFieldNames().contains("section") && StringUtils.isNotBlank(entity.getSection())) whereSet = prep(whereSet, qBuilder, "LOWER(e.section) LIKE(LOWER(:section))");
+		if(searchInput.getFieldNames().contains("rangeStart") && StringUtils.isNotBlank(entity.getRangeStart())) whereSet = prep(whereSet, qBuilder, "LOWER(e.rangeStart)>=LOWER(:rangeStart)");
+		if(searchInput.getFieldNames().contains("rangeEnd") && StringUtils.isNotBlank(entity.getRangeEnd())) whereSet = prep(whereSet, qBuilder, "LOWER(e.rangeEnd)<=LOWER(:rangeEnd)");
+		if(searchInput.getFieldNames().contains("descptn") && StringUtils.isNotBlank(entity.getDescptn())) whereSet = prep(whereSet, qBuilder, "LOWER(e.descptn) LIKE(LOWER(:descptn))");
 
-		if(searchInput.getFieldNames().contains("cntnrIdentif") && StringUtils.isNotBlank(entity.getCntnrIdentif())){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("e.cntnrIdentif=:cntnrIdentif");
-		}
+		if(searchInput.getPrchGrossPrcPreTaxFrom()!=null) whereSet = prep(whereSet, qBuilder, "e.prchGrossPrcPreTaxFrom >= :prchGrossPrcPreTaxFrom");
+		if(searchInput.getPrchGrossPrcPreTaxTo()!=null) whereSet = prep(whereSet, qBuilder, "e.prchGrossPrcPreTaxTo <= :prchGrossPrcPreTaxTo");
+
+		if(searchInput.getPrchRebateAmtFrom()!=null) whereSet = prep(whereSet, qBuilder, "e.prchRebateAmtFrom >= :prchRebateAmtFrom");
+		if(searchInput.getPrchRebateAmtTo()!=null) whereSet = prep(whereSet, qBuilder, "e.prchRebateAmtTo <= :prchRebateAmtTo");
+
+		if(searchInput.getPrchRdngDscntAmtFrom()!=null) whereSet = prep(whereSet, qBuilder, "e.prchRdngDscntAmtFrom >= :prchRdngDscntAmtFrom");
+		if(searchInput.getPrchRdngDscntAmtTo()!=null) whereSet = prep(whereSet, qBuilder, "e.prchRdngDscntAmtTo <= :prchRdngDscntAmtTo");
+
+		if(searchInput.getSlsGrossPrcPreTaxFrom()!=null) whereSet = prep(whereSet, qBuilder, "e.slsGrossPrcPreTaxFrom >= :slsGrossPrcPreTaxFrom");
+		if(searchInput.getSlsGrossPrcPreTaxTo()!=null) whereSet = prep(whereSet, qBuilder, "e.slsGrossPrcPreTaxTo <= :slsGrossPrcPreTaxTo");
+
+		if(searchInput.getSlsRebateAmtFrom()!=null) whereSet = prep(whereSet, qBuilder, "e.slsRebateAmtFrom >= :slsRebateAmtFrom");
+		if(searchInput.getSlsRebateAmtTo()!=null) whereSet = prep(whereSet, qBuilder, "e.slsRebateAmtTo <= :slsRebateAmtTo");
 		
-		if(searchInput.getFieldNames().contains("txGroup") && StringUtils.isNotBlank(entity.getTxGroup())){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("LOWER(e.txGroup) LIKE(LOWER(:txGroup))");
-		}
-		if(searchInput.getFieldNames().contains("txType") && entity.getTxType()!=null){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("e.txType=:txType");
-		}
-		if(searchInput.getFieldNames().contains("section") && StringUtils.isNotBlank(entity.getSection())){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("LOWER(e.section) LIKE(LOWER(:section))");
-		}
-		if(searchInput.getFieldNames().contains("rangeStart") && StringUtils.isNotBlank(entity.getRangeStart())){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("LOWER(e.rangeStart)<=LOWER(:rangeStart)");
-		}
-		if(searchInput.getFieldNames().contains("rangeEnd") && StringUtils.isNotBlank(entity.getRangeEnd())){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("LOWER(e.rangeEnd)<=LOWER(:rangeEnd)");
-		}
-		if(searchInput.getFieldNames().contains("descptn") && StringUtils.isNotBlank(entity.getDescptn())){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("LOWER(e.descptn) LIKE(LOWER(:descptn))");
-		}
-		if(searchInput.getValueDtFrom()!=null){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("e.valueDt >= :valueDtFrom");
-		}
-		if(searchInput.getValueDtTo()!=null){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("e.valueDt <= :valueDtTo");
-		}
-		if(searchInput.getIdentifFrom()!=null){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("e.identif >= :identifFrom");
-		}
-		if(searchInput.getIdentifTo()!=null){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("e.identif <= :identifTo");
-		}
+		if(searchInput.getSlsRdngDscntAmtFrom()!=null) whereSet = prep(whereSet, qBuilder, "e.slsRdngDscntAmtFrom >= :slsRdngDscntAmtFrom");
+		if(searchInput.getSlsRdngDscntAmtFrom()!=null) whereSet = prep(whereSet, qBuilder, "e.slsRdngDscntAmtFrom <= :slsRdngDscntAmtFrom");
 
-		if(searchInput.getPrchGrossPrcPreTaxFrom()!=null){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("e.prchGrossPrcPreTaxFrom >= :prchGrossPrcPreTaxFrom");
-		}
-		if(searchInput.getPrchGrossPrcPreTaxTo()!=null){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("e.prchGrossPrcPreTaxTo <= :prchGrossPrcPreTaxTo");
-		}
-
-		if(searchInput.getPrchRebateAmtFrom()!=null){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("e.prchRebateAmtFrom >= :prchRebateAmtFrom");
-		}
-		if(searchInput.getPrchRebateAmtTo()!=null){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("e.prchRebateAmtTo <= :prchRebateAmtTo");
-		}
-
-		if(searchInput.getPrchRdngDscntAmtFrom()!=null){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("e.prchRdngDscntAmtFrom >= :prchRdngDscntAmtFrom");
-		}
-		if(searchInput.getPrchRdngDscntAmtTo()!=null){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("e.prchRdngDscntAmtTo <= :prchRdngDscntAmtTo");
-		}
-
-		if(searchInput.getSlsGrossPrcPreTaxFrom()!=null){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("e.slsGrossPrcPreTaxFrom >= :slsGrossPrcPreTaxFrom");
-		}
-		if(searchInput.getSlsGrossPrcPreTaxTo()!=null){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("e.slsGrossPrcPreTaxTo <= :slsGrossPrcPreTaxTo");
-		}
-
-		if(searchInput.getSlsRebateAmtFrom()!=null){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("e.slsRebateAmtFrom >= :slsRebateAmtFrom");
-		}
-		if(searchInput.getSlsRebateAmtTo()!=null){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("e.slsRebateAmtTo <= :slsRebateAmtTo");
-		}
-
-		if(searchInput.getSlsRdngDscntAmtFrom()!=null){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("e.slsRdngDscntAmtFrom >= :slsRdngDscntAmtFrom");
-		}
-		if(searchInput.getSlsRdngDscntAmtFrom()!=null){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("e.slsRdngDscntAmtFrom <= :slsRdngDscntAmtFrom");
-		}
-
-		
-		if(searchInput.getStkValPreTaxFrom()!=null){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("e.stkValPreTaxFrom >= :stkValPreTaxFrom");
-		}
-		if(searchInput.getStkValPreTaxTo()!=null){
-			if(!whereSet){
-				qBuilder.append(whereClause);
-				whereSet = true;
-			} else {
-				qBuilder.append(andClause);
-			}
-			qBuilder.append("e.stkValPreTaxTo <= :stkValPreTaxTo");
-		}
+		if(searchInput.getStkValPreTaxFrom()!=null) whereSet = prep(whereSet, qBuilder, "e.stkValPreTaxFrom >= :stkValPreTaxFrom");
+		if(searchInput.getStkValPreTaxTo()!=null) whereSet = prep(whereSet, qBuilder, "e.stkValPreTaxTo <= :stkValPreTaxTo");
 		
 		return qBuilder;
 	}
 	
-	public void setParameters(CoreAbstBsnsObjectSearchInput<E> searchInput, Query query)
+	@Override
+	protected void setParameters(CoreAbstIdentifObjectSearchInput<E> si, Query query)
 	{
+
+		super.setParameters(si, query);
+
+		CoreAbstBsnsObjectSearchInput<E> searchInput = (CoreAbstBsnsObjectSearchInput<E>) si;
 		E entity = searchInput.getEntity();
 
-		if(searchInput.getFieldNames().contains("identif") && StringUtils.isNotBlank(entity.getIdentif())){
-			query.setParameter("identif", entity.getIdentif());
-		}
-		if(searchInput.getFieldNames().contains("cntnrIdentif") && StringUtils.isNotBlank(entity.getCntnrIdentif())){
-			query.setParameter("cntnrIdentif", entity.getCntnrIdentif());
-		}
-		
 		if(searchInput.getFieldNames().contains("txGroup") && StringUtils.isNotBlank(entity.getTxGroup())){
 			query.setParameter("txGroup", "%"+entity.getTxGroup()+"%");
 		}
@@ -352,18 +127,6 @@ public abstract class CoreAbstBsnsObjectLookup<E extends CoreAbstBsnsObject>
 		}
 		if(searchInput.getFieldNames().contains("descptn") && StringUtils.isNotBlank(entity.getDescptn())){
 			query.setParameter("descptn", "%"+entity.getDescptn()+"%");
-		}
-		if(searchInput.getValueDtFrom()!=null){
-			query.setParameter("valueDtFrom", searchInput.getValueDtFrom());
-		}
-		if(searchInput.getValueDtTo()!=null){
-			query.setParameter("valueDtTo", searchInput.getValueDtTo());
-		}
-		if(searchInput.getIdentifFrom()!=null){
-			query.setParameter("identifFrom", searchInput.getIdentifFrom());
-		}
-		if(searchInput.getIdentifTo()!=null){
-			query.setParameter("identifTo", searchInput.getIdentifTo());
 		}
 
 		if(searchInput.getPrchGrossPrcPreTaxFrom()!=null){
@@ -415,30 +178,5 @@ public abstract class CoreAbstBsnsObjectLookup<E extends CoreAbstBsnsObject>
 			query.setParameter("stkValPreTaxTo", searchInput.getStkValPreTaxTo());
 		}
 	}	
-	
-	public List<E> findCustom(CoreAbstBsnsObjectSearchInput<E> searchInput)
-	{
-		StringBuilder qBuilder = preprocessQuery(FIND_CUSTOM_QUERY, searchInput);
-		TypedQuery<E> query = getEntityManager().createQuery(qBuilder.toString(), getBsnsObjClass());
-		setParameters(searchInput, query);
 
-		int start = searchInput.getStart();
-		int max = searchInput.getMax();
-
-		if(start < 0)  start = 0;
-		query.setFirstResult(start);
-		if(max >= 1) 
-			query.setMaxResults(max);
-		
-		return query.getResultList();
-	}
-
-	public Long countCustom(CoreAbstBsnsObjectSearchInput<E> searchInput)
-	{
-		StringBuilder qBuilder = preprocessQuery(COUNT_CUSTOM_QUERY, searchInput);
-		TypedQuery<Long> query = getEntityManager().createQuery(qBuilder.toString(), Long.class);
-		setParameters(searchInput, query);
-		return query.getSingleResult();
-	}
-	
 }

@@ -5,26 +5,31 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
-import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
-import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
+import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 import org.adorsys.adstock.jpa.StkArticleLot2StrgSctn;
 import org.adorsys.adstock.repo.StkArticleLot2StrgSctnRepository;
 
 @Stateless
-@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 public class StkArticleLot2StrgSctnLookup extends
-		CoreAbstIdentifiedLookup<StkArticleLot2StrgSctn> {
+		CoreAbstIdentifLookup<StkArticleLot2StrgSctn> {
 
 	@Inject
 	private StkArticleLot2StrgSctnRepository repository;
 
 	@Override
-	protected CoreAbstIdentifDataRepo<StkArticleLot2StrgSctn> getRepo() {
+	protected CoreAbstIdentifRepo<StkArticleLot2StrgSctn> getRepo() {
 		return repository;
 	}
 
-	public StkArticleLot2StrgSctn findByStrgSectionAndLotPic(String strgSection, String lotPic){
-		String primaryKey = StkArticleLot2StrgSctn.toId(lotPic, strgSection);
+	public StkArticleLot2StrgSctn findBySectionAndLotPic(String strgSection, String lotPic){
+		String primaryKey = StkArticleLot2StrgSctn.toLotPicAndDectionKey(lotPic, strgSection);
 		return repository.findBy(primaryKey);
+	}
+
+	@Override
+	protected Class<StkArticleLot2StrgSctn> getEntityClass() {
+		return StkArticleLot2StrgSctn.class;
 	}
 }
