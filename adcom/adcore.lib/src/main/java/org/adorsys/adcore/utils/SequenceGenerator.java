@@ -34,7 +34,7 @@ public class SequenceGenerator {
 	public static final String APPOINTMENTCONTACT_NUMBER_SEQUENCE_PREFIXE = "CON";
 	public static final String PAYMENT_DS_SEQUENCE_PREFIXE = "PDS";
 	public static final String VOUCHER_SEQUENCE_PREFIXE = "VH";
-	
+	public static final String STK_MVNT_SEQUENCE_PREFIXE = "MVNT";
 
 	static long time = 0l;// the time corresponding to the 01.01.2014 00:00:00:00 ...
 	static {

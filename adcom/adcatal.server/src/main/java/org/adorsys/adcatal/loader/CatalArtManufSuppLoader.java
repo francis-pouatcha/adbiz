@@ -7,7 +7,7 @@ import org.adorsys.adcatal.jpa.CatalArtManufSupp;
 import org.adorsys.adcatal.rest.CatalArtManufSuppEJB;
 import org.adorsys.adcatal.rest.CatalArtManufSuppLookup;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
-import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 import org.adorsys.adcore.xls.CoreAbstObjectLoader;
 
 @Stateless
@@ -19,7 +19,7 @@ public class CatalArtManufSuppLoader extends
 	private CatalArtManufSuppLookup lookup;
 
 	@Override
-	protected CoreAbstIdentifiedLookup<CatalArtManufSupp> getLookup() {
+	protected CoreAbstIdentifLookup<CatalArtManufSupp> getLookup() {
 		return lookup;
 	}
 

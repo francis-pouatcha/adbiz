@@ -10,7 +10,7 @@ import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 @XmlRootElement
 public class StkArticleLot2StrgSctnSearchResult
 		extends
-		CoreAbstIdentifObjectSearchResult<StkArticleLot2StrgSctn, CoreAbstIdentifObjectSearchInput<StkArticleLot2StrgSctn>> {
+		CoreAbstIdentifObjectSearchResult<StkArticleLot2StrgSctn> {
 
 	public StkArticleLot2StrgSctnSearchResult() {
 		super();

@@ -5,17 +5,17 @@ import javax.inject.Inject;
 
 import org.adorsys.adcatal.jpa.CatalProdFmly;
 import org.adorsys.adcatal.repo.CatalProdFmlyRepo;
-import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
-import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
+import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 
 @Stateless
-public class CatalProdFmlyLookup  extends CoreAbstIdentifiedLookup<CatalProdFmly>{
+public class CatalProdFmlyLookup  extends CoreAbstIdentifLookup<CatalProdFmly>{
 
 	@Inject
 	private CatalProdFmlyRepo repository;
 
 	@Override
-	protected CoreAbstIdentifDataRepo<CatalProdFmly> getRepo() {
+	protected CoreAbstIdentifRepo<CatalProdFmly> getRepo() {
 		return repository;
 	}
 

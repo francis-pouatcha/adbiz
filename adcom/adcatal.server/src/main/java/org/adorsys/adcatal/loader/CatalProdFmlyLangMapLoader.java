@@ -7,7 +7,7 @@ import org.adorsys.adcatal.jpa.CatalProdFmlyLangMap;
 import org.adorsys.adcatal.rest.CatalProdFmlyLangMapEJB;
 import org.adorsys.adcatal.rest.CatalProdFmlyLangMapLookup;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
-import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 import org.adorsys.adcore.xls.CoreAbstObjectLoader;
 
 @Stateless
@@ -19,7 +19,7 @@ public class CatalProdFmlyLangMapLoader extends
 	private CatalProdFmlyLangMapLookup lookup;
 
 	@Override
-	protected CoreAbstIdentifiedLookup<CatalProdFmlyLangMap> getLookup() {
+	protected CoreAbstIdentifLookup<CatalProdFmlyLangMap> getLookup() {
 		return lookup;
 	}
 

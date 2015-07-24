@@ -19,7 +19,7 @@ public abstract class CoreAbstContainerDeletedLstnr<C extends CoreAbstIdentifObj
 
 	protected abstract CoreAbstIdentifiedEJB<E> getEltEjb();
 	
-	protected abstract CoreAbstIdentifiedLookup<E> getEltLookup();
+	protected abstract CoreAbstIdentifLookup<E> getEltLookup();
 	
 	public void handleEntityDeletedEvent(@Observes @EntityDeletedEvent C cntnr){
 		String cntnrIdentif = cntnr.getIdentif();

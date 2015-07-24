@@ -7,7 +7,7 @@ import org.adorsys.adcatal.jpa.CatalProdFmly;
 import org.adorsys.adcatal.rest.CatalProdFmlyEJB;
 import org.adorsys.adcatal.rest.CatalProdFmlyLookup;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
-import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 import org.adorsys.adcore.xls.CoreAbstObjectLoader;
 
 @Stateless
@@ -19,7 +19,7 @@ public class CatalProdFmlyLoader extends
 	private CatalProdFmlyLookup lookup;
 
 	@Override
-	protected CoreAbstIdentifiedLookup<CatalProdFmly> getLookup() {
+	protected CoreAbstIdentifLookup<CatalProdFmly> getLookup() {
 		return lookup;
 	}
 

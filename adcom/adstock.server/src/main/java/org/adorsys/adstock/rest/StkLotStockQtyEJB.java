@@ -3,7 +3,7 @@ package org.adorsys.adstock.rest;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
+import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 import org.adorsys.adstock.jpa.StkLotStockQty;
 import org.adorsys.adstock.repo.StkLotStockQtyRepository;
@@ -15,7 +15,7 @@ public class StkLotStockQtyEJB extends CoreAbstIdentifiedEJB<StkLotStockQty>{
 	private StkLotStockQtyRepository repository;
 
 	@Override
-	protected CoreAbstIdentifDataRepo<StkLotStockQty> getRepo() {
+	protected CoreAbstIdentifRepo<StkLotStockQty> getRepo() {
 		return repository;
 	}
 }

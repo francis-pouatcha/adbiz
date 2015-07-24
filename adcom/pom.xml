@@ -15,10 +15,10 @@
 		<module>adcatal.lib</module>
 		<module>adcatal.server</module>
 		<module>adcatal.client</module>
-<!-- 
 		<module>adstock.lib</module>
 		<module>adstock.server</module>
 		<module>adinvtry.lib</module>
+<!-- 
 		<module>adinvtry.server</module>
 		<module>adprocmt.lib</module>
 		<module>adprocmt.server</module>

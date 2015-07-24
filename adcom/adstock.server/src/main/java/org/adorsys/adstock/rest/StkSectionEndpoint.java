@@ -22,9 +22,11 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEndpoint;
-import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 import org.adorsys.adstock.jpa.StkSection;
 import org.adorsys.adstock.jpa.StkSection_;
 import org.adorsys.adstock.jpa.StkSectionSearchInput;
@@ -45,7 +47,7 @@ public class StkSectionEndpoint extends CoreAbstIdentifiedEndpoint<StkSection> {
 	private StkSectionEJB ejb;
 
 	@Override
-	protected CoreAbstIdentifiedLookup<StkSection> getLookup() {
+	protected CoreAbstIdentifLookup<StkSection> getLookup() {
 		return lookup;
 	}
 
@@ -57,5 +59,17 @@ public class StkSectionEndpoint extends CoreAbstIdentifiedEndpoint<StkSection> {
 	@Override
 	protected Field[] getEntityFields() {
 		return StkSection_.class.getFields();
+	}
+
+	@Override
+	protected CoreAbstIdentifObjectSearchInput<StkSection> newSearchInput() {
+		return new StkSectionSearchInput();
+	}
+
+	@Override
+	protected CoreAbstIdentifObjectSearchResult<StkSection> newSearchResult(
+			Long count, List<StkSection> resultList,
+			CoreAbstIdentifObjectSearchInput<StkSection> searchInput) {
+		return new StkSectionSearchResult();
 	}
 }

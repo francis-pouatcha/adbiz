@@ -8,7 +8,7 @@ import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchResult;
 
 @XmlRootElement
-public class StkArticleLotSearchResult extends CoreAbstBsnsItemSearchResult<StkArticleLot, CoreAbstBsnsItemSearchInput<StkArticleLot>>{
+public class StkArticleLotSearchResult extends CoreAbstBsnsItemSearchResult<StkArticleLot>{
 
 	public StkArticleLotSearchResult() {
 		super();

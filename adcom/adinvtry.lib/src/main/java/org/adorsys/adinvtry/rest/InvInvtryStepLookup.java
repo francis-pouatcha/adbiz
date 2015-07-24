@@ -19,4 +19,9 @@ public class InvInvtryStepLookup extends CoreAbstEntityStepLookup<InvInvtryStep>
 		return repository;
 	}
 
+	@Override
+	protected Class<InvInvtryStep> getEntityClass() {
+		return InvInvtryStep.class;
+	}
+
 }

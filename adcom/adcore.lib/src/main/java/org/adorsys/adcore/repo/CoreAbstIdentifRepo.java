@@ -6,7 +6,7 @@ import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 import org.apache.deltaspike.data.api.EntityRepository;
 import org.apache.deltaspike.data.api.QueryResult;
 
-public interface CoreAbstIdentifDataRepo<E extends CoreAbstIdentifObject> extends EntityRepository<E, String>{
+public interface CoreAbstIdentifRepo<E extends CoreAbstIdentifObject> extends EntityRepository<E, String>{
 	
 	public E findOptionalByIdentif(String identif);
 	
@@ -19,4 +19,14 @@ public interface CoreAbstIdentifDataRepo<E extends CoreAbstIdentifObject> extend
 	public QueryResult<E> findByValueDtBetween(Date valueDtFrom, Date valueDtTo);
 
 	public QueryResult<E> findByCntnrIdentifAndValueDtBetween(String cntnrIdentif, Date valueDtFrom, Date valueDtTo);
+
+	public QueryResult<E> findByIdentifGreaterThan(String idStart);
+
+	public QueryResult<E> findByIdentifGreaterThanEquals(
+			String idStart);
+
+	public QueryResult<E> findByIdentifLessThan(String idEnd);
+
+	public QueryResult<E> findByIdentifLessThanEquals(
+			String idEnd);
 }

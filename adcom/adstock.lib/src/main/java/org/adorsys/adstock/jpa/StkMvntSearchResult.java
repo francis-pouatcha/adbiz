@@ -5,7 +5,7 @@ import java.util.List;
 import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchResult;
 
-public class StkMvntSearchResult extends CoreAbstBsnsItemSearchResult<StkMvnt, CoreAbstBsnsItemSearchInput<StkMvnt>>
+public class StkMvntSearchResult extends CoreAbstBsnsItemSearchResult<StkMvnt>
 {
 
 	public StkMvntSearchResult() {

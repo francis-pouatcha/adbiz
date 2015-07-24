@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class CoreAbstBsnsObjectHstry extends CoreAbstIdentifObjectHstry {
+public abstract class CoreAbstBsnsObjectHstry extends CoreAbstIdentifHstry {
 	private static final long serialVersionUID = -1901201064736563160L;
 
 	@Column

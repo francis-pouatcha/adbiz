@@ -5,13 +5,13 @@ import java.util.List;
 
 import org.adorsys.adcore.jpa.CoreAbstEntityStep;
 import org.adorsys.adcore.repo.CoreAbstEntityStepRepo;
-import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
+import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 
 public abstract class CoreAbstEntityStepLookup<E extends CoreAbstEntityStep>
-		extends CoreAbstIdentifiedLookup<E> {
+		extends CoreAbstIdentifLookup<E> {
 	protected abstract CoreAbstEntityStepRepo<E> getStepRepo();
 
-	protected CoreAbstIdentifDataRepo<E> getRepo() {
+	protected CoreAbstIdentifRepo<E> getRepo() {
 		return getStepRepo();
 	};
 

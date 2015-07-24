@@ -98,4 +98,16 @@ public abstract class CoreAbstIdentifObject extends CoreAbstEntity {
 	public void setValueDt(Date valueDt) {
 		this.valueDt = valueDt;
 	}
+	
+	public void cleanId(){
+		setId(null);
+		setIdentif(null);
+		setVersion(0);
+	}
+
+	public void cleanAllIdentifFields(){
+		cleanId();
+		setCntnrIdentif(null);
+		setValueDt(null);
+	}
 }

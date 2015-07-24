@@ -19,4 +19,9 @@ public class InvInvtryCstrLookup extends CoreAbstEntityCstrLookup<InvInvtryCstr>
 		return repository;
 	}
 
+	@Override
+	protected Class<InvInvtryCstr> getEntityClass() {
+		return InvInvtryCstr.class;
+	}
+
 }

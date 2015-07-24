@@ -7,7 +7,7 @@ import org.adorsys.adcatal.jpa.CatalPicMapping;
 import org.adorsys.adcatal.rest.CatalPicMappingEJB;
 import org.adorsys.adcatal.rest.CatalPicMappingLookup;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
-import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 import org.adorsys.adcore.xls.CoreAbstObjectLoader;
 
 @Stateless
@@ -20,7 +20,7 @@ public class CatalPicMappingLoader extends
 	private CatalPicMappingLookup lookup;
 
 	@Override
-	protected CoreAbstIdentifiedLookup<CatalPicMapping> getLookup() {
+	protected CoreAbstIdentifLookup<CatalPicMapping> getLookup() {
 		return lookup;
 	}
 

@@ -13,10 +13,14 @@ import org.adorsys.adcore.annotation.Description;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 
 @MappedSuperclass
-public class StkAbstractLot2Section extends CoreAbstIdentifObject {
+public abstract class StkAbstLot2Section extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = -8174913096678489715L;
 
+	@Column
+	@NotNull
+	private String artPic;
+	
 	@Column
 	@Description("StkAbstractLot2Section_lotPic_description")
 	@NotNull
@@ -26,9 +30,9 @@ public class StkAbstractLot2Section extends CoreAbstIdentifObject {
 	 * The section code
 	 */
 	@Column
-	@Description("StkAbstractLot2Section_strgSection_description")
+	@Description("StkAbstractLot2Section_section_description")
 	@NotNull
-	private String strgSection;
+	private String section;
 
 	/*
 	 * Closed at the inventory process. Waiting for cleanup.
@@ -50,11 +54,6 @@ public class StkAbstractLot2Section extends CoreAbstIdentifObject {
 	@NotNull
 	private BigDecimal stockQty = BigDecimal.ZERO;
 
-	@Column
-	@Description("StkAbstractStockQty_rsvrdQty_description")
-	@NotNull
-	private BigDecimal rsvrdQty = BigDecimal.ZERO;
-	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Description("StkAbstractStockQty_qtyDt_description")
 	@NotNull
@@ -62,22 +61,13 @@ public class StkAbstractLot2Section extends CoreAbstIdentifObject {
 	
 	@Description("StkAbstractStockQty_seqNbr_description")
 	private Integer seqNbr;
-	
-	public String getStrgSection() {
-		return strgSection;
+
+	public String getSection() {
+		return section;
 	}
 
-	public void setStrgSection(String strgSection) {
-		this.strgSection = strgSection;
-	}
-
-	public static String toId(String lotPic, String strgSection){
-		return lotPic +"_"+ strgSection;
-	}
-	
-	@Override
-	protected String makeIdentif() {
-		return toId(lotPic, strgSection);
+	public void setSection(String section) {
+		this.section = section;
 	}
 
 	public String getLotPic() {
@@ -112,14 +102,6 @@ public class StkAbstractLot2Section extends CoreAbstIdentifObject {
 		this.stockQty = stockQty;
 	}
 
-	public BigDecimal getRsvrdQty() {
-		return rsvrdQty;
-	}
-
-	public void setRsvrdQty(BigDecimal rsvrdQty) {
-		this.rsvrdQty = rsvrdQty;
-	}
-
 	public Date getQtyDt() {
 		return qtyDt;
 	}
@@ -135,4 +117,17 @@ public class StkAbstractLot2Section extends CoreAbstIdentifObject {
 	public void setSeqNbr(Integer seqNbr) {
 		this.seqNbr = seqNbr;
 	}
+	
+	public String getArtPic() {
+		return artPic;
+	}
+
+	public void setArtPic(String artPic) {
+		this.artPic = artPic;
+	}
+	
+	public static String toLotPicAndDectionKey(String lotPic, String section){
+		return lotPic +"_"+ section;
+	}
+
 }

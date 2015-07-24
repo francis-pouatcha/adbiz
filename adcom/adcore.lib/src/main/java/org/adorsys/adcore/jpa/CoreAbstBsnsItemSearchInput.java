@@ -22,9 +22,6 @@ public abstract class CoreAbstBsnsItemSearchInput<E extends CoreAbstBsnsItem> ex
 
 	private Date expirDtTo;
 
-	private String nmlzdArtNameStart; 
-	private String nmlzdArtNameEnd; 
-
 	private BigDecimal prchUnitPrcPreTaxFrom;
 	private BigDecimal prchUnitPrcPreTaxTo;
 
@@ -165,22 +162,6 @@ public abstract class CoreAbstBsnsItemSearchInput<E extends CoreAbstBsnsItem> ex
 
 	public void setExpirDtTo(Date expirDtTo) {
 		this.expirDtTo = expirDtTo;
-	}
-
-	public String getNmlzdArtNameStart() {
-		return nmlzdArtNameStart;
-	}
-
-	public void setNmlzdArtNameStart(String nmlzdArtNameStart) {
-		this.nmlzdArtNameStart = nmlzdArtNameStart;
-	}
-
-	public String getNmlzdArtNameEnd() {
-		return nmlzdArtNameEnd;
-	}
-
-	public void setNmlzdArtNameEnd(String nmlzdArtNameEnd) {
-		this.nmlzdArtNameEnd = nmlzdArtNameEnd;
 	}
 
 	public BigDecimal getPrchUnitPrcPreTaxFrom() {

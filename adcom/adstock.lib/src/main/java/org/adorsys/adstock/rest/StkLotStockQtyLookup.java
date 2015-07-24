@@ -5,20 +5,20 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
-import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
+import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 import org.adorsys.adstock.jpa.StkLotStockQty;
 import org.adorsys.adstock.repo.StkLotStockQtyRepository;
 
 @Stateless
 public class StkLotStockQtyLookup extends
-		CoreAbstIdentifiedLookup<StkLotStockQty> {
+		CoreAbstIdentifLookup<StkLotStockQty> {
 
 	@Inject
 	private StkLotStockQtyRepository repository;
 
 	@Override
-	protected CoreAbstIdentifDataRepo<StkLotStockQty> getRepo() {
+	protected CoreAbstIdentifRepo<StkLotStockQty> getRepo() {
 		return repository;
 	}
 
@@ -37,5 +37,10 @@ public class StkLotStockQtyLookup extends
 		return repository
 				.findByArtPicAndLotPicAndSectionAndSeqNbr(artPic, lotPic,
 						section, seqNbr).orderDesc("seqNbr").getResultList();
+	}
+
+	@Override
+	protected Class<StkLotStockQty> getEntityClass() {
+		return StkLotStockQty.class;
 	}
 }

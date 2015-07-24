@@ -7,7 +7,7 @@ import org.adorsys.adcatal.jpa.CatalArt2ProductFamily;
 import org.adorsys.adcatal.rest.CatalArt2ProductFamilyEJB;
 import org.adorsys.adcatal.rest.CatalArt2ProductFamilyLookup;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
-import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 import org.adorsys.adcore.xls.CoreAbstObjectLoader;
 
 @Stateless
@@ -25,7 +25,7 @@ public class CatalArt2ProductFamilyLoader extends
 	}
 
 	@Override
-	protected CoreAbstIdentifiedLookup<CatalArt2ProductFamily> getLookup() {
+	protected CoreAbstIdentifLookup<CatalArt2ProductFamily> getLookup() {
 		return lookup;
 	}
 

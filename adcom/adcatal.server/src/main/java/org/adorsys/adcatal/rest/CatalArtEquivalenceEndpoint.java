@@ -17,7 +17,7 @@ import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEndpoint;
-import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 
 /**
  * 
@@ -33,7 +33,7 @@ public class CatalArtEquivalenceEndpoint extends
 	@Inject
 	private CatalArtEquivalenceLookup lookup;
 	@Override
-	protected CoreAbstIdentifiedLookup<CatalArtEquivalence> getLookup() {
+	protected CoreAbstIdentifLookup<CatalArtEquivalence> getLookup() {
 		return lookup;
 	}
 	@Override

@@ -7,7 +7,7 @@ import org.adorsys.adcatal.jpa.CatalArtLangMapping;
 import org.adorsys.adcatal.jpa.CatalArticle;
 import org.adorsys.adcore.rest.CoreAbstContainerDeletedLstnr;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
-import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 
 @Stateless
 public class CatalArtLangMappingDlteLstnr  extends CoreAbstContainerDeletedLstnr<CatalArticle, CatalArtLangMapping>{
@@ -24,7 +24,7 @@ public class CatalArtLangMappingDlteLstnr  extends CoreAbstContainerDeletedLstnr
 	}
 
 	@Override
-	protected CoreAbstIdentifiedLookup<CatalArtLangMapping> getEltLookup() {
+	protected CoreAbstIdentifLookup<CatalArtLangMapping> getEltLookup() {
 		return cntnrLookup;
 	}
 }

@@ -5,7 +5,7 @@ import javax.inject.Inject;
 
 import org.adorsys.adcatal.jpa.CatalPicMapping;
 import org.adorsys.adcatal.repo.CatalPicMappingRepository;
-import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
+import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 
 @Stateless
@@ -15,7 +15,7 @@ public class CatalPicMappingEJB  extends CoreAbstIdentifiedEJB<CatalPicMapping>{
 	private CatalPicMappingRepository repository;
 
 	@Override
-	protected CoreAbstIdentifDataRepo<CatalPicMapping> getRepo() {
+	protected CoreAbstIdentifRepo<CatalPicMapping> getRepo() {
 		return repository;
 	}
 }

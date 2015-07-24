@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.adorsys.adcore.jpa.CoreAbstEntityCstr;
 import org.adorsys.adcore.repo.CoreAbstEntityCstrRepo;
-import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
+import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 
-public abstract class CoreAbstEntityCstrLookup<E extends CoreAbstEntityCstr> extends CoreAbstIdentifiedLookup<E>{
+public abstract class CoreAbstEntityCstrLookup<E extends CoreAbstEntityCstr> extends CoreAbstIdentifLookup<E>{
 	protected abstract CoreAbstEntityCstrRepo<E> getCstrRepo();
 
-	protected CoreAbstIdentifDataRepo<E> getRepo() {
+	protected CoreAbstIdentifRepo<E> getRepo() {
 		return getCstrRepo();
 	}
 

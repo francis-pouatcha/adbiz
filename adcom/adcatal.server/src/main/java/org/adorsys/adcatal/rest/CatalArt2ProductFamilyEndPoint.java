@@ -17,7 +17,7 @@ import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEndpoint;
-import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 
 /**
  * 
@@ -34,7 +34,7 @@ public class CatalArt2ProductFamilyEndPoint extends
 	private CatalArt2ProductFamilyLookup lookup;
 
 	@Override
-	protected CoreAbstIdentifiedLookup<CatalArt2ProductFamily> getLookup() {
+	protected CoreAbstIdentifLookup<CatalArt2ProductFamily> getLookup() {
 		return lookup;
 	}
 

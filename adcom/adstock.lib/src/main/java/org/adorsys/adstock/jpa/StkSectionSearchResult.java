@@ -8,7 +8,7 @@ import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 
 @XmlRootElement
-public class StkSectionSearchResult extends CoreAbstIdentifObjectSearchResult<StkSection, CoreAbstIdentifObjectSearchInput<StkSection>>
+public class StkSectionSearchResult extends CoreAbstIdentifObjectSearchResult<StkSection>
 {
 
 	public StkSectionSearchResult() {

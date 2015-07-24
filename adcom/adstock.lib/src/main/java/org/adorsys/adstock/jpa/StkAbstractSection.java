@@ -14,15 +14,6 @@ public class StkAbstractSection extends CoreAbstIdentifObject {
 	private static final long serialVersionUID = 1441848160823566249L;
 
 	@Column
-	@Description("StkSection_sectionCode_description")
-	@NotNull
-	private String sectionCode;
-
-	@Column
-	@Description("StkSection_parentCode_description")
-	private String parentCode;
-
-	@Column
 	@Description("StkSection_name_description")
 	@NotNull
 	private String name;
@@ -38,22 +29,6 @@ public class StkAbstractSection extends CoreAbstIdentifObject {
 	@Column
 	@Description("StkSection_wharehouse_description")
 	private String wharehouse;
-
-	public String getSectionCode() {
-		return this.sectionCode;
-	}
-
-	public void setSectionCode(final String sectionCode) {
-		this.sectionCode = sectionCode;
-	}
-
-	public String getParentCode() {
-		return this.parentCode;
-	}
-
-	public void setParentCode(final String parentCode) {
-		this.parentCode = parentCode;
-	}
 
 	public String getName() {
 		return this.name;
@@ -89,6 +64,6 @@ public class StkAbstractSection extends CoreAbstIdentifObject {
 
 	@Override
 	protected String makeIdentif() {
-		return sectionCode;
+		throw new IllegalStateException("Identifier is supposed to be set by caller.");
 	}
 }

@@ -19,7 +19,6 @@ import org.adorsys.adcore.annotation.Description;
 import org.adorsys.adcore.utils.BigDecimalUtils;
 import org.adorsys.adcore.utils.FinancialOps;
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
 @MappedSuperclass
@@ -34,24 +33,6 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 	@NotNull
 	private String artPic;
 
-	@Column
-	private String artNameLg1;
-
-	@Column
-	String nmlzdArtNameLg1; 
-
-	@Column
-	private String artNameLg2;
-
-	@Column
-	String nmlzdArtNameLg2; 
-
-	@Column
-	private String artNameLg3;
-	
-	@Column
-	String nmlzdArtNameLg3; 
-	
 	@Column
 	private String section;
 	
@@ -282,21 +263,14 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 		super.prePersist();
 		salIndex = getSection() + "_" + getArtPic() + "_" + getLotPic();
 		usalIndex = acsngUser + "_" + salIndex;
-		normalizeArtName();
 		evlte();
 	}
 	
 	@PreUpdate
 	public void preUpdate() {
-		normalizeArtName();
 		evlte();
 	}
 
-	private void normalizeArtName(){
-		nmlzdArtNameLg1 = StringUtils.lowerCase(StringUtils.left(artNameLg1, 10));
-		nmlzdArtNameLg2 = StringUtils.lowerCase(StringUtils.left(artNameLg2, 10));
-		nmlzdArtNameLg3 = StringUtils.lowerCase(StringUtils.left(artNameLg3, 10));
-	}
 	public static String toIdentifier(String bsnsObjNbr, String acsngUser,String lotPic, String artPic, String section){
 		return bsnsObjNbr + "_" + acsngUser + "_" + lotPic + "_" + artPic + "_" + section;
 	}
@@ -792,54 +766,6 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 
 	public void setSlsRstckgFeesPreTax(BigDecimal slsRstckgFeesPreTax) {
 		this.slsRstckgFeesPreTax = slsRstckgFeesPreTax;
-	}
-
-	public String getArtNameLg1() {
-		return artNameLg1;
-	}
-
-	public void setArtNameLg1(String artNameLg1) {
-		this.artNameLg1 = artNameLg1;
-	}
-
-	public String getNmlzdArtNameLg1() {
-		return nmlzdArtNameLg1;
-	}
-
-	public void setNmlzdArtNameLg1(String nmlzdArtNameLg1) {
-		this.nmlzdArtNameLg1 = nmlzdArtNameLg1;
-	}
-
-	public String getArtNameLg2() {
-		return artNameLg2;
-	}
-
-	public void setArtNameLg2(String artNameLg2) {
-		this.artNameLg2 = artNameLg2;
-	}
-
-	public String getNmlzdArtNameLg2() {
-		return nmlzdArtNameLg2;
-	}
-
-	public void setNmlzdArtNameLg2(String nmlzdArtNameLg2) {
-		this.nmlzdArtNameLg2 = nmlzdArtNameLg2;
-	}
-
-	public String getArtNameLg3() {
-		return artNameLg3;
-	}
-
-	public void setArtNameLg3(String artNameLg3) {
-		this.artNameLg3 = artNameLg3;
-	}
-
-	public String getNmlzdArtNameLg3() {
-		return nmlzdArtNameLg3;
-	}
-
-	public void setNmlzdArtNameLg3(String nmlzdArtNameLg3) {
-		this.nmlzdArtNameLg3 = nmlzdArtNameLg3;
 	}
 
 	public void addPrchRebateAmt(BigDecimal prchRebateAmt) {

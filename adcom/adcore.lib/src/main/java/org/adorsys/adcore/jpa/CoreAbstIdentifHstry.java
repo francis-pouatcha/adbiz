@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 import org.apache.commons.lang3.StringUtils;
 
 @MappedSuperclass
-public abstract class CoreAbstIdentifObjectHstry extends CoreAbstEntity {
+public abstract class CoreAbstIdentifHstry extends CoreAbstEntity {
 
 	private static final long serialVersionUID = -7391189914830675838L;
 
@@ -133,14 +133,6 @@ public abstract class CoreAbstIdentifObjectHstry extends CoreAbstEntity {
 
 	public void setAddtnlInfo(final String addtnlInfo) {
 		this.addtnlInfo = addtnlInfo;
-	}
-	
-	public void makeHistoryId(boolean unique){
-		if(unique){
-			setId(getEntIdentif() +"_"+ getHstryType());
-		} else {
-			setId(getEntIdentif() +"_"+ getHstryType() + "_" + UUID.randomUUID().toString());
-		}
 	}
 
 }

@@ -8,7 +8,7 @@ import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 
 @XmlRootElement
-public class StkLotStockQtySearchResult extends CoreAbstIdentifObjectSearchResult<StkLotStockQty, CoreAbstIdentifObjectSearchInput<StkLotStockQty>>
+public class StkLotStockQtySearchResult extends CoreAbstIdentifObjectSearchResult<StkLotStockQty>
 {
 
 	public StkLotStockQtySearchResult() {

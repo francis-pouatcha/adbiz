@@ -5,7 +5,7 @@ import javax.inject.Inject;
 
 import org.adorsys.adcatal.jpa.CatalArt2ProductFamily;
 import org.adorsys.adcatal.repo.CatalArt2ProductFamilyRepository;
-import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
+import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 
 @Stateless
@@ -15,7 +15,7 @@ public class CatalArt2ProductFamilyEJB extends CoreAbstIdentifiedEJB<CatalArt2Pr
 	private CatalArt2ProductFamilyRepository repository;
 
 	@Override
-	protected CoreAbstIdentifDataRepo<CatalArt2ProductFamily> getRepo() {
+	protected CoreAbstIdentifRepo<CatalArt2ProductFamily> getRepo() {
 		return repository;
 	}
 }

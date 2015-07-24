@@ -2,7 +2,7 @@ package org.adorsys.adinvtry.rest;
 
 import javax.inject.Inject;
 
-import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
+import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 import org.adorsys.adcore.rest.CoreAbstEntityStepEJB;
 import org.adorsys.adinvtry.jpa.InvInvtryStep;
 import org.adorsys.adinvtry.repo.InvInvtryStepRepo;
@@ -17,7 +17,7 @@ public class InvInvtryStepEJB extends CoreAbstEntityStepEJB<InvInvtryStep>{
 	}
 
 	@Override
-	protected CoreAbstIdentifDataRepo<InvInvtryStep> getRepo() {
+	protected CoreAbstIdentifRepo<InvInvtryStep> getRepo() {
 		return repository;
 	}
 

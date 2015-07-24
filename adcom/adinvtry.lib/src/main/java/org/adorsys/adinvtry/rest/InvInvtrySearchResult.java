@@ -10,7 +10,7 @@ import org.adorsys.adinvtry.jpa.InvInvtry;
 
 @XmlRootElement
 public class InvInvtrySearchResult extends
-		CoreAbstBsnsObjectSearchResult<InvInvtry, CoreAbstBsnsObjectSearchInput<InvInvtry>> {
+		CoreAbstBsnsObjectSearchResult<InvInvtry> {
 
 	public InvInvtrySearchResult() {
 		super();

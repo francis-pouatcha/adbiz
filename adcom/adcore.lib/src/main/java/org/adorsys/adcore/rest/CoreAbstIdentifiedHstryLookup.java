@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.persistence.metamodel.SingularAttribute;
 
-import org.adorsys.adcore.jpa.CoreAbstIdentifObjectHstry;
+import org.adorsys.adcore.jpa.CoreAbstIdentifHstry;
 import org.adorsys.adcore.repo.CoreAbstIdentifObjectHstryRepo;
 
-public abstract class CoreAbstIdentifiedHstryLookup<E extends CoreAbstIdentifObjectHstry> {
+public abstract class CoreAbstIdentifiedHstryLookup<E extends CoreAbstIdentifHstry> {
 
 	protected abstract CoreAbstIdentifObjectHstryRepo<E> getRepo();
 
@@ -45,19 +45,59 @@ public abstract class CoreAbstIdentifiedHstryLookup<E extends CoreAbstIdentifObj
 		return getRepo().countLike(entity, attributes);
 	}
 
-	public Long countByEntIdentif(String identif) {
-		return getRepo().findByEntIdentif(identif).count();
-	}
-
-	public List<E> findByEntIdentif(String invtryNbr, int start, int max) {
-		return getRepo().findByEntIdentif(invtryNbr).firstResult(start).maxResults(max).getResultList();
-	}
-
 	public Long countByEntIdentifAndEntStatus(String identif, String status) {
 		return getRepo().findByEntIdentifAndEntStatus(identif, status).count();
 	}
 
 	public List<E> findByEntIdentifAndEntStatus(String identif, String status, int start, int max) {
 		return getRepo().findByEntIdentifAndEntStatus(identif, status).firstResult(start).maxResults(max).getResultList();
+	}
+
+	public Long countByEntIdentif(String identif) {
+		return getRepo().findByEntIdentif(identif).count();
+	}
+
+	public List<E> findByEntIdentif(String identif, int start, int max) {
+		return getRepo().findByEntIdentif(identif).firstResult(start).maxResults(max).getResultList();
+	}
+
+	public Long countByEntIdentifAndIdGreaterThan(String identif, String idStart) {
+		return getRepo().findByEntIdentifAndIdGreaterThan(identif, idStart).count();
+	}
+
+	public List<E> findByEntIdentifAndIdGreaterThan(String identif, String idStart, int start, int max) {
+		return getRepo().findByEntIdentifAndIdGreaterThan(identif,idStart).firstResult(start).maxResults(max).getResultList();
+	}
+	public Long countByEntIdentifAndIdGreaterThanEquals(String identif, String idStart) {
+		return getRepo().findByEntIdentifAndIdGreaterThanEquals(identif, idStart).count();
+	}
+
+	public List<E> findByEntIdentifAndIdGreaterThanEquals(String identif, String idStart, int start, int max) {
+		return getRepo().findByEntIdentifAndIdGreaterThanEquals(identif,idStart).firstResult(start).maxResults(max).getResultList();
+	}
+	
+	public Long countByIdBetween(String idStart, String idEnd){
+		return getRepo().findByIdBetween(idStart, idEnd).count();
+	}
+	public List<E> findByIdBetween(String idStart, String idEnd, int firstResult, int maxResult){
+		return getRepo().findByIdBetween(idStart, idEnd).orderAsc("id").firstResult(firstResult).maxResults(maxResult).getResultList();
+	}
+
+	public Long countByIdGreaterThan(String idStart){
+		return getRepo().findByIdGreaterThan(idStart).count();		
+	}
+	public List<E> findByIdGreaterThan(String idStart, int firstResult, int maxResult){
+		return getRepo().findByIdGreaterThan(idStart).orderAsc("id").firstResult(firstResult).maxResults(maxResult).getResultList();		
+	}
+
+	public Long countByIdGreaterThanEquals(String idStart){
+		return getRepo().findByIdGreaterThanEquals(idStart).count();				
+	}
+	public List<E> findByIdGreaterThanEquals(String idStart, int firstResult, int maxResult){
+		return getRepo().findByIdGreaterThanEquals(idStart).orderAsc("id").firstResult(firstResult).maxResults(maxResult).getResultList();		
+	}
+
+	public List<E> findAll(int firstResult, int max) {
+		return getRepo().findAll(firstResult, max);
 	}
 }

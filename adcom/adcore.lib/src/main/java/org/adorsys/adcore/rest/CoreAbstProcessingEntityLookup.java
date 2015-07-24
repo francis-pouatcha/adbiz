@@ -14,13 +14,13 @@ import javax.persistence.metamodel.SingularAttribute;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreSortOrder;
-import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
+import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 
-public abstract class CoreAbstIdentifiedLookup<E extends CoreAbstIdentifObject> {
+public abstract class CoreAbstProcessingEntityLookup<E extends CoreAbstIdentifObject> {
 
-	protected abstract CoreAbstIdentifDataRepo<E> getRepo();
+	protected abstract CoreAbstIdentifRepo<E> getRepo();
 	protected abstract Class<E> getEntityClass();
 	@Inject
 	private EntityManager em;

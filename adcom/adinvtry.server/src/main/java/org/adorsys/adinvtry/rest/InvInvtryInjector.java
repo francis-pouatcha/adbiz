@@ -59,9 +59,6 @@ public class InvInvtryInjector extends
 	@EJB
 	private InvInvtryItemLookup itemLookup;
 
-	@Resource
-	private SessionContext sessionContext;
-
 	@Override
 	protected CoreAbstBsnsObjectLookup<InvInvtry> getBsnsObjLookup() {
 		return bsnsObjLookup;
@@ -95,14 +92,6 @@ public class InvInvtryInjector extends
 	@Override
 	protected String getSequenceGeneratorPrefix() {
 		return SequenceGenerator.INVENTORY_SEQUENCE_PREFIXE;
-	}
-
-	@Override
-	protected AdcomUser getCallerPrincipal() {
-		Principal callerPrincipal = sessionContext.getCallerPrincipal();
-		if(callerPrincipal==null) return null;
-		String name = callerPrincipal.getName();
-		return new AdcomUser(name);
 	}
 
 	@Override

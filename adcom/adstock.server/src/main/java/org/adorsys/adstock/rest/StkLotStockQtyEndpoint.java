@@ -1,6 +1,7 @@
 package org.adorsys.adstock.rest;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -8,9 +9,11 @@ import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 
+import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEndpoint;
-import org.adorsys.adcore.rest.CoreAbstIdentifiedLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 import org.adorsys.adstock.jpa.StkLotStockQty;
 import org.adorsys.adstock.jpa.StkLotStockQty_;
 
@@ -29,7 +32,7 @@ public class StkLotStockQtyEndpoint extends
 	private StkLotStockQtyLookup lookup;
 
 	@Override
-	protected CoreAbstIdentifiedLookup<StkLotStockQty> getLookup() {
+	protected CoreAbstIdentifLookup<StkLotStockQty> getLookup() {
 		return lookup;
 	}
 
@@ -41,5 +44,19 @@ public class StkLotStockQtyEndpoint extends
 	@Override
 	protected Field[] getEntityFields() {
 		return StkLotStockQty_.class.getFields();
+	}
+
+	@Override
+	protected CoreAbstIdentifObjectSearchInput<StkLotStockQty> newSearchInput() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected CoreAbstIdentifObjectSearchResult<StkLotStockQty> newSearchResult(
+			Long count, List<StkLotStockQty> resultList,
+			CoreAbstIdentifObjectSearchInput<StkLotStockQty> searchInput) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

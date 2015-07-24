@@ -6,7 +6,7 @@ import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchResult;
 import org.adorsys.adinvtry.jpa.InvInvtryItem;
 
-public class InvInvtryItemSearchResult extends CoreAbstBsnsItemSearchResult<InvInvtryItem, CoreAbstBsnsItemSearchInput<InvInvtryItem>>{
+public class InvInvtryItemSearchResult extends CoreAbstBsnsItemSearchResult<InvInvtryItem>{
 
 	public InvInvtryItemSearchResult() {
 		super();

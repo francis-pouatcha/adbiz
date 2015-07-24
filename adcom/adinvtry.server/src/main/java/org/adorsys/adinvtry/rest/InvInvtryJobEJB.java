@@ -3,7 +3,7 @@ package org.adorsys.adinvtry.rest;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import org.adorsys.adcore.repo.CoreAbstIdentifDataRepo;
+import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 import org.adorsys.adcore.rest.CoreAbstEntityJobEJB;
 import org.adorsys.adinvtry.jpa.InvInvtryJob;
 import org.adorsys.adinvtry.repo.InvInvtryJobRepo;
@@ -20,7 +20,7 @@ public class InvInvtryJobEJB extends CoreAbstEntityJobEJB<InvInvtryJob> {
 	}
 
 	@Override
-	protected CoreAbstIdentifDataRepo<InvInvtryJob> getRepo() {
+	protected CoreAbstIdentifRepo<InvInvtryJob> getRepo() {
 		return jobRepo;
 	}
 
