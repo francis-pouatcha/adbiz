@@ -14,10 +14,10 @@ public class CatalArtDetailConfigSearchResult extends CoreAbstIdentifObjectSearc
 		super();
 	}
 
-	public CatalArtDetailConfigSearchResult(Long count,
+	public CatalArtDetailConfigSearchResult(Long count, Long total,
 			List<CatalArtDetailConfig> resultList,
 			CoreAbstIdentifObjectSearchInput<CatalArtDetailConfig> searchInput) {
-		super(count, resultList, searchInput);
+		super(count, total, resultList, searchInput);
 	}
 	
 }

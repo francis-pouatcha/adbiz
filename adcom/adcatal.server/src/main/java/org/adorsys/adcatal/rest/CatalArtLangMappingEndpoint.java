@@ -51,8 +51,8 @@ public class CatalArtLangMappingEndpoint extends
 	}
 	@Override
 	protected CoreAbstIdentifObjectSearchResult<CatalArtLangMapping> newSearchResult(
-			Long count, List<CatalArtLangMapping> resultList,
+			Long count,Long total, List<CatalArtLangMapping> resultList,
 			CoreAbstIdentifObjectSearchInput<CatalArtLangMapping> searchInput) {
-		return new CatalArtLangMappingSearchResult(count, resultList, searchInput);
+		return new CatalArtLangMappingSearchResult(count, total, resultList, searchInput);
 	}
 }

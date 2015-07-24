@@ -67,6 +67,7 @@ public class BaseLoaderRegistration {
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public void process() throws Exception {
 		dataSheetLoader.process();
+		System.out.print("process sheet loader");
 	}
 	
 	public void createTemplate(){

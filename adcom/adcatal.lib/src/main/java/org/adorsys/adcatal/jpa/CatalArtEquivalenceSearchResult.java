@@ -15,9 +15,9 @@ public class CatalArtEquivalenceSearchResult extends CoreAbstIdentifObjectSearch
 		super();
 	}
 
-	public CatalArtEquivalenceSearchResult(Long count,
+	public CatalArtEquivalenceSearchResult(Long count, Long total,
 			List<CatalArtEquivalence> resultList,
 			CoreAbstIdentifObjectSearchInput<CatalArtEquivalence> searchInput) {
-		super(count, resultList, searchInput);
+		super(count, total, resultList, searchInput);
 	}
 }

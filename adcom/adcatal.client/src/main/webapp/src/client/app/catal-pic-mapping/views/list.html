@@ -1,0 +1,45 @@
+<section class="" ng-controller="CatalPicMappingController as vmPic" data-ng-init="vmPic.init()">
+
+  <div class="panel panel-primary">
+    <div class="panel-body">
+
+      <div class="pull-right">
+        <a type="button" class="btn btn-success" ng-click="vmPic.createForm({})">
+          <i class="glyphicon glyphicon-open"></i> New CatalPicMapping
+        </a>
+      </div>
+
+      <table class="table table-condensed table-striped">
+          <thead>
+              <th>{{'catalPicMapping.artIdentif' | translate}}</th>
+              <th>{{'catalPicMapping.code' | translate}}</th>
+              <th>{{'catalPicMapping.codeOrigin' | translate}}</th>
+              <th>{{'catalPicMapping.addInfo' | translate}}</th>
+              <th>{{'catalPicMapping.priority' | translate}}</th>
+          </thead>
+          <tr ng-repeat="catalPicMapping in vmPic.data">
+              <td>{{catalPicMapping.artIdentif}}</td>
+              <td>{{catalPicMapping.code}}</td>
+              <td>{{catalPicMapping.codeOrigin}}</td>
+              <td>{{catalPicMapping.addInfo}}</td>
+              <td>{{catalPicMapping.priority}}</td>
+              <td>
+                 <div class="table-actions">
+                      <a class="btn btn-default" title="View" ng-click="vmPic.showForm(catalPicMapping)">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                      </a>
+                      <a class="btn btn-default" title="Edit" ng-click="vmPic.editForm(catalPicMapping)">
+                        <span class="glyphicon glyphicon-edit"></span>
+                      </a>
+                      <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vmPic.remove(catalPicMapping)" item="catalPicMapping">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                      </a>
+                  </div>
+              </td>
+          </tr>
+      </table>
+
+    </div>
+  </div>
+
+</section>

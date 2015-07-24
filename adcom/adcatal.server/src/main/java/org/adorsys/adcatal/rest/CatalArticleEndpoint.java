@@ -55,8 +55,8 @@ public class CatalArticleEndpoint extends
 
 	@Override
 	protected CoreAbstIdentifObjectSearchResult<CatalArticle> newSearchResult(
-			Long count, List<CatalArticle> resultList,
+			Long count,Long total,List<CatalArticle> resultList,
 			CoreAbstIdentifObjectSearchInput<CatalArticle> searchInput) {
-		return new CatalArticleSearchResult(count, resultList, searchInput);
+		return new CatalArticleSearchResult(count, total, resultList, searchInput);
 	}
 }

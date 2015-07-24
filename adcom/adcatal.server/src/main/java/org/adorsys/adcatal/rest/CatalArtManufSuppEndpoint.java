@@ -55,8 +55,8 @@ public class CatalArtManufSuppEndpoint extends
 
 	@Override
 	protected CoreAbstIdentifObjectSearchResult<CatalArtManufSupp> newSearchResult(
-			Long count, List<CatalArtManufSupp> resultList,
+			Long count, Long total,List<CatalArtManufSupp> resultList,
 			CoreAbstIdentifObjectSearchInput<CatalArtManufSupp> searchInput) {
-		return new CatalArtManufSuppSearchResult(count, resultList, searchInput);
+		return new CatalArtManufSuppSearchResult(count, total, resultList, searchInput);
 	}
 }

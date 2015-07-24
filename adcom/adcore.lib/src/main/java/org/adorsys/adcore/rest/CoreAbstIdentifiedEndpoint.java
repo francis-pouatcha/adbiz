@@ -27,7 +27,7 @@ public abstract class CoreAbstIdentifiedEndpoint<E extends CoreAbstIdentifObject
 	protected abstract CoreAbstIdentifiedEJB<E> getEjb();
 	protected abstract Field[] getEntityFields();
 	protected abstract CoreAbstIdentifObjectSearchInput<E> newSearchInput();
-	protected abstract CoreAbstIdentifObjectSearchResult<E> newSearchResult(Long count,List<E> resultList, CoreAbstIdentifObjectSearchInput<E> searchInput);
+	protected abstract CoreAbstIdentifObjectSearchResult<E> newSearchResult(Long count, Long total, List<E> resultList, CoreAbstIdentifObjectSearchInput<E> searchInput);
 	
 	@POST
 	@Consumes({ "application/json"})
@@ -70,11 +70,12 @@ public abstract class CoreAbstIdentifiedEndpoint<E extends CoreAbstIdentifObject
 			@QueryParam("start") int start, @QueryParam("max") int max) {
 		// Limit the max of items queryable.
 		max = CoreAbstIdentifObjectSearchInput.checkMax(max);
+		Long total = getLookup().count();
 		List<E> resultList = getLookup().listAll(start, max);
 		CoreAbstIdentifObjectSearchInput<E> searchInput = newSearchInput();
 		searchInput.setStart(start);
 		searchInput.setMax(max);
-		return newSearchResult(new Long(resultList.size()),
+		return newSearchResult(new Long(resultList.size()), total,
 				detach(resultList), detach(searchInput));
 	}
 
@@ -92,10 +93,11 @@ public abstract class CoreAbstIdentifiedEndpoint<E extends CoreAbstIdentifObject
 			CoreAbstIdentifObjectSearchInput<E> searchInput) {
 		SingularAttribute<E, ?>[] attributes = readSeachAttributes(searchInput);
 		Long count = getLookup().countBy(searchInput.getEntity(), attributes);
+		Long total = getLookup().count();
 		List<E> resultList = getLookup().findBy(
 				searchInput.getEntity(), searchInput.getStart(),
 				searchInput.getMax(), attributes);
-		return newSearchResult(count, detach(resultList),
+		return newSearchResult(count,total, detach(resultList),
 				detach(searchInput));
 	}
 
@@ -115,10 +117,11 @@ public abstract class CoreAbstIdentifiedEndpoint<E extends CoreAbstIdentifObject
 			CoreAbstIdentifObjectSearchInput<E> searchInput) {
 		SingularAttribute<E, ?>[] attributes = readSeachAttributes(searchInput);
 		Long countLike = getLookup().countByLike(searchInput.getEntity(), attributes);
+		Long total = getLookup().count();
 		List<E> resultList = getLookup().findByLike(
 				searchInput.getEntity(), searchInput.getStart(),
 				searchInput.getMax(), attributes);
-		return newSearchResult(countLike,
+		return newSearchResult(countLike, total,
 				detach(resultList), detach(searchInput));
 	}
 
@@ -128,8 +131,9 @@ public abstract class CoreAbstIdentifiedEndpoint<E extends CoreAbstIdentifObject
 	@Consumes({ "application/json" })
 	public CoreAbstIdentifObjectSearchResult<E> findCustom(CoreAbstIdentifObjectSearchInput<E> searchInput) {
 		Long countLike = getLookup().countCustom(searchInput);
+		Long total = getLookup().count();
 		List<E> resultList = getLookup().findCustom(searchInput);
-		return newSearchResult(countLike, detach(resultList),
+		return newSearchResult(countLike, total, detach(resultList),
 				detach(searchInput));
 	}
 	

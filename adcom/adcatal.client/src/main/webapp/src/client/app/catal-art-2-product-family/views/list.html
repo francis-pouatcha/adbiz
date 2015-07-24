@@ -1,0 +1,39 @@
+<section class="" ng-controller="CatalArt2ProductFamilyController as vmProductFam" data-ng-init="vmProductFam.init()" >
+
+  <div class="panel panel-primary">
+    <div class="panel-body">
+
+      <div class="pull-right">
+        <a type="button" class="btn btn-success" ng-click="vmProductFam.createForm({})">
+          <i class="glyphicon glyphicon-open"></i> New CatalArt2ProductFamily
+        </a>
+      </div>
+
+      <table  class="table table-condensed table-striped">
+          <thead>
+            <td>{{'catalArt2ProductFamily.artPic' | translate}}</td>
+            <td>{{'catalArt2ProductFamily.famCode' | translate}}</td>
+          </thead>
+          <tr ng-repeat="catalArt2ProductFamily in vmProductFam.data">
+              <td data-title="'artPic'" >{{catalArt2ProductFamily.artPic}}</td>
+              <td data-title="'famCode'" >{{catalArt2ProductFamily.famCode}}</td>
+              <td>
+                 <div class="table-actions">
+                      <a class="btn btn-default" title="View" ng-click="vmProductFam.showForm(catalArt2ProductFamily)">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                      </a>
+                      <a class="btn btn-default" title="Edit" ng-click="vmProductFam.editForm(catalArt2ProductFamily)" >
+                        <span class="glyphicon glyphicon-edit"></span>
+                      </a>
+                      <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vmProductFam.remove(catalArt2ProductFamily)" item="catalArt2ProductFamily">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                      </a>
+                  </div>
+              </td>
+          </tr>
+      </table>
+
+    </div>
+  </div>
+
+</section>

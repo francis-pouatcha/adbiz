@@ -15,10 +15,10 @@ public class CatalArtLangMappingSearchResult extends CoreAbstIdentifObjectSearch
 		super();
 	}
 
-	public CatalArtLangMappingSearchResult(Long count,
+	public CatalArtLangMappingSearchResult(Long count,Long total,
 			List<CatalArtLangMapping> resultList,
 			CoreAbstIdentifObjectSearchInput<CatalArtLangMapping> searchInput) {
-		super(count, resultList, searchInput);
+		super(count, total, resultList, searchInput);
 	}
 	
 }

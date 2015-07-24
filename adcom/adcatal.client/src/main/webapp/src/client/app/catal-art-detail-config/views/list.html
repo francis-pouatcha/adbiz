@@ -1,0 +1,41 @@
+<section class="" ng-controller="CatalArtDetailConfigController as vmArtDetail" data-ng-init="vmArtDetail.init()" >
+
+  <div class="panel panel-primary">
+    <div class="panel-body">
+
+      <div class="pull-right">
+        <a type="button" class="btn btn-success" ng-click="vmArtDetail.createForm({})">
+          <i class="glyphicon glyphicon-open"></i> New CatalArtDetailConfig
+        </a>
+      </div>
+
+      <table class="table table-condensed table-striped">
+          <thead>
+              <td>{{'catalArtDetailConfig.qtyOfDtldInMain' | translate}}</td>
+              <td>{{'catalArtDetailConfig.pptnOfDtldInMain' | translate}}</td>
+              <td>{{'catalArtDetailConfig.mngInPptn' | translate}}</td>
+          </thead>
+          <tr ng-repeat="catalArtDetailConfig in vmArtDetail.data">
+              <td>{{catalArtDetailConfig.qtyOfDtldInMain}}</td>
+              <td>{{catalArtDetailConfig.pptnOfDtldInMain}}</td>
+              <td>{{catalArtDetailConfig.mngInPptn}}</td>
+              <td>
+                 <div class="table-actions">
+                      <a class="btn btn-default" title="View" ng-click="vmArtDetail.showForm(catalArtDetailConfig)">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                      </a>
+                      <a class="btn btn-default" title="Edit" ng-click="vmArtDetail.editForm(catalArtDetailConfig)">
+                        <span class="glyphicon glyphicon-edit"></span>
+                      </a>
+                      <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vmArtDetail.remove(catalArtDetailConfig)" item="catalArtDetailConfig">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                      </a>
+                  </div>
+              </td>
+          </tr>
+      </table>
+
+    </div>
+  </div>
+
+</section>

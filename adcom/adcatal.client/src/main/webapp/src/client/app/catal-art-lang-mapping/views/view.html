@@ -1,0 +1,25 @@
+<section class="" ng-controller="CatalArtLangMappingController as vm" data-ng-init="vm.toViewCatalArtLangMapping()">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+			CatalArtLangMapping View
+    </div>
+    <div class="panel-body">
+
+      <form novalidate>
+        <formly-form model="vmModal.model" fields="vm.formFields">
+        </formly-form>
+      </form>
+
+      <hr/>
+      <div>
+
+          <a class="btn btn-primary" ng-click="vmModal.cancel()">
+              <i class="glyphicon glyphicon-chevron-left"></i> Back
+          </a>
+      </div>
+
+    </div>
+  </div>
+
+</section>

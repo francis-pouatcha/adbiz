@@ -55,9 +55,9 @@ public class CatalProdFmlyLangMapEndpoint extends
 
 	@Override
 	protected CoreAbstIdentifObjectSearchResult<CatalProdFmlyLangMap> newSearchResult(
-			Long count, List<CatalProdFmlyLangMap> resultList,
+			Long count, Long total, List<CatalProdFmlyLangMap> resultList,
 			CoreAbstIdentifObjectSearchInput<CatalProdFmlyLangMap> searchInput) {
-		return new CatalProdFmlyLangMapSearchResult(count, resultList, searchInput);
+		return new CatalProdFmlyLangMapSearchResult(count, total, resultList, searchInput);
 	}
 
 }

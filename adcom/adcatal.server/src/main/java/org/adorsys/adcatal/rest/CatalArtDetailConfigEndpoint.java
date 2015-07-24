@@ -52,9 +52,9 @@ public class CatalArtDetailConfigEndpoint extends
 
 	@Override
 	protected CoreAbstIdentifObjectSearchResult<CatalArtDetailConfig> newSearchResult(
-			Long count, List<CatalArtDetailConfig> resultList,
+			Long count, Long total,List<CatalArtDetailConfig> resultList,
 			CoreAbstIdentifObjectSearchInput<CatalArtDetailConfig> searchInput) {
-		return new CatalArtDetailConfigSearchResult(count, resultList, searchInput);
+		return new CatalArtDetailConfigSearchResult(count, total, resultList, searchInput);
 	}
 
 }

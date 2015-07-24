@@ -8,8 +8,8 @@ public abstract class CoreAbstLangObjectSearchResult<E extends CoreAbstLangObjec
 		super();
 	}
 
-	public CoreAbstLangObjectSearchResult(Long count, List<E> resultList,
+	public CoreAbstLangObjectSearchResult(Long count, Long total, List<E> resultList,
 			CoreAbstLangObjectSearchInput<E> searchInput) {
-		super(count, resultList, searchInput);
+		super(count, total, resultList, searchInput);
 	}
 }

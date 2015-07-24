@@ -13,6 +13,11 @@ public abstract class CoreSearchResult<T> {
 	 * The number of entities matching this search.
 	 */
 	private Long count;
+	
+	/*
+	 * The total number of  T entities existing in database.
+	 */
+	private Long total;
 
 	/*
 	 * The result list.
@@ -30,10 +35,19 @@ public abstract class CoreSearchResult<T> {
 		this.className = this.getClass().getName();
 	}
 
-	public CoreSearchResult(Long count, List<T> resultList,
+	/*public CoreSearchResult(Long count, List<T> resultList,
 			CoreSearchInput<T> searchInput) {
 		super();
 		this.count = count;
+		this.resultList = resultList;
+		this.searchInput = searchInput;
+	}*/
+
+	public CoreSearchResult(Long count, Long total, List<T> resultList,
+			CoreSearchInput<T> searchInput) {
+		super();
+		this.count = count;
+		this.total = total;
 		this.resultList = resultList;
 		this.searchInput = searchInput;
 	}
@@ -68,6 +82,14 @@ public abstract class CoreSearchResult<T> {
 
 	public void setClassName(String className) {
 		this.className = className;
+	}
+
+	public Long getTotal() {
+		return total;
+	}
+
+	public void setTotal(Long total) {
+		this.total = total;
 	}
 	
 }

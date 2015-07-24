@@ -1,0 +1,66 @@
+<section class="mainbar" data-ng-init="vm.toViewArticle()">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+			Article View
+    </div>
+    <div class="panel-body">
+
+      <form novalidate>
+        <formly-form model="vm.article" fields="vm.formFields">
+        </formly-form>
+      </form>
+
+      <hr/>
+      <div>
+        <a class="btn btn-success" href="/article/{{vm.article.id}}/edit">
+          <i class="glyphicon glyphicon-edit"></i> Edit
+        </a>
+        <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove()" item="vm.article">
+          <i class="glyphicon glyphicon-remove-circle"></i> Delete
+        </a>
+        <a class="btn btn-primary" href="/article">
+          <i class="glyphicon glyphicon-list"></i> List Articles
+        </a>
+      </div>
+        <hr/>
+        <div>
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">catal-art-lang-mapping</a></li>
+                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">catal-art-2-product-family</a></li>
+                <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">catal-art-detail-config</a></li>
+                <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">catal-art-equivalence</a></li>
+                <li role="presentation"><a href="#pic" aria-controls="pic" role="tab" data-toggle="tab">catal-pic-mapping</a></li>
+                <li role="presentation"><a href="#manuf" aria-controls="manuf" role="tab" data-toggle="tab">catal-art-manuf-supp</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active"  id="home">
+                    <div ng-include src="'app/catal-art-lang-mapping/views/list.html'"></div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="profile">
+                    <div ng-include src="'app/catal-art-2-product-family/views/list.html'"></div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="messages">
+                    <div ng-include src="'app/catal-art-detail-config/views/list.html'"></div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="settings">
+                    <div ng-include src="'app/catal-art-equivalence/views/list.html'"></div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="pic">
+                    <div ng-include src="'app/catal-pic-mapping/views/list.html'"></div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="manuf">
+                    <div ng-include src="'app/catal-art-manuf-supp/views/list.html'"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+  </div>
+
+</section>

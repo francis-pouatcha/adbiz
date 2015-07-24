@@ -1,0 +1,30 @@
+<section class="mainbar" data-ng-init="vm.toViewCatalProdFmlyLangMap()">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+			CatalProdFmlyLangMap View
+    </div>
+    <div class="panel-body">
+
+      <form novalidate>
+        <formly-form model="vm.catalProdFmlyLangMap" fields="vm.formFields">
+        </formly-form>
+      </form>
+
+      <hr/>
+      <div>
+        <a class="btn btn-success" href="/catal-prod-fmly-lang-map/{{vm.catalProdFmlyLangMap.id}}/edit">
+          <i class="glyphicon glyphicon-edit"></i> Edit
+        </a>
+        <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove()" item="vm.catalProdFmlyLangMap">
+          <i class="glyphicon glyphicon-remove-circle"></i> Delete
+        </a>
+        <a class="btn btn-primary" href="/catal-prod-fmly-lang-map">
+          <i class="glyphicon glyphicon-list"></i> List CatalProdFmlyLangMaps
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+</section>

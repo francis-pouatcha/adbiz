@@ -2,6 +2,8 @@
 #Please set the $ADCOM_HOME environment variable in your profile.
 #as follow
 
+unset ADCOM_HOME;
+
 # Check JBOSS_HOME
 if [ "x$JBOSS_HOME" = "x" ]; then
 

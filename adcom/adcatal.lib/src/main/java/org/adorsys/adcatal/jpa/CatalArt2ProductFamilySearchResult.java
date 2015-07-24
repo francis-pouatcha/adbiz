@@ -14,9 +14,9 @@ public class CatalArt2ProductFamilySearchResult extends CoreAbstIdentifObjectSea
 		super();
 	}
 
-	public CatalArt2ProductFamilySearchResult(Long count,
+	public CatalArt2ProductFamilySearchResult(Long count, Long total,
 			List<CatalArt2ProductFamily> resultList,
 			CoreAbstIdentifObjectSearchInput<CatalArt2ProductFamily> searchInput) {
-		super(count, resultList, searchInput);
+		super(count, total, resultList, searchInput);
 	}
 }

@@ -50,9 +50,9 @@ public class CatalArtEquivalenceEndpoint extends
 	}
 	@Override
 	protected CoreAbstIdentifObjectSearchResult<CatalArtEquivalence> newSearchResult(
-			Long count, List<CatalArtEquivalence> resultList,
+			Long count,Long total, List<CatalArtEquivalence> resultList,
 			CoreAbstIdentifObjectSearchInput<CatalArtEquivalence> searchInput) {
-		return new CatalArtEquivalenceSearchResult(count, resultList, searchInput);
+		return new CatalArtEquivalenceSearchResult(count, total, resultList, searchInput);
 	}
 
 }

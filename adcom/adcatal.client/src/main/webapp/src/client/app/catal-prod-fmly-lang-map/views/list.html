@@ -1,0 +1,44 @@
+<section class="mainbar">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      CatalProdFmlyLangMap List
+    </div>
+    <div class="panel-body">
+
+      <div class="pull-right">
+        <a type="button" class="btn btn-success" href="/catal-prod-fmly-lang-map/create">
+          <i class="glyphicon glyphicon-open"></i> New CatalProdFmlyLangMap
+        </a>
+      </div>
+
+      <table ng-table="vm.tableParams" show-filter="true" class="table table-condensed table-striped">
+          <tr ng-repeat="catalProdFmlyLangMap in $data">
+              <td data-title="'artName'" sortable="'artName'" filter="{ 'artName': 'text' }">{{catalProdFmlyLangMap.artName}}</td>
+              <td data-title="'shortName'" sortable="'shortName'" filter="{'shortName': 'text'}">{{catalProdFmlyLangMap.shortName}}</td>
+              <td data-title="'famPath'" >{{catalProdFmlyLangMap.famPath}}</td>
+              <td data-title="'langIso2'" >{{catalProdFmlyLangMap.langIso2}}</td>
+              <td data-title="'purpose'" >{{catalProdFmlyLangMap.purpose}}</td>
+              <td data-title="'usage'" >{{catalProdFmlyLangMap.usage}}</td>
+              <td data-title="'warnings'" >{{catalProdFmlyLangMap.warnings}}</td>
+              <td data-title="'substances'" >{{catalProdFmlyLangMap.substances}}</td>
+              <td>
+                 <div class="table-actions">
+                      <a class="btn btn-default" title="View" href="/catal-prod-fmly-lang-map/{{catalProdFmlyLangMap.id}}">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                      </a>
+                      <a class="btn btn-default" title="Edit" href="/catal-prod-fmly-lang-map/{{catalProdFmlyLangMap.id}}/edit">
+                        <span class="glyphicon glyphicon-edit"></span>
+                      </a>
+                      <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove(catalProdFmlyLangMap)" item="catalProdFmlyLangMap">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                      </a>
+                  </div>
+              </td>
+          </tr>
+      </table>
+
+    </div>
+  </div>
+
+</section>

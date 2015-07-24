@@ -15,9 +15,9 @@ public class CatalProdFmlyLangMapSearchResult extends
 		super();
 	}
 
-	public CatalProdFmlyLangMapSearchResult(Long count,
+	public CatalProdFmlyLangMapSearchResult(Long count, Long total,
 			List<CatalProdFmlyLangMap> resultList,
 			CoreAbstIdentifObjectSearchInput<CatalProdFmlyLangMap> searchInput) {
-		super(count, resultList, searchInput);
+		super(count, total, resultList, searchInput);
 	}
 }

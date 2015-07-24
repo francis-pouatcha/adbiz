@@ -1,0 +1,44 @@
+<section class="mainbar">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Article List
+    </div>
+    <div class="panel-body">
+
+      <div class="pull-right">
+        <a type="button" class="btn btn-success" href="/article/create">
+          <i class="glyphicon glyphicon-open"></i> New Article
+        </a>
+      </div>
+
+      <table ng-table="vm.tableParams" show-filter="true"  class="table table-condensed table-striped">
+          <tr ng-repeat="article in $data">
+              <td data-title="'CIP'" sortable="'identif'" filter="{ 'identif-catalArticle': 'text' }">{{article.identif}}</td>
+              <td data-title="'sppu'" sortable="'sppu'" filter="{'sppu': 'text'}">{{article.sppu}}</td>
+              <td data-title="'maxDisctRate'" >{{article.maxDisctRate}}</td>
+              <td data-title="'minStockQty'" >{{article.minStockQty}}</td>
+              <td data-title="'maxStockQty'" >{{article.maxStockQty}}</td>
+              <td data-title="'vatRate'">{{article.vatRate}}</td>
+              <td data-title="'active'" >{{article.active}}</td>
+              <td data-title="'authorizedSale'" >{{article.authorizedSale}}</td>
+              <td>
+                 <div class="table-actions">
+                      <a class="btn btn-default" title="View" href="/article/{{article.id}}">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                      </a>
+                      <a class="btn btn-default" title="Edit" href="/article/{{article.id}}/edit">
+                        <span class="glyphicon glyphicon-edit"></span>
+                      </a>
+                      <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove(article)" item="article">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                      </a>
+                  </div>
+              </td>
+          </tr>
+      </table>
+
+    </div>
+  </div>
+
+</section>

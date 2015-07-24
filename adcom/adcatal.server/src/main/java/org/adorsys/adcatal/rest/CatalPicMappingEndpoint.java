@@ -55,8 +55,8 @@ public class CatalPicMappingEndpoint extends
 
 	@Override
 	protected CoreAbstIdentifObjectSearchResult<CatalPicMapping> newSearchResult(
-			Long count, List<CatalPicMapping> resultList,
+			Long count, Long total,List<CatalPicMapping> resultList,
 			CoreAbstIdentifObjectSearchInput<CatalPicMapping> searchInput) {
-		return new CatalPicMappingSearchResult(count, resultList, searchInput);
+		return new CatalPicMappingSearchResult(count, total, resultList, searchInput);
 	}
 }

@@ -11,8 +11,8 @@ public class CatalArticleSearchResult extends CoreAbstIdentifObjectSearchResult<
 		super();
 	}
 
-	public CatalArticleSearchResult(Long count, List<CatalArticle> resultList,
+	public CatalArticleSearchResult(Long count, Long total, List<CatalArticle> resultList,
 			CoreAbstIdentifObjectSearchInput<CatalArticle> searchInput) {
-		super(count, resultList, searchInput);
+		super(count, total, resultList, searchInput);
 	}
 }

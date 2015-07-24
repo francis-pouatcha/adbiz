@@ -55,8 +55,8 @@ public class CatalArt2ProductFamilyEndPoint extends
 
 	@Override
 	protected CoreAbstIdentifObjectSearchResult<CatalArt2ProductFamily> newSearchResult(
-			Long count, List<CatalArt2ProductFamily> resultList,
+			Long count,Long total, List<CatalArt2ProductFamily> resultList,
 			CoreAbstIdentifObjectSearchInput<CatalArt2ProductFamily> searchInput) {
-		return new CatalArt2ProductFamilySearchResult(count, resultList, searchInput);
+		return new CatalArt2ProductFamilySearchResult(count, total, resultList, searchInput);
 	}
 }

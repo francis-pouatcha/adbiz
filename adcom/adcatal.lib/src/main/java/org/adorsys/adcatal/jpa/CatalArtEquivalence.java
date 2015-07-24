@@ -54,6 +54,7 @@ public class CatalArtEquivalence extends CoreAbstIdentifObject {
 
 	@Override
 	protected String makeIdentif() {
+		artEquivCode = mainArtIdentif+"-"+equivArtIdentif;
 		return artEquivCode;
 	}
 }

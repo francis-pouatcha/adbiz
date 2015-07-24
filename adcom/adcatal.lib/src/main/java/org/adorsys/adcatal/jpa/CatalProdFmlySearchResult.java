@@ -16,9 +16,9 @@ public class CatalProdFmlySearchResult
 		super();
 	}
 
-	public CatalProdFmlySearchResult(Long count,
+	public CatalProdFmlySearchResult(Long count, Long total,
 			List<CatalProdFmly> resultList,
 			CoreAbstIdentifObjectSearchInput<CatalProdFmly> searchInput) {
-		super(count, resultList, searchInput);
+		super(count, total, resultList, searchInput);
 	}
 }

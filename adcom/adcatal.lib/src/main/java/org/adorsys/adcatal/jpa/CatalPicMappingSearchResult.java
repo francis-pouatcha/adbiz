@@ -14,10 +14,10 @@ public class CatalPicMappingSearchResult extends CoreAbstIdentifObjectSearchResu
 		super();
 	}
 
-	public CatalPicMappingSearchResult(Long count,
+	public CatalPicMappingSearchResult(Long count, Long total,
 			List<CatalPicMapping> resultList,
 			CoreAbstIdentifObjectSearchInput<CatalPicMapping> searchInput) {
-		super(count, resultList, searchInput);
+		super(count, total, resultList, searchInput);
 	}
 
 }

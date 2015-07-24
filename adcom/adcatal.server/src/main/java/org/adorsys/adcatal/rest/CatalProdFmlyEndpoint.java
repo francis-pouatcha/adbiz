@@ -55,8 +55,8 @@ public class CatalProdFmlyEndpoint extends
 
 	@Override
 	protected CoreAbstIdentifObjectSearchResult<CatalProdFmly> newSearchResult(
-			Long count, List<CatalProdFmly> resultList,
+			Long count,Long total, List<CatalProdFmly> resultList,
 			CoreAbstIdentifObjectSearchInput<CatalProdFmly> searchInput) {
-		return new CatalProdFmlySearchResult(count, resultList, searchInput);
+		return new CatalProdFmlySearchResult(count, total, resultList, searchInput);
 	}
 }
