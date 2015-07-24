@@ -30,7 +30,6 @@
 
         vm.create = function() {
             // Create new Article object
-            console.log(vm.article);
             var article = new Article(vm.article);
 
             // Redirect after save

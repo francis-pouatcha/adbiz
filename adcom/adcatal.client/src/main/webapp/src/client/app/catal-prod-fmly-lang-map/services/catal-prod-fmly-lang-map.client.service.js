@@ -16,6 +16,10 @@
         var actions = {
             update: {
                 method: 'PUT'
+            },
+            findBy: {
+                method: 'POST',
+                url: API_BASE_URL + '/catalfamilyfeatmapings/findBy'
             }
         };
 

@@ -33,8 +33,11 @@
 
         };
 
+        var catalProdFmlyId = "";
+
         var service = {
-            getFormFields: getFormFields
+            getFormFields: getFormFields,
+            catalProdFmlyId: catalProdFmlyId
         };
 
         return service;
