@@ -7,8 +7,6 @@
         .config(function ($translateProvider) {
 
             $translateProvider.translations('en', {
-                TITLE: 'Hello',
-
                 //--------------Article---------------
                 'CatalArticle.sppu': 'Sales Price per Unit',
                 'CatalArticle.maxDisctRate': 'Max Discount',
@@ -152,17 +150,14 @@
                 'CatalFamilyFeatMaping.cancel.title':'Cancel',
                 'CatalFamilyFeatMaping.save.title':'Save ',
                 'CatalFamilyFeatMaping.edit.title':'Edit ',
-                'CatalFamilyFeatMapings.view.title':'View '
-
-
-
+                'CatalFamilyFeatMapings.view.title':'View ',
+                LANG_FR: 'French',
+                LANG_EN: 'English'
             });
 
  //------------french----------------
 
             $translateProvider.translations('fr', {
-                TITLE: 'Salut',
-
                 //--------------Article---------------
                 'CatalArticle.sppu': 'Prix de vente Unitaire',
                 'CatalArticle.maxDisctRate': 'Remise Maximale',
@@ -318,8 +313,9 @@
                 'CatalFamilyFeatMaping.save.title':'Enregistrer ',
                 'CatalFamilyFeatMaping.edit.title':'Modifier ',
                 'CatalFamilyFeatMapings.view.title':'Voir ',
-                'CatalFamilyFeatMapings.back.title':'Retour'
-
+                'CatalFamilyFeatMapings.back.title':'Retour',
+                LANG_FR: 'Francais',
+                LANG_EN: 'Englais'
             });
             $translateProvider.preferredLanguage('en');
         });
