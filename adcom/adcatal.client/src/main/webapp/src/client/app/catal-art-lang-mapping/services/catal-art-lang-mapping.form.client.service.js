@@ -36,10 +36,14 @@
                 },
                 {
                     key: 'langIso2',
-                    type: 'input',
+                    type: 'select',
                     templateOptions: {
-                        label: 'langIso2:',
-                        disabled: disabled
+                        label: 'langIso2',
+                        disabled: disabled,
+                        options: [
+                            {name: 'french', value: 'fr'},
+                            {name: 'english', value: 'en'}
+                        ]
                     }
                 },
                 {

@@ -19,8 +19,12 @@
         };
 
         /* @ngInject */
-        function TopNavController() {
+        function TopNavController($translate) {
             var vm = this;
+            vm.changeLang = function(lang) {
+                $translate.use(lang);
+            }
+
         }
 
         return directive;

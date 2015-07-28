@@ -5,7 +5,9 @@
         .module('app.catalArtEquivalence')
         .factory('CatalArtEquivalenceForm', factory);
 
-    function factory() {
+    factory.$inject = ['Article'];
+    /* @ngInject */
+    function factory(Article) {
 
         var getFormFields = function(disabled) {
 
@@ -21,11 +23,21 @@
                 },
                 {
                     key: 'equivArtIdentif',
-                    type: 'input',
+                    type: 'typeahead',
                     templateOptions: {
                         label: 'equivArtIdentif:',
                         disabled: disabled,
-                        required: true
+                        required: true,
+                        controller: /* @ngInject */
+                            function($scope, Article) {
+                                $scope.getData = function(val){
+                                    console.log(val);
+                                    return Article.query({},{max:10, start:0},{})
+                                        .$promise.then(function (response) {
+                                             console.log(response.resultList);
+                                        });
+                                }
+                        }
                     }
                 }
             ];
