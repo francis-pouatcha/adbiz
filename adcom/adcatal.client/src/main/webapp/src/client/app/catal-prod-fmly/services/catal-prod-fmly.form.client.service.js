@@ -5,7 +5,9 @@
         .module('app.catalProdFmly')
         .factory('CatalProdFmlyForm', factory);
 
-    function factory() {
+    factory.$inject = ['$translate'];
+    /* @ngInject */
+    function factory($translate) {
 
         var getFormFields = function(disabled) {
 
@@ -14,7 +16,7 @@
                     key: 'parentIdentif',
                     type: 'input',
                     templateOptions: {
-                        label: 'parentIdentif:',
+                        label: $translate.instant('CatalProductFamily.parentIdentif'),
                         disabled: disabled,
                         required: true
                     }
@@ -23,7 +25,7 @@
                     key: 'famPath',
                     type: 'input',
                     templateOptions: {
-                        label: 'famPath:',
+                        label: $translate.instant('CatalProductFamily.famPath'),
                         disabled: disabled
                     }
                 }

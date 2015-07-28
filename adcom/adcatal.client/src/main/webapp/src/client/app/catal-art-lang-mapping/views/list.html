@@ -5,19 +5,20 @@
 
       <div class="pull-right">
         <a type="button" class="btn btn-success" ng-click="vmctrl.createForm({})">
-          <i class="glyphicon glyphicon-open"></i> New CatalArtLangMapping
+          <i class="glyphicon glyphicon-open"></i>       {{'CatalAbstractFeatMapping.new.title'|translate}}
+
         </a>
       </div>
 
       <table class="table table-condensed table-striped">
           <thead>
-              <td>{{'catalArtLangMapping.artName' | translate}}</td>
-              <td>{{'catalArtLangMapping.shortName' | translate}}</td>
-              <td>{{'catalArtLangMapping.langIso2' | translate}}</td>
-              <td>{{'catalArtLangMapping.purpose' | translate}}</td>
+              <td>{{'CatalArtFeatMapping.artName' | translate}}</td>
+              <td>{{'CatalArtFeatMapping.shortName' | translate}}</td>
+              <td>{{'langIso2' | translate}}</td>
+              <td>{{'CatalAbstractFeatMapping.purpose' | translate}}</td>
           </thead>
           <tr ng-repeat="catalArtLangMapping in vmctrl.data">
-              <td>{{catalArtLangMapping.artName}}</td>
+              <td>{{catalArtLangMapping.artName }}</td>
               <td>{{catalArtLangMapping.shortName}}</td>
               <td>{{catalArtLangMapping.langIso2}}</td>
               <td>{{catalArtLangMapping.purpose}}</td>
