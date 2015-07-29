@@ -17,7 +17,7 @@
             formlyConfig.setType({
                 name: 'typeahead',
                 template: '<input type="text" ng-model="model[options.key]"' +
-                    'typeahead="item for item in getData($viewValue).resultList" ' +
+                    'typeahead="item for item in to.options | filter:$viewValue | limitTo:8" ' +
                     'class="form-control">',
                 wrapper: ['bootstrapLabel', 'bootstrapHasError']
             });

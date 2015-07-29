@@ -27,18 +27,16 @@
                     templateOptions: {
                         label: 'equivArtIdentif:',
                         disabled: disabled,
-                        required: true,
-                        controller: /* @ngInject */
-                            function($scope, Article) {
-                                $scope.getData = function(val){
-                                    console.log(val);
-                                    return Article.query({},{max:10, start:0},{})
-                                        .$promise.then(function (response) {
-                                             console.log(response.resultList);
-                                        });
-                                }
-                        }
+                        required: true
+                    },
+                    controller: /* @ngInject */
+                        function($scope, Article) {
+                            Article.get().then(function(response){
+                                $scope.to.options = response.resultList;
+                                console.log(response.resultList);
+                        });
                     }
+
                 }
             ];
 

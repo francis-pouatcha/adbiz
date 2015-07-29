@@ -10,9 +10,10 @@
         'CatalArtEquivalence',
         'utils',
         'CatalArtEquivalenceForm',
-        'ArticleForm'];
+        'ArticleForm',
+        'Article'];
     /* @ngInject */
-    function CatalArtEquivalenceController(logger, CatalArtEquivalence, utils, CatalArtEquivalenceForm, ArticleForm) {
+    function CatalArtEquivalenceController(logger, CatalArtEquivalence, utils, CatalArtEquivalenceForm, ArticleForm, Article) {
 
         var vm = this;
         vm.data = [];
@@ -43,6 +44,8 @@
                 vm.data = response.resultList;
             });
         };
+
+
 
         function coreSearchInput() {
             vm.catalArticleId = ArticleForm.catalArticleId;
@@ -109,6 +112,17 @@
         vm.toEditCatalArtEquivalence = function () {
             vm.setFormFields(false);
         };
+
+        vm.getData = function(val) {
+                console.log(toto);
+                console.log(val);
+                return Article.query({max:10,start:0})
+                          .$promise.then(function (response) {
+                        console.log(response.resultList);
+                        return response.resultList;
+        });
+
+        }
 
         activate();
 

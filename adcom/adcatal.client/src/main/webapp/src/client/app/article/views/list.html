@@ -15,7 +15,7 @@
       <table ng-table="vm.tableParams" show-filter="true"  class="table table-condensed table-striped">
           <tr ng-repeat="article in $data">
               <td data-title="'CIP'" sortable="'identif'" filter="{ 'identif-catalArticle': 'text' }">{{article.identif}}</td>
-              <td data-title="'sppu'" sortable="'sppu'" filter="{'sppu': 'text'}">{{article.sppu}}</td>
+              <td data-title="'sppu'">{{article.sppu}}</td>
               <td data-title="'maxDisctRate'" >{{article.maxDisctRate}}</td>
               <td data-title="'minStockQty'" >{{article.minStockQty}}</td>
               <td data-title="'maxStockQty'" >{{article.maxStockQty}}</td>
