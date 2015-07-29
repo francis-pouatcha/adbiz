@@ -36,8 +36,8 @@
       <file leaf-file-name="catal-art-equivalence.form.client.service.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/src/client/app/catal-art-equivalence/services/catal-art-equivalence.form.client.service.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5821114" vertical-offset="218" max-vertical-offset="945">
-              <caret line="41" column="17" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.59180576" vertical-offset="135" max-vertical-offset="915">
+              <caret line="35" column="65" selection-start-line="35" selection-start-column="65" selection-end-line="35" selection-end-column="65" />
               <folding />
 >>>>>>> 97bc319fd368ef28fdf99441e8041e4ea93de142
             </state>
@@ -45,18 +45,57 @@
         </entry>
       </file>
 <<<<<<< HEAD
+      <file leaf-file-name="catal-art-equivalence.client.controller.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/src/client/app/catal-art-equivalence/controllers/catal-art-equivalence.client.controller.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="359" max-vertical-offset="2100">
+              <caret line="119" column="26" selection-start-line="119" selection-start-column="26" selection-end-line="119" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="list.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/src/client/app/article/views/list.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-10.625" vertical-offset="0" max-vertical-offset="750">
+              <caret line="17" column="37" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="table.settings.service.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/src/client/app/core/services/table.settings.service.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2025">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+=======
+<<<<<<< HEAD
       <file leaf-file-name="create.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/src/client/app/catal-art-manuf-supp/views/create.html">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-10.625" vertical-offset="45" max-vertical-offset="615">
               <caret line="20" column="94" selection-start-line="20" selection-start-column="94" selection-end-line="20" selection-end-column="94" />
 =======
+>>>>>>> e47b54a698030ecbef118e89b2950270df42aac8
       <file leaf-file-name="app.module.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/src/client/app/app.module.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480">
+<<<<<<< HEAD
+              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+=======
               <caret line="19" column="79" selection-start-line="19" selection-start-column="79" selection-end-line="19" selection-end-column="79" />
 >>>>>>> 97bc319fd368ef28fdf99441e8041e4ea93de142
+>>>>>>> e47b54a698030ecbef118e89b2950270df42aac8
               <folding />
             </state>
           </provider>
@@ -115,6 +154,8 @@
     <option name="changedFiles">
       <list>
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/src/main/webapp/src/client/app/catal-prod-fmly-lang-map/services/catal-prod-fmly-lang-map.client.service.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/src/client/app/catal-prod-fmly-lang-map/controllers/catal-prod-fmly-lang-map.client.controller.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/src/client/app/catal-prod-fmly/controllers/catal-prod-fmly.client.controller.js" />
@@ -143,6 +184,7 @@
         <option value="$PROJECT_DIR$/src/main/webapp/src/client/app/catal-art-equivalence/views/view.html" />
 =======
         <option value="$PROJECT_DIR$/src/main/webapp/src/client/app/catal-art-detail-config/views/list.html" />
+>>>>>>> e47b54a698030ecbef118e89b2950270df42aac8
         <option value="$PROJECT_DIR$/src/main/webapp/src/client/app/catal-art-detail-config/controllers/catal-art-detail-config.client.controller.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/src/client/app/catal-art-2-product-family/controllers/catal-art-2-product-family.client.controller.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/src/client/app/catal-art-lang-mapping/views/view.html" />
@@ -156,10 +198,13 @@
         <option value="$PROJECT_DIR$/src/main/webapp/src/client/app/catal-pic-mapping/views/edit.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/src/client/app/catal-pic-mapping/views/view.html" />
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/src/main/webapp/src/client/app/catal-prod-fmly/views/create.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/src/client/app/catal-prod-fmly/views/edit.html" />
 =======
         <option value="$PROJECT_DIR$/src/main/webapp/src/client/app/catal-art-equivalence/controllers/catal-art-equivalence.client.controller.js" />
+>>>>>>> e47b54a698030ecbef118e89b2950270df42aac8
         <option value="$PROJECT_DIR$/src/main/webapp/src/client/app/catal-pic-mapping/controllers/catal-pic-mapping.client.controller.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/src/client/app/catal-art-2-product-family/config/catal-art-2-product-family.client.routes.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/src/client/app/catal-art-equivalence/config/catal-art-equivalence.client.routes.js" />
@@ -198,6 +243,8 @@
         <option value="$PROJECT_DIR$/src/main/webapp/src/client/app/layout/shell.controller.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/src/client/app/layout/ht-top-nav.directive.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/src/client/app/catal-art-lang-mapping/services/catal-art-lang-mapping.form.client.service.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/src/client/app/catal-art-equivalence/controllers/catal-art-equivalence.client.controller.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/src/client/app/article/views/list.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/src/client/app/app.module.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/src/client/app/catal-art-equivalence/services/catal-art-equivalence.form.client.service.js" />
 >>>>>>> 97bc319fd368ef28fdf99441e8041e4ea93de142
@@ -408,10 +455,14 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
 <<<<<<< HEAD
+              <option name="myItemId" value="core" />
+=======
+<<<<<<< HEAD
               <option name="myItemId" value="catal-art-manuf-supp" />
 =======
               <option name="myItemId" value="layout" />
 >>>>>>> 97bc319fd368ef28fdf99441e8041e4ea93de142
+>>>>>>> e47b54a698030ecbef118e89b2950270df42aac8
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -456,6 +507,10 @@
 >>>>>>> 97bc319fd368ef28fdf99441e8041e4ea93de142
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -491,7 +546,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="catal-art-lang-mapping" />
+              <option name="myItemId" value="catal-art-equivalence" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -531,11 +586,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="catal-art-lang-mapping" />
+              <option name="myItemId" value="catal-art-equivalence" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="services" />
+              <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -783,10 +838,14 @@
   </component>
   <component name="ToolWindowManager">
 <<<<<<< HEAD
+    <frame x="20" y="25" width="1160" height="802" extended-state="0" />
+=======
+<<<<<<< HEAD
     <frame x="0" y="22" width="1440" height="813" extended-state="6" />
 =======
     <frame x="20" y="25" width="1160" height="802" extended-state="1" />
 >>>>>>> 97bc319fd368ef28fdf99441e8041e4ea93de142
+>>>>>>> e47b54a698030ecbef118e89b2950270df42aac8
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -852,6 +911,8 @@
   </component>
   <component name="editorHistoryManager">
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/webapp/src/client/app/catal-art-2-product-family/views/create.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-11.875" vertical-offset="0" max-vertical-offset="585">
@@ -902,6 +963,7 @@
         <state vertical-scroll-proportion="-0.625" vertical-offset="45" max-vertical-offset="585">
           <caret line="4" column="48" selection-start-line="4" selection-start-column="48" selection-end-line="4" selection-end-column="48" />
 =======
+>>>>>>> e47b54a698030ecbef118e89b2950270df42aac8
     <entry file="file://$PROJECT_DIR$/src/main/webapp/src/client/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="2295">
@@ -1320,6 +1382,8 @@
       </provider>
     </entry>
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/webapp/src/client/app/catal-prod-fmly-lang-map/views/view.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.625" vertical-offset="0" max-vertical-offset="480">
@@ -1340,6 +1404,7 @@
         <state vertical-scroll-proportion="0.23963134" vertical-offset="151" max-vertical-offset="990">
           <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
 =======
+>>>>>>> e47b54a698030ecbef118e89b2950270df42aac8
     <entry file="file://$PROJECT_DIR$/src/main/webapp/src/client/app/catal-prod-fmly-lang-map/views/list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.28528073" vertical-offset="52" max-vertical-offset="735">
@@ -1579,6 +1644,46 @@
       </provider>
     </entry>
 <<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/gulpfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="10395">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/src/client/app/article/views/list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.625" vertical-offset="0" max-vertical-offset="750">
+          <caret line="17" column="37" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/src/client/app/core/services/table.settings.service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2025">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/src/client/app/app.module.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/src/client/app/catal-art-equivalence/controllers/catal-art-equivalence.client.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1454" max-vertical-offset="2100">
+          <caret line="119" column="26" selection-start-line="119" selection-start-column="26" selection-end-line="119" selection-end-column="26" />
+=======
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/webapp/src/client/app/article/views/view.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.75" vertical-offset="315" max-vertical-offset="1080">
@@ -1589,6 +1694,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480">
           <caret line="19" column="79" selection-start-line="19" selection-start-column="79" selection-end-line="19" selection-end-column="79" />
 >>>>>>> 97bc319fd368ef28fdf99441e8041e4ea93de142
+>>>>>>> e47b54a698030ecbef118e89b2950270df42aac8
           <folding />
         </state>
       </provider>
@@ -1601,9 +1707,14 @@
 =======
     <entry file="file://$PROJECT_DIR$/src/main/webapp/src/client/app/catal-art-equivalence/services/catal-art-equivalence.form.client.service.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="0.59180576" vertical-offset="135" max-vertical-offset="915">
+          <caret line="35" column="65" selection-start-line="35" selection-start-column="65" selection-end-line="35" selection-end-column="65" />
+=======
         <state vertical-scroll-proportion="0.5821114" vertical-offset="218" max-vertical-offset="945">
           <caret line="41" column="17" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
 >>>>>>> 97bc319fd368ef28fdf99441e8041e4ea93de142
+>>>>>>> e47b54a698030ecbef118e89b2950270df42aac8
           <folding />
         </state>
       </provider>

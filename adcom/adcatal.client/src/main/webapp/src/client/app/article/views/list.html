@@ -25,7 +25,8 @@
 
           </thead>
           <tr ng-repeat="article in $data">
-              <td>{{article.identif}}</td>
+
+              <td filter="{ 'identif-catalArticle': 'text' }" >{{article.identif}}</td>
               <td>{{article.sppu}}</td>
               <td>{{article.maxDisctRate}}</td>
               <td>{{article.minStockQty}}</td>
@@ -33,12 +34,7 @@
               <td>{{article.vatRate}}</td>
               <td>{{article.active}}</td>
               <td>{{article.authorizedSale}}</td>
-
-
-
-
-
-
+              <td>
                  <div class="table-actions">
                       <a class="btn btn-default" title="View" href="/article/{{article.id}}">
                         <span class="glyphicon glyphicon-eye-open"></span>

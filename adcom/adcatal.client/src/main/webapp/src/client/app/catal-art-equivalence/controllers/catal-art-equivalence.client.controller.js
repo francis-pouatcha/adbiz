@@ -10,9 +10,10 @@
         'CatalArtEquivalence',
         'utils',
         'CatalArtEquivalenceForm',
-        'ArticleForm'];
+        'ArticleForm',
+        'Article'];
     /* @ngInject */
-    function CatalArtEquivalenceController(logger, CatalArtEquivalence, utils, CatalArtEquivalenceForm, ArticleForm) {
+    function CatalArtEquivalenceController(logger, CatalArtEquivalence, utils, CatalArtEquivalenceForm, ArticleForm, Article) {
 
         var vm = this;
         vm.data = [];
@@ -43,6 +44,8 @@
                 vm.data = response.resultList;
             });
         };
+
+
 
         function coreSearchInput() {
             vm.catalArticleId = ArticleForm.catalArticleId;
