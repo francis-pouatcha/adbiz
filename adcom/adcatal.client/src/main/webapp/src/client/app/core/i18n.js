@@ -131,7 +131,7 @@
                 //------------CatalProductFamily---------------
                 'CatalProductFamily.title': 'Product Family',
                 'CatalProductFamily.parentIdentif': 'Identifier or the Parent Family',
-                'CatalProductFamily.famPath': '',
+                'CatalProductFamily.famPath': 'Family Path',
                 'CatalProductFamily.new.title':'New Product Family',
                 'CatalProductFamily.list.title':'List Product Family',
                 'CatalProductFamily.delete.title':'Delete Product Family',
