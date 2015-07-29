@@ -2,26 +2,38 @@
 
   <div class="panel panel-primary">
     <div class="panel-heading">
-      Article List
+        {{'CatalArticle.list.title' | translate}}
     </div>
     <div class="panel-body">
 
       <div class="pull-right">
         <a type="button" class="btn btn-success" href="/article/create">
-          <i class="glyphicon glyphicon-open"></i> New Article
+          <i class="glyphicon glyphicon-open"></i> {{'CatalArticle.new.title' | translate}}
         </a>
       </div>
 
       <table ng-table="vm.tableParams" show-filter="true"  class="table table-condensed table-striped">
+          <thead>
+          <th>{{'CIP' | translate}}</th>
+          <th>{{'CatalArticle.sppu' | translate}}</th>
+          <th>{{'CatalArticle.maxDisctRate' | translate}}</th>
+          <th>{{'CatalArticle.minStockQty' | translate}}</th>
+          <th>{{'CatalArticle.minStockQty' | translate}}</th>
+          <th>{{'CatalArticle.vatRate' | translate}}</th>
+          <th>{{'CatalArticle.active' | translate}}</th>
+          <th>{{'CatalArticle.authorizedSale' | translate}}</th>
+
+          </thead>
           <tr ng-repeat="article in $data">
-              <td data-title="'CIP'" sortable="'identif'" filter="{ 'identif-catalArticle': 'text' }">{{article.identif}}</td>
-              <td data-title="'sppu'">{{article.sppu}}</td>
-              <td data-title="'maxDisctRate'" >{{article.maxDisctRate}}</td>
-              <td data-title="'minStockQty'" >{{article.minStockQty}}</td>
-              <td data-title="'maxStockQty'" >{{article.maxStockQty}}</td>
-              <td data-title="'vatRate'">{{article.vatRate}}</td>
-              <td data-title="'active'" >{{article.active}}</td>
-              <td data-title="'authorizedSale'" >{{article.authorizedSale}}</td>
+
+              <td filter="{ 'identif-catalArticle': 'text' }" >{{article.identif}}</td>
+              <td>{{article.sppu}}</td>
+              <td>{{article.maxDisctRate}}</td>
+              <td>{{article.minStockQty}}</td>
+              <td>{{article.maxStockQty}}</td>
+              <td>{{article.vatRate}}</td>
+              <td>{{article.active}}</td>
+              <td>{{article.authorizedSale}}</td>
               <td>
                  <div class="table-actions">
                       <a class="btn btn-default" title="View" href="/article/{{article.id}}">

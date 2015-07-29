@@ -4,8 +4,9 @@
     angular
         .module('app.catalArt2ProductFamily')
         .factory('CatalArt2ProductFamilyForm', factory);
+    factory.$inject = ['$translate'];
 
-    function factory() {
+    function factory($translate) {
 
         var getFormFields = function(disabled) {
 
@@ -14,7 +15,7 @@
                     key: 'artPic',
                     type: 'input',
                     templateOptions: {
-                        label: 'artPic:',
+                        label: $translate.instant('CatalArt2ProductFamily.artPic'),
                         disabled: true
                     }
                 },
@@ -22,7 +23,7 @@
                     key: 'famCode',
                     type: 'input',
                     templateOptions: {
-                        label: 'famCode:',
+                        label: $translate.instant('CatalArt2ProductFamily.famCode'),
                         disabled: disabled
                     }
                 }

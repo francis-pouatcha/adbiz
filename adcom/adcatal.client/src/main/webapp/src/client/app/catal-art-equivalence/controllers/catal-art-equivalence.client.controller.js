@@ -113,17 +113,6 @@
             vm.setFormFields(false);
         };
 
-        vm.getData = function(val) {
-                console.log(toto);
-                console.log(val);
-                return Article.query({max:10,start:0})
-                          .$promise.then(function (response) {
-                        console.log(response.resultList);
-                        return response.resultList;
-        });
-
-        }
-
         activate();
 
         function activate() {

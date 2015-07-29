@@ -5,17 +5,18 @@
 
       <div class="pull-right">
         <a type="button" class="btn btn-success" ng-click="vmPic.createForm({})">
-          <i class="glyphicon glyphicon-open"></i> New CatalPicMapping
+          <i class="glyphicon glyphicon-open"></i>       {{'CatalPicMapping.new.title'|translate}}
+
         </a>
       </div>
 
       <table class="table table-condensed table-striped">
           <thead>
-              <th>{{'catalPicMapping.artIdentif' | translate}}</th>
-              <th>{{'catalPicMapping.code' | translate}}</th>
-              <th>{{'catalPicMapping.codeOrigin' | translate}}</th>
-              <th>{{'catalPicMapping.addInfo' | translate}}</th>
-              <th>{{'catalPicMapping.priority' | translate}}</th>
+              <th>{{'CatalPicMapping.artIdentif' | translate}}</th>
+              <th>{{'CatalPicMapping.code' | translate}}</th>
+              <th>{{'CatalPicMapping.codeOrigin' | translate}}</th>
+              <th>{{'CatalPicMapping.addInfo' | translate}}</th>
+              <th>{{'CatalPicMapping.priority' | translate}}</th>
           </thead>
           <tr ng-repeat="catalPicMapping in vmPic.data">
               <td>{{catalPicMapping.artIdentif}}</td>

@@ -5,15 +5,16 @@
 
       <div class="pull-right">
         <a type="button" class="btn btn-success" ng-click="vmArtDetail.createForm({})">
-          <i class="glyphicon glyphicon-open"></i> New CatalArtDetailConfig
+          <i class="glyphicon glyphicon-open"></i>       {{'CatalArtDetailConfig.new.title' | translate}}
+
         </a>
       </div>
 
       <table class="table table-condensed table-striped">
           <thead>
-              <td>{{'catalArtDetailConfig.qtyOfDtldInMain' | translate}}</td>
-              <td>{{'catalArtDetailConfig.pptnOfDtldInMain' | translate}}</td>
-              <td>{{'catalArtDetailConfig.mngInPptn' | translate}}</td>
+              <th>{{'CatalArtDetailConfig.qtyOfDtldInMain' | translate}}</th>
+              <th>{{'CatalArtDetailConfig.targetPrprtn' | translate}}</th>
+              <th>{{'CatalArtDetailConfig.mngInPptn' | translate}}</th>
           </thead>
           <tr ng-repeat="catalArtDetailConfig in vmArtDetail.data">
               <td>{{catalArtDetailConfig.qtyOfDtldInMain}}</td>

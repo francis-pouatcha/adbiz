@@ -5,15 +5,16 @@
 
       <div class="pull-right">
         <a type="button" class="btn btn-success" ng-click="vmArtEquiv.createForm({})">
-          <i class="glyphicon glyphicon-open"></i> New CatalArtEquivalence
+          <i class="glyphicon glyphicon-open"></i>       {{'CatalArtEquivalence.new.title'|translate}}
+
         </a>
       </div>
 
       <table class="table table-condensed table-striped">
           <thead>
           <th>{{'catalArtEquivalence.artEquivCode' | translate}}</th>
-          <th>{{'catalArtEquivalence.mainArtIdentif' | translate}}</th>
-          <th>{{'catalArtEquivalence.equivArtIdentif' | translate}}</th>
+          <th>{{'CatalArtEquivalence.mainArtIdentif' | translate}}</th>
+          <th>{{'CatalArtEquivalence.equivArtIdentif' | translate}}</th>
           </thead>
           <tr ng-repeat="catalArtEquivalence in vmArtEquiv.data">
               <td>{{catalArtEquivalence.artEquivCode}}</td>

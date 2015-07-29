@@ -2,7 +2,7 @@
 
   <div class="panel panel-primary">
     <div class="panel-heading">
-      New Article
+        {{'CatalArticle.new.title' | translate}}
     </div>
     <div class="panel-body">
 
@@ -14,10 +14,10 @@
         <hr/>
         <div class="form-group">
             <button type="submit" class="btn btn-success" ng-disabled="vm.form.$invalid">
-              <i class="glyphicon glyphicon-ok"></i> Save
+              <i class="glyphicon glyphicon-ok"></i> {{'CatalArticle.save.title' | translate}}
             </button>
             <a class="btn btn-danger" href="/article">
-              <i class="glyphicon glyphicon-remove"></i> Cancel
+              <i class="glyphicon glyphicon-remove"></i> {{'CatalArticle.cancel.title' | translate}}
             </a>
         </div>
 

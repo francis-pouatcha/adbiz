@@ -30,7 +30,7 @@
                             type: 'input',
                             key: 'sppu',
                             templateOptions: {
-                                label: $translate.instant('CatalArticle_sppu_description.title'),
+                                label: $translate.instant('CatalArticle.sppu'),
                                 disabled:disabled
                             }
                         },
@@ -39,7 +39,7 @@
                             type: 'input',
                             key: 'maxDisctRate',
                             templateOptions: {
-                                label: 'Max Remise',
+                                label: $translate.instant('CatalArticle.maxDisctRate'),
                                 disabled:disabled
                             }
                         }
@@ -56,7 +56,7 @@
                             key: 'minStockQty',
                             templateOptions: {
                                 type: 'number',
-                                label: 'Min Stock',
+                                label: $translate.instant('CatalArticle.minStockQty'),
                                 max: 99999,
                                 min: 0,
                                 //pattern: '\\d{5}',
@@ -69,7 +69,7 @@
                             key: 'maxStockQty',
                             templateOptions: {
                                 type: 'number',
-                                label: 'Max stock',
+                                label: $translate.instant('CatalArticle.maxStockQty'),
                                 max: 99999,
                                 min: 0,
                                 //pattern: '\\d{5}',
@@ -81,7 +81,7 @@
                             type: 'input',
                             key: 'vatRate',
                             templateOptions: {
-                                label: 'Taux TVA',
+                                label: $translate.instant('CatalArticle.vatRate'),
                                 disabled:disabled
                             }
                         },
@@ -90,7 +90,7 @@
                             type: 'checkbox',
                             key: 'active',
                             templateOptions: {
-                                label: 'Actif',
+                                label: $translate.instant('CatalArticle.active'),
                                 disabled:disabled
                             }
                         },
@@ -99,7 +99,7 @@
                             type: 'checkbox',
                             key: 'authorizedSale',
                             templateOptions: {
-                                label: 'Vendable',
+                                label: $translate.instant('CatalArticle.authorizedSale'),
                                 disabled:disabled
                             }
                         }

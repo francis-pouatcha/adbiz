@@ -2,7 +2,7 @@
 
   <div class="panel panel-primary">
     <div class="panel-heading">
-			Article View
+        {{'CatalArticle.view.title' | translate}}
     </div>
     <div class="panel-body">
 
@@ -14,13 +14,13 @@
       <hr/>
       <div>
         <a class="btn btn-success" href="/article/{{vm.article.id}}/edit">
-          <i class="glyphicon glyphicon-edit"></i> Edit
+          <i class="glyphicon glyphicon-edit"></i> {{'CatalArticle.edit.title' | translate}}
         </a>
         <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove()" item="vm.article">
-          <i class="glyphicon glyphicon-remove-circle"></i> Delete
+          <i class="glyphicon glyphicon-remove-circle"></i> {{'CatalArticle.delete.title' | translate}}
         </a>
         <a class="btn btn-primary" href="/article">
-          <i class="glyphicon glyphicon-list"></i> List Articles oo
+          <i class="glyphicon glyphicon-list"></i> {{'CatalArticle.list.title' | translate}}
         </a>
       </div>
         <hr/>
@@ -28,12 +28,12 @@
 
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#catal-art-lang-mapping" aria-controls="catal-art-lang-mapping" role="tab" data-toggle="tab">catal-art-lang-mapping</a></li>
-                <li role="presentation"><a href="#catal-art-2-product-family" aria-controls="catal-art-2-product-family" role="tab" data-toggle="tab">catal-art-2-product-family</a></li>
-                <li role="presentation"><a href="#catal-art-detail-config" aria-controls="catal-art-detail-config" role="tab" data-toggle="tab">catal-art-detail-config</a></li>
-                <li role="presentation"><a href="#catal-art-equivalence" aria-controls="catal-art-equivalence" role="tab" data-toggle="tab">catal-art-equivalence</a></li>
-                <li role="presentation"><a href="#catal-pic-mapping" aria-controls="catal-pic-mapping" role="tab" data-toggle="tab">catal-pic-mapping</a></li>
-                <li role="presentation"><a href="#catal-art-manuf-supp" aria-controls="catal-art-manuf-supp" role="tab" data-toggle="tab">catal-art-manuf-supp</a></li>
+                <li role="presentation" class="active"><a href="#catal-art-lang-mapping" aria-controls="catal-art-lang-mapping" role="tab" data-toggle="tab">{{'CatalArtFeatMapping.title'|translate}}</a></li>
+                <li role="presentation"><a href="#catal-art-2-product-family" aria-controls="catal-art-2-product-family" role="tab" data-toggle="tab">{{'CatalArt2ProductFamily.title'|translate}}</a></li>
+                <li role="presentation"><a href="#catal-art-detail-config" aria-controls="catal-art-detail-config" role="tab" data-toggle="tab">{{'CatalArtDetailConfig.title'|translate}}</a></li>
+                <li role="presentation"><a href="#catal-art-equivalence" aria-controls="catal-art-equivalence" role="tab" data-toggle="tab">{{'CatalArtEquivalence.title'|translate}}</a></li>
+                <li role="presentation"><a href="#catal-pic-mapping" aria-controls="catal-pic-mapping" role="tab" data-toggle="tab">{{'CatalPicMapping.title'|translate}}</a></li>
+                <li role="presentation"><a href="#catal-art-manuf-supp" aria-controls="catal-art-manuf-supp" role="tab" data-toggle="tab">{{'CatalArtManufSupp.title'|translate}}</a></li>
             </ul>
 
             <!-- Tab panes -->
