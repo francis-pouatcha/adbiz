@@ -42,6 +42,8 @@
                 'CatalArt2ProductFamily.save.title':'Save Product Family',
                 'CatalArt2ProductFamily.edit.title':'Edit Product Family',
                 'CatalArt2ProductFamily.view.title':'View Product Family',
+                'CatalArt2ProductFamily.back.title':'Back',
+
 
 
                 //------------CatalArtDetailConfig-------------
@@ -57,6 +59,7 @@
                 'CatalArtDetailConfig.save.title':'Save Detail Config',
                 'CatalArtDetailConfig.edit.title':'Edit Detail Config',
                 'CatalArtDetailConfig.view.title':'View Detail Config',
+                'CatalArtDetailConfig.back.title':'Back',
 
 
                 //-------------CatalArtEquivalence------------
@@ -70,6 +73,7 @@
                 'CatalArtEquivalence.save.title':'Save Article Equivalence',
                 'CatalArtEquivalence.edit.title':'Edit Article Equivalence',
                 'CatalArtEquivalence.view.title':'View Article Equivalence',
+                'CatalArtEquivalence.back.title':'Back',
 
 
 
@@ -90,6 +94,7 @@
                 'CatalAbstractFeatMapping.save.title':'Save Article Feature Mapping',
                 'CatalAbstractFeatMapping.edit.title':'Edit Article Feature Mapping',
                 'CatalAbstractFeatMapping.view.title':'View Article Feature Mapping',
+                'CatalAbstractFeatMapping.back.title':'Back',
 
 
                 //------------CatalArtManufSupp------------------
@@ -109,6 +114,7 @@
                 'CatalArtManufSupp.save.title':'Save  Manufacturer or Supplier',
                 'CatalArtManufSupp.edit.title':'Edit  Manufacturer or Supplier',
                 'CatalArtManufSupp.view.title':'View  Manufacturer or Supplier',
+                'CatalArtManufSupp.back.title':'Back',
 
 
                 //-----------CatalPicMapping--------------------
@@ -125,6 +131,7 @@
                 'CatalPicMapping.save.title':'Save PIC Mapping',
                 'CatalPicMapping.edit.title':'Edit PIC Mapping',
                 'CatalPicMapping.view.title':'View PIC Mapping',
+                'CatalPicMapping.back.title':'Back',
 
 
 
@@ -139,6 +146,7 @@
                 'CatalProductFamily.save.title':'Save Product Family',
                 'CatalProductFamily.edit.title':'Edit Product Family',
                 'CatalProductFamily.view.title':'View Product Family',
+                'CatalProductFamily.back.title':'Back',
 
 
                 //-----------CatalProductFamilyLangMap-----------
@@ -151,6 +159,8 @@
                 'CatalFamilyFeatMaping.save.title':'Save ',
                 'CatalFamilyFeatMaping.edit.title':'Edit ',
                 'CatalFamilyFeatMapings.view.title':'View ',
+                'CatalFamilyFeatMapings.back.title':'Back',
+
                 LANG_FR: 'French',
                 LANG_EN: 'English'
             });
