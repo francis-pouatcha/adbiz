@@ -1,4 +1,4 @@
-<section class="mainbar">
+<section class="mainbar" >
 
   <div class="panel panel-primary">
     <div class="panel-heading">
@@ -13,7 +13,7 @@
         </a>
       </div>
 
-      <table  show-filter="true" class="table table-condensed table-striped">
+      <table ng-table="vm.tableParams"  show-filter="true" class="table table-condensed table-striped">
           <thead>
           <th>{{'CatalProductFamily.parentIdentif' | translate}}</th>
           <th>{{'cntnrIdentif' | translate}}</th>
