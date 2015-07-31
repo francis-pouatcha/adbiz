@@ -1,28 +1,24 @@
-<section class="mainbar" data-ng-init="vm.toViewCatalProdFmlyLangMap()">
+<section class="" ng-controller="CatalProdFmlyLangMapController as vm" data-ng-init="vm.toViewCatalProdFmlyLangMap()">
 
   <div class="panel panel-primary">
     <div class="panel-heading">
-			CatalProdFmlyLangMap View
+        {{'CatalFamilyFeatMaping.view.title'| translate}}
     </div>
     <div class="panel-body">
 
-      <form novalidate>
-        <formly-form model="vm.catalProdFmlyLangMap" fields="vm.formFields">
-        </formly-form>
-      </form>
+        <form novalidate>
+            <formly-form model="vmModal.model" fields="vm.formFields">
+            </formly-form>
+        </form>
 
-      <hr/>
-      <div>
-        <a class="btn btn-success" href="/catal-prod-fmly-lang-map/{{vm.catalProdFmlyLangMap.id}}/edit">
-          <i class="glyphicon glyphicon-edit"></i> Edit
-        </a>
-        <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove()" item="vm.catalProdFmlyLangMap">
-          <i class="glyphicon glyphicon-remove-circle"></i> Delete
-        </a>
-        <a class="btn btn-primary" href="/catal-prod-fmly-lang-map">
-          <i class="glyphicon glyphicon-list"></i> List CatalProdFmlyLangMaps
-        </a>
-      </div>
+        <hr/>
+        <div>
+
+            <a class="btn btn-primary" ng-click="vmModal.cancel()">
+                <i class="glyphicon glyphicon-chevron-left"></i>       {{'CatalFamilyFeatMaping.back.title'| translate}}
+
+            </a>
+        </div>
 
     </div>
   </div>

@@ -5,14 +5,14 @@
 
       <div class="pull-right">
         <a type="button" class="btn btn-success" ng-click="vmProductFam.createForm({})">
-          <i class="glyphicon glyphicon-open"></i> New CatalArt2ProductFamily
+          <i class="glyphicon glyphicon-open"></i>  {{'CatalArt2ProductFamily.new.title'| translate}}
         </a>
       </div>
 
       <table  class="table table-condensed table-striped">
           <thead>
-            <td>{{'catalArt2ProductFamily.artPic' | translate}}</td>
-            <td>{{'catalArt2ProductFamily.famCode' | translate}}</td>
+            <th>{{'CatalArt2ProductFamily.artPic' | translate}}</th>
+            <th>{{'CatalArt2ProductFamily.famCode' | translate}}</th>
           </thead>
           <tr ng-repeat="catalArt2ProductFamily in vmProductFam.data">
               <td data-title="'artPic'" >{{catalArt2ProductFamily.artPic}}</td>

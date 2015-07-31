@@ -2,7 +2,7 @@
 
   <div class="panel panel-primary">
     <div class="panel-heading">
-			CatalProdFmly View
+        {{'CatalProductFamily.view.title'|translate}}
     </div>
     <div class="panel-body">
 
@@ -14,16 +14,20 @@
       <hr/>
       <div>
         <a class="btn btn-success" href="/catal-prod-fmly/{{vm.catalProdFmly.id}}/edit">
-          <i class="glyphicon glyphicon-edit"></i> Edit
+          <i class="glyphicon glyphicon-edit"></i>       {{'CatalProductFamily.edit.title'|translate}}
+
         </a>
         <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove()" item="vm.catalProdFmly">
-          <i class="glyphicon glyphicon-remove-circle"></i> Delete
+          <i class="glyphicon glyphicon-remove-circle"></i>       {{'CatalProductFamily.delete.title'|translate}}
+
         </a>
         <a class="btn btn-primary" href="/catal-prod-fmly">
-          <i class="glyphicon glyphicon-list"></i> List CatalProdFmlies
+          <i class="glyphicon glyphicon-list"></i>       {{'CatalProductFamily.list.title'|translate}}
+
         </a>
       </div>
-
+       <hr/>
+        <div ng-include src="'app/catal-prod-fmly-lang-map/views/list.html'" ></div>
     </div>
   </div>
 

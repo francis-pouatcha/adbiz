@@ -5,17 +5,18 @@
 
       <div class="pull-right">
         <a type="button" class="btn btn-success" ng-click="vmArtManuf.createForm({})">
-          <i class="glyphicon glyphicon-open"></i> New CatalArtManufSupp
+          <i class="glyphicon glyphicon-open"></i>          {{'CatalArtManufSupp.new.title'|translate}}
+
         </a>
       </div>
 
       <table  class="table table-condensed table-striped">
           <thead>
-              <td>{{'catalArtManufSupp.artIdentif' | translate}}</td>
-              <td>{{'catalArtManufSupp.msIdentif' | translate}}</td>
-              <td>{{'catalArtManufSupp.msType' | translate}}</td>
-              <td>{{'catalArtManufSupp.returnDays' | translate}}</td>
-              <td>{{'catalArtManufSupp.pppu' | translate}}</td>
+              <th>{{'CatalArtManufSupp.artIdentif' | translate}}</th>
+              <th>{{'CatalArtManufSupp.msIdentif' | translate}}</th>
+              <th>{{'CatalArtManufSupp.msType' | translate}}</th>
+              <th>{{'CatalArtManufSupp.returnDays' | translate}}</th>
+              <th>{{'CatalArtManufSupp.pppu' | translate}}</th>
           </thead>
           <tr ng-repeat="catalArtManufSupp in vmArtManuf.data">
               <td>{{catalArtManufSupp.artIdentif}}</td>

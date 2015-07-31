@@ -1,33 +1,33 @@
-<section class="mainbar" data-ng-init="vm.toEditCatalProdFmlyLangMap()">
+<section class="" ng-controller="CatalProdFmlyLangMapController as vm" data-ng-init="vm.toEditCatalProdFmlyLangMap()">
 
   <div class="panel panel-primary">
     <div class="panel-heading">
-      CatalProdFmlyLangMap Edit
+        {{'CatalFamilyFeatMaping.edit.title'| translate}}
     </div>
     <div class="panel-body">
 
-      <form data-ng-submit="vm.update()" novalidate>
+        <form  novalidate>
 
-        <formly-form model="vm.catalProdFmlyLangMap" fields="vm.formFields" form="vm.form">
-        </formly-form>
+            <formly-form model="vmModal.model" fields="vm.formFields" form="vm.form">
+            </formly-form>
 
-        <hr/>
-        <div class="form-group">
-            <button type="submit" class="btn btn-success" ng-disabled="vm.form.$invalid">
-              <i class="glyphicon glyphicon-ok"></i> Save
-            </button>
-            <a class="btn btn-danger" href="/catal-prod-fmly-lang-map">
-              <i class="glyphicon glyphicon-remove"></i> Cancel
-            </a>
-        </div>
+            <hr/>
+            <div class="form-group">
+                <button ng-click="vmModal.ok()" class="btn btn-success" ng-disabled="vm.form.$invalid">
+                    <i class="glyphicon glyphicon-ok"></i>       {{'CatalFamilyFeatMaping.save.title'| translate}}
 
-        <div data-ng-show="vm.error" class="alert alert-danger form-group">
-          <strong data-ng-bind="vm.error"></strong>
-        </div>
+                </button>
+                <a class="btn btn-danger" ng-click="vmModal.cancel()">
+                    <i class="glyphicon glyphicon-remove"></i>       {{'CatalFamilyFeatMaping.cancel.title'| translate}}
 
-      </form>
+                </a>
+            </div>
 
+            <div data-ng-show="vm.error" class="alert alert-danger form-group">
+                <strong data-ng-bind="vm.error"></strong>
+            </div>
 
+        </form>
     </div>
   </div>
 

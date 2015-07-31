@@ -1,33 +1,33 @@
-<section class="mainbar">
+<section class="" ng-controller="CatalProdFmlyLangMapController as vmProdFmlyLangMap" data-ng-init="vmProdFmlyLangMap.init()" >
 
   <div class="panel panel-primary">
-    <div class="panel-heading">
-      CatalProdFmlyLangMap List
-    </div>
     <div class="panel-body">
 
       <div class="pull-right">
-        <a type="button" class="btn btn-success" href="/catal-prod-fmly-lang-map/create">
-          <i class="glyphicon glyphicon-open"></i> New CatalProdFmlyLangMap
+        <a type="button" class="btn btn-success" ng-click="vmProdFmlyLangMap.createForm({})">
+          <i class="glyphicon glyphicon-open"></i>       {{'CatalFamilyFeatMaping.new.title'| translate}}
+
         </a>
       </div>
 
-      <table ng-table="vm.tableParams" show-filter="true" class="table table-condensed table-striped">
-          <tr ng-repeat="catalProdFmlyLangMap in $data">
-              <td data-title="'artName'" sortable="'artName'" filter="{ 'artName': 'text' }">{{catalProdFmlyLangMap.artName}}</td>
-              <td data-title="'shortName'" sortable="'shortName'" filter="{'shortName': 'text'}">{{catalProdFmlyLangMap.shortName}}</td>
-              <td data-title="'famPath'" >{{catalProdFmlyLangMap.famPath}}</td>
-              <td data-title="'langIso2'" >{{catalProdFmlyLangMap.langIso2}}</td>
-              <td data-title="'purpose'" >{{catalProdFmlyLangMap.purpose}}</td>
-              <td data-title="'usage'" >{{catalProdFmlyLangMap.usage}}</td>
-              <td data-title="'warnings'" >{{catalProdFmlyLangMap.warnings}}</td>
-              <td data-title="'substances'" >{{catalProdFmlyLangMap.substances}}</td>
+      <table class="table table-condensed table-striped">
+          <thead>
+              <th>{{'CatalArtFeatMapping.artName' | translate}}</th>
+              <th>{{'CatalArtFeatMapping.shortName' | translate}}</th>
+              <th>{{'CatalFamilyFeatMaping.famPath' | translate}}</th>
+              <th>{{'langIso2' | translate}}</th>
+          </thead>
+          <tr ng-repeat="catalProdFmlyLangMap in vmProdFmlyLangMap.data">
+              <td>{{catalProdFmlyLangMap.artName}}</td>
+              <td>{{catalProdFmlyLangMap.shortName}}</td>
+              <td>{{catalProdFmlyLangMap.famPath}}</td>
+              <td>{{catalProdFmlyLangMap.langIso2}}</td>
               <td>
                  <div class="table-actions">
-                      <a class="btn btn-default" title="View" href="/catal-prod-fmly-lang-map/{{catalProdFmlyLangMap.id}}">
+                      <a class="btn btn-default" title="View" ng-click="vmProdFmlyLangMap.showForm(catalProdFmlyLangMap)">
                         <span class="glyphicon glyphicon-eye-open"></span>
                       </a>
-                      <a class="btn btn-default" title="Edit" href="/catal-prod-fmly-lang-map/{{catalProdFmlyLangMap.id}}/edit">
+                      <a class="btn btn-default" title="Edit" ng-click="vmProdFmlyLangMap.editForm(catalProdFmlyLangMap)">
                         <span class="glyphicon glyphicon-edit"></span>
                       </a>
                       <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove(catalProdFmlyLangMap)" item="catalProdFmlyLangMap">

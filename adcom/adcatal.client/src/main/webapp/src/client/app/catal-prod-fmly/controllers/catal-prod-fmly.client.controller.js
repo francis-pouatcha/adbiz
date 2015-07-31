@@ -74,6 +74,7 @@
 
         vm.toViewCatalProdFmly = function() {
             vm.catalProdFmly = CatalProdFmly.get({catalProdFmlyId: $stateParams.catalProdFmlyId});
+            CatalProdFmlyForm.catalProdFmlyId = $stateParams.catalProdFmlyId;
             vm.setFormFields(true);
         };
 

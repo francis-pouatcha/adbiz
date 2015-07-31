@@ -5,7 +5,9 @@
         .module('app.catalPicMapping')
         .factory('CatalPicMappingForm', factory);
 
-    function factory() {
+    factory.$inject = ['$translate'];
+    /* @ngInject */
+    function factory($translate) {
 
         var getFormFields = function(disabled) {
 
@@ -14,7 +16,7 @@
                     key: 'artIdentif',
                     type: 'input',
                     templateOptions: {
-                        label: 'artIdentif:',
+                        label: $translate.instant('CatalPicMapping.artIdentif'),
                         disabled: true,
                         required: true
                     }
@@ -23,7 +25,7 @@
                     key: 'code',
                     type: 'input',
                     templateOptions: {
-                        label: 'code:',
+                        label: $translate.instant('CatalPicMapping.code'),
                         disabled: disabled
                     }
                 },
@@ -31,7 +33,7 @@
                     key: 'codeOrigin',
                     type: 'input',
                     templateOptions: {
-                        label: 'codeOrigin:',
+                        label: $translate.instant('CatalPicMapping.codeOrigin'),
                         disabled: disabled
                     }
                 },
@@ -39,7 +41,7 @@
                     key: 'addInfo',
                     type: 'input',
                     templateOptions: {
-                        label: 'addInfo:',
+                        label: $translate.instant('CatalPicMapping.addInfo'),
                         disabled: disabled
                     }
                 },
@@ -47,7 +49,7 @@
                     key: 'priority',
                     type: 'input',
                     templateOptions: {
-                        label: 'priority:',
+                        label: $translate.instant('CatalPicMapping.priority'),
                         disabled: disabled
                     }
                 }
