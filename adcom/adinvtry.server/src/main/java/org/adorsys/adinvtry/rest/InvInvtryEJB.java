@@ -1,7 +1,5 @@
 package org.adorsys.adinvtry.rest;
 
-import java.util.Date;
-
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 

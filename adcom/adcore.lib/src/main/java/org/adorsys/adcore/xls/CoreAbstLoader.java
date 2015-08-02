@@ -27,9 +27,17 @@ public abstract class CoreAbstLoader<T extends CoreAbstIdentifObject> {
 	private XlsConverterFactory xlsConverterFactory;
 		
 	protected abstract T newObject();
+	
+	protected abstract CoreAbstLoader<T> getLoader();
+	protected abstract StepCallback getStepCallback();
 
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public void load(HSSFSheet hssfSheet){
+		load(hssfSheet, null);
+	}
+
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public void load(HSSFSheet hssfSheet, String stepIdentifier){
 		Iterator<Row> rowIterator = hssfSheet.rowIterator();
 		List<PropertyDesc> fields = null;
 		if(rowIterator.hasNext()){
@@ -41,24 +49,25 @@ public abstract class CoreAbstLoader<T extends CoreAbstIdentifObject> {
 		T last = null;
 		while(rowIterator.hasNext()){
 			Row row = rowIterator.next();
-			last = update(row, fields, cellParser);
+			last = getLoader().update(row, fields, cellParser, stepIdentifier);
 		}
-		done(last);
+		getLoader().done(last);
 	}
 	
 	/*
 	 * Allows the release of resources.
 	 */
-	protected void done(T last){
-		// noop
+	public void done(T last){
 	}
 	
-	protected T update(Row row, List<PropertyDesc> fields, CellParser cellParser) {
+	public T update(Row row, List<PropertyDesc> fields, CellParser cellParser, String stepIdentifier) {
 		T newObject = newObject();
 		for (PropertyDesc propertyDesc : fields) {
 			propertyDesc.setProperty(row, newObject, cellParser);
 		}
-		return save(newObject, fields);
+		T save = save(newObject, fields);
+		if(getStepCallback()!=null)getStepCallback().markSynchPoint(stepIdentifier,row.getRowNum());
+		return save;
 	}
 
 	public abstract T save(T entity, List<PropertyDesc> fields);

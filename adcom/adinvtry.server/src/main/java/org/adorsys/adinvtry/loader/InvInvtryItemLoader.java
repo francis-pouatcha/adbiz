@@ -2,15 +2,19 @@ package org.adorsys.adinvtry.loader;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchInput;
+import org.adorsys.adcore.loader.ejb.CorLdrStepCallback;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjectLookup;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjectManager;
 import org.adorsys.adcore.utils.SequenceGenerator;
 import org.adorsys.adcore.xls.CoreAbstBsnsitemLoader;
+import org.adorsys.adcore.xls.CoreAbstLoader;
 import org.adorsys.adcore.xls.PropertyDesc;
+import org.adorsys.adcore.xls.StepCallback;
 import org.adorsys.adinvtry.api.InvInvtryManager;
 import org.adorsys.adinvtry.jpa.InvInvtry;
 import org.adorsys.adinvtry.jpa.InvInvtryCstr;
@@ -28,6 +32,10 @@ public class InvInvtryItemLoader extends CoreAbstBsnsitemLoader<InvInvtry, InvIn
 	private InvInvtryManager manager;
 	@Inject
 	private InvInvtryLookup lookup;
+	@EJB
+	private InvInvtryItemLoader loader;
+	@EJB
+	private CorLdrStepCallback stepCallback;
 
 	@Override
 	protected InvInvtryItem newObject() {
@@ -51,5 +59,15 @@ public class InvInvtryItemLoader extends CoreAbstBsnsitemLoader<InvInvtry, InvIn
 			invtryItem.setLotPic(lotPic);
 		}
 		return super.save(invtryItem, fields);
+	}
+
+	@Override
+	protected CoreAbstLoader<InvInvtryItem> getLoader() {
+		return loader;
+	}
+
+	@Override
+	protected StepCallback getStepCallback() {
+		return stepCallback;
 	}
 }

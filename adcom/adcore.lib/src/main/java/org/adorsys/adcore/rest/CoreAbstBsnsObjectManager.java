@@ -143,6 +143,8 @@ public abstract class CoreAbstBsnsObjectManager<E extends CoreAbstBsnsObject, I 
 		
 		item.setAcsngUser(callerPrincipal.getLoginName());
 		
+		item.evlte();
+		
 		return getInjector().getItemEjb().create(item);
 	}
 	

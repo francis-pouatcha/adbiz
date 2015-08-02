@@ -94,12 +94,7 @@ public abstract class CoreAbstEntityBatch<J extends CoreAbstEntityJob, S extends
 			int execTimeMilisec = executor.estimateExecTimeMilisec(step.getIdentif());
 			boolean leased = getBatch().lease(step.getIdentif(), execTimeMilisec);
 			if(!leased) return;
-//			
-//			step = getStepLookup().findByIdentif(step.getIdentif());
-//			if(step==null || StringUtils.equals(step.getStepOwner(), getCurrentProcessIdentif()) || step.getEnded()==null){
-//				return;
-//			}
-			
+
 			executor.execute(step.getIdentif());
 		}
 	}
@@ -148,6 +143,22 @@ public abstract class CoreAbstEntityBatch<J extends CoreAbstEntityJob, S extends
 		s.setStepOwner(getCurrentProcessIdentif());
 		s.setStarted(now);
 		s.setLeaseEnd(DateUtils.addMilliseconds(now, execTimeMilisec));
+		getStepEjb().update(s);
+		
+		getBatch().unLock(stepIdentifier);
+		return true;
+	}
+	
+	public boolean reschedule(String stepIdentifier, int inTimeMilisec){
+		boolean locked = getBatch().lock(stepIdentifier);
+		if(!locked) return false;
+		
+		S s = getStepLookup().findByIdentif(stepIdentifier);
+		Date now = new Date();
+		s.setStepOwner(null);
+		s.setStarted(null);
+		s.setLeaseEnd(null);
+		s.setSchdldStart(DateUtils.addMilliseconds(now, inTimeMilisec));
 		getStepEjb().update(s);
 		
 		getBatch().unLock(stepIdentifier);

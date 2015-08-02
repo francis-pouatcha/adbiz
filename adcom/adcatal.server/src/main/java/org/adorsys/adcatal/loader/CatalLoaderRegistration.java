@@ -1,14 +1,9 @@
 package org.adorsys.adcatal.loader;
 
-import java.util.concurrent.TimeUnit;
-
 import javax.annotation.PostConstruct;
-import javax.ejb.AccessTimeout;
-import javax.ejb.Schedule;
+import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
 import org.adorsys.adcatal.jpa.CatalArt2ProductFamily;
@@ -20,11 +15,17 @@ import org.adorsys.adcatal.jpa.CatalArticle;
 import org.adorsys.adcatal.jpa.CatalPicMapping;
 import org.adorsys.adcatal.jpa.CatalProdFmly;
 import org.adorsys.adcatal.jpa.CatalProdFmlyLangMap;
+import org.adorsys.adcore.loader.jpa.CorLdrJob;
+import org.adorsys.adcore.loader.jpa.CorLdrPrcssngStep;
+import org.adorsys.adcore.loader.jpa.CorLdrStep;
+import org.adorsys.adcore.rest.CoreAbstEntityJobExecutor;
+import org.adorsys.adcore.xls.AbstractLoader;
+import org.adorsys.adcore.xls.CoreAbstLoaderRegistration;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 @Startup
 @Singleton
-public class BaseLoaderRegistration {
+public class CatalLoaderRegistration extends CoreAbstLoaderRegistration {
 
 	@Inject
 	private DataSheetLoader dataSheetLoader;
@@ -46,9 +47,14 @@ public class BaseLoaderRegistration {
 	private CatalProdFmlyLangMapLoader catalProdFmlyLangMapLoader;
 	@Inject
 	private CatalArt2ProductFamilyLoader catalArt2ProductFamilyLoader;
+	@EJB
+	private CatalLoaderRegistration registration;
+	@EJB
+	private CatalLoaderExecutor execTask;
 	
 	@PostConstruct
 	public void postConstruct(){
+		super.postConstruct();
 		dataSheetLoader.registerLoader(CatalArtDetailConfig.class.getSimpleName(), catalArtDetailConfigLoader);
 		dataSheetLoader.registerLoader(CatalArtEquivalence.class.getSimpleName(), catalArtEquivalenceLoader);
 		dataSheetLoader.registerLoader(CatalArticle.class.getSimpleName(), catalArticleLoader);
@@ -62,14 +68,6 @@ public class BaseLoaderRegistration {
 		createTemplate();
 	}
 
-	@Schedule(minute = "*", second="1/35" ,hour="*", persistent=false)
-	@AccessTimeout(unit=TimeUnit.MINUTES, value=10)
-	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-	public void process() throws Exception {
-		dataSheetLoader.process();
-		System.out.print("process sheet loader");
-	}
-	
 	public void createTemplate(){
 		HSSFWorkbook workbook = new HSSFWorkbook();
 		catalProductFamilyLoader.createTemplate(workbook);
@@ -82,6 +80,21 @@ public class BaseLoaderRegistration {
 		catalArtEquivalenceLoader.createTemplate(workbook);
 		catalArtDetailConfigLoader.createTemplate(workbook);
 		dataSheetLoader.exportTemplate(workbook);
+	}
+
+	@Override
+	protected AbstractLoader getDataSheetLoader() {
+		return dataSheetLoader;
+	}
+
+	@Override
+	protected CoreAbstEntityJobExecutor<CorLdrJob, CorLdrStep, CorLdrPrcssngStep> getExecTask() {
+		return execTask;
+	}
+
+	@Override
+	protected CoreAbstEntityJobExecutor<CorLdrJob, CorLdrStep, CorLdrPrcssngStep> getEjb() {
+		return registration;
 	}
 	
 }

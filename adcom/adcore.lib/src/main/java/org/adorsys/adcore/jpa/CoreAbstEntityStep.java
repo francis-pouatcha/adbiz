@@ -8,6 +8,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * This defines a task to be executed on an entity.
@@ -93,6 +94,10 @@ public class CoreAbstEntityStep extends CoreAbstIdentifObject {
 	
 	@Column
 	private Date rcvrySchdlDt;
+	
+	@Column
+	@Size(max=256)
+	private String errror;
 	
 	@Override
 	protected String makeIdentif() {
@@ -201,5 +206,13 @@ public class CoreAbstEntityStep extends CoreAbstIdentifObject {
 
 	public void setRcvrySchdlDt(Date rcvrySchdlDt) {
 		this.rcvrySchdlDt = rcvrySchdlDt;
+	}
+
+	public String getErrror() {
+		return errror;
+	}
+
+	public void setErrror(String errror) {
+		this.errror = errror;
 	}
 }

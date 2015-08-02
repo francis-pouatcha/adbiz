@@ -76,4 +76,15 @@ public abstract class CoreAbstEntityStepLookup<E extends CoreAbstEntityStep>
 		return getStepRepo().findByCntnrIdentifAndEndedIsNotNull(cntnrIdentif).firstResult(start)
 				.maxResults(max).getResultList();
 	}
+
+	//===============================================================================================//
+	//					CONTAINER AND ENTITY IDENTIF
+	//==============================================================================================//
+	public List<E> findByCntnrIdentifAndEntIdentif(String cntnrIdentif, String entityIdentif, int start, int max) {
+		return getStepRepo().findByCntnrIdentifAndEntIdentif(cntnrIdentif, entityIdentif).firstResult(start).maxResults(max).getResultList();
+	}
+
+	public Long countByCntnrIdentifAndEntIdentif(String cntnrIdentif, String entityIdentif){
+		return getStepRepo().findByCntnrIdentifAndEntIdentif(cntnrIdentif, entityIdentif).count();
+	}
 }

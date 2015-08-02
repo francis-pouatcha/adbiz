@@ -192,6 +192,7 @@ public abstract class CoreAbstBsnsObjectEJB<
 	}	
 	
 	public E recomputeBusinessObject(String cntnrIdentif, E accumulator){
+		accumulator.clearValues();
 		Long count = getInjector().getItemLookup().countByCntnrIdentifAndDisabledDtIsNull(cntnrIdentif);
 		int start = 0;
 		int max = 100;

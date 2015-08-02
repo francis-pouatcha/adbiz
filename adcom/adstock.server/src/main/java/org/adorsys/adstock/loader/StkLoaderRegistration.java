@@ -1,4 +1,4 @@
-package org.adorsys.adinvtry.loader;
+package org.adorsys.adstock.loader;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -12,35 +12,33 @@ import org.adorsys.adcore.loader.jpa.CorLdrStep;
 import org.adorsys.adcore.rest.CoreAbstEntityJobExecutor;
 import org.adorsys.adcore.xls.AbstractLoader;
 import org.adorsys.adcore.xls.CoreAbstLoaderRegistration;
-import org.adorsys.adinvtry.jpa.InvInvtry;
-import org.adorsys.adinvtry.jpa.InvInvtryItem;
+import org.adorsys.adstock.jpa.StkSection;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 @Startup
 @Singleton
-public class InvLoaderRegistration extends CoreAbstLoaderRegistration{
+public class StkLoaderRegistration extends CoreAbstLoaderRegistration {
 
 	@Inject
 	private DataSheetLoader dataSheetLoader;
 	@Inject
-	private InvInvtryLoader intInvInvtryLoader;
-	@Inject
-	private InvInvtryItemLoader invInvtryItemLoader;
+	private StkSectionLoader stkSectionLoader;
 	@EJB
-	private InvLoaderRegistration registration;
-	
+	private StkLoaderRegistration registration;
 	@EJB
-	private InvLoaderExecutor execTask;
+	private StkLoaderExecutor execTask;
 	
 	@PostConstruct
 	public void postConstruct(){
 		super.postConstruct();
-		dataSheetLoader.registerLoader(InvInvtry.class.getSimpleName(), intInvInvtryLoader);
-		dataSheetLoader.registerLoader(InvInvtryItem.class.getSimpleName(), invInvtryItemLoader);
+		dataSheetLoader.registerLoader(StkSection.class.getSimpleName(), stkSectionLoader);
+		createTemplate();
 	}
 
-	@Override
-	protected CoreAbstEntityJobExecutor<CorLdrJob, CorLdrStep, CorLdrPrcssngStep> getEjb() {
-		return registration;
+	public void createTemplate(){
+		HSSFWorkbook workbook = new HSSFWorkbook();
+		stkSectionLoader.createTemplate(workbook);
+		dataSheetLoader.exportTemplate(workbook);
 	}
 
 	@Override
@@ -52,4 +50,10 @@ public class InvLoaderRegistration extends CoreAbstLoaderRegistration{
 	protected CoreAbstEntityJobExecutor<CorLdrJob, CorLdrStep, CorLdrPrcssngStep> getExecTask() {
 		return execTask;
 	}
+
+	@Override
+	protected CoreAbstEntityJobExecutor<CorLdrJob, CorLdrStep, CorLdrPrcssngStep> getEjb() {
+		return registration;
+	}
+	
 }
