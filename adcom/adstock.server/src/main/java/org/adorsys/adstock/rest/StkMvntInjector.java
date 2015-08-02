@@ -1,12 +1,12 @@
 package org.adorsys.adstock.rest;
 
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 
 import org.adorsys.adcore.jpa.CoreAbstBsnsObject;
 import org.adorsys.adcore.jpa.CoreAbstEntityCstr;
 import org.adorsys.adcore.rest.CoreAbstBsnsItemEJB;
 import org.adorsys.adcore.rest.CoreAbstBsnsItemLookup;
-import org.adorsys.adcore.rest.CoreAbstBsnsObjBatch;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjInjector;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjectEJB;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjectHstryEJB;
@@ -19,13 +19,14 @@ import org.adorsys.adcore.rest.CoreAbstEntityJobLookup;
 import org.adorsys.adcore.rest.CoreAbstEntityStepEJB;
 import org.adorsys.adcore.rest.CoreAbstEntityStepLookup;
 import org.adorsys.adcore.utils.SequenceGenerator;
+import org.adorsys.adstock.jpa.StkJob;
 import org.adorsys.adstock.jpa.StkMvnt;
 import org.adorsys.adstock.jpa.StkMvntHstry;
-import org.adorsys.adstock.jpa.StkMvntJob;
-import org.adorsys.adstock.jpa.StkMvntStep;
+import org.adorsys.adstock.jpa.StkStep;
 
+@Stateless
 public class StkMvntInjector extends
-		CoreAbstBsnsObjInjector<CoreAbstBsnsObject, StkMvnt, StkMvntHstry, StkMvntJob, StkMvntStep, CoreAbstEntityCstr> {
+		CoreAbstBsnsObjInjector<CoreAbstBsnsObject, StkMvnt, StkMvntHstry, StkJob, StkStep, CoreAbstEntityCstr> {
 
 	@EJB
 	private StkMvntLookup itemLookup;
@@ -36,85 +37,79 @@ public class StkMvntInjector extends
 	@EJB
 	private StkMvntHstryEJB hstryEjb;
 	@EJB
-	private StkMvntJobEJB jobEjb;
+	private StkJobEJB jobEjb;
 	@EJB
-	private StkMvntJobLookup jobLookup;
+	private StkJobLookup jobLookup;
 	@EJB
-	private StkMvntStepEJB stepEJB;
+	private StkStepEJB stepEJB;
 	@EJB
-	private StkMvntStepLookup stepLookup;
+	private StkStepLookup stepLookup;
 	
 	@Override
-	protected CoreAbstBsnsObjectLookup<CoreAbstBsnsObject> getBsnsObjLookup() {
+	public CoreAbstBsnsObjectLookup<CoreAbstBsnsObject> getBsnsObjLookup() {
 		return null;
 	}
 
 	@Override
-	protected CoreAbstBsnsObjectEJB<CoreAbstBsnsObject, StkMvnt, 
-		StkMvntHstry, StkMvntJob, StkMvntStep, CoreAbstEntityCstr> getBsnsObjEjb() {
+	public CoreAbstBsnsObjectEJB<CoreAbstBsnsObject, StkMvnt, 
+		StkMvntHstry, StkJob, StkStep, CoreAbstEntityCstr> getBsnsObjEjb() {
 		return null;
 	}
 
 	@Override
-	protected CoreAbstBsnsItemLookup<StkMvnt> getItemLookup() {
+	public CoreAbstBsnsItemLookup<StkMvnt> getItemLookup() {
 		return itemLookup;
 	}
 
 	@Override
-	protected CoreAbstBsnsItemEJB<CoreAbstBsnsObject, StkMvnt, 
-		StkMvntHstry, StkMvntJob, StkMvntStep, CoreAbstEntityCstr> getItemEjb() {
+	public CoreAbstBsnsItemEJB<CoreAbstBsnsObject, StkMvnt, 
+		StkMvntHstry, StkJob, StkStep, CoreAbstEntityCstr> getItemEjb() {
 		return itemEjb;
 	}
 
 	@Override
-	protected CoreAbstBsnsObjectHstryLookup<StkMvntHstry> getHstrLookup() {
+	public CoreAbstBsnsObjectHstryLookup<StkMvntHstry> getHstrLookup() {
 		return hstryLookup;
 	}
 
 	@Override
-	protected CoreAbstBsnsObjectHstryEJB<CoreAbstBsnsObject, StkMvnt, 
-		StkMvntHstry, StkMvntJob, StkMvntStep, CoreAbstEntityCstr> getHstrEjb() {
+	public CoreAbstBsnsObjectHstryEJB<CoreAbstBsnsObject, StkMvnt, 
+		StkMvntHstry, StkJob, StkStep, CoreAbstEntityCstr> getHstrEjb() {
 		return hstryEjb;
 	}
 
 	@Override
-	protected String getSequenceGeneratorPrefix() {
+	public String getSequenceGeneratorPrefix() {
 		return SequenceGenerator.STK_MVNT_SEQUENCE_PREFIXE;
 	}
 
 	@Override
-	protected CoreAbstEntityJobEJB<StkMvntJob> getJobEjb() {
+	public CoreAbstEntityJobEJB<StkJob> getJobEjb() {
 		return jobEjb;
 	}
 
 	@Override
-	protected CoreAbstEntityJobLookup<StkMvntJob> getJobLookup() {
+	public CoreAbstEntityJobLookup<StkJob> getJobLookup() {
 		return jobLookup;
 	}
 
 	@Override
-	protected CoreAbstEntityStepEJB<StkMvntStep> getStepEjb() {
+	public CoreAbstEntityStepEJB<StkStep> getStepEjb() {
 		return stepEJB;
 	}
 
 	@Override
-	protected CoreAbstEntityStepLookup<StkMvntStep> getStepLookup() {
+	public CoreAbstEntityStepLookup<StkStep> getStepLookup() {
 		return stepLookup;
 	}
 
 	@Override
-	protected CoreAbstEntityCstrEJB<CoreAbstEntityCstr> getCstrEjb() {
+	public CoreAbstEntityCstrEJB<CoreAbstEntityCstr> getCstrEjb() {
 		return null;
 	}
 
 	@Override
-	protected CoreAbstEntityCstrLookup<CoreAbstEntityCstr> getCstrLookup() {
+	public CoreAbstEntityCstrLookup<CoreAbstEntityCstr> getCstrLookup() {
 		return null;
 	}
-
-	@Override
-	protected CoreAbstBsnsObjBatch<CoreAbstBsnsObject, StkMvnt, StkMvntHstry, StkMvntJob, StkMvntStep, CoreAbstEntityCstr> getBatch() {
-		return null;
-	}
-
 }

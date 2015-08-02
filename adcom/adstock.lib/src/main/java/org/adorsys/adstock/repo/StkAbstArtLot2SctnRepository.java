@@ -9,4 +9,7 @@ public interface StkAbstArtLot2SctnRepository<E extends StkAbstLot2Section> exte
 	public QueryResult<E> findByLotPic(String lotPic);
 	
 	public QueryResult<E> findBySection(String section);
+	
+	public QueryResult<E> findByClosedDtIsNull();
+	
 }

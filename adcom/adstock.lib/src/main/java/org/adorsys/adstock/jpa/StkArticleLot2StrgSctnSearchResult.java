@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
+import org.adorsys.adcore.jpa.CoreSearchInput;
 
 @XmlRootElement
 public class StkArticleLot2StrgSctnSearchResult
@@ -21,4 +22,11 @@ public class StkArticleLot2StrgSctnSearchResult
 			CoreAbstIdentifObjectSearchInput<StkArticleLot2StrgSctn> searchInput) {
 		super(count, resultList, searchInput);
 	}
+
+	public StkArticleLot2StrgSctnSearchResult(Long count, Long total,
+			List<StkArticleLot2StrgSctn> resultList,
+			CoreSearchInput<StkArticleLot2StrgSctn> searchInput) {
+		super(count, total, resultList, searchInput);
+	}
+	
 }

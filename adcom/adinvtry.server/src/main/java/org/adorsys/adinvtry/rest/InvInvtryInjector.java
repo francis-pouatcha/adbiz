@@ -1,15 +1,10 @@
 package org.adorsys.adinvtry.rest;
 
-import java.security.Principal;
-
-import javax.annotation.Resource;
 import javax.ejb.EJB;
-import javax.ejb.SessionContext;
+import javax.ejb.Stateless;
 
-import org.adorsys.adcore.auth.AdcomUser;
 import org.adorsys.adcore.rest.CoreAbstBsnsItemEJB;
 import org.adorsys.adcore.rest.CoreAbstBsnsItemLookup;
-import org.adorsys.adcore.rest.CoreAbstBsnsObjBatch;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjInjector;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjectEJB;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjectHstryEJB;
@@ -26,11 +21,12 @@ import org.adorsys.adinvtry.jpa.InvInvtry;
 import org.adorsys.adinvtry.jpa.InvInvtryCstr;
 import org.adorsys.adinvtry.jpa.InvInvtryHstry;
 import org.adorsys.adinvtry.jpa.InvInvtryItem;
-import org.adorsys.adinvtry.jpa.InvInvtryJob;
-import org.adorsys.adinvtry.jpa.InvInvtryStep;
+import org.adorsys.adinvtry.jpa.InvJob;
+import org.adorsys.adinvtry.jpa.InvStep;
 
+@Stateless
 public class InvInvtryInjector extends
-		CoreAbstBsnsObjInjector<InvInvtry, InvInvtryItem, InvInvtryHstry, InvInvtryJob, InvInvtryStep, InvInvtryCstr> {
+		CoreAbstBsnsObjInjector<InvInvtry, InvInvtryItem, InvInvtryHstry, InvJob, InvStep, InvInvtryCstr> {
 
 	@EJB
 	private InvInvtryLookup bsnsObjLookup;
@@ -43,13 +39,13 @@ public class InvInvtryInjector extends
 	@EJB
 	private InvInvtryCstrEJB cstrEjb;
 	@EJB
-	private InvInvtryStepLookup stepLookup;
+	private InvStepLookup stepLookup;
 	@EJB
-	private InvInvtryStepEJB stepEjb;
+	private InvStepEJB stepEjb;
 	@EJB
-	private InvInvtryJobLookup jobLookup;
+	private InvJobLookup jobLookup;
 	@EJB
-	private InvInvtryJobEJB jobEjb;
+	private InvJobEJB jobEjb;
 	@EJB
 	private InvInvtryHstryEJB hstrEjb;
 	@EJB
@@ -60,73 +56,68 @@ public class InvInvtryInjector extends
 	private InvInvtryItemLookup itemLookup;
 
 	@Override
-	protected CoreAbstBsnsObjectLookup<InvInvtry> getBsnsObjLookup() {
+	public CoreAbstBsnsObjectLookup<InvInvtry> getBsnsObjLookup() {
 		return bsnsObjLookup;
 	}
 
 	@Override
-	protected CoreAbstBsnsObjectEJB<InvInvtry, InvInvtryItem, InvInvtryHstry, InvInvtryJob, InvInvtryStep, InvInvtryCstr> getBsnsObjEjb() {
+	public CoreAbstBsnsObjectEJB<InvInvtry, InvInvtryItem, InvInvtryHstry, InvJob, InvStep, InvInvtryCstr> getBsnsObjEjb() {
 		return bsnsObjEjb;
 	}
 
 	@Override
-	protected CoreAbstBsnsItemLookup<InvInvtryItem> getItemLookup() {
+	public CoreAbstBsnsItemLookup<InvInvtryItem> getItemLookup() {
 		return itemLookup;
 	}
 
 	@Override
-	protected CoreAbstBsnsItemEJB<InvInvtry, InvInvtryItem, InvInvtryHstry, InvInvtryJob, InvInvtryStep, InvInvtryCstr> getItemEjb() {
+	public CoreAbstBsnsItemEJB<InvInvtry, InvInvtryItem, InvInvtryHstry, InvJob, InvStep, InvInvtryCstr> getItemEjb() {
 		return itemEjb;
 	}
 
 	@Override
-	protected CoreAbstBsnsObjectHstryLookup<InvInvtryHstry> getHstrLookup() {
+	public CoreAbstBsnsObjectHstryLookup<InvInvtryHstry> getHstrLookup() {
 		return hstrLookup;
 	}
 
 	@Override
-	protected CoreAbstBsnsObjectHstryEJB<InvInvtry, InvInvtryItem, InvInvtryHstry, InvInvtryJob, InvInvtryStep, InvInvtryCstr> getHstrEjb() {
+	public CoreAbstBsnsObjectHstryEJB<InvInvtry, InvInvtryItem, InvInvtryHstry, InvJob, InvStep, InvInvtryCstr> getHstrEjb() {
 		return hstrEjb;
 	}
 
 	@Override
-	protected String getSequenceGeneratorPrefix() {
+	public String getSequenceGeneratorPrefix() {
 		return SequenceGenerator.INVENTORY_SEQUENCE_PREFIXE;
 	}
 
 	@Override
-	protected CoreAbstEntityJobEJB<InvInvtryJob> getJobEjb() {
+	public CoreAbstEntityJobEJB<InvJob> getJobEjb() {
 		return jobEjb;
 	}
 
 	@Override
-	protected CoreAbstEntityJobLookup<InvInvtryJob> getJobLookup() {
+	public CoreAbstEntityJobLookup<InvJob> getJobLookup() {
 		return jobLookup;
 	}
 
 	@Override
-	protected CoreAbstEntityStepEJB<InvInvtryStep> getStepEjb() {
+	public CoreAbstEntityStepEJB<InvStep> getStepEjb() {
 		return stepEjb;
 	}
 
 	@Override
-	protected CoreAbstEntityStepLookup<InvInvtryStep> getStepLookup() {
+	public CoreAbstEntityStepLookup<InvStep> getStepLookup() {
 		return stepLookup;
 	}
 
 	@Override
-	protected CoreAbstEntityCstrEJB<InvInvtryCstr> getCstrEjb() {
+	public CoreAbstEntityCstrEJB<InvInvtryCstr> getCstrEjb() {
 		return cstrEjb;
 	}
 
 	@Override
-	protected CoreAbstEntityCstrLookup<InvInvtryCstr> getCstrLookup() {
+	public CoreAbstEntityCstrLookup<InvInvtryCstr> getCstrLookup() {
 		return cstrLookup;
-	}
-
-	@Override
-	protected CoreAbstBsnsObjBatch<InvInvtry, InvInvtryItem, InvInvtryHstry, InvInvtryJob, InvInvtryStep, InvInvtryCstr> getBatch() {
-		return batch;
 	}
 
 }

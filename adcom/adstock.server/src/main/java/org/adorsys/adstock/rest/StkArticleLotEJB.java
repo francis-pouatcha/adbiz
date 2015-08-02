@@ -11,12 +11,12 @@ import org.adorsys.adcore.rest.CoreAbstBsnsItemEJB;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjInjector;
 import org.adorsys.adstock.jpa.StkArticleLot;
 import org.adorsys.adstock.jpa.StkArticleLotHstry;
-import org.adorsys.adstock.jpa.StkArticleLotJob;
-import org.adorsys.adstock.jpa.StkArticleLotStep;
+import org.adorsys.adstock.jpa.StkJob;
+import org.adorsys.adstock.jpa.StkStep;
 import org.adorsys.adstock.repo.StkArticleLotRepository;
 
 @Stateless
-public class StkArticleLotEJB extends CoreAbstBsnsItemEJB<CoreAbstBsnsObject, StkArticleLot, StkArticleLotHstry, StkArticleLotJob, StkArticleLotStep, CoreAbstEntityCstr> {
+public class StkArticleLotEJB extends CoreAbstBsnsItemEJB<CoreAbstBsnsObject, StkArticleLot, StkArticleLotHstry, StkJob, StkStep, CoreAbstEntityCstr> {
 
 	@Inject
 	private StkArticleLotRepository repo;
@@ -25,7 +25,7 @@ public class StkArticleLotEJB extends CoreAbstBsnsItemEJB<CoreAbstBsnsObject, St
 	private StkArticleLotInjector injector;
 	
 	@Override
-	protected CoreAbstBsnsObjInjector<CoreAbstBsnsObject, StkArticleLot, StkArticleLotHstry, StkArticleLotJob, StkArticleLotStep, CoreAbstEntityCstr> getInjector() {
+	protected CoreAbstBsnsObjInjector<CoreAbstBsnsObject, StkArticleLot, StkArticleLotHstry, StkJob, StkStep, CoreAbstEntityCstr> getInjector() {
 		return injector;
 	}
 

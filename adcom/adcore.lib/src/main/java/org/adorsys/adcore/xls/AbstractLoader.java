@@ -7,16 +7,39 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.annotation.Resource;
+import javax.ejb.SessionContext;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+
+import org.adorsys.adcore.auth.AdcomUser;
 import org.adorsys.adcore.utils.RandomMilisec;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 public abstract class AbstractLoader {
 	
 	public static final String EXCEL_SUFFIX = ".xls";
 
+	@SuppressWarnings("rawtypes")
+	private Map<String, CoreAbstLoader> loaders = new HashMap<String, CoreAbstLoader>();
+
+	@Resource
+	private SessionContext sessionContext;
+	
+	String processedSuffix = ".processed";
+
+	public abstract String getDir();
+	
+	public abstract String getFileName();
+
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public void process() throws Exception {
 		RandomMilisec.doWait();
 		// create this directory if not exists
@@ -74,11 +97,38 @@ public abstract class AbstractLoader {
 		}
 	}
 
-	public abstract void loadFile(FileInputStream fis);
+	public void loadFile(FileInputStream fis) {
+		try {
+			HSSFWorkbook workbook = new HSSFWorkbook(fis);
+			int numberOfSheets = workbook.getNumberOfSheets();
+			for (int i = 0; i < numberOfSheets; i++) {
+				HSSFSheet sheet = workbook.getSheetAt(i);
+				if(sheet==null) continue;
+				String sheetName = sheet.getSheetName();
+				@SuppressWarnings("rawtypes")
+				CoreAbstLoader loader = loaders.get(sheetName);
+				if(loader!=null)loader.load(sheet);
+			}
+		} catch (IOException e) {
+			throw new IllegalStateException(e);
+		} finally {
+			IOUtils.closeQuietly(fis);
+		}
+	}
 
-	public abstract String getProcessedSuffix();
-
-	public abstract String getDir();
+	public String getProcessedSuffix() {
+		return processedSuffix;
+	}
 	
-	public abstract String getFileName();
+	protected AdcomUser getCallerPrincipal() {
+		Principal callerPrincipal = sessionContext.getCallerPrincipal();
+		if(callerPrincipal==null) return null;
+		String name = callerPrincipal.getName();
+		return new AdcomUser(name);
+	}
+
+	public void registerLoader(String key, CoreAbstLoader<?> value){
+		loaders.put(key, value);
+	}
+
 }

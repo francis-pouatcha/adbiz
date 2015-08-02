@@ -11,6 +11,9 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
+import org.adorsys.adinvtry.jpa.InvInvtry;
+import org.adorsys.adinvtry.jpa.InvInvtryItem;
+
 @Startup
 @Singleton
 public class InvLoaderRegistration {
@@ -24,8 +27,8 @@ public class InvLoaderRegistration {
 	
 	@PostConstruct
 	public void postConstruct(){
-		dataSheetLoader.registerLoader(InvInvtryExcel.class.getSimpleName(), intInvInvtryLoader);
-		dataSheetLoader.registerLoader(InvInvtryItemExcel.class.getSimpleName(), invInvtryItemLoader);
+		dataSheetLoader.registerLoader(InvInvtry.class.getSimpleName(), intInvInvtryLoader);
+		dataSheetLoader.registerLoader(InvInvtryItem.class.getSimpleName(), invInvtryItemLoader);
 		createTemplate();
 	}
 

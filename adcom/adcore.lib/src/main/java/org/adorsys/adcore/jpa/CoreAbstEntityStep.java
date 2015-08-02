@@ -25,13 +25,6 @@ public class CoreAbstEntityStep extends CoreAbstIdentifObject {
 	@Column
 	@NotNull
 	private String entIdentif;
-	
-	/*
-	 * Identifier of the containing job.
-	 */
-	@Column
-	@NotNull
-	private String jobIdentif;
 
 	/*
 	 * Delimitation of the partition of this step. Allow for 
@@ -96,11 +89,10 @@ public class CoreAbstEntityStep extends CoreAbstIdentifObject {
 	private String executorId;
 
 	@Column
-	@NotNull
-	private String taskId;
-
-	@Column
 	private String preceedingStep;
+	
+	@Column
+	private Date rcvrySchdlDt;
 	
 	@Override
 	protected String makeIdentif() {
@@ -113,14 +105,6 @@ public class CoreAbstEntityStep extends CoreAbstIdentifObject {
 
 	public void setEntIdentif(String entIdentif) {
 		this.entIdentif = entIdentif;
-	}
-
-	public String getJobIdentif() {
-		return jobIdentif;
-	}
-
-	public void setJobIdentif(String jobIdentif) {
-		this.jobIdentif = jobIdentif;
 	}
 
 	public String getStepStartId() {
@@ -203,19 +187,19 @@ public class CoreAbstEntityStep extends CoreAbstIdentifObject {
 		this.executorId = executorId;
 	}
 
-	public String getTaskId() {
-		return taskId;
-	}
-
-	public void setTaskId(String taskId) {
-		this.taskId = taskId;
-	}
-
 	public String getPreceedingStep() {
 		return preceedingStep;
 	}
 
 	public void setPreceedingStep(String preceedingStep) {
 		this.preceedingStep = preceedingStep;
+	}
+
+	public Date getRcvrySchdlDt() {
+		return rcvrySchdlDt;
+	}
+
+	public void setRcvrySchdlDt(Date rcvrySchdlDt) {
+		this.rcvrySchdlDt = rcvrySchdlDt;
 	}
 }

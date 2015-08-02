@@ -3,10 +3,11 @@ package org.adorsys.adcore.repo;
 import java.util.Date;
 
 import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
+import org.apache.deltaspike.data.api.EntityManagerDelegate;
 import org.apache.deltaspike.data.api.EntityRepository;
 import org.apache.deltaspike.data.api.QueryResult;
 
-public interface CoreAbstIdentifRepo<E extends CoreAbstIdentifObject> extends EntityRepository<E, String>{
+public interface CoreAbstIdentifRepo<E extends CoreAbstIdentifObject> extends EntityRepository<E, String>, EntityManagerDelegate<E>{
 	
 	public E findOptionalByIdentif(String identif);
 	
@@ -29,4 +30,19 @@ public interface CoreAbstIdentifRepo<E extends CoreAbstIdentifObject> extends En
 
 	public QueryResult<E> findByIdentifLessThanEquals(
 			String idEnd);
+
+	public QueryResult<E> findByCntnrIdentifBetween(
+			String identifStart, String identifEnd);
+
+	public QueryResult<E> findByCntnrIdentifGreaterThan(
+			String identifStart);
+
+	public QueryResult<E> findByCntnrIdentifGreaterThanEquals(
+			String identifStart);
+
+	public QueryResult<E> findByCntnrIdentifLessThan(
+			String identifEnd);
+
+	public QueryResult<E> findByCntnrIdentifLessThanEquals(
+			String identifEnd);
 }

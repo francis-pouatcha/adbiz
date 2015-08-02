@@ -4,20 +4,4 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 	<display-name>adinvtry.server</display-name>
 
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>all</web-resource-name>
-			<url-pattern>/</url-pattern>
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>LOGIN</role-name>
-		</auth-constraint>
-		<user-data-constraint>
-			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
-		</user-data-constraint>
-	</security-constraint>
-
-	<security-role>
-		<role-name>LOGIN</role-name>
-	</security-role>
 </web-app>

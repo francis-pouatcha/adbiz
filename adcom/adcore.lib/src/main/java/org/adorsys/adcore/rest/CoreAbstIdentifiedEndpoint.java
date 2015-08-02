@@ -50,7 +50,8 @@ public abstract class CoreAbstIdentifiedEndpoint<E extends CoreAbstIdentifObject
 	@Path("/{id}")
 	@Produces({ "application/json"})
 	@Consumes({ "application/json"})
-	public E update(E entity) {
+	public E update(E entity, @PathParam("id") String id) {
+		// TODO: verify id integrity.
 		return detach(getEjb().update(entity));
 	}
 

@@ -1,43 +1,31 @@
 package org.adorsys.adinvtry.loader;
 
-import java.util.Date;
-import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import org.adorsys.adcore.xls.AbstractObjectLoader;
-import org.adorsys.adcore.xls.PropertyDesc;
+import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchInput;
+import org.adorsys.adcore.rest.CoreAbstBsnsObjectManager;
+import org.adorsys.adcore.xls.CoreAbstBsnsObjectLoader;
+import org.adorsys.adinvtry.api.InvInvtryManager;
+import org.adorsys.adinvtry.jpa.InvInvtry;
+import org.adorsys.adinvtry.jpa.InvInvtryCstr;
+import org.adorsys.adinvtry.jpa.InvInvtryHstry;
+import org.adorsys.adinvtry.jpa.InvInvtryItem;
+import org.adorsys.adinvtry.jpa.InvJob;
+import org.adorsys.adinvtry.jpa.InvStep;
 
 @Stateless
-public class InvInvtryLoader extends AbstractObjectLoader<InvInvtryExcel> {
-
+public class InvInvtryLoader extends CoreAbstBsnsObjectLoader<InvInvtry, InvInvtryItem, InvInvtryHstry, InvJob, InvStep, InvInvtryCstr, CoreAbstBsnsObjectSearchInput<InvInvtry>>{
 	@Inject
-	private InvInvtryManagerClient dlvryManagerClient;
-	
+	private InvInvtryManager manager;
+
 	@Override
-	protected InvInvtryExcel newObject() {
-		return new InvInvtryExcel();
-	}
-
-	public InvInvtryExcel findByIdentif(String identif, Date validOn) {
-		return null;
-	}
-
-	public InvInvtryExcel create(InvInvtryExcel entity) {
-		return null;
-	}
-
-	public InvInvtryExcel update(InvInvtryExcel found) {
-		return null;
-	}
-
-	public InvInvtryExcel deleteById(String id) {
-		return null;
+	protected InvInvtry newObject() {
+		return new InvInvtry();
 	}
 
 	@Override
-	protected void save(InvInvtryExcel entity, List<PropertyDesc> fields) {
-		dlvryManagerClient.saveInvtry(entity);
+	protected CoreAbstBsnsObjectManager<InvInvtry, InvInvtryItem, InvInvtryHstry, InvJob, InvStep, InvInvtryCstr, CoreAbstBsnsObjectSearchInput<InvInvtry>> getManager() {
+		return manager;
 	}
 }

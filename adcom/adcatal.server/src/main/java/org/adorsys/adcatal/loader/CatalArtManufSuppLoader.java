@@ -8,11 +8,11 @@ import org.adorsys.adcatal.rest.CatalArtManufSuppEJB;
 import org.adorsys.adcatal.rest.CatalArtManufSuppLookup;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
-import org.adorsys.adcore.xls.CoreAbstObjectLoader;
+import org.adorsys.adcore.xls.CoreAbstEntityLoader;
 
 @Stateless
 public class CatalArtManufSuppLoader extends
-		CoreAbstObjectLoader<CatalArtManufSupp> {
+		CoreAbstEntityLoader<CatalArtManufSupp> {
 	@Inject
 	private CatalArtManufSuppEJB ejb;
 	@Inject

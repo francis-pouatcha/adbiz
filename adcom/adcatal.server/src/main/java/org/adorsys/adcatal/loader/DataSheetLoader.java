@@ -11,7 +11,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
 import org.adorsys.adcore.xls.AbstractLoader;
-import org.adorsys.adcore.xls.CoreAbstObjectLoader;
+import org.adorsys.adcore.xls.CoreAbstEntityLoader;
 import org.apache.commons.io.IOUtils;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -25,7 +25,7 @@ public class DataSheetLoader extends AbstractLoader {
 	String processedSuffix = ".processed";
 	
 	@SuppressWarnings("rawtypes")
-	private Map<String, CoreAbstObjectLoader> loaders = new HashMap<String, CoreAbstObjectLoader>();
+	private Map<String, CoreAbstEntityLoader> loaders = new HashMap<String, CoreAbstEntityLoader>();
 
 	@Override
 	public void loadFile(FileInputStream fis) {
@@ -37,7 +37,7 @@ public class DataSheetLoader extends AbstractLoader {
 				if(sheet==null) continue;
 				String sheetName = sheet.getSheetName();
 				@SuppressWarnings("rawtypes")
-				CoreAbstObjectLoader loader = loaders.get(sheetName);
+				CoreAbstEntityLoader loader = loaders.get(sheetName);
 				if(loader!=null)loader.load(sheet);
 			}
 		} catch (IOException e) {
@@ -57,7 +57,7 @@ public class DataSheetLoader extends AbstractLoader {
 		return dataDir;
 	}
 	
-	public void registerLoader(String key, CoreAbstObjectLoader<?> value){
+	public void registerLoader(String key, CoreAbstEntityLoader<?> value){
 		loaders.put(key, value);
 	}
 

@@ -39,6 +39,15 @@ public class StkLotStockQtyLookup extends
 						section, seqNbr).orderDesc("seqNbr").getResultList();
 	}
 
+	public List<StkLotStockQty> findByLotPicAndSectionOrderBySeqNbrDesc(String lotPic, String section, int start, int max) {
+		return repository.findByLotPicAndSection(lotPic,section).orderDesc("seqNbr").firstResult(start).maxResults(max).getResultList();
+	}
+	public StkLotStockQty findLatest(String lotPic, String section, int start, int max) {
+		List<StkLotStockQty> resultList = repository.findByLotPicAndSection(lotPic,section).orderDesc("seqNbr").firstResult(start).maxResults(max).getResultList();
+		if(resultList.isEmpty()) return null;
+		return resultList.iterator().next();
+	}
+	
 	@Override
 	protected Class<StkLotStockQty> getEntityClass() {
 		return StkLotStockQty.class;

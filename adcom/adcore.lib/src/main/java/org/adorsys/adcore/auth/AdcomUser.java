@@ -1,6 +1,6 @@
 package org.adorsys.adcore.auth;
 
-public class AdcomUser {
+public final class AdcomUser {
 
 	private String name;
 
@@ -13,7 +13,7 @@ public class AdcomUser {
 	};
 	
 	public String getWorkspaceId(){
-		return "system";
+		return name;
 	}
 	
 }

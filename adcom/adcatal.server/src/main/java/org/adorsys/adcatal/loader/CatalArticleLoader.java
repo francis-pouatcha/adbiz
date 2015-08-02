@@ -8,10 +8,10 @@ import org.adorsys.adcatal.rest.CatalArticleEJB;
 import org.adorsys.adcatal.rest.CatalArticleLookup;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
-import org.adorsys.adcore.xls.CoreAbstObjectLoader;
+import org.adorsys.adcore.xls.CoreAbstEntityLoader;
 
 @Stateless
-public class CatalArticleLoader extends CoreAbstObjectLoader<CatalArticle> {
+public class CatalArticleLoader extends CoreAbstEntityLoader<CatalArticle> {
 
 	@Inject
 	private CatalArticleEJB ejb;

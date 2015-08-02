@@ -1,7 +1,10 @@
 package org.adorsys.adcatal.jpa;
 
-import org.adorsys.adcore.jpa.CoreAbstBsnsObjectHstry;
+import javax.persistence.Entity;
 
-public class CatalArtLangMappingHstry extends CoreAbstBsnsObjectHstry {
+import org.adorsys.adcore.jpa.CoreAbstIdentifHstry;
+
+@Entity
+public class CatalArtLangMappingHstry extends CoreAbstIdentifHstry {
 	private static final long serialVersionUID = -6362603311240940411L;
 }

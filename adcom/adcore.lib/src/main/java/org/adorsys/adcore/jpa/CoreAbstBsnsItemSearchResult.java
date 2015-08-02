@@ -9,9 +9,9 @@ public abstract class CoreAbstBsnsItemSearchResult<E extends CoreAbstBsnsItem>
 		super();
 	}
 
-	public CoreAbstBsnsItemSearchResult(Long count, Long total, List<E> resultList,
+	public CoreAbstBsnsItemSearchResult(Long count, List<E> resultList,
 			CoreAbstBsnsItemSearchInput<E> searchInput) {
-		super(count, total, resultList, searchInput);
+		super(count, resultList, searchInput);
 	}
 	
 }

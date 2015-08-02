@@ -2,6 +2,9 @@ package org.adorsys.adcore.jpa;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
+
+import org.apache.commons.lang3.StringUtils;
 
 @MappedSuperclass
 public abstract class CoreAbstBsnsObjectHstry extends CoreAbstIdentifHstry {
@@ -10,6 +13,15 @@ public abstract class CoreAbstBsnsObjectHstry extends CoreAbstIdentifHstry {
 	@Column
 	private String itemIdentif;
 
+	@PrePersist
+	public void prePersist(){
+		if(StringUtils.isBlank(getEntIdentif()) && StringUtils.isNotBlank(itemIdentif))
+			setEntIdentif(itemIdentif);
+		if(StringUtils.isBlank(getCntnrIdentif()) && StringUtils.isNotBlank(getEntIdentif()))
+			setCntnrIdentif(getEntIdentif());
+		super.prePersist();
+	}
+	
 	public String getItemIdentif() {
 		return itemIdentif;
 	}

@@ -8,11 +8,11 @@ import org.adorsys.adcatal.rest.CatalArtDetailConfigEJB;
 import org.adorsys.adcatal.rest.CatalArtDetailConfigLookup;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
-import org.adorsys.adcore.xls.CoreAbstObjectLoader;
+import org.adorsys.adcore.xls.CoreAbstEntityLoader;
 
 @Stateless
 public class CatalArtDetailConfigLoader extends
-		CoreAbstObjectLoader<CatalArtDetailConfig> {
+		CoreAbstEntityLoader<CatalArtDetailConfig> {
 
 	@Inject
 	private CatalArtDetailConfigEJB ejb;

@@ -8,11 +8,11 @@ import org.adorsys.adcatal.rest.CatalArt2ProductFamilyEJB;
 import org.adorsys.adcatal.rest.CatalArt2ProductFamilyLookup;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
-import org.adorsys.adcore.xls.CoreAbstObjectLoader;
+import org.adorsys.adcore.xls.CoreAbstEntityLoader;
 
 @Stateless
 public class CatalArt2ProductFamilyLoader extends
-		CoreAbstObjectLoader<CatalArt2ProductFamily> {
+		CoreAbstEntityLoader<CatalArt2ProductFamily> {
 
 	@Inject
 	private CatalArt2ProductFamilyEJB ejb;

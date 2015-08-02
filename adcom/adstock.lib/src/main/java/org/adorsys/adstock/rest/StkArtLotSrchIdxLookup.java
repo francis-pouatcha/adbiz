@@ -37,8 +37,11 @@ public class StkArtLotSrchIdxLookup extends
 	public Long countByArtLMIdx(String artLMIdx){
 		return repository.findByArtLMIndex(artLMIdx).count();
 	}
-	public List<StkArtLotSrchIdx> findByArtLMIdxOrdered(String artLMIdx, int start, int max){
+	public List<StkArtLotSrchIdx> findByArtLMIdxOrderAsc(String artLMIdx, int start, int max){
 		return repository.findByArtLMIndex(artLMIdx).orderAsc("identif").firstResult(start).maxResults(max).getResultList();
+	}
+	public List<StkArtLotSrchIdx> findByArtLMIdxOrderDesc(String artLMIdx, int start, int max){
+		return repository.findByArtLMIndex(artLMIdx).orderDesc("identif").firstResult(start).maxResults(max).getResultList();
 	}
 	
 	@Override
@@ -46,10 +49,18 @@ public class StkArtLotSrchIdxLookup extends
 		return StkArtLotSrchIdx.class;
 	}
 
-	public List<StkArtLotSrchIdx> findBySectionAndLotPic(String strgSection, String lotPic){
+	public Long countBySectionAndLotPic(String strgSection, String lotPic){
 		String cntnrIdentif = StkArtLotSrchIdx.toLotPicAndDectionKey(lotPic, strgSection);
-		Long count = repository.findByCntnrIdentif(cntnrIdentif).count();
-		return repository.findByCntnrIdentif(cntnrIdentif).firstResult(0).maxResults(count.intValue()).getResultList();
+		return repository.findByCntnrIdentif(cntnrIdentif).count();
+	}
+
+	public List<StkArtLotSrchIdx> findBySectionAndLotPicOrderAsc(String strgSection, String lotPic, int start, int max){
+		String cntnrIdentif = StkArtLotSrchIdx.toLotPicAndDectionKey(lotPic, strgSection);
+		return repository.findByCntnrIdentif(cntnrIdentif).orderAsc("identif").firstResult(start).maxResults(max).getResultList();
+	}
+	public List<StkArtLotSrchIdx> findBySectionAndLotPicOrderDesc(String strgSection, String lotPic, int start, int max){
+		String cntnrIdentif = StkArtLotSrchIdx.toLotPicAndDectionKey(lotPic, strgSection);
+		return repository.findByCntnrIdentif(cntnrIdentif).orderDesc("identif").firstResult(start).maxResults(max).getResultList();
 	}
 	
 	@Override

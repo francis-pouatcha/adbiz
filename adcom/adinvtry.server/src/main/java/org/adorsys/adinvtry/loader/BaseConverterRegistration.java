@@ -6,15 +6,11 @@ import javax.ejb.Startup;
 import javax.inject.Inject;
 
 import org.adorsys.adcore.xls.XlsConverterFactory;
-import org.adorsys.adinvtry.jpa.InvInvtryStatus;
 import org.adorsys.adinvtry.jpa.InvInvtryType;
 
 @Startup
 @Singleton
 public class BaseConverterRegistration {
-
-	@Inject
-	private InvInvtryStatusConverter invInvtryStatusConverter;
 
 	@Inject
 	private InvInvtryTypeConverter invInvtryTypeConverter;
@@ -24,7 +20,6 @@ public class BaseConverterRegistration {
 	
 	@PostConstruct
 	public void postConstruct(){
-		converterFactory.registerConverter(InvInvtryStatus.class.getName(), invInvtryStatusConverter);
 		converterFactory.registerConverter(InvInvtryType.class.getName(), invInvtryTypeConverter);
 	}
 }

@@ -14,6 +14,7 @@ import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjectEndpoint;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjectLookup;
 import org.adorsys.adinvtry.jpa.InvInvtry;
+import org.adorsys.adinvtry.jpa.InvInvtry_;
 
 /**
  * 

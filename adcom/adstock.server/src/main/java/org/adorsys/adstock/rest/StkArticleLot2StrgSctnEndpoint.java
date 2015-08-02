@@ -55,9 +55,9 @@ public class StkArticleLot2StrgSctnEndpoint extends
 
 	@Override
 	protected CoreAbstIdentifObjectSearchResult<StkArticleLot2StrgSctn> newSearchResult(
-			Long count, List<StkArticleLot2StrgSctn> resultList,
+			Long count, Long total, List<StkArticleLot2StrgSctn> resultList,
 			CoreAbstIdentifObjectSearchInput<StkArticleLot2StrgSctn> searchInput) {
-		return new StkArticleLot2StrgSctnSearchResult(count, resultList, searchInput);
+		return new StkArticleLot2StrgSctnSearchResult(count, total, resultList, searchInput);
 	}
 
 }

@@ -8,11 +8,11 @@ import org.adorsys.adcatal.rest.CatalPicMappingEJB;
 import org.adorsys.adcatal.rest.CatalPicMappingLookup;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
-import org.adorsys.adcore.xls.CoreAbstObjectLoader;
+import org.adorsys.adcore.xls.CoreAbstEntityLoader;
 
 @Stateless
 public class CatalPicMappingLoader extends
-		CoreAbstObjectLoader<CatalPicMapping> {
+		CoreAbstEntityLoader<CatalPicMapping> {
 
 	@Inject
 	private CatalPicMappingEJB ejb;

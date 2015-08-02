@@ -8,11 +8,11 @@ import org.adorsys.adcatal.rest.CatalArtEquivalenceEJB;
 import org.adorsys.adcatal.rest.CatalArtEquivalenceLookup;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
-import org.adorsys.adcore.xls.CoreAbstObjectLoader;
+import org.adorsys.adcore.xls.CoreAbstEntityLoader;
 
 @Stateless
 public class CatalArtEquivalenceLoader extends
-		CoreAbstObjectLoader<CatalArtEquivalence> {
+		CoreAbstEntityLoader<CatalArtEquivalence> {
 	@Inject
 	private CatalArtEquivalenceEJB ejb;
 	@Inject

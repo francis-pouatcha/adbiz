@@ -1,19 +1,17 @@
 package org.adorsys.adstock.loader;
 
-import java.util.Date;
-
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
-import org.adorsys.adcore.xls.CoreAbstObjectLoader;
+import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
+import org.adorsys.adcore.xls.CoreAbstEntityLoader;
 import org.adorsys.adstock.jpa.StkSection;
 import org.adorsys.adstock.rest.StkSectionEJB;
 import org.adorsys.adstock.rest.StkSectionLookup;
 
 @Stateless
-public class StkSectionLoader extends CoreAbstObjectLoader<StkSection> {
+public class StkSectionLoader extends CoreAbstEntityLoader<StkSection> {
 
 	@Inject
 	private StkSectionEJB ejb;

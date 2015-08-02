@@ -14,37 +14,28 @@ public abstract class CoreAbstEntityStepLookup<E extends CoreAbstEntityStep>
 	protected CoreAbstIdentifRepo<E> getRepo() {
 		return getStepRepo();
 	};
+//
+//	public Long countByCntnrIdentifAndStartedIsNullAndEndedIsNull(
+//			String cntnrIdentif) {
+//		return getStepRepo().findByCntnrIdentifAndStartedIsNullAndEndedIsNull(cntnrIdentif).count();
+//	}
+//
+//	public List<E> findByCntnrIdentifAndStartedIsNullAndEndedIsNull(
+//			String cntnrIdentif, int start, int max) {
+//		return getStepRepo().findByCntnrIdentifAndStartedIsNullAndEndedIsNull(cntnrIdentif).firstResult(start)
+//				.maxResults(max).getResultList();
+//	}
 
-	public Long countByJobIdentif(String jobIdentif) {
-		return getStepRepo().findByJobIdentif(jobIdentif).count();
-	}
-
-	public List<E> findByJobIdentif(String jobIdentif, int start, int max) {
-		return getStepRepo().findByJobIdentif(jobIdentif).firstResult(start)
-				.maxResults(max).getResultList();
-	}
-
-	public Long countByJobIdentifAndStartedIsNullAndEndedIsNull(
-			String jobIdentif) {
-		return getStepRepo().findByJobIdentifAndStartedIsNullAndEndedIsNull(jobIdentif).count();
-	}
-
-	public List<E> findByJobIdentifAndStartedIsNullAndEndedIsNull(
-			String jobIdentif, int start, int max) {
-		return getStepRepo().findByJobIdentifAndStartedIsNullAndEndedIsNull(jobIdentif).firstResult(start)
-				.maxResults(max).getResultList();
-	}
-
-	public Long countByJobIdentifAndStartedIsNotNullAndEndedIsNull(
-			String jobIdentif) {
-		return getStepRepo().findByJobIdentifAndStartedIsNotNullAndEndedIsNull(jobIdentif).count();
-	}
-
-	public List<E> findByJobIdentifAndStartedIsNotNullAndEndedIsNull(
-			String jobIdentif, int start, int max) {
-		return getStepRepo().findByJobIdentifAndStartedIsNotNullAndEndedIsNull(jobIdentif).firstResult(start)
-				.maxResults(max).getResultList();
-	}
+//	public Long countByCntnrIdentifAndStartedIsNotNullAndEndedIsNull(
+//			String cntnrIdentif) {
+//		return getStepRepo().findByCntnrIdentifAndStartedIsNotNullAndEndedIsNull(cntnrIdentif).count();
+//	}
+//
+//	public List<E> findByCntnrIdentifAndStartedIsNotNullAndEndedIsNull(
+//			String cntnrIdentif, int start, int max) {
+//		return getStepRepo().findByCntnrIdentifAndStartedIsNotNullAndEndedIsNull(cntnrIdentif).firstResult(start)
+//				.maxResults(max).getResultList();
+//	}
 
 	public Long countByStartedIsNotNullAndEndedIsNullAndLeaseEndLessThan(
 			Date now) {
@@ -56,14 +47,33 @@ public abstract class CoreAbstEntityStepLookup<E extends CoreAbstEntityStep>
 		return getStepRepo().findByStartedIsNotNullAndEndedIsNullAndLeaseEndLessThan(now).firstResult(start)
 				.maxResults(max).getResultList();
 	}
+//
+//	public Long countByCntnrIdentifAndStartedIsNullAndSchdldStartLessThan(String cntnrIdentif,Date now) {
+//		return getStepRepo().findByCntnrIdentifAndStartedIsNullAndSchdldStartLessThan(cntnrIdentif, now).count();
+//	}
+//
+//	public List<E> findByCntnrIdentifAndStartedIsNullAndSchdldStartLessThan(String cntnrIdentif,
+//			Date now, int start, int max) {
+//		return getStepRepo().findByCntnrIdentifAndStartedIsNullAndSchdldStartLessThan(cntnrIdentif, now).firstResult(start)
+//				.maxResults(max).getResultList();
+//	}
 
-	public Long countByJobIdentifAndStartedIsNullAndSchdldStartLessThan(Date now) {
-		return getStepRepo().findByJobIdentifAndStartedIsNullAndSchdldStartLessThan(now).count();
+	public Long countByStartedIsNullAndSchdldStartLessThan(Date now) {
+		return getStepRepo().findByStartedIsNullAndSchdldStartLessThan(now).count();
 	}
 
-	public List<E> findByJobIdentifAndStartedIsNullAndSchdldStartLessThan(
+	public List<E> findByStartedIsNullAndSchdldStartLessThan(
 			Date now, int start, int max) {
-		return getStepRepo().findByJobIdentifAndStartedIsNullAndSchdldStartLessThan(now).firstResult(start)
+		return getStepRepo().findByStartedIsNullAndSchdldStartLessThan(now).firstResult(start)
+				.maxResults(max).getResultList();
+	}
+
+	public Long countByCntnrIdentifAndEndedIsNotNull(String cntnrIdentif) {
+		return getStepRepo().findByCntnrIdentifAndEndedIsNotNull(cntnrIdentif).count();
+	}
+
+	public List<E> findByCntnrIdentifAndEndedIsNotNull(String cntnrIdentif,int start, int max) {
+		return getStepRepo().findByCntnrIdentifAndEndedIsNotNull(cntnrIdentif).firstResult(start)
 				.maxResults(max).getResultList();
 	}
 }
