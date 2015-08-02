@@ -2,7 +2,7 @@
 
   <div class="panel panel-primary">
     <div class="panel-heading">
-      New CatalPicMapping
+      {{'CatalPicMapping.new.title'|translate}}
     </div>
     <div class="panel-body">
 
@@ -14,10 +14,12 @@
             <hr/>
             <div class="form-group">
                 <button ng-click="vmModal.ok()" class="btn btn-success" ng-disabled="vm.form.$invalid">
-                    <i class="glyphicon glyphicon-ok"></i> Save
+                    <i class="glyphicon glyphicon-ok"></i>       {{'CatalPicMapping.save.title'|translate}}
+
                 </button>
                 <a class="btn btn-danger" ng-click="vmModal.cancel()">
-                    <i class="glyphicon glyphicon-remove"></i> Cancel
+                    <i class="glyphicon glyphicon-remove"></i>       {{'CatalPicMapping.cancel.title'|translate}}
+
                 </a>
             </div>
 

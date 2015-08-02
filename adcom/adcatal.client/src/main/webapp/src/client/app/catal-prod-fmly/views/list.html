@@ -1,22 +1,32 @@
-<section class="mainbar">
+<section class="mainbar" >
 
   <div class="panel panel-primary">
     <div class="panel-heading">
-      CatalProdFmly List
+        {{'CatalProductFamily.list.title'|translate}}
     </div>
     <div class="panel-body">
 
       <div class="pull-right">
         <a type="button" class="btn btn-success" href="/catal-prod-fmly/create">
-          <i class="glyphicon glyphicon-open"></i> New CatalProdFmly
+          <i class="glyphicon glyphicon-open"></i>         {{'CatalProductFamily.new.title'|translate}}
+
         </a>
       </div>
 
-      <table ng-table="vm.tableParams" show-filter="true" class="table table-condensed table-striped">
+      <table ng-table="vm.tableParams"  show-filter="true" class="table table-condensed table-striped">
+          <thead>
+          <th>{{'CatalProductFamily.parentIdentif' | translate}}</th>
+          <th>{{'cntnrIdentif' | translate}}</th>
+          <th>{{'CatalProductFamily.famPath' | translate}}</th>
+
+
+          </thead>
           <tr ng-repeat="catalProdFmly in $data">
-              <td data-title="'parentIdentif'">{{catalProdFmly.parentIdentif}}</td>
-              <td data-title="'identif'" >{{catalProdFmly.identif}}</td>
-              <td data-title="'famPath'" >{{catalProdFmly.famPath}}</td>
+              <td>{{catalProdFmly.parentIdentif}}</td>
+              <td>{{catalProdFmly.identif}}</td>
+              <td>{{catalProdFmly.famPath}}</td>
+
+
               <td>
                  <div class="table-actions">
                       <a class="btn btn-default" title="View" href="/catal-prod-fmly/{{catalProdFmly.id}}">

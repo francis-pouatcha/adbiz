@@ -5,7 +5,9 @@
         .module('app.catalArtDetailConfig')
         .factory('CatalArtDetailConfigForm', factory);
 
-    function factory() {
+    factory.$inject = ['$translate'];
+    /* @ngInject */
+    function factory($translate) {
 
         var getFormFields = function(disabled) {
 
@@ -14,7 +16,7 @@
                     key: 'cntnrIdentif',
                     type: 'input',
                     templateOptions: {
-                        label: 'cntnrIdentif:',
+                        label: $translate.instant('cntnrIdentif'),
                         disabled: true,
                         required: true
                     }
@@ -23,7 +25,7 @@
                     key: 'qtyOfDtldInMain',
                     type: 'input',
                     templateOptions: {
-                        label: 'qtyOfDtldInMain:',
+                        label: $translate.instant('CatalArtDetailConfig.qtyOfDtldInMain'),
                         disabled: disabled,
                         required: true
                     }
@@ -32,7 +34,7 @@
                     key: 'pptnOfDtldInMain',
                     type: 'input',
                     templateOptions: {
-                        label: 'pptnOfDtldInMain:',
+                        label: $translate.instant('CatalArtDetailConfig.targetPrprtn'),
                         disabled: disabled,
                         required: true
                     }
@@ -41,7 +43,7 @@
                     key: 'mngInPptn',
                     type: 'checkbox',
                     templateOptions: {
-                        label: 'mngInPptn:',
+                        label: $translate.instant('CatalArtDetailConfig.mngInPptn'),
                         disabled: disabled
                     }
                 }

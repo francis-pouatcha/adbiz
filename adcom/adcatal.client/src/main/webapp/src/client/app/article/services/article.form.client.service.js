@@ -28,21 +28,25 @@
                         {
                             className: 'col-xs-4',
                             type: 'input',
-                            key: 'sppu',
+                            key: 'artName',
                             templateOptions: {
-                                label: $translate.instant('CatalArticle_sppu_description.title'),
-                                disabled:disabled
+                                label: $translate.instant('CatalArtFeatMapping.artName'),
+                                //pattern: '\\d{5}',
+                                disabled:disabled,
+                                required:true
                             }
                         },
                         {
                             className: 'col-xs-4',
                             type: 'input',
-                            key: 'maxDisctRate',
+                            key: 'shortName',
                             templateOptions: {
-                                label: 'Max Remise',
+                                label: $translate.instant('Article ShortName'),
+                                //pattern: '\\d{5}',
                                 disabled:disabled
                             }
                         }
+
                     ]
                 },
 
@@ -51,12 +55,31 @@
                     fieldGroup: [
 
                         {
-                            className: 'col-xs-3',
+                            className: 'col-xs-2',
+                            type: 'input',
+                            key: 'sppu',
+                            templateOptions: {
+                                type:'number',
+                                label: $translate.instant('CatalArticle.sppu'),
+                                disabled:disabled
+                            }
+                        },
+                        {
+                            className: 'col-xs-2',
+                            type: 'input',
+                            key: 'maxDisctRate',
+                            templateOptions: {
+                                label: $translate.instant('CatalArticle.maxDisctRate'),
+                                disabled:disabled
+                            }
+                        },
+                        {
+                            className: 'col-xs-2',
                             type: 'input',
                             key: 'minStockQty',
                             templateOptions: {
                                 type: 'number',
-                                label: 'Min Stock',
+                                label: $translate.instant('CatalArticle.minStockQty'),
                                 max: 99999,
                                 min: 0,
                                 //pattern: '\\d{5}',
@@ -64,12 +87,12 @@
                             }
                         },
                         {
-                            className: 'col-xs-3',
+                            className: 'col-xs-2',
                             type: 'input',
                             key: 'maxStockQty',
                             templateOptions: {
                                 type: 'number',
-                                label: 'Max stock',
+                                label: $translate.instant('CatalArticle.maxStockQty'),
                                 max: 99999,
                                 min: 0,
                                 //pattern: '\\d{5}',
@@ -77,11 +100,11 @@
                             }
                         },
                         {
-                            className: 'col-xs-3',
+                            className: 'col-xs-2',
                             type: 'input',
                             key: 'vatRate',
                             templateOptions: {
-                                label: 'Taux TVA',
+                                label: $translate.instant('CatalArticle.vatRate'),
                                 disabled:disabled
                             }
                         },
@@ -90,7 +113,7 @@
                             type: 'checkbox',
                             key: 'active',
                             templateOptions: {
-                                label: 'Actif',
+                                label: $translate.instant('CatalArticle.active'),
                                 disabled:disabled
                             }
                         },
@@ -99,10 +122,12 @@
                             type: 'checkbox',
                             key: 'authorizedSale',
                             templateOptions: {
-                                label: 'Vendable',
+                                label: $translate.instant('CatalArticle.authorizedSale'),
                                 disabled:disabled
                             }
                         }
+
+
                     ]
                 }
             ];

@@ -5,16 +5,17 @@
 
       <div class="pull-right">
         <a type="button" class="btn btn-success" ng-click="vmProdFmlyLangMap.createForm({})">
-          <i class="glyphicon glyphicon-open"></i> New CatalProdFmlyLangMap
+          <i class="glyphicon glyphicon-open"></i>       {{'CatalFamilyFeatMaping.new.title'| translate}}
+
         </a>
       </div>
 
       <table class="table table-condensed table-striped">
           <thead>
-              <th>{{'catalProdFmlyLangMap.artName' | translate}}</th>
-              <th>{{'catalProdFmlyLangMap.shortName ' | translate}}</th>
-              <th>{{'catalProdFmlyLangMap.famPath' | translate}}</th>
-              <th>{{'catalProdFmlyLangMap.langIso2' | translate}}</th>
+              <th>{{'CatalArtFeatMapping.artName' | translate}}</th>
+              <th>{{'CatalArtFeatMapping.shortName' | translate}}</th>
+              <th>{{'CatalFamilyFeatMaping.famPath' | translate}}</th>
+              <th>{{'langIso2' | translate}}</th>
           </thead>
           <tr ng-repeat="catalProdFmlyLangMap in vmProdFmlyLangMap.data">
               <td>{{catalProdFmlyLangMap.artName}}</td>
