@@ -1,5 +1,7 @@
 package org.adorsys.adstock.rest;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -32,4 +34,15 @@ public class StkArticleLot2StrgSctnLookup extends
 	protected Class<StkArticleLot2StrgSctn> getEntityClass() {
 		return StkArticleLot2StrgSctn.class;
 	}
+	
+	public Long countByClosedDtIsNull(){
+		return repository.findByClosedDtIsNull().count();
+	}
+	public List<StkArticleLot2StrgSctn> findByClosedDtIsNullAsc(int start, int max){
+		return repository.findByClosedDtIsNull().firstResult(start).maxResults(max).orderAsc("identif").getResultList();
+	}
+	public List<StkArticleLot2StrgSctn> findByClosedDtIsNullDesc(int start, int max){
+		return repository.findByClosedDtIsNull().firstResult(start).maxResults(max).orderDesc("identif").getResultList();
+	}
+
 }

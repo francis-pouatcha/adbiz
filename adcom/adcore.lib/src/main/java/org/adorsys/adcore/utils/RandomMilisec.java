@@ -11,4 +11,12 @@ public class RandomMilisec {
 			// Noop
 		}
 	}
+
+	public static void doWait(int sec){
+		try {
+			Thread.sleep(new BigDecimal(Math.random()*1000*sec).longValue());
+		} catch (InterruptedException e) {
+			// Noop
+		}
+	}
 }

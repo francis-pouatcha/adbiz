@@ -135,4 +135,12 @@ public abstract class CoreAbstIdentifHstry extends CoreAbstEntity {
 		this.addtnlInfo = addtnlInfo;
 	}
 
+	public String getCntnrIdentif() {
+		return cntnrIdentif;
+	}
+
+	public void setCntnrIdentif(String cntnrIdentif) {
+		this.cntnrIdentif = cntnrIdentif;
+	}
+
 }

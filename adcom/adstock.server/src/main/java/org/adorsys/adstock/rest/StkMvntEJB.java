@@ -9,14 +9,14 @@ import org.adorsys.adcore.jpa.CoreAbstEntityCstr;
 import org.adorsys.adcore.repo.CoreAbstBsnsItemRepo;
 import org.adorsys.adcore.rest.CoreAbstBsnsItemEJB;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjInjector;
+import org.adorsys.adstock.jpa.StkJob;
 import org.adorsys.adstock.jpa.StkMvnt;
 import org.adorsys.adstock.jpa.StkMvntHstry;
-import org.adorsys.adstock.jpa.StkMvntJob;
-import org.adorsys.adstock.jpa.StkMvntStep;
+import org.adorsys.adstock.jpa.StkStep;
 import org.adorsys.adstock.repo.StkMvntRepository;
 
 @Stateless
-public class StkMvntEJB extends CoreAbstBsnsItemEJB<CoreAbstBsnsObject, StkMvnt, StkMvntHstry, StkMvntJob, StkMvntStep, CoreAbstEntityCstr> {
+public class StkMvntEJB extends CoreAbstBsnsItemEJB<CoreAbstBsnsObject, StkMvnt, StkMvntHstry, StkJob, StkStep, CoreAbstEntityCstr> {
 
 	@Inject
 	private StkMvntRepository repository;
@@ -29,7 +29,7 @@ public class StkMvntEJB extends CoreAbstBsnsItemEJB<CoreAbstBsnsObject, StkMvnt,
 	}
 
 	@Override
-	protected CoreAbstBsnsObjInjector<CoreAbstBsnsObject, StkMvnt, StkMvntHstry, StkMvntJob, StkMvntStep, CoreAbstEntityCstr> getInjector() {
+	protected CoreAbstBsnsObjInjector<CoreAbstBsnsObject, StkMvnt, StkMvntHstry, StkJob, StkStep, CoreAbstEntityCstr> getInjector() {
 		return injector;
 	}
 }

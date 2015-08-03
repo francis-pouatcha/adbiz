@@ -19,4 +19,6 @@ public interface StkLotStockQtyRepository extends CoreAbstIdentifRepo<StkLotStoc
 	public QueryResult<StkLotStockQty> findByArtPicAndLotPicAndSectionAndCnsldtd(String artPic,String lotPic,String section,Boolean cnsldtd);
 	
 	public QueryResult<StkLotStockQty> findByArtPicAndLotPicAndSectionAndSeqNbr(String artPic,String lotPic, String section, int seqNbr);
+
+	public QueryResult<StkLotStockQty> findByLotPicAndSection(String lotPic,String section);
 }

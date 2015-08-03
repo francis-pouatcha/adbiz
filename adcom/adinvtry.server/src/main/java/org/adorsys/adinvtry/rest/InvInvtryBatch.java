@@ -1,35 +1,69 @@
 package org.adorsys.adinvtry.rest;
 
-import java.util.UUID;
-
+import javax.ejb.EJB;
 import javax.ejb.Singleton;
-import javax.inject.Inject;
 
-import org.adorsys.adcore.rest.CoreAbstBsnsObjBatch;
-import org.adorsys.adcore.rest.CoreAbstBsnsObjInjector;
-import org.adorsys.adinvtry.jpa.InvInvtry;
-import org.adorsys.adinvtry.jpa.InvInvtryCstr;
-import org.adorsys.adinvtry.jpa.InvInvtryHstry;
-import org.adorsys.adinvtry.jpa.InvInvtryItem;
-import org.adorsys.adinvtry.jpa.InvInvtryJob;
-import org.adorsys.adinvtry.jpa.InvInvtryStep;
+import org.adorsys.adcore.rest.CoreAbstEntityJobEJB;
+import org.adorsys.adcore.rest.CoreAbstEntityJobLookup;
+import org.adorsys.adcore.rest.CoreAbstEntityStepEJB;
+import org.adorsys.adcore.rest.CoreAbstEntityStepLookup;
+import org.adorsys.adcore.rest.CoreAbstPrcssngStepEJB;
+import org.adorsys.adcore.rest.CoreAbstPrcssngStepLookup;
+import org.adorsys.adcore.task.CoreAbstEntityBatch;
+import org.adorsys.adinvtry.jpa.InvJob;
+import org.adorsys.adinvtry.jpa.InvPrcssgStep;
+import org.adorsys.adinvtry.jpa.InvStep;
 
 @Singleton
-public class InvInvtryBatch extends CoreAbstBsnsObjBatch<InvInvtry, InvInvtryItem, InvInvtryHstry, InvInvtryJob, InvInvtryStep, InvInvtryCstr> {
+public class InvInvtryBatch extends CoreAbstEntityBatch<InvJob, InvStep, InvPrcssgStep> {
+
+	@EJB
+	private InvJobEJB jobEJB;
+	@EJB
+	private InvJobLookup jobLookup;
+	@EJB
+	private InvStepEJB stepEJB;
+	@EJB
+	private InvStepLookup stepLookup;
+	@EJB
+	private InvInvtryBatch batch;
+	@EJB
+	private InvPrcssgStepLookup prcssgStepLookup;
+	@EJB
+	private InvPrcssgStepEJB prcssgStepEJB;
 	
-	private final String processId = UUID.randomUUID().toString();
-
-	@Inject
-	private InvInvtryInjector injector;
-
 	@Override
-	protected CoreAbstBsnsObjInjector<InvInvtry, InvInvtryItem, InvInvtryHstry, InvInvtryJob, InvInvtryStep, InvInvtryCstr> getInjector() {
-		return injector;
+	protected CoreAbstEntityJobEJB<InvJob> getJobEjb() {
+		return jobEJB;
 	}
 
 	@Override
-	protected String getCurrentProcessIdentif() {
-		return processId;
+	public CoreAbstEntityJobLookup<InvJob> getJobLookup() {
+		return jobLookup;
 	}
 
+	@Override
+	public CoreAbstEntityStepEJB<InvStep> getStepEjb() {
+		return stepEJB;
+	}
+
+	@Override
+	public CoreAbstEntityStepLookup<InvStep> getStepLookup() {
+		return stepLookup;
+	}
+
+	@Override
+	protected CoreAbstEntityBatch<InvJob, InvStep, InvPrcssgStep> getBatch() {
+		return batch;
+	}
+
+	@Override
+	protected CoreAbstPrcssngStepEJB<InvPrcssgStep> getPrcssngStepEJB() {
+		return prcssgStepEJB;
+	}
+
+	@Override
+	protected CoreAbstPrcssngStepLookup<InvPrcssgStep> getPrcssngStepLookup() {
+		return prcssgStepLookup;
+	}
 }

@@ -28,21 +28,25 @@
                         {
                             className: 'col-xs-4',
                             type: 'input',
-                            key: 'sppu',
+                            key: 'artName',
                             templateOptions: {
-                                label: $translate.instant('CatalArticle.sppu'),
-                                disabled:disabled
+                                label: $translate.instant('CatalArtFeatMapping.artName'),
+                                //pattern: '\\d{5}',
+                                disabled:disabled,
+                                required:true
                             }
                         },
                         {
                             className: 'col-xs-4',
                             type: 'input',
-                            key: 'maxDisctRate',
+                            key: 'shortName',
                             templateOptions: {
-                                label: $translate.instant('CatalArticle.maxDisctRate'),
+                                label: $translate.instant('Article ShortName'),
+                                //pattern: '\\d{5}',
                                 disabled:disabled
                             }
                         }
+
                     ]
                 },
 
@@ -51,7 +55,26 @@
                     fieldGroup: [
 
                         {
-                            className: 'col-xs-3',
+                            className: 'col-xs-2',
+                            type: 'input',
+                            key: 'sppu',
+                            templateOptions: {
+                                type:'number',
+                                label: $translate.instant('CatalArticle.sppu'),
+                                disabled:disabled
+                            }
+                        },
+                        {
+                            className: 'col-xs-2',
+                            type: 'input',
+                            key: 'maxDisctRate',
+                            templateOptions: {
+                                label: $translate.instant('CatalArticle.maxDisctRate'),
+                                disabled:disabled
+                            }
+                        },
+                        {
+                            className: 'col-xs-2',
                             type: 'input',
                             key: 'minStockQty',
                             templateOptions: {
@@ -64,7 +87,7 @@
                             }
                         },
                         {
-                            className: 'col-xs-3',
+                            className: 'col-xs-2',
                             type: 'input',
                             key: 'maxStockQty',
                             templateOptions: {
@@ -77,7 +100,7 @@
                             }
                         },
                         {
-                            className: 'col-xs-3',
+                            className: 'col-xs-2',
                             type: 'input',
                             key: 'vatRate',
                             templateOptions: {
@@ -103,6 +126,8 @@
                                 disabled:disabled
                             }
                         }
+
+
                     ]
                 }
             ];

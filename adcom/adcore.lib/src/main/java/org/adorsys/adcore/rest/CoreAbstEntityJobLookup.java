@@ -46,4 +46,11 @@ public abstract class CoreAbstEntityJobLookup<E extends CoreAbstEntityJob> exten
 	public List<E> findByJobStatusAndStartTimeLessThanAndEndTimeIsNull(String jobStatus, int start, int max){
 		return getJobRepo().findByJobStatusAndStartTimeLessThanAndEndTimeIsNull(jobStatus).firstResult(start).maxResults(max).getResultList();
 	}
+
+	public Long countByJobStatus(String jobStatus){
+		return getJobRepo().findByJobStatus(jobStatus).count();
+	}
+	public List<E> findByJobStatus(String jobStatus, int start, int max){
+		return getJobRepo().findByJobStatus(jobStatus).firstResult(start).maxResults(max).getResultList();
+	}
 }

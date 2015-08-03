@@ -2,8 +2,8 @@
 	xsi:schemaLocation="
       http://java.sun.com/xml/ns/javaee
       http://java.sun.com/xml/ns/javaee/beans_1_0.xsd">
-      <interceptors>
-      	<class>org.adorsys.adcore.auth.SystemAuthInterceptor</class>
-      </interceptors>
+	<alternatives>
+		<class>org.apache.deltaspike.jpa.impl.transaction.ContainerManagedTransactionStrategy</class>
+	</alternatives>
 	
 </beans>

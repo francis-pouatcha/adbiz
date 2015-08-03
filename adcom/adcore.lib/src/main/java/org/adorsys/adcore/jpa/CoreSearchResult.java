@@ -35,21 +35,18 @@ public abstract class CoreSearchResult<T> {
 		this.className = this.getClass().getName();
 	}
 
-	/*public CoreSearchResult(Long count, List<T> resultList,
+	public CoreSearchResult(Long count, List<T> resultList,
 			CoreSearchInput<T> searchInput) {
 		super();
 		this.count = count;
 		this.resultList = resultList;
 		this.searchInput = searchInput;
-	}*/
+	}
 
 	public CoreSearchResult(Long count, Long total, List<T> resultList,
 			CoreSearchInput<T> searchInput) {
-		super();
-		this.count = count;
+		this(count, resultList, searchInput);
 		this.total = total;
-		this.resultList = resultList;
-		this.searchInput = searchInput;
 	}
 
 	public Long getCount() {

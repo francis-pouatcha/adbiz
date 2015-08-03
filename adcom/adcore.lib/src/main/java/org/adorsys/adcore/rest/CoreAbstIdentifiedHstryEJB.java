@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.event.Observes;
+import javax.inject.Inject;
 
 import org.adorsys.adcore.auth.AdcomUser;
 import org.adorsys.adcore.enums.CoreHistoryTypeEnum;
@@ -20,7 +21,9 @@ public abstract class CoreAbstIdentifiedHstryEJB<H extends CoreAbstIdentifHstry,
 
 	protected abstract CoreAbstIdentifObjectHstryRepo<H> getRepo();
 	protected abstract H newHstryObj();
-	protected abstract AdcomUser getCallerPrincipal();
+	
+	@Inject
+	private AdcomUser callerPrincipal;
 
 	public H create(H entity) {
 		H saved = getRepo().save(entity);
@@ -52,21 +55,21 @@ public abstract class CoreAbstIdentifiedHstryEJB<H extends CoreAbstIdentifHstry,
 		return entity;
 	}
 	
-	protected void handleEntityCreatedEvent(@Observes @EntityCreatedEvent E entity) {
+	public void handleEntityCreatedEvent(@Observes @EntityCreatedEvent E entity) {
 		H h = newHstry(entity);
 		h.setEntStatus(CoreProcessStatusEnum.CREATED.name());
 		h.setHstryType(CoreHistoryTypeEnum.INITIATED.name());
 		h.setProcStep(CoreProcStepEnum.INITIATING.name());
 		create(h);
 	}
-	protected void handleEntityDeletedEvent(@Observes @EntityDeletedEvent E entity) {
+	public void handleEntityDeletedEvent(@Observes @EntityDeletedEvent E entity) {
 		H h = newHstry(entity);
 		h.setEntStatus(CoreProcessStatusEnum.DELETED.name());
 		h.setHstryType(CoreHistoryTypeEnum.DELETED.name());
 		h.setProcStep(CoreProcStepEnum.DELETING.name());
 		create(h);
 	}
-	protected void handleEntityUpdatedEvent(@Observes @EntityUpdatedEvent E entity) {
+	public void handleEntityUpdatedEvent(@Observes @EntityUpdatedEvent E entity) {
 		H h = newHstry(entity);
 		h.setEntStatus(CoreProcessStatusEnum.MODIFIED.name());
 		h.setHstryType(CoreHistoryTypeEnum.MODIFIED.name());
@@ -76,17 +79,15 @@ public abstract class CoreAbstIdentifiedHstryEJB<H extends CoreAbstIdentifHstry,
 	
 	private H newHstry(E entity){
 		H h = newHstryObj();
+		h.setCntnrIdentif(entity.getCntnrIdentif());
 		h.setEntIdentif(entity.getIdentif());
 		h.setHstryDt(new Date());
-		AdcomUser callerPrincipal = getCallerPrincipal();
-		if(callerPrincipal!=null){
-			h.setOrignLogin(callerPrincipal.getLoginName());
-			h.setOrignWrkspc(callerPrincipal.getWorkspaceId());
-		}
+		h.setOrignLogin(callerPrincipal.getLoginName());
+		h.setOrignWrkspc(callerPrincipal.getWorkspaceId());
 		h.setAddtnlInfo(printHstryInfo(entity));
 		return h;
 	}
-	protected String printHstryInfo(E entity){
+	public String printHstryInfo(E entity){
 		return entity.toString();
 	}
 	

@@ -73,8 +73,6 @@ public abstract class CoreAbstBsnsObjectLookup<E extends CoreAbstBsnsObject>
 		if(searchInput.getFieldNames().contains("txGroup") && StringUtils.isNotBlank(entity.getTxGroup())) whereSet = prep(whereSet, qBuilder, "LOWER(e.txGroup) LIKE(LOWER(:txGroup))");
 		if(searchInput.getFieldNames().contains("txType") && StringUtils.isNotBlank(entity.getTxType())) whereSet = prep(whereSet, qBuilder, "e.txType=:txType");
 		if(searchInput.getFieldNames().contains("section") && StringUtils.isNotBlank(entity.getSection())) whereSet = prep(whereSet, qBuilder, "LOWER(e.section) LIKE(LOWER(:section))");
-		if(searchInput.getFieldNames().contains("rangeStart") && StringUtils.isNotBlank(entity.getRangeStart())) whereSet = prep(whereSet, qBuilder, "LOWER(e.rangeStart)>=LOWER(:rangeStart)");
-		if(searchInput.getFieldNames().contains("rangeEnd") && StringUtils.isNotBlank(entity.getRangeEnd())) whereSet = prep(whereSet, qBuilder, "LOWER(e.rangeEnd)<=LOWER(:rangeEnd)");
 		if(searchInput.getFieldNames().contains("descptn") && StringUtils.isNotBlank(entity.getDescptn())) whereSet = prep(whereSet, qBuilder, "LOWER(e.descptn) LIKE(LOWER(:descptn))");
 
 		if(searchInput.getPrchGrossPrcPreTaxFrom()!=null) whereSet = prep(whereSet, qBuilder, "e.prchGrossPrcPreTaxFrom >= :prchGrossPrcPreTaxFrom");
@@ -118,12 +116,6 @@ public abstract class CoreAbstBsnsObjectLookup<E extends CoreAbstBsnsObject>
 		}
 		if(searchInput.getFieldNames().contains("section") && StringUtils.isNotBlank(entity.getSection())){
 			query.setParameter("section", "%"+entity.getSection()+"%");
-		}
-		if(searchInput.getFieldNames().contains("rangeStart") && StringUtils.isNotBlank(entity.getRangeStart())){
-			query.setParameter("rangeStart", entity.getRangeStart());
-		}
-		if(searchInput.getFieldNames().contains("rangeEnd") && StringUtils.isNotBlank(entity.getRangeEnd())){
-			query.setParameter("rangeEnd", entity.getRangeEnd());
 		}
 		if(searchInput.getFieldNames().contains("descptn") && StringUtils.isNotBlank(entity.getDescptn())){
 			query.setParameter("descptn", "%"+entity.getDescptn()+"%");

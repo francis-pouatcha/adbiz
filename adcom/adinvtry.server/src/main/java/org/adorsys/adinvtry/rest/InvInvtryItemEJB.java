@@ -14,13 +14,13 @@ import org.adorsys.adinvtry.jpa.InvInvtry;
 import org.adorsys.adinvtry.jpa.InvInvtryCstr;
 import org.adorsys.adinvtry.jpa.InvInvtryHstry;
 import org.adorsys.adinvtry.jpa.InvInvtryItem;
-import org.adorsys.adinvtry.jpa.InvInvtryJob;
-import org.adorsys.adinvtry.jpa.InvInvtryStep;
+import org.adorsys.adinvtry.jpa.InvJob;
+import org.adorsys.adinvtry.jpa.InvStep;
 import org.adorsys.adinvtry.repo.InvInvtryItemRepository;
 
 @Stateless
 public class InvInvtryItemEJB extends CoreAbstBsnsItemEJB<InvInvtry, InvInvtryItem, InvInvtryHstry, 
-	InvInvtryJob, InvInvtryStep, InvInvtryCstr>
+	InvJob, InvStep, InvInvtryCstr>
 {
 
 	@Inject
@@ -29,7 +29,7 @@ public class InvInvtryItemEJB extends CoreAbstBsnsItemEJB<InvInvtry, InvInvtryIt
 	private InvInvtryInjector injector;
 
 	@Override
-	protected CoreAbstBsnsObjInjector<InvInvtry, InvInvtryItem, InvInvtryHstry, InvInvtryJob, InvInvtryStep, InvInvtryCstr> getInjector() {
+	protected CoreAbstBsnsObjInjector<InvInvtry, InvInvtryItem, InvInvtryHstry, InvJob, InvStep, InvInvtryCstr> getInjector() {
 		return injector;
 	}
 

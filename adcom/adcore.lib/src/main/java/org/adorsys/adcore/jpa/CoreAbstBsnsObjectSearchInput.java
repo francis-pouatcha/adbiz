@@ -59,6 +59,7 @@ public abstract class CoreAbstBsnsObjectSearchInput<E extends CoreAbstBsnsObject
 
 	private BigDecimal stkValPreTaxTo;
 
+	
 	public boolean noSpecialParams(){
 		return prchWrntyDtFrom==null && prchWrntyDtTo==null &&
 				prchRtrnDtFrom==null && prchRtrnDtTo==null && slsWrntyDtFrom==null && slsWrntyDtTo==null && slsRtrnDtFrom==null && slsRtrnDtTo==null &&

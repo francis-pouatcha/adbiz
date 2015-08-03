@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -18,10 +20,12 @@ import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 
+@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 public abstract class CoreAbstIdentifLookup<E extends CoreAbstIdentifObject> {
 
 	protected abstract CoreAbstIdentifRepo<E> getRepo();
 	protected abstract Class<E> getEntityClass();
+
 	@Inject
 	private EntityManager em;
 	protected EntityManager getEntityManager(){
@@ -76,13 +80,60 @@ public abstract class CoreAbstIdentifLookup<E extends CoreAbstIdentifObject> {
 		return getRepo().findByIdentifLessThanEquals(idEnd).orderDesc("identif").firstResult(firstResult).maxResults(maxResult).getResultList();		
 	}
 	
+	//==============================================================================================//
+	// 																								//			
+	// 									CONTAINER IDENTIF											//
+	//==============================================================================================//
 	public List<E> findByCntnrIdentif(String cntnrIdentif, int start, int max) {
 		return getRepo().findByCntnrIdentif(cntnrIdentif).firstResult(start).maxResults(max).getResultList();
+	}
+	public List<E> findByCntnrIdentifAsc(String cntnrIdentif, int start, int max) {
+		return getRepo().findByCntnrIdentif(cntnrIdentif).orderAsc(cntnrIdentif).firstResult(start).maxResults(max).getResultList();
+	}
+	public List<E> findByCntnrIdentifDesc(String cntnrIdentif, int start, int max) {
+		return getRepo().findByCntnrIdentif(cntnrIdentif).orderDesc(cntnrIdentif).firstResult(start).maxResults(max).getResultList();
 	}
 
 	public Long countByCntnrIdentif(String cntnrIdentif){
 		return getRepo().findByCntnrIdentif(cntnrIdentif).count();
 	}
+	
+	public Long countByCntnrIdentifBetween(String identifStart, String identifEnd){
+		return getRepo().findByCntnrIdentifBetween(identifStart, identifEnd).count();
+	}
+	public List<E> findByCntnrIdentifBetween(String identifStart, String identifEnd, int first, int max){
+		return getRepo().findByCntnrIdentifBetween(identifStart, identifEnd).firstResult(first).maxResults(max).getResultList();
+	}
+
+	public Long countByCntnrIdentifGreaterThan(String identifStart){
+		return getRepo().findByCntnrIdentifGreaterThan(identifStart).count();		
+	}
+	public List<E> findByCntnrIdentifGreaterThan(String identifStart, int firstResult, int maxResult){
+		return getRepo().findByCntnrIdentifGreaterThan(identifStart).orderAsc("cntnrIdentif").firstResult(firstResult).maxResults(maxResult).getResultList();		
+	}
+
+	public Long countByCntnrIdentifGreaterThanEquals(String identifStart){
+		return getRepo().findByCntnrIdentifGreaterThanEquals(identifStart).count();				
+	}
+	public List<E> findByCntnrIdentifGreaterThanEquals(String identifStart, int firstResult, int maxResult){
+		return getRepo().findByCntnrIdentifGreaterThanEquals(identifStart).orderAsc("cntnrIdentif").firstResult(firstResult).maxResults(maxResult).getResultList();		
+	}
+
+	public Long countByCntnrIdentifLessThan(String identifEnd){
+		return getRepo().findByCntnrIdentifLessThan(identifEnd).count();		
+	}
+	public List<E> findByCntnrIdentifLessThan(String identifEnd, int firstResult, int maxResult){
+		return getRepo().findByCntnrIdentifLessThan(identifEnd).orderDesc("cntnrIdentif").firstResult(firstResult).maxResults(maxResult).getResultList();		
+	}
+
+	public Long countByCntnrIdentifLessThanEquals(String identifEnd){
+		return getRepo().findByCntnrIdentifLessThanEquals(identifEnd).count();				
+	}
+	public List<E> findByCntnrIdentifLessThanEquals(String identifEnd, int firstResult, int maxResult){
+		return getRepo().findByCntnrIdentifLessThanEquals(identifEnd).orderDesc("cntnrIdentif").firstResult(firstResult).maxResults(maxResult).getResultList();		
+	}
+	
+	//==============================================================================================//
 	
 	public List<E> listAll(int start, int max) {
 		return getRepo().findAll(start, max);
