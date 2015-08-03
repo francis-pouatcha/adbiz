@@ -12,7 +12,8 @@
         'CatalProdFmlyLangMapForm',
         'CatalProdFmlyForm'];
     /* @ngInject */
-    function CatalProdFmlyLangMapController(logger, CatalProdFmlyLangMap, utils, CatalProdFmlyLangMapForm, CatalProdFmlyForm) {
+    function CatalProdFmlyLangMapController(logger, CatalProdFmlyLangMap,
+                                            utils, CatalProdFmlyLangMapForm, CatalProdFmlyForm) {
 
         var vm = this;
         vm.data = [];
@@ -24,28 +25,25 @@
             vm.formFields = CatalProdFmlyLangMapForm.getFormFields(disabled);
             vm.formFields[0].defaultValue = vm.catalProdFmlyId;
         };
-
-
         vm.createForm = function (model) {
             utils.templateModal(model, 'createForm',
                 'app/catal-prod-fmly-lang-map/views/create.html', vm);
-        }
+        };
         vm.editForm = function (model) {
             utils.templateModal(model, 'editForm',
                 'app/catal-prod-fmly-lang-map/views/edit.html', vm);
-        }
+        };
         vm.showForm = function (model) {
             utils.templateModal(model, 'showForm',
                 'app/catal-prod-fmly-lang-map/views/view.html', vm);
-        }
-
+        };
         vm.init = function () {
-            CatalProdFmlyLangMap.findBy(coreSearchInput(), function (response) {
+            CatalProdFmlyLangMap.findBy(coreSearchInputInit(), function (response) {
                 vm.data = response.resultList;
             });
         };
 
-        function coreSearchInput() {
+        function coreSearchInputInit() {
             vm.catalProdFmlyId = CatalProdFmlyForm.catalProdFmlyId;
             var coreSearchInput = {};
             coreSearchInput.entity = {};
@@ -60,8 +58,8 @@
             vm.catalProdFmlyId = CatalProdFmlyForm.catalProdFmlyId;
             catalProdFmlyLangMap.cntnrIdentif = vm.catalProdFmlyId;
             // Create new catalProdFmlyLangMap object
-            var catalProdFmlyLangMap = new CatalProdFmlyLangMap(catalProdFmlyLangMap);
-            catalProdFmlyLangMap.$save(function (response) {
+            var catalProdFmlyLangMapRes = new CatalProdFmlyLangMap(catalProdFmlyLangMap);
+            catalProdFmlyLangMapRes.$save(function (response) {
                 logger.success('CatalProdFmlyLangMap created');
                 vm.data.push(response);
             }, function (errorResponse) {
@@ -81,7 +79,7 @@
                         });
                     });
             } else {
-                var index = vm.data.indexOf(vm.catalProdFmlyLangMap);
+                index = vm.data.indexOf(vm.catalProdFmlyLangMap);
                 vm.catalProdFmlyLangMap.$remove(function () {
                     logger.success('CatalProdFmlyLangMap deleted');
                     vm.data.splice(index, 1);
@@ -93,8 +91,8 @@
         // Update existing catalProdFmlyLangMap
         vm.update = function (catalProdFmlyLangMap) {
             var index = vm.data.indexOf(vm.model);
-            var catalProdFmlyLangMap = new CatalProdFmlyLangMap(catalProdFmlyLangMap);
-            catalProdFmlyLangMap.$update(function () {
+            var catalProdFmlyLangMapRes = new CatalProdFmlyLangMap(catalProdFmlyLangMap);
+            catalProdFmlyLangMapRes.$update(function () {
                 logger.success('catalProdFmlyLangMap updated');
                 vm.data.splice(index, 1);
                 vm.data.push(catalProdFmlyLangMap);

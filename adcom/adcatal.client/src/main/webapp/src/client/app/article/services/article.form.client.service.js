@@ -111,7 +111,7 @@
 
         };
 
-        var catalArticleId = "";
+        var catalArticleId = '';
 
         var service = {
             getFormFields: getFormFields,

@@ -13,20 +13,24 @@
       </div>
 
       <table ng-table="vm.tableParams" show-filter="true"  class="table table-condensed table-striped">
+           <tr>
+               <td>
+                   <input type="text" class="input-filter form-control ng-pristine ng-untouched ng-valid ng-scope"
+                           ng-model="params.filter()[name]"  name="identif-catalArticle">
+               </td>
+           </tr>
           <thead>
-          <th>{{'CIP' | translate}}</th>
-          <th>{{'CatalArticle.sppu' | translate}}</th>
-          <th>{{'CatalArticle.maxDisctRate' | translate}}</th>
-          <th>{{'CatalArticle.minStockQty' | translate}}</th>
-          <th>{{'CatalArticle.minStockQty' | translate}}</th>
-          <th>{{'CatalArticle.vatRate' | translate}}</th>
-          <th>{{'CatalArticle.active' | translate}}</th>
-          <th>{{'CatalArticle.authorizedSale' | translate}}</th>
-
+              <th>{{'CIP' | translate}}</th>
+              <th>{{'CatalArticle.sppu' | translate}}</th>
+              <th>{{'CatalArticle.maxDisctRate' | translate}}</th>
+              <th>{{'CatalArticle.minStockQty' | translate}}</th>
+              <th>{{'CatalArticle.minStockQty' | translate}}</th>
+              <th>{{'CatalArticle.vatRate' | translate}}</th>
+              <th>{{'CatalArticle.active' | translate}}</th>
+              <th>{{'CatalArticle.authorizedSale' | translate}}</th>
           </thead>
           <tr ng-repeat="article in $data">
-
-              <td filter="{ 'identif-catalArticle': 'text' }" >{{article.identif}}</td>
+              <td name="identif-catalArticle" >{{article.identif}}</td>
               <td>{{article.sppu}}</td>
               <td>{{article.maxDisctRate}}</td>
               <td>{{article.minStockQty}}</td>

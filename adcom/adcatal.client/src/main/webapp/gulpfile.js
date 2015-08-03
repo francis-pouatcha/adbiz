@@ -245,7 +245,7 @@ gulp.task('optimize', ['inject', 'vet'], function() {
         .pipe(assets.restore())
         .pipe($.useref())
         // Replace the file names in the html with rev numbers
-        .pipe($.revReplace())
+        .pipe($.revReplace({prefix:'adcatal.client/build/'}))
         .pipe(gulp.dest(config.build));
 });
 
