@@ -110,6 +110,7 @@
             return coreSearchInput;
         }
 
+
         vm.toViewArticle = function() {
             vm.article = Article.get({articleId: $stateParams.articleId});
             ArticleForm.catalArticleId = $stateParams.articleId;
