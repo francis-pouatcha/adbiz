@@ -1,13 +1,17 @@
 package org.adorsys.adcore.rest;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.adorsys.adcore.exceptions.AdException;
+import org.adorsys.adcore.exceptions.AdRestException;
 import org.adorsys.adcore.jpa.CoreAbstBsnsItem;
 import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchResult;
@@ -26,77 +30,75 @@ public abstract class CoreAbstBsnsManagerEndpoint<E extends CoreAbstBsnsObject, 
 	protected abstract CoreAbstBsnsItemSearchInput<I> newItemSearchInput();
 	protected abstract CoreAbstBsnsItemSearchResult<I> newItemSearchResult(long count, List<I> resultList, CoreAbstBsnsItemSearchInput<I> itemSearchInput);
 
-	@PUT
-	@Path("/prepare")
+	@POST
 	@Consumes({ "application/json"})
 	@Produces({ "application/json"})
-	public E newBsnsObj(E bsnsObj) {
+	public E createBsnsObj(E bsnsObj) {
 		return getBsnsObjManager().initiateBsnsObj(bsnsObj);
 	}
 
 	@PUT
-	@Path("/update")
-	@Consumes({ "application/json"})
+	@Path("/{identif}")
 	@Produces({ "application/json"})
-	public E updateBsnsObj(E bsnsObj) {
-		return getBsnsObjManager().update(bsnsObj);
+	@Consumes({ "application/json"})
+	public E updateBsnsObj(E bsnsObj, @PathParam("identif") String identif) throws AdRestException {
+		return getBsnsObjManager().update(identif, bsnsObj);
 	}
 
 	@PUT
-	@Path("/close")
-	@Consumes({ "application/json"})
+	@Path("/{identif}/close")
 	@Produces({ "application/json"})
-	public E closeBsnsObj(E bsnsObj) {
-		return getBsnsObjManager().close(bsnsObj);
+	public E closeBsnsObj(@PathParam("identif") String identif) throws AdRestException {
+		return getBsnsObjManager().close(identif);
 	}
 
 	@PUT
-	@Path("/validate")
-	@Consumes({ "application/json"})
+	@Path("/{identif}/validate")
 	@Produces({ "application/json"})
-	public E validateBsnsObj(E bsnsObj) {
-		return getBsnsObjManager().validate(bsnsObj);
+	public E validateBsnsObj(@PathParam("identif") String identif) throws AdRestException{
+		return getBsnsObjManager().validate(identif);
 	}
 
 	@PUT
-	@Path("/post")
+	@Path("/{identif}/post")
 	@Consumes({ "application/json"})
 	@Produces({ "application/json"})
-	public E postBsnsObj(E bsnsObj) {
-		return getBsnsObjManager().post(bsnsObj);
+	public E postBsnsObj(@PathParam("identif") String identif) throws AdRestException{
+		return getBsnsObjManager().post(identif);
+	}
+
+	@POST
+	@Path("/{identif}/items")
+	@Consumes({ "application/json"})
+	@Produces({ "application/json"})
+	public I addItem(@PathParam("identif") String identif, I item) throws AdException {
+		return getBsnsObjManager().addItem(identif, item);
 	}
 
 	@PUT
-	@Path("/addItem")
+	@Path("/{identif}/items/{itemIdentif}")
 	@Consumes({ "application/json"})
 	@Produces({ "application/json"})
-	public I addItem(I item) throws AdException {
-		return getBsnsObjManager().addItem(item);
+	public I updateItem(@PathParam("identif") String identif, @PathParam("itemIdentif") String itemIdentif, I item) throws AdException {
+		return getBsnsObjManager().updateItem(identif, itemIdentif, item);
 	}
 
 	@PUT
-	@Path("/updateItem")
+	@Path("/{identif}/items/{itemIdentif}/disable")
 	@Consumes({ "application/json"})
 	@Produces({ "application/json"})
-	public I updateItem(I item) throws AdException {
-		return getBsnsObjManager().updateItem(item);
-	}
-
-	@PUT
-	@Path("/disableItem")
-	@Consumes({ "application/json"})
-	@Produces({ "application/json"})
-	public CoreAbstBsnsItemSearchResult<I> disableItem(I item) throws AdException {
-		getBsnsObjManager().disableItem(item);
+	public CoreAbstBsnsItemSearchResult<I> disableItem(@PathParam("identif") String identif, 
+			@PathParam("itemIdentif") String itemIdentif) throws AdRestException {
+		I item = getBsnsObjManager().disableItem(identif, itemIdentif, new Date());
 		return findByCntnrIdentifAndSalIndex(item);
 	}
 
 	@PUT
-	@Path("/enableItem")
+	@Path("/{identif}/items/{itemIdentif}/enable")
 	@Consumes({ "application/json"})
 	@Produces({ "application/json"})
-	public CoreAbstBsnsItemSearchResult<I> enableItem(I item) throws AdException {
-		getBsnsObjManager().enableItem(item);
+	public CoreAbstBsnsItemSearchResult<I> enableItem(@PathParam("identif") String identif, @PathParam("itemIdentif") String itemIdentif) throws AdException {
+		I item = getBsnsObjManager().enableItem(identif, itemIdentif);
 		return findByCntnrIdentifAndSalIndex(item);
 	}
 

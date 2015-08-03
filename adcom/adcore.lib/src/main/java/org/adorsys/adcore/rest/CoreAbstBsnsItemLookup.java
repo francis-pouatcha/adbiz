@@ -50,6 +50,9 @@ public abstract class CoreAbstBsnsItemLookup<E extends CoreAbstBsnsItem> extends
 	public List<E> findByCntnrIdentifOrderByIdentifAsc(String cntnrIdentif, int start, int max){
 		return getBsnsRepo().findByCntnrIdentif(cntnrIdentif).orderAsc("identif").firstResult(start).maxResults(max).getResultList();
 	}
+	public List<E> findByCntnrIdentifOrderByIdentifDesc(String cntnrIdentif, int start, int max){
+		return getBsnsRepo().findByCntnrIdentif(cntnrIdentif).orderDesc("identif").firstResult(start).maxResults(max).getResultList();
+	}
 	
 	public Long countByCntnrIdentifAndIdentifBetween(String cntnrIdentif, String identifStart, String identifEnd){
 		return getBsnsRepo().findByCntnrIdentifAndIdentifBetween(cntnrIdentif, identifStart, identifEnd).count();
@@ -79,6 +82,12 @@ public abstract class CoreAbstBsnsItemLookup<E extends CoreAbstBsnsItem> extends
 	}  
 	public List<E> findByCntnrIdentifAndDisabledDtIsNullOrderByAcsngDtAsc(String cntnrIdentif, int start, int max){
 		return getBsnsRepo().findByCntnrIdentifAndDisabledDtIsNull(cntnrIdentif).orderAsc("acsngDt").firstResult(start).maxResults(max).getResultList();
+	}  
+	public List<E> findByCntnrIdentifAndDisabledDtIsNullOrderByIdentifAsc(String cntnrIdentif, int start, int max){
+		return getBsnsRepo().findByCntnrIdentifAndDisabledDtIsNull(cntnrIdentif).orderAsc("identif").firstResult(start).maxResults(max).getResultList();
+	}  
+	public List<E> findByCntnrIdentifAndDisabledDtIsNullOrderByIdentifDesc(String cntnrIdentif, int start, int max){
+		return getBsnsRepo().findByCntnrIdentifAndDisabledDtIsNull(cntnrIdentif).orderDesc("identif").firstResult(start).maxResults(max).getResultList();
 	}  
 
 	public Long countByCntnrIdentifAndSection(String cntnrIdentif, String section){

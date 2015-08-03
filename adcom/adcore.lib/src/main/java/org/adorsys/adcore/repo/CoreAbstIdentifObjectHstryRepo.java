@@ -1,10 +1,11 @@
 package org.adorsys.adcore.repo;
 
 import org.adorsys.adcore.jpa.CoreAbstIdentifHstry;
+import org.apache.deltaspike.data.api.EntityManagerDelegate;
 import org.apache.deltaspike.data.api.EntityRepository;
 import org.apache.deltaspike.data.api.QueryResult;
 
-public interface CoreAbstIdentifObjectHstryRepo<E extends CoreAbstIdentifHstry> extends EntityRepository<E, String>{
+public interface CoreAbstIdentifObjectHstryRepo<E extends CoreAbstIdentifHstry> extends EntityRepository<E, String>, EntityManagerDelegate<E>{
 
 	public QueryResult<E> findByEntIdentif(String entIdentif);
 

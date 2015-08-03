@@ -26,13 +26,14 @@ public abstract class CoreAbstBsnsObjectEJB<
 
 	protected abstract CoreAbstBsnsObjInjector<E, I, H, J, S, C> getInjector();	
 	protected abstract CoreAbstBsnsObjectRepo<E> getBsnsRepo();
+
 	protected String prinHstryInfo(E entity){
 		return CoreBsnsObjInfo.prinInfo(entity);
-	};
+	}
 	
 	protected CoreAbstIdentifRepo<E> getRepo(){
 		return getBsnsRepo();
-	};
+	}
 
 	public E create(E entity)
 	{
@@ -48,7 +49,7 @@ public abstract class CoreAbstBsnsObjectEJB<
 	
 
 	public E close(E entity){
-		recompute(entity);
+		entity = recomputeBusinessObject(entity.getCntnrIdentif(), entity);
 		entity.evlte();
 
 		E saved = getBsnsRepo().save(attach(entity));
@@ -58,15 +59,8 @@ public abstract class CoreAbstBsnsObjectEJB<
 	}
 
 	public E post(E entity){
-		
-		recompute(entity);
-		
-		entity.evlte();
-
-		E saved = getBsnsRepo().save(attach(entity));
-		
-		getInjector().getHstrEjb().createHstry(saved.getIdentif(), CoreProcessStatusEnum.POSTED.name(), CoreHistoryTypeEnum.POSTED.name(),CoreProcStepEnum.POSTING.name(), CoreHistoryTypeEnum.POSTED.name(), prinHstryInfo(saved));
-		return saved;
+		getInjector().getHstrEjb().createHstry(entity.getIdentif(), CoreProcessStatusEnum.POSTED.name(), CoreHistoryTypeEnum.POSTED.name(),CoreProcStepEnum.POSTING.name(), CoreHistoryTypeEnum.POSTED.name(), prinHstryInfo(entity));
+		return entity;
 	}
 	
 	
@@ -94,7 +88,9 @@ public abstract class CoreAbstBsnsObjectEJB<
 		List<I> currentItems = new ArrayList<I>();
 		String currentSalIndex = null;
 		while(start<itemCount){
-			List<I> list = getInjector().getItemLookup().findByCntnrIdentifOrderBySalIndexAsc(bsnsObjNbr, start, max);
+			int firstResult = start;
+			start += max;
+			List<I> list = getInjector().getItemLookup().findByCntnrIdentifOrderBySalIndexAsc(bsnsObjNbr, firstResult, max);
 			for (I item : list) {
 				if(currentSalIndex==null){
 					currentSalIndex = item.getSalIndex();
@@ -160,9 +156,7 @@ public abstract class CoreAbstBsnsObjectEJB<
 		if(itemA.getAcsngDt().before(itemB.getAcsngDt())) return itemB;
 		return itemA;
 	}
-	
-	public void processStep(S step){}
-	
+
 	public void validateBusinessObject(String cntnrIdentif){
 
 		Long countByCntnrIdentif = getInjector().getItemLookup().countByCntnrIdentif(cntnrIdentif);
@@ -197,14 +191,15 @@ public abstract class CoreAbstBsnsObjectEJB<
 			handleConsistentBsnsObj(cntnrIdentif);
 	}	
 	
-	public CoreAbstBsnsObject recomputeBusinessObject(String hldrNbr, CoreAbstBsnsObject accumulator){
-		Long count = getInjector().getItemLookup().countByCntnrIdentifAndDisabledDtIsNull(hldrNbr);
+	public E recomputeBusinessObject(String cntnrIdentif, E accumulator){
+		accumulator.clearValues();
+		Long count = getInjector().getItemLookup().countByCntnrIdentifAndDisabledDtIsNull(cntnrIdentif);
 		int start = 0;
 		int max = 100;
 		while(start<=count){
 			int firstResult = start;
 			start +=max;
-			List<I> found = getInjector().getItemLookup().findByCntnrIdentifOrderBySalIndexAsc(hldrNbr, firstResult, max);
+			List<I> found = getInjector().getItemLookup().findByCntnrIdentifAndDisabledDtIsNullOrderByAcsngDtAsc(cntnrIdentif, firstResult, max);
 			for (I e : found) {
 				accumulator.addItemValue(e);
 			}

@@ -14,4 +14,6 @@ public interface CoreAbstEntityJobRepo<E extends CoreAbstEntityJob> extends Core
 	public QueryResult<E> findByJobStatusAndStartTimeIsNotNullAndEndTimeIsNull(String jobStatus);
 
 	public QueryResult<E> findByJobStatusAndStartTimeLessThanAndEndTimeIsNull(String jobStatus);
+
+	public QueryResult<E> findByJobStatus(String jobStatus);
 }

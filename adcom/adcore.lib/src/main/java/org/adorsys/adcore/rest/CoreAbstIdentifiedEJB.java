@@ -26,9 +26,10 @@ public abstract class CoreAbstIdentifiedEJB<E extends CoreAbstIdentifObject> {
 	private Event<E> entityDeletedEvent;
 	
 	public E create(E entity) {
-		E saved = getRepo().save(attach(entity));
-		fireEntityCreatedEvent(saved);
-		return saved;
+		E attached = attach(entity);
+		getRepo().persist(attached);
+		fireEntityCreatedEvent(attached);
+		return attached;
 	}
 
 	public E deleteById(String id) {

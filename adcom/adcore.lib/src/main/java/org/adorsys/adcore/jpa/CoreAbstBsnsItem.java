@@ -1,8 +1,8 @@
 package org.adorsys.adcore.jpa;
 
-import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.EnumType;
@@ -18,7 +18,6 @@ import org.adorsys.adcore.annotation.DateFormatPattern;
 import org.adorsys.adcore.annotation.Description;
 import org.adorsys.adcore.utils.BigDecimalUtils;
 import org.adorsys.adcore.utils.FinancialOps;
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
 @MappedSuperclass
@@ -199,7 +198,6 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 	private String orgUnit;
 
 	@Column
-	@NotNull
 	private String acsngUser;
 	
 	@Column
@@ -237,13 +235,11 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 	@Column
 	@Description("StkMvnt_mvntType_description")
 	@Enumerated(EnumType.STRING)
-	@NotNull
 	private CoreStkMvtType mvntType;
 
 	@Column
 	@Description("StkMvnt_mvntOrigin_description")
 	@Enumerated(EnumType.STRING)
-	@NotNull
 	private CoreStkMvtTerminal mvntOrigin;
 
 	@Column
@@ -252,7 +248,6 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 	@Column
 	@Description("StkMvnt_mvntDest_description")
 	@Enumerated(EnumType.STRING)
-	@NotNull
 	private CoreStkMvtTerminal mvntDest;
 
 	@Column
@@ -261,18 +256,22 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 	@PrePersist
 	public void prePersist() {
 		super.prePersist();
-		salIndex = getSection() + "_" + getArtPic() + "_" + getLotPic();
-		usalIndex = acsngUser + "_" + salIndex;
+		salIndex = toSalIndex(getSection(), getArtPic(), getLotPic());
+		usalIndex = toUsalIndex(acsngUser, getSection(), getArtPic(), getLotPic());
 		evlte();
 	}
 	
 	@PreUpdate
 	public void preUpdate() {
+		usalIndex = toUsalIndex(acsngUser, getSection(), getArtPic(), getLotPic());
 		evlte();
 	}
 
-	public static String toIdentifier(String bsnsObjNbr, String acsngUser,String lotPic, String artPic, String section){
-		return bsnsObjNbr + "_" + acsngUser + "_" + lotPic + "_" + artPic + "_" + section;
+	public static String toSalIndex(String section, String artPic, String lotPic){
+		return section + "_" + artPic + "_" + lotPic;
+	}
+	public static String toUsalIndex(String acsngUser, String section, String artPic, String lotPic){
+		return acsngUser + "_" +toSalIndex(section, artPic, lotPic);
 	}
 	
 	public CoreStkMvtType getMvntType() {
@@ -285,7 +284,7 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 
 	@Override
 	protected String makeIdentif() {
-		return toIdentifier(getCntnrIdentif(), acsngUser, getLotPic(), getArtPic(), getSection());
+		return UUID.randomUUID().toString();
 	}
 	
 	public Boolean getEditing() {
@@ -721,11 +720,8 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 	}
 
 	public void copyTo(CoreAbstBsnsItem target){
-		try {
-			BeanUtils.copyProperties(target, this);
-		} catch (IllegalAccessException | InvocationTargetException e) {
-			throw new IllegalStateException(e);
-		}
+		super.copyTo(target);
+		target.resetHeader();
 	}
 
 	public BigDecimal getStkUnitValPreTax() {

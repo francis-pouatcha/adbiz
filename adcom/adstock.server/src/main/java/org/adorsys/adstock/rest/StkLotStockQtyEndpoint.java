@@ -15,6 +15,8 @@ import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEndpoint;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 import org.adorsys.adstock.jpa.StkLotStockQty;
+import org.adorsys.adstock.jpa.StkLotStockQtySearchInput;
+import org.adorsys.adstock.jpa.StkLotStockQtySearchResult;
 import org.adorsys.adstock.jpa.StkLotStockQty_;
 
 /**
@@ -48,15 +50,13 @@ public class StkLotStockQtyEndpoint extends
 
 	@Override
 	protected CoreAbstIdentifObjectSearchInput<StkLotStockQty> newSearchInput() {
-		// TODO Auto-generated method stub
-		return null;
+		return new StkLotStockQtySearchInput();
 	}
 
 	@Override
 	protected CoreAbstIdentifObjectSearchResult<StkLotStockQty> newSearchResult(
-			Long count, List<StkLotStockQty> resultList,
+			Long count, Long total, List<StkLotStockQty> resultList,
 			CoreAbstIdentifObjectSearchInput<StkLotStockQty> searchInput) {
-		// TODO Auto-generated method stub
-		return null;
+		return new StkLotStockQtySearchResult(count, resultList, searchInput);
 	}
 }

@@ -93,6 +93,8 @@ public abstract class CoreAbstEntity implements Serializable {
 	public void copyTo(CoreAbstEntity target){
 		try {
 			BeanUtils.copyProperties(target, this);
+			target.id = null;
+			target.version = 0;
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			throw new IllegalStateException(e);
 		}
@@ -101,6 +103,8 @@ public abstract class CoreAbstEntity implements Serializable {
 	public void copyFrom(CoreAbstEntity source){
 		try {
 			BeanUtils.copyProperties(this, source);
+			this.id = null;
+			this.version = 0;
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			throw new IllegalStateException(e);
 		}

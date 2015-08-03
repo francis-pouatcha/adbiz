@@ -1,12 +1,12 @@
 package org.adorsys.adstock.rest;
 
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 
 import org.adorsys.adcore.jpa.CoreAbstBsnsObject;
 import org.adorsys.adcore.jpa.CoreAbstEntityCstr;
 import org.adorsys.adcore.rest.CoreAbstBsnsItemEJB;
 import org.adorsys.adcore.rest.CoreAbstBsnsItemLookup;
-import org.adorsys.adcore.rest.CoreAbstBsnsObjBatch;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjInjector;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjectEJB;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjectHstryEJB;
@@ -21,11 +21,12 @@ import org.adorsys.adcore.rest.CoreAbstEntityStepLookup;
 import org.adorsys.adcore.utils.SequenceGenerator;
 import org.adorsys.adstock.jpa.StkArticleLot;
 import org.adorsys.adstock.jpa.StkArticleLotHstry;
-import org.adorsys.adstock.jpa.StkArticleLotJob;
-import org.adorsys.adstock.jpa.StkArticleLotStep;
+import org.adorsys.adstock.jpa.StkJob;
+import org.adorsys.adstock.jpa.StkStep;
 
+@Stateless
 public class StkArticleLotInjector extends
-		CoreAbstBsnsObjInjector<CoreAbstBsnsObject, StkArticleLot, StkArticleLotHstry, StkArticleLotJob, StkArticleLotStep, CoreAbstEntityCstr> {
+		CoreAbstBsnsObjInjector<CoreAbstBsnsObject, StkArticleLot, StkArticleLotHstry, StkJob, StkStep, CoreAbstEntityCstr> {
 
 	@EJB
 	private StkArticleLotLookup itemLookup;
@@ -36,84 +37,79 @@ public class StkArticleLotInjector extends
 	@EJB
 	private StkArticleLotHstryEJB hstryEjb;
 	@EJB
-	private StkArticleLotJobEJB jobEjb;
+	private StkJobEJB jobEjb;
 	@EJB
-	private StkArticleLotJobLookup jobLookup;
+	private StkJobLookup jobLookup;
 	@EJB
-	private StkArticleLotStepEJB stepEJB;
+	private StkStepEJB stepEJB;
 	@EJB
-	private StkArticleLotStepLookup stepLookup;
+	private StkStepLookup stepLookup;
 
 	@Override
-	protected CoreAbstBsnsObjectLookup<CoreAbstBsnsObject> getBsnsObjLookup() {
+	public CoreAbstBsnsObjectLookup<CoreAbstBsnsObject> getBsnsObjLookup() {
 		return null;
 	}
 
 	@Override
-	protected CoreAbstBsnsObjectEJB<CoreAbstBsnsObject, StkArticleLot, 
-		StkArticleLotHstry, StkArticleLotJob, StkArticleLotStep, CoreAbstEntityCstr> getBsnsObjEjb() {
+	public CoreAbstBsnsObjectEJB<CoreAbstBsnsObject, StkArticleLot, 
+		StkArticleLotHstry, StkJob, StkStep, CoreAbstEntityCstr> getBsnsObjEjb() {
 		return null;
 	}
 
 	@Override
-	protected CoreAbstBsnsItemLookup<StkArticleLot> getItemLookup() {
+	public CoreAbstBsnsItemLookup<StkArticleLot> getItemLookup() {
 		return itemLookup;
 	}
 
 	@Override
-	protected CoreAbstBsnsItemEJB<CoreAbstBsnsObject, StkArticleLot, 
-		StkArticleLotHstry, StkArticleLotJob, StkArticleLotStep, CoreAbstEntityCstr> getItemEjb() {
+	public CoreAbstBsnsItemEJB<CoreAbstBsnsObject, StkArticleLot, 
+		StkArticleLotHstry, StkJob, StkStep, CoreAbstEntityCstr> getItemEjb() {
 		return itemEjb;
 	}
 
 	@Override
-	protected CoreAbstBsnsObjectHstryLookup<StkArticleLotHstry> getHstrLookup() {
+	public CoreAbstBsnsObjectHstryLookup<StkArticleLotHstry> getHstrLookup() {
 		return hstryLookup;
 	}
 
 	@Override
-	protected CoreAbstBsnsObjectHstryEJB<CoreAbstBsnsObject, StkArticleLot, 
-		StkArticleLotHstry, StkArticleLotJob, StkArticleLotStep, CoreAbstEntityCstr> getHstrEjb() {
+	public CoreAbstBsnsObjectHstryEJB<CoreAbstBsnsObject, StkArticleLot, 
+		StkArticleLotHstry, StkJob, StkStep, CoreAbstEntityCstr> getHstrEjb() {
 		return hstryEjb;
 	}
 
 	@Override
-	protected String getSequenceGeneratorPrefix() {
+	public String getSequenceGeneratorPrefix() {
 		return SequenceGenerator.LOT_SEQUENCE_PREFIXE;
 	}
 
 	@Override
-	protected CoreAbstEntityJobEJB<StkArticleLotJob> getJobEjb() {
+	public CoreAbstEntityJobEJB<StkJob> getJobEjb() {
 		return jobEjb;
 	}
 
 	@Override
-	protected CoreAbstEntityJobLookup<StkArticleLotJob> getJobLookup() {
+	public CoreAbstEntityJobLookup<StkJob> getJobLookup() {
 		return jobLookup;
 	}
 
 	@Override
-	protected CoreAbstEntityStepEJB<StkArticleLotStep> getStepEjb() {
+	public CoreAbstEntityStepEJB<StkStep> getStepEjb() {
 		return stepEJB;
 	}
 
 	@Override
-	protected CoreAbstEntityStepLookup<StkArticleLotStep> getStepLookup() {
+	public CoreAbstEntityStepLookup<StkStep> getStepLookup() {
 		return stepLookup;
 	}
 
 	@Override
-	protected CoreAbstEntityCstrEJB<CoreAbstEntityCstr> getCstrEjb() {
+	public CoreAbstEntityCstrEJB<CoreAbstEntityCstr> getCstrEjb() {
 		return null;
 	}
 
 	@Override
-	protected CoreAbstEntityCstrLookup<CoreAbstEntityCstr> getCstrLookup() {
-		return null;
-	}
-
-	@Override
-	protected CoreAbstBsnsObjBatch<CoreAbstBsnsObject, StkArticleLot, StkArticleLotHstry, StkArticleLotJob, StkArticleLotStep, CoreAbstEntityCstr> getBatch() {
+	public CoreAbstEntityCstrLookup<CoreAbstEntityCstr> getCstrLookup() {
 		return null;
 	}
 }

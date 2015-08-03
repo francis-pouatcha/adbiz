@@ -1,19 +1,23 @@
 package org.adorsys.adinvtry.loader;
 
-import java.util.concurrent.TimeUnit;
-
 import javax.annotation.PostConstruct;
-import javax.ejb.AccessTimeout;
-import javax.ejb.Schedule;
+import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
+
+import org.adorsys.adcore.loader.jpa.CorLdrJob;
+import org.adorsys.adcore.loader.jpa.CorLdrPrcssngStep;
+import org.adorsys.adcore.loader.jpa.CorLdrStep;
+import org.adorsys.adcore.rest.CoreAbstEntityJobExecutor;
+import org.adorsys.adcore.xls.AbstractLoader;
+import org.adorsys.adcore.xls.CoreAbstLoaderRegistration;
+import org.adorsys.adinvtry.jpa.InvInvtry;
+import org.adorsys.adinvtry.jpa.InvInvtryItem;
 
 @Startup
 @Singleton
-public class InvLoaderRegistration {
+public class InvLoaderRegistration extends CoreAbstLoaderRegistration{
 
 	@Inject
 	private DataSheetLoader dataSheetLoader;
@@ -21,22 +25,31 @@ public class InvLoaderRegistration {
 	private InvInvtryLoader intInvInvtryLoader;
 	@Inject
 	private InvInvtryItemLoader invInvtryItemLoader;
+	@EJB
+	private InvLoaderRegistration registration;
+	
+	@EJB
+	private InvLoaderExecutor execTask;
 	
 	@PostConstruct
 	public void postConstruct(){
-		dataSheetLoader.registerLoader(InvInvtryExcel.class.getSimpleName(), intInvInvtryLoader);
-		dataSheetLoader.registerLoader(InvInvtryItemExcel.class.getSimpleName(), invInvtryItemLoader);
-		createTemplate();
+		super.postConstruct();
+		dataSheetLoader.registerLoader(InvInvtry.class.getSimpleName(), intInvInvtryLoader);
+		dataSheetLoader.registerLoader(InvInvtryItem.class.getSimpleName(), invInvtryItemLoader);
 	}
 
-	@Schedule(minute = "*", second="3/33" ,hour="*", persistent=false)
-	@AccessTimeout(unit=TimeUnit.MINUTES, value=10)
-	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-	public void process() throws Exception {
-		dataSheetLoader.process();
+	@Override
+	protected CoreAbstEntityJobExecutor<CorLdrJob, CorLdrStep, CorLdrPrcssngStep> getEjb() {
+		return registration;
 	}
-	
-	public void createTemplate(){
+
+	@Override
+	protected AbstractLoader getDataSheetLoader() {
+		return dataSheetLoader;
 	}
-	
+
+	@Override
+	protected CoreAbstEntityJobExecutor<CorLdrJob, CorLdrStep, CorLdrPrcssngStep> getExecTask() {
+		return execTask;
+	}
 }

@@ -68,7 +68,7 @@ public class StkSectionEndpoint extends CoreAbstIdentifiedEndpoint<StkSection> {
 
 	@Override
 	protected CoreAbstIdentifObjectSearchResult<StkSection> newSearchResult(
-			Long count, List<StkSection> resultList,
+			Long count, Long total, List<StkSection> resultList,
 			CoreAbstIdentifObjectSearchInput<StkSection> searchInput) {
 		return new StkSectionSearchResult();
 	}

@@ -139,12 +139,6 @@ public abstract class CoreAbstBsnsObject extends CoreAbstBsnsObjectHeader {
 	private String descptn;
 
 	@Column
-	private String rangeStart;
-	
-	@Column
-	private String rangeEnd;
-
-	@Column
 	private String section;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -415,22 +409,6 @@ public abstract class CoreAbstBsnsObject extends CoreAbstBsnsObjectHeader {
 
 	public void setDescptn(String descptn) {
 		this.descptn = descptn;
-	}
-
-	public String getRangeStart() {
-		return rangeStart;
-	}
-
-	public void setRangeStart(String rangeStart) {
-		this.rangeStart = rangeStart;
-	}
-
-	public String getRangeEnd() {
-		return rangeEnd;
-	}
-
-	public void setRangeEnd(String rangeEnd) {
-		this.rangeEnd = rangeEnd;
 	}
 
 	public String getSection() {

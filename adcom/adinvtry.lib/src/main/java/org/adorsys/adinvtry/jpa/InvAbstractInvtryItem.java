@@ -32,7 +32,7 @@ public abstract class InvAbstractInvtryItem extends CoreAbstBsnsItem {
 	protected void normalize(){
 		this.expectedQty = BigDecimalUtils.zeroIfNull(this.expectedQty);
 		this.asseccedQty = BigDecimalUtils.zeroIfNull(this.asseccedQty);
-		setTrgtQty(BigDecimalUtils.subs(this.expectedQty,this.asseccedQty));
+		setTrgtQty(BigDecimalUtils.subs(this.asseccedQty, this.expectedQty));
 		super.normalize();
 	}
 

@@ -1,12 +1,16 @@
 package org.adorsys.adcore.jpa;
 
 import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+
+import org.adorsys.adcore.enums.CoreJobStatusEnum;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Defines a job to be executed of an instance of a well defined entity.
@@ -38,13 +42,12 @@ public class CoreAbstEntityJob extends CoreAbstIdentifObject {
 	private String entIdentif;
 
 	@Column
+	private String histIdentif;
+	
+	@Column
 	@NotNull
 	private String executorId;
 
-	@Column
-	@NotNull
-	private String taskId;
-	
 	@Column
 	private String jobStatus;
 	
@@ -56,7 +59,7 @@ public class CoreAbstEntityJob extends CoreAbstIdentifObject {
 	
 	@Override
 	protected String makeIdentif() {
-		return entIdentif + "_" + executorId + "_" + taskId;
+		return UUID.randomUUID().toString();
 	}
 
 	public String getEntIdentif() {
@@ -98,12 +101,24 @@ public class CoreAbstEntityJob extends CoreAbstIdentifObject {
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
-
-	public String getTaskId() {
-		return taskId;
+	
+	public String getHistIdentif() {
+		return histIdentif;
 	}
 
-	public void setTaskId(String taskId) {
-		this.taskId = taskId;
+	public void setHistIdentif(String histIdentif) {
+		this.histIdentif = histIdentif;
 	}
+
+	public boolean canExecute(){
+		return !StringUtils.equals(CoreJobStatusEnum.SUSPENDED.name(), jobStatus) &&
+				!StringUtils.equals(CoreJobStatusEnum.TERMINATING.name(), jobStatus) &&
+				!StringUtils.equals(CoreJobStatusEnum.TERMINATED.name(), jobStatus);
+	}
+	
+	public boolean hasTerminated(){
+		return StringUtils.equals(CoreJobStatusEnum.TERMINATING.name(), jobStatus) &&
+				StringUtils.equals(CoreJobStatusEnum.TERMINATED.name(), jobStatus);
+	}
+	
 }

@@ -58,6 +58,9 @@ public abstract class CoreAbstBsnsObjectHstryLookup<E extends CoreAbstBsnsObject
 	public List<E> findByEntIdentifOrderByIdAsc(String identif, int start, int max) {
 		return getRepo().findByEntIdentif(identif).orderAsc("id").firstResult(start).maxResults(max).getResultList();
 	}
+	public List<E> findByEntIdentifOrderByIdDesc(String identif, int start, int max) {
+		return getRepo().findByEntIdentif(identif).orderDesc("id").firstResult(start).maxResults(max).getResultList();
+	}
 	public Long countByEntIdentifAndIdBetween(String entIdentif, String idStart, String idEnd) {
 		return getRepo().findByEntIdentifAndIdBetween(entIdentif, idStart, idEnd).count();
 	}

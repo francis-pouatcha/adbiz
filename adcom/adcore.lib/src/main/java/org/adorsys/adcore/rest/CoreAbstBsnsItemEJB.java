@@ -4,20 +4,11 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
-import javax.ejb.Asynchronous;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
-
 import org.adorsys.adcore.enums.CoreHistoryTypeEnum;
-import org.adorsys.adcore.enums.CoreJobExecutorIdEnum;
-import org.adorsys.adcore.enums.CoreJobStatusEnum;
-import org.adorsys.adcore.enums.CoreJobTaskIdEnum;
 import org.adorsys.adcore.enums.CoreProcStepEnum;
 import org.adorsys.adcore.enums.CoreProcessStatusEnum;
-import org.adorsys.adcore.enums.CoreStepExecutorIdEnum;
 import org.adorsys.adcore.jpa.CoreAbstBsnsItem;
 import org.adorsys.adcore.jpa.CoreAbstBsnsObject;
 import org.adorsys.adcore.jpa.CoreAbstBsnsObjectHstry;
@@ -29,16 +20,15 @@ import org.adorsys.adcore.repo.CoreAbstBsnsItemRepo;
 import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 import org.adorsys.adcore.utils.BigDecimalUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
 
 public abstract class CoreAbstBsnsItemEJB<
 	E extends CoreAbstBsnsObject, I extends CoreAbstBsnsItem, 
 	H extends CoreAbstBsnsObjectHstry, J extends CoreAbstEntityJob,
-	S extends CoreAbstEntityStep, C extends CoreAbstEntityCstr> extends CoreAbstIdentifiedEJB<I>{
+	S extends CoreAbstEntityStep, C extends CoreAbstEntityCstr> extends CoreAbstIdentifiedEJB<I> {
 	
 	protected abstract CoreAbstBsnsObjInjector<E, I, H, J, S, C> getInjector();
 	protected abstract CoreAbstBsnsItemRepo<I> getBsnsRepo();
-	
+
 	protected String prinHstryInfo(I item){
 		return CoreBsnsItemInfo.prinInfo(item);
 	};
@@ -209,12 +199,10 @@ public abstract class CoreAbstBsnsItemEJB<
 	 * @param cntnrIdentif
 	 * @return
 	 */
-	@Asynchronous
-	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void makeConsistent(String cntnrIdentif, String salIndex){
 		Long countEnabled = getBsnsRepo().findByCntnrIdentifAndSalIndexAndDisabledDtIsNull(cntnrIdentif, salIndex).count();
 		if(countEnabled==1) return;
-		List<I> resultList = getBsnsRepo().findByCntnrIdentifAndSalIndex(salIndex, cntnrIdentif).getResultList();
+		List<I> resultList = getBsnsRepo().findByCntnrIdentifAndSalIndex(cntnrIdentif, salIndex).getResultList();
 		Boolean sameQty = checkSameQty(resultList);
 		if(!sameQty) {
 			setConflicting(resultList, new Date());
@@ -241,7 +229,7 @@ public abstract class CoreAbstBsnsItemEJB<
 			Date date = new Date();
 			for (I splItem : resultList) {
 				boolean update = false;
-				if(oldest.getId()!=splItem.getId()){
+				if(StringUtils.equals(oldest.getId(),splItem.getId())){
 					if(splItem.getDisabledDt()==null){
 						splItem.setDisabledDt(date);
 						update = true;
@@ -278,108 +266,5 @@ public abstract class CoreAbstBsnsItemEJB<
 			}
 		}
 	}	
-	
-	
-	protected void handleEvent(H hstry){
-		if(CoreProcessStatusEnum.DELETED.name().equals(hstry.getEntStatus())){
-			processDeleteItems(hstry);
-		}
-	}
-	
-	private static final int ITEM_COUNT_TRESHOLD = 100;
-	protected void processDeleteItems(H hstry){
-		Long itemsCount = getInjector().getItemLookup().countByCntnrIdentif(hstry.getEntIdentif());
-		if(itemsCount<ITEM_COUNT_TRESHOLD) { // delete directly
-			removeByCntnrIdentif(hstry.getEntIdentif(),0,itemsCount.intValue());
-		} else { // create constraint object and delete gradually.
-			createDeleteJob(hstry);
-		}
-		
-	}
-
-	private void createDeleteJob(H hstry) {
-		J job = getInjector().getJobEjb().newJobInstance();
-		job.setExecutorId(CoreJobExecutorIdEnum.bsnsItemEJB.name());
-		job.setExecutorId(CoreJobTaskIdEnum.DELETE.name());
-		job.setJobStatus(CoreJobStatusEnum.INITIATED.name());
-		getInjector().getJobEjb().create(job);
-	
-		S s = getInjector().getStepEjb().newStepInstance();
-		s.setEntIdentif(hstry.getEntIdentif());
-		s.setJobIdentif(job.getIdentif());
-		s.setExecutorId(job.getExecutorId());
-		s.setTaskId(CoreStepExecutorIdEnum.PREPARE_DELETE.name());
-		s.setSchdldStart(DateUtils.addMinutes(new Date(), 1));
-		getInjector().getStepEjb().create(s);
-	}
-
-	private void prepareDeleteJob(String jobIdentif, String stepIdentif){
-		// use the get ejb interface to activate new transaction
-		getInjector().getBatch().lease(stepIdentif, 300);// 5 mins for the preparation.
-		
-		// Only do this job, if you controle the prepare job
-		J job = getInjector().getJobLookup().findByIdentif(jobIdentif);
-		String entIdentif = job.getEntIdentif();
-		Long itemsCount = getInjector().getItemLookup().countByCntnrIdentif(entIdentif);
-		int itemStart = 0;
-		while(itemStart<itemsCount){
-			int firstResult = itemStart;
-			itemStart+=ITEM_COUNT_TRESHOLD;
-			List<I> list = getInjector().getItemLookup().findByCntnrIdentifOrderByIdentifAsc(entIdentif, firstResult, ITEM_COUNT_TRESHOLD);
-			LinkedList<I> linkedList = new LinkedList<I>(list);
-
-			S s = getInjector().getStepEjb().newStepInstance();
-			s.setEntIdentif(entIdentif);
-			s.setJobIdentif(job.getIdentif());
-			s.setStepStartId(linkedList.getFirst().getIdentif());
-			s.setStepEndId(linkedList.getLast().getIdentif());
-			s.setExecutorId(job.getExecutorId());
-			s.setTaskId(CoreStepExecutorIdEnum.DELETE_ITEMS.name());
-			s.setPreceedingStep(stepIdentif);
-			getInjector().getStepEjb().create(s);
-		}
-
-		S step = getInjector().getStepLookup().findByIdentif(stepIdentif);// Refresh the step object
-		step.setEnded(new Date());
-		getInjector().getStepEjb().update(step);
-	}
-	
-	public void processStep(S step){
-		String executorId = step.getExecutorId();
-		if(CoreStepExecutorIdEnum.PREPARE_DELETE.name().equals(executorId)){
-			prepareDeleteJob(step.getJobIdentif(), step.getIdentif());
-		} else if (CoreStepExecutorIdEnum.DELETE_ITEMS.name().equals(executorId)){
-			deleteItems(step.getJobIdentif(), step.getIdentif());
-		}
-	}
-	
-	public void recoverStep(S step){
-		step = getInjector().getStepLookup().findByIdentif(step.getIdentif());// Refresh the step object
-		if(step.getEnded()!=null) return;
-		Date now = new Date();
-		if(now.after(step.getLeaseEnd())){ // take over.
-			processStep(step);
-		}
-	}
-
-	private void deleteItems(String jobIdentif, String stepIdentif) {
-		getInjector().getBatch().lease(stepIdentif, 300);// 5 mins for the preparation.
-		
-		// Only do this job, if you controle the prepare job
-		J job = getInjector().getJobLookup().findByIdentif(jobIdentif);
-		String entIdentif = job.getEntIdentif();
-		S step = getInjector().getStepLookup().findByIdentif(stepIdentif);// Refresh the step object
-		Long count = getInjector().getItemLookup().countByCntnrIdentifAndIdentifBetween(entIdentif, step.getStepStartId(), step.getStepEndId());
-		if(count>0){
-			List<I> list = getInjector().getItemLookup().findByCntnrIdentifAndIdentifBetweenOrderByIdentifAsc(entIdentif, step.getStepStartId(), step.getStepEndId(), 0, count.intValue());
-			for (I e : list) {
-				getInjector().getItemEjb().deleteById(e.getId());
-			}
-		}
-		step.setEnded(new Date());
-		getInjector().getStepEjb().update(step);
-	}
-	
-	
 }
 

@@ -187,6 +187,22 @@ public abstract class StkAbstractStockQty extends CoreAbstIdentifObject {
 		return getArtPic() + "_" + getLotPic() + "_" + getSection();
 	}
 
+	public BigDecimal getRsvrdQty() {
+		return rsvrdQty;
+	}
+
+	public void setRsvrdQty(BigDecimal rsvrdQty) {
+		this.rsvrdQty = rsvrdQty;
+	}
+
+	public String getStkMvntIdentif() {
+		return stkMvntIdentif;
+	}
+
+	public void setStkMvntIdentif(String stkMvntIdentif) {
+		this.stkMvntIdentif = stkMvntIdentif;
+	}
+
 	@Override
 	protected String makeIdentif() {
 		if(StringUtils.isNotBlank(stkMvntIdentif)) return stkMvntIdentif;

@@ -6,7 +6,6 @@
     <jta-data-source>java:jboss/datasources/ADDS</jta-data-source>
     <!-- COmponents directly accessible from base. -->
     <jar-file>lib/adcore.lib-${project.version}.jar</jar-file>
-    <jar-file>lib/adbase.lib-${project.version}.jar</jar-file>
     <jar-file>lib/adcatal.lib-${project.version}.jar</jar-file>
 
     <class>org.adorsys.adcore.jpa.CoreAbstEntity</class>
