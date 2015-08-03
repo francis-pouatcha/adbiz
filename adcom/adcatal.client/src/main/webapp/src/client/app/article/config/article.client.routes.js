@@ -11,14 +11,14 @@
         routerHelper.configureStates(getStates());
     }
 
-    function getStates() {
+    function getStates(BASE_URL) {
         return [
 
             {
 
                 state: 'listArticle',
                 config: {
-                    url: '/article',
+                    url: BASE_URL+'/article',
                     templateUrl: 'app/article/views/list.html',
                     controller: 'ArticleController',
                     controllerAs: 'vm',
