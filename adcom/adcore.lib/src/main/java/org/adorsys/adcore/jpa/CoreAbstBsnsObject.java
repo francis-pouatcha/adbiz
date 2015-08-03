@@ -167,18 +167,17 @@ public abstract class CoreAbstBsnsObject extends CoreAbstBsnsObjectHeader {
 	 * The type of this transaction object.
 	 */
 	private String txType;
-	/*
-	 * The identifier of the container inventory. It is the inventory
-	 * into which this inventory is merged.
-	 */
-	private String containerId;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateFormatPattern(pattern = "dd-MM-yyyy HH:mm")
 	private Date conflictDt;
 	
 	private String bsnsPartner;
 
+	private String bsnsPrtnrOU;
+	
+	private String docNbr;
+	
 	public String getPrchPrcCur() {
 		return prchPrcCur;
 	}
@@ -467,14 +466,6 @@ public abstract class CoreAbstBsnsObject extends CoreAbstBsnsObjectHeader {
 		this.txType = txType;
 	}
 
-	public String getContainerId() {
-		return containerId;
-	}
-
-	public void setContainerId(String containerId) {
-		this.containerId = containerId;
-	}
-
 	public Date getConflictDt() {
 		return conflictDt;
 	}
@@ -539,6 +530,14 @@ public abstract class CoreAbstBsnsObject extends CoreAbstBsnsObjectHeader {
 		this.bsnsPartner = bsnsPartner;
 	}
 
+	public String getBsnsPrtnrOU() {
+		return bsnsPrtnrOU;
+	}
+
+	public void setBsnsPrtnrOU(String bsnsPrtnrOU) {
+		this.bsnsPrtnrOU = bsnsPrtnrOU;
+	}
+
 	public BigDecimal getPrchNetPymtAmt() {
 		return prchNetPymtAmt;
 	}
@@ -553,6 +552,14 @@ public abstract class CoreAbstBsnsObject extends CoreAbstBsnsObjectHeader {
 
 	public void setSlsNetPymtAmt(BigDecimal slsNetPymtAmt) {
 		this.slsNetPymtAmt = slsNetPymtAmt;
+	}
+
+	public String getDocNbr() {
+		return docNbr;
+	}
+
+	public void setDocNbr(String docNbr) {
+		this.docNbr = docNbr;
 	}
 
 	protected void normalize(){
