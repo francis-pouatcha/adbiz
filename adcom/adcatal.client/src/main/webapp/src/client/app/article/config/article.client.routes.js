@@ -32,7 +32,7 @@
             {
                 state: 'createArticle',
                 config: {
-                    url: '/article/create',
+                    url: BASE_URL+'/article/create',
                     templateUrl: 'app/article/views/create.html',
                     controller: 'ArticleController',
                     controllerAs: 'vm',
@@ -42,7 +42,7 @@
             {
                 state: 'viewArticle',
                 config: {
-                    url: '/article/:articleId',
+                    url: BASE_URL+'/article/:articleId',
                     templateUrl: 'app/article/views/view.html',
                     controller: 'ArticleController',
                     controllerAs: 'vm',
@@ -50,7 +50,7 @@
                 }
             },
             {
-                state: 'editArticle',
+                state: BASE_URL+'editArticle',
                 config: {
                     url: '/article/:articleId/edit',
                     templateUrl: 'app/article/views/edit.html',
