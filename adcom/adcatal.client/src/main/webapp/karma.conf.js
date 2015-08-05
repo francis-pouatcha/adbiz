@@ -17,12 +17,21 @@ module.exports = function(config) {
     files: [
       'lib/angular.min.js',
       'lib/angular-mocks.js',
+       'bower_components/angular-ui-router/release/angular-ui-router.js',
+        'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+        'bower_components/angular-animate/angular-animate.js',
+        'bower_components/angular-sanitize/angular-sanitize.js',
+        'bower_components/angular-resource/angular-resource.js',
+        'bower_components/bardjs/dist/*.js',
+        'bower_components/toastr/*.js',
+   //     'src/client/app/core/*.js',
       'src/client/app/*.js',
       'src/client/app/article/*.js',
-      'src/client/app/article/controllers/article.client.controller.js',
-      'src/client/app/article/test/*.js',
+       'src/client/app/article/**/*.js'
+   //   'src/client/app/blocks/**/*.js',
+   //   'src/client/app/core/*.js'
 
-        
+
     ],
 
 
@@ -62,7 +71,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome', 'Firefox'],
+    browsers: ['Chrome'],
 
 
     // Continuous Integration mode
@@ -70,3 +79,5 @@ module.exports = function(config) {
     singleRun: false
   })
 }
+
+

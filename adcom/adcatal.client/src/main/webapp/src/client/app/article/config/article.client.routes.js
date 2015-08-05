@@ -13,9 +13,7 @@
 
     function getStates(BASE_URL) {
         return [
-
             {
-
                 state: 'listArticle',
                 config: {
                     url: BASE_URL+'/article',
@@ -50,9 +48,9 @@
                 }
             },
             {
-                state: BASE_URL+'editArticle',
+                state: 'editArticle',
                 config: {
-                    url: '/article/:articleId/edit',
+                    url: BASE_URL+'/article/:articleId/edit',
                     templateUrl: 'app/article/views/edit.html',
                     controller: 'ArticleController',
                     controllerAs: 'vm',
