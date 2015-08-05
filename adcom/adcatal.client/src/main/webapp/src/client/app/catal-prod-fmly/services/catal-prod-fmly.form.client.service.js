@@ -35,7 +35,7 @@
 
         };
 
-        var catalProdFmlyId = "";
+        var catalProdFmlyId = '';
 
         var service = {
             getFormFields: getFormFields,

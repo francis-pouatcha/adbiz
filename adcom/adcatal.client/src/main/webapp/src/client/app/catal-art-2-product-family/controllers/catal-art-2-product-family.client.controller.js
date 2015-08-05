@@ -26,15 +26,15 @@
         vm.createForm = function(model){
             utils.templateModal(model, 'createForm',
                 'app/catal-art-2-product-family/views/create.html', vm);
-        }
+        };
         vm.editForm = function(model){
             utils.templateModal(model, 'editForm',
                 'app/catal-art-2-product-family/views/edit.html', vm);
-        }
+        };
         vm.showForm = function(model){
             utils.templateModal(model, 'showForm',
                 'app/catal-art-2-product-family/views/view.html', vm);
-        }
+        };
 
         vm.init = function() {
             CatalArt2ProductFamily.findBy(coreSearchInput(), function(response) {
@@ -44,7 +44,7 @@
 
         function coreSearchInput (){
             vm.catalArticleId = ArticleForm.catalArticleId;
-            var coreSearchInput = {};
+        //    var coreSearchInput = {};
             coreSearchInput.entity = {};
             coreSearchInput.entity.cntnrIdentif = vm.catalArticleId;
             coreSearchInput.fieldNames = [];
@@ -63,7 +63,7 @@
             vm.catalArticleId = ArticleForm.catalArticleId;
             catalArt2ProductFamily.cntnrIdentif = vm.catalArticleId;
             // Create new CatalArt2ProductFamily object
-            var catalArt2ProductFamily = new CatalArt2ProductFamily(catalArt2ProductFamily);
+            catalArt2ProductFamily = new CatalArt2ProductFamily(catalArt2ProductFamily);
             catalArt2ProductFamily.$save(function(response) {
 
                 logger.success('CatalArt2ProductFamily created');
@@ -85,7 +85,7 @@
                     });
                 });
             } else {
-                var index = vm.data.indexOf(vm.catalArt2ProductFamily);
+                index = vm.data.indexOf(vm.catalArt2ProductFamily);
                 vm.catalArt2ProductFamily.$remove(function() {
                     logger.success('CatalArt2ProductFamily deleted');
                     vm.data.splice(index, 1);
@@ -96,7 +96,7 @@
 
         // Update existing CatalArt2ProductFamily
         vm.update = function(catalArt2ProductFamily) {
-            var catalArt2ProductFamily = new CatalArt2ProductFamily(catalArt2ProductFamily);
+            catalArt2ProductFamily = new CatalArt2ProductFamily(catalArt2ProductFamily);
             var index = vm.data.indexOf(vm.model);
             catalArt2ProductFamily.$update(function() {
                 logger.success('CatalArt2ProductFamily updated');

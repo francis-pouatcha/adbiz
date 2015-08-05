@@ -1,6 +1,5 @@
 (function () {
     'use strict';
-
     angular
         .module('app.article')
         .controller('ArticleController', ArticleController);
@@ -55,7 +54,6 @@
                 vm.error = errorResponse.data.summary;
             });
         };
-
         // Remove existing Article
         vm.remove = function(article) {
             if (article) {
@@ -85,7 +83,7 @@
         };
         function coreSearchInput() {
             vm.articleId = $stateParams.articleId;
-            var coreSearchInput = {};
+         // var coreSearchInput = {};
             coreSearchInput.entity = {};
             coreSearchInput.entity.cntnrIdentif = vm.articleId;
             coreSearchInput.entity.langIso2 = $translate.use();
