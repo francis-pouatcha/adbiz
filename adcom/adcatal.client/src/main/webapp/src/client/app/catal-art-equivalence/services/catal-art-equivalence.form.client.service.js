@@ -45,7 +45,7 @@
                                     return response.resultList;
 
                                 });
-                            }
+                            };
                     }
 
                 }

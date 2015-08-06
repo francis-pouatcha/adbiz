@@ -13,7 +13,8 @@
         'ArticleForm',
         'Article'];
     /* @ngInject */
-    function CatalArtEquivalenceController(logger, CatalArtEquivalence, utils, CatalArtEquivalenceForm, ArticleForm, Article) {
+    function CatalArtEquivalenceController(logger, CatalArtEquivalence, utils,
+                            CatalArtEquivalenceForm, ArticleForm, Article) {
 
         var vm = this;
         vm.data = [];
@@ -29,15 +30,15 @@
         vm.createForm = function (model) {
             utils.templateModal(model, 'createForm',
                 'app/catal-art-equivalence/views/create.html', vm);
-        }
+        };
         vm.editForm = function (model) {
             utils.templateModal(model, 'editForm',
                 'app/catal-art-equivalence/views/edit.html', vm);
-        }
+        };
         vm.showForm = function (model) {
             utils.templateModal(model, 'showForm',
                 'app/catal-art-equivalence/views/view.html', vm);
-        }
+        };
 
         vm.init = function () {
             CatalArtEquivalence.findBy(coreSearchInput(), function (response) {
@@ -49,20 +50,20 @@
 
         function coreSearchInput() {
             vm.catalArticleId = ArticleForm.catalArticleId;
-            var coreSearchInput = {};
-            coreSearchInput.entity = {};
-            coreSearchInput.entity.cntnrIdentif = vm.catalArticleId;
-            coreSearchInput.fieldNames = [];
-            coreSearchInput.fieldNames.push('cntnrIdentif');
-            coreSearchInput.className = 'org.adorsys.adcatal.jpa.CatalArtEquivalenceSearchInput';
-            return coreSearchInput;
+            var searchInput = {};
+            searchInput.entity = {};
+            searchInput.entity.cntnrIdentif = vm.catalArticleId;
+            searchInput.fieldNames = [];
+            searchInput.fieldNames.push('cntnrIdentif');
+            searchInput.className = 'org.adorsys.adcatal.jpa.CatalArtEquivalenceSearchInput';
+            return searchInput;
         }
 
         vm.create = function (catalArtEquivalence) {
             vm.catalArticleId = ArticleForm.catalArticleId;
             catalArtEquivalence.cntnrIdentif = vm.catalArticleId;
             // Create new catalArtEquivalence object
-            var catalArtEquivalence = new CatalArtEquivalence(catalArtEquivalence);
+            catalArtEquivalence = new CatalArtEquivalence(catalArtEquivalence);
             catalArtEquivalence.$save(function (response) {
                 logger.success('CatalArtEquivalence created');
                 vm.data.push(response);
@@ -83,7 +84,7 @@
                         });
                     });
             } else {
-                var index = vm.data.indexOf(vm.catalArtEquivalence);
+                index = vm.data.indexOf(vm.catalArtEquivalence);
                 vm.catalArtEquivalence.$remove(function () {
                     logger.success('CatalArtEquivalence deleted');
                     vm.data.splice(index, 1);
@@ -95,7 +96,7 @@
         // Update existing catalArtEquivalence
         vm.update = function (catalArtEquivalence) {
             var index = vm.data.indexOf(vm.model);
-            var catalArtEquivalence = new CatalArtEquivalence(catalArtEquivalence);
+            catalArtEquivalence = new CatalArtEquivalence(catalArtEquivalence);
             catalArtEquivalence.$update(function () {
                 logger.success('catalArtEquivalence updated');
                 vm.data.splice(index, 1);

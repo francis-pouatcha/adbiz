@@ -32,15 +32,15 @@
         vm.createForm = function(model){
             utils.templateModal(model, 'createForm',
                 'app/catal-art-detail-config/views/create.html', vm);
-        }
+        };
         vm.editForm = function(model){
             utils.templateModal(model, 'editForm',
                 'app/catal-art-detail-config/views/edit.html', vm);
-        }
+        };
         vm.showForm = function(model){
             utils.templateModal(model, 'showForm',
                 'app/catal-art-detail-config/views/view.html', vm);
-        }
+        };
 
         vm.init = function() {
             CatalArtDetailConfig.findBy(coreSearchInput(), function(response) {
@@ -50,20 +50,20 @@
 
         function coreSearchInput (){
             vm.catalArticleId = ArticleForm.catalArticleId;
-            var coreSearchInput = {};
-            coreSearchInput.entity = {};
-            coreSearchInput.entity.cntnrIdentif = vm.catalArticleId;
-            coreSearchInput.fieldNames = [];
-            coreSearchInput.fieldNames.push('cntnrIdentif');
-            coreSearchInput.className = 'org.adorsys.adcatal.jpa.CatalArtDetailConfigSearchInput';
-            return coreSearchInput;
+            var searchInput = {};
+            searchInput.entity = {};
+            searchInput.entity.cntnrIdentif = vm.catalArticleId;
+            searchInput.fieldNames = [];
+            searchInput.fieldNames.push('cntnrIdentif');
+            searchInput.className = 'org.adorsys.adcatal.jpa.CatalArtDetailConfigSearchInput';
+            return searchInput;
         }
 
         vm.create = function(catalArtDetailConfig) {
             vm.catalArticleId = ArticleForm.catalArticleId;
             catalArtDetailConfig.cntnrIdentif = vm.catalArticleId;
             // Create new CatalArtDetailConfig object
-            var catalArtDetailConfig = new CatalArtDetailConfig(catalArtDetailConfig);
+            catalArtDetailConfig = new CatalArtDetailConfig(catalArtDetailConfig);
             catalArtDetailConfig.$save(function(response) {
                 logger.success('CatalArtDetailConfig created');
                 vm.data.push(response);
@@ -84,7 +84,7 @@
                     });
                 });
             } else {
-                var index = vm.data.indexOf(vm.catalArtDetailConfig);
+                 index = vm.data.indexOf(vm.catalArtDetailConfig);
                 vm.catalArtDetailConfig.$remove(function() {
                     logger.success('CatalArtDetailConfig deleted');
                     vm.data.splice(index, 1);
@@ -96,7 +96,7 @@
         // Update existing CatalArtDetailConfig
         vm.update = function(catalArtDetailConfig) {
             var index = vm.data.indexOf(vm.model);
-            var catalArtDetailConfig = new CatalArtDetailConfig(catalArtDetailConfig);
+            catalArtDetailConfig = new CatalArtDetailConfig(catalArtDetailConfig);
             catalArtDetailConfig.$update(function() {
                 logger.success('CatalArtDetailConfig updated');
                 vm.data.splice(index, 1);
