@@ -13,7 +13,7 @@
             {
                 state: 'listArticle',
                 config: {
-                    url: '/',
+                    url: BASE_URL +'/',
                     templateUrl: 'app/article/views/list.html',
                     controller: 'ArticleController',
                     controllerAs: 'vm',
@@ -27,7 +27,7 @@
             {
                 state: 'createArticle',
                 config: {
-                    url: BASE_URL+ '/article/create',
+                    url: '/article/create',
                     templateUrl: 'app/article/views/create.html',
                     controller: 'ArticleController',
                     controllerAs: 'vm',
