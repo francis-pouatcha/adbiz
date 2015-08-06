@@ -3,7 +3,7 @@
 
     angular
         .module('app.stockArticlelot')
-        .factory('Stock-articlelotForm', factory);
+        .factory('StockArticlelotForm', factory);
 
     function factory() {
 

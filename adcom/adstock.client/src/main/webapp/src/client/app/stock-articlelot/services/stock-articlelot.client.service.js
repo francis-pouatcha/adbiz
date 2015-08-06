@@ -3,11 +3,11 @@
 
     angular
         .module('app.stockArticlelot')
-        .factory('Stock-articlelot', Stock-articlelot);
+        .factory('StockArticlelot', StockArticlelot);
 
-    Stock-articlelot.$inject = ['$resource', 'API_BASE_URL'];
+    StockArticlelot.$inject = ['$resource', 'API_BASE_URL'];
     /* @ngInject */
-    function Stock-articlelot($resource, API_BASE_URL) {
+    function StockArticlelot($resource, API_BASE_URL) {
 
         var params = {
             stockArticlelotId: '@id'

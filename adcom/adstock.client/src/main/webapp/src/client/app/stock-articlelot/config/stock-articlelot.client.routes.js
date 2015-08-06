@@ -18,7 +18,7 @@
                 config: {
                     url: '/stock-articlelot',
                     templateUrl: 'app/stock-articlelot/views/list.html',
-                    controller: 'Stock-articlelotController',
+                    controller: 'StockArticlelotController',
                     controllerAs: 'vm',
                     title: 'List Stock-articlelots',
                     settings: {
@@ -32,7 +32,7 @@
                 config: {
                     url: '/stock-articlelot/create',
                     templateUrl: 'app/stock-articlelot/views/create.html',
-                    controller: 'Stock-articlelotController',
+                    controller: 'StockArticlelotController',
                     controllerAs: 'vm',
                     title: 'Create Stock-articlelot'
                 }
@@ -42,7 +42,7 @@
                 config: {
                     url: '/stock-articlelot/:stockArticlelotId',
                     templateUrl: 'app/stock-articlelot/views/view.html',
-                    controller: 'Stock-articlelotController',
+                    controller: 'StockArticlelotController',
                     controllerAs: 'vm',
                     title: 'View Stock-articlelot'
                 }
@@ -52,7 +52,7 @@
                 config: {
                     url: '/stock-articlelot/:stockArticlelotId/edit',
                     templateUrl: 'app/stock-articlelot/views/edit.html',
-                    controller: 'Stock-articlelotController',
+                    controller: 'StockArticlelotController',
                     controllerAs: 'vm',
                     title: 'Edit Stock-articlelot'
                 }
