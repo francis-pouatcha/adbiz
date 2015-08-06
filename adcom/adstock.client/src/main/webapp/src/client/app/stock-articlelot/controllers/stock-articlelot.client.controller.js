@@ -29,7 +29,9 @@
         };
 
         vm.create = function() {
+
             // Create new StockArticlelot object
+
             var stockArticlelot = new StockArticlelot(vm.stockArticlelot);
 
             // Redirect after save
@@ -45,7 +47,11 @@
         vm.remove = function(stockArticlelot) {
 
             if (stockArticlelot) {
+<<<<<<< HEAD
                 stockArticlelot = StockArticlelot.get({stockArticlelotId:stockArticlelot.id}, function() {
+=======
+                stockArticlelot = StockArticlelot({stockArticlelotId:stockArticlelot.id}, function() {
+>>>>>>> cbf35b40cda026d8afeba0f31ddcce55993ceed4
                     stockArticlelot.$remove(function() {
                         logger.success('StockArticlelot deleted');
                         vm.tableParams.reload();

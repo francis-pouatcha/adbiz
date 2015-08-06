@@ -23,7 +23,7 @@
             var vm = this;
             vm.changeLang = function(lang) {
                 $translate.use(lang);
-            }
+            };
 
         }
 
