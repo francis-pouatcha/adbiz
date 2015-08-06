@@ -3,25 +3,25 @@
 
     angular
         .module('app.stockArticlelot')
-        .controller('Stock-articlelotController', Stock-articlelotController);
+        .controller('StockArticlelotController', StockArticlelotController);
 
-    Stock-articlelotController.$inject = ['logger',
+    StockArticlelotController.$inject = ['logger',
         '$stateParams',
         '$location',
-        'Stock-articlelot',
+        'StockArticlelot',
         'TableSettings',
-        'Stock-articlelotForm'];
+        'StockArticlelotForm'];
     /* @ngInject */
-    function Stock-articlelotController(logger,
+    function StockArticlelotController(logger,
         $stateParams,
         $location,
-        Stock-articlelot,
+        StockArticlelot,
         TableSettings,
-        Stock-articlelotForm) {
+        StockArticlelotForm) {
 
         var vm = this;
 
-        vm.tableParams = TableSettings.getParams(Stock-articlelot);
+        vm.tableParams = TableSettings.getParams(StockArticlelot);
         vm.stockArticlelot = {};
 
         vm.setFormFields = function(disabled) {
@@ -30,7 +30,7 @@
 
         vm.create = function() {
             // Create new Stock-articlelot object
-            var stockArticlelot = new Stock-articlelot(vm.stockArticlelot);
+            var stockArticlelot = new StockArticlelot(vm.stockArticlelot);
 
             // Redirect after save
             stockArticlelot.$save(function(response) {
@@ -45,7 +45,7 @@
         vm.remove = function(stockArticlelot) {
 
             if (stockArticlelot) {
-                stockArticlelot = Stock-articlelot.get({stockArticlelotId:stockArticlelot.id}, function() {
+                stockArticlelot = StockArticlelot({stockArticlelotId:stockArticlelot.id}, function() {
                     stockArticlelot.$remove(function() {
                         logger.success('Stock-articlelot deleted');
                         vm.tableParams.reload();
@@ -72,13 +72,13 @@
             });
         };
 
-        vm.toViewStock-articlelot = function() {
-            vm.stockArticlelot = Stock-articlelot.get({stockArticlelotId: $stateParams.stockArticlelotId});
+        vm.toViewStockArticlelot = function() {
+            vm.stockArticlelot = StockArticlelot.get({stockArticlelotId: $stateParams.stockArticlelotId});
             vm.setFormFields(true);
         };
 
-        vm.toEditStock-articlelot = function() {
-            vm.stockArticlelot = Stock-articlelot.get({stockArticlelotId: $stateParams.stockArticlelotId});
+        vm.toEditStockArticlelot = function() {
+            vm.stockArticlelot = StockArticlelot.get({stockArticlelotId: $stateParams.stockArticlelotId});
             vm.setFormFields(false);
         };
 

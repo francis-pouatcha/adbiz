@@ -30,9 +30,8 @@
 
             function cancel() {
                 $modalInstance.dismiss('cancel');
-            };
-
-        };
+            }
+        }
 
         service.templateModal = function(model, typeForm, templateUrl, parentCtrl){
             var result = $modal.open({
@@ -41,22 +40,22 @@
                 controllerAs: 'vmModal',
                 resolve: {
                     model: function() {
-                        return model
+                        return model;
                     }
                 }
             }).result;
 
-            if (typeForm == 'createForm') {
+            if (typeForm === 'createForm') {
                 result.then(function(model) {
                     parentCtrl.create(model);
                 });
             }
-            if (typeForm == 'editForm') {
+            if (typeForm === 'editForm') {
                 result.then(function(model) {
                     parentCtrl.update(model);
                 });
             }
-        }
+        };
 
         return service;
 

@@ -18,7 +18,7 @@
                 config: {
                     url: '/',
                     templateUrl: 'app/stock-articlelot/views/list.html',
-                    controller: 'Stock-articlelotController',
+                    controller: 'StockArticlelotController',
                     controllerAs: 'vm',
                     title: 'List Stock Articles Lot'
                 }
