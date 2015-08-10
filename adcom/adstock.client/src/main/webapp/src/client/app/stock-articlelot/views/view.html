@@ -1,0 +1,30 @@
+<section class="mainbar" data-ng-init="vm.toViewStock-articlelot()">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+			Stock-articlelot View
+    </div>
+    <div class="panel-body">
+
+      <form novalidate>
+        <formly-form model="vm.stockArticlelot" fields="vm.formFields">
+        </formly-form>
+      </form>
+
+      <hr/>
+      <div>
+        <a class="btn btn-success" href="/stock-articlelot/{{vm.stockArticlelot.id}}/edit">
+          <i class="glyphicon glyphicon-edit"></i> Edit
+        </a>
+        <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove()" item="vm.stockArticlelot">
+          <i class="glyphicon glyphicon-remove-circle"></i> Delete
+        </a>
+        <a class="btn btn-primary" href="/stock-articlelot">
+          <i class="glyphicon glyphicon-list"></i> List Stock-articlelots
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+</section>

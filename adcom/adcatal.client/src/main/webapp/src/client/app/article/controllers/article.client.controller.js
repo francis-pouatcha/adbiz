@@ -1,6 +1,5 @@
 (function () {
     'use strict';
-
     angular
         .module('app.article')
         .controller('ArticleController', ArticleController);
@@ -22,51 +21,41 @@
                                TableSettings,
                                ArticleForm,
                                $translate) {
-
         var vm = this;
         vm.data = [];
-
         vm.tableParams = TableSettings.getParams(Article);
         vm.article = {};
-
         vm.setFormFields = function(disabled) {
             vm.formFields = ArticleForm.getFormFields(disabled);
         };
-
         vm.create = function() {
-
             var catalArtLangMapping = {};
             catalArtLangMapping.artName = vm.article.artName;
             catalArtLangMapping.shortName = vm.article.shortName;
             catalArtLangMapping.langIso2 = $translate.use();
             delete vm.article.artName;
             delete vm.article.shortName;
-
             // Create new Article object
             var article = new Article(vm.article);
-
             // Redirect after save
             article.$save(function(response) {
                 logger.success('Article created');
-
                 catalArtLangMapping.cntnrIdentif = response.id;
                 var catalArtLangMappingRes = new CatalArtLangMapping(catalArtLangMapping);
-                catalArtLangMappingRes.$save(function (response) {
+                catalArtLangMappingRes.$save(function (responseTwo) {
+                    vm.data.push(responseTwo);
+                    $location.path('article/' + response.id);
 
                 }, function (errorResponse) {
                     vm.error = errorResponse.data.summary;
                 });
 
-                vm.data.push(response);
-                $location.path('article/' + response.id);
             }, function(errorResponse) {
                 vm.error = errorResponse.data.summary;
             });
         };
-
         // Remove existing Article
         vm.remove = function(article) {
-
             if (article) {
                 article = Article.get({articleId:article.id}, function() {
                     article.$remove(function() {
@@ -80,9 +69,7 @@
                     $location.path('/article');
                 });
             }
-
         };
-
         // Update existing Article
         vm.update = function() {
             var article = vm.article;
@@ -96,6 +83,7 @@
         };
 
         function coreSearchInputInit() {
+
             vm.articleId = $stateParams.articleId;
             var coreSearchInput = {};
             coreSearchInput.entity = {};
@@ -107,7 +95,6 @@
             coreSearchInput.className = 'org.adorsys.adcatal.jpa.CatalArtLangMappingSearchInput';
             return coreSearchInput;
         }
-
         vm.toViewArticle = function() {
             vm.article = Article.get({articleId: $stateParams.articleId});
             ArticleForm.catalArticleId = $stateParams.articleId;
@@ -126,10 +113,8 @@
             vm.setFormFields(false);
         };
         activate();
-
         function activate() {
             //logger.info('Activated Article View');
         }
     }
-
 })();

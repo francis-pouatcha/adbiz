@@ -37,6 +37,7 @@
             utils.templateModal(model, 'showForm',
                 'app/catal-art-equivalence/views/view.html', vm);
         };
+
         vm.init = function () {
             CatalArtEquivalence.findBy(coreSearchInputInit(), function (response) {
                 vm.data = response.resultList;
@@ -45,13 +46,13 @@
 
         function coreSearchInputInit() {
             vm.catalArticleId = ArticleForm.catalArticleId;
-            var coreSearchInput = {};
-            coreSearchInput.entity = {};
-            coreSearchInput.entity.cntnrIdentif = vm.catalArticleId;
-            coreSearchInput.fieldNames = [];
-            coreSearchInput.fieldNames.push('cntnrIdentif');
-            coreSearchInput.className = 'org.adorsys.adcatal.jpa.CatalArtEquivalenceSearchInput';
-            return coreSearchInput;
+            var searchInput = {};
+            searchInput.entity = {};
+            searchInput.entity.cntnrIdentif = vm.catalArticleId;
+            searchInput.fieldNames = [];
+            searchInput.fieldNames.push('cntnrIdentif');
+            searchInput.className = 'org.adorsys.adcatal.jpa.CatalArtEquivalenceSearchInput';
+            return searchInput;
         }
 
         vm.create = function (catalArtEquivalence) {

@@ -30,11 +30,12 @@
             utils.templateModal(model, 'createForm',
                 'app/catal-art-detail-config/views/create.html', vm);
         };
-        vm.editForm = function(model) {
+
+        vm.editForm = function(model){
             utils.templateModal(model, 'editForm',
                 'app/catal-art-detail-config/views/edit.html', vm);
         };
-        vm.showForm = function(model) {
+        vm.showForm = function(model){
             utils.templateModal(model, 'showForm',
                 'app/catal-art-detail-config/views/view.html', vm);
         };
@@ -46,13 +47,13 @@
 
         function coreSearchInputInit() {
             vm.catalArticleId = ArticleForm.catalArticleId;
-            var coreSearchInput = {};
-            coreSearchInput.entity = {};
-            coreSearchInput.entity.cntnrIdentif = vm.catalArticleId;
-            coreSearchInput.fieldNames = [];
-            coreSearchInput.fieldNames.push('cntnrIdentif');
-            coreSearchInput.className = 'org.adorsys.adcatal.jpa.CatalArtDetailConfigSearchInput';
-            return coreSearchInput;
+            var searchInput = {};
+            searchInput.entity = {};
+            searchInput.entity.cntnrIdentif = vm.catalArticleId;
+            searchInput.fieldNames = [];
+            searchInput.fieldNames.push('cntnrIdentif');
+            searchInput.className = 'org.adorsys.adcatal.jpa.CatalArtDetailConfigSearchInput';
+            return searchInput;
         }
 
         vm.create = function(catalArtDetailConfig) {
@@ -80,7 +81,7 @@
                     });
                 });
             } else {
-                index = vm.data.indexOf(vm.catalArtDetailConfig);
+                 index = vm.data.indexOf(vm.catalArtDetailConfig);
                 vm.catalArtDetailConfig.$remove(function() {
                     logger.success('CatalArtDetailConfig deleted');
                     vm.data.splice(index, 1);

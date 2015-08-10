@@ -27,7 +27,6 @@
 
             vm.username = $rootScope.username;
             vm.logout = $rootScope.logout;
-
         }
 
         return directive;

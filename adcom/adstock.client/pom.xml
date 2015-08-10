@@ -7,7 +7,7 @@
   </parent>
   <artifactId>adstock.client</artifactId>
   <packaging>war</packaging>
-  <name>adstock.client</name>
+  <name> adstock.client </name>
   <description>Ad Stock Client</description>
 
   <build>

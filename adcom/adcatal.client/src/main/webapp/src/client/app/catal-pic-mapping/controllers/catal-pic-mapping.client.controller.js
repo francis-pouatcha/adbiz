@@ -35,6 +35,7 @@
             utils.templateModal(model, 'showForm',
                 'app/catal-pic-mapping/views/view.html', vm);
         };
+
         vm.init = function () {
             CatalPicMapping.findBy(coreSearchInputInit(), function (response) {
                 vm.data = response.resultList;
@@ -43,13 +44,13 @@
 
         function coreSearchInputInit() {
             vm.catalArticleId = ArticleForm.catalArticleId;
-            var coreSearchInput = {};
-            coreSearchInput.entity = {};
-            coreSearchInput.entity.cntnrIdentif = vm.catalArticleId;
-            coreSearchInput.fieldNames = [];
-            coreSearchInput.fieldNames.push('cntnrIdentif');
-            coreSearchInput.className = 'org.adorsys.adcatal.jpa.CatalPicMappingSearchInput';
-            return coreSearchInput;
+            var searchInput = {};
+            searchInput.entity = {};
+            searchInput.entity.cntnrIdentif = vm.catalArticleId;
+            searchInput.fieldNames = [];
+            searchInput.fieldNames.push('cntnrIdentif');
+            searchInput.className = 'org.adorsys.adcatal.jpa.CatalPicMappingSearchInput';
+            return searchInput;
         }
 
         vm.create = function (catalPicMapping) {

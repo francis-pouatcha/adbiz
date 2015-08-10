@@ -15,6 +15,7 @@
     function CatalProdFmlyLangMapController(logger, CatalProdFmlyLangMap,
                                             utils, CatalProdFmlyLangMapForm, CatalProdFmlyForm) {
 
+
         var vm = this;
         vm.data = [];
         vm.catalProdFmlyLangMap = {};
@@ -37,6 +38,7 @@
             utils.templateModal(model, 'showForm',
                 'app/catal-prod-fmly-lang-map/views/view.html', vm);
         };
+
         vm.init = function () {
             CatalProdFmlyLangMap.findBy(coreSearchInputInit(), function (response) {
                 vm.data = response.resultList;
@@ -45,13 +47,13 @@
 
         function coreSearchInputInit() {
             vm.catalProdFmlyId = CatalProdFmlyForm.catalProdFmlyId;
-            var coreSearchInput = {};
-            coreSearchInput.entity = {};
-            coreSearchInput.entity.cntnrIdentif = vm.catalProdFmlyId;
-            coreSearchInput.fieldNames = [];
-            coreSearchInput.fieldNames.push('cntnrIdentif');
-            coreSearchInput.className = 'org.adorsys.adcatal.jpa.CatalProdFmlyLangMapSearchInput';
-            return coreSearchInput;
+            var searchInput = {};
+            searchInput.entity = {};
+            searchInput.entity.cntnrIdentif = vm.catalProdFmlyId;
+            searchInput.fieldNames = [];
+            searchInput.fieldNames.push('cntnrIdentif');
+            searchInput.className = 'org.adorsys.adcatal.jpa.CatalProdFmlyLangMapSearchInput';
+            return searchInput;
         }
 
         vm.create = function (catalProdFmlyLangMap) {
@@ -60,6 +62,7 @@
             // Create new catalProdFmlyLangMap object
             var catalProdFmlyLangMapRes = new CatalProdFmlyLangMap(catalProdFmlyLangMap);
             catalProdFmlyLangMapRes.$save(function (response) {
+
                 logger.success('CatalProdFmlyLangMap created');
                 vm.data.push(response);
             }, function (errorResponse) {
@@ -93,6 +96,7 @@
             var index = vm.data.indexOf(vm.model);
             var catalProdFmlyLangMapRes = new CatalProdFmlyLangMap(catalProdFmlyLangMap);
             catalProdFmlyLangMapRes.$update(function () {
+
                 logger.success('catalProdFmlyLangMap updated');
                 vm.data.splice(index, 1);
                 vm.data.push(catalProdFmlyLangMap);

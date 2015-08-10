@@ -64,7 +64,6 @@
             // Create new CatalArt2ProductFamily object
             var catalArt2ProductFamilyRes = new CatalArt2ProductFamily(catalArt2ProductFamily);
             catalArt2ProductFamilyRes.$save(function(response) {
-
                 logger.success('CatalArt2ProductFamily created');
                 vm.data.push(response);
             }, function(errorResponse) {

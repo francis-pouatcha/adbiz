@@ -45,13 +45,13 @@
 
         function coreSearchInputInit() {
             vm.catalArticleId = ArticleForm.catalArticleId;
-            var coreSearchInput = {};
-            coreSearchInput.entity = {};
-            coreSearchInput.entity.cntnrIdentif = vm.catalArticleId;
-            coreSearchInput.fieldNames = [];
-            coreSearchInput.fieldNames.push('cntnrIdentif');
-            coreSearchInput.className = 'org.adorsys.adcatal.jpa.CatalArtLangMappingSearchInput';
-            return coreSearchInput;
+            var searchInput = {};
+            searchInput.entity = {};
+            searchInput.entity.cntnrIdentif = vm.catalArticleId;
+            searchInput.fieldNames = [];
+            searchInput.fieldNames.push('cntnrIdentif');
+            searchInput.className = 'org.adorsys.adcatal.jpa.CatalArtLangMappingSearchInput';
+            return searchInput;
         }
 
         vm.create = function (catalArtLangMapping) {

@@ -34,8 +34,7 @@
             angular.bootstrap(document, ['adcatal']);
         }).error(function () {
             window.location.reload();
-        });
-
+        })
     });
     /* jshint ignore:end */
 
