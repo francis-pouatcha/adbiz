@@ -36,13 +36,13 @@ gulp.task('default', ['help']);
 gulp.task('vet', function() {
     log('Analyzing source with JSHint and JSCS');
 
-//    return gulp
-//        .src(config.alljs)
-//        .pipe($.if(args.verbose, $.print()))
-//        .pipe($.jshint())
-//        .pipe($.jshint.reporter('jshint-stylish', {verbose: true}))
-//        .pipe($.jshint.reporter('fail'))
-//        .pipe($.jscs());
+    /*return gulp
+     .src(config.alljs)
+     .pipe($.if(args.verbose, $.print()))
+     .pipe($.jshint())
+     .pipe($.jshint.reporter('jshint-stylish', {verbose: true}))
+     .pipe($.jshint.reporter('fail'))
+     .pipe($.jscs());*/
 });
 
 /**
@@ -281,8 +281,8 @@ gulp.task('clean-images', function(done) {
  */
 gulp.task('clean-styles', function(done) {
     var files = [].concat(
-        config.temp + '**/*.css',
-        config.build + 'styles/**/*.css'
+            config.temp + '**/*.css',
+            config.build + 'styles/**/*.css'
     );
     clean(files, done);
 });
@@ -293,9 +293,9 @@ gulp.task('clean-styles', function(done) {
  */
 gulp.task('clean-code', function(done) {
     var files = [].concat(
-        config.temp + '**/*.js',
-        config.build + 'js/**/*.js',
-        config.build + '**/*.html'
+            config.temp + '**/*.js',
+            config.build + 'js/**/*.js',
+            config.build + '**/*.html'
     );
     clean(files, done);
 });
@@ -503,9 +503,9 @@ function startBrowserSync(isDev, specRunner) {
         proxy: 'localhost:' + port,
         port: 3000,
         files: isDev ? [
-            config.client + '**/*.*',
-            '!' + config.less,
-            config.temp + '**/*.css'
+                config.client + '**/*.*',
+                '!' + config.less,
+                config.temp + '**/*.css'
         ] : [],
         ghostMode: { // these are the defaults t,f,t,t
             clicks: true,

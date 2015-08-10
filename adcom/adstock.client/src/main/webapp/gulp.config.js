@@ -15,6 +15,13 @@ module.exports = function() {
     };
     var nodeModules = 'node_modules';
 
+    var karma = {
+        files: [bower.directory+'*.js',
+                clientApp + 'blocks/router/*.js',
+                clientApp+'*.js'],
+        exclude: []
+    };
+
     var config = {
         /**
          * File paths
@@ -28,16 +35,16 @@ module.exports = function() {
         client: client,
         css: temp + 'styles.css',
         fonts: [bower.directory + 'font-awesome/fonts/**/*.*',
-            bower.directory + 'bootstrap/fonts/**/*.*'],
+                bower.directory + 'bootstrap/fonts/**/*.*'],
         html: client + '**/*.html',
         htmltemplates: clientApp + '**/*.html',
         images: client + 'images/**/*.*',
         index: client + 'index.html',
         // app js, with no specs
         js: [
-            clientApp + '**/*.module.js',
-            clientApp + '**/*.js',
-            '!' + clientApp + '**/*.spec.js'
+                clientApp + '**/*.module.js',
+                clientApp + '**/*.js',
+                '!' + clientApp + '**/*.spec.js'
         ],
         jsOrder: [
             '**/app.module.js',
@@ -50,8 +57,8 @@ module.exports = function() {
         server: server,
         source: 'src/',
         stubsjs: [
-            bower.directory + 'angular-mocks/angular-mocks.js',
-            client + 'stubs/**/*.js'
+                bower.directory + 'angular-mocks/angular-mocks.js',
+                client + 'stubs/**/*.js'
         ],
         temp: temp,
 
@@ -111,10 +118,10 @@ module.exports = function() {
          *  6 templates
          */
         testlibraries: [
-            nodeModules + '/mocha/mocha.js',
-            nodeModules + '/chai/chai.js',
-            nodeModules + '/mocha-clean/index.js',
-            nodeModules + '/sinon-chai/lib/sinon-chai.js'
+                nodeModules + '/mocha/mocha.js',
+                nodeModules + '/chai/chai.js',
+                nodeModules + '/mocha-clean/index.js',
+                nodeModules + '/sinon-chai/lib/sinon-chai.js'
         ],
         specHelpers: [client + 'test-helpers/*.js'],
         specs: [clientApp + '**/*.spec.js'],
@@ -153,9 +160,9 @@ module.exports = function() {
             files: [].concat(
                 bowerFiles,
                 config.specHelpers,
-                clientApp + '**/*.module.js',
-                clientApp + '**/*.js',
-                temp + config.templateCache.file,
+                    clientApp + '**/*.module.js',
+                    clientApp + '**/*.js',
+                    temp + config.templateCache.file,
                 config.serverIntegrationSpecs
             ),
             exclude: [],

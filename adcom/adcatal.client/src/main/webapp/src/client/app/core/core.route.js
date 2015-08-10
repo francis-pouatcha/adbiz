@@ -9,7 +9,7 @@
     function appRun(routerHelper,BASE_URL) {
         var otherwise = BASE_URL+ '/';
 
-        routerHelper.configureStates(getStates(BASE_URL), otherwise);
+        routerHelper.configureStates(getStates(), otherwise);
     }
 
     function getStates() {

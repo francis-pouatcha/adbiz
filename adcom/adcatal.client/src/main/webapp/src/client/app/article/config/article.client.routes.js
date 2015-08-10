@@ -3,17 +3,19 @@
     angular
         .module('app.article')
         .run(appRun);
+
     appRun.$inject = ['routerHelper'];
     /* @ngInject */
     function appRun(routerHelper) {
         routerHelper.configureStates(getStates());
     }
-    function getStates(BASE_URL) {
+
+    function getStates() {
         return [
             {
                 state: 'listArticle',
                 config: {
-                    url: BASE_URL +'/',
+                    url: '/',
                     templateUrl: 'app/article/views/list.html',
                     controller: 'ArticleController',
                     controllerAs: 'vm',
