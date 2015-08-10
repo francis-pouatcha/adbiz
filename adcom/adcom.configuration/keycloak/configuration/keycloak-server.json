@@ -38,7 +38,7 @@
     },
 
     "theme": {
-        "default": "keycloak",
+        "default": "adorsys",
         "staticMaxAge": 2592000,
         "cacheTemplates": true,
         "cacheThemes": true,

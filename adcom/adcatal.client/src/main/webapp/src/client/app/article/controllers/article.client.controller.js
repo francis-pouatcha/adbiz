@@ -39,8 +39,6 @@
             catalArtLangMapping.artName = vm.article.artName;
             catalArtLangMapping.shortName = vm.article.shortName;
             catalArtLangMapping.langIso2 = $translate.use();
-
-
             delete vm.article.artName;
             delete vm.article.shortName;
 
@@ -97,7 +95,7 @@
             });
         };
 
-        function coreSearchInput() {
+        function coreSearchInputInit() {
             vm.articleId = $stateParams.articleId;
             var coreSearchInput = {};
             coreSearchInput.entity = {};
@@ -115,23 +113,18 @@
             ArticleForm.catalArticleId = $stateParams.articleId;
             vm.setFormFields(true);
 
-            CatalArtLangMapping.findBy(coreSearchInput(), function (response) {
+            CatalArtLangMapping.findBy(coreSearchInputInit(), function (response) {
                 console.log(response.resultList);
                 vm.article.artName = response.resultList[0].artName;
                 vm.article.shortName = response.resultList[0].shortName;
             });
-
-
             vm.article.artName = vm.data.artName;
             vm.article.shortName = vm.data.shortName;
-
         };
-
         vm.toEditArticle = function() {
             vm.article = Article.get({articleId: $stateParams.articleId});
             vm.setFormFields(false);
         };
-
         activate();
 
         function activate() {

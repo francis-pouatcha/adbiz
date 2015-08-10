@@ -7,11 +7,11 @@
 
     /* @ngInject */
     function appRun(routerHelper) {
-        var otherwise = '/article';//'/404';
+        var otherwise = '/article';
         routerHelper.configureStates(getStates(), otherwise);
     }
 
-    function getStates(BASE_ROUTE) {
+    function getStates() {
         return [
             {
                 state: '404',

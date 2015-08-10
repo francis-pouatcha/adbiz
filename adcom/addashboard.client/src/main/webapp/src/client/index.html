@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html>
 <head>
     <style>
         /* This helps the ng-show/ng-hide animations start at the right place. */
@@ -10,8 +10,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-    <base href="/">
-
+  
     <!-- build:css styles/lib.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
@@ -27,7 +26,7 @@
     <!-- endinject -->
     <!-- endbuild -->
 </head>
-<body>
+<body ng-controller="GlobalController as GlobalCtlr" >
     <div>
         <div ng-include="'app/layout/shell.html'"></div>
         <div id="splash-page" ng-show="showSplash">
@@ -60,6 +59,7 @@
     <script src="/bower_components/angular-formly/dist/formly.js"></script>
     <script src="/bower_components/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap.js"></script>
     <script src="/bower_components/angular-translate/angular-translate.js"></script>
+    <script src="/bower_components/keycloak/dist/keycloak.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

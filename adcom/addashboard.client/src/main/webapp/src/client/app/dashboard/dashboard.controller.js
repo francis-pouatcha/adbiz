@@ -5,40 +5,17 @@
         .module('app.dashboard')
         .controller('DashboardController', DashboardController);
 
-    DashboardController.$inject = ['$q', 'dataservice', 'logger'];
+    DashboardController.$inject = ['Auth'];
     /* @ngInject */
-    function DashboardController($q, dataservice, logger) {
+    function DashboardController(Auth) {
         var vm = this;
-        vm.news = {
-            title: 'adcatal.client',
-            description: 'generator-angular-crud allows creating entities ' +
-                          'and CRUD operations very productively for AngularJS applications'
+        vm.hasWorkspace = function (workspace) {
+            if (Auth.authz.hasResourceRole(workspace + '_role', workspace)) {
+                return true;
+            }
+            else {
+                return false;
+            }
         };
-        vm.messageCount = 0;
-        vm.people = [];
-        vm.title = 'Dashboard';
-
-        activate();
-
-        function activate() {
-            var promises = [getMessageCount(), getPeople()];
-            return $q.all(promises).then(function() {
-                //logger.info('Activated Dashboard View');
-            });
-        }
-
-        function getMessageCount() {
-            return dataservice.getMessageCount().then(function (data) {
-                vm.messageCount = data;
-                return vm.messageCount;
-            });
-        }
-
-        function getPeople() {
-            return dataservice.getPeople().then(function (data) {
-                vm.people = data;
-                return vm.people;
-            });
-        }
     }
 })();

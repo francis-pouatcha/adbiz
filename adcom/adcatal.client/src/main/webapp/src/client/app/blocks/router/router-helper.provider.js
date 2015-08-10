@@ -15,7 +15,7 @@
             resolveAlways: {}
         };
 
-        $locationProvider.html5Mode(true);
+        //$locationProvider.html5Mode(true);
 
         this.configure = function(cfg) {
             angular.extend(config, cfg);
@@ -46,6 +46,7 @@
 
             function configureStates(states, otherwisePath) {
                 states.forEach(function(state) {
+                    //never declare state without config inside, causing error
                     state.config.resolve =
                         angular.extend(state.config.resolve || {}, config.resolveAlways);
                     $stateProvider.state(state.state, state.config);

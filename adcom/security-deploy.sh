@@ -44,6 +44,9 @@ export ADCOM_HOME
 echo 'deleting deployemnt db'
 cd && rm -rf $HOME/addb.*
 
+#echo 'deleting keycloak db'
+#cd && rm -rf $JBOSS_HOME/standalone/data/keycloak.*
+
 echo 'stopping jboss smoothly'
 kill -9 $( ps aux | grep '[j]boss' | awk '{print $2}')
 
@@ -79,18 +82,25 @@ cd $JBOSS_HOME/adcom/adsales/data/ && rm ad*
 echo 'configuring keycloak for OAuth'
 cp -r $ADCOM_HOME/adcom.configuration/keycloak/deployments $JBOSS_HOME/standalone
 cp -r $ADCOM_HOME/adcom.configuration/keycloak/configuration $JBOSS_HOME/standalone
+cp $ADCOM_HOME/adcom.configuration/keycloak/adcomrealm.json $JBOSS_HOME/
 cd $JBOSS_HOME
-unzip $ADCOM_HOME/adcom.configuration/keycloak/adapters/keycloak-eap6-adapter-dist-1.0.4.Final.zip
+unzip -o $ADCOM_HOME/adcom.configuration/keycloak/adapters/keycloak-eap6-adapter-dist-1.0.4.Final.zip
 
 
 echo 'cnfiguring jboss'
 cp $ADCOM_HOME/adcom.configuration/jboss-eap-6.3/standalone/configuration/standalone.xml $JBOSS_HOME/standalone/configuration/standalone.xml
 # cp $ADCOM_HOME/adcom.configuration/jboss-eap-6.3/standalone/security/adcom.jks $JBOSS_HOME/standalone/security/adcom.jks
 
+echo 'gulp build frontend'
+cd $ADCOM_HOME/adcatal.client/src/main/webapp
+gulp build
+cd $ADCOM_HOME/addashboard.client/src/main/webapp
+gulp build
+
 
 echo 'starting jboss'
 cd $JBOSS_HOME
-cd $JBOSS_HOME && bin/standalone.sh >/dev/null &
+cd $JBOSS_HOME && bin/standalone.sh -Dkeycloak.migration.action=import -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.strategy=OVERWRITE_EXISTING -Dkeycloak.migration.file=$JBOSS_HOME/adcomrealm.json >/dev/null &
 	 		
 echo 'switching to projet directory'
 cd $ADCOM_HOME
@@ -99,10 +109,10 @@ mvn clean install -DskipTests
 
 echo 'deploying new artifacts'
 # cp adbase.server/target/adbase.server.war $JBOSS_HOME/standalone/deployments/
-# cp adcatal.server/target/adcatal.server.war $JBOSS_HOME/standalone/deployments/
-# cp adstock.server/target/adstock.server.war $JBOSS_HOME/standalone/deployments/
+ cp adcatal.server/target/adcatal.server.war $JBOSS_HOME/standalone/deployments/
+ cp adstock.server/target/adstock.server.war $JBOSS_HOME/standalone/deployments/
 # cp adprocmt.server/target/adprocmt.server.war $JBOSS_HOME/standalone/deployments/
-# cp adinvtry.server/target/adinvtry.server.war $JBOSS_HOME/standalone/deployments/
+ cp adinvtry.server/target/adinvtry.server.war $JBOSS_HOME/standalone/deployments/
 # cp adbnsptnr.server/target/adbnsptnr.server.war $JBOSS_HOME/standalone/deployments/
 # cp adsales.server/target/adsales.server.war $JBOSS_HOME/standalone/deployments/
 # cp adcshdwr.server/target/adcshdwr.server.war $JBOSS_HOME/standalone/deployments/
@@ -123,6 +133,7 @@ cp adacc.client/target/adacc.client.war $JBOSS_HOME/standalone/deployments/
 cp adlogin.client/target/adlogin.client.war $JBOSS_HOME/standalone/deployments/
 cp adaptmt.client/target/adaptmt.client.war $JBOSS_HOME/standalone/deployments/
 cp admanager.client/target/admanager.client.war $JBOSS_HOME/standalone/deployments/
+cp addashboard.client/target/addashboard.client.war $JBOSS_HOME/standalone/deployments/
 
 echo 'copying the .xls file'
 cp adcom.configuration/jboss-eap-6.3/adcom/adbase/data/adbase.xls $JBOSS_HOME/adcom/adbase/data/

@@ -5,13 +5,13 @@
     <artifactId>adcom.parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <artifactId>adcatal.client</artifactId>
+  <artifactId>addashboard.client</artifactId>
   <packaging>war</packaging>
-  <name>adcatal.client</name>
+  <name>addashboard.client</name>
   <description>Ad Catalogue Client</description>
 
   <build>
-    <finalName>adcatal.client</finalName>
+    <finalName>addashboard.client</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>

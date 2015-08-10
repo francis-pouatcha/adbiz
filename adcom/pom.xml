@@ -19,12 +19,13 @@
 		<module>adcatal.server</module>
 		<module>adstock.server</module>
 		<module>adinvtry.server</module>
+		<module>addashboard.client</module>
 <!-- 
 		<module>adprocmt.lib</module>
 		<module>adprocmt.server</module>
 		<module>adinvtry.client</module>
 		<module>adres.client</module>
-		<module>adcatal.client</module>
+		
 		<module>adbase.client</module>
 		<module>adlogin.client</module>
 		<module>adacc.client</module>
