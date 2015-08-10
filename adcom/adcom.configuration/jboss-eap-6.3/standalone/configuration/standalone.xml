@@ -24,6 +24,7 @@
         <extension module="org.jboss.as.web"/>
         <extension module="org.jboss.as.webservices"/>
         <extension module="org.jboss.as.weld"/>
+        <extension module="org.keycloak.keycloak-as7-subsystem"/>
     </extensions>
     <management>
         <security-realms>
@@ -78,6 +79,7 @@
         </access-control>
     </management>
     <profile>
+        <subsystem xmlns="urn:jboss:domain:keycloak:1.0"/>
         <subsystem xmlns="urn:jboss:domain:logging:1.4">
             <console-handler name="CONSOLE">
                 <level name="INFO"/>
@@ -262,6 +264,11 @@
         <subsystem xmlns="urn:jboss:domain:sar:1.0"/>
         <subsystem xmlns="urn:jboss:domain:security:1.2">
             <security-domains>
+                <security-domain name="keycloak">
+                    <authentication>
+                        <login-module code="org.keycloak.adapters.jboss.KeycloakLoginModule" flag="required"/>
+                    </authentication>
+                </security-domain>
                 <security-domain name="other" cache-type="default">
                     <authentication>
                         <login-module code="Remoting" flag="optional">

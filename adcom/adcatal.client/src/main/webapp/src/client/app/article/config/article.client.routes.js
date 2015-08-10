@@ -15,7 +15,7 @@
             {
                 state: 'listArticle',
                 config: {
-                    url: '/',
+                    url:  '/article',
                     templateUrl: 'app/article/views/list.html',
                     controller: 'ArticleController',
                     controllerAs: 'vm',

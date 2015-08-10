@@ -20,8 +20,7 @@
             findByLike: {
                 method: 'POST',
                 url: API_BASE_URL + '/catalarticles/findByLike'
-        }
-
+            }
         };
 
         var API_URL = API_BASE_URL + '/catalarticles/:articleId';

@@ -36,13 +36,13 @@ gulp.task('default', ['help']);
 gulp.task('vet', function() {
     log('Analyzing source with JSHint and JSCS');
 
-    /*return gulp
+    return gulp
      .src(config.alljs)
      .pipe($.if(args.verbose, $.print()))
      .pipe($.jshint())
      .pipe($.jshint.reporter('jshint-stylish', {verbose: true}))
      .pipe($.jshint.reporter('fail'))
-     .pipe($.jscs());*/
+     .pipe($.jscs());
 });
 
 /**
@@ -245,7 +245,7 @@ gulp.task('optimize', ['inject', 'vet'], function() {
         .pipe(assets.restore())
         .pipe($.useref())
         // Replace the file names in the html with rev numbers
-        .pipe($.revReplace())
+        .pipe($.revReplace({prefix:'build/'}))
         .pipe(gulp.dest(config.build));
 });
 

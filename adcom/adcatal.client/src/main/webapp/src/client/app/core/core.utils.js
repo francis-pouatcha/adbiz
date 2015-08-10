@@ -10,8 +10,11 @@
     utils.$inject = ['$modal'];
     /* @ngInject */
     function utils($modal) {
+
         var service = {};
-        function ModalInstanceCtrl($modalInstance,model) {
+
+        function ModalInstanceCtrl($modalInstance, model) {
+
             var vm = this;
             vm.model = model;
             // function assignment
@@ -26,7 +29,8 @@
                 $modalInstance.dismiss('cancel');
             }
         }
-        service.templateModal = function(model, typeForm, templateUrl, parentCtrl){
+
+        service.templateModal = function(model, typeForm, templateUrl, parentCtrl) {
             var result = $modal.open({
                 templateUrl: templateUrl,
                 controller: ModalInstanceCtrl,
@@ -37,6 +41,7 @@
                     }
                 }
             }).result;
+
             if (typeForm === 'createForm') {
                 result.then(function(model) {
                     parentCtrl.create(model);
@@ -48,6 +53,6 @@
                 });
             }
         };
-        return service;
+
     }
 })();

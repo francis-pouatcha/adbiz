@@ -26,29 +26,26 @@
             vm.formFields = CatalArtDetailConfigForm.getFormFields(disabled);
             vm.formFields[0].defaultValue = vm.catalArticleId;
         };
-
-
-
-        vm.createForm = function(model){
+        vm.createForm = function(model) {
             utils.templateModal(model, 'createForm',
                 'app/catal-art-detail-config/views/create.html', vm);
         };
-        vm.editForm = function(model){
+
+        vm.editForm = function(model) {
             utils.templateModal(model, 'editForm',
                 'app/catal-art-detail-config/views/edit.html', vm);
         };
-        vm.showForm = function(model){
+        vm.showForm = function(model) {
             utils.templateModal(model, 'showForm',
                 'app/catal-art-detail-config/views/view.html', vm);
         };
-
         vm.init = function() {
-            CatalArtDetailConfig.findBy(coreSearchInput(), function(response) {
+            CatalArtDetailConfig.findBy(coreSearchInputInit(), function(response) {
                 vm.data = response.resultList;
             });
         };
 
-        function coreSearchInput (){
+        function coreSearchInputInit() {
             vm.catalArticleId = ArticleForm.catalArticleId;
             var searchInput = {};
             searchInput.entity = {};
@@ -63,8 +60,8 @@
             vm.catalArticleId = ArticleForm.catalArticleId;
             catalArtDetailConfig.cntnrIdentif = vm.catalArticleId;
             // Create new CatalArtDetailConfig object
-            catalArtDetailConfig = new CatalArtDetailConfig(catalArtDetailConfig);
-            catalArtDetailConfig.$save(function(response) {
+            var catalArtDetailConfigRes = new CatalArtDetailConfig(catalArtDetailConfig);
+            catalArtDetailConfigRes.$save(function(response) {
                 logger.success('CatalArtDetailConfig created');
                 vm.data.push(response);
             }, function(errorResponse) {
@@ -84,7 +81,7 @@
                     });
                 });
             } else {
-                 index = vm.data.indexOf(vm.catalArtDetailConfig);
+                index = vm.data.indexOf(vm.catalArtDetailConfig);
                 vm.catalArtDetailConfig.$remove(function() {
                     logger.success('CatalArtDetailConfig deleted');
                     vm.data.splice(index, 1);
@@ -96,8 +93,8 @@
         // Update existing CatalArtDetailConfig
         vm.update = function(catalArtDetailConfig) {
             var index = vm.data.indexOf(vm.model);
-            catalArtDetailConfig = new CatalArtDetailConfig(catalArtDetailConfig);
-            catalArtDetailConfig.$update(function() {
+            var catalArtDetailConfigRes = new CatalArtDetailConfig(catalArtDetailConfig);
+            catalArtDetailConfigRes.$update(function() {
                 logger.success('CatalArtDetailConfig updated');
                 vm.data.splice(index, 1);
                 vm.data.push(catalArtDetailConfig);

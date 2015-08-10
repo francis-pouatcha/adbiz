@@ -11,10 +11,10 @@
         'utils',
         'CatalArtLangMappingForm',
         'ArticleForm'];
-    /* @ngInject */
-    function CatalArtLangMappingController(logger, CatalArtLangMapping, utils,
-                                           CatalArtLangMappingForm, ArticleForm) {
 
+    /* @ngInject */
+    function CatalArtLangMappingController(logger, CatalArtLangMapping,
+                                           utils, CatalArtLangMappingForm, ArticleForm) {
         var vm = this;
         vm.data = [];
         vm.catalArtLangMapping = {};
@@ -24,8 +24,6 @@
             vm.formFields = CatalArtLangMappingForm.getFormFields(disabled);
             vm.formFields[0].defaultValue = vm.catalArticleId;
         };
-
-
         vm.createForm = function (model) {
             utils.templateModal(model, 'createForm',
                 'app/catal-art-lang-mapping/views/create.html', vm);
@@ -40,12 +38,12 @@
         };
 
         vm.init = function () {
-            CatalArtLangMapping.findBy(coreSearchInput(), function (response) {
+            CatalArtLangMapping.findBy(coreSearchInputInit(), function (response) {
                 vm.data = response.resultList;
             });
         };
 
-        function coreSearchInput() {
+        function coreSearchInputInit() {
             vm.catalArticleId = ArticleForm.catalArticleId;
             var searchInput = {};
             searchInput.entity = {};
@@ -60,8 +58,8 @@
             vm.catalArticleId = ArticleForm.catalArticleId;
             catalArtLangMapping.cntnrIdentif = vm.catalArticleId;
             // Create new catalArtLangMapping object
-            catalArtLangMapping = new CatalArtLangMapping(catalArtLangMapping);
-            catalArtLangMapping.$save(function (response) {
+            var catalArtLangMappingRes = new CatalArtLangMapping(catalArtLangMapping);
+            catalArtLangMappingRes.$save(function (response) {
                 logger.success('CatalArtLangMapping created');
                 vm.data.push(response);
             }, function (errorResponse) {
@@ -93,8 +91,8 @@
         // Update existing catalArtLangMapping
         vm.update = function (catalArtLangMapping) {
             var index = vm.data.indexOf(vm.model);
-            catalArtLangMapping = new CatalArtLangMapping(catalArtLangMapping);
-            catalArtLangMapping.$update(function () {
+            var catalArtLangMappingRes = new CatalArtLangMapping(catalArtLangMapping);
+            catalArtLangMappingRes.$update(function () {
                 logger.success('catalArtLangMapping updated');
                 vm.data.splice(index, 1);
                 vm.data.push(catalArtLangMapping);

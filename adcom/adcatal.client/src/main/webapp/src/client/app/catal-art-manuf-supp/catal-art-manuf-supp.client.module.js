@@ -2,6 +2,6 @@
     'use strict';
 
     angular.module('app.catalArtManufSupp', []);
-    angular.module('app').requires.push('app.catalArtManufSupp');
+    angular.module('adcatal').requires.push('app.catalArtManufSupp');
 
 })();

@@ -11,7 +11,8 @@
         'CatalArtManufSuppForm',
         'ArticleForm'];
     /* @ngInject */
-    function CatalArtManufSuppController(logger, CatalArtManufSupp, utils, CatalArtManufSuppForm, ArticleForm) {
+    function CatalArtManufSuppController(logger, CatalArtManufSupp,
+                                         utils, CatalArtManufSuppForm, ArticleForm) {
 
         var vm = this;
         vm.data = [];
@@ -22,8 +23,6 @@
             vm.formFields = CatalArtManufSuppForm.getFormFields(disabled);
             vm.formFields[0].defaultValue = vm.catalArticleId;
         };
-
-
         vm.createForm = function (model) {
             utils.templateModal(model, 'createForm',
                 'app/catal-art-manuf-supp/views/create.html', vm);
@@ -38,12 +37,12 @@
         };
 
         vm.init = function () {
-            CatalArtManufSupp.findBy(coreSearchInput(), function (response) {
+            CatalArtManufSupp.findBy(coreSearchInputInit(), function (response) {
                 vm.data = response.resultList;
             });
         };
 
-        function coreSearchInput() {
+        function coreSearchInputInit() {
             vm.catalArticleId = ArticleForm.catalArticleId;
             var searchInput = {};
             searchInput.entity = {};
@@ -58,8 +57,8 @@
             vm.catalArticleId = ArticleForm.catalArticleId;
             catalArtManufSupp.cntnrIdentif = vm.catalArticleId;
             // Create new catalArtManufSupp object
-            catalArtManufSupp = new CatalArtManufSupp(catalArtManufSupp);
-            catalArtManufSupp.$save(function (response) {
+            var catalArtManufSuppRes = new CatalArtManufSupp(catalArtManufSupp);
+            catalArtManufSuppRes.$save(function (response) {
                 logger.success('CatalArtManufSupp created');
                 vm.data.push(response);
             }, function (errorResponse) {
@@ -91,8 +90,8 @@
         // Update existing catalArtManufSupp
         vm.update = function (catalArtManufSupp) {
             var index = vm.data.indexOf(vm.model);
-            catalArtManufSupp = new CatalArtManufSupp(catalArtManufSupp);
-            catalArtManufSupp.$update(function () {
+            var catalArtManufSuppRes = new CatalArtManufSupp(catalArtManufSupp);
+            catalArtManufSuppRes.$update(function () {
                 logger.success('catalArtManufSupp updated');
                 vm.data.splice(index, 1);
                 vm.data.push(catalArtManufSupp);

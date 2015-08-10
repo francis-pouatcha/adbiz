@@ -1,3 +1,4 @@
+/*
 (function() {
     'use strict';
 
@@ -6,7 +7,9 @@
         .run(appRun);
 
     appRun.$inject = ['routerHelper'];
-    /* @ngInject */
+    */
+/* @ngInject *//*
+
     function appRun(routerHelper) {
         routerHelper.configureStates(getStates());
     }
@@ -14,14 +17,16 @@
     function getStates() {
         return [
             {
-                /*state: 'dashboard',
+                */
+/*state: 'dashboard',
                 config: {
                     url: '/',
                     templateUrl: 'app/dashboard/dashboard.html',
                     controller: 'DashboardController',
                     controllerAs: 'vm',
                     title: 'dashboard'
-                }*/
+                }*//*
+
                 state: 'dashboard',
                 config: {
                     url: '/',
@@ -34,3 +39,4 @@
         ];
     }
 })();
+*/

@@ -81,9 +81,11 @@
                 vm.error = errorResponse.data.summary;
             });
         };
-        function coreSearchInput() {
+
+        function coreSearchInputInit() {
+
             vm.articleId = $stateParams.articleId;
-         // var coreSearchInput = {};
+            var coreSearchInput = {};
             coreSearchInput.entity = {};
             coreSearchInput.entity.cntnrIdentif = vm.articleId;
             coreSearchInput.entity.langIso2 = $translate.use();
@@ -98,7 +100,7 @@
             ArticleForm.catalArticleId = $stateParams.articleId;
             vm.setFormFields(true);
 
-            CatalArtLangMapping.findBy(coreSearchInput(), function (response) {
+            CatalArtLangMapping.findBy(coreSearchInputInit(), function (response) {
                 console.log(response.resultList);
                 vm.article.artName = response.resultList[0].artName;
                 vm.article.shortName = response.resultList[0].shortName;

@@ -26,10 +26,6 @@
                 'CatalArticle.view.title':'Article View',
                 'CatalArticle.back.title':'Back',
 
-
-
-
-
                 //-------------CatalArt2ProductFamily---------
 
                 'CatalArt2ProductFamily.artPic': 'The Article PIC',
@@ -43,8 +39,6 @@
                 'CatalArt2ProductFamily.edit.title':'Edit Product Family',
                 'CatalArt2ProductFamily.view.title':'View Product Family',
                 'CatalArt2ProductFamily.back.title':'Back',
-
-
 
                 //------------CatalArtDetailConfig-------------
                 'CatalArtDetailConfig.title':'Detail Config',
@@ -61,7 +55,6 @@
                 'CatalArtDetailConfig.view.title':'View Detail Config',
                 'CatalArtDetailConfig.back.title':'Back',
 
-
                 //-------------CatalArtEquivalence------------
                 'CatalArtEquivalence.title':'Article Equivalence',
                 'CatalArtEquivalence.mainArtIdentif': 'Main Article',
@@ -74,9 +67,6 @@
                 'CatalArtEquivalence.edit.title':'Edit Article Equivalence',
                 'CatalArtEquivalence.view.title':'View Article Equivalence',
                 'CatalArtEquivalence.back.title':'Back',
-
-
-
 
                 //------------CatalArtLangMapping--------------
                 'CatalArtFeatMapping.title':'Article Feature Mapping',
@@ -95,7 +85,6 @@
                 'CatalAbstractFeatMapping.edit.title':'Edit Article Feature Mapping',
                 'CatalAbstractFeatMapping.view.title':'View Article Feature Mapping',
                 'CatalAbstractFeatMapping.back.title':'Back',
-
 
                 //------------CatalArtManufSupp------------------
                 'CatalArtManufSupp.title': 'Manufacturer or Supplier',
@@ -116,7 +105,6 @@
                 'CatalArtManufSupp.view.title':'View  Manufacturer or Supplier',
                 'CatalArtManufSupp.back.title':'Back',
 
-
                 //-----------CatalPicMapping--------------------
                 'CatalPicMapping.title': 'PIC Mapping',
                 'CatalPicMapping.artIdentif': 'Identifier or this Article',
@@ -133,8 +121,6 @@
                 'CatalPicMapping.view.title':'View PIC Mapping',
                 'CatalPicMapping.back.title':'Back',
 
-
-
                 //------------CatalProductFamily---------------
                 'CatalProductFamily.title': 'Product Family',
                 'CatalProductFamily.parentIdentif': 'Identifier or the Parent Family',
@@ -147,7 +133,6 @@
                 'CatalProductFamily.edit.title':'Edit Product Family',
                 'CatalProductFamily.view.title':'View Product Family',
                 'CatalProductFamily.back.title':'Back',
-
 
                 //-----------CatalProductFamilyLangMap-----------
                 'CatalFamilyFeatMaping.title': '',
@@ -165,7 +150,7 @@
                 LANG_EN: 'English'
             });
 
- //------------french----------------
+            //------------french----------------
 
             $translateProvider.translations('fr', {
                 //--------------Article---------------
@@ -187,12 +172,7 @@
                 'CatalArticle.view.title':'Voir Article',
                 'CatalArticle.back.title':'Retour',
 
-
-
-
-
                 //-------------CatalArt2ProductFamily---------
-
                 'CatalArt2ProductFamily.artPic': 'Code CIP',
                 'CatalArt2ProductFamily.famCode': 'Code Famille',
                 'CatalArt2ProductFamily.title':'Famille Prodruit',
@@ -204,8 +184,6 @@
                 'CatalArt2ProductFamily.edit.title':'Modifier Produit',
                 'CatalArt2ProductFamily.view.title':'Voir Produit',
                 'CatalArt2ProductFamily.back.title':'Retour',
-
-
 
                 //------------CatalArtDetailConfig-------------
                 'CatalArtDetailConfig.title':'Transformation du produit',
@@ -222,8 +200,6 @@
                 'CatalArtDetailConfig.view.title':'Voir Transformation du Produit',
                 'CatalArtDetailConfig.back.title':'Retour',
 
-
-
                 //-------------CatalArtEquivalence------------
                 'CatalArtEquivalence.title':'Articles Equivalents',
                 'CatalArtEquivalence.mainArtIdentif': 'Identifiant du Produit Principal',
@@ -236,8 +212,6 @@
                 'CatalArtEquivalence.edit.title':'Modifier Article Equivalent',
                 'CatalArtEquivalence.view.title':'Voir Article Equivalent',
                 'CatalArtEquivalence.back.title':'Retour',
-
-
 
                 //------------CatalArtLangMapping--------------
                 'CatalArtFeatMapping.title':'Table de detail de l\'article',
@@ -256,8 +230,6 @@
                 'CatalAbstractFeatMapping.edit.title':'Modifier Table de Detail Article',
                 'CatalAbstractFeatMapping.view.title':'Voir Table de Detail Article',
                 'CatalAbstractFeatMapping.back.title':'Retour',
-
-
 
                 //------------CatalArtManufSupp------------------
                 'CatalArtManufSupp.title': 'Fabricant ou Fournisseur',
@@ -278,8 +250,6 @@
                 'CatalArtManufSupp.view.title':'Voir  Fabricant ou Fournisseur',
                 'CatalArtManufSupp.back.title':'Retour',
 
-
-
                 //-----------CatalPicMapping--------------------
                 'CatalPicMapping.title': 'Table PIC',
                 'CatalPicMapping.artIdentif': 'Identifiant de cet Article',
@@ -296,9 +266,6 @@
                 'CatalPicMapping.view.title':'Voir Table PIC',
                 'CatalPicMapping.back.title':'Retour',
 
-
-
-
                 //------------CatalProductFamily---------------
                 'CatalProductFamily.title': 'Famille de produit',
                 'CatalProductFamily.parentIdentif': 'Identifiant de la Famille Parent',
@@ -311,8 +278,6 @@
                 'CatalProductFamily.edit.title':'Modifier Famille de Produit',
                 'CatalProductFamily.view.title':'Voir Famille de Produit',
                 'CatalProductFamily.back.title':'Retour',
-
-
 
                 //-----------CatalProductFamilyLangMap-----------
                 'CatalFamilyFeatMaping.famPath': '',

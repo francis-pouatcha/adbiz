@@ -16,9 +16,9 @@ module.exports = function() {
     var nodeModules = 'node_modules';
 
     var karma = {
-        files: [bower.directory+'*.js',
+        files: [bower.directory + '*.js',
                 clientApp + 'blocks/router/*.js',
-                clientApp+'*.js'],
+                clientApp + '*.js'],
         exclude: []
     };
 

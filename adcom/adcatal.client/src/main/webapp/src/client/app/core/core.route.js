@@ -6,9 +6,8 @@
         .run(appRun);
 
     /* @ngInject */
-    function appRun(routerHelper,BASE_URL) {
-        var otherwise = BASE_URL+ '/';
-
+    function appRun(routerHelper) {
+        var otherwise = '/article';
         routerHelper.configureStates(getStates(), otherwise);
     }
 

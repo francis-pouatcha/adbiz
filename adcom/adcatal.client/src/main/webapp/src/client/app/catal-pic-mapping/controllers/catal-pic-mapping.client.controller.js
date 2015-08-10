@@ -11,8 +11,8 @@
         'CatalPicMappingForm',
         'ArticleForm'];
     /* @ngInject */
-    function CatalPicMappingController(logger, CatalPicMapping, utils,
-                                       CatalPicMappingForm, ArticleForm) {
+    function CatalPicMappingController(logger, CatalPicMapping,
+                                       utils, CatalPicMappingForm, ArticleForm) {
 
         var vm = this;
         vm.data = [];
@@ -23,8 +23,6 @@
             vm.formFields = CatalPicMappingForm.getFormFields(disabled);
             vm.formFields[0].defaultValue = vm.catalArticleId;
         };
-
-
         vm.createForm = function (model) {
             utils.templateModal(model, 'createForm',
                 'app/catal-pic-mapping/views/create.html', vm);
@@ -39,12 +37,12 @@
         };
 
         vm.init = function () {
-            CatalPicMapping.findBy(coreSearchInput(), function (response) {
+            CatalPicMapping.findBy(coreSearchInputInit(), function (response) {
                 vm.data = response.resultList;
             });
         };
 
-        function coreSearchInput() {
+        function coreSearchInputInit() {
             vm.catalArticleId = ArticleForm.catalArticleId;
             var searchInput = {};
             searchInput.entity = {};
@@ -59,8 +57,8 @@
             vm.catalArticleId = ArticleForm.catalArticleId;
             catalPicMapping.cntnrIdentif = vm.catalArticleId;
             // Create new catalPicMapping object
-            catalPicMapping = new CatalPicMapping(catalPicMapping);
-            catalPicMapping.$save(function (response) {
+            var catalPicMappingRes = new CatalPicMapping(catalPicMapping);
+            catalPicMappingRes.$save(function (response) {
                 logger.success('CatalPicMapping created');
                 vm.data.push(response);
             }, function (errorResponse) {
@@ -92,8 +90,8 @@
         // Update existing catalPicMapping
         vm.update = function (catalPicMapping) {
             var index = vm.data.indexOf(vm.model);
-            catalPicMapping = new CatalPicMapping(catalPicMapping);
-            catalPicMapping.$update(function () {
+            var catalPicMappingRes = new CatalPicMapping(catalPicMapping);
+            catalPicMappingRes.$update(function () {
                 logger.success('catalPicMapping updated');
                 vm.data.splice(index, 1);
                 vm.data.push(catalPicMapping);
