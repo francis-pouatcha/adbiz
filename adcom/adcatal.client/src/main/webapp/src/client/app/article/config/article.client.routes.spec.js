@@ -14,10 +14,10 @@ describe('article routes', function () {
         });
         bard.verifyNoOutstandingHttpRequests();
         it('should map state listArticle to url / ', function() {
-            expect($state.href('listArticle', {})).to.equal('/');
+            expect($state.href('listArticle', {})).toEqual('/');
         });
         it('should map /listArticle route to listArticle View template', function () {
-            expect($state.get('listArticle').templateUrl).to.equal(view);
+            expect($state.get('listArticle').templateUrl).toEqual(view);
         });
         it('of listArticle should work with $state.go', function () {
             $state.go('listArticle');
