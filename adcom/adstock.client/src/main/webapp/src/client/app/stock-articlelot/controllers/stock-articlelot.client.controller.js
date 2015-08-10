@@ -47,11 +47,7 @@
         vm.remove = function(stockArticlelot) {
 
             if (stockArticlelot) {
-
                 stockArticlelot = StockArticlelot.get({stockArticlelotId:stockArticlelot.id}, function() {
-
-            
-
                     stockArticlelot.$remove(function() {
                         logger.success('StockArticlelot deleted');
                         vm.tableParams.reload();
