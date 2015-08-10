@@ -31,11 +31,11 @@
                 'app/catal-art-detail-config/views/create.html', vm);
         };
 
-        vm.editForm = function(model){
+        vm.editForm = function(model) {
             utils.templateModal(model, 'editForm',
                 'app/catal-art-detail-config/views/edit.html', vm);
         };
-        vm.showForm = function(model){
+        vm.showForm = function(model) {
             utils.templateModal(model, 'showForm',
                 'app/catal-art-detail-config/views/view.html', vm);
         };
@@ -81,7 +81,7 @@
                     });
                 });
             } else {
-                 index = vm.data.indexOf(vm.catalArtDetailConfig);
+                index = vm.data.indexOf(vm.catalArtDetailConfig);
                 vm.catalArtDetailConfig.$remove(function() {
                     logger.success('CatalArtDetailConfig deleted');
                     vm.data.splice(index, 1);

@@ -34,7 +34,8 @@
     "angular-formly": "~6.18.1",
     "angular-formly-templates-bootstrap": "~4.0.3",
     "angular-translate": "~2.7.2",
-    "keycloak": "1.0.4"
+    "keycloak": "1.0.4",
+    "sinon": "~1.15.4"
   },
   "resolutions": {
     "api-check": "^7.0.0"

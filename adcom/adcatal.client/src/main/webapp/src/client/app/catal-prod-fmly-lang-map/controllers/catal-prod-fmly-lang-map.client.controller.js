@@ -15,7 +15,6 @@
     function CatalProdFmlyLangMapController(logger, CatalProdFmlyLangMap,
                                             utils, CatalProdFmlyLangMapForm, CatalProdFmlyForm) {
 
-
         var vm = this;
         vm.data = [];
         vm.catalProdFmlyLangMap = {};

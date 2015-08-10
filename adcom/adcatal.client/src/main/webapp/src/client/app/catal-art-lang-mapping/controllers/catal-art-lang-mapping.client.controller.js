@@ -11,10 +11,10 @@
         'utils',
         'CatalArtLangMappingForm',
         'ArticleForm'];
+
     /* @ngInject */
     function CatalArtLangMappingController(logger, CatalArtLangMapping,
                                            utils, CatalArtLangMappingForm, ArticleForm) {
-
         var vm = this;
         vm.data = [];
         vm.catalArtLangMapping = {};

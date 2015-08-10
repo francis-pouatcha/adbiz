@@ -7,7 +7,7 @@ describe('ArticleController', function() {
         bard.inject('$controller', '$log', '$q', '$rootScope', 'Article');
     });
     beforeEach(function () {
-    //  sinon.stub(Article, 'getPeople').returns($q.when(people));
+        //sinon.stub(Article, 'getPeople').returns($q.when(people));
         controller = $controller('ArticleController');
         $rootScope.$apply();
     });

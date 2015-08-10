@@ -13,7 +13,7 @@
 
         var service = {};
 
-        function ModalInstanceCtrl($modalInstance,model) {
+        function ModalInstanceCtrl($modalInstance, model) {
 
             var vm = this;
             vm.model = model;
@@ -30,7 +30,7 @@
             }
         }
 
-        service.templateModal = function(model, typeForm, templateUrl, parentCtrl){
+        service.templateModal = function(model, typeForm, templateUrl, parentCtrl) {
             var result = $modal.open({
                 templateUrl: templateUrl,
                 controller: ModalInstanceCtrl,

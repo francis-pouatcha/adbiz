@@ -3,6 +3,7 @@ describe('article routes', function () {
     describe('state listArticle', function () {
         var controller;
         var view = 'app/article/views/list.html';
+
         beforeEach(function() {
             module('app.article', bard.fakeToastr);
             bard.inject('$httpBackend', '$location', '$rootScope', '$state', '$templateCache');
