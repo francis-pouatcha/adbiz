@@ -87,10 +87,29 @@
     });
 
     /* @ngInject */
-    appModule.config(function($httpProvider, $locationProvider) {
+    appModule.config(function($httpProvider, $locationProvider, flowFactoryProvider,
+                              API_BASE_URL) {
         $httpProvider.interceptors.push('errorInterceptor');
         $httpProvider.interceptors.push('authInterceptor');
-        $locationProvider.html5Mode(false);
+        //$locationProvider.html5Mode(false);
+        flowFactoryProvider.defaults = {
+            target: API_BASE_URL + '/upload',
+            permanentErrors: [404, 500, 501],
+            maxChunkRetries : 1,
+            chunkRetryInterval : 5000,
+            simultaneousUploads : 4,
+            progressCallbacksInterval : 1,
+            testChunks: false,
+            withCredentials : true,
+            method : 'octet'
+        };
+        // You can also set default events:
+        flowFactoryProvider.on('catchAll', function (event) {
+            //console.log('catchAll', arguments);
+            //logger.
+        });
+        // Can be used with different implementations of Flow.js
+        //flowFactoryProvider.factory = fustyFlowFactory;
     });
     /* jshint ignore:start */
     /* @ngInject */
