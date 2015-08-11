@@ -4,25 +4,21 @@ describe('article routes', function () {
         var controller;
         var view = 'app/article/views/list.html';
 
+<<<<<<< HEAD
+        beforeEach(module('app.article'));
+
+=======
+>>>>>>> d30e0dbce322424b80a0dfc8b1b160793d002e9e
         beforeEach(function() {
-            module('app.article', bard.fakeToastr);
+          //  module('app.article', bard.fakeToastr);
             bard.inject('$httpBackend', '$location', '$rootScope', '$state', '$templateCache');
         });
-        beforeEach(function() {
-            $templateCache.put(view, '');
-        });
+
         bard.verifyNoOutstandingHttpRequests();
         it('should map state listArticle to url / ', function() {
-            expect($state.href('listArticle', {})).to.equal('/');
+            expect($state.href('listArticle', {})).toEqual('/');
         });
-        it('should map /listArticle route to listArticle View template', function () {
-            expect($state.get('listArticle').templateUrl).to.equal(view);
-        });
-        it('of listArticle should work with $state.go', function () {
-            $state.go('listArticle');
-            $rootScope.$apply();
-            expect($state.is('listArticle'));
-        });
+
     });
 
 });
