@@ -4,7 +4,7 @@
         .module('app.article')
         .run(appRun);
 
-    appRun.$inject = ['app.article', 'routerHelper'];
+    appRun.$inject = ['routerHelper'];
     /* @ngInject */
     function appRun(routerHelper) {
         routerHelper.configureStates(getStates());

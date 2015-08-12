@@ -2,6 +2,7 @@ module.exports = function() {
     var client = './src/client/';
     var server = './src/server/';
     var clientApp = client + 'app/';
+    var article = clientApp + 'article/';
     var report = './report/';
     var root = './';
     var specRunnerFile = 'specs.html';
@@ -18,7 +19,8 @@ module.exports = function() {
     var karma = {
         files: [bower.directory + '*.js',
                 clientApp + 'blocks/router/*.js',
-                clientApp + '*.js'],
+                article + 'services/*.js',
+            clientApp + '*.js'],
         exclude: []
     };
 
@@ -43,13 +45,14 @@ module.exports = function() {
         // app js, with no specs
         js: [
                 clientApp + '**/*.module.js',
-                clientApp + '**/*.js',
                 clientApp + 'blocks/**/*.js',
+            clientApp + '**/*.js',
                 '!' + clientApp + '**/*.spec.js'
         ],
         jsOrder: [
             '**/app.module.js',
             '**/*.module.js',
+            '**/*.service.js',
             '**/*.js'
         ],
         less: client + 'styles/styles.less',
@@ -162,6 +165,9 @@ module.exports = function() {
                 bowerFiles,
                 config.specHelpers,
                     clientApp + '**/*.module.js',
+                    clientApp + 'blocks/router/*.js',
+                clientApp + 'article/services/*.service.js',
+                    article + 'services/*.service.js',
                     clientApp + '**/*.js',
                     temp + config.templateCache.file,
                 config.serverIntegrationSpecs
