@@ -3,14 +3,8 @@ describe('article routes', function () {
     describe('state listArticle', function () {
         var controller;
         var view = 'app/article/views/list.html';
-
-<<<<<<< HEAD
-        beforeEach(module('app.article'));
-
-=======
->>>>>>> d30e0dbce322424b80a0dfc8b1b160793d002e9e
         beforeEach(function() {
-          //  module('app.article', bard.fakeToastr);
+            module('app.article', bard.fakeToastr);
             bard.inject('$httpBackend', '$location', '$rootScope', '$state', '$templateCache');
         });
 
