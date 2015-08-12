@@ -18,7 +18,7 @@
             update: {
                 method: 'PUT'
             },
-            download: {
+            export: {
                 method: 'GET',
                 url: API_BASE_URL + '/importExport/download/:xlsType'
             }

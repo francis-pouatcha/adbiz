@@ -66,6 +66,7 @@ cd $JBOSS_HOME/adcom/ && mkdir adinvtry
 cd $JBOSS_HOME/adcom/adinvtry/ && mkdir data
 cd $JBOSS_HOME/adcom/ && mkdir adsales
 cd $JBOSS_HOME/adcom/adsales/ && mkdir data
+d $JBOSS_HOME/adcom/ && mkdir sample
 
 cd $JBOSS_HOME/standalone/ && mkdir security
 
@@ -78,6 +79,7 @@ cd $JBOSS_HOME/adcom/adbnsptnr/data/ && rm ad*
 cd $JBOSS_HOME/adcom/adprocmt/data/ && rm ad*
 cd $JBOSS_HOME/adcom/adinvtry/data/ && rm ad*
 cd $JBOSS_HOME/adcom/adsales/data/ && rm ad*
+cd $JBOSS_HOME/adcom/sample && rm *.xls
 
 echo 'configuring keycloak for OAuth'
 cp -r $ADCOM_HOME/adcom.configuration/keycloak/deployments $JBOSS_HOME/standalone
@@ -149,6 +151,7 @@ cp adcom.configuration/jboss-eap-6.3/adcom/adbnsptnr/data/adbnsptnr.xls $JBOSS_H
 cp adcom.configuration/jboss-eap-6.3/adcom/adprocmt/data/adprocmt.xls $JBOSS_HOME/adcom/adprocmt/data/
 cp adcom.configuration/jboss-eap-6.3/adcom/adinvtry/data/adinvtry.xls $JBOSS_HOME/adcom/adinvtry/data/
 cp adcom.configuration/jboss-eap-6.3/adcom/adsales/data/adsales* $JBOSS_HOME/adcom/adsales/data/
+cp -r adcom.configuration/jboss-eap-6.3/adcom/sample $JBOSS_HOME/adcom/sample
 
 echo 'back to adcom home'
 cd $ADCOM_HOME

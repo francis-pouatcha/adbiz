@@ -50,11 +50,11 @@ public class ImportExportXlsEndpoint {
 
 	@GET
 	@Path("/download/{xlsType}")
-	@Produces({"application/xls","application/octet-stream" })
+	@Produces({"application/xls","application/octet-stream","application/vnd.ms-excel"})
 	public Response download(@PathParam("xlsType") String xlsType,
 			@Context HttpServletResponse response) throws AdException {
 
-		String filename = xlsType.toLowerCase()+".xls";
+		String filename = xlsType+".xls";
 		OutputStream os = null;
 		try {
 			File file = new File(DOWNLOAD_DIR, filename);

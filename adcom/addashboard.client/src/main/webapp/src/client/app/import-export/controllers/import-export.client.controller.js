@@ -9,22 +9,16 @@
         'fileExtractor'
     ];
     /* @ngInject */
-    function ImportExportController(logger, fileExtractor, ImportExport) {
+    function ImportExportController(logger, ImportExport, fileExtractor) {
 
         var vm = this;
 
         vm.download = function() {
-                console.log('download start');
-            ImportExport.download ({xlsType: vm.xlsType})
-                .$promise.then(
-                    function(value) {
-                        fileExtractor.extractFile(value, 'xls');
-                    },
-                    function(error) {
-                        vm.error = error;
-                    }
+            console.log(ImportExport);
+            ImportExport.export({xlsType: vm.xlsType}, function(value) {
+                    fileExtractor.extractFile(value, 'xls');
+                }
             );
-
         };
 
         vm.xlsChange = function() {
@@ -33,7 +27,6 @@
 
         vm.params = {
             query: function (flowFile, flowChunk) {
-                // function will be called for every request
                 return {
                     xlsType: vm.xlsType
                 };
