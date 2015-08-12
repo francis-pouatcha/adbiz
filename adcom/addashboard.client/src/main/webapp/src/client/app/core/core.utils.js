@@ -61,4 +61,31 @@
 
     }
 
+    angular
+        .module('app.core')
+        .factory('fileExtractor',['$window',function($window){
+
+            var  service = {
+                extractFile : extractFile,
+                saveFile:saveFile
+
+            };
+            return service ;
+            //////////////////////////////////////////////////////////////////////////////////////////////////
+            function extractFile(data,fileType)
+            {
+                var file = new Blob([data], {type: fileType});
+                var fileURL = URL.createObjectURL(file);
+                $window.open(fileURL);
+            }
+
+            function saveFile(data,fileType,fileName)
+            {
+                var file = new Blob([data], {type: fileType});
+                saveAs(file, fileName);
+            }
+
+        }]);
+
+
 })();

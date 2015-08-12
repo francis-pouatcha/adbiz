@@ -12,13 +12,30 @@
 			ImportExport View
     </div>
     <div class="panel-body">
-
-        <h3>
-            <a name="basic-example" class="anchor"><span class="octicon octicon-link"></span></a>Upload xls file</h3>
-
+        <div class="row panel-body" >
+            <form>
+                <div class="col-lg-3">
+                    <h3 >
+                        <a name="basic-example" class="anchor"><span class="octicon octicon-link"></span></a>
+                        Upload xls file
+                    </h3>
+                </div>
+                <div class="col-lg-3 col-offset-3">
+                    <select class="form-control" ng-model="vm.xlsType" ng-change="vm.xlsChange()" >
+                        <option value="ADCATAL">CATALOGUE</option>
+                        <option value="ADPRCMT">POCUREMENT</option>
+                        <option value="ADINVTRY">INVENTORY</option>
+                        <option value="ADSTOCK">STOCK</option>
+                    </select>
+                </div>
+                <div class="col-lg-3">
+                    <button ng-click="vm.download()" class="btn btn-default" >Download sample</button>
+                </div>
+            </form>
+        </div>
         <div class="alert alert-warning">drag and drop or select one or more xls file to upload</div>
 
-        <div flow-init
+        <div flow-init="vm.params"
              flow-files-submitted="$flow.upload()" flow-file-added="!!{xls:1}[$file.getExtension()]">
             <div class="drop" flow-drop ng-class="dropClass">
                 <span class="btn btn-default" flow-btn>Upload File</span>

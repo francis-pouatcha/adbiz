@@ -93,7 +93,7 @@
         $httpProvider.interceptors.push('authInterceptor');
         //$locationProvider.html5Mode(false);
         flowFactoryProvider.defaults = {
-            target: API_BASE_URL + '/upload',
+            target: API_BASE_URL + '/importExport/upload',
             permanentErrors: [404, 500, 501],
             maxChunkRetries : 1,
             chunkRetryInterval : 5000,

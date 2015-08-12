@@ -10,12 +10,17 @@
     function ImportExport($resource, API_BASE_URL) {
 
         var params = {
-            importExportId: '@id'
+            importExportId: '@id',
+            xlsType: '@xlsType'
         };
 
         var actions = {
             update: {
                 method: 'PUT'
+            },
+            download: {
+                method: 'GET',
+                url: API_BASE_URL + '/importExport/download/:xlsType'
             }
         };
 
