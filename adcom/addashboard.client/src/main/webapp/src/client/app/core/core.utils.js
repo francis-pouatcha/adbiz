@@ -63,7 +63,7 @@
 
     angular
         .module('app.core')
-        .factory('fileExtractor',['$window',function($window){
+        .factory('fileExtractor', ['$window', function($window) {
 
             var  service = {
                 extractFile : extractFile,
@@ -72,20 +72,18 @@
             };
             return service ;
             //////////////////////////////////////////////////////////////////////////////////////////////////
-            function extractFile(data,fileType)
+            function extractFile(data, fileType)
             {
                 var file = new Blob([data], {type: fileType});
                 var fileURL = URL.createObjectURL(file);
                 $window.open(fileURL);
             }
 
-            function saveFile(data,fileType,fileName)
+            function saveFile(data, fileType, fileName)
             {
                 var file = new Blob([data], {type: fileType});
-                saveAs(file, fileName);
+                //saveAs(file, fileName);
             }
 
         }]);
-
-
 })();

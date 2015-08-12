@@ -14,16 +14,16 @@
         var vm = this;
 
         vm.download = function() {
-
-            ImportExport.download({xlsType: vm.xlsType})
+                console.log('download start');
+            ImportExport.download ({xlsType: vm.xlsType})
                 .$promise.then(
-                    function( value ){
+                    function(value) {
                         fileExtractor.extractFile(value, 'xls');
                     },
-                    function( error ){
+                    function(error) {
                         vm.error = error;
                     }
-            )
+            );
 
         };
 

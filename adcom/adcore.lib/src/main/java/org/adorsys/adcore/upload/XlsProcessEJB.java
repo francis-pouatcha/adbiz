@@ -24,7 +24,7 @@ public class XlsProcessEJB {
 		listDir.put(XlsType.ADCATAL.name(), "adcom/adcatal/data/");
 		listDir.put(XlsType.ADSTOCK.name(), "adcom/adstock/data/");
 		listDir.put(XlsType.ADINVTRY.name(), "adcom/adinvtry/data/");
-		listDir.put(XlsType.ADPRCMT.name(), "adcom/adprcmt/data/");
+		listDir.put(XlsType.ADPROCMT.name(), "adcom/adprcmt/data/");
 	}
 
 	public Boolean processXls(FlowInfo flowInfo){

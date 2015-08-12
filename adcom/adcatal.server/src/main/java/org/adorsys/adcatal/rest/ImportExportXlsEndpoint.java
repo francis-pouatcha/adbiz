@@ -54,7 +54,7 @@ public class ImportExportXlsEndpoint {
 	public Response download(@PathParam("xlsType") String xlsType,
 			@Context HttpServletResponse response) throws AdException {
 
-		String filename = xlsType+".xls";
+		String filename = xlsType.toLowerCase()+".xls";
 		OutputStream os = null;
 		try {
 			File file = new File(DOWNLOAD_DIR, filename);

@@ -85,7 +85,8 @@ cp -r $ADCOM_HOME/adcom.configuration/keycloak/configuration $JBOSS_HOME/standal
 cp $ADCOM_HOME/adcom.configuration/keycloak/adcomrealm.json $JBOSS_HOME/
 cd $JBOSS_HOME
 unzip -o $ADCOM_HOME/adcom.configuration/keycloak/adapters/keycloak-eap6-adapter-dist-1.0.4.Final.zip
-cd $JBOSS_HOME/standalone/deployments/ && unzip -o auth-server.war.zip
+cd $JBOSS_HOME/standalone/deployments/
+unzip -o auth-server.war.zip
 
 
 echo 'cnfiguring jboss'
