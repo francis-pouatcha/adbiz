@@ -2,7 +2,6 @@ module.exports = function() {
     var client = './src/client/';
     var server = './src/server/';
     var clientApp = client + 'app/';
-    var article = clientApp + 'article/';
     var report = './report/';
     var root = './';
     var specRunnerFile = 'specs.html';
@@ -16,13 +15,12 @@ module.exports = function() {
     };
     var nodeModules = 'node_modules';
 
-    var karma = {
-        files: [bower.directory + '*.js',
-                clientApp + 'blocks/router/*.js',
-                article + 'services/*.js',
-            clientApp + '*.js'],
-        exclude: []
-    };
+//    var karma = {
+//        files: [bower.directory + '*.js',
+//                clientApp + 'blocks/router/*.js',
+//                clientApp + '*.js'],
+//        exclude: []
+//    };
 
     var config = {
         /**
@@ -128,7 +126,7 @@ module.exports = function() {
                 nodeModules + '/sinon-chai/lib/sinon-chai.js'
         ],
         specHelpers: [client + 'test-helpers/*.js'],
-        specs: [clientApp + '**/*.spec.js'],
+//        specs: [clientApp + '**/*.spec.js'],
         serverIntegrationSpecs: [client + '/tests/server-integration/**/*.spec.js'],
 
         /**
@@ -164,11 +162,10 @@ module.exports = function() {
             files: [].concat(
                 bowerFiles,
                 config.specHelpers,
-                    clientApp + '**/*.module.js',
-                    clientApp + 'blocks/router/*.js',
-                clientApp + 'article/services/*.service.js',
-                    article + 'services/*.service.js',
-                    clientApp + '**/*.js',
+//                    clientApp + '**/*.module.js',
+//                    clientApp + 'blocks/router/*.js',
+//                    clientApp + 'article/services/*.service.js',
+//                    clientApp + '**/*.js',
                     temp + config.templateCache.file,
                 config.serverIntegrationSpecs
             ),
