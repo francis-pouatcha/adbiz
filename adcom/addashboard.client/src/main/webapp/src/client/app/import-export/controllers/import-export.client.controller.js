@@ -15,8 +15,8 @@
 
         vm.download = function() {
             console.log(ImportExport);
-            ImportExport.export({xlsType: vm.xlsType}, function(value) {
-                    fileExtractor.extractFile(value, 'xls');
+            ImportExport.export({xlsType: vm.xlsType}, function(data) {
+                    fileExtractor.saveFile(data, 'sample.xls', 'vnd.ms-excel');
                 }
             );
         };
