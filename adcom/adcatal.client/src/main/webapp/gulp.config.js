@@ -15,12 +15,12 @@ module.exports = function() {
     };
     var nodeModules = 'node_modules';
 
-//    var karma = {
-//        files: [bower.directory + '*.js',
-//                clientApp + 'blocks/router/*.js',
-//                clientApp + '*.js'],
-//        exclude: []
-//    };
+    var karma = {
+        files: [bower.directory + '*.js',
+                clientApp + 'blocks/router/*.js',
+                clientApp + '*.js'],
+        exclude: []
+    };
 
     var config = {
         /**
@@ -126,7 +126,7 @@ module.exports = function() {
                 nodeModules + '/sinon-chai/lib/sinon-chai.js'
         ],
         specHelpers: [client + 'test-helpers/*.js'],
-//        specs: [clientApp + '**/*.spec.js'],
+        specs: [clientApp + '**/*.spec.js'],
         serverIntegrationSpecs: [client + '/tests/server-integration/**/*.spec.js'],
 
         /**
@@ -161,11 +161,13 @@ module.exports = function() {
         var options = {
             files: [].concat(
                 bowerFiles,
+                clientApp + 'blocks/router/router-helper.provider.js',
+                clientApp + 'blocks/router/router.module.js',
                 config.specHelpers,
-//                    clientApp + '**/*.module.js',
-//                    clientApp + 'blocks/router/*.js',
-//                    clientApp + 'article/services/*.service.js',
-//                    clientApp + '**/*.js',
+                    clientApp + '**/*.module.js',
+                clientApp + 'article/services/*.service.js',
+                    clientApp + 'article/config/*.js',
+
                     temp + config.templateCache.file,
                 config.serverIntegrationSpecs
             ),
