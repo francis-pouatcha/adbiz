@@ -12,62 +12,79 @@
 			ImportExport View
     </div>
     <div class="panel-body">
-
-        <h3>
-            <a name="basic-example" class="anchor"><span class="octicon octicon-link"></span></a>Upload xls file</h3>
-
+        <div class="row panel-body" >
+            <form>
+                <div class="col-lg-3">
+                    <h3 >
+                        <a name="basic-example" class="anchor"><span class="octicon octicon-link"></span></a>
+                        Upload xls file
+                    </h3>
+                </div>
+                <div class="col-lg-3 col-offset-3">
+                    <select class="form-control" ng-model="vm.xlsType" ng-change="vm.xlsChange()" >
+                        <option value="ADCATAL">CATALOGUE</option>
+                        <option value="ADPROCMT">POCUREMENT</option>
+                        <option value="ADINVTRY">INVENTORY</option>
+                        <option value="ADSTOCK">STOCK</option>
+                    </select>
+                </div>
+                <div class="col-lg-3">
+                    <button ng-click="vm.download()" ng-show="!vm.xlsType" class="btn btn-default" >Download sample</button>
+                </div>
+            </form>
+        </div>
         <div class="alert alert-warning">drag and drop or select one or more xls file to upload</div>
+        <div ng-show="!vm.xlsType" >
+            <div flow-init="vm.params"
+                 flow-files-submitted="$flow.upload()" flow-file-added="!!{xls:1}[$file.getExtension()]">
+                <div class="drop" flow-drop ng-class="dropClass">
+                    <span class="btn btn-default" flow-btn>Upload File</span>
+                    <!--<span class="btn btn-default" flow-btn flow-directory ng-show="$flow.supportDirectory">Upload Folder</span>-->
+                    <b>OR</b>
+                    Drag And Drop your file here
+                </div>
 
-        <div flow-init
-             flow-files-submitted="$flow.upload()" flow-file-added="!!{xls:1}[$file.getExtension()]">
-            <div class="drop" flow-drop ng-class="dropClass">
-                <span class="btn btn-default" flow-btn>Upload File</span>
-                <!--<span class="btn btn-default" flow-btn flow-directory ng-show="$flow.supportDirectory">Upload Folder</span>-->
-                <b>OR</b>
-                Drag And Drop your file here
-            </div>
+                <br/>
 
-            <br/>
+                <div class="well">
+                    <a class="btn btn-small btn-success" ng-click="$flow.resume()">Resume all</a>
+                    <a class="btn btn-small btn-danger" ng-click="$flow.pause()">Pause all</a>
+                    <a class="btn btn-small btn-info" ng-click="$flow.cancel()">Cancel all</a>
+                    <span class="label label-info">Total Size: {{$flow.getSize()}}bytes</span>
+                </div>
 
-            <div class="well">
-                <a class="btn btn-small btn-success" ng-click="$flow.resume()">Resume all</a>
-                <a class="btn btn-small btn-danger" ng-click="$flow.pause()">Pause all</a>
-                <a class="btn btn-small btn-info" ng-click="$flow.cancel()">Cancel all</a>
-                <span class="label label-info">Total Size: {{$flow.getSize()}}bytes</span>
-            </div>
+                <div>
 
-            <div>
-
-                <div ng-repeat="file in $flow.files" class="transfer-box">
-                    {{file.relativePath}} ({{file.size}}bytes)
-                    <div class="progress progress-striped" ng-class="{active: file.isUploading()}">
-                        <div class="progress-bar" role="progressbar"
-                             aria-valuenow="{{file.progress() * 100}}"
-                             aria-valuemin="0"
-                             aria-valuemax="100"
-                             ng-style="{width: (file.progress() * 100) + '%'}">
-                            <span><img flow-img="file" /></span>
-                            <span class="sr-only">{{file.progress()}}% Complete</span>
+                    <div ng-repeat="file in $flow.files" class="transfer-box">
+                        {{file.relativePath}} ({{file.size}}bytes)
+                        <div class="progress progress-striped" ng-class="{active: file.isUploading()}">
+                            <div class="progress-bar" role="progressbar"
+                                 aria-valuenow="{{file.progress() * 100}}"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 ng-style="{width: (file.progress() * 100) + '%'}">
+                                <span><img flow-img="file" /></span>
+                                <span class="sr-only">{{file.progress()}}% Complete</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="btn-group">
-                        <a class="btn btn-xs btn-warning" ng-click="file.pause()" ng-show="!file.paused && file.isUploading()">
-                            Pause
-                        </a>
-                        <a class="btn btn-xs btn-warning" ng-click="file.resume()" ng-show="file.paused">
-                            Resume
-                        </a>
-                        <a class="btn btn-xs btn-danger" ng-click="file.cancel()">
-                            Cancel
-                        </a>
-                        <a class="btn btn-xs btn-info" ng-click="file.retry()" ng-show="file.error">
-                            Retry
-                        </a>
+                        <div class="btn-group">
+                            <a class="btn btn-xs btn-warning" ng-click="file.pause()" ng-show="!file.paused && file.isUploading()">
+                                Pause
+                            </a>
+                            <a class="btn btn-xs btn-warning" ng-click="file.resume()" ng-show="file.paused">
+                                Resume
+                            </a>
+                            <a class="btn btn-xs btn-danger" ng-click="file.cancel()">
+                                Cancel
+                            </a>
+                            <a class="btn btn-xs btn-info" ng-click="file.retry()" ng-show="file.error">
+                                Retry
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
   </div>
 
