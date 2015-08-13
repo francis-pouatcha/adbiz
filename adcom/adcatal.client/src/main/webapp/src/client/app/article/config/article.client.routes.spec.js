@@ -6,7 +6,7 @@ describe('article routes', function () {
         beforeEach(function() {
             module('app.article', bard.fakeToastr);
             bard.$inject = ['$httpBackend', '$location', '$rootScope', '$state',
-                '$templateCache', 'Article'];
+                '$templateCache'];
         });
         bard.verifyNoOutstandingHttpRequests();
         it('should map state listArticle to url / ', function() {

@@ -154,11 +154,13 @@ module.exports = function() {
         var options = {
             files: [].concat(
                 bowerFiles,
+                clientApp + 'blocks/router/router-helper.provider.js',
+                clientApp + 'blocks/router/router.module.js',
                 config.specHelpers,
-//                    clientApp + '**/*.module.js',
-//                    clientApp + 'blocks/router/*.js',
-//                    clientApp + 'article/services/*.service.js',
-//                    clientApp + '**/*.js',
+                    clientApp + '**/*.module.js',
+                clientApp + 'article/services/*.service.js',
+                    clientApp + 'article/config/*.js',
+
                     temp + config.templateCache.file,
                 config.serverIntegrationSpecs
             ),
