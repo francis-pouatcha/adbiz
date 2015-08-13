@@ -18,9 +18,10 @@
             update: {
                 method: 'PUT'
             },
-            download: {
-                method: 'GET',
-                url: API_BASE_URL + '/importExport/download/:xlsType'
+            export: {
+                method: 'POST',
+                url: API_BASE_URL + '/importExport/download/:xlsType',
+                responseType: 'ArrayBuffer'
             }
         };
 

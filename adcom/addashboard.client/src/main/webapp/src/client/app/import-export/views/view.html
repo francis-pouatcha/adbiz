@@ -29,12 +29,12 @@
                     </select>
                 </div>
                 <div class="col-lg-3">
-                    <button ng-click="vm.download()" ng-show="!vm.xlsType" class="btn btn-default" >Download sample</button>
+                    <a href="sample/{{vm.xlsType}}.xls" ng-show="vm.xlsType" class="btn btn-default" >Download sample</a>
                 </div>
             </form>
         </div>
-        <div class="alert alert-warning">drag and drop or select one or more xls file to upload</div>
-        <div ng-show="!vm.xlsType" >
+        <div ng-show="vm.xlsType" class="alert alert-warning">drag and drop or select one or more xls file to upload</div>
+        <div ng-show="vm.xlsType" >
             <div flow-init="vm.params"
                  flow-files-submitted="$flow.upload()" flow-file-added="!!{xls:1}[$file.getExtension()]">
                 <div class="drop" flow-drop ng-class="dropClass">

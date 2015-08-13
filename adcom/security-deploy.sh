@@ -79,6 +79,7 @@ cd $JBOSS_HOME/adcom/adprocmt/data/ && rm ad*
 cd $JBOSS_HOME/adcom/adinvtry/data/ && rm ad*
 cd $JBOSS_HOME/adcom/adsales/data/ && rm ad*
 
+
 echo 'configuring keycloak for OAuth'
 cp -r $ADCOM_HOME/adcom.configuration/keycloak/deployments $JBOSS_HOME/standalone
 cp -r $ADCOM_HOME/adcom.configuration/keycloak/configuration $JBOSS_HOME/standalone

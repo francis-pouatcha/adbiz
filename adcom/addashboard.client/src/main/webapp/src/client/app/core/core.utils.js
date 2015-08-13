@@ -79,10 +79,9 @@
                 $window.open(fileURL);
             }
 
-            function saveFile(data, fileType, fileName)
-            {
+            function saveFile(data, fileName, fileType) {
                 var file = new Blob([data], {type: fileType});
-                //saveAs(file, fileName);
+                saveAs(file, fileName);//jshint ignore:line
             }
 
         }]);
