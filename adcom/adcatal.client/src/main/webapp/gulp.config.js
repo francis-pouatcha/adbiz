@@ -153,15 +153,19 @@ module.exports = function() {
     function getKarmaOptions() {
         var options = {
             files: [].concat(
-              //  bowerFiles,
+                bowerFiles,
                 bower.directory + 'angular/angular.js',
-                bower.directory + 'angular-animate/angular-animate.js',
                 bower.directory + 'angular-mocks/angular-mocks.js',
+                bower.directory + 'angular-animate/angular-animate.js',
                 bower.directory + 'angular-ui-router/release/angular-ui-router.js',
                 bower.directory + 'angular-route/angular-route.js',
-                clientApp + 'blocks/router/router.module.js',
+                clientApp + 'blocks/**/*.module.js',
+                clientApp + 'blocks/**/*.provider.js',
+                clientApp + 'blocks/**/*.js',
                 clientApp + 'blocks/router/router-helper.provider.js',
+                clientApp + 'blocks/router/router.module.js',
                 config.specHelpers,
+                client + 'core/*.js',
                 clientApp + '**/*.module.js',
                 clientApp + 'article/config/*.js',
                 clientApp + 'article/services/*.service.js',
