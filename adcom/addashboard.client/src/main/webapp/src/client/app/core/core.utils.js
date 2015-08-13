@@ -63,7 +63,7 @@
 
     angular
         .module('app.core')
-        .factory('fileExtractor', ['$window', 'SaveAs', function($window, SaveAs) {
+        .factory('fileExtractor', ['$window', function($window) {
 
             var  service = {
                 extractFile : extractFile,
@@ -79,10 +79,9 @@
                 $window.open(fileURL);
             }
 
-            function saveFile(data, fileName, fileType)
-            {
-                var options = {type: fileType};
-                SaveAs.download(data, fileName, options);
+            function saveFile(data, fileName, fileType) {
+                var file = new Blob([data], {type: fileType});
+                saveAs(file, fileName);//jshint ignore:line
             }
 
         }]);

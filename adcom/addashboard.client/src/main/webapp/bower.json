@@ -35,6 +35,7 @@
     "angular-formly-templates-bootstrap": "~4.0.3",
     "angular-translate": "~2.7.2",
     "keycloak": "1.0.4",
-    "ng-flow": "2.6.1"
+    "ng-flow": "2.6.1",
+    "file-saver.js": "1.20150507.2"
   }
 }

@@ -48,9 +48,9 @@ public class ImportExportXlsEndpoint {
 	public static final String UPLOAD_DIR = "/tmp";
 	public static final String DOWNLOAD_DIR = "adcom/sample/";
 
-	@GET
+	@POST
 	@Path("/download/{xlsType}")
-	@Produces({"application/xls","application/octet-stream","application/vnd.ms-excel"})
+	@Produces({"application/vnd.ms-excel" })
 	public Response download(@PathParam("xlsType") String xlsType,
 			@Context HttpServletResponse response) throws AdException {
 

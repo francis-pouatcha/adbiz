@@ -14,11 +14,11 @@
         var vm = this;
 
         vm.download = function() {
-            console.log(ImportExport);
             ImportExport.export({xlsType: vm.xlsType}, function(data) {
-                    fileExtractor.saveFile(data, 'sample.xls', 'vnd.ms-excel');
-                }
-            );
+                fileExtractor.saveFile(data, 'sample.xls', 'application/vnd.ms-excel');
+            }, function(error) {
+                console.log(error);
+            });
         };
 
         vm.xlsChange = function() {

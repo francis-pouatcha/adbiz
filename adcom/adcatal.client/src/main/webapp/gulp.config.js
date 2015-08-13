@@ -15,13 +15,6 @@ module.exports = function() {
     };
     var nodeModules = 'node_modules';
 
-//    var karma = {
-//        files: [bower.directory + '*.js',
-//                clientApp + 'blocks/router/*.js',
-//                clientApp + '*.js'],
-//        exclude: []
-//    };
-
     var config = {
         /**
          * File paths
@@ -126,7 +119,7 @@ module.exports = function() {
                 nodeModules + '/sinon-chai/lib/sinon-chai.js'
         ],
         specHelpers: [client + 'test-helpers/*.js'],
-//        specs: [clientApp + '**/*.spec.js'],
+        specs: [clientApp + '**/*.spec.js'],
         serverIntegrationSpecs: [client + '/tests/server-integration/**/*.spec.js'],
 
         /**
