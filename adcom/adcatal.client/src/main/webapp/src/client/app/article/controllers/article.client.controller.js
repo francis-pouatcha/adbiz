@@ -42,8 +42,8 @@
                 logger.success('Article created');
                 catalArtLangMapping.cntnrIdentif = response.id;
                 var catalArtLangMappingRes = new CatalArtLangMapping(catalArtLangMapping);
-                catalArtLangMappingRes.$save(function (responseTwo) {
-                    vm.data.push(responseTwo);
+                catalArtLangMappingRes.$save(function (response) {
+                    // vm.data.push(response);
                     $location.path('article/' + response.id);
 
                 }, function (errorResponse) {

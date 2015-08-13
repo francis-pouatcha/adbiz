@@ -15,13 +15,6 @@ module.exports = function() {
     };
     var nodeModules = 'node_modules';
 
-    var karma = {
-        files: [bower.directory + '*.js',
-                clientApp + 'blocks/router/*.js',
-                clientApp + '*.js'],
-        exclude: []
-    };
-
     var config = {
         /**
          * File paths
@@ -160,15 +153,21 @@ module.exports = function() {
     function getKarmaOptions() {
         var options = {
             files: [].concat(
-                bowerFiles,
-                clientApp + 'blocks/router/router-helper.provider.js',
+              //  bowerFiles,
+                bower.directory + 'angular/angular.js',
+                bower.directory + 'angular-animate/angular-animate.js',
+                bower.directory + 'angular-mocks/angular-mocks.js',
+                bower.directory + 'angular-ui-router/release/angular-ui-router.js',
+                bower.directory + 'angular-route/angular-route.js',
                 clientApp + 'blocks/router/router.module.js',
+                clientApp + 'blocks/router/router-helper.provider.js',
                 config.specHelpers,
-                    clientApp + '**/*.module.js',
+                clientApp + '**/*.module.js',
+                clientApp + 'article/config/*.js',
                 clientApp + 'article/services/*.service.js',
-                    clientApp + 'article/config/*.js',
-
-                    temp + config.templateCache.file,
+                clientApp + 'article/controllers/*.js',
+                clientApp + 'article/services/*.js',
+                temp + config.templateCache.file,
                 config.serverIntegrationSpecs
             ),
             exclude: [],

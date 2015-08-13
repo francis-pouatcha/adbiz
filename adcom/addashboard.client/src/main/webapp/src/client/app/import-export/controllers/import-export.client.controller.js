@@ -14,7 +14,7 @@
         var vm = this;
 
         vm.download = function() {
-                console.log('download start');
+            console.log('download start');
             ImportExport.download ({xlsType: vm.xlsType})
                 .$promise.then(
                     function(value) {
