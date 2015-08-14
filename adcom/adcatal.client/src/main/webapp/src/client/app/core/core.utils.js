@@ -11,6 +11,8 @@
     /* @ngInject */
     function utils($modal) {
 
+        var templateModal;
+
         var service = {
             templateModal : templateModal
         };
@@ -32,7 +34,7 @@
             }
         }
 
-        var templateModal = function(model, typeForm, templateUrl, parentCtrl) {
+        templateModal = function(model, typeForm, templateUrl, parentCtrl) {
             var result = $modal.open({
                 templateUrl: templateUrl,
                 controller: ModalInstanceCtrl,
