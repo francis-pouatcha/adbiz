@@ -42,12 +42,13 @@
                 logger.success('Article created');
                 catalArtLangMapping.cntnrIdentif = response.id;
                 var catalArtLangMappingRes = new CatalArtLangMapping(catalArtLangMapping);
-                catalArtLangMappingRes.$save(function (response) {
-                    // vm.data.push(response);
-                    $location.path('article/' + response.id);
+                vm.data.push(response);
 
-                }, function (errorResponse) {
-                    vm.error = errorResponse.data.summary;
+                catalArtLangMappingRes.$save(function (responseTwo) {
+                    $location.path('/article/' + response.id);
+
+                }, function (errorResponseTwo) {
+                    vm.error = errorResponseTwo.data.summary;
                 });
 
             }, function(errorResponse) {
@@ -105,8 +106,7 @@
                 vm.article.artName = response.resultList[0].artName;
                 vm.article.shortName = response.resultList[0].shortName;
             });
-            vm.article.artName = vm.data.artName;
-            vm.article.shortName = vm.data.shortName;
+
         };
         vm.toEditArticle = function() {
             vm.article = Article.get({articleId: $stateParams.articleId});
