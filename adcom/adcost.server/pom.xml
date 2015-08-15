@@ -19,7 +19,12 @@
 		</dependency>
 		<dependency>
 			<groupId>org.adorsys.adcom</groupId>
-			<artifactId>adbase.lib</artifactId>
+			<artifactId>adcost.lib</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.adorsys.adcom</groupId>
+			<artifactId>adstock.lib</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>

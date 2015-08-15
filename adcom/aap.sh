@@ -63,6 +63,8 @@ cd $JBOSS_HOME/adcom/ && mkdir adinvtry
 cd $JBOSS_HOME/adcom/adinvtry/ && mkdir data
 cd $JBOSS_HOME/adcom/ && mkdir adsales
 cd $JBOSS_HOME/adcom/adsales/ && mkdir data
+cd $JBOSS_HOME/adcom/ && mkdir adcost
+cd $JBOSS_HOME/adcom/adcost/ && mkdir data
 
 echo 'remove old deployments'
 cd $JBOSS_HOME/standalone/deployments/ && rm ad*
@@ -74,6 +76,7 @@ cd $JBOSS_HOME/adcom/adstock/data/ && rm ad*
 # cd $JBOSS_HOME/adcom/adprocmt/data/ && rm ad*
 cd $JBOSS_HOME/adcom/adinvtry/data/ && rm ad*
 # cd $JBOSS_HOME/adcom/adsales/data/ && rm ad*
+cd $JBOSS_HOME/adcom/adcost/data/ && rm ad*
 
 echo 'cnfiguring jboss'
 cp $ADCOM_HOME/adcom.configuration/jboss-eap-6.4/standalone/configuration/standalone-adds.xml $JBOSS_HOME/standalone/configuration/standalone.xml
@@ -104,10 +107,11 @@ cp adinvtry.server/target/adinvtry.server.war $JBOSS_HOME/standalone/deployments
 # cp adacc.server/target/adacc.server.war $JBOSS_HOME/standalone/deployments/
 # cp adterm.server/target/adterm.server.war $JBOSS_HOME/standalone/deployments/
 # cp adaptmt.server/target/adaptmt.server.war $JBOSS_HOME/standalone/deployments/
+cp adcost.server/target/adcost.server.war $JBOSS_HOME/standalone/deployments/
 
 # cp adres.client/target/adres.client.war $JBOSS_HOME/standalone/deployments/
 # cp adbase.client/target/adbase.client.war $JBOSS_HOME/standalone/deployments/
-# cp adcatal.client/target/adcatal.client.war $JBOSS_HOME/standalone/deployments/
+cp adcatal.client/target/adcatal.client.war $JBOSS_HOME/standalone/deployments/
 # cp adstock.client/target/adstock.client.war $JBOSS_HOME/standalone/deployments/
 # cp adprocmt.client/target/adprocmt.client.war $JBOSS_HOME/standalone/deployments/
 # cp adinvtry.client/target/adinvtry.client.war $JBOSS_HOME/standalone/deployments/

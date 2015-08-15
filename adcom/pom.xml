@@ -15,10 +15,12 @@
 		<module>adcatal.lib</module>
 		<module>adcatal.client</module>
 		<module>adstock.lib</module>
+		<module>adcost.lib</module>
 		<module>adinvtry.lib</module>
 		<module>adcatal.server</module>
 		<module>adstock.server</module>
 		<module>adinvtry.server</module>
+		<module>adcost.server</module>
 		<module>addashboard.client</module>
 <!-- 
 		<module>adprocmt.lib</module>
@@ -51,7 +53,6 @@
 		<module>adaptmt.server</module>
 		<module>adaptmt.client</module>
 		<module>admanager.client</module>
-		<module>adcost.server</module>
 		<module>adcom.all</module>
 		<module>adcom.configuration</module>
  -->
