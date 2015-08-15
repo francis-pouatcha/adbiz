@@ -11,10 +11,6 @@
     /* @ngInject */
     function utils($modal) {
 
-        var service = {
-            templateModal : templateModal
-        };
-
         function ModalInstanceCtrl($modalInstance, model) {
 
             var vm = this;
@@ -54,6 +50,10 @@
                     parentCtrl.update(model);
                 });
             }
+        };
+
+        var service = {
+            templateModal : templateModal
         };
 
         return service;
