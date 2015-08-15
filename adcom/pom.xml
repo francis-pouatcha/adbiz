@@ -11,6 +11,7 @@
 		<!-- POM Modules -->
 		<module>adcom.lib.parent</module>
 		<module>adcom.server.parent</module>
+		<module>adcom.client.parent</module>
 		<module>adcore.lib</module>
 		<module>adcatal.lib</module>
 		<module>adcatal.client</module>
