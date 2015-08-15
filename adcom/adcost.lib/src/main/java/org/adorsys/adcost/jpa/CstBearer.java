@@ -5,21 +5,23 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
 import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.annotation.TmprlCstr;
+import org.adorsys.adcore.enums.CoreTmprlDpndncy;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * A cost/profit bearer is an identifiable element in an activity center.
  * 
- * A bearer can bear costs and/or profit. 
+ * A bearer can bear costs and/or profit.
  * 
  * A bearer is always hosted by an activity center.
  * 
- * A bearer can be either a primary or a secondary bearer. 
- * 	- Primary bearers are only assigned costs/profits from the general accounting.
- * 	- Secondary bearers can receive costs from other bearers through the process of redistribution. 
+ * A bearer can be either a primary or a secondary bearer. - Primary bearers are
+ * only assigned costs/profits from the general accounting. - Secondary bearers
+ * can receive costs from other bearers through the process of redistribution.
  * 
  * 
  * @author francis
@@ -30,23 +32,6 @@ import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 public class CstBearer extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = 2129216711240922680L;
-
-	/*
-	 * The identifier of the cost center of this bearer. A bearer is always 
-	 * assigned to a well defined cost center.
-	 */
-	@Column
-	@Description("CstBearer_ctrNbr_description")
-	@NotNull
-	private String ctrNbr;
-	
-	/*
-	 * The identifier of this bearer.
-	 */
-	@Column
-	@Description("CstBearer_brrNbr_description")
-	@NotNull
-	private String brrNbr;
 
 	/*
 	 * The name of this bearer.
@@ -62,10 +47,13 @@ public class CstBearer extends CoreAbstIdentifObject {
 
 	/*
 	 * Tghe type of this bearer. Whether it is a primary or a secondary bearer.
+	 * 
+	 * Classification des porteurs primaires et secondaires
 	 */
 	@Column
 	@Description("CstBearer_brrType_description")
 	@Enumerated(EnumType.STRING)
+	@TmprlCstr(CoreTmprlDpndncy.ACC_YEAR)
 	private CstBearerType brrType;
 
 	/*
@@ -73,27 +61,43 @@ public class CstBearer extends CoreAbstIdentifObject {
 	 */
 	@Column
 	@Description("CstBearer_brrCur_description")
+	@TmprlCstr(CoreTmprlDpndncy.ACC_YEAR)
 	private String brrCur;
+
+	/*
+	 * Gestion des quantités consommées ;
+	 * 
+	 * avertissement pour les écritures sans quantités ;
+	 * 
+	 * aucune incidence sur la mise à jour des quantités.
+	 */
+	@Column
+	@Description("CstActivityCenter_qtyIndctr_description")
+	@TmprlCstr(CoreTmprlDpndncy.ACC_YEAR)
+	private String qtyIndctr;
+
+	/*
+	 * Détermination de l’unité de quantité utilisée
+	 */
+	@Column
+	@Description("CstActivityCenter_msrmntUnit_description")
+	@TmprlCstr(CoreTmprlDpndncy.ACC_YEAR)
+	private String msrmntUnit;
+
+	/*
+	 * Affectation au centre de coûts ou à la commande
+	 */
+	@Column
+	@Description("CstBearer_brrCur_description")
+	@TmprlCstr(CoreTmprlDpndncy.DATE)
+	private String activityCtr;
 
 	@Override
 	protected String makeIdentif() {
-		return ctrNbr + "_" + brrNbr;
-	}
-
-	public String getCtrNbr() {
-		return ctrNbr;
-	}
-
-	public void setCtrNbr(String ctrNbr) {
-		this.ctrNbr = ctrNbr;
-	}
-
-	public String getBrrNbr() {
-		return brrNbr;
-	}
-
-	public void setBrrNbr(String brrNbr) {
-		this.brrNbr = brrNbr;
+		if (StringUtils.isBlank(identif))
+			throw new IllegalStateException(
+					"Identifier must be set before creation");
+		return identif;
 	}
 
 	public String getDesgtn() {
@@ -128,4 +132,27 @@ public class CstBearer extends CoreAbstIdentifObject {
 		this.brrCur = brrCur;
 	}
 
+	public String getQtyIndctr() {
+		return qtyIndctr;
+	}
+
+	public void setQtyIndctr(String qtyIndctr) {
+		this.qtyIndctr = qtyIndctr;
+	}
+
+	public String getMsrmntUnit() {
+		return msrmntUnit;
+	}
+
+	public void setMsrmntUnit(String msrmntUnit) {
+		this.msrmntUnit = msrmntUnit;
+	}
+
+	public String getActivityCtr() {
+		return activityCtr;
+	}
+
+	public void setActivityCtr(String activityCtr) {
+		this.activityCtr = activityCtr;
+	}
 }
