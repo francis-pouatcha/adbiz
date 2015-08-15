@@ -16,5 +16,5 @@
             'formly',
             'formlyBootstrap',
             'pascalprecht.translate'
-        ])
+        ]);
 })();

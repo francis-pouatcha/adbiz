@@ -28,20 +28,22 @@ module.exports = function() {
         client: client,
         css: temp + 'styles.css',
         fonts: [bower.directory + 'font-awesome/fonts/**/*.*',
-            bower.directory + 'bootstrap/fonts/**/*.*'],
+                bower.directory + 'bootstrap/fonts/**/*.*'],
         html: client + '**/*.html',
         htmltemplates: clientApp + '**/*.html',
         images: client + 'images/**/*.*',
         index: client + 'index.html',
         // app js, with no specs
         js: [
-            clientApp + '**/*.module.js',
+                clientApp + '**/*.module.js',
+                clientApp + 'blocks/**/*.js',
             clientApp + '**/*.js',
-            '!' + clientApp + '**/*.spec.js'
+                '!' + clientApp + '**/*.spec.js'
         ],
         jsOrder: [
             '**/app.module.js',
             '**/*.module.js',
+            '**/*.service.js',
             '**/*.js'
         ],
         less: client + 'styles/styles.less',
@@ -50,8 +52,8 @@ module.exports = function() {
         server: server,
         source: 'src/',
         stubsjs: [
-            bower.directory + 'angular-mocks/angular-mocks.js',
-            client + 'stubs/**/*.js'
+                bower.directory + 'angular-mocks/angular-mocks.js',
+                client + 'stubs/**/*.js'
         ],
         temp: temp,
 
@@ -111,10 +113,10 @@ module.exports = function() {
          *  6 templates
          */
         testlibraries: [
-            nodeModules + '/mocha/mocha.js',
-            nodeModules + '/chai/chai.js',
-            nodeModules + '/mocha-clean/index.js',
-            nodeModules + '/sinon-chai/lib/sinon-chai.js'
+                nodeModules + '/mocha/mocha.js',
+                nodeModules + '/chai/chai.js',
+                nodeModules + '/mocha-clean/index.js',
+                nodeModules + '/sinon-chai/lib/sinon-chai.js'
         ],
         specHelpers: [client + 'test-helpers/*.js'],
         specs: [clientApp + '**/*.spec.js'],
@@ -152,9 +154,23 @@ module.exports = function() {
         var options = {
             files: [].concat(
                 bowerFiles,
+                bower.directory + 'angular/angular.js',
+                bower.directory + 'angular-mocks/angular-mocks.js',
+                bower.directory + 'angular-animate/angular-animate.js',
+                bower.directory + 'angular-ui-router/release/angular-ui-router.js',
+                bower.directory + 'angular-route/angular-route.js',
+                clientApp + 'blocks/**/*.module.js',
+                clientApp + 'blocks/**/*.provider.js',
+                clientApp + 'blocks/**/*.js',
+                clientApp + 'blocks/router/router-helper.provider.js',
+                clientApp + 'blocks/router/router.module.js',
                 config.specHelpers,
+                client + 'core/*.js',
                 clientApp + '**/*.module.js',
-                clientApp + '**/*.js',
+                clientApp + 'article/config/*.js',
+                clientApp + 'article/services/*.service.js',
+                clientApp + 'article/controllers/*.js',
+                clientApp + 'article/services/*.js',
                 temp + config.templateCache.file,
                 config.serverIntegrationSpecs
             ),

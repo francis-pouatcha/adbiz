@@ -11,9 +11,10 @@
         'utils',
         'CatalArtLangMappingForm',
         'ArticleForm'];
-    /* @ngInject */
-    function CatalArtLangMappingController(logger, CatalArtLangMapping, utils, CatalArtLangMappingForm, ArticleForm) {
 
+    /* @ngInject */
+    function CatalArtLangMappingController(logger, CatalArtLangMapping,
+                                           utils, CatalArtLangMappingForm, ArticleForm) {
         var vm = this;
         vm.data = [];
         vm.catalArtLangMapping = {};
@@ -23,44 +24,42 @@
             vm.formFields = CatalArtLangMappingForm.getFormFields(disabled);
             vm.formFields[0].defaultValue = vm.catalArticleId;
         };
-
-
         vm.createForm = function (model) {
             utils.templateModal(model, 'createForm',
                 'app/catal-art-lang-mapping/views/create.html', vm);
-        }
+        };
         vm.editForm = function (model) {
             utils.templateModal(model, 'editForm',
                 'app/catal-art-lang-mapping/views/edit.html', vm);
-        }
+        };
         vm.showForm = function (model) {
             utils.templateModal(model, 'showForm',
                 'app/catal-art-lang-mapping/views/view.html', vm);
-        }
+        };
 
         vm.init = function () {
-            CatalArtLangMapping.findBy(coreSearchInput(), function (response) {
+            CatalArtLangMapping.findBy(coreSearchInputInit(), function (response) {
                 vm.data = response.resultList;
             });
         };
 
-        function coreSearchInput() {
+        function coreSearchInputInit() {
             vm.catalArticleId = ArticleForm.catalArticleId;
-            var coreSearchInput = {};
-            coreSearchInput.entity = {};
-            coreSearchInput.entity.cntnrIdentif = vm.catalArticleId;
-            coreSearchInput.fieldNames = [];
-            coreSearchInput.fieldNames.push('cntnrIdentif');
-            coreSearchInput.className = 'org.adorsys.adcatal.jpa.CatalArtLangMappingSearchInput';
-            return coreSearchInput;
+            var searchInput = {};
+            searchInput.entity = {};
+            searchInput.entity.cntnrIdentif = vm.catalArticleId;
+            searchInput.fieldNames = [];
+            searchInput.fieldNames.push('cntnrIdentif');
+            searchInput.className = 'org.adorsys.adcatal.jpa.CatalArtLangMappingSearchInput';
+            return searchInput;
         }
 
         vm.create = function (catalArtLangMapping) {
             vm.catalArticleId = ArticleForm.catalArticleId;
             catalArtLangMapping.cntnrIdentif = vm.catalArticleId;
             // Create new catalArtLangMapping object
-            var catalArtLangMapping = new CatalArtLangMapping(catalArtLangMapping);
-            catalArtLangMapping.$save(function (response) {
+            var catalArtLangMappingRes = new CatalArtLangMapping(catalArtLangMapping);
+            catalArtLangMappingRes.$save(function (response) {
                 logger.success('CatalArtLangMapping created');
                 vm.data.push(response);
             }, function (errorResponse) {
@@ -80,7 +79,7 @@
                         });
                     });
             } else {
-                var index = vm.data.indexOf(vm.catalArtLangMapping);
+                index = vm.data.indexOf(vm.catalArtLangMapping);
                 vm.catalArtLangMapping.$remove(function () {
                     logger.success('CatalArtLangMapping deleted');
                     vm.data.splice(index, 1);
@@ -92,8 +91,8 @@
         // Update existing catalArtLangMapping
         vm.update = function (catalArtLangMapping) {
             var index = vm.data.indexOf(vm.model);
-            var catalArtLangMapping = new CatalArtLangMapping(catalArtLangMapping);
-            catalArtLangMapping.$update(function () {
+            var catalArtLangMappingRes = new CatalArtLangMapping(catalArtLangMapping);
+            catalArtLangMappingRes.$update(function () {
                 logger.success('catalArtLangMapping updated');
                 vm.data.splice(index, 1);
                 vm.data.push(catalArtLangMapping);

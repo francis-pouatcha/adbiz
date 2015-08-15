@@ -15,7 +15,6 @@
         vm.navline = {
             title: config.appTitle
         };
-        
         activate();
 
         function activate() {

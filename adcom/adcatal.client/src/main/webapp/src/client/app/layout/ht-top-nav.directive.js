@@ -19,12 +19,14 @@
         };
 
         /* @ngInject */
-        function TopNavController($translate) {
+        function TopNavController($translate, $rootScope) {
             var vm = this;
             vm.changeLang = function(lang) {
                 $translate.use(lang);
-            }
+            };
 
+            vm.username = $rootScope.username;
+            vm.logout = $rootScope.logout;
         }
 
         return directive;

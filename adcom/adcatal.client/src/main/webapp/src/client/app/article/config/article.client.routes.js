@@ -1,6 +1,5 @@
 (function() {
     'use strict';
-
     angular
         .module('app.article')
         .run(appRun);
@@ -11,14 +10,12 @@
         routerHelper.configureStates(getStates());
     }
 
-    function getStates(BASE_URL) {
+    function getStates() {
         return [
-
             {
-
                 state: 'listArticle',
                 config: {
-                    url: BASE_URL+'/article',
+                    url:  '/article',
                     templateUrl: 'app/article/views/list.html',
                     controller: 'ArticleController',
                     controllerAs: 'vm',
@@ -32,7 +29,7 @@
             {
                 state: 'createArticle',
                 config: {
-                    url: BASE_URL+'/article/create',
+                    url: '/article/create',
                     templateUrl: 'app/article/views/create.html',
                     controller: 'ArticleController',
                     controllerAs: 'vm',
@@ -42,7 +39,7 @@
             {
                 state: 'viewArticle',
                 config: {
-                    url: BASE_URL+'/article/:articleId',
+                    url: '/article/:articleId',
                     templateUrl: 'app/article/views/view.html',
                     controller: 'ArticleController',
                     controllerAs: 'vm',
@@ -50,7 +47,7 @@
                 }
             },
             {
-                state: BASE_URL+'editArticle',
+                state: 'editArticle',
                 config: {
                     url: '/article/:articleId/edit',
                     templateUrl: 'app/article/views/edit.html',

@@ -11,7 +11,8 @@
         'CatalPicMappingForm',
         'ArticleForm'];
     /* @ngInject */
-    function CatalPicMappingController(logger, CatalPicMapping, utils, CatalPicMappingForm, ArticleForm) {
+    function CatalPicMappingController(logger, CatalPicMapping,
+                                       utils, CatalPicMappingForm, ArticleForm) {
 
         var vm = this;
         vm.data = [];
@@ -22,44 +23,42 @@
             vm.formFields = CatalPicMappingForm.getFormFields(disabled);
             vm.formFields[0].defaultValue = vm.catalArticleId;
         };
-
-
         vm.createForm = function (model) {
             utils.templateModal(model, 'createForm',
                 'app/catal-pic-mapping/views/create.html', vm);
-        }
+        };
         vm.editForm = function (model) {
             utils.templateModal(model, 'editForm',
                 'app/catal-pic-mapping/views/edit.html', vm);
-        }
+        };
         vm.showForm = function (model) {
             utils.templateModal(model, 'showForm',
                 'app/catal-pic-mapping/views/view.html', vm);
-        }
+        };
 
         vm.init = function () {
-            CatalPicMapping.findBy(coreSearchInput(), function (response) {
+            CatalPicMapping.findBy(coreSearchInputInit(), function (response) {
                 vm.data = response.resultList;
             });
         };
 
-        function coreSearchInput() {
+        function coreSearchInputInit() {
             vm.catalArticleId = ArticleForm.catalArticleId;
-            var coreSearchInput = {};
-            coreSearchInput.entity = {};
-            coreSearchInput.entity.cntnrIdentif = vm.catalArticleId;
-            coreSearchInput.fieldNames = [];
-            coreSearchInput.fieldNames.push('cntnrIdentif');
-            coreSearchInput.className = 'org.adorsys.adcatal.jpa.CatalPicMappingSearchInput';
-            return coreSearchInput;
+            var searchInput = {};
+            searchInput.entity = {};
+            searchInput.entity.cntnrIdentif = vm.catalArticleId;
+            searchInput.fieldNames = [];
+            searchInput.fieldNames.push('cntnrIdentif');
+            searchInput.className = 'org.adorsys.adcatal.jpa.CatalPicMappingSearchInput';
+            return searchInput;
         }
 
         vm.create = function (catalPicMapping) {
             vm.catalArticleId = ArticleForm.catalArticleId;
             catalPicMapping.cntnrIdentif = vm.catalArticleId;
             // Create new catalPicMapping object
-            var catalPicMapping = new CatalPicMapping(catalPicMapping);
-            catalPicMapping.$save(function (response) {
+            var catalPicMappingRes = new CatalPicMapping(catalPicMapping);
+            catalPicMappingRes.$save(function (response) {
                 logger.success('CatalPicMapping created');
                 vm.data.push(response);
             }, function (errorResponse) {
@@ -79,7 +78,7 @@
                         });
                     });
             } else {
-                var index = vm.data.indexOf(vm.catalPicMapping);
+                index = vm.data.indexOf(vm.catalPicMapping);
                 vm.catalPicMapping.$remove(function () {
                     logger.success('CatalPicMapping deleted');
                     vm.data.splice(index, 1);
@@ -91,8 +90,8 @@
         // Update existing catalPicMapping
         vm.update = function (catalPicMapping) {
             var index = vm.data.indexOf(vm.model);
-            var catalPicMapping = new CatalPicMapping(catalPicMapping);
-            catalPicMapping.$update(function () {
+            var catalPicMappingRes = new CatalPicMapping(catalPicMapping);
+            catalPicMappingRes.$update(function () {
                 logger.success('catalPicMapping updated');
                 vm.data.splice(index, 1);
                 vm.data.push(catalPicMapping);

@@ -2,6 +2,6 @@
     'use strict';
 
     angular.module('app.catalProdFmly', []);
-    angular.module('app').requires.push('app.catalProdFmly');
+    angular.module('adcatal').requires.push('app.catalProdFmly');
 
 })();
