@@ -8,7 +8,7 @@
   <artifactId>addashboard.client</artifactId>
   <packaging>war</packaging>
   <name>addashboard.client</name>
-  <description>Ad Catalogue Client</description>
+  <description>Ad Dashboard Client</description>
 
   <build>
     <finalName>addashboard.client</finalName>
@@ -27,6 +27,7 @@
         <version>2.4</version>
         <configuration>
           <failOnMissingWebXml>false</failOnMissingWebXml>
+	  <warSourceIncludes>build/**,i18n/**,WEB-INF/**,sample/**,keycloak.json</warSourceIncludes>
         </configuration>
       </plugin>
     </plugins>
