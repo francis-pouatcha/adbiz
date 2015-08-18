@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/adbnsptnr.client.iml" filepath="$PROJECT_DIR$/.idea/adbnsptnr.client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/adcatal.client.iml" filepath="$PROJECT_DIR$/.idea/adcatal.client.iml" />
     </modules>
   </component>
 </project>
+
