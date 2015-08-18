@@ -84,25 +84,21 @@ echo 'configuring keycloak for OAuth'
 cp -r $ADCOM_HOME/adcom.configuration/keycloak/deployments $JBOSS_HOME/standalone
 cp -r $ADCOM_HOME/adcom.configuration/keycloak/configuration $JBOSS_HOME/standalone
 cp $ADCOM_HOME/adcom.configuration/keycloak/adcomrealm.json $JBOSS_HOME/
-cd $JBOSS_HOME
-unzip -o $ADCOM_HOME/adcom.configuration/keycloak/adapters/keycloak-eap6-adapter-dist-1.0.4.Final.zip
-cd $JBOSS_HOME/standalone/deployments/
-unzip -o auth-server.war.zip
+cd $JBOSS_HOME && unzip -o $ADCOM_HOME/adcom.configuration/keycloak/adapters/keycloak-eap6-adapter-dist-1.0.4.Final.zip
+cd $JBOSS_HOME/standalone/deployments/ && unzip -o auth-server.war.zip
 
 
 echo 'cnfiguring jboss'
 cp $ADCOM_HOME/adcom.configuration/jboss-eap-6.3/standalone/configuration/standalone.xml $JBOSS_HOME/standalone/configuration/standalone.xml
 # cp $ADCOM_HOME/adcom.configuration/jboss-eap-6.3/standalone/security/adcom.jks $JBOSS_HOME/standalone/security/adcom.jks
 
-echo 'gulp build adcatal'
-cd $ADCOM_HOME/adcatal.client/src/main/webapp
-npm install
-gulp build
+# echo 'gulp build adcatal'
+# cd $ADCOM_HOME/adcatal.client/src/main/webapp && npm install
+# cd $ADCOM_HOME/adcatal.client/src/main/webapp && gulp build
 
-echo 'gulp build addashboard'
-cd $ADCOM_HOME/addashboard.client/src/main/webapp
-npm install
-gulp build
+# echo 'gulp build addashboard'
+# cd $ADCOM_HOME/addashboard.client/src/main/webapp && npm install
+# cd $ADCOM_HOME/addashboard.client/src/main/webapp && gulp build
 
 
 echo 'starting jboss'
@@ -127,19 +123,19 @@ echo 'deploying new artifacts'
 # cp adterm.server/target/adterm.server.war $JBOSS_HOME/standalone/deployments/
 # cp adaptmt.server/target/adaptmt.server.war $JBOSS_HOME/standalone/deployments/
 
-cp adres.client/target/adres.client.war $JBOSS_HOME/standalone/deployments/
-cp adbase.client/target/adbase.client.war $JBOSS_HOME/standalone/deployments/
+# cp adres.client/target/adres.client.war $JBOSS_HOME/standalone/deployments/
+# cp adbase.client/target/adbase.client.war $JBOSS_HOME/standalone/deployments/
 cp adcatal.client/target/adcatal.client.war $JBOSS_HOME/standalone/deployments/
-cp adstock.client/target/adstock.client.war $JBOSS_HOME/standalone/deployments/
-cp adprocmt.client/target/adprocmt.client.war $JBOSS_HOME/standalone/deployments/
-cp adinvtry.client/target/adinvtry.client.war $JBOSS_HOME/standalone/deployments/
-cp adbnsptnr.client/target/adbnsptnr.client.war $JBOSS_HOME/standalone/deployments/
-cp adsales.client/target/adsales.client.war $JBOSS_HOME/standalone/deployments/
-cp adcshdwr.client/target/adcshdwr.client.war $JBOSS_HOME/standalone/deployments/
-cp adacc.client/target/adacc.client.war $JBOSS_HOME/standalone/deployments/
-cp adlogin.client/target/adlogin.client.war $JBOSS_HOME/standalone/deployments/
-cp adaptmt.client/target/adaptmt.client.war $JBOSS_HOME/standalone/deployments/
-cp admanager.client/target/admanager.client.war $JBOSS_HOME/standalone/deployments/
+# && cp adstock.client/target/adstock.client.war $JBOSS_HOME/standalone/deployments/
+# cp adprocmt.client/target/adprocmt.client.war $JBOSS_HOME/standalone/deployments/
+# cp adinvtry.client/target/adinvtry.client.war $JBOSS_HOME/standalone/deployments/
+# cp adbnsptnr.client/target/adbnsptnr.client.war $JBOSS_HOME/standalone/deployments/
+# cp adsales.client/target/adsales.client.war $JBOSS_HOME/standalone/deployments/
+# cp adcshdwr.client/target/adcshdwr.client.war $JBOSS_HOME/standalone/deployments/
+# cp adacc.client/target/adacc.client.war $JBOSS_HOME/standalone/deployments/
+# cp adlogin.client/target/adlogin.client.war $JBOSS_HOME/standalone/deployments/
+# cp adaptmt.client/target/adaptmt.client.war $JBOSS_HOME/standalone/deployments/
+# cp admanager.client/target/admanager.client.war $JBOSS_HOME/standalone/deployments/
 cp addashboard.client/target/addashboard.client.war $JBOSS_HOME/standalone/deployments/
 
 echo 'copying the .xls file'
