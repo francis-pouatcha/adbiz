@@ -7,8 +7,8 @@
   </parent>
   <artifactId>adbnsptnr.client</artifactId>
   <packaging>war</packaging>
-  <name>adbnsptnr.client</name>
-  <description>Ad Stock Client</description>
+  <name> adbnsptnr.client </name>
+  <description>Ad BnsPtnr Client</description>
 
   <build>
     <finalName>adbnsptnr.client</finalName>

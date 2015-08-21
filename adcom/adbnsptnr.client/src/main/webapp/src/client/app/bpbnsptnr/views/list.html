@@ -1,0 +1,38 @@
+<section class="mainbar">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Bpbnsptnr List
+    </div>
+    <div class="panel-body">
+
+      <div class="pull-right">
+        <a type="button" class="btn btn-success" href="/bpbnsptnr/create">
+          <i class="glyphicon glyphicon-open"></i> New Bpbnsptnr
+        </a>
+      </div>
+
+      <table ng-table="vm.tableParams" show-filter="true" class="table table-condensed table-striped">
+          <tr ng-repeat="bpbnsptnr in $data">
+              <td data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">{{BpIndivPtnrName_ptnrNbr_description.text}}</td>
+              <td data-title="'Address'" sortable="'address'" filter="{'address': 'text'}">{{bpbnsptnr.address}}</td>
+              <td>
+                 <div class="table-actions">
+                      <a class="btn btn-default" title="View" href="/bpbnsptnr/{{bpbnsptnr.id}}">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                      </a>
+                      <a class="btn btn-default" title="Edit" href="/bpbnsptnr/{{bpbnsptnr.id}}/edit">
+                        <span class="glyphicon glyphicon-edit"></span>
+                      </a>
+                      <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove(bpbnsptnr)" item="bpbnsptnr">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                      </a>
+                  </div>
+              </td>
+          </tr>
+      </table>
+
+    </div>
+  </div>
+
+</section>

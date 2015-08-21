@@ -103,10 +103,10 @@
 
             CatalArtLangMapping.findBy(coreSearchInputInit(), function (response) {
                 console.log(response.resultList);
+                console.log(response.resultList[0]);
                 vm.article.artName = response.resultList[0].artName;
                 vm.article.shortName = response.resultList[0].shortName;
             });
-
         };
         vm.toEditArticle = function() {
             vm.article = Article.get({articleId: $stateParams.articleId});
