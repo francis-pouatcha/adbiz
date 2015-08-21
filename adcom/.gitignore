@@ -19,8 +19,8 @@ adpharma/*/.classpath
 
 # Node
 ######################
-#/node/**
-#/node_modules/**
+/node/**
+/node_modules/**
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

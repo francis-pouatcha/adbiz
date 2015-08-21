@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.adorsys.adcom</groupId>
-		<artifactId>adcom.client.parent</artifactId>
+		<artifactId>adcom.parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>addashboard.client</artifactId>
