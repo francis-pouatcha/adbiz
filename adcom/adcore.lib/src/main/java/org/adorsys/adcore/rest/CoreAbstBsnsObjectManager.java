@@ -76,7 +76,7 @@ public abstract class CoreAbstBsnsObjectManager<E extends CoreAbstBsnsObject, I 
 		E existing = getInjector().getBsnsObjLookup().findByIdentif(identif);
 		if(existing==null) throw new AdRestException(Response.Status.NOT_FOUND);
 
-		if(StringUtils.equals(existing.getIdentif(), entity.getIdentif()))
+		if(!StringUtils.equals(existing.getIdentif(), entity.getIdentif()))
 			throw new AdRestException(Response.Status.CONFLICT);
 
 		entityUpdatingEvent.fire(entity);
