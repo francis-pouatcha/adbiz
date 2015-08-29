@@ -7,13 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.adorsys.adcore.jpa.CoreAbstTimedData;
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 
 @Entity 
 @Table(name="BaseCountry")
 @Description("Country_description")
-public class Country extends CoreAbstTimedData {
+public class Country extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = 6524330877067168714L;
 

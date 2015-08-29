@@ -4,67 +4,27 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
+import org.adorsys.adcore.jpa.CoreSearchInput;
+
 @XmlRootElement
-public class SecTerminalSearchResult
+public class SecTerminalSearchResult extends CoreAbstIdentifObjectSearchResult<SecTerminal>
 {
 
-   /*
-    * The number of entities matching this search.
-    */
-   private Long count;
+	public SecTerminalSearchResult() {
+		super();
+	}
 
-   /*
-    * The result list.
-    */
-   private List<SecTerminal> resultList;
+	public SecTerminalSearchResult(Long count, List<SecTerminal> resultList,
+			CoreAbstIdentifObjectSearchInput<SecTerminal> searchInput) {
+		super(count, resultList, searchInput);
+	}
 
-   /*
-    * The original search input object. For stateless clients.
-    */
-   private SecTerminalSearchInput searchInput;
-
-   public SecTerminalSearchResult()
-   {
-      super();
-   }
-
-   public SecTerminalSearchResult(Long count, List<SecTerminal> resultList,
-		   SecTerminalSearchInput searchInput)
-   {
-      super();
-      this.count = count;
-      this.resultList = resultList;
-      this.searchInput = searchInput;
-   }
-
-   public Long getCount()
-   {
-      return count;
-   }
-
-   public List<SecTerminal> getResultList()
-   {
-      return resultList;
-   }
-
-   public SecTerminalSearchInput getSearchInput()
-   {
-      return searchInput;
-   }
-
-   public void setCount(Long count)
-   {
-      this.count = count;
-   }
-
-   public void setResultList(List<SecTerminal> resultList)
-   {
-      this.resultList = resultList;
-   }
-
-   public void setSearchInput(SecTerminalSearchInput searchInput)
-   {
-      this.searchInput = searchInput;
-   }
+	public SecTerminalSearchResult(Long count, Long total,
+			List<SecTerminal> resultList,
+			CoreSearchInput<SecTerminal> searchInput) {
+		super(count, total, resultList, searchInput);
+	}
 
 }

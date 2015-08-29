@@ -14,11 +14,12 @@
             <role-name>adcatal.client_role</role-name>
         </auth-constraint>
     </security-constraint>
-
+	<!-- 
     <login-config>
         <auth-method>KEYCLOAK</auth-method>
         <realm-name>adcom</realm-name>
     </login-config>
+	 -->
 
     <security-role>
         <role-name>adcatal.client_role</role-name>

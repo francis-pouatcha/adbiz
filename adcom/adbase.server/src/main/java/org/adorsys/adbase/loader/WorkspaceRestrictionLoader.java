@@ -1,40 +1,54 @@
 package org.adorsys.adbase.loader;
 
-import java.util.Date;
-
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import org.adorsys.adbase.jpa.WorkspaceRestriction;
 import org.adorsys.adbase.rest.WorkspaceRestrictionEJB;
-import org.adorsys.adcore.xls.AbstractObjectLoader;
+import org.adorsys.adbase.rest.WorkspaceRestrictionLookup;
+import org.adorsys.adcore.loader.ejb.CorLdrStepCallback;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
+import org.adorsys.adcore.xls.CoreAbstEntityLoader;
+import org.adorsys.adcore.xls.CoreAbstLoader;
+import org.adorsys.adcore.xls.StepCallback;
 
 @Stateless
-public class WorkspaceRestrictionLoader extends
-		AbstractObjectLoader<WorkspaceRestriction> {
+public class WorkspaceRestrictionLoader  extends CoreAbstEntityLoader<WorkspaceRestriction> {
 
 	@Inject
 	private WorkspaceRestrictionEJB ejb;
+	@Inject
+	private WorkspaceRestrictionLookup lookup;
+	@EJB
+	private CorLdrStepCallback stepCallback;
+	@EJB 
+	private WorkspaceRestrictionLoader loader;	
 
 	@Override
 	protected WorkspaceRestriction newObject() {
 		return new WorkspaceRestriction();
 	}
 
-	public WorkspaceRestriction findByIdentif(String identif, Date validOn) {
-		return ejb.findByIdentif(identif, validOn);
+	@Override
+	protected CoreAbstIdentifLookup<WorkspaceRestriction> getLookup() {
+		return lookup;
 	}
 
-	public WorkspaceRestriction create(WorkspaceRestriction entity) {
-		return ejb.create(entity);
+	@Override
+	protected CoreAbstIdentifiedEJB<WorkspaceRestriction> getEjb() {
+		return ejb;
 	}
 
-	public WorkspaceRestriction update(WorkspaceRestriction found) {
-		return ejb.update(found);
+	@Override
+	protected CoreAbstLoader<WorkspaceRestriction> getLoader() {
+		return loader;
 	}
 
-	public WorkspaceRestriction deleteById(String id) {
-		return ejb.deleteById(id);
+	@Override
+	protected StepCallback getStepCallback() {
+		return stepCallback;
 	}
 
 }

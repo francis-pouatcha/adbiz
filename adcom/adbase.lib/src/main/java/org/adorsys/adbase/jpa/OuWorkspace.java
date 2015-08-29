@@ -5,14 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.adorsys.adcore.jpa.CoreAbstTimedData;
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 import org.apache.commons.lang3.StringUtils;
 
 @Entity 
 @Table(name="BaseOuWorkspace")
 @Description("OuWorkspace_description")
-public class OuWorkspace extends CoreAbstTimedData {
+public class OuWorkspace extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = 5003489119950388983L;
 

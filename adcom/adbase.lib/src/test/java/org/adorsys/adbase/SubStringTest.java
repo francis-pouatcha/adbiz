@@ -1,6 +1,5 @@
 package org.adorsys.adbase;
 
-import org.adorsys.adbase.rest.OrgUnitIdEJB;
 import org.junit.Test;
 
 public class SubStringTest {

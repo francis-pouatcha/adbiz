@@ -1,40 +1,54 @@
 package org.adorsys.adbase.loader;
 
-import java.util.Date;
-
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import org.adorsys.adbase.jpa.OuWsRestriction;
 import org.adorsys.adbase.rest.OuWsRestrictionEJB;
-import org.adorsys.adcore.xls.AbstractObjectLoader;
+import org.adorsys.adbase.rest.OuWsRestrictionLookup;
+import org.adorsys.adcore.loader.ejb.CorLdrStepCallback;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
+import org.adorsys.adcore.xls.CoreAbstEntityLoader;
+import org.adorsys.adcore.xls.CoreAbstLoader;
+import org.adorsys.adcore.xls.StepCallback;
 
 @Stateless
-public class OuWsRestrictionLoader extends
-		AbstractObjectLoader<OuWsRestriction> {
+public class OuWsRestrictionLoader  extends CoreAbstEntityLoader<OuWsRestriction> {
 
 	@Inject
 	private OuWsRestrictionEJB ejb;
+	@Inject
+	private OuWsRestrictionLookup lookup;
+	@EJB
+	private CorLdrStepCallback stepCallback;
+	@EJB 
+	private OuWsRestrictionLoader loader;	
 
 	@Override
 	protected OuWsRestriction newObject() {
 		return new OuWsRestriction();
 	}
 
-	public OuWsRestriction findByIdentif(String identif, Date validOn) {
-		return ejb.findByIdentif(identif, validOn);
+	@Override
+	protected CoreAbstIdentifLookup<OuWsRestriction> getLookup() {
+		return lookup;
 	}
 
-	public OuWsRestriction create(OuWsRestriction entity) {
-		return ejb.create(entity);
+	@Override
+	protected CoreAbstIdentifiedEJB<OuWsRestriction> getEjb() {
+		return ejb;
 	}
 
-	public OuWsRestriction update(OuWsRestriction found) {
-		return ejb.update(found);
+	@Override
+	protected CoreAbstLoader<OuWsRestriction> getLoader() {
+		return loader;
 	}
 
-	public OuWsRestriction deleteById(String id) {
-		return ejb.deleteById(id);
+	@Override
+	protected StepCallback getStepCallback() {
+		return stepCallback;
 	}
 
 }

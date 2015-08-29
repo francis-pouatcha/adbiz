@@ -6,11 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
-import org.adorsys.adcore.jpa.CoreAbstTimedData;
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 
 @MappedSuperclass
-public abstract class BaseAbstractCurrRate extends CoreAbstTimedData {
+public abstract class BaseAbstractCurrRate extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = 1120666861067636937L;
 

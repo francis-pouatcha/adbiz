@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.adorsys.adcore.utils.AuthChars;
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 

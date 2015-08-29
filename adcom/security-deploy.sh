@@ -111,11 +111,12 @@ echo 'cleanning the projet'
 mvn clean install -DskipTests
 
 echo 'deploying new artifacts'
-# cp adbase.server/target/adbase.server.war $JBOSS_HOME/standalone/deployments/
- cp adcatal.server/target/adcatal.server.war $JBOSS_HOME/standalone/deployments/
- cp adstock.server/target/adstock.server.war $JBOSS_HOME/standalone/deployments/
+cp adcatal.server/target/adcatal.server.war $JBOSS_HOME/standalone/deployments/
+cp adstock.server/target/adstock.server.war $JBOSS_HOME/standalone/deployments/
+cp adinvtry.server/target/adinvtry.server.war $JBOSS_HOME/standalone/deployments/
+
 # cp adprocmt.server/target/adprocmt.server.war $JBOSS_HOME/standalone/deployments/
- cp adinvtry.server/target/adinvtry.server.war $JBOSS_HOME/standalone/deployments/
+# cp adbase.server/target/adbase.server.war $JBOSS_HOME/standalone/deployments/
 # cp adbnsptnr.server/target/adbnsptnr.server.war $JBOSS_HOME/standalone/deployments/
 # cp adsales.server/target/adsales.server.war $JBOSS_HOME/standalone/deployments/
 # cp adcshdwr.server/target/adcshdwr.server.war $JBOSS_HOME/standalone/deployments/
@@ -123,9 +124,11 @@ echo 'deploying new artifacts'
 # cp adterm.server/target/adterm.server.war $JBOSS_HOME/standalone/deployments/
 # cp adaptmt.server/target/adaptmt.server.war $JBOSS_HOME/standalone/deployments/
 
+cp addashboard.client/target/addashboard.client.war $JBOSS_HOME/standalone/deployments/
+cp adcatal.client/target/adcatal.client.war $JBOSS_HOME/standalone/deployments/
+
 # cp adres.client/target/adres.client.war $JBOSS_HOME/standalone/deployments/
 # cp adbase.client/target/adbase.client.war $JBOSS_HOME/standalone/deployments/
-cp adcatal.client/target/adcatal.client.war $JBOSS_HOME/standalone/deployments/
 # && cp adstock.client/target/adstock.client.war $JBOSS_HOME/standalone/deployments/
 # cp adprocmt.client/target/adprocmt.client.war $JBOSS_HOME/standalone/deployments/
 # cp adinvtry.client/target/adinvtry.client.war $JBOSS_HOME/standalone/deployments/
@@ -136,7 +139,6 @@ cp adcatal.client/target/adcatal.client.war $JBOSS_HOME/standalone/deployments/
 # cp adlogin.client/target/adlogin.client.war $JBOSS_HOME/standalone/deployments/
 # cp adaptmt.client/target/adaptmt.client.war $JBOSS_HOME/standalone/deployments/
 # cp admanager.client/target/admanager.client.war $JBOSS_HOME/standalone/deployments/
-cp addashboard.client/target/addashboard.client.war $JBOSS_HOME/standalone/deployments/
 
 echo 'copying the .xls file'
 cp adcom.configuration/jboss-eap-6.3/adcom/adbase/data/adbase.xls $JBOSS_HOME/adcom/adbase/data/

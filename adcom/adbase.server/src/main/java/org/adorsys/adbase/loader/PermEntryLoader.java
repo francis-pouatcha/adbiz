@@ -1,39 +1,54 @@
 package org.adorsys.adbase.loader;
 
-import java.util.Date;
-
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import org.adorsys.adbase.jpa.PermEntry;
 import org.adorsys.adbase.rest.PermEntryEJB;
-import org.adorsys.adcore.xls.AbstractObjectLoader;
+import org.adorsys.adbase.rest.PermEntryLookup;
+import org.adorsys.adcore.loader.ejb.CorLdrStepCallback;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
+import org.adorsys.adcore.xls.CoreAbstEntityLoader;
+import org.adorsys.adcore.xls.CoreAbstLoader;
+import org.adorsys.adcore.xls.StepCallback;
 
 @Stateless
-public class PermEntryLoader extends AbstractObjectLoader<PermEntry> {
+public class PermEntryLoader  extends CoreAbstEntityLoader<PermEntry> {
 
 	@Inject
 	private PermEntryEJB ejb;
+	@Inject
+	private PermEntryLookup lookup;
+	@EJB
+	private CorLdrStepCallback stepCallback;
+	@EJB 
+	private PermEntryLoader loader;	
 
 	@Override
 	protected PermEntry newObject() {
 		return new PermEntry();
 	}
 
-	public PermEntry findByIdentif(String identif, Date validOn) {
-		return ejb.findByIdentif(identif, validOn);
+	@Override
+	protected CoreAbstIdentifLookup<PermEntry> getLookup() {
+		return lookup;
 	}
 
-	public PermEntry create(PermEntry entity) {
-		return ejb.create(entity);
+	@Override
+	protected CoreAbstIdentifiedEJB<PermEntry> getEjb() {
+		return ejb;
 	}
 
-	public PermEntry update(PermEntry found) {
-		return ejb.update(found);
+	@Override
+	protected CoreAbstLoader<PermEntry> getLoader() {
+		return loader;
 	}
 
-	public PermEntry deleteById(String id) {
-		return ejb.deleteById(id);
+	@Override
+	protected StepCallback getStepCallback() {
+		return stepCallback;
 	}
 
 }

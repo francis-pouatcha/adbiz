@@ -20,10 +20,5 @@
 	</dependencies>
 	<build>
 		<finalName>adbase.lib</finalName>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-			</plugin>
-		</plugins>
 	</build>
 </project>

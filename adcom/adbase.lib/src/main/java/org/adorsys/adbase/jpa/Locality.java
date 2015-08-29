@@ -6,13 +6,13 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.adorsys.adcore.jpa.CoreAbstTimedData;
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 
 @Entity 
 @Table(name="BaseLocality")
 @Description("Locality_description")
-public class Locality extends CoreAbstTimedData {
+public class Locality extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = 4915533373959238528L;
 

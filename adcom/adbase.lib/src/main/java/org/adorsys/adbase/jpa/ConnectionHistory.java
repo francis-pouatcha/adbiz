@@ -2,6 +2,7 @@ package org.adorsys.adbase.jpa;
 
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,14 +10,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.adorsys.adcore.jpa.AbstractMvmtData;
-import org.adorsys.javaext.description.Description;
-import org.adorsys.javaext.format.DateFormatPattern;
+import org.adorsys.adcore.annotation.DateFormatPattern;
+import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 
 @Entity
 @Table(name="BaseConnHist")
 @Description("ConnectionHistory_description")
-public class ConnectionHistory extends AbstractMvmtData {
+public class ConnectionHistory extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = -3655451239124519992L;
 
@@ -161,5 +162,10 @@ public class ConnectionHistory extends AbstractMvmtData {
 
 	public void setOuId(String ouId) {
 		this.ouId = ouId;
+	}
+
+	@Override
+	protected String makeIdentif() {
+		return UUID.randomUUID().toString();
 	}
 }

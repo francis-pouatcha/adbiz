@@ -9,14 +9,14 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-import org.adorsys.adcore.jpa.AbstractMvmtData;
-import org.adorsys.javaext.description.Description;
-import org.adorsys.javaext.format.DateFormatPattern;
+import org.adorsys.adcore.annotation.DateFormatPattern;
+import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstEntity;
 
 @Entity 
 @Table(name="BaseSecUserSession")
 @Description("SecUserSession_description")
-public class SecUserSession extends AbstractMvmtData {
+public class SecUserSession extends CoreAbstEntity {
 
 	private static final long serialVersionUID = 2417607506198295117L;
 

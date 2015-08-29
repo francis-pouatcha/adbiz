@@ -11,15 +11,15 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-import org.adorsys.adcore.jpa.AbstractMvmtData;
-import org.adorsys.javaext.description.Description;
-import org.adorsys.javaext.format.DateFormatPattern;
+import org.adorsys.adcore.annotation.DateFormatPattern;
+import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstEntity;
 import org.apache.commons.lang3.StringUtils;
 
 @Entity 
 @Table(name="BaseSecTermCredtl")
 @Description("SecTermCredtl_description")
-public class SecTermCredtl extends AbstractMvmtData {
+public class SecTermCredtl extends CoreAbstEntity {
 
 	private static final long serialVersionUID = -8997465407110640284L;
 

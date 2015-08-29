@@ -13,6 +13,7 @@
 		<module>adcom.server.parent</module>
 		<module>adcom.client.parent</module>
 		<module>adcore.lib</module>
+		<module>adbase.lib</module>
 		<module>adcatal.lib</module>
 		<module>adcatal.client</module>
 		<module>adstock.lib</module>
@@ -23,6 +24,7 @@
 		<module>adinvtry.server</module>
 		<module>adcost.server</module>
 		<module>addashboard.client</module>
+		<module>adbase.server</module>
 <!-- 
 		<module>adprocmt.lib</module>
 		<module>adprocmt.server</module>
@@ -38,11 +40,9 @@
 		<module>adsales.client</module>
 		<module>adcshdwr.client</module>
 
-		<module>adbase.lib</module>
 		<module>adacc.lib</module>
 		<module>adcshdwr.lib</module>
 
-		<module>adbase.server</module>
 		<module>adacc.server</module>
 
 

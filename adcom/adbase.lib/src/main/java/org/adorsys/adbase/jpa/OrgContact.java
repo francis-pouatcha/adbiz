@@ -6,13 +6,13 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.adorsys.adcore.jpa.CoreAbstTimedData;
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 
 @Entity 
 @Table(name="BaseOrgContact")
 @Description("OrgContact_description")
-public class OrgContact extends CoreAbstTimedData {
+public class OrgContact extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = 8597854339966447440L;
 

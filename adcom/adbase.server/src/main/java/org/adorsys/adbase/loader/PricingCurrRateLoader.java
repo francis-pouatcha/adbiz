@@ -1,40 +1,54 @@
 package org.adorsys.adbase.loader;
 
-import java.util.Date;
-
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import org.adorsys.adbase.jpa.PricingCurrRate;
 import org.adorsys.adbase.rest.PricingCurrRateEJB;
-import org.adorsys.adcore.xls.AbstractObjectLoader;
+import org.adorsys.adbase.rest.PricingCurrRateLookup;
+import org.adorsys.adcore.loader.ejb.CorLdrStepCallback;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
+import org.adorsys.adcore.xls.CoreAbstEntityLoader;
+import org.adorsys.adcore.xls.CoreAbstLoader;
+import org.adorsys.adcore.xls.StepCallback;
 
 @Stateless
-public class PricingCurrRateLoader extends
-		AbstractObjectLoader<PricingCurrRate> {
+public class PricingCurrRateLoader  extends CoreAbstEntityLoader<PricingCurrRate> {
 
 	@Inject
 	private PricingCurrRateEJB ejb;
+	@Inject
+	private PricingCurrRateLookup lookup;
+	@EJB
+	private CorLdrStepCallback stepCallback;
+	@EJB 
+	private PricingCurrRateLoader loader;	
 
 	@Override
 	protected PricingCurrRate newObject() {
 		return new PricingCurrRate();
 	}
 
-	public PricingCurrRate findByIdentif(String identif, Date validOn) {
-		return ejb.findByIdentif(identif, validOn);
+	@Override
+	protected CoreAbstIdentifLookup<PricingCurrRate> getLookup() {
+		return lookup;
 	}
 
-	public PricingCurrRate create(PricingCurrRate entity) {
-		return ejb.create(entity);
+	@Override
+	protected CoreAbstIdentifiedEJB<PricingCurrRate> getEjb() {
+		return ejb;
 	}
 
-	public PricingCurrRate update(PricingCurrRate found) {
-		return ejb.update(found);
+	@Override
+	protected CoreAbstLoader<PricingCurrRate> getLoader() {
+		return loader;
 	}
 
-	public PricingCurrRate deleteById(String id) {
-		return ejb.deleteById(id);
+	@Override
+	protected StepCallback getStepCallback() {
+		return stepCallback;
 	}
 
 }
