@@ -142,7 +142,7 @@ cp adcatal.client/target/adcatal.client.war $JBOSS_HOME/standalone/deployments/
 
 echo 'copying the .xls file'
 cp adcom.configuration/jboss-eap-6.3/adcom/adbase/data/adbase.xls $JBOSS_HOME/adcom/adbase/data/
-#cp adcom.configuration/jboss-eap-6.3/adcom/adcatal/data/adcatal.xls $JBOSS_HOME/adcom/adcatal/data/
+cp adcom.configuration/jboss-eap-6.3/adcom/adcatal/data/adcatal.xls $JBOSS_HOME/adcom/adcatal/data/
 cp adcom.configuration/jboss-eap-6.3/adcom/adstock/data/adstock.xls $JBOSS_HOME/adcom/adstock/data/
 cp adcom.configuration/jboss-eap-6.3/adcom/adbnsptnr/data/adbnsptnr.xls $JBOSS_HOME/adcom/adbnsptnr/data/
 cp adcom.configuration/jboss-eap-6.3/adcom/adprocmt/data/adprocmt.xls $JBOSS_HOME/adcom/adprocmt/data/
