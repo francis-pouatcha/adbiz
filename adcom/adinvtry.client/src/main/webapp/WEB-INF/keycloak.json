@@ -1,0 +1,14 @@
+{
+    "realm": "adcom",
+    "realm-public-key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDT2WkbXOgyEhfMY2xOMwEjXmBFL/8SOZr7qNFt2+4CI8T13gBQPYoJxzVnX4Kgb2v/uUw7ywCvTAqjMGDrg3UyTs6hG9P7G95BXD2y3Uyc0VUwjmxLqzTYOmO9zDM7b7axRDewHNeg7cH++n15nB8TDAmEnctFNnvmcBxcSaeTzQIDAQAB",
+    "auth-server-url": "http://localhost:8080/auth",
+    "ssl-required": "external",
+    "resource": "adinvtry.client",
+    "credentials": {
+        "secret": "74067fd7-0dcc-4f20-a45f-8d7680b8a169"
+    },
+    "use-resource-role-mappings": true,
+    "enable-cors" : true,
+    "cors-max-age" : 1000,
+    "cors-allowed-methods" : "POST, PUT, DELETE, GET"
+}
