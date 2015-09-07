@@ -11,7 +11,6 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
-import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -21,7 +20,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
-public abstract class CoreAbstLoader<T extends CoreAbstIdentifObject> {
+public abstract class CoreAbstLoader<T extends Object> {
 
 	@Inject
 	private XlsConverterFactory xlsConverterFactory;

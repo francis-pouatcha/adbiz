@@ -1,1 +1,0 @@
-<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><ns2:convertIBAN xmlns:ns2="http://IBANKonverter/IBANKonverter"><iban><iban>0</iban></iban></ns2:convertIBAN></soap:Body></soap:Envelope>

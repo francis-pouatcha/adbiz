@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<jboss-web>
-    <security-domain>java:/jaas/adcom</security-domain>
-    <valve>
-    	<class-name>org.adorsys.adcore.auth.AdcomAuthValve</class-name>
-    </valve>
-</jboss-web>

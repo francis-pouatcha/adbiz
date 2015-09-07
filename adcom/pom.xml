@@ -12,6 +12,13 @@
 		<module>adcom.lib.parent</module>
 		<module>adcom.server.parent</module>
 		<module>adcom.client.parent</module>
+		
+		<module>adkcloak.jpa</module>
+		<module>adkcloak.events.jpa</module>
+		<module>adkcloak.model.sessions.jpa</module>
+		<module>adkcloak.config</module>
+		<module>adkcloak.services</module>
+				
 		<module>adcore.lib</module>
 		<module>adbase.lib</module>
 		<module>adcatal.lib</module>
@@ -73,6 +80,8 @@
 	</distributionManagement>
 	<properties>
 		<github.global.server>github</github.global.server>
+		<keycloak.version>1.4.0.Final</keycloak.version>
+	    <apache.httpcomponents.version>4.3.6</apache.httpcomponents.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
