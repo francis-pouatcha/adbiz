@@ -22,7 +22,7 @@
                     controllerAs: 'vm',
                     title: 'List Stock-articlelots',
                     settings: {
-                        nav: 3,
+                        nav: 2,
                         content: '<i class="fa fa-folder-open"></i> Stock-articlelots'
                     }
                 }

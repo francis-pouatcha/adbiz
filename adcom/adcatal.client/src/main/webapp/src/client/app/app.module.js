@@ -23,7 +23,8 @@
     /* jshint ignore:start */
     /* @ngInject */
     angular.element(document).ready(function ($http, Auth) {
-        var keycloakAuth = new Keycloak('keycloak.json');
+        angular.bootstrap(document, ['adcatal']);
+        /*var keycloakAuth = new Keycloak('keycloak.json');
         auth.loggedIn = false;
         keycloakAuth.init({onLoad: 'login-required'}).success(function () {
             auth.loggedIn = true;
@@ -34,7 +35,7 @@
             angular.bootstrap(document, ['adcatal']);
         }).error(function () {
             window.location.reload();
-        })
+        })*/
     });
     /* jshint ignore:end */
 
@@ -87,8 +88,8 @@
 
     /* @ngInject */
     appModule.config(function($httpProvider, $locationProvider) {
-        $httpProvider.interceptors.push('errorInterceptor');
-        $httpProvider.interceptors.push('authInterceptor');
+        //$httpProvider.interceptors.push('errorInterceptor');
+        //$httpProvider.interceptors.push('authInterceptor');
         $locationProvider.html5Mode(false);
     });
     /* jshint ignore:start */

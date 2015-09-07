@@ -44,10 +44,10 @@ public class CstStmntItemEndpoint extends
 	}
 
 	@Override
-	protected CoreAbstBsnsItemSearchResult<CstStmntItem> newSearchResult(Long size,
+	protected CoreAbstBsnsItemSearchResult<CstStmntItem> newSearchResult(Long count,
 			List<CstStmntItem> resultList,
 			CoreAbstBsnsItemSearchInput<CstStmntItem> searchInput) {
-		return new CstStmntItemSearchResult();
+		return new CstStmntItemSearchResult(count, resultList, searchInput);
 	}
 
 	@Override
@@ -68,5 +68,12 @@ public class CstStmntItemEndpoint extends
 	@Override
 	protected AbstEntiyProps<CstStmntItem> getEntityProps() {
 		return entityProps;
+	}
+
+	@Override
+	protected CoreAbstBsnsItemSearchResult<CstStmntItem> newSearchResult(
+			Long count, Long total, List<CstStmntItem> resultList,
+			CoreAbstBsnsItemSearchInput<CstStmntItem> searchInput) {
+		return new CstStmntItemSearchResult(count, total, resultList, searchInput);
 	}
 }

@@ -39,10 +39,10 @@ public class InvInvtryItemEndpoint extends
 	}
 
 	@Override
-	protected CoreAbstBsnsItemSearchResult<InvInvtryItem> newSearchResult(Long size,
+	protected CoreAbstBsnsItemSearchResult<InvInvtryItem> newSearchResult(Long count,
 			List<InvInvtryItem> resultList,
 			CoreAbstBsnsItemSearchInput<InvInvtryItem> searchInput) {
-		return new InvInvtryItemSearchResult();
+		return new InvInvtryItemSearchResult(count, resultList, searchInput);
 	}
 
 	@Override
@@ -63,5 +63,12 @@ public class InvInvtryItemEndpoint extends
 	@Override
 	protected AbstEntiyProps<InvInvtryItem> getEntityProps() {
 		return entityProps;
+	}
+
+	@Override
+	protected CoreAbstBsnsItemSearchResult<InvInvtryItem> newSearchResult(
+			Long count, Long total, List<InvInvtryItem> resultList,
+			CoreAbstBsnsItemSearchInput<InvInvtryItem> searchInput) {
+		return new InvInvtryItemSearchResult(count, total, resultList, searchInput);
 	}
 }

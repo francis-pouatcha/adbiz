@@ -33,7 +33,8 @@
     "api-check": "~6.0.10",
     "angular-formly": "~6.18.1",
     "angular-formly-templates-bootstrap": "~4.0.3",
-    "angular-translate": "~2.7.2"
+    "angular-translate": "~2.7.2",
+    "angular-utils-pagination": "~0.8.4"
   },
   "resolutions": {
     "api-check": "^7.0.0"

@@ -16,10 +16,22 @@
         var actions = {
             update: {
                 method: 'PUT'
+            },
+            findCustom:{
+                method: 'POST',
+                url: API_BASE_URL + '/stkarticlelots/findCustom'
+            },
+            listAll:{
+                method: 'GET',
+                url: API_BASE_URL + '/stkarticlelots',
+                params:{
+                    start: -1,
+                    max: 20
+                }
             }
         };
 
-        var API_URL = API_BASE_URL + '/stockArticlelot/:stockArticlelotId';
+        var API_URL = API_BASE_URL + '/stkarticlelots/:stockArticlelotId';
 
         return $resource(API_URL, params, actions);
 

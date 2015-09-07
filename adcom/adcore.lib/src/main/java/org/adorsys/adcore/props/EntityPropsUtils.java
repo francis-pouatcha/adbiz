@@ -44,11 +44,12 @@ public class EntityPropsUtils {
 			if(translationMap.containsKey(lg)) return;// Property already loaded
 			inputStream = klass.getResourceAsStream(klass.getSimpleName()+"_"+lg+".properties");
 			if(inputStream==null){
-				if(lg.equals(defaultLang)){
-					throw new IllegalStateException("Missing property file: " + klass.getSimpleName()+".properties or " + klass.getSimpleName()+"_"+lg+".properties");
-				} else {
-					throw new IllegalStateException("Missing property file: " + klass.getSimpleName()+"_"+lg+".properties");
-				}
+				return ;
+//				if(lg.equals(defaultLang)){
+//					throw new IllegalStateException("Missing property file: " + klass.getSimpleName()+".properties or " + klass.getSimpleName()+"_"+lg+".properties");
+//				} else {
+//					throw new IllegalStateException("Missing property file: " + klass.getSimpleName()+"_"+lg+".properties");
+//				}
 			}
 		}
 		

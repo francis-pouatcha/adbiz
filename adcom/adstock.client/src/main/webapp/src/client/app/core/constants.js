@@ -6,5 +6,7 @@
         .module('app.core')
         .constant('toastr', toastr)
         .constant('moment', moment)
-        .constant('API_BASE_URL', 'http://localhost:8080/adcatal.server/rest');
+        .constant('BASE_ROUTE', '/adstock.client')
+        .constant('BASE_SERVER', 'http://localhost:8080')
+        .constant('API_BASE_URL', 'http://localhost:8080/adstock.server/rest');
 })();

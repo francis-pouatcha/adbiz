@@ -15,12 +15,8 @@
         //      allow-collapse="true" </div>
         var directive = {
             scope: {
-                'title': '@',
-                'subtitle': '@',
-                'rightText': '@',
-                'allowCollapse': '@'
             },
-            templateUrl: 'app/widgets/widget-header.html',
+            templateUrl: 'app/widgets/dirPagination.tpl.html',
             restrict: 'EA'
         };
         return directive;

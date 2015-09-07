@@ -66,4 +66,11 @@ public class StkMvntEndpoint
 	protected AbstEntiyProps<StkMvnt> getEntityProps() {
 		return entityProps;
 	}
+
+	@Override
+	protected CoreAbstBsnsItemSearchResult<StkMvnt> newSearchResult(Long size,
+			Long total, List<StkMvnt> resultList,
+			CoreAbstBsnsItemSearchInput<StkMvnt> searchInput) {
+		return new StkMvntSearchResult(size, total, resultList, searchInput);
+	}
 }
