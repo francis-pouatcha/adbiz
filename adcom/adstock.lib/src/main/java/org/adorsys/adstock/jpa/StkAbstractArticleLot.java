@@ -52,4 +52,39 @@ public class StkAbstractArticleLot extends CoreAbstBsnsItem {
 	public void setClosedDt(Date closedDt) {
 		this.closedDt = closedDt;
 	}
+
+	@Override
+	public String toString() {
+		return "StkAbstractArticleLot [stkgDt=" + stkgDt + ", closedDt="
+				+ closedDt + ", getAcsngUser()=" + getAcsngUser()
+				+ ", getLotPic()=" + getLotPic() + ", getArtPic()="
+				+ getArtPic() + ", getExpirDt()=" + getExpirDt()
+				+ ", getSupplierPic()=" + getSupplierPic() + ", getSupplier()="
+				+ getSupplier() + ", getSection()=" + getSection()
+				+ ", getPrchUnitPrcPreTax()=" + getPrchUnitPrcPreTax()
+				+ ", getPrchUnitPrcCur()=" + getPrchUnitPrcCur()
+				+ ", getPrchGrossPrcPreTax()=" + getPrchGrossPrcPreTax()
+				+ ", getPrchNetPrcPreTax()=" + getPrchNetPrcPreTax()
+				+ ", getPrchVatPct()=" + getPrchVatPct() + ", getPrchVatAmt()="
+				+ getPrchVatAmt() + ", getSlsUnitPrcPreTax()="
+				+ getSlsUnitPrcPreTax() + ", getSlsUnitPrcCur()="
+				+ getSlsUnitPrcCur() + ", getSlsGrossPrcPreTax()="
+				+ getSlsGrossPrcPreTax() + ", getSlsNetPrcPreTax()="
+				+ getSlsNetPrcPreTax() + ", getSlsVatPct()=" + getSlsVatPct()
+				+ ", getSlsVatAmt()=" + getSlsVatAmt()
+				+ ", getSlsNetPrcTaxIncl()=" + getSlsNetPrcTaxIncl()
+				+ ", getPrchUnitPrcTaxIncl()=" + getPrchUnitPrcTaxIncl()
+				+ ", getPrchVatUnitAmt()=" + getPrchVatUnitAmt()
+				+ ", getSlsUnitPrcTaxIncl()=" + getSlsUnitPrcTaxIncl()
+				+ ", getSlsVatUnitAmt()=" + getSlsVatUnitAmt()
+				+ ", getStkUnitValCur()=" + getStkUnitValCur()
+				+ ", getTrgtQty()=" + getTrgtQty() + ", getValueDt()="
+				+ getValueDt() + "]";
+	}
+
+	
+	
+	
+	
+	
 }

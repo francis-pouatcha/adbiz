@@ -130,23 +130,47 @@ else
 fi
 
 cp $ADCOM_HOME/adcom.configuration/$JBOSS_DIR/standalone/configuration/standalone-keycloak.xml $JBOSS_HOME/standalone/configuration/standalone-keycloak.xml
+cp $ADCOM_HOME/adcom.configuration/$JBOSS_DIR/standalone/configuration/standalone-keycloak-configured.xml $JBOSS_HOME/standalone/configuration/standalone-keycloak-configured.xml
 cp $ADCOM_HOME/adcom.configuration/$JBOSS_DIR/standalone/configuration/keycloak-server.json $JBOSS_HOME/standalone/configuration/keycloak-server.json
 
 echo "             Starting jboss"
 cd $JBOSS_HOME && bin/standalone.sh --debug --server-config=standalone-keycloak.xml > /dev/null &
 
-# cd $ADCOM_HOME/adkcloak.config && mvn clean install
-# cp $ADCOM_HOME/adkcloak.config/target/adkcloak.config.war $JBOSS_HOME/standalone/deployments/
+export CONFIG_DONE=$JBOSS_HOME/.config.done
+
+while [ ! -e "$CONFIG_DONE" ]
+do
+   	echo "             Waitingfor for config to end."
+   	sleep 10s	
+done
+
+export RUNNING_JBOSS_PID="$( ps aux | grep '[j]boss' | awk '{print $2}')"
+
+if [ "x$RUNNING_JBOSS_PID" != "x" ]; then
+	echo "             Stopping jboss smoothly PID $RUNNING_JBOSS_PID"
+	kill -9 $RUNNING_JBOSS_PID > /dev/null
+   	sleep 2s	
+fi
+export RUNNING_JBOSS_PID="$( ps aux | grep '[j]boss' | awk '{print $2}')"
+if [ "x$RUNNING_JBOSS_PID" = "x" ]; then
+   	echo "             Running jboss instance terminated."
+fi
+
+# Undeploy adkcloak.config
+rm $JBOSS_DEPLOY_DIR/adkcloak.config.war
+
+# deploy modules
+echo "             deploying new artifacts"
+cp $ADCOM_HOME/adcatal.server/target/adcatal.server.war $JBOSS_HOME/standalone/deployments/
+cp $ADCOM_HOME/adcatal.client/target/adcatal.client.war $JBOSS_HOME/standalone/deployments/
+
+echo "             Starting jboss"
+cd $JBOSS_HOME && bin/standalone.sh --debug --server-config=standalone-keycloak-configured.xml > /dev/null &
+
+echo "             Import catalogue data"
+cp $ADCOM_HOME/adcom.configuration/all-servers/adcom/adcatal/adcatal.xls $JBOSS_DATA_DIR/adcom/adcatal/
 
 
-# echo "             Building the projet"
-# cd $ADCOM_HOME && mvn clean install -DskipTests
-
-# echo "             deploying new artifacts"
-# cp $ADCOM_HOME/adcatal.server/target/adcatal.server.war $JBOSS_HOME/standalone/deployments/
-# cp $ADCOM_HOME/adcatal.client/target/adcatal.client.war $JBOSS_HOME/standalone/deployments/
-
-# echo "             Create Dir for data"
 # cd $JBOSS_HOME/ && mkdir adcom
 # echo "             Copying the .xls file"
 # cd $JBOSS_HOME/adcom/ && mkdir adcatal

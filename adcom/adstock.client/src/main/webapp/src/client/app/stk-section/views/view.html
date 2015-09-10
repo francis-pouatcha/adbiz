@@ -1,0 +1,32 @@
+<section class="mainbar" data-ng-init="vm.toViewStkSection()">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+			{{'app.core.view.title' | translate}} {{'StockSection.title' | translate}}
+    </div>
+    <div class="panel-body">
+
+      <form novalidate>
+        <formly-form model="vm.stkSection" fields="vm.formFields">
+        </formly-form>
+      </form>
+
+      <hr/>
+      <div>
+        <a class="btn btn-success" href="#/stk-section/{{vm.stkSection.id}}/edit">
+          <i class="glyphicon glyphicon-edit"></i> {{'app.core.edit.title' | translate}}
+        </a>
+        <a class="btn btn-danger" title="Remove" 
+           ng-really-message="{{'app.core.delete.confirmation.title' | translate}} {{'StockSection.title' | translate}}" 
+           ng-really-click="vm.remove()" item="vm.stkSection">
+          <i class="glyphicon glyphicon-remove-circle"></i> {{'app.core.delete.title' | translate}}
+        </a>
+        <a class="btn btn-primary" href="#/stk-section">
+          <i class="glyphicon glyphicon-list"></i> {{'app.core.list.title' | translate}} {{'StockSections.title' | translate }}
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+</section>

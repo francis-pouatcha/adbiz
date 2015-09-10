@@ -11,7 +11,6 @@ import org.adorsys.adkcloak.config.Failure;
 import org.adorsys.adkcloak.config.RealmClient;
 import org.apache.commons.lang3.StringUtils;
 import org.keycloak.representations.idm.RoleRepresentation;
-import org.keycloak.representations.idm.RoleRepresentation.Composites;
 
 @Stateless
 public class RolesLoader extends CoreAbstModelLoader<RolesReprestn> {

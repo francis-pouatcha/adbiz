@@ -23,6 +23,7 @@
 		<module>adbase.lib</module>
 		<module>adcatal.lib</module>
 		<module>adcatal.client</module>
+		<module>adstock.client</module>
 		<module>adstock.lib</module>
 		<module>adcost.lib</module>
 		<module>adinvtry.lib</module>

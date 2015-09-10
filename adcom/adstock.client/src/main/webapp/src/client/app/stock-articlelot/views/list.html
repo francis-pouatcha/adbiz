@@ -2,35 +2,60 @@
 
   <div class="panel panel-primary">
     <div class="panel-heading">
-      Stock-articlelot List
+      {{'app.core.list.title' | translate}} {{'StockArticlelots.title' | translate }}
     </div>
     <div class="panel-body">
 
       <div class="pull-right">
         <a type="button" class="btn btn-success" href="/stock-articlelot/create">
-          <i class="glyphicon glyphicon-open"></i> New Stock-articlelot
+          <i class="glyphicon glyphicon-open"></i> 
+            {{'app.core.new.title' | translate}} {{'StockArticlelot.title' | translate}}
         </a>
       </div>
 
-      <table ng-table="vm.tableParams" show-filter="true" class="table table-condensed table-striped">
-          <tr ng-repeat="stockArticlelot in $data">
-              <td data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">{{stockArticlelot.name}}</td>
-              <td data-title="'Address'" sortable="'address'" filter="{'address': 'text'}">{{stockArticlelot.address}}</td>
+      <table class="table table-condensed table-striped">
+          <thead>
+          <th>{{'StockArticlelot.lotPic.title' | translate}}</th>
+          <th>{{'StockArticlelot.artPic.title' | translate}}</th>
+          <th>{{'StockArticlelot.section.title' | translate}}</th>
+          <th>{{'StockArticlelot.expirDt.title' | translate}}</th>
+          <th>{{'StockArticlelot.valueDt.title' | translate}}</th>
+              
+          <th>{{'StockArticlelot.supplier.title' | translate}}</th>
+          <th>{{'StockArticlelot.stkUnitValCur.title' | translate}}</th>
+          <th>{{'StockArticlelot.trgtQty.title' | translate}}</th>
+          <th>{{'StockArticlelot.stkgDt.title' | translate}}</th>
+          </thead>
+          <tr dir-paginate="stockArticlelot in vm.data.list | itemsPerPage: vm.pagination.itemsPerPage" 
+              total-items="vm.data.total" 
+              current-page="vm.pagination.current">
+              <td>{{stockArticlelot.lotPic}}</td>
+              <td>{{stockArticlelot.artPic}}</td>
+              <td>{{stockArticlelot.section}}</td>
+              <td>{{stockArticlelot.expirDt | date:'dd-MM-yyyy'}}</td>
+              <td>{{stockArticlelot.valueDt | date:'dd-MM-yyyy HH:mm:ss'}}</td>
+              <td>{{stockArticlelot.supplier}}</td>
+              <td>{{stockArticlelot.stkUnitValCur}}</td>
+              <td>{{stockArticlelot.trgtQty}}</td>
+              <td>{{stockArticlelot.stkgDt | date:'dd-MM-yyyy HH:mm:ss'}}</td>
               <td>
                  <div class="table-actions">
-                      <a class="btn btn-default" title="View" href="/stock-articlelot/{{stockArticlelot.id}}">
+                      <a class="btn btn-default" title="{{'app.core.view.title' | translate}}" href="#/stock-articlelot/{{stockArticlelot.id}}">
                         <span class="glyphicon glyphicon-eye-open"></span>
                       </a>
-                      <a class="btn btn-default" title="Edit" href="/stock-articlelot/{{stockArticlelot.id}}/edit">
+                      <a class="btn btn-default" title="{{'app.core.edit.title' | translate}}" href="#/stock-articlelot/{{stockArticlelot.id}}/edit">
                         <span class="glyphicon glyphicon-edit"></span>
-                      </a>
-                      <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove(stockArticlelot)" item="stockArticlelot">
-                        <span class="glyphicon glyphicon-remove-circle"></span>
                       </a>
                   </div>
               </td>
           </tr>
       </table>
+      <div class="pull-right">    
+        <dir-pagination-controls on-page-change="vm.paginate(newPageNumber)" 
+                                 boundary-links="true"
+                                 max-size="vm.pagination.maxSize">
+        </dir-pagination-controls>
+      </div> 
 
     </div>
   </div>

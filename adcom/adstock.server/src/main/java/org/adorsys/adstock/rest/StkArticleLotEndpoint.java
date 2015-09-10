@@ -43,9 +43,9 @@ public class StkArticleLotEndpoint extends CoreAbstBsnsItemEndpoint<StkArticleLo
 	}
 	@Override
 	protected CoreAbstBsnsItemSearchResult<StkArticleLot> newSearchResult(
-			Long size, List<StkArticleLot> resultList,
+			Long size, Long total, List<StkArticleLot> resultList,
 			CoreAbstBsnsItemSearchInput<StkArticleLot> searchInput) {
-		return new StkArticleLotSearchResult(size, resultList, searchInput);
+		return new StkArticleLotSearchResult(size, total, resultList, searchInput);
 	}
 	@Override
 	protected CoreAbstBsnsItemSearchInput<StkArticleLot> newSearchInput() {
@@ -58,6 +58,12 @@ public class StkArticleLotEndpoint extends CoreAbstBsnsItemEndpoint<StkArticleLo
 	@Override
 	protected AbstEntiyProps<StkArticleLot> getEntityProps() {
 		return entityProps;
+	}
+	@Override
+	protected CoreAbstBsnsItemSearchResult<StkArticleLot> newSearchResult(
+			Long size, List<StkArticleLot> resultList,
+			CoreAbstBsnsItemSearchInput<StkArticleLot> searchInput) {
+		return null;
 	}
 
 }
