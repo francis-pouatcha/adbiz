@@ -24,7 +24,14 @@ public class KcloakLoaderRegistration extends CoreAbstLoaderRegistration {
 	private RealmLoader realmLoader;
 	@Inject
 	private ClientLoader clientLoader;
-
+	@Inject
+	private ClientRoleLoader clientRoleLoader;
+	@Inject
+	private RolesLoader rolesLoader;
+	@Inject
+	private UserLoader userLoader;
+	@Inject
+	private UserCredentialsLoader userCredentialsLoader;
 	@EJB
 	private KcloakLoaderRegistration registration;
 	@EJB
@@ -35,6 +42,10 @@ public class KcloakLoaderRegistration extends CoreAbstLoaderRegistration {
 		super.postConstruct();
 		dataSheetLoader.registerLoader(RealmRepresentation.class.getSimpleName(), realmLoader);
 		dataSheetLoader.registerLoader(ClientReprestn.class.getSimpleName(), clientLoader);
+		dataSheetLoader.registerLoader(ClientRoleReprestn.class.getSimpleName(), clientRoleLoader);
+		dataSheetLoader.registerLoader(RolesReprestn.class.getSimpleName(), rolesLoader);
+		dataSheetLoader.registerLoader(UserReprestn.class.getSimpleName(), userLoader);
+		dataSheetLoader.registerLoader(UserCredentials.class.getSimpleName(), userCredentialsLoader);
 	}
 
 	@Override
