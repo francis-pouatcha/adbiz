@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.adorsys.adkcloak.loader.ClientReprestn;
@@ -13,6 +14,7 @@ import org.adorsys.adkcloak.loader.RoleReprestn;
 import org.adorsys.adkcloak.loader.UserCredentials;
 import org.adorsys.adkcloak.loader.UserReprestn;
 import org.adorsys.adkcloak.utils.CopyUtils;
+import org.adorsys.adkcloak.utils.KeycloakProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -33,6 +35,14 @@ public class RealmClient {
 	@Inject
 	private TokenManager tokenManager;
 	
+	@Inject
+	private KeycloakProperties properties;
+	
+	@PostConstruct
+	public void postConstruct(){
+		initDefaultValues();
+	}
+	
     public void createRealm(RealmRepresentation rr) throws Failure {
     	try {
 	        HttpPost post = new HttpPost(KeycloakUriBuilder.fromUri(tokenManager.getBaseUrl() + "/auth/admin/realms").build());
@@ -46,9 +56,21 @@ public class RealmClient {
             if (response.getStatusLine().getStatusCode() != 201) {
                 throw new Failure(response.getStatusLine().getStatusCode());
             }
+            
+            RealmRepresentation realmRepresentation = findRealm(rr.getRealm());
+            properties.addProperperty("realm-public-key", realmRepresentation.getPublicKey());
+            
     	} catch (IOException e) {
 			throw new RuntimeException(e);
     	}
+    }
+    
+    private void initDefaultValues(){
+    	properties.addProperperty("auth-server-url","http://localhost:8080/auth");
+    	properties.addProperperty("use-resource-role-mappings","true");
+    	properties.addProperperty("enable-cors","true");
+    	properties.addProperperty("cors-max-age","10000");
+    	properties.addProperperty("cors-allowed-methods","POST, PUT, DELETE, GET");
     }
     
     public RealmRepresentation findRealm(String realmName) throws Failure {
@@ -69,7 +91,7 @@ public class RealmClient {
 		res.setRealmId(realmId);
 		return res;
 	}
-
+	
 	public void createClient(ClientReprestn t)  throws Failure {
     	try {
 	        HttpPost post = new HttpPost(KeycloakUriBuilder.fromUri(tokenManager.getBaseUrl() + "/auth/admin/realms/{realm}/clients").build(t.getRealmId()));
@@ -90,11 +112,14 @@ public class RealmClient {
 	        stringEntity.setContentType("application/json");
 	        post.setEntity(stringEntity);
 
-	        CloseableHttpResponse response = tokenManager.execute(masterRealmName,post);
-	        
-            if (response.getStatusLine().getStatusCode() != 201) {
-                throw new Failure(response.getStatusLine().getStatusCode());
-            }
+	        tokenManager.execute(masterRealmName,post, 201);
+	                    
+	        String clientId = t.getClientId();
+//            ClientReprestn clientReprestn = findClient(t.getRealmId(), clientId);
+//            String secret = clientReprestn.getSecret();
+	        CredentialRepresentation secret = findGenericFromRealm(CredentialRepresentation.class, "/auth/admin/realms/{realm}/clients/{id}/client-secret", t.getRealmId(), clientId);
+            String credentialKey =clientId + ".credential";
+            properties.addProperperty(credentialKey, secret.getValue());
     	} catch (IOException e) {
 			throw new RuntimeException(e);
     	}

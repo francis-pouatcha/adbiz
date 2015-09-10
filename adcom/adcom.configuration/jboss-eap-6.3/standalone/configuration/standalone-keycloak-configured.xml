@@ -85,20 +85,118 @@
 	<profile>
 		<subsystem xmlns="urn:jboss:domain:keycloak:1.0">
 			<realm name="adcom">
-				<realm-public-key>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDT2WkbXOgyEhfMY2xOMwEjXmBFL/8SOZr7qNFt2+4CI8T13gBQPYoJxzVnX4Kgb2v/uUw7ywCvTAqjMGDrg3UyTs6hG9P7G95BXD2y3Uyc0VUwjmxLqzTYOmO9zDM7b7axRDewHNeg7cH++n15nB8TDAmEnctFNnvmcBxcSaeTzQIDAQAB
-				</realm-public-key>
-				<auth-server-url>http://localhost:8080/auth</auth-server-url>
+				<realm-public-key>${realm-public-key}</realm-public-key>
+				<auth-server-url>${auth-server-url}</auth-server-url>
 				<ssl-required>external</ssl-required>
+				<use-resource-role-mappings>${use-resource-role-mappings}</use-resource-role-mappings>
+				<enable-cors>${enable-cors}</enable-cors>
+				<cors-max-age>${cors-max-age}</cors-max-age>
+				<cors-allowed-methods>${cors-allowed-methods}</cors-allowed-methods>
 			</realm>
+			<secure-deployment name="adacc.server.war">
+				<realm>adcom</realm>
+				<resource>adacc.server</resource>
+				<credential name="secret">${adacc.server.credential}</credential>
+			</secure-deployment>
+			<secure-deployment name="adcatal.server.war">
+				<realm>adcom</realm>
+				<resource>adcatal.server</resource>
+				<credential name="secret">${adcatal.server.credential}</credential>
+			</secure-deployment>
+			<secure-deployment name="adaptmt.server.war">
+				<realm>adcom</realm>
+				<resource>adaptmt.serverr</resource>
+				<credential name="secret">${adaptmt.server.credential}</credential>
+			</secure-deployment>
+			<secure-deployment name="adbnsptnr.server.war">
+				<realm>adcom</realm>
+				<resource>adbnsptnr.server</resource>
+				<credential name="secret">${adbnsptnr.server.credential}</credential>
+			</secure-deployment>
+			<secure-deployment name="adcost.server.war">
+				<realm>adcom</realm>
+				<resource>adcost.server</resource>
+				<credential name="secret">${adcost.server.credential}</credential>
+			</secure-deployment>
+			<secure-deployment name="adcshdwr.server.war">
+				<realm>adcom</realm>
+				<resource>adcshdwr.server</resource>
+				<credential name="secret">${adcshdwr.server.credential}</credential>
+			</secure-deployment>
+			<secure-deployment name="adinvtry.server.war">
+				<realm>adcom</realm>
+				<resource>adinvtry.server</resource>
+				<credential name="secret">${adinvtry.server.credential}</credential>
+			</secure-deployment>
+			<secure-deployment name="adprocmt.server.war">
+				<realm>adcom</realm>
+				<resource>adprocmt.server</resource>
+				<credential name="secret">${adprocmt.server.credential}</credential>
+			</secure-deployment>
+			<secure-deployment name="adsales.server.war">
+				<realm>adcom</realm>
+				<resource>adsales.server</resource>
+				<credential name="secret">${adsales.server.credential}</credential>
+			</secure-deployment>
+			<secure-deployment name="adstock.server.war">
+				<realm>adcom</realm>
+				<resource>adstock.server</resource>
+				<credential name="secret">${adstock.server.credential}</credential>
+			</secure-deployment>
+			<secure-deployment name="addashboard.client.war">
+				<realm>adcom</realm>
+				<resource>addashboard.client</resource>
+				<credential name="secret">${addashboard.client.credential}</credential>
+			</secure-deployment>
+			<secure-deployment name="adacc.client.war">
+				<realm>adcom</realm>
+				<resource>adacc.client</resource>
+				<credential name="secret">${adacc.client.credential}</credential>
+			</secure-deployment>
 			<secure-deployment name="adcatal.client.war">
 				<realm>adcom</realm>
 				<resource>adcatal.client</resource>
-				<credential name="secret">74067fd7-0dcc-4f20-a45f-8d7680b8a169
-				</credential>
-				<use-resource-role-mappings>true</use-resource-role-mappings>
-				<enable-cors>true</enable-cors>
-				<cors-max-age>10000</cors-max-age>
-				<cors-allowed-methods>POST, PUT, DELETE, GET</cors-allowed-methods>
+				<credential name="secret">${adcatal.client.credential}</credential>
+			</secure-deployment>
+			<secure-deployment name="adaptmt.client.war">
+				<realm>adcom</realm>
+				<resource>adaptmt.client</resource>
+				<credential name="secret">${adaptmt.client.credential}</credential>
+			</secure-deployment>
+			<secure-deployment name="adbnsptnr.client.war">
+				<realm>adcom</realm>
+				<resource>adbnsptnr.client</resource>
+				<credential name="secret">${adbnsptnr.client.credential}</credential>
+			</secure-deployment>
+			<secure-deployment name="adcost.client.war">
+				<realm>adcom</realm>
+				<resource>adcost.client</resource>
+				<credential name="secret">${adcost.client.credential}</credential>
+			</secure-deployment>
+			<secure-deployment name="adcshdwr.client.war">
+				<realm>adcom</realm>
+				<resource>adcshdwr.client</resource>
+				<credential name="secret">${adcshdwr.client.credential}</credential>
+			</secure-deployment>
+			<secure-deployment name="adinvtry.client.war">
+				<realm>adcom</realm>
+				<resource>adinvtry.client</resource>
+				<credential name="secret">${adinvtry.client.credential}</credential>
+			</secure-deployment>
+			<secure-deployment name="adprocmt.client.war">
+				<realm>adcom</realm>
+				<resource>adprocmt.client</resource>
+				<credential name="secret">${adprocmt.client.credential}</credential>
+			</secure-deployment>
+			<secure-deployment name="adsales.client.war">
+				<realm>adcom</realm>
+				<resource>adsales.client</resource>
+				<credential name="secret">${adsales.client.credential}</credential>
+			</secure-deployment>
+			<secure-deployment name="adstock.client.war">
+				<realm>adcom</realm>
+				<resource>adstock.client</resource>
+				<credential name="secret">${adstock.client.credential}</credential>
 			</secure-deployment>
 		</subsystem>
 		<subsystem xmlns="urn:jboss:domain:logging:1.4">

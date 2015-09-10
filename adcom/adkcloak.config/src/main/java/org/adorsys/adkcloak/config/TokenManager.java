@@ -140,6 +140,27 @@ public class TokenManager {
     	}
     }
 
+    public CloseableHttpResponse execute(String realm, HttpUriRequest req, int expectedRes) throws Failure{
+    	CloseableHttpClient client = HttpClientBuilder.create().build();
+    	AccessTokenResponse token = login(realm);
+        req.addHeader("Authorization", "Bearer " + token.getToken());
+        try {
+        	CloseableHttpResponse response = client.execute(req);
+        	if(response.getStatusLine().getStatusCode()!=expectedRes)
+        		throw new Failure(response.getStatusLine().getStatusCode());
+        	return response;
+    	} catch (IOException e) {
+			throw new RuntimeException(e);
+		} finally {
+    		try {
+				client.close();
+				logout(realm, token);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+    	}
+    }
+    
     public <T> T execute(String realm, HttpUriRequest req, Class<T> klass) throws Failure {
     	CloseableHttpClient client = HttpClientBuilder.create().build();
     	AccessTokenResponse token = login(realm);
@@ -172,4 +193,37 @@ public class TokenManager {
 			}
     	}
     }
+    public <T> T execute(String realm, HttpUriRequest req, Class<T> klass, int expectedStatusCode) throws Failure {
+    	CloseableHttpClient client = HttpClientBuilder.create().build();
+    	AccessTokenResponse token = login(realm);
+        req.addHeader("Authorization", "Bearer " + token.getToken());
+        try {
+        	CloseableHttpResponse response = client.execute(req);
+        	int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode == 404) {
+                return null;// not found
+            }
+            if (statusCode == expectedStatusCode) {
+	            HttpEntity entity = response.getEntity();
+	            InputStream is = entity.getContent();
+	            try {
+	            	return JsonSerialization.readValue(is, klass);
+	            } finally {
+	            	is.close();
+	            }
+            } else {
+                throw new Failure(response.getStatusLine().getStatusCode());
+            }
+    	} catch (IOException e) {
+			throw new RuntimeException(e);
+		} finally {
+    		try {
+				client.close();
+				logout(realm, token);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+    	}
+    }
+
 }
