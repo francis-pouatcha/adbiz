@@ -399,8 +399,8 @@
                     $scope.coreSearchInput.fieldNames.push('lotPic');
                 }
 
-                if(angular.isDefined($scope.coreSearchInput.entity.artPic) && $scope.coreSearchInput.entity.artPic){
-                    $scope.coreSearchInput.fieldNames.push('artPic');
+                if(angular.isDefined($scope.coreSearchInput.entity.identif) && $scope.coreSearchInput.entity.identif){
+                    $scope.coreSearchInput.fieldNames.push('identif');
                 }
 
                 if(angular.isDefined($scope.coreSearchInput.entity.section) && $scope.coreSearchInput.entity.section){
@@ -465,7 +465,7 @@
                 invInvtryManagerResource.addItem(invtryItem,
                     function(invtryItem){
                         itemsResultHandler.unshift(invtryItem);
-                        $scope.coreSearchInput.entity.artPic=undefined;
+                        $scope.coreSearchInput.entity.identif=undefined;
                         $scope.coreSearchInput.entity.artName=undefined;
                         $scope.coreSearchInput.entity.lotPic=undefined;
                         $scope.coreSearchInput.entity.asseccedQty=undefined;
@@ -648,16 +648,16 @@
             $scope.onArticleLotChangedInSearch = function(){
                 if($scope.coreSearchInput.entity.lotPic && $scope.coreSearchInput.entity.lotPic.length<9) return;
                 if(
-                    (angular.isDefined($scope.coreSearchInput.entity.artPic) && $scope.coreSearchInput.entity.artPic) &&
+                    (angular.isDefined($scope.coreSearchInput.entity.identif) && $scope.coreSearchInput.entity.identif) &&
                     (angular.isDefined($scope.coreSearchInput.entity.section) && $scope.coreSearchInput.entity.section)
                     ){
                     return;
                 }
-                if(angular.isUndefined($scope.coreSearchInput.entity.artPic) || !$scope.coreSearchInput.entity.artPic){
+                if(angular.isUndefined($scope.coreSearchInput.entity.identif) || !$scope.coreSearchInput.entity.identif){
                     genericResource.findByIdentif(invInvtryUtils.stkarticlelotsUrlBase,$scope.coreSearchInput.entity.lotPic.toUpperCase())
                         .success(function(articleLot){
-                            $scope.coreSearchInput.entity.artPic=articleLot.artPic;
-                            genericResource.findByIdentif(invInvtryUtils.catalarticlesUrlBase,$scope.coreSearchInput.entity.artPic)
+                            $scope.coreSearchInput.entity.identif=articleLot.identif;
+                            genericResource.findByIdentif(invInvtryUtils.catalarticlesUrlBase,$scope.coreSearchInput.entity.identif)
                                 .success(function(catalArticle){
                                     $scope.coreSearchInput.entity.artName=catalArticle.features.artName;
                                 })
@@ -674,12 +674,12 @@
 
             $scope.onArticleLotSectionSelectedInSearch = function(item,model,label){
                 $scope.coreSearchInput.entity.lotPic = item.lotPic;
-                var artPic = item.artPic;
-                if(	(angular.isUndefined($scope.coreSearchInput.entity.artPic) ||
-                    !$scope.coreSearchInput.entity.artPic) ||
-                    $scope.coreSearchInput.entity.artPic!=artPic)
+                var identif = item.identif;
+                if(	(angular.isUndefined($scope.coreSearchInput.entity.identif) ||
+                    !$scope.coreSearchInput.entity.identif) ||
+                    $scope.coreSearchInput.entity.identif!=identif)
                 {
-                    $scope.coreSearchInput.entity.artPic=artPic;
+                    $scope.coreSearchInput.entity.identif=identif;
                     $scope.coreSearchInput.entity.artName=item.artName;
                 }
 
@@ -697,19 +697,19 @@
                 if((angular.isDefined(lotPic) && lotPic.length>=8)){
                     return [];
                 }
-                var artPic = $scope.coreSearchInput.entity.artPic;
+                var identif = $scope.coreSearchInput.entity.identif;
                 var section = $scope.coreSearchInput.entity.section;
-                if(((angular.isUndefined(artPic) || !artPic)) && ((angular.isUndefined(section) || !section))){
+                if(((angular.isUndefined(identif) || !identif)) && ((angular.isUndefined(section) || !section))){
                     return [];
                 }
-                return invInvtryUtils.loadStkSectionArticleLotsByIdentif(artPic,lotPic,section);
+                return invInvtryUtils.loadStkSectionArticleLotsByIdentif(identif,lotPic,section);
             };
 
             $scope.onArticleLotSelectedInSearch = function(item,model,label){
                 $scope.coreSearchInput.entity.lotPic=item.lotPic;
-                $scope.coreSearchInput.entity.artPic=item.artPic;
+                $scope.coreSearchInput.entity.identif=item.identif;
 //    	// read the article name
-                genericResource.findByIdentif(invInvtryUtils.catalarticlesUrlBase,item.artPic)
+                genericResource.findByIdentif(invInvtryUtils.catalarticlesUrlBase,item.identif)
                     .success(function(catalArticle){
                         $scope.coreSearchInput.entity.artName=catalArticle.features.artName;
                     })
@@ -719,7 +719,8 @@
             };
 
             $scope.onArticleSelectedInSearch = function(item,model,label){
-                $scope.coreSearchInput.entity.artPic=item.pic;
+                $scope.coreSearchInput.entity = {};
+                $scope.coreSearchInput.entity.identif=item.identif;
                 $scope.coreSearchInput.entity.artName=item.features.artName;
 
             };

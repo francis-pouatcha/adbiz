@@ -136,8 +136,8 @@
                     <div class="form-group col-lg-2" ng-class="{ 'has-error' : invInvtryItemForm.artPic.$invalid }">
                         <label class=" control-label" for="artPic">{{'InvInvtryItem_artPic_description.title'| translate}}</label>
                         <input type="text" ng- class="form-control" name="artPic" id="artPic" required autocomplete="off"
-                               ng-model="searchInput.entity.artPic"
-                               typeahead="article as article.pic for article in invInvtryUtils.loadArticlesByPic($viewValue)"
+                               ng-model="searchInput.entity.identif"
+                               typeahead="article as article.identif for article in invInvtryUtils.loadArticlesByPic($viewValue)"
                                typeahead-min-length="5"
                                typeahead-loading="loading" typeahead-on-select='onArticleSelectedInSearch($item, $model, $label)' >
                     </div>

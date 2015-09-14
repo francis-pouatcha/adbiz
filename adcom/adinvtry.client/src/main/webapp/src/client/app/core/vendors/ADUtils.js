@@ -343,7 +343,7 @@ angular.module('ADUtils',[])
 	
 }])
 
-.factory('genericResource',['$http','$q', function($http,$q){
+.factory('genericResource',['$http','$q', function($http,$q, urlBase){
     var service = {};
 
     service.create = function(urlBase, entity){
@@ -370,7 +370,7 @@ angular.module('ADUtils',[])
             return $http.get(urlBase+"/"+id,{responseType: 'arraybuffer'});
         };
 
-    service.findByLikePromissed = function (urlBase, fieldName, fieldValue){
+    service.findByLikePromissed = function (urlBase, fieldName, fieldValue, klassName){
     	if(angular.isUndefined(urlBase) || !urlBase ||
     		angular.isUndefined(fieldName) || !fieldName || 
     		angular.isUndefined(fieldValue) || !fieldValue) return;
@@ -380,6 +380,7 @@ angular.module('ADUtils',[])
         if(coreSearchInput.fieldNames.indexOf(fieldName)==-1)
         	coreSearchInput.fieldNames.push(fieldName);
           var deferred = $q.defer();
+          coreSearchInput.className = klassName;
           service.findByLike(urlBase, coreSearchInput)
           .success(function(entitySearchResult) {
               deferred.resolve(entitySearchResult);
@@ -414,7 +415,7 @@ angular.module('ADUtils',[])
     service.findCustom = function(urlBase, entitySearchInput){
         return $http.post(urlBase+'/findCustom',entitySearchInput);
     };
-    service.findCustomPromissed = function (urlBase, fieldName, fieldValue){
+    service.findCustomPromissed = function (urlBase, fieldName, fieldValue, klassName){
     	if(angular.isUndefined(urlBase) || !urlBase ||
     		angular.isUndefined(fieldName) || !fieldName || 
     		angular.isUndefined(fieldValue) || !fieldValue) return;
@@ -424,6 +425,7 @@ angular.module('ADUtils',[])
         if(coreSearchInput.fieldNames.indexOf(fieldName)==-1)
         	coreSearchInput.fieldNames.push(fieldName);
           var deferred = $q.defer();
+        coreSearchInput.className = klassName;
           service.findCustom(urlBase, coreSearchInput)
           .success(function(entitySearchResult) {
               deferred.resolve(entitySearchResult);

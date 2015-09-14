@@ -34,6 +34,12 @@ public class EntityPropsUtils {
 		return translationMap;
 	}
 	
+	/**
+	 * @param translationMap
+	 * @param klass
+	 * @param lg
+	 * @throws IOException
+	 */
 	private void loadInternal(Map<String, Properties> translationMap, Class<?> klass, String lg) throws IOException{
 		InputStream inputStream = null;
 		if(StringUtils.isBlank(lg)){
@@ -43,13 +49,13 @@ public class EntityPropsUtils {
 		if(inputStream==null){
 			if(translationMap.containsKey(lg)) return;// Property already loaded
 			inputStream = klass.getResourceAsStream(klass.getSimpleName()+"_"+lg+".properties");
-			if(inputStream==null){
+			if(inputStream==null){	
 				return;
-				/*if(lg.equals(defaultLang)){
+			/*if(lg.equals(defaultLang)){
 					throw new IllegalStateException("Missing property file: " + klass.getSimpleName()+".properties or " + klass.getSimpleName()+"_"+lg+".properties");
 				} else {
 					throw new IllegalStateException("Missing property file: " + klass.getSimpleName()+"_"+lg+".properties");
-				}*/
+			}*/
 			}
 		}
 		

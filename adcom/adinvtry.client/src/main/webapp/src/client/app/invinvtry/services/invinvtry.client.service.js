@@ -153,20 +153,20 @@
         .module('app.invinvtry')
         .factory('invInvtryUtils', invInvtryUtils);
 
-    invInvtryUtils.$inject = ['sessionManager','$translate','genericResource','$q','invInvtryState','API_BASE_URL'];
+    invInvtryUtils.$inject = ['sessionManager','$translate','genericResource','invInvtryState','API_BASE_URL', 'BASE_SERVER'];
     /* @ngInject */
-    function invInvtryUtils(sessionManager, $translate,genericResource,$q,invInvtryState,API_BASE_URL) {
+    function invInvtryUtils(sessionManager, $translate,genericResource,invInvtryState,API_BASE_URL, BASE_SERVER) {
 
         var service = {};
 
         service.inventoryManagerUrlBase = API_BASE_URL + "/inventory";
         service.urlBase= API_BASE_URL + '/invinvtrys';
         service.invinvtrysUrlBase= API_BASE_URL+ '/invinvtryitems';
-        service.stksectionsUrlBase='/adstock.server/rest/stksections';
-        service.stkarticlelotsUrlBase='/adstock.server/rest/stkarticlelots';
-        service.catalarticlesUrlBase='/adcatal.server/rest/catalarticles';
-        service.loginnamessUrlBase='/adbase.server/rest/loginnamess';
-        service.stkarticlelot2strgsctnsUrlBase='/adstock.server/rest/stkarticlelot2strgsctns';
+        service.stksectionsUrlBase=BASE_SERVER+'/adstock.server/rest/stksections';
+        service.stkarticlelotsUrlBase=BASE_SERVER+'/adstock.server/rest/stkarticlelots';
+        service.catalarticlesUrlBase=BASE_SERVER+'/adcatal.server/rest/catalarticles';
+        service.loginnamessUrlBase=BASE_SERVER+'/adbase.server/rest/loginnamess';
+        service.stkarticlelot2strgsctnsUrlBase=BASE_SERVER+'/adstock.server/rest/stkarticlelot2strgsctns';
         service.alphabet = "abcdefghijklmnopqrstuvwxyz";
 
         service.invInvtryTypeI18nMsgTitleKey = function(enumKey){
@@ -202,27 +202,23 @@
             {enumKey:'POSTED', translKey:'InvInvntrStatus_POSTED_description.title'}
         ];
 
-        service.language=sessionManager.language;
-
-        service.currentWsUser=sessionManager.userWsData();
-
 
         service.loadSectionsBySectionCode = function(sectionCode){
-            return genericResource.findByLikePromissed(service.stksectionsUrlBase, 'sectionCode', sectionCode)
+            return genericResource.findByLikePromissed(service.stksectionsUrlBase, 'sectionCode', sectionCode, 'org.adorsys.adstock.jpa.StkSection')
                 .then(function(entitySearchResult){
                     return entitySearchResult.resultList;
                 });
         };
 
         service.loadSectionsBySectionName = function(sectionName){
-            return genericResource.findByLikePromissed(service.stksectionsUrlBase, 'name', sectionName)
+            return genericResource.findByLikePromissed(service.stksectionsUrlBase, 'name', sectionName, 'org.adorsys.adstock.jpa.StkSection')
                 .then(function(entitySearchResult){
                     return entitySearchResult.resultList;
                 });
         };
 
         service.loadArticlesByPic = function(artPic){
-            return genericResource.findByLikePromissed(service.catalarticlesUrlBase, 'pic', artPic)
+            return genericResource.findByLikePromissed(service.catalarticlesUrlBase, 'identif', artPic, 'org.adorsys.adcatal.jpa.CatalArticleSearchInput')
                 .then(function(entitySearchResult){
                     return entitySearchResult.resultList;
                 });
@@ -238,7 +234,7 @@
         };
 
         service.loadStkSectionArticleLots = function(strgSection){
-            return genericResource.findByLikePromissed(service.stksectionsUrlBase, 'sectionCode', strgSection)
+            return genericResource.findByLikePromissed(service.stksectionsUrlBase, 'sectionCode', strgSection, 'org.adorsys.adstock.jpa.StkSection')
                 .then(function(entitySearchResult){
                     return entitySearchResult.resultList;
                 });
@@ -265,7 +261,7 @@
         };
 
         service.loadStkSectionArticleLotsByName = function(sectionName){
-            return genericResource.findByLikePromissed(service.stksectionsUrlBase, 'name', sectionName)
+            return genericResource.findByLikePromissed(service.stksectionsUrlBase, 'name', sectionName, 'org.adorsys.adstock.jpa.StkSection')
                 .then(function(entitySearchResult){
                     return entitySearchResult.resultList;
                 });

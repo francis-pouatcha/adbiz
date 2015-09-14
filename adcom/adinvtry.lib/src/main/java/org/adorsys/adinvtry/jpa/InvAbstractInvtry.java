@@ -1,5 +1,6 @@
 package org.adorsys.adinvtry.jpa;
 
+import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 import org.adorsys.adcore.annotation.Description;
@@ -17,5 +18,17 @@ public abstract class InvAbstractInvtry extends CoreAbstBsnsObject {
 		return identif;
 	}
 	
+	@Column
+	private String rangeStart;	
+
+	@Column
+	private String rangeEnd;
 	
+	public String getRangeStart() {
+		return rangeStart;
+	}
+
+	public void setRangeStart(String rangeStart) {
+		this.rangeStart = rangeStart;
+	}
 }

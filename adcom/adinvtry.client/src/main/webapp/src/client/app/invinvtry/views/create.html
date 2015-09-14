@@ -45,13 +45,13 @@
                         <label> {{'InvInvtry_invInvtryType_description.title' | translate}}:</label>
                         <div ng-class="{ 'has-error' : invInvtryForm.invMode.$invalid }" >
                             <select class="form-control" name="invInvtryType" id="invInvtryType" ng-model="invInvtry.invInvtryType"
-                                    ng-options="invInvtryType.enumKey as invInvtryUtils.translations[invInvtryType.translKey]
+                                    ng-options="invInvtryType.enumKey as (invInvtryType.translKey | translate)
 	                   				for invInvtryType in invInvtryUtils.invInvtryTypes" >
                                 <option value=""/>
                             </select>
                         </div>
                     </div>
-                    <div class="form-group col-lg-2">
+                   <!-- <div class="form-group col-lg-2">
                         <label class=" control-label" for="acsngUser">{{'InvInvtry_acsngUser_description.title' | translate}}</label>
                         <input type="text" ng-model="invInvtry.acsngUser" id="acsngUser" name="acsngUser" class="form-control" ng-blur="onUserNameChanged()"
                                autocomplete="off" typeahead="loginName as (loginName.loginName + ' : ' + loginName.fullName) for loginName in invInvtryUtils.loadUsers($viewValue)"
@@ -62,10 +62,10 @@
                         <input type="text" ng-model="display.acsngUserFullName" id="acsngUserFullName" name="acsngUserFullName" class="form-control"
                                autocomplete="off" typeahead="loginName as (loginName.loginName + ' : ' + loginName.fullName) for loginName in invInvtryUtils.loadUsersByName($viewValue)"
                                typeahead-loading="loading" typeahead-min-length="3" typeahead-on-select='onUserSelectedInCreate($item, $model, $label)'>
-                    </div>
+                    </div>-->
                     <div class="form-group col-lg-2">
-                        <label class=" control-label" for="invtryGroup"> {{'InvInvtry_invtryGroup_description.title' | translate}}</label>
-                        <input type="text" ng-model="invInvtry.invtryGroup" id="invtryGroup" name="invtryGroup" class="form-control">
+                        <label class=" control-label" for="txGroup"> {{'InvInvtry_invtryGroup_description.title' | translate}}</label>
+                        <input type="text" ng-model="invInvtry.txGroup" id="txGroup" name="txGroup" class="form-control">
                     </div>
                 </div>
                 <div class="row" >
@@ -81,12 +81,12 @@
                                autocomplete="off" typeahead="stkSection as (stkSection.sectionCode + ' : ' + stkSection.name) for stkSection in invInvtryUtils.loadStkSectionArticleLots($viewValue)"
                                typeahead-loading="loading" typeahead-min-length="4" typeahead-on-select='onSectionSelectedInCreate($item, $model, $label)'>
                     </div>
-                    <div class="form-group col-lg-4">
+                    <!--<div class="form-group col-lg-4">
                         <label class=" control-label" for="createSectionName"> {{'InvInvtryItem_sectionName_description.title' | translate}}</label>
                         <input type="text" ng-model="display.sectionName" id="createSectionName" name="createSectionName" class="form-control"
                                autocomplete="off" typeahead="stkSection as (stkSection.sectionCode + ' : ' + stkSection.name) for stkSection in invInvtryUtils.loadStkSectionArticleLotsByName($viewValue)"
                                typeahead-loading="loading" typeahead-min-length="4" typeahead-on-select='onSectionSelectedInCreate($item, $model, $label)'>
-                    </div>
+                    </div>-->
                     <div class="form-group col-lg-1">
                         <label class=" control-label" for="createRangeStart"> {{'InvInvtryItem_artNameStart_description.title' | translate}}</label>
                         <input type="text" ng-model="invInvtry.rangeStart" id="createRangeStart" name="createRangeStart" class="form-control">
