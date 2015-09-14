@@ -32,6 +32,7 @@ public abstract class CoreAbstBsnsItemEndpoint<E extends CoreAbstBsnsItem, SI ex
 	protected abstract CoreAbstBsnsItemLookup<E> getLookup();
 	protected abstract Field[] getEntityFields();
 	protected abstract SR newSearchResult(Long size, List<E> resultList,CoreAbstBsnsItemSearchInput<E> searchInput);
+	protected abstract SR newSearchResult(Long size, Long total, List<E> resultList,CoreAbstBsnsItemSearchInput<E> searchInput);
 	protected abstract SI newSearchInput();
 	protected abstract PdfReportTemplate<E> getReportTemplate();
 	protected abstract AbstEntiyProps<E> getEntityProps();
@@ -162,8 +163,9 @@ public abstract class CoreAbstBsnsItemEndpoint<E extends CoreAbstBsnsItem, SI ex
 	   public SR findCustom(CoreAbstBsnsItemSearchInput<E> searchInput)
 	   {
 	      Long count = getLookup().countCustom(searchInput);
+	      Long total = getLookup().count();
 	      List<E> resultList = getLookup().findCustom(searchInput);
-	       return newSearchResult(count, detach(resultList),
+	       return newSearchResult(count, total, detach(resultList),
 		              detach(searchInput));
 	   }
 

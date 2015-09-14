@@ -11,15 +11,15 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.adorsys.adbase.auth.PasswordChecker;
-import org.adorsys.adcore.jpa.CoreAbstIdentifData;
-import org.adorsys.javaext.description.Description;
-import org.adorsys.javaext.format.DateFormatPattern;
+import org.adorsys.adcore.annotation.DateFormatPattern;
+import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 import org.apache.commons.lang3.StringUtils;
 
 @Entity 
 @Table(name="BaseLogin")
 @Description("Login_description")
-public class Login extends CoreAbstIdentifData {
+public class Login extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = 5322058832893286944L;
 

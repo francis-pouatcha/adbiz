@@ -13,5 +13,14 @@ public abstract class CoreAbstBsnsItemSearchResult<E extends CoreAbstBsnsItem>
 			CoreAbstBsnsItemSearchInput<E> searchInput) {
 		super(count, resultList, searchInput);
 	}
+
+
+	public CoreAbstBsnsItemSearchResult(Long count, Long total,
+			List<E> resultList, CoreSearchInput<E> searchInput) {
+		super(count, total, resultList, searchInput);
+	}
+	
+	
+	
 	
 }

@@ -1,60 +1,54 @@
 package org.adorsys.adbase.loader;
 
-import java.util.Date;
-
-import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import org.adorsys.adbase.jpa.SecTermCredtl;
 import org.adorsys.adbase.jpa.SecTermRegist;
-import org.adorsys.adbase.rest.SecTermCredtlEJB;
 import org.adorsys.adbase.rest.SecTermRegistEJB;
-import org.adorsys.adcore.xls.AbstractObjectLoader;
-import org.apache.commons.lang3.time.DateUtils;
+import org.adorsys.adbase.rest.SecTermRegistLookup;
+import org.adorsys.adcore.loader.ejb.CorLdrStepCallback;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
+import org.adorsys.adcore.xls.CoreAbstEntityLoader;
+import org.adorsys.adcore.xls.CoreAbstLoader;
+import org.adorsys.adcore.xls.StepCallback;
 
 @Stateless
-public class SecTermRegistLoader extends AbstractObjectLoader<SecTermRegist> {
+public class SecTermRegistLoader  extends CoreAbstEntityLoader<SecTermRegist> {
 
 	@Inject
 	private SecTermRegistEJB ejb;
+	@Inject
+	private SecTermRegistLookup lookup;
+	@EJB
+	private CorLdrStepCallback stepCallback;
+	@EJB 
+	private SecTermRegistLoader loader;	
 
 	@Override
 	protected SecTermRegist newObject() {
 		return new SecTermRegist();
 	}
 
-	public SecTermRegist findByIdentif(String identif, Date validOn) {
-		return ejb.findByIdentif(identif, validOn);
+	@Override
+	protected CoreAbstIdentifLookup<SecTermRegist> getLookup() {
+		return lookup;
 	}
 
-	public SecTermRegist create(SecTermRegist entity) {
-		return ejb.create(entity);
+	@Override
+	protected CoreAbstIdentifiedEJB<SecTermRegist> getEjb() {
+		return ejb;
 	}
 
-	public SecTermRegist update(SecTermRegist found) {
-		return ejb.update(found);
+	@Override
+	protected CoreAbstLoader<SecTermRegist> getLoader() {
+		return loader;
 	}
 
-	public SecTermRegist deleteById(String id) {
-		return ejb.deleteById(id);
+	@Override
+	protected StepCallback getStepCallback() {
+		return stepCallback;
 	}
 
-	@Inject
-	private SecTermCredtlEJB termCredtlEJB;
-
-	@PostConstruct
-	public void postConstruct(){
-		String testTermCredId = "67a7723c-83b1-446a-bf96-f536036dedb4";
-		SecTermCredtl termCredtl = termCredtlEJB.findById(testTermCredId);
-		if(termCredtl!=null) return;
-		termCredtl = new SecTermCredtl();
-		termCredtl.setId(testTermCredId);
-		termCredtl.setCreated(new Date());
-		termCredtl.setExpires(DateUtils.addYears(new Date(), 1));
-		termCredtl.setLangIso2("en");
-		termCredtl.setTermId("A01CMTest_20150328150924");
-		termCredtl.setTermName("A01CMTest");
-		termCredtlEJB.create(termCredtl);
-	}
 }

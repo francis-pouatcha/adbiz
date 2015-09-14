@@ -1,39 +1,54 @@
 package org.adorsys.adbase.loader;
 
-import java.util.Date;
-
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import org.adorsys.adbase.jpa.Locality;
 import org.adorsys.adbase.rest.LocalityEJB;
-import org.adorsys.adcore.xls.AbstractObjectLoader;
+import org.adorsys.adbase.rest.LocalityLookup;
+import org.adorsys.adcore.loader.ejb.CorLdrStepCallback;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
+import org.adorsys.adcore.xls.CoreAbstEntityLoader;
+import org.adorsys.adcore.xls.CoreAbstLoader;
+import org.adorsys.adcore.xls.StepCallback;
 
 @Stateless
-public class LocalityLoader extends AbstractObjectLoader<Locality> {
+public class LocalityLoader  extends CoreAbstEntityLoader<Locality> {
 
 	@Inject
 	private LocalityEJB ejb;
+	@Inject
+	private LocalityLookup lookup;
+	@EJB
+	private CorLdrStepCallback stepCallback;
+	@EJB 
+	private LocalityLoader loader;	
 
 	@Override
 	protected Locality newObject() {
 		return new Locality();
 	}
 
-	public Locality findByIdentif(String identif, Date validOn) {
-		return ejb.findByIdentif(identif, validOn);
+	@Override
+	protected CoreAbstIdentifLookup<Locality> getLookup() {
+		return lookup;
 	}
 
-	public Locality create(Locality entity) {
-		return ejb.create(entity);
+	@Override
+	protected CoreAbstIdentifiedEJB<Locality> getEjb() {
+		return ejb;
 	}
 
-	public Locality update(Locality found) {
-		return ejb.update(found);
+	@Override
+	protected CoreAbstLoader<Locality> getLoader() {
+		return loader;
 	}
 
-	public Locality deleteById(String id) {
-		return ejb.deleteById(id);
+	@Override
+	protected StepCallback getStepCallback() {
+		return stepCallback;
 	}
 
 }

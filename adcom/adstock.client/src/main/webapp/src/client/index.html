@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html>
 <head>
     <style>
         /* This helps the ng-show/ng-hide animations start at the right place. */
@@ -10,7 +10,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-    <base href="/">
+    
 
     <!-- build:css styles/lib.css -->
     <!-- bower:css -->
@@ -60,6 +60,7 @@
     <script src="/bower_components/angular-formly/dist/formly.js"></script>
     <script src="/bower_components/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap.js"></script>
     <script src="/bower_components/angular-translate/angular-translate.js"></script>
+    <script src="/bower_components/angular-utils-pagination/dirPagination.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -72,6 +73,8 @@
     <script src="/src/client/app/core/core.module.js"></script>
     <script src="/src/client/app/dashboard/dashboard.module.js"></script>
     <script src="/src/client/app/layout/layout.module.js"></script>
+    <script src="/src/client/app/stk-mvnt/stk-mvnt.client.module.js"></script>
+    <script src="/src/client/app/stk-section/stk-section.client.module.js"></script>
     <script src="/src/client/app/stock-articlelot/stock-articlelot.client.module.js"></script>
     <script src="/src/client/app/widgets/widgets.module.js"></script>
     <script src="/src/client/app/blocks/exception/exception-handler.provider.js"></script>
@@ -92,12 +95,21 @@
     <script src="/src/client/app/layout/ht-top-nav.directive.js"></script>
     <script src="/src/client/app/layout/shell.controller.js"></script>
     <script src="/src/client/app/layout/sidebar.controller.js"></script>
+    <script src="/src/client/app/stk-mvnt/config/stk-mvnt.client.routes.js"></script>
+    <script src="/src/client/app/stk-mvnt/controllers/stk-mvnt.client.controller.js"></script>
+    <script src="/src/client/app/stk-mvnt/services/stk-mvnt.client.service.js"></script>
+    <script src="/src/client/app/stk-mvnt/services/stk-mvnt.form.client.service.js"></script>
+    <script src="/src/client/app/stk-section/config/stk-section.client.routes.js"></script>
+    <script src="/src/client/app/stk-section/controllers/stk-section.client.controller.js"></script>
+    <script src="/src/client/app/stk-section/services/stk-section.client.service.js"></script>
+    <script src="/src/client/app/stk-section/services/stk-section.form.client.service.js"></script>
     <script src="/src/client/app/stock-articlelot/config/stock-articlelot.client.routes.js"></script>
     <script src="/src/client/app/stock-articlelot/controllers/stock-articlelot.client.controller.js"></script>
     <script src="/src/client/app/stock-articlelot/services/stock-articlelot.client.service.js"></script>
     <script src="/src/client/app/stock-articlelot/services/stock-articlelot.form.client.service.js"></script>
     <script src="/src/client/app/widgets/ht-img-person.directive.js"></script>
     <script src="/src/client/app/widgets/ht-widget-header.directive.js"></script>
+    <script src="/src/client/app/widgets/ht-widget-pagination.directive.js"></script>
     <!-- endinject -->
 
     <!-- inject:templates:js -->

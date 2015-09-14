@@ -1,39 +1,54 @@
 package org.adorsys.adbase.loader;
 
-import java.util.Date;
-
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import org.adorsys.adbase.jpa.OrgUnit;
 import org.adorsys.adbase.rest.OrgUnitEJB;
-import org.adorsys.adcore.xls.AbstractObjectLoader;
+import org.adorsys.adbase.rest.OrgUnitLookup;
+import org.adorsys.adcore.loader.ejb.CorLdrStepCallback;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
+import org.adorsys.adcore.xls.CoreAbstEntityLoader;
+import org.adorsys.adcore.xls.CoreAbstLoader;
+import org.adorsys.adcore.xls.StepCallback;
 
 @Stateless
-public class OrgUnitLoader extends AbstractObjectLoader<OrgUnit> {
+public class OrgUnitLoader  extends CoreAbstEntityLoader<OrgUnit> {
 
 	@Inject
 	private OrgUnitEJB ejb;
+	@Inject
+	private OrgUnitLookup lookup;
+	@EJB
+	private CorLdrStepCallback stepCallback;
+	@EJB 
+	private OrgUnitLoader loader;	
 
 	@Override
 	protected OrgUnit newObject() {
 		return new OrgUnit();
 	}
 
-	public OrgUnit findByIdentif(String identif, Date validOn) {
-		return ejb.findByIdentif(identif, validOn);
+	@Override
+	protected CoreAbstIdentifLookup<OrgUnit> getLookup() {
+		return lookup;
 	}
 
-	public OrgUnit create(OrgUnit entity) {
-		return ejb.create(entity);
+	@Override
+	protected CoreAbstIdentifiedEJB<OrgUnit> getEjb() {
+		return ejb;
 	}
 
-	public OrgUnit update(OrgUnit found) {
-		return ejb.update(found);
+	@Override
+	protected CoreAbstLoader<OrgUnit> getLoader() {
+		return loader;
 	}
 
-	public OrgUnit deleteById(String id) {
-		return ejb.deleteById(id);
+	@Override
+	protected StepCallback getStepCallback() {
+		return stepCallback;
 	}
 
 }

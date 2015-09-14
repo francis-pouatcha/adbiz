@@ -3,7 +3,7 @@ package org.adorsys.adbase.jpa;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
 
 @Entity 
 @Table(name="BaseSecTerminal")

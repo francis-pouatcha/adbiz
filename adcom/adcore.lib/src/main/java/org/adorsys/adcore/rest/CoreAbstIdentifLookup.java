@@ -19,6 +19,8 @@ import org.adorsys.adcore.jpa.CoreSortOrder;
 import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.apache.deltaspike.core.util.ReflectionUtils;
+import org.apache.log4j.Logger;
 
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
 public abstract class CoreAbstIdentifLookup<E extends CoreAbstIdentifObject> {
@@ -189,8 +191,55 @@ public abstract class CoreAbstIdentifLookup<E extends CoreAbstIdentifObject> {
 
 		if(searchInput.getIdentifFrom()!=null) whereSet = prep(whereSet, qBuilder, "e.identif >= :identifFrom");
 		if(searchInput.getIdentifTo()!=null) whereSet = prep(whereSet, qBuilder, "e.identif <= :identifTo");
-		
 		return qBuilder;
+	}
+	
+	
+	/**
+	 * Custom fields Entity query processor
+	 * 
+	 * @author Hsimo
+	 * @param searchInput
+	 * @return a StringBuilder
+	 */
+	protected StringBuilder preprocessCustomQuery(CoreAbstIdentifObjectSearchInput<E> searchInput, StringBuilder qBuilder){
+		E entity = searchInput.getEntity();
+		Class<?> klass = entity.getClass().getSuperclass();
+		boolean whereSet = false;
+		if(StringUtils.contains(qBuilder, whereClause)){
+			whereSet = true;
+		}
+		
+		List<String> fieldNames = searchInput.getFieldNames();
+		for(String fieldName: fieldNames){
+			Field field = FieldUtils.getField(klass, fieldName, true);
+			if(field != null){
+				try {
+					if(field.get(field.getDeclaringClass())!=null){
+						String whereOp = prepareWhereOp(fieldName);
+						whereSet = prep(whereSet, qBuilder, whereOp);
+					}
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		Logger.getLogger("Requete:").info("Requete: "+qBuilder);
+		return qBuilder;
+	}
+	
+	
+	public String prepareWhereOp(String fieldName){
+		StringBuilder builder = new StringBuilder();
+		builder.append("e.")
+               .append(fieldName)
+               .append("=:")
+               .append(fieldName);
+		return builder.toString();
 	}
 
 	protected StringBuilder preprocessSort(CoreAbstIdentifObjectSearchInput<E> searchInput, StringBuilder qBuilder){
@@ -232,14 +281,40 @@ public abstract class CoreAbstIdentifLookup<E extends CoreAbstIdentifObject> {
 		
 		if(searchInput.getIdentifFrom()!=null) query.setParameter("identifFrom", searchInput.getIdentifFrom());
 		if(searchInput.getIdentifTo()!=null) query.setParameter("identifTo", searchInput.getIdentifTo());
-	}	
+	}
+	
+	protected void setCustomParameters(CoreAbstIdentifObjectSearchInput<E> searchInput, Query query){
+		E entity = searchInput.getEntity();
+		Class<?> klass = entity.getClass().getSuperclass();
+		
+		List<String> fieldNames = searchInput.getFieldNames();
+		for(String fieldName: fieldNames){
+			Field field = FieldUtils.getField(klass, fieldName, true);
+			if(field!=null){
+				try {
+					if(field.get(field.getDeclaringClass())!=null){
+						query.setParameter(fieldName, field.get(klass));
+					}
+				} catch (IllegalArgumentException e) {
+					throw new IllegalArgumentException();
+				} catch (IllegalAccessException e) {
+					throw new IllegalStateException();
+				}
+			}
+		}
+		
+		
+	}
+	
 
 	public List<E> findCustom(CoreAbstIdentifObjectSearchInput<E> searchInput)
 	{
 		StringBuilder qBuilder = preprocessQuery(FIND_CUSTOM_QUERY, searchInput);
+		preprocessCustomQuery(searchInput, qBuilder);
 		qBuilder = preprocessSort(searchInput, qBuilder);
 		TypedQuery<E> query = getEntityManager().createQuery(qBuilder.toString(), getEntityClass());
 		setParameters(searchInput, query);
+		setCustomParameters(searchInput, query);
 
 		int start = searchInput.getStart();
 		int max = searchInput.getMax();

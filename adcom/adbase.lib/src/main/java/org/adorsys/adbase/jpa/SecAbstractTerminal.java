@@ -5,11 +5,11 @@ import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.adorsys.adcore.jpa.CoreAbstTimedData;
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 
 @MappedSuperclass
-public class SecAbstractTerminal extends CoreAbstTimedData {
+public class SecAbstractTerminal extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = 3459575818704625971L;
 

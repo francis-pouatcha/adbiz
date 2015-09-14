@@ -1,39 +1,54 @@
 package org.adorsys.adbase.loader;
 
-import java.util.Date;
-
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import org.adorsys.adbase.jpa.Login;
 import org.adorsys.adbase.rest.LoginEJB;
-import org.adorsys.adcore.xls.AbstractObjectLoader;
+import org.adorsys.adbase.rest.LoginLookup;
+import org.adorsys.adcore.loader.ejb.CorLdrStepCallback;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
+import org.adorsys.adcore.xls.CoreAbstEntityLoader;
+import org.adorsys.adcore.xls.CoreAbstLoader;
+import org.adorsys.adcore.xls.StepCallback;
 
 @Stateless
-public class LoginLoader extends AbstractObjectLoader<Login> {
+public class LoginLoader  extends CoreAbstEntityLoader<Login> {
 
 	@Inject
 	private LoginEJB ejb;
+	@Inject
+	private LoginLookup lookup;
+	@EJB
+	private CorLdrStepCallback stepCallback;
+	@EJB 
+	private LoginLoader loader;	
 
 	@Override
 	protected Login newObject() {
 		return new Login();
 	}
 
-	public Login findByIdentif(String identif, Date validOn) {
-		return ejb.findByIdentif(identif, validOn);
+	@Override
+	protected CoreAbstIdentifLookup<Login> getLookup() {
+		return lookup;
 	}
 
-	public Login create(Login entity) {
-		return ejb.create(entity);
+	@Override
+	protected CoreAbstIdentifiedEJB<Login> getEjb() {
+		return ejb;
 	}
 
-	public Login update(Login found) {
-		return ejb.update(found);
+	@Override
+	protected CoreAbstLoader<Login> getLoader() {
+		return loader;
 	}
 
-	public Login deleteById(String id) {
-		return ejb.deleteById(id);
+	@Override
+	protected StepCallback getStepCallback() {
+		return stepCallback;
 	}
 
 }

@@ -16,7 +16,8 @@ public class ShortConverter implements Converter {
 			Object target, CellParser cellParser) {
 		BigDecimal number = cellParser.parseNumber(propertyCell);
 		try {
-			PropertyUtils.setProperty(target, propertyName, number.shortValue());
+			Short nbr = number!=null?number.shortValue():null;
+			PropertyUtils.setProperty(target, propertyName, nbr);
 		} catch (IllegalAccessException | InvocationTargetException
 				| NoSuchMethodException e) {
 			throw new IllegalStateException(e);

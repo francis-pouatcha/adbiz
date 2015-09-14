@@ -1,7 +1,7 @@
-Adorsys Product Catalogue
+Adorsys Stock
 =========================
 
-This application manages a product catalogue and allows for the following functionality.
+This application manages the stock of all the project and allows for the following functionality.
 
 1- Management of a list of articles existing or potentially existing in the inventory of a client. 
 2- Management of article equivalences.

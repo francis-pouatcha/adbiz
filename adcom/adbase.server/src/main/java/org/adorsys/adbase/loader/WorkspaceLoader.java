@@ -1,39 +1,54 @@
 package org.adorsys.adbase.loader;
 
-import java.util.Date;
-
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import org.adorsys.adbase.jpa.Workspace;
 import org.adorsys.adbase.rest.WorkspaceEJB;
-import org.adorsys.adcore.xls.AbstractObjectLoader;
+import org.adorsys.adbase.rest.WorkspaceLookup;
+import org.adorsys.adcore.loader.ejb.CorLdrStepCallback;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
+import org.adorsys.adcore.xls.CoreAbstEntityLoader;
+import org.adorsys.adcore.xls.CoreAbstLoader;
+import org.adorsys.adcore.xls.StepCallback;
 
 @Stateless
-public class WorkspaceLoader extends AbstractObjectLoader<Workspace> {
+public class WorkspaceLoader  extends CoreAbstEntityLoader<Workspace> {
 
 	@Inject
 	private WorkspaceEJB ejb;
+	@Inject
+	private WorkspaceLookup lookup;
+	@EJB
+	private CorLdrStepCallback stepCallback;
+	@EJB 
+	private WorkspaceLoader loader;	
 
 	@Override
 	protected Workspace newObject() {
 		return new Workspace();
 	}
 
-	public Workspace findByIdentif(String identif, Date validOn) {
-		return ejb.findByIdentif(identif, validOn);
+	@Override
+	protected CoreAbstIdentifLookup<Workspace> getLookup() {
+		return lookup;
 	}
 
-	public Workspace create(Workspace entity) {
-		return ejb.create(entity);
+	@Override
+	protected CoreAbstIdentifiedEJB<Workspace> getEjb() {
+		return ejb;
 	}
 
-	public Workspace update(Workspace found) {
-		return ejb.update(found);
+	@Override
+	protected CoreAbstLoader<Workspace> getLoader() {
+		return loader;
 	}
 
-	public Workspace deleteById(String id) {
-		return ejb.deleteById(id);
+	@Override
+	protected StepCallback getStepCallback() {
+		return stepCallback;
 	}
 
 }

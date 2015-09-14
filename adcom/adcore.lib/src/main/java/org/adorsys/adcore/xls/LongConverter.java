@@ -16,7 +16,8 @@ public class LongConverter implements Converter {
 			Object target, CellParser cellParser) {
 		BigDecimal number = cellParser.parseNumber(propertyCell);
 		try {
-			PropertyUtils.setProperty(target, propertyName, number.longValue());
+			Long nbr = number!=null?number.longValue():null;
+			PropertyUtils.setProperty(target, propertyName, nbr);
 		} catch (IllegalAccessException | InvocationTargetException
 				| NoSuchMethodException e) {
 			throw new IllegalStateException(e);

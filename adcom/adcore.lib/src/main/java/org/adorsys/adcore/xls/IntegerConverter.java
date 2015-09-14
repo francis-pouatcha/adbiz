@@ -16,7 +16,8 @@ public class IntegerConverter implements Converter {
 			Object target, CellParser cellParser) {
 		BigDecimal number = cellParser.parseNumber(propertyCell);
 		try {
-			PropertyUtils.setProperty(target, propertyName, number.intValue());
+			Integer nbr = number!=null?number.intValue():null;
+			PropertyUtils.setProperty(target, propertyName, nbr);
 		} catch (IllegalAccessException | InvocationTargetException
 				| NoSuchMethodException e) {
 			throw new IllegalStateException(e);

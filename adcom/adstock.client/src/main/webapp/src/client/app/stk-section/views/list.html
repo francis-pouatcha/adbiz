@@ -1,0 +1,63 @@
+<section class="mainbar" data-ng-init="vm.findCustomSections()">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      {{'app.core.list.title' | translate}} {{'StockSections.title' | translate }}
+    </div>
+    <div class="panel-body">
+        
+        <!-- Search form -->
+        <div ng-include src="'app/stk-section/views/search.html'"></div>
+
+      <div class="pull-right">
+        <a type="button" class="btn btn-success" href="#/stk-section/create">
+          <i class="glyphicon glyphicon-open"></i> 
+          {{'app.core.new.title' | translate}} {{'StockSection.title' | translate}}
+        </a>
+      </div>
+
+      <table class="table table-condensed table-striped">
+          <thead>
+          <th>{{'StockSection.code.title' | translate}}</th>
+          <th>{{'StockSection.name.title' | translate}}</th>
+          <th>{{'StockSection.position.title' | translate}}</th>
+          <th>{{'StockSection.geoCode.title' | translate}}</th>
+          <th>{{'StockSection.wharehouse.title' | translate}}</th>
+          </thead>
+          <tr dir-paginate="stkSection in vm.data.list | itemsPerPage: vm.pagination.itemsPerPage" 
+              total-items="vm.data.total" 
+              current-page="vm.pagination.current">
+              <td>{{stkSection.identif}}</td>
+              <td>{{stkSection.name}}</td>
+              <td>{{stkSection.position}}</td>
+              <td>{{stkSection.geoCode}}</td>
+              <td>{{stkSection.wharehouse}}</td>
+              <td>
+                 <div class="table-actions">
+                      <a class="btn btn-default" title="{{'app.core.view.title' | translate}}" href="#/stk-section/{{stkSection.id}}">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                      </a>
+                      <a class="btn btn-default" title="{{'app.core.edit.title' | translate}}" href="#/stk-section/{{stkSection.id}}/edit">
+                        <span class="glyphicon glyphicon-edit"></span>
+                      </a>
+                      <a class="btn btn-danger" title="{{'app.core.delete.title' | translate}}" 
+                         ng-really-message="{{'app.core.delete.confirmation.title' | translate}} {{'StockSection.title' | translate}}" 
+                         ng-really-click="vm.remove(stkSection)" item="stkSection">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                      </a>
+                  </div>
+              </td>
+          </tr>
+      </table>
+    
+    <div class="pull-right">    
+        <dir-pagination-controls on-page-change="vm.paginate(newPageNumber)" 
+                                 boundary-links="true"
+                                 max-size="vm.pagination.maxSize">
+        </dir-pagination-controls>
+    </div>    
+
+    </div>
+  </div>
+
+</section>

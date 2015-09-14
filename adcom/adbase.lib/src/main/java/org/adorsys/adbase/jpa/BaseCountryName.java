@@ -4,12 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
-import org.adorsys.adcore.jpa.CoreAbstIdentifData;
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
+import org.adorsys.adcore.annotation.Description;
 
 @Entity
 @Description("BaseCountryName_description")
-public class BaseCountryName extends CoreAbstIdentifData {
+public class BaseCountryName extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = 2066333794336871081L;
 

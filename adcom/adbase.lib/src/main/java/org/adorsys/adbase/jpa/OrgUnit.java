@@ -6,14 +6,14 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
-import org.adorsys.adcore.jpa.CoreAbstTimedData;
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 import org.apache.commons.lang3.StringUtils;
 
 @Entity 
 @Table(name="BaseOrgUnit")
 @Description("OrgUnit_description")
-public class OrgUnit extends CoreAbstTimedData {
+public class OrgUnit extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = -4042784869338352973L;
 
@@ -26,10 +26,6 @@ public class OrgUnit extends CoreAbstTimedData {
 	@Description("OrgUnit_typeIdentif_description")
 	@NotNull
 	private String typeIdentif;
-
-	@Column
-	@Description("OrgUnit_parentIdentif_description")
-	private String parentIdentif;
 	
 	@Column
 	@Description("OrgUnit_fullName_description")
@@ -75,14 +71,6 @@ public class OrgUnit extends CoreAbstTimedData {
 
 	public void setShortName(final String shortName) {
 		this.shortName = shortName;
-	}
-
-	public String getParentIdentif() {
-		return parentIdentif;
-	}
-
-	public void setParentIdentif(String parentIdentif) {
-		this.parentIdentif = parentIdentif;
 	}
 
 	public OrgContact getContact() {

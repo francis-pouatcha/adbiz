@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchResult;
+import org.adorsys.adcore.jpa.CoreSearchInput;
 
 public class CstStmntItemSearchResult extends
 		CoreAbstBsnsItemSearchResult<CstStmntItem> {
@@ -16,4 +17,12 @@ public class CstStmntItemSearchResult extends
 			CoreAbstBsnsItemSearchInput<CstStmntItem> searchInput) {
 		super(count, resultList, searchInput);
 	}
+
+	public CstStmntItemSearchResult(Long count, Long total,
+			List<CstStmntItem> resultList,
+			CoreSearchInput<CstStmntItem> searchInput) {
+		super(count, total, resultList, searchInput);
+	}
+	
+	
 }

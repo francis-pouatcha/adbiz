@@ -4,67 +4,26 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
+import org.adorsys.adcore.jpa.CoreSearchInput;
+
 @XmlRootElement
-public class ConverterCurrRateSearchResult
+public class ConverterCurrRateSearchResult extends CoreAbstIdentifObjectSearchResult<ConverterCurrRate>
 {
+	public ConverterCurrRateSearchResult() {
+		super();
+	}
 
-   /*
-    * The number of entities matching this search.
-    */
-   private Long count;
+	public ConverterCurrRateSearchResult(Long count,
+			List<ConverterCurrRate> resultList,
+			CoreAbstIdentifObjectSearchInput<ConverterCurrRate> searchInput) {
+		super(count, resultList, searchInput);
+	}
 
-   /*
-    * The result list.
-    */
-   private List<ConverterCurrRate> resultList;
-
-   /*
-    * The original search input object. For stateless clients.
-    */
-   private ConverterCurrRateSearchInput searchInput;
-
-   public ConverterCurrRateSearchResult()
-   {
-      super();
-   }
-
-   public ConverterCurrRateSearchResult(Long count, List<ConverterCurrRate> resultList,
-         ConverterCurrRateSearchInput searchInput)
-   {
-      super();
-      this.count = count;
-      this.resultList = resultList;
-      this.searchInput = searchInput;
-   }
-
-   public Long getCount()
-   {
-      return count;
-   }
-
-   public List<ConverterCurrRate> getResultList()
-   {
-      return resultList;
-   }
-
-   public ConverterCurrRateSearchInput getSearchInput()
-   {
-      return searchInput;
-   }
-
-   public void setCount(Long count)
-   {
-      this.count = count;
-   }
-
-   public void setResultList(List<ConverterCurrRate> resultList)
-   {
-      this.resultList = resultList;
-   }
-
-   public void setSearchInput(ConverterCurrRateSearchInput searchInput)
-   {
-      this.searchInput = searchInput;
-   }
-
+	public ConverterCurrRateSearchResult(Long count, Long total,
+			List<ConverterCurrRate> resultList,
+			CoreSearchInput<ConverterCurrRate> searchInput) {
+		super(count, total, resultList, searchInput);
+	}
 }

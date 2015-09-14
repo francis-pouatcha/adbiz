@@ -4,67 +4,27 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
+import org.adorsys.adcore.jpa.CoreSearchInput;
+
 @XmlRootElement
-public class BaseCountryNameSearchResult
+public class BaseCountryNameSearchResult extends CoreAbstIdentifObjectSearchResult<BaseCountryName>
 {
+	public BaseCountryNameSearchResult() {
+		super();
+	}
 
-   /*
-    * The number of entities matching this search.
-    */
-   private Long count;
+	public BaseCountryNameSearchResult(Long count,
+			List<BaseCountryName> resultList,
+			CoreAbstIdentifObjectSearchInput<BaseCountryName> searchInput) {
+		super(count, resultList, searchInput);
+	}
 
-   /*
-    * The result list.
-    */
-   private List<BaseCountryName> resultList;
-
-   /*
-    * The original search input object. For stateless clients.
-    */
-   private BaseCountryNameSearchInput searchInput;
-
-   public BaseCountryNameSearchResult()
-   {
-      super();
-   }
-
-   public BaseCountryNameSearchResult(Long count, List<BaseCountryName> resultList,
-         BaseCountryNameSearchInput searchInput)
-   {
-      super();
-      this.count = count;
-      this.resultList = resultList;
-      this.searchInput = searchInput;
-   }
-
-   public Long getCount()
-   {
-      return count;
-   }
-
-   public List<BaseCountryName> getResultList()
-   {
-      return resultList;
-   }
-
-   public BaseCountryNameSearchInput getSearchInput()
-   {
-      return searchInput;
-   }
-
-   public void setCount(Long count)
-   {
-      this.count = count;
-   }
-
-   public void setResultList(List<BaseCountryName> resultList)
-   {
-      this.resultList = resultList;
-   }
-
-   public void setSearchInput(BaseCountryNameSearchInput searchInput)
-   {
-      this.searchInput = searchInput;
-   }
-
+	public BaseCountryNameSearchResult(Long count, Long total,
+			List<BaseCountryName> resultList,
+			CoreSearchInput<BaseCountryName> searchInput) {
+		super(count, total, resultList, searchInput);
+	}
+	
 }

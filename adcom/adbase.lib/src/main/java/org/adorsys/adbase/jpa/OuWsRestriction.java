@@ -5,13 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.adorsys.adcore.jpa.CoreAbstTimedData;
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 
 @Entity 
 @Table(name="BaseOuWsRestrct")
 @Description("OuWsRestriction_description")
-public class OuWsRestriction extends CoreAbstTimedData {
+public class OuWsRestriction extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = -8368460820325030065L;
 

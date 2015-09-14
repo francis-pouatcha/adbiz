@@ -12,9 +12,18 @@
 		<module>adcom.lib.parent</module>
 		<module>adcom.server.parent</module>
 		<module>adcom.client.parent</module>
+		
+		<module>adkcloak.jpa</module>
+		<module>adkcloak.events.jpa</module>
+		<module>adkcloak.model.sessions.jpa</module>
+		<module>adkcloak.config</module>
+		<module>adkcloak.services</module>
+				
 		<module>adcore.lib</module>
+		<module>adbase.lib</module>
 		<module>adcatal.lib</module>
 		<module>adcatal.client</module>
+		<module>adstock.client</module>
 		<module>adstock.lib</module>
 		<module>adcost.lib</module>
 		<module>adinvtry.lib</module>
@@ -23,6 +32,7 @@
 		<module>adinvtry.server</module>
 		<module>adcost.server</module>
 		<module>addashboard.client</module>
+		<module>adbase.server</module>
 <!-- 
 		<module>adprocmt.lib</module>
 		<module>adprocmt.server</module>
@@ -38,11 +48,9 @@
 		<module>adsales.client</module>
 		<module>adcshdwr.client</module>
 
-		<module>adbase.lib</module>
 		<module>adacc.lib</module>
 		<module>adcshdwr.lib</module>
 
-		<module>adbase.server</module>
 		<module>adacc.server</module>
 
 
@@ -73,6 +81,8 @@
 	</distributionManagement>
 	<properties>
 		<github.global.server>github</github.global.server>
+		<keycloak.version>1.4.0.Final</keycloak.version>
+	    <apache.httpcomponents.version>4.3.6</apache.httpcomponents.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>

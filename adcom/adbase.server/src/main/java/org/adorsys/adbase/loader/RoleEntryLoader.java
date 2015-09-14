@@ -1,39 +1,54 @@
 package org.adorsys.adbase.loader;
 
-import java.util.Date;
-
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import org.adorsys.adbase.jpa.RoleEntry;
 import org.adorsys.adbase.rest.RoleEntryEJB;
-import org.adorsys.adcore.xls.AbstractObjectLoader;
+import org.adorsys.adbase.rest.RoleEntryLookup;
+import org.adorsys.adcore.loader.ejb.CorLdrStepCallback;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
+import org.adorsys.adcore.xls.CoreAbstEntityLoader;
+import org.adorsys.adcore.xls.CoreAbstLoader;
+import org.adorsys.adcore.xls.StepCallback;
 
 @Stateless
-public class RoleEntryLoader extends AbstractObjectLoader<RoleEntry> {
+public class RoleEntryLoader  extends CoreAbstEntityLoader<RoleEntry> {
 
 	@Inject
 	private RoleEntryEJB ejb;
+	@Inject
+	private RoleEntryLookup lookup;
+	@EJB
+	private CorLdrStepCallback stepCallback;
+	@EJB 
+	private RoleEntryLoader loader;	
 
 	@Override
 	protected RoleEntry newObject() {
 		return new RoleEntry();
 	}
 
-	public RoleEntry findByIdentif(String identif, Date validOn) {
-		return ejb.findByIdentif(identif, validOn);
+	@Override
+	protected CoreAbstIdentifLookup<RoleEntry> getLookup() {
+		return lookup;
 	}
 
-	public RoleEntry create(RoleEntry entity) {
-		return ejb.create(entity);
+	@Override
+	protected CoreAbstIdentifiedEJB<RoleEntry> getEjb() {
+		return ejb;
 	}
 
-	public RoleEntry update(RoleEntry found) {
-		return ejb.update(found);
+	@Override
+	protected CoreAbstLoader<RoleEntry> getLoader() {
+		return loader;
 	}
 
-	public RoleEntry deleteById(String id) {
-		return ejb.deleteById(id);
+	@Override
+	protected StepCallback getStepCallback() {
+		return stepCallback;
 	}
 
 }

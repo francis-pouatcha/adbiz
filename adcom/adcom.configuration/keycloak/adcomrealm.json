@@ -27,97 +27,127 @@
   "publicKey" : "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDT2WkbXOgyEhfMY2xOMwEjXmBFL/8SOZr7qNFt2+4CI8T13gBQPYoJxzVnX4Kgb2v/uUw7ywCvTAqjMGDrg3UyTs6hG9P7G95BXD2y3Uyc0VUwjmxLqzTYOmO9zDM7b7axRDewHNeg7cH++n15nB8TDAmEnctFNnvmcBxcSaeTzQIDAQAB",
   "roles" : {
     "application" : {
-      "adcost.client" : [ {
-        "id" : "ed7eb5ee-7f01-444c-9120-5f55b0b665ca",
-        "name" : "adcost.client_role",
-        "composite" : false
-      } ],
-      "addashboard.client" : [ {
-        "id" : "c8eceb16-5568-4c80-902d-82118bda6216",
-        "name" : "addashboard.client_role",
-        "composite" : false
-      } ],
-      "adbase.server" : [ {
-        "id" : "ba3408ac-62a5-4681-8d37-1bfb55f7f34f",
-        "name" : "adbase.server_role",
-        "composite" : false
-      } ],
-      "realm-management" : [ {
-        "id" : "ef45aa36-ffd7-4d71-8141-b3ed1ab72113",
-        "name" : "realm-admin",
-        "composite" : true,
-        "composites" : {
-          "application" : {
-            "realm-management" : [ "manage-realm", "view-users", "manage-users", "view-events", "manage-applications", "view-clients", "manage-clients", "view-applications", "manage-events", "view-realm" ]
-          }
-        }
-      }, {
-        "id" : "3ed841cb-ff6c-458a-b138-3c55ec6af04f",
-        "name" : "manage-realm",
-        "composite" : false
-      }, {
-        "id" : "9cfc8d59-89b2-4247-bdf8-394cf3fb7e74",
-        "name" : "view-users",
-        "composite" : false
-      }, {
-        "id" : "fb2ab652-14e9-4b49-b3f0-c986f052293d",
-        "name" : "manage-users",
-        "composite" : false
-      }, {
-        "id" : "10a92522-b4f0-44c2-8e9c-3c6502e57340",
-        "name" : "view-events",
-        "composite" : false
-      }, {
-        "id" : "2cca4bea-2a5f-42f4-8e3f-542cab184644",
-        "name" : "view-clients",
-        "composite" : false
-      }, {
-        "id" : "10178758-b41c-454a-a8d0-16f27a16f326",
-        "name" : "manage-applications",
-        "composite" : false
-      }, {
-        "id" : "076070a9-3150-481c-b8d8-c83e411234aa",
-        "name" : "view-applications",
-        "composite" : false
-      }, {
-        "id" : "97a7f0f7-fe09-4eb1-bee6-3beb76d26ad1",
-        "name" : "manage-clients",
-        "composite" : false
-      }, {
-        "id" : "f52a298c-c11e-4f4f-8ccf-ceefff1ffe37",
-        "name" : "manage-events",
-        "composite" : false
-      }, {
-        "id" : "d359a228-7dbf-4fa6-8c66-fb1fe955886e",
-        "name" : "view-realm",
-        "composite" : false
-      } ],
-      "adcatal.client" : [ {
-        "id" : "654e57d7-184b-4156-8054-265aa7b54621",
-        "name" : "adcatal.client_role",
-        "composite" : false
-      } ],
-      "adbase.client" : [ {
-        "id" : "cfa519b0-bd39-484d-aa04-695abefb433f",
-        "name" : "adbase.client_role",
-        "composite" : false
-      } ],
+    
+      "realm-management" : 
+      [ 
+      	{
+	        "id" : "ef45aa36-ffd7-4d71-8141-b3ed1ab72113",
+	        "name" : "realm-admin",
+	        "composite" : true,
+	        "composites" : {
+	          "application" : {
+	            "realm-management" : [ "manage-realm", "view-users", "manage-users", "view-events", "manage-applications", "view-clients", "manage-clients", "view-applications", "manage-events", "view-realm" ]
+	          }
+        	}
+      	}, 
+  
+      	{
+	        "id" : "3ed841cb-ff6c-458a-b138-3c55ec6af04f",
+	        "name" : "manage-realm",
+	        "composite" : false
+      	}, 
+      	
+      	{
+	        "id" : "9cfc8d59-89b2-4247-bdf8-394cf3fb7e74",
+	        "name" : "view-users",
+	        "composite" : false
+      	}, 
+      	
+      	{
+	        "id" : "fb2ab652-14e9-4b49-b3f0-c986f052293d",
+	        "name" : "manage-users",
+	        "composite" : false
+      	}, 
+      	
+      	{
+	        "id" : "10a92522-b4f0-44c2-8e9c-3c6502e57340",
+	        "name" : "view-events",
+	        "composite" : false
+      	}, 
+      	
+      	{
+	        "id" : "2cca4bea-2a5f-42f4-8e3f-542cab184644",
+	        "name" : "view-clients",
+	        "composite" : false
+      	}, 
+      	
+      	{
+	        "id" : "10178758-b41c-454a-a8d0-16f27a16f326",
+	        "name" : "manage-applications",
+	        "composite" : false
+      	}, 
+      	
+      	{
+	        "id" : "076070a9-3150-481c-b8d8-c83e411234aa",
+	        "name" : "view-applications",
+	        "composite" : false
+      	}, 
+      	
+      	{
+	        "id" : "97a7f0f7-fe09-4eb1-bee6-3beb76d26ad1",
+	        "name" : "manage-clients",
+	        "composite" : false
+      	}, 
+      	
+      	{
+	        "id" : "f52a298c-c11e-4f4f-8ccf-ceefff1ffe37",
+	        "name" : "manage-events",
+	        "composite" : false
+      	}, 
+      	
+      	{
+	        "id" : "d359a228-7dbf-4fa6-8c66-fb1fe955886e",
+	        "name" : "view-realm",
+	        "composite" : false
+      	} 
+      ],
+      
       "security-admin-console" : [ ],
-      "adcost.server" : [ {
-        "id" : "47af795f-2e9d-4cb0-9cf1-49ed1eaf1a8e",
-        "name" : "adcost.server_role",
-        "description" : "adcost privileges",
-        "composite" : false
-      } ],
-      "account" : [ {
-        "id" : "2508848d-f164-4aab-8b16-64411866bdb9",
-        "name" : "view-profile",
-        "composite" : false
-      }, {
-        "id" : "c568498f-6a21-452e-bbab-8670a65be495",
-        "name" : "manage-account",
-        "composite" : false
-      } ]
+      
+      "account" : 
+      [ 
+      	{
+	        "id" : "2508848d-f164-4aab-8b16-64411866bdb9",
+	        "name" : "view-profile",
+	        "composite" : false
+      	}, 
+      	
+      	{
+	        "id" : "c568498f-6a21-452e-bbab-8670a65be495",
+	        "name" : "manage-account",
+	        "composite" : false
+      	} 
+      ],
+
+      "adcom.client" : [ 
+      	 {
+	        "id" : "c8eceb16-5568-4c80-902d-82118bda6216",
+	        "name" : "role.addashboard",
+	        "composite" : false
+         },        
+         
+         {
+	        "id" : "654e57d7-184b-4156-8054-265aa7b54621",
+	        "name" : "role.adcatal",
+	        "composite" : true,
+	        "composites" : {
+	          "application" : {
+	            "adcom.client" : [ "role.addashboard" ]
+	          }
+	      	}
+         },
+                 
+         {
+	        "id" : "b65c9916-1a92-4ed9-9300-f1b9a76821d1",
+	        "name" : "role.adcost",
+	        "composite" : true,
+	        "composites" : {
+	          "application" : {
+	            "adcom.client" : [ "role.addashboard" ]
+	          }
+	      	}
+	     }
+      ]
     }
   },
   "requiredCredentials" : [ "password" ],

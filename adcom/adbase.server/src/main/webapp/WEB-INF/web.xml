@@ -10,14 +10,11 @@
 			<url-pattern>/</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
-			<role-name>LOGIN</role-name>
+			<role-name>role.adbase.server</role-name>
 		</auth-constraint>
-		<user-data-constraint>
-			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
-		</user-data-constraint>
 	</security-constraint>
 
 	<security-role>
-		<role-name>LOGIN</role-name>
+		<role-name>role.adbase.server</role-name>
 	</security-role>
 </web-app>

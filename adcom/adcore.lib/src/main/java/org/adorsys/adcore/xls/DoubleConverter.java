@@ -16,7 +16,8 @@ public class DoubleConverter implements Converter {
 			Object target, CellParser cellParser) {
 		BigDecimal number = cellParser.parseNumber(propertyCell);
 		try {
-			PropertyUtils.setProperty(target, propertyName, number.doubleValue());
+			Double nbr = number!=null?number.doubleValue():null;
+			PropertyUtils.setProperty(target, propertyName, nbr);
 		} catch (IllegalAccessException | InvocationTargetException
 				| NoSuchMethodException e) {
 			throw new IllegalStateException(e);

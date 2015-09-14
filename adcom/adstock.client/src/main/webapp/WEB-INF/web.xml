@@ -4,13 +4,24 @@
 
 	<security-constraint>
 		<web-resource-collection>
-			<web-resource-name>all</web-resource-name>
-			<url-pattern>/</url-pattern>
+			<url-pattern>/*</url-pattern>
 		</web-resource-collection>
 <!-- 		<user-data-constraint> -->
 <!-- 			<transport-guarantee>CONFIDENTIAL</transport-guarantee> -->
 <!-- 		</user-data-constraint> -->
+        <auth-constraint>
+            <role-name>adstock.client_role</role-name>
+        </auth-constraint>
 	</security-constraint>
+	
+	<login-config>
+        <auth-method>KEYCLOAK</auth-method>
+        <realm-name>adcom</realm-name>
+    </login-config>
+
+    <security-role>
+        <role-name>adstock.client_role</role-name>
+    </security-role>
 
   <welcome-file-list>
     <welcome-file>/build/index.html</welcome-file>

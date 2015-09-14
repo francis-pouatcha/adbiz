@@ -1,39 +1,54 @@
 package org.adorsys.adbase.loader;
 
-import java.util.Date;
-
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import org.adorsys.adbase.jpa.OuType;
 import org.adorsys.adbase.rest.OuTypeEJB;
-import org.adorsys.adcore.xls.AbstractObjectLoader;
+import org.adorsys.adbase.rest.OuTypeLookup;
+import org.adorsys.adcore.loader.ejb.CorLdrStepCallback;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
+import org.adorsys.adcore.xls.CoreAbstEntityLoader;
+import org.adorsys.adcore.xls.CoreAbstLoader;
+import org.adorsys.adcore.xls.StepCallback;
 
 @Stateless
-public class OuTypeLoader extends AbstractObjectLoader<OuType> {
+public class OuTypeLoader  extends CoreAbstEntityLoader<OuType> {
 
 	@Inject
 	private OuTypeEJB ejb;
+	@Inject
+	private OuTypeLookup lookup;
+	@EJB
+	private CorLdrStepCallback stepCallback;
+	@EJB 
+	private OuTypeLoader loader;	
 
 	@Override
 	protected OuType newObject() {
 		return new OuType();
 	}
 
-	public OuType findByIdentif(String identif, Date validOn) {
-		return ejb.findByIdentif(identif, validOn);
+	@Override
+	protected CoreAbstIdentifLookup<OuType> getLookup() {
+		return lookup;
 	}
 
-	public OuType create(OuType entity) {
-		return ejb.create(entity);
+	@Override
+	protected CoreAbstIdentifiedEJB<OuType> getEjb() {
+		return ejb;
 	}
 
-	public OuType update(OuType found) {
-		return ejb.update(found);
+	@Override
+	protected CoreAbstLoader<OuType> getLoader() {
+		return loader;
 	}
 
-	public OuType deleteById(String id) {
-		return ejb.deleteById(id);
+	@Override
+	protected StepCallback getStepCallback() {
+		return stepCallback;
 	}
 
 }

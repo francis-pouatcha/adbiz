@@ -1,6 +1,6 @@
 package org.adorsys.adbase.jpa;
 
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
 
 @Description("PermActionEnum_description")
 public enum PermActionEnum
