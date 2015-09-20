@@ -3,7 +3,6 @@
     <display-name>adcatal.client</display-name>
 
     <module-name>adcatal.client</module-name>
-
     <security-constraint>
         <web-resource-collection>
         	<web-resource-name>all</web-resource-name>

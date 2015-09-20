@@ -3,7 +3,7 @@
     <display-name>addashboard.client</display-name>
 
     <module-name>addashboard.client</module-name>
-
+	<!-- 
     <security-constraint>
         <web-resource-collection>
         	<web-resource-name>all</web-resource-name>
@@ -20,6 +20,7 @@
     <security-role>
         <role-name>role.addashboard.client</role-name>
     </security-role>
+	 -->
 
     <welcome-file-list>
         <welcome-file>/build/index.html</welcome-file>

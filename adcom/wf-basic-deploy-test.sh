@@ -167,6 +167,7 @@ rm $JBOSS_DEPLOY_DIR/adkcloak.config.war
 
 # deploy modules
 echo "             deploying new artifacts"
+cp $ADCOM_HOME/addashboard.client/target/addashboard.client.war $JBOSS_HOME/standalone/deployments/
 cp $ADCOM_HOME/adcatal.server/target/adcatal.server.war $JBOSS_HOME/standalone/deployments/
 cp $ADCOM_HOME/adcatal.client/target/adcatal.client.war $JBOSS_HOME/standalone/deployments/
 
