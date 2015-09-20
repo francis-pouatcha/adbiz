@@ -69,7 +69,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -213,7 +212,7 @@ public class UsersResource {
         user.setLastName(rep.getLastName());
 
         user.setEnabled(rep.isEnabled());
-        user.setTotp(rep.isTotp());
+        user.setOtpEnabled(rep.isTotp());
         user.setEmailVerified(rep.isEmailVerified());
 
         List<String> reqActions = rep.getRequiredActions();
@@ -457,7 +456,7 @@ public class UsersResource {
             // Logout clientSessions for this user and client
             AuthenticationManager.backchannelUserFromClient(session, realm, user, client, uriInfo, headers);
         } else {
-            throw new NotFoundException("Consent not found for user " + id + " and client " + clientId);
+            throw new NotFoundException("Consent not found");
         }
         adminEvent.operation(OperationType.ACTION).resourcePath(uriInfo).success();
     }
@@ -821,7 +820,7 @@ public class UsersResource {
             throw new NotFoundException("User not found");
         }
 
-        user.setTotp(false);
+        user.setOtpEnabled(false);
         adminEvent.operation(OperationType.ACTION).resourcePath(uriInfo).success();
     }
 
@@ -835,10 +834,13 @@ public class UsersResource {
      * @param clientId client id
      * @return
      */
-    @Path("{id}/reset-password-email")
+    @Path("{id}/execute-actions-email")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response resetPasswordEmail(@PathParam("id") String id, @QueryParam(OIDCLoginProtocol.REDIRECT_URI_PARAM) String redirectUri, @QueryParam(OIDCLoginProtocol.CLIENT_ID_PARAM) String clientId) {
+    public Response executeActionsEmail(@PathParam("id") String id,
+                                        @QueryParam(OIDCLoginProtocol.REDIRECT_URI_PARAM) String redirectUri,
+                                        @QueryParam(OIDCLoginProtocol.CLIENT_ID_PARAM) String clientId,
+                                        List<String> actions) {
         auth.requireManage();
 
         UserModel user = session.users().getUserById(id, realm);
@@ -851,17 +853,20 @@ public class UsersResource {
         }
 
         ClientSessionModel clientSession = createClientSession(user, redirectUri, clientId);
+        for (String action : actions) {
+            clientSession.addRequiredAction(action);
+        }
         ClientSessionCode accessCode = new ClientSessionCode(realm, clientSession);
-        accessCode.setAction(ClientSessionModel.Action.RECOVER_PASSWORD.name());
+        accessCode.setAction(ClientSessionModel.Action.EXECUTE_ACTIONS.name());
 
         try {
-            UriBuilder builder = Urls.loginPasswordResetBuilder(uriInfo.getBaseUri());
+            UriBuilder builder = Urls.executeActionsBuilder(uriInfo.getBaseUri());
             builder.queryParam("key", accessCode.getCode());
 
             String link = builder.build(realm.getName()).toString();
             long expiration = TimeUnit.SECONDS.toMinutes(realm.getAccessCodeLifespanUserAction());
 
-            this.session.getProvider(EmailProvider.class).setRealm(realm).setUser(user).sendPasswordReset(link, expiration);
+            this.session.getProvider(EmailProvider.class).setRealm(realm).setUser(user).sendExecuteActions(link, expiration);
 
             //audit.user(user).detail(Details.EMAIL, user.getEmail()).detail(Details.CODE_ID, accessCode.getCodeId()).success();
 
@@ -869,8 +874,8 @@ public class UsersResource {
 
             return Response.ok().build();
         } catch (EmailException e) {
-            logger.error("Failed to send password reset email", e);
-            return ErrorResponse.error("Failed to send email", Response.Status.INTERNAL_SERVER_ERROR);
+            logger.error("Failed to send execute actions email", e);
+            return ErrorResponse.error("Failed to send execute actions email", Response.Status.INTERNAL_SERVER_ERROR);
         }
     }
 

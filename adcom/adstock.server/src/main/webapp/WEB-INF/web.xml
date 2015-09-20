@@ -1,18 +1,27 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	version="3.0"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-	<display-name>adstock.server</display-name>
-     <filter>
-		<filter-name>CORS</filter-name>
-		<filter-class>com.thetransactioncompany.cors.CORSFilter</filter-class>
-		<init-param>
-			<param-name>cors.supportedMethods</param-name>
-			<param-value>GET, HEAD, POST, OPTIONS, PUT, DELETE</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-        <filter-name>CORS</filter-name>
-        <url-pattern>/*</url-pattern>
-     </filter-mapping>
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+    <display-name>adstock.server</display-name>
+
+    <module-name>adstock.server</module-name>
+
+    <security-constraint>
+        <web-resource-collection>
+        	<web-resource-name>all</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>role.adstock.server</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>KEYCLOAK</auth-method>
+        <realm-name>adcom</realm-name>
+    </login-config>
+    <security-role>
+        <role-name>role.adstock.server</role-name>
+    </security-role>
+
+    <welcome-file-list>
+        <welcome-file>/build/index.html</welcome-file>
+    </welcome-file-list>
 </web-app>

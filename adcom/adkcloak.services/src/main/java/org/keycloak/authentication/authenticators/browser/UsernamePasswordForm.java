@@ -1,16 +1,16 @@
 package org.keycloak.authentication.authenticators.browser;
 
+import org.jboss.logging.Logger;
 import org.jboss.resteasy.specimpl.MultivaluedMapImpl;
+import org.keycloak.authentication.AuthenticationFlowContext;
 import org.keycloak.authentication.AuthenticationProcessor;
 import org.keycloak.authentication.Authenticator;
-import org.keycloak.authentication.AuthenticatorContext;
 import org.keycloak.events.Errors;
 import org.keycloak.login.LoginFormsProvider;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.RealmModel;
 import org.keycloak.models.UserModel;
 import org.keycloak.protocol.LoginProtocol;
-import org.keycloak.protocol.RestartLoginCookie;
 import org.keycloak.protocol.oidc.OIDCLoginProtocol;
 import org.keycloak.services.managers.AuthenticationManager;
 
@@ -21,19 +21,14 @@ import javax.ws.rs.core.Response;
  * @author <a href="mailto:bill@burkecentral.com">Bill Burke</a>
  * @version $Revision: 1 $
  */
-public class UsernamePasswordForm extends AbstractFormAuthenticator implements Authenticator {
+public class UsernamePasswordForm extends AbstractUsernameFormAuthenticator implements Authenticator {
+    protected static Logger logger = Logger.getLogger(UsernamePasswordForm.class);
 
-   @Override
-    public void action(AuthenticatorContext context) {
+    @Override
+    public void action(AuthenticationFlowContext context) {
         MultivaluedMap<String, String> formData = context.getHttpRequest().getDecodedFormParameters();
         if (formData.containsKey("cancel")) {
-            context.getEvent().error(Errors.REJECTED_BY_USER);
-            LoginProtocol protocol = context.getSession().getProvider(LoginProtocol.class, context.getClientSession().getAuthMethod());
-            protocol.setRealm(context.getRealm())
-                    .setHttpHeaders(context.getHttpRequest().getHttpHeaders())
-                    .setUriInfo(context.getUriInfo());
-            Response response = protocol.cancelLogin(context.getClientSession());
-            context.forceChallenge(response);
+            context.cancelLogin();
             return;
         }
         if (!validateForm(context, formData)) {
@@ -42,12 +37,12 @@ public class UsernamePasswordForm extends AbstractFormAuthenticator implements A
         context.success();
     }
 
-    protected boolean validateForm(AuthenticatorContext context, MultivaluedMap<String, String> formData) {
+    protected boolean validateForm(AuthenticationFlowContext context, MultivaluedMap<String, String> formData) {
         return validateUser(context, formData) && validatePassword(context, formData);
     }
 
     @Override
-    public void authenticate(AuthenticatorContext context) {
+    public void authenticate(AuthenticationFlowContext context) {
         MultivaluedMap<String, String> formData = new MultivaluedMapImpl<>();
         String loginHint = context.getClientSession().getNote(OIDCLoginProtocol.LOGIN_HINT_PARAM);
 
@@ -71,8 +66,8 @@ public class UsernamePasswordForm extends AbstractFormAuthenticator implements A
         return false;
     }
 
-    protected Response challenge(AuthenticatorContext context, MultivaluedMap<String, String> formData) {
-        LoginFormsProvider forms = loginForm(context);
+    protected Response challenge(AuthenticationFlowContext context, MultivaluedMap<String, String> formData) {
+        LoginFormsProvider forms = context.form();
 
         if (formData.size() > 0) forms.setFormData(formData);
 

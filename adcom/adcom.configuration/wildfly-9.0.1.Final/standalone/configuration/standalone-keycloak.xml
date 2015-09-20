@@ -29,6 +29,7 @@
 		<extension module="org.wildfly.extension.request-controller" />
 		<extension module="org.wildfly.extension.security.manager" />
 		<extension module="org.wildfly.extension.undertow" />
+		<extension module="org.keycloak.keycloak-adapter-subsystem" />
 	</extensions>
 	<management>
 		<security-realms>
@@ -146,14 +147,16 @@
 		<subsystem xmlns="urn:jboss:domain:bean-validation:1.0" />
 		<subsystem xmlns="urn:jboss:domain:datasources:3.0">
 			<datasources>
-                <datasource jndi-name="java:jboss/datasources/ADDS" pool-name="ADDS" enabled="true" use-java-context="true">
-					<connection-url>jdbc:h2:${jboss.server.data.dir}/addb;AUTO_SERVER=TRUE</connection-url>
-                    <driver>h2</driver>
-                    <security>
-                        <user-name>sa</user-name>
-                        <password>sa</password>
-                    </security>
-                </datasource>
+				<datasource jndi-name="java:jboss/datasources/ADDS"
+					pool-name="ADDS" enabled="true" use-java-context="true">
+					<connection-url>jdbc:h2:${jboss.server.data.dir}/addb;AUTO_SERVER=TRUE
+					</connection-url>
+					<driver>h2</driver>
+					<security>
+						<user-name>sa</user-name>
+						<password>sa</password>
+					</security>
+				</datasource>
 				<drivers>
 					<driver name="h2" module="com.h2database.h2">
 						<xa-datasource-class>org.h2.jdbcx.JdbcDataSource
@@ -195,8 +198,7 @@
 				</managed-scheduled-executor-services>
 			</concurrent>
 			<default-bindings context-service="java:jboss/ee/concurrency/context/default"
-				datasource="java:jboss/datasources/ADDS"
-				managed-executor-service="java:jboss/ee/concurrency/executor/default"
+				datasource="java:jboss/datasources/ADDS" managed-executor-service="java:jboss/ee/concurrency/executor/default"
 				managed-scheduled-executor-service="java:jboss/ee/concurrency/scheduler/default"
 				managed-thread-factory="java:jboss/ee/concurrency/factory/default" />
 		</subsystem>
@@ -252,6 +254,12 @@
 			<buffer-pool name="default" />
 		</subsystem>
 		<subsystem xmlns="urn:jboss:domain:infinispan:3.0">
+			<cache-container name="keycloak" jndi-name="infinispan/Keycloak">
+				<local-cache name="realms" />
+				<local-cache name="users" />
+				<local-cache name="sessions" />
+				<local-cache name="loginFailures" />
+			</cache-container>
 			<cache-container name="server" default-cache="default"
 				module="org.wildfly.clustering.server">
 				<local-cache name="default">
@@ -372,6 +380,12 @@
 						<policy-module code="Delegating" flag="required" />
 					</authorization>
 				</security-domain>
+				<security-domain name="keycloak">
+					<authentication>
+						<login-module code="org.keycloak.adapters.jboss.KeycloakLoginModule"
+							flag="required" />
+					</authentication>
+				</security-domain>
 			</security-domains>
 		</subsystem>
 		<subsystem xmlns="urn:jboss:domain:transactions:3.0">
@@ -424,6 +438,7 @@
 		<subsystem xmlns="urn:jboss:domain:keycloak-server:1.1">
 			<web-context>auth</web-context>
 		</subsystem>
+		<subsystem xmlns="urn:jboss:domain:keycloak:1.1" />
 	</profile>
 	<interfaces>
 		<interface name="management">

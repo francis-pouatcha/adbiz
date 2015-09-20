@@ -55,8 +55,24 @@ public class RealmEntity {
     protected boolean resetPasswordAllowed;
     @Column(name="REMEMBER_ME")
     protected boolean rememberMe;
+
     @Column(name="PASSWORD_POLICY")
     protected String passwordPolicy;
+
+    @Column(name="OTP_POLICY_TYPE")
+    protected String otpPolicyType;
+    @Column(name="OTP_POLICY_ALG")
+    protected String otpPolicyAlgorithm;
+    @Column(name="OTP_POLICY_COUNTER")
+    protected int otpPolicyInitialCounter;
+    @Column(name="OTP_POLICY_DIGITS")
+    protected int otpPolicyDigits;
+    @Column(name="OTP_POLICY_WINDOW")
+    protected int otpPolicyLookAheadWindow;
+    @Column(name="OTP_POLICY_PERIOD")
+    protected int otpPolicyPeriod;
+
+
     @Column(name="EDIT_USERNAME_ALLOWED")
     protected boolean editUsernameAllowed;
 
@@ -100,7 +116,7 @@ public class RealmEntity {
     Collection<RequiredCredentialEntity> requiredCredentials = new ArrayList<RequiredCredentialEntity>();
 
     @OneToMany(cascade ={CascadeType.REMOVE}, orphanRemoval = true)
-    @JoinTable(name="KC_FED_PROVIDERS")
+    @JoinTable(name="KC_FED_PROVIDERS", joinColumns={ @JoinColumn(name="REALM_ID") })
     List<UserFederationProviderEntity> userFederationProviders = new ArrayList<UserFederationProviderEntity>();
 
     @OneToMany(cascade ={CascadeType.REMOVE}, orphanRemoval = true, mappedBy = "realm")
@@ -162,6 +178,21 @@ public class RealmEntity {
 
     @OneToMany(cascade ={CascadeType.REMOVE}, orphanRemoval = true, mappedBy = "realm")
     Collection<AuthenticationFlowEntity> authenticationFlows = new ArrayList<>();
+
+    @Column(name="BROWSER_FLOW")
+    protected String browserFlow;
+
+    @Column(name="REGISTRATION_FLOW")
+    protected String registrationFlow;
+
+
+    @Column(name="DIRECT_GRANT_FLOW")
+    protected String directGrantFlow;
+    @Column(name="RESET_CREDENTIALS_FLOW")
+    protected String resetCredentialsFlow;
+
+    @Column(name="CLIENT_AUTH_FLOW")
+    protected String clientAuthenticationFlow;
 
 
 
@@ -580,5 +611,92 @@ public class RealmEntity {
         this.authenticationFlows = authenticationFlows;
     }
 
+    public String getOtpPolicyType() {
+        return otpPolicyType;
+    }
+
+    public void setOtpPolicyType(String otpPolicyType) {
+        this.otpPolicyType = otpPolicyType;
+    }
+
+    public String getOtpPolicyAlgorithm() {
+        return otpPolicyAlgorithm;
+    }
+
+    public void setOtpPolicyAlgorithm(String otpPolicyAlgorithm) {
+        this.otpPolicyAlgorithm = otpPolicyAlgorithm;
+    }
+
+    public int getOtpPolicyInitialCounter() {
+        return otpPolicyInitialCounter;
+    }
+
+    public void setOtpPolicyInitialCounter(int otpPolicyInitialCounter) {
+        this.otpPolicyInitialCounter = otpPolicyInitialCounter;
+    }
+
+    public int getOtpPolicyDigits() {
+        return otpPolicyDigits;
+    }
+
+    public void setOtpPolicyDigits(int otpPolicyDigits) {
+        this.otpPolicyDigits = otpPolicyDigits;
+    }
+
+    public int getOtpPolicyLookAheadWindow() {
+        return otpPolicyLookAheadWindow;
+    }
+
+    public void setOtpPolicyLookAheadWindow(int otpPolicyLookAheadWindow) {
+        this.otpPolicyLookAheadWindow = otpPolicyLookAheadWindow;
+    }
+
+    public int getOtpPolicyPeriod() {
+        return otpPolicyPeriod;
+    }
+
+    public void setOtpPolicyPeriod(int otpPolicyPeriod) {
+        this.otpPolicyPeriod = otpPolicyPeriod;
+    }
+
+    public String getBrowserFlow() {
+        return browserFlow;
+    }
+
+    public void setBrowserFlow(String browserFlow) {
+        this.browserFlow = browserFlow;
+    }
+
+    public String getRegistrationFlow() {
+        return registrationFlow;
+    }
+
+    public void setRegistrationFlow(String registrationFlow) {
+        this.registrationFlow = registrationFlow;
+    }
+
+    public String getDirectGrantFlow() {
+        return directGrantFlow;
+    }
+
+    public void setDirectGrantFlow(String directGrantFlow) {
+        this.directGrantFlow = directGrantFlow;
+    }
+
+    public String getResetCredentialsFlow() {
+        return resetCredentialsFlow;
+    }
+
+    public void setResetCredentialsFlow(String resetCredentialsFlow) {
+        this.resetCredentialsFlow = resetCredentialsFlow;
+    }
+
+    public String getClientAuthenticationFlow() {
+        return clientAuthenticationFlow;
+    }
+
+    public void setClientAuthenticationFlow(String clientAuthenticationFlow) {
+        this.clientAuthenticationFlow = clientAuthenticationFlow;
+    }
 }
 

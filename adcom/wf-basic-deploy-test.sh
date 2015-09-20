@@ -61,13 +61,23 @@ else
 	echo "             JBOSS_DIST: $JBOSS_DIST"
 fi
 
-export KEYCLOAK_DIST_FILE=keycloak-overlay-1.4.0.Final.tar.gz
-if [ ! -e "$TOOLS_HOME/keycloak-overlay-1.4.0.Final.tar.gz" ]; then
-   	echo "   ERROR:  $KEYCLOAK_DIST_FILE does not exist in idrectory $TOOLS_HOME or is not readable."
+export KEYCLOAK_VERSION=1.5.0.Final
+export KEYCLOAK_DIST_FILE=keycloak-overlay-$KEYCLOAK_VERSION.tar.gz
+if [ ! -e "$TOOLS_HOME/keycloak-overlay-$KEYCLOAK_VERSION.tar.gz" ]; then
+   	echo "   ERROR:  $KEYCLOAK_DIST_FILE does not exist in directory $TOOLS_HOME or is not readable."
    	sleep 2s	
    	exit
 else
 	echo "             KEYCLOAK_DIST_FILE: $KEYCLOAK_DIST_FILE"
+fi
+
+export KEYCLOAK_ADAPTER_FILE=keycloak-wf9-adapter-dist-$KEYCLOAK_VERSION.tar.gz
+if [ ! -e "$TOOLS_HOME/keycloak-wf9-adapter-dist-$KEYCLOAK_VERSION.tar.gz" ]; then
+   	echo "   ERROR:  $KEYCLOAK_ADAPTER_FILE does not exist in directory $TOOLS_HOME or is not readable."
+   	sleep 2s	
+   	exit
+else
+	echo "             KEYCLOAK_ADAPTER_FILE: $KEYCLOAK_ADAPTER_FILE"
 fi
 
 export JBOSS_HOME=$TOOLS_HOME/$JBOSS_DIR
@@ -92,24 +102,21 @@ if [ ! -d "$JBOSS_HOME" ]; then
 fi
 
 cd $JBOSS_HOME && tar xzf $TOOLS_HOME/$KEYCLOAK_DIST_FILE
+cd $JBOSS_HOME && tar xzf $TOOLS_HOME/$KEYCLOAK_ADAPTER_FILE
 
 cd $ADCOM_HOME && mvn clean install 
 
 # Override Keycloak JPA Implementation.
 # cd $ADCOM_HOME/adkcloak.jpa && mvn clean install
-cp $ADCOM_HOME/adkcloak.jpa/target/keycloak-model-jpa-1.4.0.Final.jar $JBOSS_HOME/modules/system/layers/base/org/keycloak/keycloak-model-jpa/main/
+cp $ADCOM_HOME/adkcloak.jpa/target/keycloak-model-jpa-$KEYCLOAK_VERSION.jar $JBOSS_HOME/modules/system/layers/base/org/keycloak/keycloak-model-jpa/main/
 
 # Override Keycloak Event JPA Implementation.
 # cd $ADCOM_HOME/adkcloak.events.jpa && mvn clean install
-cp $ADCOM_HOME/adkcloak.events.jpa/target/keycloak-events-jpa-1.4.0.Final.jar $JBOSS_HOME/modules/system/layers/base/org/keycloak/keycloak-events-jpa/main/
-
-# Override Keycloak Sessions JPA Implementation.
-# cd $ADCOM_HOME/adkcloak.model.sessions.jpa && mvn clean install
-cp $ADCOM_HOME/adkcloak.model.sessions.jpa/target/keycloak-model-sessions-jpa-1.4.0.Final.jar $JBOSS_HOME/modules/system/layers/base/org/keycloak/keycloak-model-sessions-jpa/main/
+cp $ADCOM_HOME/adkcloak.events.jpa/target/keycloak-events-jpa-$KEYCLOAK_VERSION.jar $JBOSS_HOME/modules/system/layers/base/org/keycloak/keycloak-events-jpa/main/
 
 # Override Keycloak Services Implementation.
 # cd $ADCOM_HOME/adkcloak.services && mvn clean install
-cp $ADCOM_HOME/adkcloak.services/target/keycloak-services-1.4.0.Final.jar $JBOSS_HOME/modules/system/layers/base/org/keycloak/keycloak-services/main/
+cp $ADCOM_HOME/adkcloak.services/target/keycloak-services-$KEYCLOAK_VERSION.jar $JBOSS_HOME/modules/system/layers/base/org/keycloak/keycloak-services/main/
 
 # Configue adcom realm for keycloak
 # cd $ADCOM_HOME/adkcloak.config && mvn clean install
@@ -130,7 +137,6 @@ else
 fi
 
 cp $ADCOM_HOME/adcom.configuration/$JBOSS_DIR/standalone/configuration/standalone-keycloak.xml $JBOSS_HOME/standalone/configuration/standalone-keycloak.xml
-cp $ADCOM_HOME/adcom.configuration/$JBOSS_DIR/standalone/configuration/standalone-keycloak-configured.xml $JBOSS_HOME/standalone/configuration/standalone-keycloak-configured.xml
 cp $ADCOM_HOME/adcom.configuration/$JBOSS_DIR/standalone/configuration/keycloak-server.json $JBOSS_HOME/standalone/configuration/keycloak-server.json
 
 echo "             Starting jboss"
@@ -165,7 +171,7 @@ cp $ADCOM_HOME/adcatal.server/target/adcatal.server.war $JBOSS_HOME/standalone/d
 cp $ADCOM_HOME/adcatal.client/target/adcatal.client.war $JBOSS_HOME/standalone/deployments/
 
 echo "             Starting jboss"
-cd $JBOSS_HOME && bin/standalone.sh --debug --server-config=standalone-keycloak-configured.xml --properties=$JBOSS_HOME/keycloak-config.properties > /dev/null &
+cd $JBOSS_HOME && bin/standalone.sh --debug --server-config=standalone-keycloak.xml --properties=$JBOSS_HOME/keycloak-config.properties > /dev/null &
 
 echo "             Import catalogue data"
 cp $ADCOM_HOME/adcom.configuration/all-servers/adcom/adcatal/adcatal.xls $JBOSS_DATA_DIR/adcom/adcatal/

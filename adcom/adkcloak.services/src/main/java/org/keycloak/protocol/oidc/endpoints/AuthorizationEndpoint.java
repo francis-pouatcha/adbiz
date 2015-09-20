@@ -27,6 +27,7 @@ import org.keycloak.services.managers.AuthenticationManager;
 import org.keycloak.services.managers.ClientSessionCode;
 import org.keycloak.services.messages.Messages;
 import org.keycloak.services.Urls;
+import org.keycloak.services.resources.LoginActionsService;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.core.Context;
@@ -263,10 +264,11 @@ public class AuthorizationEndpoint {
         clientSession.setNote(Details.AUTH_TYPE, CODE_AUTH_TYPE);
 
 
-        AuthenticationFlowModel flow = realm.getFlowByAlias(DefaultAuthenticationFlows.BROWSER_FLOW);
+        AuthenticationFlowModel flow = realm.getBrowserFlow();
         String flowId = flow.getId();
         AuthenticationProcessor processor = new AuthenticationProcessor();
         processor.setClientSession(clientSession)
+                .setFlowPath(LoginActionsService.AUTHENTICATE_PATH)
                 .setFlowId(flowId)
                 .setConnection(clientConnection)
                 .setEventBuilder(event)

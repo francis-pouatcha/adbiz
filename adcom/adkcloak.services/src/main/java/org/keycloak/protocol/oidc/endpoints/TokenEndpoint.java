@@ -7,6 +7,7 @@ import org.keycloak.OAuth2Constants;
 import org.keycloak.OAuthErrorException;
 import org.keycloak.authentication.AuthenticationProcessor;
 import org.keycloak.constants.AdapterConstants;
+import org.keycloak.constants.ServiceAccountConstants;
 import org.keycloak.events.Details;
 import org.keycloak.events.Errors;
 import org.keycloak.events.EventBuilder;
@@ -19,17 +20,16 @@ import org.keycloak.models.RealmModel;
 import org.keycloak.models.UserModel;
 import org.keycloak.models.UserSessionModel;
 import org.keycloak.models.UserSessionProvider;
-import org.keycloak.models.utils.DefaultAuthenticationFlows;
-import org.keycloak.models.utils.KeycloakModelUtils;
 import org.keycloak.protocol.oidc.OIDCLoginProtocol;
-import org.keycloak.protocol.oidc.ServiceAccountManager;
 import org.keycloak.protocol.oidc.TokenManager;
 import org.keycloak.protocol.oidc.utils.AuthorizeClientUtil;
 import org.keycloak.representations.AccessToken;
 import org.keycloak.representations.AccessTokenResponse;
 import org.keycloak.services.ErrorResponseException;
 import org.keycloak.services.managers.AuthenticationManager;
+import org.keycloak.services.managers.ClientManager;
 import org.keycloak.services.managers.ClientSessionCode;
+import org.keycloak.services.managers.RealmManager;
 import org.keycloak.services.resources.Cors;
 import org.keycloak.services.Urls;
 
@@ -52,6 +52,7 @@ public class TokenEndpoint {
     private static final Logger logger = Logger.getLogger(TokenEndpoint.class);
     private MultivaluedMap<String, String> formParams;
     private ClientModel client;
+    private Map<String, String> clientAuthAttributes;
 
     private enum Action {
         AUTHORIZATION_CODE, REFRESH_TOKEN, PASSWORD, CLIENT_CREDENTIALS
@@ -98,11 +99,7 @@ public class TokenEndpoint {
         checkSsl();
         checkRealm();
         checkGrantType();
-
-        // client grant type will do it's own verification of client
-        if (!grantType.equals(OAuth2Constants.CLIENT_CREDENTIALS)) {
-            checkClient();
-        }
+        checkClient();
 
         switch (action) {
             case AUTHORIZATION_CODE:
@@ -148,8 +145,9 @@ public class TokenEndpoint {
     }
 
     private void checkClient() {
-        String authorizationHeader = headers.getRequestHeaders().getFirst(HttpHeaders.AUTHORIZATION);
-        client = AuthorizeClientUtil.authorizeClient(authorizationHeader, formParams, event, realm);
+        AuthorizeClientUtil.ClientAuthResult clientAuth = AuthorizeClientUtil.authorizeClient(session, event, realm);
+        client = clientAuth.getClient();
+        clientAuthAttributes = clientAuth.getClientAuthAttributes();
 
         if (client.isBearerOnly()) {
             throw new ErrorResponseException("invalid_client", "Bearer-only not allowed", Response.Status.BAD_REQUEST);
@@ -242,6 +240,7 @@ public class TokenEndpoint {
         }
 
         updateClientSession(clientSession);
+        updateUserSessionFromClientAuth(userSession);
 
         AccessToken token = tokenManager.createClientAccessToken(session, accessCode.getRequestedRoles(), realm, client, user, userSession, clientSession);
 
@@ -267,6 +266,7 @@ public class TokenEndpoint {
 
             UserSessionModel userSession = session.sessions().getUserSession(realm, res.getSessionState());
             updateClientSessions(userSession.getClientSessions());
+            updateUserSessionFromClientAuth(userSession);
 
         } catch (OAuthErrorException e) {
             event.error(Errors.INVALID_TOKEN);
@@ -317,6 +317,12 @@ public class TokenEndpoint {
         }
     }
 
+    private void updateUserSessionFromClientAuth(UserSessionModel userSession) {
+        for (Map.Entry<String, String> attr : clientAuthAttributes.entrySet()) {
+            userSession.setNote(attr.getKey(), attr.getValue());
+        }
+    }
+
     public Response buildResourceOwnerPasswordCredentialsGrant() {
         event.detail(Details.AUTH_METHOD, "oauth_credentials").detail(Details.RESPONSE_TYPE, "token");
 
@@ -331,7 +337,7 @@ public class TokenEndpoint {
         clientSession.setAuthMethod(OIDCLoginProtocol.LOGIN_PROTOCOL);
         clientSession.setAction(ClientSessionModel.Action.AUTHENTICATE.name());
         clientSession.setNote(OIDCLoginProtocol.ISSUER, Urls.realmIssuer(uriInfo.getBaseUri(), realm.getName()));
-        AuthenticationFlowModel flow = realm.getFlowByAlias(DefaultAuthenticationFlows.DIRECT_GRANT_FLOW);
+        AuthenticationFlowModel flow = realm.getDirectGrantFlow();
         String flowId = flow.getId();
         AuthenticationProcessor processor = new AuthenticationProcessor();
         processor.setClientSession(clientSession)
@@ -354,6 +360,7 @@ public class TokenEndpoint {
         }
         processor.attachSession();
         UserSessionModel userSession = processor.getUserSession();
+        updateUserSessionFromClientAuth(userSession);
 
         AccessTokenResponse res = tokenManager.responseBuilder(realm, client, event, session, userSession, clientSession)
                 .generateAccessToken(session, scope, client, user, userSession, clientSession)
@@ -368,8 +375,68 @@ public class TokenEndpoint {
     }
 
     public Response buildClientCredentialsGrant() {
-        ServiceAccountManager serviceAccountManager = new ServiceAccountManager(tokenManager, authManager, event, request, formParams, session);
-        return serviceAccountManager.buildClientCredentialsGrant();
+        if (client.isBearerOnly()) {
+            event.error(Errors.INVALID_CLIENT);
+            throw new ErrorResponseException("unauthorized_client", "Bearer-only client not allowed to retrieve service account", Response.Status.UNAUTHORIZED);
+        }
+        if (client.isPublicClient()) {
+            event.error(Errors.INVALID_CLIENT);
+            throw new ErrorResponseException("unauthorized_client", "Public client not allowed to retrieve service account", Response.Status.UNAUTHORIZED);
+        }
+        if (!client.isServiceAccountsEnabled()) {
+            event.error(Errors.INVALID_CLIENT);
+            throw new ErrorResponseException("unauthorized_client", "Client not enabled to retrieve service account", Response.Status.UNAUTHORIZED);
+        }
+
+        event.detail(Details.RESPONSE_TYPE, ServiceAccountConstants.CLIENT_AUTH);
+
+        UserModel clientUser = session.users().getUserByServiceAccountClient(client);
+
+        if (clientUser == null || client.getProtocolMapperByName(OIDCLoginProtocol.LOGIN_PROTOCOL, ServiceAccountConstants.CLIENT_ID_PROTOCOL_MAPPER) == null) {
+            // May need to handle bootstrap here as well
+            logger.infof("Service account user for client '%s' not found or default protocol mapper for service account not found. Creating now", client.getClientId());
+            new ClientManager(new RealmManager(session)).enableServiceAccount(client);
+            clientUser = session.users().getUserByServiceAccountClient(client);
+        }
+
+        String clientUsername = clientUser.getUsername();
+        event.detail(Details.USERNAME, clientUsername);
+        event.user(clientUser);
+
+        if (!clientUser.isEnabled()) {
+            event.error(Errors.USER_DISABLED);
+            throw new ErrorResponseException("invalid_request", "User '" + clientUsername + "' disabled", Response.Status.UNAUTHORIZED);
+        }
+
+        String scope = formParams.getFirst(OAuth2Constants.SCOPE);
+
+        UserSessionProvider sessions = session.sessions();
+
+        ClientSessionModel clientSession = sessions.createClientSession(realm, client);
+        clientSession.setAuthMethod(OIDCLoginProtocol.LOGIN_PROTOCOL);
+        clientSession.setNote(OIDCLoginProtocol.ISSUER, Urls.realmIssuer(uriInfo.getBaseUri(), realm.getName()));
+
+        UserSessionModel userSession = sessions.createUserSession(realm, clientUser, clientUsername, clientConnection.getRemoteAddr(), ServiceAccountConstants.CLIENT_AUTH, false, null, null);
+        event.session(userSession);
+
+        TokenManager.attachClientSession(userSession, clientSession);
+
+        // Notes about client details
+        userSession.setNote(ServiceAccountConstants.CLIENT_ID, client.getClientId());
+        userSession.setNote(ServiceAccountConstants.CLIENT_HOST, clientConnection.getRemoteHost());
+        userSession.setNote(ServiceAccountConstants.CLIENT_ADDRESS, clientConnection.getRemoteAddr());
+
+        updateUserSessionFromClientAuth(userSession);
+
+        AccessTokenResponse res = tokenManager.responseBuilder(realm, client, event, session, userSession, clientSession)
+                .generateAccessToken(session, scope, client, clientUser, userSession, clientSession)
+                .generateRefreshToken()
+                .generateIDToken()
+                .build();
+
+        event.success();
+
+        return Cors.add(request, Response.ok(res, MediaType.APPLICATION_JSON_TYPE)).auth().allowedOrigins(client).allowedMethods("POST").exposedHeaders(Cors.ACCESS_CONTROL_ALLOW_METHODS).build();
     }
 
 }

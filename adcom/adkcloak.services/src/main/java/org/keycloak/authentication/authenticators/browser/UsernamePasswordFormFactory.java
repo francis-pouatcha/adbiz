@@ -18,15 +18,11 @@ import java.util.List;
 public class UsernamePasswordFormFactory implements AuthenticatorFactory {
 
     public static final String PROVIDER_ID = "auth-username-password-form";
-
-    @Override
-    public Authenticator create() {
-        return new UsernamePasswordForm();
-    }
+    public static final UsernamePasswordForm SINGLETON = new UsernamePasswordForm();
 
     @Override
     public Authenticator create(KeycloakSession session) {
-        throw new IllegalStateException("illegal call");
+        return SINGLETON;
     }
 
     @Override
@@ -81,4 +77,10 @@ public class UsernamePasswordFormFactory implements AuthenticatorFactory {
     public List<ProviderConfigProperty> getConfigProperties() {
         return null;
     }
+
+    @Override
+    public boolean isUserSetupAllowed() {
+        return false;
+    }
+
 }

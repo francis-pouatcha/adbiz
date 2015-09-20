@@ -15,7 +15,6 @@
 		
 		<module>adkcloak.jpa</module>
 		<module>adkcloak.events.jpa</module>
-		<module>adkcloak.model.sessions.jpa</module>
 		<module>adkcloak.config</module>
 		<module>adkcloak.services</module>
 				
@@ -80,6 +79,7 @@
 		</repository>
 	</distributionManagement>
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<github.global.server>github</github.global.server>
 		<keycloak.version>1.4.0.Final</keycloak.version>
 	    <apache.httpcomponents.version>4.3.6</apache.httpcomponents.version>
