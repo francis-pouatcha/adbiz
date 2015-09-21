@@ -168,7 +168,8 @@ echo "             Starting jboss"
 cd $JBOSS_HOME && bin/standalone.sh --debug --server-config=standalone-keycloak-configured.xml --properties=$JBOSS_HOME/keycloak-config.properties > /dev/null &
 
 echo "             Import catalogue data"
-cp $ADCOM_HOME/adcom.configuration/all-servers/adcom/adcatal/adcatal.xls $JBOSS_DATA_DIR/adcom/adcatal/
+cd $JBOSS_DATA_DIR/adcom && mkdir adcatal
+cp $ADCOM_HOME/adcom.configuration/all-servers/adcom/adcatal/data/adcatal.xls $JBOSS_DATA_DIR/adcom/adcatal/
 
 # cd $JBOSS_HOME/ && mkdir adcom
 # echo "             Copying the .xls file"
