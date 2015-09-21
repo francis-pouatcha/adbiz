@@ -1,0 +1,11 @@
+{
+    "realm": "adcom",
+    "resource": "adinvtry.server",
+    "realm-public-key": "${realm-public-key}",
+    "auth-server-url": "${auth-server-url}",
+    "ssl-required" : "external",
+    "expose-token": true,
+    "credentials": {
+        "secret": "${adinvtry.server.credential}"
+    }
+}

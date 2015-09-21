@@ -8,6 +8,7 @@ import org.keycloak.authentication.RequiredActionProvider;
 import org.keycloak.events.Details;
 import org.keycloak.events.EventType;
 import org.keycloak.login.LoginFormsProvider;
+import org.keycloak.models.ClientSessionModel;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.KeycloakSessionFactory;
 import org.keycloak.models.UserCredentialModel;
@@ -34,24 +35,32 @@ public class VerifyEmail implements RequiredActionProvider, RequiredActionFactor
         }
     }
     @Override
-    public Response invokeRequiredAction(RequiredActionContext context) {
+    public void requiredActionChallenge(RequiredActionContext context) {
+        // if this is EXECUTE_ACTIONS we know that the email sent is valid so we can verify it automatically
+        if (context.getClientSession().getNote(ClientSessionModel.Action.EXECUTE_ACTIONS.name()) != null) {
+            context.getUser().setEmailVerified(true);
+            context.success();
+            return;
+        }
+
         if (Validation.isBlank(context.getUser().getEmail())) {
-            return null;
+            context.ignore();
+            return;
         }
 
         context.getEvent().clone().event(EventType.SEND_VERIFY_EMAIL).detail(Details.EMAIL, context.getUser().getEmail()).success();
         LoginActionsService.createActionCookie(context.getRealm(), context.getUriInfo(), context.getConnection(), context.getUserSession().getId());
 
         LoginFormsProvider loginFormsProvider = context.getSession().getProvider(LoginFormsProvider.class)
-                .setClientSessionCode(context.generateAccessCode(getProviderId()))
+                .setClientSessionCode(context.generateAccessCode(UserModel.RequiredAction.VERIFY_EMAIL.name()))
                 .setUser(context.getUser());
-        return loginFormsProvider.createResponse(UserModel.RequiredAction.VERIFY_EMAIL);
+        Response challenge = loginFormsProvider.createResponse(UserModel.RequiredAction.VERIFY_EMAIL);
+        context.challenge(challenge);
     }
 
     @Override
-    public Object jaxrsService(RequiredActionContext context) {
-        // this is handled by LoginActionsService at the moment
-        return null;
+    public void processAction(RequiredActionContext context) {
+        context.failure();
     }
 
 
@@ -85,11 +94,4 @@ public class VerifyEmail implements RequiredActionProvider, RequiredActionFactor
     public String getId() {
         return UserModel.RequiredAction.VERIFY_EMAIL.name();
     }
-
-    @Override
-    public String getProviderId() {
-        return getId();
-    }
-
-
 }

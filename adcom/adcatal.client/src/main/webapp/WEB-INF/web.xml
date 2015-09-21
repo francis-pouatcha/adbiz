@@ -3,7 +3,6 @@
     <display-name>adcatal.client</display-name>
 
     <module-name>adcatal.client</module-name>
-
     <security-constraint>
         <web-resource-collection>
         	<web-resource-name>all</web-resource-name>
@@ -14,7 +13,7 @@
         </auth-constraint>
     </security-constraint>
     <login-config>
-        <auth-method>BASIC</auth-method>
+        <auth-method>KEYCLOAK</auth-method>
         <realm-name>adcom</realm-name>
     </login-config>
     <security-role>

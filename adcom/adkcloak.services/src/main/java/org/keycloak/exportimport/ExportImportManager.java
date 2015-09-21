@@ -35,37 +35,47 @@ public class ExportImportManager {
                 if (export) {
                     ExportProvider exportProvider = session.getProvider(ExportProvider.class, exportImportProviderId);
 
-                    if (realmName == null) {
-                        logger.info("Full model export requested");
-                        exportProvider.exportModel(sessionFactory);
+                    if (exportProvider == null) {
+                        logger.errorf("Invalid Export Provider %s", exportImportProviderId);
                     } else {
-                        logger.infof("Export of realm '%s' requested", realmName);
-                        exportProvider.exportRealm(sessionFactory, realmName);
+                        if (realmName == null) {
+                            logger.info("Full model export requested");
+                            exportProvider.exportModel(sessionFactory);
+                        } else {
+                            logger.infof("Export of realm '%s' requested", realmName);
+                            exportProvider.exportRealm(sessionFactory, realmName);
+                        }
+                        logger.info("Export finished successfully");
                     }
-                    logger.info("Export finished successfully");
                 } else {
                     ImportProvider importProvider = session.getProvider(ImportProvider.class, exportImportProviderId);
-                    Strategy strategy = ExportImportConfig.getStrategy();
-                    if (realmName == null) {
-                        logger.infof("Full model import requested. Strategy: %s", strategy.toString());
-
-                        // Check if master realm was exported. If it's not, then it needs to be created before other realms are imported
-                        if (!importProvider.isMasterRealmExported()) {
-                            new ApplianceBootstrap().bootstrap(sessionFactory, contextPath);
-                        }
-
-                        importProvider.importModel(sessionFactory, strategy);
+                    
+                    if (importProvider == null) {
+                    	logger.errorf("Invalid Import Provider %s", exportImportProviderId);
                     } else {
-                        logger.infof("Import of realm '%s' requested. Strategy: %s", realmName, strategy.toString());
-
-                        if (!realmName.equals(Config.getAdminRealm())) {
-                            // Check if master realm exists. If it's not, then it needs to be created before other realm is imported
-                            new ApplianceBootstrap().bootstrap(sessionFactory, contextPath);
-                        }
-
-                        importProvider.importRealm(sessionFactory, realmName, strategy);
+                    
+	                    Strategy strategy = ExportImportConfig.getStrategy();
+	                    if (realmName == null) {
+	                        logger.infof("Full model import requested. Strategy: %s", strategy.toString());
+	                        
+	                        // Check if master realm was exported. If it's not, then it needs to be created before other realms are imported
+	                        if (!importProvider.isMasterRealmExported()) {
+	                            new ApplianceBootstrap().bootstrap(sessionFactory, contextPath);
+	                        }
+	
+	                        importProvider.importModel(sessionFactory, strategy);
+	                    } else {
+	                        logger.infof("Import of realm '%s' requested. Strategy: %s", realmName, strategy.toString());
+	
+	                        if (!realmName.equals(Config.getAdminRealm())) {
+	                            // Check if master realm exists. If it's not, then it needs to be created before other realm is imported
+	                            new ApplianceBootstrap().bootstrap(sessionFactory, contextPath);
+	                        }
+	
+	                        importProvider.importRealm(sessionFactory, realmName, strategy);
+	                    }
+	                    logger.info("Import finished successfully");
                     }
-                    logger.info("Import finished successfully");
                 }
             } catch (Throwable ioe) {
                 logger.error("Error during export/import", ioe);

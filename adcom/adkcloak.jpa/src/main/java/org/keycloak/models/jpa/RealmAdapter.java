@@ -1,5 +1,6 @@
 package org.keycloak.models.jpa;
 
+import org.keycloak.connections.jpa.util.JpaUtils;
 import org.keycloak.enums.SslRequired;
 import org.keycloak.models.AuthenticationExecutionModel;
 import org.keycloak.models.AuthenticationFlowModel;
@@ -9,6 +10,7 @@ import org.keycloak.models.IdentityProviderMapperModel;
 import org.keycloak.models.IdentityProviderModel;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.ModelDuplicateException;
+import org.keycloak.models.OTPPolicy;
 import org.keycloak.models.PasswordPolicy;
 import org.keycloak.models.RealmModel;
 import org.keycloak.models.RequiredActionProviderModel;
@@ -65,6 +67,7 @@ public class RealmAdapter implements RealmModel {
     protected volatile transient Key codeSecretKey;
     protected KeycloakSession session;
     private PasswordPolicy passwordPolicy;
+    private OTPPolicy otpPolicy;
 
     public RealmAdapter(KeycloakSession session, EntityManager em, RealmEntity realm) {
         this.session = session;
@@ -971,7 +974,8 @@ public class RealmAdapter implements RealmModel {
         realm.getRoles().remove(roleEntity);
         realm.getDefaultRoles().remove(roleEntity);
 
-        em.createNativeQuery("delete from KC_COMPOSITE_ROLE where CHILD_ROLE = :role").setParameter("role", roleEntity).executeUpdate();
+        String compositeRoleTable = JpaUtils.getTableNameForNativeQuery("KC_COMPOSITE_ROLE", em);
+        em.createNativeQuery("delete from " + compositeRoleTable + " where CHILD_ROLE = :role").setParameter("role", roleEntity).executeUpdate();
         em.createNamedQuery("deleteScopeMappingByRole").setParameter("role", roleEntity).executeUpdate();
 
         em.remove(roleEntity);
@@ -1016,6 +1020,32 @@ public class RealmAdapter implements RealmModel {
         realm.setPasswordPolicy(policy.toString());
         em.flush();
     }
+
+    @Override
+    public OTPPolicy getOTPPolicy() {
+        if (otpPolicy == null) {
+            otpPolicy = new OTPPolicy();
+            otpPolicy.setDigits(realm.getOtpPolicyDigits());
+            otpPolicy.setAlgorithm(realm.getOtpPolicyAlgorithm());
+            otpPolicy.setInitialCounter(realm.getOtpPolicyInitialCounter());
+            otpPolicy.setLookAheadWindow(realm.getOtpPolicyLookAheadWindow());
+            otpPolicy.setType(realm.getOtpPolicyType());
+            otpPolicy.setPeriod(realm.getOtpPolicyPeriod());
+        }
+        return otpPolicy;
+    }
+
+    @Override
+    public void setOTPPolicy(OTPPolicy policy) {
+        realm.setOtpPolicyAlgorithm(policy.getAlgorithm());
+        realm.setOtpPolicyDigits(policy.getDigits());
+        realm.setOtpPolicyInitialCounter(policy.getInitialCounter());
+        realm.setOtpPolicyLookAheadWindow(policy.getLookAheadWindow());
+        realm.setOtpPolicyType(policy.getType());
+        realm.setOtpPolicyPeriod(policy.getPeriod());
+        em.flush();
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -1143,7 +1173,8 @@ public class RealmAdapter implements RealmModel {
     
     @Override
     public ClientModel getMasterAdminClient() {
-        return new ClientAdapter(this, em, session, realm.getMasterAdminClient());
+        ClientEntity client = realm.getMasterAdminClient();
+        return client!=null ? new ClientAdapter(this, em, session, realm.getMasterAdminClient()) : null;
     }
 
     @Override
@@ -1514,6 +1545,67 @@ public class RealmAdapter implements RealmModel {
     }
 
     @Override
+    public AuthenticationFlowModel getBrowserFlow() {
+        String flowId = realm.getBrowserFlow();
+        if (flowId == null) return null;
+        return getAuthenticationFlowById(flowId);
+    }
+
+    @Override
+    public void setBrowserFlow(AuthenticationFlowModel flow) {
+        realm.setBrowserFlow(flow.getId());
+
+    }
+
+    @Override
+    public AuthenticationFlowModel getRegistrationFlow() {
+        String flowId = realm.getRegistrationFlow();
+        if (flowId == null) return null;
+        return getAuthenticationFlowById(flowId);
+    }
+
+    @Override
+    public void setRegistrationFlow(AuthenticationFlowModel flow) {
+        realm.setRegistrationFlow(flow.getId());
+
+    }
+
+    @Override
+    public AuthenticationFlowModel getDirectGrantFlow() {
+        String flowId = realm.getDirectGrantFlow();
+        if (flowId == null) return null;
+        return getAuthenticationFlowById(flowId);
+    }
+
+    @Override
+    public void setDirectGrantFlow(AuthenticationFlowModel flow) {
+        realm.setDirectGrantFlow(flow.getId());
+
+    }
+
+    @Override
+    public AuthenticationFlowModel getResetCredentialsFlow() {
+        String flowId = realm.getResetCredentialsFlow();
+        if (flowId == null) return null;
+        return getAuthenticationFlowById(flowId);
+    }
+
+    @Override
+    public void setResetCredentialsFlow(AuthenticationFlowModel flow) {
+        realm.setResetCredentialsFlow(flow.getId());
+    }
+
+    public AuthenticationFlowModel getClientAuthenticationFlow() {
+        String flowId = realm.getClientAuthenticationFlow();
+        if (flowId == null) return null;
+        return getAuthenticationFlowById(flowId);
+    }
+
+    public void setClientAuthenticationFlow(AuthenticationFlowModel flow) {
+        realm.setClientAuthenticationFlow(flow.getId());
+    }
+
+    @Override
     public List<AuthenticationFlowModel> getAuthenticationFlows() {
         TypedQuery<AuthenticationFlowEntity> query = em.createNamedQuery("getAuthenticationFlowsByRealm", AuthenticationFlowEntity.class);
         query.setParameter("realm", realm);
@@ -1622,13 +1714,12 @@ public class RealmAdapter implements RealmModel {
     public AuthenticationExecutionModel entityToModel(AuthenticationExecutionEntity entity) {
         AuthenticationExecutionModel model = new AuthenticationExecutionModel();
         model.setId(entity.getId());
-        model.setUserSetupAllowed(entity.isUserSetupAllowed());
         model.setRequirement(entity.getRequirement());
         model.setPriority(entity.getPriority());
         model.setAuthenticator(entity.getAuthenticator());
         model.setFlowId(entity.getFlowId());
         model.setParentFlow(entity.getParentFlow().getId());
-        model.setAutheticatorFlow(entity.isAutheticatorFlow());
+        model.setAuthenticatorFlow(entity.isAutheticatorFlow());
         model.setAuthenticatorConfig(entity.getAuthenticatorConfig());
         return model;
     }
@@ -1654,8 +1745,7 @@ public class RealmAdapter implements RealmModel {
         entity.setParentFlow(flow);
         flow.getExecutions().add(entity);
         entity.setRealm(realm);
-        entity.setUserSetupAllowed(model.isUserSetupAllowed());
-        entity.setAutheticatorFlow(model.isAutheticatorFlow());
+        entity.setAutheticatorFlow(model.isAuthenticatorFlow());
         em.persist(entity);
         em.flush();
         model.setId(entity.getId());
@@ -1667,11 +1757,10 @@ public class RealmAdapter implements RealmModel {
     public void updateAuthenticatorExecution(AuthenticationExecutionModel model) {
         AuthenticationExecutionEntity entity = em.find(AuthenticationExecutionEntity.class, model.getId());
         if (entity == null) return;
-        entity.setAutheticatorFlow(model.isAutheticatorFlow());
+        entity.setAutheticatorFlow(model.isAuthenticatorFlow());
         entity.setAuthenticator(model.getAuthenticator());
         entity.setPriority(model.getPriority());
         entity.setRequirement(model.getRequirement());
-        entity.setUserSetupAllowed(model.isUserSetupAllowed());
         entity.setAuthenticatorConfig(model.getAuthenticatorConfig());
         entity.setFlowId(model.getFlowId());
         em.flush();
