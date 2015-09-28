@@ -3,6 +3,7 @@
     <display-name>adcatal.client</display-name>
 
     <module-name>adcatal.client</module-name>
+    <!-- 
     <security-constraint>
         <web-resource-collection>
         	<web-resource-name>all</web-resource-name>
@@ -19,6 +20,7 @@
     <security-role>
         <role-name>role.adcatal.client</role-name>
     </security-role>
+     -->
 
     <welcome-file-list>
         <welcome-file>/build/index.html</welcome-file>
