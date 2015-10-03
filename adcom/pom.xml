@@ -18,6 +18,8 @@
 		<module>adkcloak.config</module>
 		<module>adkcloak.services</module>
 				
+		<module>adres.lib</module>
+
 		<module>adcore.lib</module>
 		<module>adbase.lib</module>
 		<module>adcatal.lib</module>
@@ -202,6 +204,12 @@
 				<version>4.10</version>
 				<scope>test</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.jboss.weld.se</groupId>
+				<artifactId>weld-se</artifactId>
+				<version>1.1.10.Final</version>
+				<scope>test</scope>
+			</dependency>			
 		   <dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>

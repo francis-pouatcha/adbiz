@@ -10,7 +10,7 @@ import java.util.Date;
  * @author francis pouatcha
  *
  */
-public abstract class CoreAbstBsnsItemSearchInput<E extends CoreAbstBsnsItem> extends CoreAbstIdentifObjectSearchInput<E>{
+public class CoreAbstBsnsItemSearchInput<E extends CoreAbstBsnsItem> extends CoreAbstIdentifObjectSearchInput<E>{
 
 	private Date acsngDtFrom;
 
