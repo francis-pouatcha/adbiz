@@ -2,7 +2,6 @@ package org.adorsys.adcore.rest;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.metamodel.SingularAttribute;
@@ -24,7 +23,7 @@ import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchResult;
 public abstract class CoreAbstBsnsObjectEndpoint<E extends CoreAbstBsnsObject, SI extends CoreAbstBsnsObjectSearchInput<E>, SR extends CoreAbstBsnsObjectSearchResult<E>> {
 
 	protected abstract CoreAbstBsnsObjectLookup<E> getLookup();
-	protected abstract Class<E> getEntityKlass();
+	protected abstract Field[] getEntityFields();
 	protected abstract SR newSearchResult(Long size, List<E> resultList,CoreAbstBsnsObjectSearchInput<E> searchInput);
 	protected abstract SI newSearchInput();
 
@@ -117,7 +116,7 @@ public abstract class CoreAbstBsnsObjectEndpoint<E extends CoreAbstBsnsObject, S
 		List<String> fieldNames = searchInput.getFieldNames();
 		List<SingularAttribute<E, ?>> result = new ArrayList<SingularAttribute<E, ?>>();
 		for (String fieldName : fieldNames) {
-			List<Field> fields = getEntityFields();
+			Field[] fields = getEntityFields();
 			for (Field field : fields) {
 				if (field.getName().equals(fieldName)) {
 					try {
@@ -155,23 +154,4 @@ public abstract class CoreAbstBsnsObjectEndpoint<E extends CoreAbstBsnsObject, S
 		searchInput.setEntity(detach(searchInput.getEntity()));
 		return searchInput;
 	}
-	
-	private List<Field> entityFields = null;
-	private List<Field> getEntityFields(){
-		if(entityFields==null) {
-			entityFields = getAllFields(new ArrayList<Field>(), getEntityKlass());
-		}
-		return entityFields;
-	} 
-	
-	private List<Field> getAllFields(List<Field> fields, Class<?> type) {		
-	    fields.addAll(Arrays.asList(type.getDeclaredFields()));
-
-	    if (type.getSuperclass() != null) {
-	        fields = getAllFields(fields, type.getSuperclass());
-	    }
-
-	    return fields;
-	}	
-	
 }
