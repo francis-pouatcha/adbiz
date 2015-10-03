@@ -37,10 +37,7 @@ public class StkArticleLotEndpoint extends CoreAbstBsnsItemEndpoint<StkArticleLo
 	protected CoreAbstBsnsItemLookup<StkArticleLot> getLookup() {
 		return lookup;
 	}
-	@Override
-	protected Field[] getEntityFields() {
-		return StkArticleLot_.class.getFields();
-	}
+
 	@Override
 	protected CoreAbstBsnsItemSearchResult<StkArticleLot> newSearchResult(
 			Long size, Long total, List<StkArticleLot> resultList,
@@ -63,6 +60,12 @@ public class StkArticleLotEndpoint extends CoreAbstBsnsItemEndpoint<StkArticleLo
 	protected CoreAbstBsnsItemSearchResult<StkArticleLot> newSearchResult(
 			Long size, List<StkArticleLot> resultList,
 			CoreAbstBsnsItemSearchInput<StkArticleLot> searchInput) {
+		return null;
+	}
+
+	@Override
+	protected Class<StkArticleLot> getEntityKlass() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

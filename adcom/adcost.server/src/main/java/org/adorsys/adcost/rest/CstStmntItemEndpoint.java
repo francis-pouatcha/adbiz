@@ -39,11 +39,6 @@ public class CstStmntItemEndpoint extends
 	private CstStmntItemProps entityProps;
 
 	@Override
-	protected Field[] getEntityFields() {
-		return CstStmntItem_.class.getFields();
-	}
-
-	@Override
 	protected CoreAbstBsnsItemSearchResult<CstStmntItem> newSearchResult(Long count,
 			List<CstStmntItem> resultList,
 			CoreAbstBsnsItemSearchInput<CstStmntItem> searchInput) {
@@ -75,5 +70,10 @@ public class CstStmntItemEndpoint extends
 			Long count, Long total, List<CstStmntItem> resultList,
 			CoreAbstBsnsItemSearchInput<CstStmntItem> searchInput) {
 		return new CstStmntItemSearchResult(count, total, resultList, searchInput);
+	}
+
+	@Override
+	protected Class<CstStmntItem> getEntityKlass() {
+		return CstStmntItem.class;
 	}
 }

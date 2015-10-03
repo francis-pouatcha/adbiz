@@ -34,11 +34,6 @@ public class InvInvtryEndpoint extends CoreAbstBsnsObjectEndpoint<InvInvtry, Cor
 	}
 
 	@Override
-	protected Field[] getEntityFields() {
-		return InvInvtry_.class.getFields();
-	}
-
-	@Override
 	protected CoreAbstBsnsObjectSearchResult<InvInvtry> newSearchResult(
 			Long size, List<InvInvtry> resultList,
 			CoreAbstBsnsObjectSearchInput<InvInvtry> searchInput) {
@@ -48,5 +43,10 @@ public class InvInvtryEndpoint extends CoreAbstBsnsObjectEndpoint<InvInvtry, Cor
 	@Override
 	protected CoreAbstBsnsObjectSearchInput<InvInvtry> newSearchInput() {
 		return new InvInvtrySearchInput();
+	}
+
+	@Override
+	protected Class<InvInvtry> getEntityKlass() {
+		return InvInvtry.class;
 	}
 }

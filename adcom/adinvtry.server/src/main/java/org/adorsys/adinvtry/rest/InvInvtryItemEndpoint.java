@@ -34,11 +34,6 @@ public class InvInvtryItemEndpoint extends
 	private InvInvtryItemProps entityProps;
 
 	@Override
-	protected Field[] getEntityFields() {
-		return InvInvtryItem_.class.getFields();
-	}
-
-	@Override
 	protected CoreAbstBsnsItemSearchResult<InvInvtryItem> newSearchResult(Long count,
 			List<InvInvtryItem> resultList,
 			CoreAbstBsnsItemSearchInput<InvInvtryItem> searchInput) {
@@ -70,5 +65,10 @@ public class InvInvtryItemEndpoint extends
 			Long count, Long total, List<InvInvtryItem> resultList,
 			CoreAbstBsnsItemSearchInput<InvInvtryItem> searchInput) {
 		return new InvInvtryItemSearchResult(count, total, resultList, searchInput);
+	}
+
+	@Override
+	protected Class<InvInvtryItem> getEntityKlass() {
+		return InvInvtryItem.class;
 	}
 }

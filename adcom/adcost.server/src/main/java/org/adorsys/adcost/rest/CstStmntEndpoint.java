@@ -36,10 +36,6 @@ public class CstStmntEndpoint extends CoreAbstBsnsObjectEndpoint<CstStmnt, CoreA
 		return lookup;
 	}
 
-	@Override
-	protected Field[] getEntityFields() {
-		return CstStmnt_.class.getFields();
-	}
 
 	@Override
 	protected CoreAbstBsnsObjectSearchResult<CstStmnt> newSearchResult(
@@ -51,5 +47,11 @@ public class CstStmntEndpoint extends CoreAbstBsnsObjectEndpoint<CstStmnt, CoreA
 	@Override
 	protected CoreAbstBsnsObjectSearchInput<CstStmnt> newSearchInput() {
 		return new CstStmntSearchInput();
+	}
+
+
+	@Override
+	protected Class<CstStmnt> getEntityKlass() {
+		return CstStmnt.class;
 	}
 }
