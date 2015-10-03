@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.metamodel.SingularAttribute;
@@ -30,7 +31,7 @@ import org.apache.commons.io.FileUtils;
 public abstract class CoreAbstBsnsItemEndpoint<E extends CoreAbstBsnsItem, SI extends CoreAbstBsnsItemSearchInput<E>, SR extends CoreAbstBsnsItemSearchResult<E>> {
 
 	protected abstract CoreAbstBsnsItemLookup<E> getLookup();
-	protected abstract Field[] getEntityFields();
+	protected abstract Class<E> getEntityKlass();
 	protected abstract SR newSearchResult(Long size, List<E> resultList,CoreAbstBsnsItemSearchInput<E> searchInput);
 	protected abstract SR newSearchResult(Long size, Long total, List<E> resultList,CoreAbstBsnsItemSearchInput<E> searchInput);
 	protected abstract SI newSearchInput();
@@ -101,7 +102,7 @@ public abstract class CoreAbstBsnsItemEndpoint<E extends CoreAbstBsnsItem, SI ex
 			CoreAbstBsnsItemSearchInput<E> searchInput) {
 		List<String> fieldNames = searchInput.getFieldNames();
 		List<SingularAttribute<E, ?>> result = new ArrayList<SingularAttribute<E, ?>>();
-		Field[] fields = getEntityFields();
+		List<Field> fields = getEntityFields();
 		for (String fieldName : fieldNames) {
 			for (Field field : fields) {
 				if (field.getName().equals(fieldName)) {
@@ -259,5 +260,23 @@ public abstract class CoreAbstBsnsItemEndpoint<E extends CoreAbstBsnsItem, SI ex
 				.header("Content-Disposition",
 						"attachment; filename=report.pdf").build();
 	}
+	
+	private List<Field> entityFields = null;
+	private List<Field> getEntityFields(){
+		if(entityFields==null) {
+			entityFields = getAllFields(new ArrayList<Field>(), getEntityKlass());
+		}
+		return entityFields;
+	} 
+	
+	private List<Field> getAllFields(List<Field> fields, Class<?> type) {		
+	    fields.addAll(Arrays.asList(type.getDeclaredFields()));
+
+	    if (type.getSuperclass() != null) {
+	        fields = getAllFields(fields, type.getSuperclass());
+	    }
+
+	    return fields;
+	}	
 	
 }

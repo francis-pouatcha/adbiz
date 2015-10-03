@@ -23,7 +23,7 @@
     /* jshint ignore:start */
     /* @ngInject */
     angular.element(document).ready(function ($http, Auth) {
-            var keycloakAuth = new Keycloak('keycloak.json');
+            var keycloakAuth = new Keycloak('rest/keycloak.json');
             auth.loggedIn = false;
             keycloakAuth.init({onLoad: 'login-required'}).success(function () {
                 auth.loggedIn = true;

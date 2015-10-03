@@ -8,7 +8,7 @@ package org.adorsys.adcore.jpa;
  * @author francis pouatcha
  *
  */
-public abstract class CoreAbstIdentifObjectSearchInput<E extends CoreAbstIdentifObject>
+public class CoreAbstIdentifObjectSearchInput<E extends CoreAbstIdentifObject>
 		extends CoreSearchInput<E> {
 
 	private String valueDtFrom;

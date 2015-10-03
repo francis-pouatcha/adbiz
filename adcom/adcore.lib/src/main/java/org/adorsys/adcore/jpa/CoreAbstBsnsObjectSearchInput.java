@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  */
 @XmlRootElement
-public abstract class CoreAbstBsnsObjectSearchInput<E extends CoreAbstBsnsObject> extends CoreAbstIdentifObjectSearchInput<E>{
+public class CoreAbstBsnsObjectSearchInput<E extends CoreAbstBsnsObject> extends CoreAbstIdentifObjectSearchInput<E>{
 
 	private Date prchWrntyDtFrom;
 	
