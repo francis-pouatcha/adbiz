@@ -41,6 +41,11 @@ public class StkMvntEndpoint
 	}
 
 	@Override
+	protected Field[] getEntityFields() {
+		return StkMvnt_.class.getFields();
+	}
+
+	@Override
 	protected CoreAbstBsnsItemSearchResult<StkMvnt> newSearchResult(
 			Long size, List<StkMvnt> resultList,
 			CoreAbstBsnsItemSearchInput<StkMvnt> searchInput) {
@@ -67,10 +72,5 @@ public class StkMvntEndpoint
 			Long total, List<StkMvnt> resultList,
 			CoreAbstBsnsItemSearchInput<StkMvnt> searchInput) {
 		return new StkMvntSearchResult(size, total, resultList, searchInput);
-	}
-
-	@Override
-	protected Class<StkMvnt> getEntityKlass() {
-		return StkMvnt.class;
 	}
 }
