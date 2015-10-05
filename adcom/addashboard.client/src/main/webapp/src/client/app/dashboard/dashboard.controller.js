@@ -10,7 +10,7 @@
     function DashboardController(Auth) {
         var vm = this;
         vm.hasWorkspace = function (workspace) {
-            if (Auth.authz.hasResourceRole(workspace + '_role', workspace)) {
+            if (Auth.authz.hasResourceRole('role.' + workspace, workspace)) {
                 return true;
             }
             else {

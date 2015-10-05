@@ -1,6 +1,6 @@
 {
-  "name": "adcatal.client",
-  "description": "adcatal.client Project Generated from HotTowel Angular",
+  "name": "addashboard.client",
+  "description": "addashboard.client Project Generated from HotTowel Angular",
   "version": "0.0.0",
   "scripts": {
     "init": "npm install",

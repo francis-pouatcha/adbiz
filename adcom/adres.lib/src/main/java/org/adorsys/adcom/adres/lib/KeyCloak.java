@@ -1,21 +1,26 @@
 package org.adorsys.adcom.adres.lib;
 
+import java.io.Serializable;
+
+import javax.xml.bind.annotation.XmlElement;
+
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.annotate.JsonProperty;
 
-public class KeyCloak {
+public class KeyCloak implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String realm = "adcom";
 	private String resource;
-	@JsonProperty("realm-public-key")
+	@XmlElement(name="realm-public-key")
 	private String realmPublicKey;
-	@JsonProperty("auth-server-url")
+	@XmlElement(name="auth-server-url")
 	private String authServerUrl;
-	@JsonProperty("ssl-required")
+	@XmlElement(name="ssl-required")
 	private String sslRequired = "external";
-	@JsonProperty("expose-token")
+	@XmlElement(name="expose-token")
 	private boolean exposeToken = true;
 	private Creds credentials;
-	@JsonProperty("public-client")
+	@XmlElement(name="public-client")
 	private boolean publicClient;
 
 	public KeyCloak(String resource, String realmPublicKey,

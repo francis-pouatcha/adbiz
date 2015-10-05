@@ -23,8 +23,8 @@
     /* jshint ignore:start */
     /* @ngInject */
     angular.element(document).ready(function ($http, Auth) {
-        angular.bootstrap(document, ['adcatal']);
-        /*var keycloakAuth = new Keycloak('keycloak.json');
+        var keycloakAuth = new Keycloak('http://localhost:8080/adcatal.client/rest/keycloak.json');
+        console.log(keycloakAuth);
         auth.loggedIn = false;
         keycloakAuth.init({onLoad: 'login-required'}).success(function () {
             auth.loggedIn = true;
@@ -34,8 +34,9 @@
             Auth = auth;
             angular.bootstrap(document, ['adcatal']);
         }).error(function () {
+            console.log(keycloakAuth);
             window.location.reload();
-        })*/
+        })
     });
     /* jshint ignore:end */
 

@@ -1,6 +1,6 @@
 {
   "name": "keycloak",
-  "version": "1.0.4",
+  "version": "1.5.0",
   "main": "dist/keycloak.js",
   "ignore": [
     "**/.*"
@@ -14,13 +14,13 @@
     "authentication"
   ],
   "homepage": "https://github.com/keycloak/keycloak-js-bower",
-  "_release": "1.0.4",
+  "_release": "1.5.0",
   "_resolution": {
     "type": "version",
-    "tag": "1.0.4",
-    "commit": "0dadfd62aca6613e07f9abd54badded590ba9fd2"
+    "tag": "1.5.0",
+    "commit": "6fdc10b67d836e757def87fcaf5d27ab5c9f50c6"
   },
   "_source": "git://github.com/keycloak/keycloak-js-bower.git",
-  "_target": "1.0.4",
+  "_target": "1.5.0",
   "_originalSource": "keycloak"
 }

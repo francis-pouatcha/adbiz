@@ -6,7 +6,7 @@ public class SimpleKeyCloakConfigResolver implements KeyCloakConfigResolver {
 
 	@Override
 	public String getResource() {
-		return "adcatal.client";
+		return "addashboard.client";
 	}
 
 	@Override

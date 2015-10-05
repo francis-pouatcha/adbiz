@@ -13,8 +13,8 @@
             'ngResource',
             'ui.bootstrap',
             'ngTable',
+            'pascalprecht.translate',
             'formly',
-            'formlyBootstrap',
-            'pascalprecht.translate'
+            'formlyBootstrap'
         ]);
 })();

@@ -9,38 +9,41 @@
     ]);
 
     var auth = {};
-    var logout = function() {
+    var logout = function () {
         console.log('*** LOGOUT');
         auth.loggedIn = false;
         auth.authz = null;
         window.location = auth.logoutUrl;
     };
 
-    appModule.factory('Auth', function() {
+    appModule.factory('Auth', function () {
         return auth;
     });
 
     /* jshint ignore:start */
     /* @ngInject */
     angular.element(document).ready(function ($http, Auth) {
-            var keycloakAuth = new Keycloak('rest/keycloak.json');
-            auth.loggedIn = false;
-            keycloakAuth.init({onLoad: 'login-required'}).success(function () {
-                auth.loggedIn = true;
-                auth.authz = keycloakAuth;
-                auth.logoutUrl = keycloakAuth.authServerUrl +
-                    '/realms/adcom/tokens/logout?redirect_uri=/addashboard.client';
-                Auth = auth;
-                angular.bootstrap(document, ['addashboard']);
-            }).error(function () {
-                window.location.reload();
-            });
-
+        var keycloakAuth = new Keycloak('http://localhost:8080/addashboard.client/' +
+            'rest/keycloak.json');
+        console.log(keycloakAuth);
+        console.log(keycloakAuth.authServerUrl);
+        auth.loggedIn = false;
+        keycloakAuth.init({onLoad: 'login-required'}).success(function () {
+            auth.loggedIn = true;
+            auth.authz = keycloakAuth;
+            auth.logoutUrl = keycloakAuth.authServerUrl +
+                '/realms/adcom/tokens/logout?redirect_uri=/addashboard.client';
+            Auth = auth;
+            angular.bootstrap(document, ['addashboard']);
+        }).error(function () {
+            window.location.reload();
         });
+
+    });
     /* jshint ignore:end */
 
     /* @ngInject */
-    appModule.factory('authInterceptor', function($q, Auth) {
+    appModule.factory('authInterceptor', function ($q, Auth) {
         return {
             request: function (config) {
                 var deferred = $q.defer();
@@ -62,11 +65,11 @@
     });
 
     /* @ngInject */
-    appModule.factory('errorInterceptor', function($q) {
-        return function(promise) {
-            return promise.then(function(response) {
+    appModule.factory('errorInterceptor', function ($q) {
+        return function (promise) {
+            return promise.then(function (response) {
                 return response;
-            }, function(response) {
+            }, function (response) {
                 if (response.status === 401) {
                     console.log('session timeout?');
                     logout();
@@ -87,21 +90,21 @@
     });
 
     /* @ngInject */
-    appModule.config(function($httpProvider, $locationProvider, flowFactoryProvider,
-                              API_BASE_URL) {
+    appModule.config(function ($httpProvider, $locationProvider,
+                               flowFactoryProvider, API_BASE_URL) {
         $httpProvider.interceptors.push('errorInterceptor');
         $httpProvider.interceptors.push('authInterceptor');
         //$locationProvider.html5Mode(false);
         flowFactoryProvider.defaults = {
             target: API_BASE_URL + '/importExport/upload',
             permanentErrors: [404, 500, 501],
-            maxChunkRetries : 1,
-            chunkRetryInterval : 5000,
-            simultaneousUploads : 4,
-            progressCallbacksInterval : 1,
+            maxChunkRetries: 1,
+            chunkRetryInterval: 5000,
+            simultaneousUploads: 4,
+            progressCallbacksInterval: 1,
             testChunks: false,
-            withCredentials : true,
-            method : 'octet'
+            withCredentials: true,
+            method: 'octet'
         };
         // You can also set default events:
         flowFactoryProvider.on('catchAll', function (event) {
@@ -113,7 +116,7 @@
     });
     /* jshint ignore:start */
     /* @ngInject */
-    appModule.controller('GlobalController', function($rootScope, Auth, BASE_ROUTE, BASE_SERVER) {
+    appModule.controller('GlobalController', function ($rootScope, Auth, BASE_ROUTE, BASE_SERVER) {
         var vm = this;
         vm.logout = logout;
         vm.BASE_ROUTE = BASE_ROUTE;
