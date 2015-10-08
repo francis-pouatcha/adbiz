@@ -34,7 +34,8 @@ public class KcloakLoaderRegistration extends CoreAbstLoaderRegistration {
 	private UserCredentialsLoader userCredentialsLoader;
 	@Inject
 	private DeployConfigLoader deployConfigLoader;
-	
+	@Inject
+	private UserClientRolesLoader userClientRolesLoader;
 	@EJB
 	private KcloakLoaderRegistration registration;
 	@EJB
@@ -50,6 +51,7 @@ public class KcloakLoaderRegistration extends CoreAbstLoaderRegistration {
 		dataSheetLoader.registerLoader(UserReprestn.class.getSimpleName(), userLoader);
 		dataSheetLoader.registerLoader(UserCredentials.class.getSimpleName(), userCredentialsLoader);
 		dataSheetLoader.registerLoader(DeployConfig.class.getSimpleName(), deployConfigLoader);
+		dataSheetLoader.registerLoader(UserClientRoles.class.getSimpleName(), userClientRolesLoader);
 	}
 
 	@Override

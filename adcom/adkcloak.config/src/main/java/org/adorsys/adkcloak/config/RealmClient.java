@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import org.adorsys.adkcloak.loader.ClientReprestn;
 import org.adorsys.adkcloak.loader.ClientRoleReprestn;
 import org.adorsys.adkcloak.loader.RoleReprestn;
+import org.adorsys.adkcloak.loader.UserClientRoles;
 import org.adorsys.adkcloak.loader.UserCredentials;
 import org.adorsys.adkcloak.loader.UserReprestn;
 import org.adorsys.adkcloak.utils.CopyUtils;
@@ -154,13 +155,16 @@ public class RealmClient {
 	}
 
 	public ClientRoleReprestn findClientRole(String realmId, String clientId, String roleName) throws Failure {
-		RoleRepresentation orig = findGenericFromRealm(RoleRepresentation.class, "/auth/admin/realms/{realmId}/clients/{clientId}/roles/{roleName}", realmId, clientId, roleName);
+		RoleRepresentation orig = findRawClientRole(realmId, clientId, roleName);
 		if(orig==null) return null;
 		ClientRoleReprestn res = new ClientRoleReprestn();
 		copy(res, orig);
 		res.setRealmId(realmId);
 		res.setClientId(clientId);
 		return res;
+	}
+	private RoleRepresentation findRawClientRole(String realmId, String clientId, String roleName) throws Failure {
+		return findGenericFromRealm(RoleRepresentation.class, "/auth/admin/realms/{realmId}/clients/{clientId}/roles/{roleName}", realmId, clientId, roleName);
 	}
 
 	public RoleReprestn findRealmRole(String realmId, String roleName) throws Failure {
@@ -291,5 +295,49 @@ public class RealmClient {
     	} catch (IOException e) {
 			throw new RuntimeException(e);
     	}
+	}
+
+	public void addClientRole(UserClientRoles t) throws Failure {
+		
+		RoleRepresentation clientRole = findRawClientRole(t.getRealmId(), t.getClientId(), t.getRoleName());
+		if(clientRole==null)throw new IllegalStateException("No client with role name: " + t.getRoleName());
+		
+    	UserRepresentation orig = findRawUser(t.getRealmId(), t.getUsername());
+
+		if(orig==null) throw new IllegalStateException("No user with username: " + t.getUsername());
+						
+    	try {
+    		HttpPost post = new HttpPost(KeycloakUriBuilder.fromUri(tokenManager.getBaseUrl() + "/auth/admin/realms/{realmId}/users/{userid}/role-mappings/clients/{clientId}").build(t.getRealmId(), orig.getId(), t.getClientId()));
+    		clientRole.setComposites(null);
+    		RoleRepresentation[] clientRoles = new RoleRepresentation[]{clientRole};
+	        String asString = JsonSerialization.writeValueAsString(clientRoles);
+	        StringEntity stringEntity = new StringEntity(asString);
+	        stringEntity.setContentType("application/json");
+	        post.setEntity(stringEntity);
+
+	        CloseableHttpResponse response = tokenManager.execute(masterRealmName,post);
+	        
+            if (response.getStatusLine().getStatusCode() != 204) {
+                throw new Failure(response.getStatusLine().getStatusCode());
+            }
+    	} catch (IOException e) {
+			throw new RuntimeException(e);
+    	}
+	}
+
+	public UserClientRoles findUserClientRole(UserClientRoles ucr) throws Failure {
+    	UserRepresentation orig = findRawUser(ucr.getRealmId(), ucr.getUsername());
+		if(orig==null) throw new IllegalStateException("No user with username: " + ucr.getUsername());
+		
+    	HttpGet get = new HttpGet(KeycloakUriBuilder.fromUri(tokenManager.getBaseUrl() + "/admin/realms/{realm}/users/{id}/role-mappings/clients/{client}")
+    			.build(ucr.getRealmId(), orig.getId(), ucr.getClientId()));
+    	ClientRoleReprestn[] result = tokenManager.execute(masterRealmName, get, ClientRoleReprestn[].class);
+    	if(result==null || result.length<1) return null;
+    	for (ClientRoleReprestn clientRoleReprestn : result) {
+			if(StringUtils.equals(clientRoleReprestn.getName(), ucr.getRoleName())){
+				return ucr;
+			}
+		}
+    	return null;
 	}
 }

@@ -16,7 +16,7 @@ angular.element(document).ready(function ($http) {
     keycloakAuth.init({ onLoad: 'login-required' }).success(function () {
         auth.loggedIn = true;
         auth.authz = keycloakAuth;
-        auth.logoutUrl = keycloakAuth.authServerUrl + "/realms/demo/tokens/logout?redirect_uri=/adcatal.client/index.html";
+        auth.logoutUrl = keycloakAuth.authServerUrl + "/realms/adcom/tokens/logout?redirect_uri=/adcatal.client/index.html";
         module.factory('Auth', function() {
             return auth;
         });

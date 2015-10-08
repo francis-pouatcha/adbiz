@@ -169,14 +169,15 @@ rm $JBOSS_DEPLOY_DIR/adkcloak.config.war
 echo "             deploying new artifacts"
 cp $ADCOM_HOME/addashboard.client/target/addashboard.client.war $JBOSS_HOME/standalone/deployments/
 cp $ADCOM_HOME/adcatal.server/target/adcatal.server.war $JBOSS_HOME/standalone/deployments/
-cp $ADCOM_HOME/adcatal.client/target/adcatal.client.war $JBOSS_HOME/standalone/deployments/
+cp $ADCOM_HOME/adcatal.client.sample/target/adcatal.client.war $JBOSS_HOME/standalone/deployments/
 
 echo "             Starting jboss"
 cd $JBOSS_HOME && bin/standalone.sh --debug --server-config=standalone-keycloak.xml --properties=$JBOSS_HOME/keycloak-config.properties > /dev/null &
 
 echo "             Import catalogue data"
 cd $JBOSS_DATA_DIR/adcom && mkdir adcatal
-cp $ADCOM_HOME/adcom.configuration/all-servers/adcom/adcatal/data/adcatal.xls $JBOSS_DATA_DIR/adcom/adcatal/
+cd $JBOSS_HOME/adcom/adcatal && mkdir data
+cp $ADCOM_HOME/adcom.configuration/all-servers/adcom/adcatal/adcatal.xls $JBOSS_DATA_DIR/adcom/adcatal/
 
 # cd $JBOSS_HOME/ && mkdir adcom
 # echo "             Copying the .xls file"
