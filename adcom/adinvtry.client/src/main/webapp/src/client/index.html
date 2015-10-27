@@ -61,18 +61,11 @@
     <script src="/bower_components/angular-formly/dist/formly.js"></script>
     <script src="/bower_components/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap.js"></script>
     <script src="/bower_components/angular-translate/angular-translate.js"></script>
-    <script src="/bower_components/keycloak/dist/keycloak.js"></script>
     <script src="/bower_components/sinon/index.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
-    <script src="/src/client/app/core/vendors/base64/base64.js"></script>
-    <script src="/src/client/app/core/vendors/ADUtils.js"></script>
-    <script src="/src/client/app/core/vendors/SessionManager.js"></script>
-
-
-
-
+    <script src="/auth/js/keycloak.js"></script>
     <!-- build:js js/app.js-->
     <!-- inject:js -->
     <script src="/src/client/app/app.module.js"></script>
@@ -87,6 +80,7 @@
     <script src="/src/client/app/core/services/table.settings.service.js"></script>
     <script src="/src/client/app/invinvtry/services/invinvtry.client.service.js"></script>
     <script src="/src/client/app/invinvtry/services/invinvtry.form.client.service.js"></script>
+    <script src="/src/client/app/core/ADUtils.js"></script>
     <script src="/src/client/app/core/config.js"></script>
     <script src="/src/client/app/core/constants.js"></script>
     <script src="/src/client/app/core/core.route.js"></script>
@@ -94,11 +88,6 @@
     <script src="/src/client/app/core/dataservice.js"></script>
     <script src="/src/client/app/core/directives/ng-really-click.directive.js"></script>
     <script src="/src/client/app/core/i18n.js"></script>
-    <script src="/src/client/app/core/vendors/ADUtils.js"></script>
-    <script src="/src/client/app/core/vendors/AuthInterceptor.js"></script>
-    <script src="/src/client/app/core/vendors/base64/base64.js"></script>
-    <script src="/src/client/app/core/vendors/httpProgress.js"></script>
-    <script src="/src/client/app/core/vendors/SessionManager.js"></script>
     <script src="/src/client/app/dashboard/dashboard.controller.js"></script>
     <script src="/src/client/app/dashboard/dashboard.route.js"></script>
     <script src="/src/client/app/blocks/exception/exception-handler.provider.js"></script>
@@ -114,8 +103,6 @@
     <script src="/src/client/app/widgets/ht-img-person.directive.js"></script>
     <script src="/src/client/app/widgets/ht-widget-header.directive.js"></script>
     <!-- endinject -->
-
-
 
     <!-- inject:templates:js -->
     <!-- endinject -->

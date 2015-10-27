@@ -6,227 +6,20 @@
         .module('app.invinvtry')
         .controller('invInvtrysCtlr', invInvtrysCtlr);
 
-    invInvtrysCtlr.$inject = ['$scope',
-        'genericResource',
-        'invInvtryUtils',
-        'invInvtryState',
-        '$location',
-        '$rootScope',
-        'invInvtryManagerResource',
-        'adUtils'];
+    invInvtrysCtlr.$inject = ['$scope','invInvtryUtils',
+      'invInvtryManagerResource' ];
     /* @ngInject */
-    function invInvtrysCtlr($scope,
-                            genericResource,
-                            invInvtryUtils,
-                            invInvtryState,
-                            $location,
-                            $rootScope,
-                            invInvtryManagerResource,
-                            adUtils) {
+    function invInvtrysCtlr($scope, invInvtryUtils, invInvtryManagerResource) {
 
-        $scope.coreSearchInput = invInvtryState.resultHandler.coreSearchInput(null,'org.adorsys.adinvtry.rest.InvInvtrySearchInput');
-        $scope.itemPerPage=invInvtryState.resultHandler.itemPerPage;
-        $scope.totalItems=invInvtryState.resultHandler.totalItems;
-        $scope.currentPage=invInvtryState.resultHandler.currentPage();
-        $scope.maxSize =invInvtryState.resultHandler.maxResult;
-        $scope.invInvtrys =invInvtryState.resultHandler.entities;
-        $scope.selectedIndex=invInvtryState.resultHandler.selectedIndex;
-        $scope.error = "";
-        $scope.invInvtryUtils=invInvtryUtils;
-        $scope.display = invInvtryState.resultHandler.displayInfo();
-
-//        var translateChangeSuccessHdl = $rootScope.$on('$translateChangeSuccess', function () {
-//            invInvtryUtils.translate();
-//        });
-
-        $scope.$on('$destroy', function () {
-           // translateChangeSuccessHdl();
-        });
+        $scope.invInvtrys = [];
 
         init();
 
         function init(){
-            if(invInvtryState.resultHandler.hasEntities())return;
-            findByLike($scope.coreSearchInput);
+            invInvtryManagerResource.query({start:0, max:20}, function(response){
+                $scope.invInvtrys = response;
+            });
         }
-
-        function processSearchInput(coreSearchInput){
-            //coreSearchInput.entity = {};
-            if(angular.isDefined(coreSearchInput.entity.identif) && coreSearchInput.entity.identif){
-                coreSearchInput.fieldNames.push('identif');
-            }
-            if(angular.isDefined(coreSearchInput.entity.acsngUser) && coreSearchInput.entity.acsngUser){
-                coreSearchInput.fieldNames.push('acsngUser');
-            }
-            if(angular.isDefined(coreSearchInput.entity.invtryStatus) && coreSearchInput.entity.invtryStatus){
-                coreSearchInput.fieldNames.push('invtryStatus');
-            }
-            if(angular.isDefined(coreSearchInput.entity.invtryGroup) && coreSearchInput.entity.invtryGroup){
-                coreSearchInput.fieldNames.push('invtryGroup');
-            }
-            if(angular.isDefined(coreSearchInput.entity.invInvtryType) && coreSearchInput.entity.invInvtryType){
-                coreSearchInput.fieldNames.push('invInvtryType');
-            }
-            if(angular.isDefined(coreSearchInput.entity.descptn) && coreSearchInput.entity.descptn){
-                coreSearchInput.fieldNames.push('descptn');
-            }
-            if(angular.isDefined(coreSearchInput.entity.section) && coreSearchInput.entity.section){
-                coreSearchInput.fieldNames.push('section');
-            }
-            if(angular.isDefined(coreSearchInput.entity.rangeStart) && coreSearchInput.entity.rangeStart){
-                coreSearchInput.fieldNames.push('rangeStart');
-            }
-            if(angular.isDefined(coreSearchInput.entity.rangeEnd) && coreSearchInput.entity.rangeEnd){
-                coreSearchInput.fieldNames.push('rangeEnd');
-            }
-
-        }
-        function findByLike(coreSearchInput){
-            genericResource.findCustom(invInvtryUtils.urlBase, coreSearchInput)
-                .success(function(entitySearchResult) {
-                    // store search
-                    invInvtryState.resultHandler.searchResult(entitySearchResult);
-                    $scope.coreSearchInput = invInvtryState.resultHandler.coreSearchInput();
-                   // setAccessingUserName();
-                    //setSectionName();
-                })
-                .error(function(error){
-                    $scope.error=error;
-                });
-        }
-
-        $scope.handleSearchRequestEvent = function(){
-            processSearchInput($scope.coreSearchInput);
-            findByLike($scope.coreSearchInput);
-        };
-
-        $scope.paginate = function paginate(){
-            invInvtryState.resultHandler.currentPage($scope.currentPage);
-            $scope.coreSearchInput = invInvtryState.resultHandler.paginate();
-            findByLike($scope.coreSearchInput);
-        };
-
-        $scope.handlePrintRequestEvent = function(){
-            // To do
-        };
-
-        $scope.show = function(invInvtry, index){
-            var i = invInvtryState.resultHandler.selectedObject(invInvtry);
-            if(i>-1){
-                $location.path('/InvInvtrys/show/');
-            }
-        };
-
-        $scope.edit = function(invInvtry, index){
-            if(invInvtryState.resultHandler.selectedObject(invInvtry)){
-                $location.path('/InvInvtrys/edit/');
-            }
-        };
-
-        $scope.onUserChanged = function(){
-            setAccessingUserName();
-        };
-        function setAccessingUserName(){
-            if(angular.isUndefined($scope.coreSearchInput.entity.acsngUser) || !$scope.coreSearchInput.entity.acsngUser){
-                $scope.display.acsngUserFullName='';
-                $scope.display.acsngUser='';
-                return;
-            } else if (angular.equals($scope.display.acsngUser,$scope.coreSearchInput.entity.acsngUser)) {
-                return;
-            }
-            genericResource.findByLikePromissed(invInvtryUtils.loginnamessUrlBase, 'loginName', $scope.coreSearchInput.entity.acsngUser)
-                .then(function(entitySearchResult){
-                    var resultList = entitySearchResult.resultList;
-                    if(angular.isDefined(resultList) && resultList.length>0)
-                        $scope.display.acsngUser = resultList[0].loginName;
-                    $scope.display.acsngUserFullName = resultList[0].fullName;
-                }, function(error){
-                    $scope.coreSearchInput.entity.acsngUser='';
-                    $scope.display.acsngUser = '';
-                    $scope.display.acsngUserFullName = '';
-                });
-        }
-        $scope.onSectionChanged = function(){
-            setSectionName();
-        };
-        function setSectionName(){
-            if(angular.isUndefined($scope.coreSearchInput.entity.section) || !$scope.coreSearchInput.entity.section){
-                $scope.display.section='';
-                $scope.display.sectionName='';
-                return;
-            } else if (angular.equals($scope.display.section,$scope.coreSearchInput.entity.section)) {
-                return;
-            }
-
-            genericResource.findByLikePromissed(invInvtryUtils.stksectionsUrlBase, 'sectionCode', $scope.coreSearchInput.entity.section)
-                .then(function(entitySearchResult){
-                    var resultList = entitySearchResult.resultList;
-                    if(angular.isDefined(resultList) && resultList.length>0)
-                        $scope.display.section = resultList[0].sectionCode;
-                    $scope.display.sectionName = resultList[0].name;
-                }, function(error){
-                    $scope.display.section = '';
-                    $scope.display.sectionName = '';
-                });
-        }
-
-        $scope.onUserSelected = function(item,model,label){
-            $scope.coreSearchInput.entity.acsngUser=item.loginName;
-            $scope.display.acsngUser=item.loginName;
-            $scope.display.acsngUserFullName=item.fullName;
-        };
-
-        $scope.onSectionSelected = function(item,model,label){
-            $scope.coreSearchInput.entity.section=item.sectionCode;
-            $scope.display.section=item.strgSection;
-            $scope.display.sectionName=item.name;
-        }
-
-        $scope.isSelected = function(invtry){
-            return invInvtryState.selection.indexOf(invtry.identif)!=-1;
-        };
-        // ad or remove from the collection depending on state of the check box. Then sort.
-        $scope.selChanged = function(invtry){
-            var index = invInvtryState.selection.indexOf(invtry.identif);
-            if(index==-1){
-                invInvtryState.selection.push(invtry.identif);
-            } else {
-                invInvtryState.selection.splice(index,1);
-            }
-            invInvtryState.selection.sort();
-        };
-
-        $scope.compare = function(){
-            if(invInvtryState.selection.length<0) return;
-            $location.path('/InvInvtrys/compare');
-        };
-        $scope.selection = invInvtryState.selection;
-        $scope.mainInvtry = invInvtryState.mainInvtry;
-        $scope.cantMerge = function(){
-            return invInvtryState.selection.length<1 ||
-                angular.isUndefined(invInvtryState.mainInvtry.identif) ||
-                !invInvtryState.mainInvtry.identif ||
-                (invInvtryState.selection.indexOf(invInvtryState.mainInvtry.identif)!=-1 && invInvtryState.selection.length<2);
-        };
-        $scope.merge = function(){
-            if(invInvtryState.selection.length<0) return;
-            if(angular.isUndefined(invInvtryState.mainInvtry.identif) || !invInvtryState.mainInvtry.identif) return;
-            var listHolder = {list:[]};
-            listHolder.list.push(invInvtryState.mainInvtry.identif);
-            for (var i = 0; i < invInvtryState.selection.length; i++) {
-                if(!angular.equals(invInvtryState.selection[i], invInvtryState.mainInvtry.identif)){
-                    listHolder.list.push(invInvtryState.selection[i]);
-                }
-            }
-            if(listHolder.list.length<2) return;
-            invInvtryManagerResource.merge(listHolder)
-                .success(function(listHolder) {
-                    findByLike($scope.coreSearchInput);
-                })
-                .error(function(error){
-                    $scope.error=error;
-                });
-        };
     }
 
     angular
@@ -239,8 +32,7 @@
         'invInvtryState',
         '$location',
         '$rootScope',
-        'invInvtryManagerResource',
-        'adUtils'];
+        'invInvtryManagerResource'];
     /* @ngInject */
     function invInvtryCreateCtlr($scope,
                             genericResource,
@@ -248,8 +40,7 @@
                             invInvtryState,
                             $location,
                             $rootScope,
-                            invInvtryManagerResource,
-                            adUtils) {
+                            invInvtryManagerResource) {
 
         $scope.invInvtry = {};
         $scope.display = {};
@@ -288,9 +79,9 @@
             invInvtryManagerResource.save($scope.invInvtry,
                 function(invInvtry){
                     var index = invInvtryState.resultHandler.unshift(invInvtry);
-                    if(adUtils.greaterThan(index)){
+
                         $location.path('/InvInvtrys/');
-                    }
+
                 },
                 function(error){
                     $scope.error = error;
@@ -775,8 +566,7 @@
         'invInvtryState',
         '$location',
         '$rootScope',
-        'invInvtryManagerResource',
-        'adUtils'];
+        'invInvtryManagerResource'];
     /* @ngInject */
     function invInvtryCompareCtlr($scope,
                                  genericResource,
@@ -784,8 +574,7 @@
                                  invInvtryState,
                                  $location,
                                  $rootScope,
-                                 invInvtryManagerResource,
-                                 adUtils) {
+                                 invInvtryManagerResource) {
 
         $scope.invInvtry = invInvtryState.resultHandler.entity();
         $scope.coreSearchInput = invInvtryState.compareResultHandler.coreSearchInput();
@@ -952,5 +741,5 @@
 
     }
 
-})()
+})();
 

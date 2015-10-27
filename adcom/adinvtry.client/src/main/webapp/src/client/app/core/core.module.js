@@ -15,6 +15,7 @@
             'ngTable',
             'formly',
             'formlyBootstrap',
-            'pascalprecht.translate'
+            'pascalprecht.translate',
+            'ADUtils'
         ]);
 })();

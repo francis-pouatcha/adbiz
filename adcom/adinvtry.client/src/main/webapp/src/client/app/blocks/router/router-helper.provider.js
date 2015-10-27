@@ -15,6 +15,7 @@
             resolveAlways: {}
         };
 
+         console.log('routerHelperProvider');
         //$locationProvider.html5Mode(true);
 
         this.configure = function(cfg) {

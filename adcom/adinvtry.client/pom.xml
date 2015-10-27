@@ -10,7 +10,13 @@
 	<packaging>war</packaging>
 	<name>adinvtry.client</name>
 	<description>Ad Invtry Client</description>
-
+    <dependencies>
+        <dependency>
+            <groupId>org.adorsys.adcom</groupId>
+            <artifactId>adres.lib</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 	<build>
 		<finalName>adinvtry.client</finalName>
 		<plugins>

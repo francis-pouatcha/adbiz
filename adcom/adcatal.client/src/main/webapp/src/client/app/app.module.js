@@ -16,22 +16,25 @@
         window.location = auth.logoutUrl;
     };
 
-    appModule.factory('Auth', function() {
+    /*appModule.factory('Auth', function() {
         return auth;
-    });
+    });*/
 
     /* jshint ignore:start */
     /* @ngInject */
     angular.element(document).ready(function ($http, Auth) {
-        var keycloakAuth = new Keycloak('http://localhost:8080/adcatal.client/rest/keycloak.json');
+        var keycloakAuth = new Keycloak('rest/keycloak.json');
         console.log(keycloakAuth);
         auth.loggedIn = false;
         keycloakAuth.init({onLoad: 'login-required'}).success(function () {
             auth.loggedIn = true;
             auth.authz = keycloakAuth;
             auth.logoutUrl = keycloakAuth.authServerUrl +
-                '/realms/adcom/tokens/logout?redirect_uri=/addashboard.client';
-            Auth = auth;
+                '/realms/adcom/tokens/logout?redirect_uri=/adcatal.client';
+            //Auth = auth;
+            appModule.factory('Auth', function() {
+                return auth;
+            });
             angular.bootstrap(document, ['adcatal']);
         }).error(function () {
             console.log(keycloakAuth);
@@ -89,8 +92,8 @@
 
     /* @ngInject */
     appModule.config(function($httpProvider, $locationProvider) {
-        //$httpProvider.interceptors.push('errorInterceptor');
-        //$httpProvider.interceptors.push('authInterceptor');
+        $httpProvider.interceptors.push('errorInterceptor');
+        $httpProvider.interceptors.push('authInterceptor');
         $locationProvider.html5Mode(false);
     });
     /* jshint ignore:start */

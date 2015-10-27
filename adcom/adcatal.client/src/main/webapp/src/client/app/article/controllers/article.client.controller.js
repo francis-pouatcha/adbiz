@@ -28,6 +28,15 @@
         vm.setFormFields = function(disabled) {
             vm.formFields = ArticleForm.getFormFields(disabled);
         };
+
+        init();
+
+        function init() {
+            Article.query({start:0, max:20} , function(data) {
+                vm.data = data.resultList;
+            });
+        }
+
         vm.create = function() {
             var catalArtLangMapping = {};
             catalArtLangMapping.artName = vm.article.artName;

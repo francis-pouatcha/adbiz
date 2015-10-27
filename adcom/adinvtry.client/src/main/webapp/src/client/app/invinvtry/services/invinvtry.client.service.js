@@ -3,12 +3,9 @@
 
     angular
         .module('app.invinvtry')
-        .factory('invInvtryManagerResource',['$http','$resource','API_BASE_URL', function($http,$resource,API_BASE_URL){
-        //.factory('invInvtryManagerResource', invInvtryManagerResource);
+        .factory('invInvtryManagerResource',['$http','$resource','API_BASE_URL',
 
-    /*invInvtryManagerResource.$inject = ['API_BASE_URL', '$resource'];
-    *//* @ngInject *//*
-    function invInvtryManagerResource(API_BASE_URL, $resource) {*/
+    function($http,$resource,API_BASE_URL){
 
         var params = {
             identif: '@identif',
@@ -16,6 +13,7 @@
         };
 
         var actions = {
+            query:  {method:'GET', isArray:true},
             update: {
                 method: 'PUT'
             },
@@ -56,73 +54,6 @@
 
     }])
 
-   /* function invInvtryManagerResource($http, API_BASE_URL) {
-
-
-        var service = {};
-        var urlBase = API_BASE_URL + '/inventory';
-
-        // Prepare an inventory, eventually pre creating inventory items.
-        // This simplifies the execution of the inventory by reducing the data collection to
-        // quantities only.
-        service.prepare = function(invtry){
-            return $http.put(urlBase+'/prepare',invtry);
-        };
-
-        // Update core data of an inventory.
-        // Can not be done if an inventorys posted.
-        service.update = function(invtry){
-            return $http.put(urlBase+'/update',invtry);
-        };
-
-
-        // Close an inventory object. No item can be added to the inventory object anymore.
-        // Inventory information can be changed. But item data can no be changed anymore.
-        service.close = function(invtry){
-            return $http.put(urlBase+'/close',invtry);
-        };
-
-        service.validate = function(invtry){
-            return $http.put(urlBase+'/validate',invtry);
-        };
-
-        // Post an inventory. Notifying listener about the inventory.
-        // Form this state nothing can be modified on the inventory anymore.
-        service.post = function(invtry){
-            return $http.put(urlBase+'/post',invtry);
-        };
-
-        // Add an item to the inventory. This can only be done if the
-        // inventory is not closed.
-        service.addItem = function(invtryItem){
-            return $http.put(urlBase+'/addItem',invtryItem);
-        };
-
-        // Update an existing inventory item. For example setting
-        // quantities.
-        service.updateItem = function(invtryItem){
-            return $http.put(urlBase+'/updateItem',invtryItem);
-        };
-
-        // Disable an inventory item. This is preferable to deleting an inventory item.
-        // This can only be done if the inventory item is not closed.
-        service.disableItem = function(invtryItem){
-            return $http.put(urlBase+'/disableItem',invtryItem);
-        };
-
-        // Reenabling a disabled inventory item.
-        // This can only be done if the inventory item is not closed.
-        service.enableItem = function(invtryItem){
-            return $http.put(urlBase+'/enableItem',invtryItem);
-        };
-
-        service.merge = function(invrtyNbr){
-            return $http.put(urlBase+'/merge',invrtyNbr);
-        }
-
-        return service;
-
-    }*/
 
     angular
         .module('app.invinvtry')
@@ -153,9 +84,9 @@
         .module('app.invinvtry')
         .factory('invInvtryUtils', invInvtryUtils);
 
-    invInvtryUtils.$inject = ['sessionManager','$translate','genericResource','invInvtryState','API_BASE_URL', 'BASE_SERVER'];
+    invInvtryUtils.$inject = ['$translate','genericResource','invInvtryState','API_BASE_URL', 'BASE_SERVER'];
     /* @ngInject */
-    function invInvtryUtils(sessionManager, $translate,genericResource,invInvtryState,API_BASE_URL, BASE_SERVER) {
+    function invInvtryUtils($translate,genericResource,invInvtryState,API_BASE_URL, BASE_SERVER) {
 
         var service = {};
 

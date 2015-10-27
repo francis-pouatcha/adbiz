@@ -193,13 +193,13 @@
                         <th> {{'InvInvtry_startRange_description.title' | translate}}</th>
                         <th> {{'InvInvtry_endRange_description.title' | translate}}</th>
                         <th> {{'InvInvtryItem_section_description.title' | translate}}</th>
-                        <th> {{'InvInvtryItem_descptn_description.title' | translate}}</th>
+                        <th> {{'description' | translate}}</th>
                         <th></th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="invtry in invInvtrys()" ng-dblclick="editItem" >
+                    <tr ng-repeat="invtry in invInvtrys" ng-dblclick="editItem" >
                         <td>{{invtry.identif}}</td>
                         <td>{{invtry.acsngUser}}</td>
                         <!--<td>{{invtry.invtryGroup}}</td>-->

@@ -16,30 +16,23 @@
         window.location = auth.logoutUrl;
     };
 
-    appModule.factory('Auth', function() {
-        return auth;
-    });
-
     /* jshint ignore:start */
     /* @ngInject */
     angular.element(document).ready(function ($http, Auth) {
-        /*var keycloakAuth = new Keycloak('keycloak.json');
+        var keycloakAuth = new Keycloak('rest/keycloak.json');
         auth.loggedIn = false;
        keycloakAuth.init({onLoad: 'login-required'}).success(function () {
             auth.loggedIn = true;
             auth.authz = keycloakAuth;
             auth.logoutUrl = keycloakAuth.authServerUrl +
-                '/realms/adcom/tokens/logout?redirect_uri=/addashboard.client';
-            Auth = auth;
+                '/realms/adcom/tokens/logout?redirect_uri=/adinvtry.client';
+           appModule.factory('Auth', function() {
+               return auth;
+           });
            angular.bootstrap(document, ['adinvtry']);
-
        }).error(function () {
             window.location.reload();
-        })*/
-
-        angular.bootstrap(document, ['adinvtry']);
-
-
+        })
     });
 
 
@@ -94,8 +87,8 @@
 
     /* @ngInject */
     appModule.config(function($httpProvider, $locationProvider) {
-    //    $httpProvider.interceptors.push('errorInterceptor');
-     //   $httpProvider.interceptors.push('authInterceptor');
+        $httpProvider.interceptors.push('errorInterceptor');
+        $httpProvider.interceptors.push('authInterceptor');
         $locationProvider.html5Mode(false);
     });
     /* jshint ignore:start */
