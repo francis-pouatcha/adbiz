@@ -17,7 +17,7 @@
                 state: 'listImportExport',
                 config: {
                     url: '/import-export',
-                    templateUrl: 'app/import-export/views/view.html',
+                    templateUrl: '/addashboard.client/src/client/app/import-export/views/view.html',
                     controller: 'ImportExportController',
                     controllerAs: 'vm',
                     title: 'ImportExports'

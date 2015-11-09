@@ -14,22 +14,22 @@
 
     <!-- build:css styles/lib.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="/bower_components/toastr/toastr.css" />
-    <link rel="stylesheet" href="/bower_components/ng-table/dist/ng-table.css" />
+    <link rel="stylesheet" href="/adres.client/bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/adres.client/bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="/adres.client/bower_components/toastr/toastr.css" />
+    <link rel="stylesheet" href="/adres.client/bower_components/ng-table/dist/ng-table.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:css styles/app.css-->
     <!-- inject:css  -->
-    <link rel="stylesheet" href="/.tmp/styles.css">
+    <link rel="stylesheet" href="/adres.client/styles/style.css">
     <!-- endinject -->
     <!-- endbuild -->
 </head>
 <body ng-controller="GlobalController as GlobalCtlr" >
     <div>
-        <div ng-include="'app/layout/shell.html'"></div>
+        <div ng-include="'/adres.client/modules/layout/shell.html'"></div>
         <div id="splash-page" ng-show="showSplash">
             <div class="page-splash">
                 <div class="page-splash-message">
@@ -44,23 +44,26 @@
 
     <!-- build:js js/lib.js -->
     <!-- bower:js -->
-    <script src="/bower_components/jquery/dist/jquery.js"></script>
-    <script src="/bower_components/angular/angular.js"></script>
-    <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="/bower_components/angular-resource/angular-resource.js"></script>
-    <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="/bower_components/extras.angular.plus/ngplus-overlay.js"></script>
-    <script src="/bower_components/moment/moment.js"></script>
-    <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="/bower_components/toastr/toastr.js"></script>
-    <script src="/bower_components/angular-animate/angular-animate.js"></script>
-    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="/bower_components/ng-table/dist/ng-table.js"></script>
-    <script src="/bower_components/api-check/dist/api-check.js"></script>
-    <script src="/bower_components/angular-formly/dist/formly.js"></script>
-    <script src="/bower_components/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap.js"></script>
-    <script src="/bower_components/angular-translate/angular-translate.js"></script>
-    <script src="/bower_components/sinon/index.js"></script>
+    <script src="/adres.client/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/adres.client/bower_components/angular/angular.js"></script>
+    <script src="/adres.client/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/adres.client/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="/adres.client/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/adres.client/bower_components/extras.angular.plus/ngplus-overlay.js"></script>
+    <script src="/adres.client/bower_components/moment/moment.js"></script>
+    <script src="/adres.client/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="/adres.client/bower_components/toastr/toastr.js"></script>
+    <script src="/adres.client/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/adres.client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="/adres.client/bower_components/ng-table/dist/ng-table.js"></script>
+    <script src="/adres.client/bower_components/api-check/dist/api-check.js"></script>
+    <script src="/adres.client/bower_components/angular-formly/dist/formly.js"></script>
+    <script src="/adres.client/bower_components/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap.js"></script>
+    <script src="/adres.client/bower_components/angular-translate/angular-translate.js"></script>
+    <script src="/adres.client/bower_components/flow.js/dist/flow.js"></script>
+    <script src="/adres.client/bower_components/ng-flow/dist/ng-flow.js"></script>
+    <script src="/adres.client/bower_components/file-saver.js/FileSaver.js"></script>
+    <script src="/adres.client/bower_components/sinon/index.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -68,79 +71,76 @@
 
     <!-- build:js js/app.js-->
     <!-- inject:js -->
-    <script src="/src/client/app/app.module.js"></script>
-    <script src="/src/client/app/article/article.client.module.js"></script>
-    <script src="/src/client/app/blocks/exception/exception.module.js"></script>
-    <script src="/src/client/app/blocks/logger/logger.module.js"></script>
-    <script src="/src/client/app/blocks/router/router.module.js"></script>
-    <script src="/src/client/app/catal-art-2-product-family/catal-art-2-product-family.client.module.js"></script>
-    <script src="/src/client/app/catal-art-detail-config/catal-art-detail-config.client.module.js"></script>
-    <script src="/src/client/app/catal-art-equivalence/catal-art-equivalence.client.module.js"></script>
-    <script src="/src/client/app/catal-art-lang-mapping/catal-art-lang-mapping.client.module.js"></script>
-    <script src="/src/client/app/catal-art-manuf-supp/catal-art-manuf-supp.client.module.js"></script>
-    <script src="/src/client/app/catal-pic-mapping/catal-pic-mapping.client.module.js"></script>
-    <script src="/src/client/app/catal-prod-fmly-lang-map/catal-prod-fmly-lang-map.client.module.js"></script>
-    <script src="/src/client/app/catal-prod-fmly/catal-prod-fmly.client.module.js"></script>
-    <script src="/src/client/app/core/core.module.js"></script>
-    <script src="/src/client/app/dashboard/dashboard.module.js"></script>
-    <script src="/src/client/app/layout/layout.module.js"></script>
-    <script src="/src/client/app/widgets/widgets.module.js"></script>
-    <script src="/src/client/app/article/services/article.client.service.js"></script>
-    <script src="/src/client/app/article/services/article.form.client.service.js"></script>
-    <script src="/src/client/app/catal-art-2-product-family/services/catal-art-2-product-family.client.service.js"></script>
-    <script src="/src/client/app/catal-art-2-product-family/services/catal-art-2-product-family.form.client.service.js"></script>
-    <script src="/src/client/app/catal-art-detail-config/services/catal-art-detail-config.client.service.js"></script>
-    <script src="/src/client/app/catal-art-detail-config/services/catal-art-detail-config.form.client.service.js"></script>
-    <script src="/src/client/app/catal-art-equivalence/services/catal-art-equivalence.client.service.js"></script>
-    <script src="/src/client/app/catal-art-equivalence/services/catal-art-equivalence.form.client.service.js"></script>
-    <script src="/src/client/app/catal-art-lang-mapping/services/catal-art-lang-mapping.client.service.js"></script>
-    <script src="/src/client/app/catal-art-lang-mapping/services/catal-art-lang-mapping.form.client.service.js"></script>
-    <script src="/src/client/app/catal-art-manuf-supp/services/catal-art-manuf-supp.client.service.js"></script>
-    <script src="/src/client/app/catal-art-manuf-supp/services/catal-art-manuf-supp.form.client.service.js"></script>
-    <script src="/src/client/app/catal-pic-mapping/services/catal-pic-mapping.client.service.js"></script>
-    <script src="/src/client/app/catal-pic-mapping/services/catal-pic-mapping.form.client.service.js"></script>
-    <script src="/src/client/app/catal-prod-fmly-lang-map/services/catal-prod-fmly-lang-map.client.service.js"></script>
-    <script src="/src/client/app/catal-prod-fmly-lang-map/services/catal-prod-fmly-lang-map.form.client.service.js"></script>
-    <script src="/src/client/app/catal-prod-fmly/services/catal-prod-fmly.client.service.js"></script>
-    <script src="/src/client/app/catal-prod-fmly/services/catal-prod-fmly.form.client.service.js"></script>
-    <script src="/src/client/app/core/services/table.settings.service.js"></script>
-    <script src="/src/client/app/article/config/article.client.routes.js"></script>
-    <script src="/src/client/app/article/controllers/article.client.controller.js"></script>
-    <script src="/src/client/app/catal-art-2-product-family/config/catal-art-2-product-family.client.routes.js"></script>
-    <script src="/src/client/app/catal-art-2-product-family/controllers/catal-art-2-product-family.client.controller.js"></script>
-    <script src="/src/client/app/catal-art-detail-config/config/catal-art-detail-config.client.routes.js"></script>
-    <script src="/src/client/app/catal-art-detail-config/controllers/catal-art-detail-config.client.controller.js"></script>
-    <script src="/src/client/app/catal-art-equivalence/config/catal-art-equivalence.client.routes.js"></script>
-    <script src="/src/client/app/catal-art-equivalence/controllers/catal-art-equivalence.client.controller.js"></script>
-    <script src="/src/client/app/catal-art-lang-mapping/config/catal-art-lang-mapping.client.routes.js"></script>
-    <script src="/src/client/app/catal-art-lang-mapping/controllers/catal-art-lang-mapping.client.controller.js"></script>
-    <script src="/src/client/app/catal-art-manuf-supp/config/catal-art-manuf-supp.client.routes.js"></script>
-    <script src="/src/client/app/catal-art-manuf-supp/controllers/catal-art-manuf-supp.client.controller.js"></script>
-    <script src="/src/client/app/catal-pic-mapping/config/catal-pic-mapping.client.routes.js"></script>
-    <script src="/src/client/app/catal-pic-mapping/controllers/catal-pic-mapping.client.controller.js"></script>
-    <script src="/src/client/app/catal-prod-fmly-lang-map/config/catal-prod-fmly-lang-map.client.routes.js"></script>
-    <script src="/src/client/app/catal-prod-fmly-lang-map/controllers/catal-prod-fmly-lang-map.client.controller.js"></script>
-    <script src="/src/client/app/catal-prod-fmly/config/catal-prod-fmly.client.routes.js"></script>
-    <script src="/src/client/app/catal-prod-fmly/controllers/catal-prod-fmly.client.controller.js"></script>
-    <script src="/src/client/app/core/config.js"></script>
-    <script src="/src/client/app/core/constants.js"></script>
-    <script src="/src/client/app/core/core.route.js"></script>
-    <script src="/src/client/app/core/core.utils.js"></script>
-    <script src="/src/client/app/core/dataservice.js"></script>
-    <script src="/src/client/app/core/directives/ng-really-click.directive.js"></script>
-    <script src="/src/client/app/core/i18n.js"></script>
-    <script src="/src/client/app/dashboard/dashboard.controller.js"></script>
-    <script src="/src/client/app/dashboard/dashboard.route.js"></script>
-    <script src="/src/client/app/blocks/exception/exception-handler.provider.js"></script>
-    <script src="/src/client/app/blocks/exception/exception.js"></script>
-    <script src="/src/client/app/layout/ht-sidebar.directive.js"></script>
-    <script src="/src/client/app/layout/ht-top-nav.directive.js"></script>
-    <script src="/src/client/app/layout/shell.controller.js"></script>
-    <script src="/src/client/app/layout/sidebar.controller.js"></script>
-    <script src="/src/client/app/blocks/logger/logger.js"></script>
-    <script src="/src/client/app/blocks/router/router-helper.provider.js"></script>
-    <script src="/src/client/app/widgets/ht-img-person.directive.js"></script>
-    <script src="/src/client/app/widgets/ht-widget-header.directive.js"></script>
+    <script src="/adcatal.client/src/client/app/app.module.js"></script>
+    <script src="/adcatal.client/src/client/app/article/article.client.module.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-art-2-product-family/catal-art-2-product-family.client.module.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-art-detail-config/catal-art-detail-config.client.module.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-art-equivalence/catal-art-equivalence.client.module.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-art-lang-mapping/catal-art-lang-mapping.client.module.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-art-manuf-supp/catal-art-manuf-supp.client.module.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-pic-mapping/catal-pic-mapping.client.module.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-prod-fmly-lang-map/catal-prod-fmly-lang-map.client.module.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-prod-fmly/catal-prod-fmly.client.module.js"></script>
+    <script src="/adcatal.client/src/client/app/article/services/article.client.service.js"></script>
+    <script src="/adcatal.client/src/client/app/article/services/article.form.client.service.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-art-2-product-family/services/catal-art-2-product-family.client.service.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-art-2-product-family/services/catal-art-2-product-family.form.client.service.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-art-detail-config/services/catal-art-detail-config.client.service.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-art-detail-config/services/catal-art-detail-config.form.client.service.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-art-equivalence/services/catal-art-equivalence.client.service.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-art-equivalence/services/catal-art-equivalence.form.client.service.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-art-lang-mapping/services/catal-art-lang-mapping.client.service.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-art-lang-mapping/services/catal-art-lang-mapping.form.client.service.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-art-manuf-supp/services/catal-art-manuf-supp.client.service.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-art-manuf-supp/services/catal-art-manuf-supp.form.client.service.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-pic-mapping/services/catal-pic-mapping.client.service.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-pic-mapping/services/catal-pic-mapping.form.client.service.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-prod-fmly-lang-map/services/catal-prod-fmly-lang-map.client.service.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-prod-fmly-lang-map/services/catal-prod-fmly-lang-map.form.client.service.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-prod-fmly/services/catal-prod-fmly.client.service.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-prod-fmly/services/catal-prod-fmly.form.client.service.js"></script>
+    <script src="/adcatal.client/src/client/app/article/config/article.client.routes.js"></script>
+    <script src="/adcatal.client/src/client/app/article/controllers/article.client.controller.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-art-2-product-family/config/catal-art-2-product-family.client.routes.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-art-2-product-family/controllers/catal-art-2-product-family.client.controller.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-art-detail-config/config/catal-art-detail-config.client.routes.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-art-detail-config/controllers/catal-art-detail-config.client.controller.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-art-equivalence/config/catal-art-equivalence.client.routes.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-art-equivalence/controllers/catal-art-equivalence.client.controller.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-art-lang-mapping/config/catal-art-lang-mapping.client.routes.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-art-lang-mapping/controllers/catal-art-lang-mapping.client.controller.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-art-manuf-supp/config/catal-art-manuf-supp.client.routes.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-art-manuf-supp/controllers/catal-art-manuf-supp.client.controller.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-pic-mapping/config/catal-pic-mapping.client.routes.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-pic-mapping/controllers/catal-pic-mapping.client.controller.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-prod-fmly-lang-map/config/catal-prod-fmly-lang-map.client.routes.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-prod-fmly-lang-map/controllers/catal-prod-fmly-lang-map.client.controller.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-prod-fmly/config/catal-prod-fmly.client.routes.js"></script>
+    <script src="/adcatal.client/src/client/app/catal-prod-fmly/controllers/catal-prod-fmly.client.controller.js"></script>
+
+
+    <!--common js will be compress later-->
+    <script src="/adres.client/modules/blocks/exception/exception.module.js"></script>
+    <script src="/adres.client/modules/blocks/logger/logger.module.js"></script>
+    <script src="/adres.client/modules/blocks/router/router.module.js"></script>
+    <script src="/adres.client/modules/core/core.module.js"></script>
+    <script src="/adres.client/modules/layout/layout.module.js"></script>
+    <script src="/adres.client/modules/blocks/exception/exception-handler.provider.js"></script>
+    <script src="/adres.client/modules/blocks/exception/exception.js"></script>
+    <script src="/adres.client/modules/blocks/logger/logger.js"></script>
+    <script src="/adres.client/modules/blocks/router/router-helper.provider.js"></script>
+    <script src="/adres.client/modules/core/config.js"></script>
+    <script src="/adres.client/modules/core/constants.js"></script>
+    <script src="/adres.client/modules/core/core.route.js"></script>
+    <script src="/adres.client/modules/core/core.utils.js"></script>
+    <script src="/adres.client/modules/core/directives/ng-really-click.directive.js"></script>
+    <script src="/adres.client/modules/core/i18n.js"></script>
+    <script src="/adres.client/modules/core/services/table.settings.service.js"></script>
+    <script src="/adres.client/modules/layout/ht-sidebar.directive.js"></script>
+    <script src="/adres.client/modules/layout/ht-top-nav.directive.js"></script>
+    <script src="/adres.client/modules/layout/shell.controller.js"></script>
+    <script src="/adres.client/modules/layout/sidebar.controller.js"></script>
+
     <!-- endinject -->
 
     <!-- inject:templates:js -->

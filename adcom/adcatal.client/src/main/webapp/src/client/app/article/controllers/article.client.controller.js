@@ -98,22 +98,26 @@
             var coreSearchInput = {};
             coreSearchInput.entity = {};
             coreSearchInput.entity.cntnrIdentif = vm.articleId;
-            coreSearchInput.entity.langIso2 = $translate.use();
+            //coreSearchInput.entity.langIso2 = $translate.use();
             coreSearchInput.fieldNames = [];
             coreSearchInput.fieldNames.push('cntnrIdentif');
-            coreSearchInput.fieldNames.push('langIso2');
+            //coreSearchInput.fieldNames.push('langIso2');
             coreSearchInput.className = 'org.adorsys.adcatal.jpa.CatalArtLangMappingSearchInput';
             return coreSearchInput;
         }
-        vm.toViewArticle = function() {
-            vm.article = Article.get({articleId: $stateParams.articleId});
-            ArticleForm.catalArticleId = $stateParams.articleId;
-            vm.setFormFields(true);
 
-            CatalArtLangMapping.findBy(coreSearchInputInit(), function (response) {
-                console.log(response.resultList);
-                vm.article.artName = response.resultList[0].artName;
-                vm.article.shortName = response.resultList[0].shortName;
+        vm.toViewArticle = function() {
+             Article.get({articleId: $stateParams.articleId}, function(data){
+                vm.article = data;
+
+                 ArticleForm.catalArticleId = $stateParams.articleId;
+                 vm.setFormFields(true);
+
+                 CatalArtLangMapping.findBy(coreSearchInputInit(), function (response) {
+                     console.log(response.resultList);
+                     vm.article.artName = response.resultList[0].artName;
+                     vm.article.shortName = response.resultList[0].shortName;
+                 });
             });
 
         };

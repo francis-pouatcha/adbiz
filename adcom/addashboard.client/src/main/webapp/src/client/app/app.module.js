@@ -3,7 +3,6 @@
 
     var appModule = angular.module('addashboard', [
         'app.core',
-        'app.widgets',
         'app.dashboard',
         'app.layout'
     ]);

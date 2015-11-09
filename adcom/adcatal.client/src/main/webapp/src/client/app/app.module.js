@@ -3,8 +3,6 @@
 
     var appModule = angular.module('adcatal', [
         'app.core',
-        'app.widgets',
-        'app.dashboard',
         'app.layout'
     ]);
 

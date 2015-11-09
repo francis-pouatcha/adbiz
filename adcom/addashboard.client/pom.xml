@@ -25,13 +25,13 @@
 				<version>2.4</version>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<warSourceIncludes>build/**,i18n/**,WEB-INF/**,sample/**,keycloak.json</warSourceIncludes>
+					<warSourceIncludes>src/**,i18n/**,WEB-INF/**,sample/**</warSourceIncludes>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 			</plugin>
-		</plugins>
+        </plugins>
 	</build>
 </project>

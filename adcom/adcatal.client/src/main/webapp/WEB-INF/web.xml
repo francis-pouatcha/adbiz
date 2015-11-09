@@ -5,6 +5,6 @@
     <module-name>adcatal.client</module-name>
 
     <welcome-file-list>
-        <welcome-file>/build/index.html</welcome-file>
+        <welcome-file>/src/client/index.html</welcome-file>
     </welcome-file-list>
 </web-app>

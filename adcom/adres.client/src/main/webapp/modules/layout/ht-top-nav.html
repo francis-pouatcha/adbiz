@@ -1,0 +1,34 @@
+<nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="navbar-header">
+        <a href="/" class="navbar-brand"><span class="brand-title">{{vm.navline.title}}</span></a>
+        <a class="btn navbar-btn navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+    </div>
+    <div class="navbar-collapse collapse">
+        <div class="pull-right navbar-logo">
+            <ul class="nav navbar-nav pull-right">
+                <li>
+                    <div class="dropdown" style="color: #808080;margin-right: 15px;margin-top: 15px">
+                        <span data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+                            <i class="glyphicon glyphicon-user" ></i> {{vm.username}}
+                            <span class="caret"></span>
+                        </span>
+                        <ul class="dropdown-menu" aria-labelledby="dLabel">
+                            <li><a href="#" ng-click="vm.changeLang('fr')" >{{'LANG_FR' | translate}}</a></li>
+                            <li><a href="#" ng-click="vm.changeLang('en')" >{{'LANG_EN' | translate}}</a></li>
+                            <li><a ng-click="vm.logout()" >{{'logout' | translate}}</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="dropdown dropdown-big">
+                    <a href="http://www.adorsys.cm" target="_blank">
+                        <img src="/adres.client/images/logo.png" />
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

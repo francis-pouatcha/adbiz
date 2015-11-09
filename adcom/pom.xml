@@ -25,6 +25,7 @@
 		<module>adcore.lib</module>
 		<module>adbase.lib</module>
 		<module>adcatal.lib</module>
+		<module>adres.client</module>
 		<module>adcatal.client</module>
 		<module>adstock.client</module>
 		<module>adstock.lib</module>
