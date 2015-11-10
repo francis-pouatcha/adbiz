@@ -25,7 +25,7 @@
 				<version>2.4</version>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<warSourceIncludes>build/**,i18n/**,WEB-INF/**,keycloak.json</warSourceIncludes>
+                    <warSourceIncludes>src/**,i18n/**,WEB-INF/**</warSourceIncludes>
 				</configuration>
 			</plugin>
 			<plugin>

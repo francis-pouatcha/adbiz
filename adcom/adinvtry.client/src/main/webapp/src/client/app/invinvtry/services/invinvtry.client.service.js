@@ -55,38 +55,13 @@
     }])
 
 
-    angular
-        .module('app.invinvtry')
-        .factory('invInvtryState', invInvtryState);
-
-    invInvtryState.$inject = ['$rootScope', 'searchResultHandler'];
-    /* @ngInject */
-    function invInvtryState($rootScope, searchResultHandler) {
-
-        var service = {};
-        service.selection = [];
-        service.mainInvtry = {};
-        service.resultHandler = searchResultHandler.newResultHandler('invtryNbr');
-        service.itemsResultHandler = function(){
-            var itemsResultHandlerVar = service.resultHandler.dependent('items');
-            if(angular.isUndefined(itemsResultHandlerVar)){
-                itemsResultHandlerVar = searchResultHandler.newResultHandler('identif');
-                service.resultHandler.dependent('items', itemsResultHandlerVar);
-            }
-            return itemsResultHandlerVar;
-        };
-        service.compareResultHandler = searchResultHandler.newResultHandler('salIndex');
-        return service;
-
-    }
-
-    angular
+    /*angular
         .module('app.invinvtry')
         .factory('invInvtryUtils', invInvtryUtils);
 
     invInvtryUtils.$inject = ['$translate','genericResource','invInvtryState','API_BASE_URL', 'BASE_SERVER'];
-    /* @ngInject */
-    function invInvtryUtils($translate,genericResource,invInvtryState,API_BASE_URL, BASE_SERVER) {
+    *//* @ngInject *//*
+    function invInvtryUtils($translate,API_BASE_URL, BASE_SERVER) {
 
         var service = {};
 
@@ -251,6 +226,6 @@
         }
         return service;
 
-    }
+    }*/
 
 })();

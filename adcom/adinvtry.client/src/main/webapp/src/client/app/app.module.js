@@ -3,8 +3,6 @@
 
     var appModule = angular.module('adinvtry', [
         'app.core',
-        'app.widgets',
-        'app.dashboard',
         'app.layout'
     ]);
 
@@ -102,11 +100,12 @@
         if (Auth.authz) {
             if (Auth.authz.idToken) {
                 //jscs:disable
-                vm.username = Auth.authz.idToken.preferred_username; //to ignore camelCase
+                vm.username = Auth.authz.tokenParsed.name; //to ignore camelCase
                 //jscs:enable
             } else {
                 Auth.authz.loadUserProfile(function () {
-                    vm.username = Auth.authz.profile.username;
+                    if(vm.username)
+                        vm.username = Auth.authz.profile.username;
                 }, function () {
                     console.log('failed to retrieve user profile');
                 });
@@ -114,6 +113,7 @@
         }
         $rootScope.username = vm.username;
         $rootScope.logout = vm.logout;
+        $rootScope.appTitle = 'Inventaire';
     });
     /* jshint ignore:end */
 
