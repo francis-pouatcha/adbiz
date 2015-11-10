@@ -20,7 +20,11 @@
                     templateUrl: '/addashboard.client/src/client/app/dashboard/dashboard.html',
                     controller: 'DashboardController',
                     controllerAs: 'vm',
-                    title: 'dashboard'
+                    title: 'dashboard',
+                    settings: {
+                        nav: 1,
+                        content: '<i class="fa fa-folder-open"></i> Dashboard'
+                    }
                 }
             }
         ];

@@ -20,7 +20,11 @@
                     templateUrl: '/addashboard.client/src/client/app/import-export/views/view.html',
                     controller: 'ImportExportController',
                     controllerAs: 'vm',
-                    title: 'ImportExports'
+                    title: 'ImportExports',
+                    settings: {
+                        nav: 2,
+                        content: '<i class="fa fa-folder-open"></i> Import'
+                    }
                 }
             }
         ];

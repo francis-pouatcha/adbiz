@@ -7,11 +7,23 @@
     appRun.$inject = ['routerHelper', 'BASE_VIEW'];
     /* @ngInject */
     function appRun(routerHelper, BASE_VIEW) {
-        routerHelper.configureStates(getStates(BASE_VIEW));
+        var otherwise = '/article';
+        routerHelper.configureStates(getStates(BASE_VIEW), otherwise);
     }
 
     function getStates(BASE_VIEW) {
         return [
+            {
+                state: 'Articles',
+                config: {
+                    url:  '/',
+                    templateUrl: BASE_VIEW+'/app/article/views/list.html',
+                    controller: 'ArticleController',
+                    controllerAs: 'vm',
+                    title: 'List Articles'
+
+                }
+            },,
             {
                 state: 'listArticle',
                 config: {

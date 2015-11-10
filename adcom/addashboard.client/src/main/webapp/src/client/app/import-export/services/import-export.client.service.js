@@ -5,7 +5,7 @@
         .module('app.importExport')
         .factory('ImportExport', ImportExport);
 
-    ImportExport.$inject = ['$resource', 'API_BASE_URL_'];
+    ImportExport.$inject = ['$resource', 'API_BASE_URL'];
     /* @ngInject */
     function ImportExport($resource, API_BASE_URL) {
 
