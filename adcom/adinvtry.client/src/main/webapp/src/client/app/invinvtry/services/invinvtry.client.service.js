@@ -3,9 +3,9 @@
 
     angular
         .module('app.invinvtry')
-        .factory('invInvtryManagerResource',['$http','$resource','API_BASE_URL',
+        .factory('invInvtryManagerResource',['$http','$resource','API_BASE_ADINVTRY_URL',
 
-    function($http,$resource,API_BASE_URL){
+    function($http,$resource,API_BASE_ADINVTRY_URL){
 
         var params = {
             identif: '@identif',
@@ -19,36 +19,36 @@
             },
             close: {
                 method: 'PUT',
-                url: API_BASE_URL + '/inventory/:identif/close'
+                url: API_BASE_ADINVTRY_URL + '/inventory/:identif/close'
             },
             validate: {
                 method: 'PUT',
-                url: API_BASE_URL + '/inventory/:identif/validate'
+                url: API_BASE_ADINVTRY_URL + '/inventory/:identif/validate'
             },
             post: {
                 method: 'PUT',
-                url: API_BASE_URL + '/inventory/:identif/post'
+                url: API_BASE_ADINVTRY_URL + '/inventory/:identif/post'
             },
             addItem: {
                 method: 'POST',
-                url: API_BASE_URL + '/inventory/:identif/items'
+                url: API_BASE_ADINVTRY_URL + '/inventory/:identif/items'
             },
             updateItem: {
                 method: 'PUT',
-                url: API_BASE_URL + '/inventory/:identif/items/:itemIdentif'
+                url: API_BASE_ADINVTRY_URL + '/inventory/:identif/items/:itemIdentif'
             },
             disableItem: {
                 method: 'PUT',
-                url: API_BASE_URL + '/inventory/:identif/items/:itemIdentif/disable'
+                url: API_BASE_ADINVTRY_URL + '/inventory/:identif/items/:itemIdentif/disable'
             },
             enableItem: {
                 method: 'PUT',
-                url: API_BASE_URL + '/inventory/:identif/items/:itemIdentif/enable'
+                url: API_BASE_ADINVTRY_URL + '/inventory/:identif/items/:itemIdentif/enable'
             }
 
         };
 
-        var API_URL = API_BASE_URL + '/inventory/:identif';
+        var API_URL = API_BASE_ADINVTRY_URL + '/inventory/:identif';
 
         return $resource(API_URL, params, actions);
 

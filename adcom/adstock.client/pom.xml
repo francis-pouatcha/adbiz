@@ -9,7 +9,13 @@
   <packaging>war</packaging>
   <name> adstock.client </name>
   <description>Ad Stock Client</description>
-
+    <dependencies>
+        <dependency>
+            <groupId>org.adorsys.adcom</groupId>
+            <artifactId>adres.lib</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
   <build>
     <finalName>adstock.client</finalName>
     <plugins>
@@ -27,6 +33,7 @@
         <version>2.4</version>
         <configuration>
           <failOnMissingWebXml>false</failOnMissingWebXml>
+            <warSourceIncludes>src/**,WEB-INF/**</warSourceIncludes>
         </configuration>
       </plugin>
     </plugins>

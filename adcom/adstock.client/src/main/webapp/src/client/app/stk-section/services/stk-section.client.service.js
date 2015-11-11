@@ -5,9 +5,9 @@
         .module('app.stkSection')
         .factory('StkSection', StkSection);
 
-    StkSection.$inject = ['$resource', 'API_BASE_URL'];
+    StkSection.$inject = ['$resource', 'API_BASE_ADSTOCK_URL'];
     /* @ngInject */
-    function StkSection($resource, API_BASE_URL) {
+    function StkSection($resource, API_BASE_ADSTOCK_URL) {
 
         var params = {
             stkSectionId: '@id'
@@ -19,11 +19,11 @@
             },
             findCustom:{
                 method: 'POST',
-                url: API_BASE_URL + '/stksections/findCustom'
+                url: API_BASE_ADSTOCK_URL + '/stksections/findCustom'
             },
             listAll:{
                 method: 'GET',
-                url: API_BASE_URL + '/stksections',
+                url: API_BASE_ADSTOCK_URL + '/stksections',
                 params:{
                     start: -1,
                     max: 20
@@ -31,7 +31,7 @@
             }
         };
 
-        var API_URL = API_BASE_URL + '/stksections/:stkSectionId';
+        var API_URL = API_BASE_ADSTOCK_URL + '/stksections/:stkSectionId';
 
         return $resource(API_URL, params, actions);
 

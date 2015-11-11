@@ -1,13 +1,11 @@
 (function () {
     'use strict';
 
-  var appModule = angular.module('adstock', [
+    var appModule = angular.module('adstock', [
         'app.core',
-        'app.widgets',
-        'app.dashboard',
         'app.layout'
     ]);
-  
+
     var auth = {};
     var logout = function() {
         console.log('*** LOGOUT');
@@ -16,28 +14,30 @@
         window.location = auth.logoutUrl;
     };
 
-    appModule.factory('Auth', function() {
-        return auth;
-    });
-    
-    
+    /*appModule.factory('Auth', function() {
+     return auth;
+     });*/
 
-   /* jshint ignore:start */
+    /* jshint ignore:start */
     /* @ngInject */
     angular.element(document).ready(function ($http, Auth) {
-    	angular.bootstrap(document, ['adstock']);
-//        var keycloakAuth = new Keycloak('keycloak.json');
-//        auth.loggedIn = false;
-//        keycloakAuth.init({onLoad: 'login-required'}).success(function () {
-//            auth.loggedIn = true;
-//            auth.authz = keycloakAuth;
-//            auth.logoutUrl = keycloakAuth.authServerUrl +
-//                '/realms/adcom/tokens/logout?redirect_uri=/addashboard.client';
-//            Auth = auth;
-//            angular.bootstrap(document, ['adcatal']);
-//        }).error(function () {
-//            window.location.reload();
-//        })
+        var keycloakAuth = new Keycloak('rest/keycloak.json');
+        console.log(keycloakAuth);
+        auth.loggedIn = false;
+        keycloakAuth.init({onLoad: 'login-required'}).success(function () {
+            auth.loggedIn = true;
+            auth.authz = keycloakAuth;
+            auth.logoutUrl = keycloakAuth.authServerUrl +
+                '/realms/adcom/tokens/logout?redirect_uri=/adstock.client';
+            //Auth = auth;
+            appModule.factory('Auth', function() {
+                return auth;
+            });
+            angular.bootstrap(document, ['adstock']);
+        }).error(function () {
+            console.log(keycloakAuth);
+            window.location.reload();
+        })
     });
     /* jshint ignore:end */
 
@@ -88,17 +88,13 @@
         };
     });
 
-    /* @ngInject Global Configuration */
-    appModule.config(function($httpProvider, $locationProvider, paginationTemplateProvider, $translateProvider) {
-        //$httpProvider.interceptors.push('errorInterceptor');
-        //$httpProvider.interceptors.push('authInterceptor');
-        paginationTemplateProvider.setPath('app/widgets/dirPagination.tpl.html');
-        $translateProvider.useSanitizeValueStrategy('sanitize');
+    /* @ngInject */
+    appModule.config(function($httpProvider, $locationProvider) {
+        $httpProvider.interceptors.push('errorInterceptor');
+        $httpProvider.interceptors.push('authInterceptor');
         $locationProvider.html5Mode(false);
     });
-    
-    
-    /* jshint ignore:start Global Controller*/
+    /* jshint ignore:start */
     /* @ngInject */
     appModule.controller('GlobalController', function($rootScope, Auth, BASE_ROUTE, BASE_SERVER) {
         var vm = this;
@@ -109,18 +105,21 @@
         if (Auth.authz) {
             if (Auth.authz.idToken) {
                 //jscs:disable
-                vm.username = Auth.authz.idToken.preferred_username; //to ignore camelCase
+                vm.username = Auth.authz.tokenParsed.name; //to ignore camelCase
                 //jscs:enable
             } else {
                 Auth.authz.loadUserProfile(function () {
-                    vm.username = Auth.authz.profile.username;
+                    if(vm.username)
+                        vm.username = Auth.authz.profile.username;
                 }, function () {
                     console.log('failed to retrieve user profile');
                 });
             }
         }
+        console.log(Auth.authz);
         $rootScope.username = vm.username;
         $rootScope.logout = vm.logout;
+        $rootScope.appTitle = 'Stock';
     });
     
     /* Runtime configuration */

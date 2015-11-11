@@ -5,19 +5,19 @@
         .module('app.stkMvnt')
         .run(appRun);
 
-    appRun.$inject = ['routerHelper'];
+    appRun.$inject = ['routerHelper', 'BASE_VIEW_STOCK'];
     /* @ngInject */
-    function appRun(routerHelper) {
-        routerHelper.configureStates(getStates());
+    function appRun(routerHelper, BASE_VIEW_STOCK) {
+        routerHelper.configureStates(getStates(BASE_VIEW_STOCK));
     }
 
-    function getStates() {
+    function getStates(BASE_VIEW_STOCK) {
         return [
             {
                 state: 'listStkMvnt',
                 config: {
                     url: '/stk-mvnt',
-                    templateUrl: 'app/stk-mvnt/views/list.html',
+                    templateUrl: BASE_VIEW_STOCK+'/app/stk-mvnt/views/list.html',
                     controller: 'StkMvntController',
                     controllerAs: 'vm',
                     title: 'List StkMvnts',
@@ -31,7 +31,7 @@
                 state: 'createStkMvnt',
                 config: {
                     url: '/stk-mvnt/create',
-                    templateUrl: 'app/stk-mvnt/views/create.html',
+                    templateUrl: BASE_VIEW_STOCK+'/app/stk-mvnt/views/create.html',
                     controller: 'StkMvntController',
                     controllerAs: 'vm',
                     title: 'Create StkMvnt'
@@ -41,7 +41,7 @@
                 state: 'viewStkMvnt',
                 config: {
                     url: '/stk-mvnt/:stkMvntId',
-                    templateUrl: 'app/stk-mvnt/views/view.html',
+                    templateUrl: BASE_VIEW_STOCK+'/app/stk-mvnt/views/view.html',
                     controller: 'StkMvntController',
                     controllerAs: 'vm',
                     title: 'View StkMvnt'
@@ -51,7 +51,7 @@
                 state: 'editStkMvnt',
                 config: {
                     url: '/stk-mvnt/:stkMvntId/edit',
-                    templateUrl: 'app/stk-mvnt/views/edit.html',
+                    templateUrl: BASE_VIEW_STOCK+'/app/stk-mvnt/views/edit.html',
                     controller: 'StkMvntController',
                     controllerAs: 'vm',
                     title: 'Edit StkMvnt'

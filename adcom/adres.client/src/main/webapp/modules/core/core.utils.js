@@ -57,6 +57,65 @@
             }
         };
 
+
+        service.searchInputInit= function(){
+            var itemsPerPageVar = 10;
+            var currentVar = 1;
+            var maxSizeVar = 10;
+            var searchInputVar = {
+                searchInput:{
+                    entity: {},
+                    start: 0,
+                    max: itemsPerPageVar,
+                    fieldNames: [],
+                    className: ''
+                },
+                pagination:{
+                    current: currentVar,
+                    itemsPerPage: itemsPerPageVar,
+                    maxSize: maxSizeVar
+                }
+
+            };
+            return searchInputVar;
+        };
+
+        service.resetPagination = function(pagination){
+            var itemsPerPageVar = 10;
+            var currentVar = 1;
+            var maxSizeVar = 10;
+            pagination.current = currentVar;
+            pagination.itemsPerPage = itemsPerPageVar;
+            pagination.maxSize = maxSizeVar;
+            return pagination;
+        }
+
+        service.pagination = function(searchInput, pagination, currentIn){
+            searchInput.start = ((pagination.current -1) * pagination.itemsPerPage);
+            pagination.current = currentIn;
+        };
+
+        service.getFieldsFromObject = function(object){
+            var props = Object.keys(object);
+            return props;
+        };
+
+
+
+        service.processSearch = function(searchInput, object){
+            for(var key in object){
+                if(object.hasOwnProperty(key)){
+                    var keyValue = Object.getOwnPropertyDescriptor(object, key).value;
+                    if(keyValue){
+                        Object.defineProperty(searchInput.entity, key,
+                            {value: keyValue, writable: true, enumerable: true, configurable: true});
+                        searchInput.fieldNames.push(key);
+                    }
+                }
+            }
+            return searchInput;
+        };
+
         return service;
 
     }

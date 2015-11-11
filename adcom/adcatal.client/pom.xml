@@ -25,7 +25,7 @@
 				<version>2.4</version>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
-                    <warSourceIncludes>src/**,i18n/**,WEB-INF/**,sample/**</warSourceIncludes>
+                    <warSourceIncludes>src/**,WEB-INF/**,sample/**</warSourceIncludes>
 				</configuration>
 			</plugin>
 			<plugin>
