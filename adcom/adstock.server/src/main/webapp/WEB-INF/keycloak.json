@@ -7,5 +7,6 @@
     "expose-token": true,
     "credentials": {
         "secret": "${adstock.server.credential}"
-    }
+    },
+    "use-resource-role-mappings":true
 }
