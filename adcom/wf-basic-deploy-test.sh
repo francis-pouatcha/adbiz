@@ -190,13 +190,12 @@ cp $ADCOM_HOME/adcom.configuration/all-servers/adcom/adcatal/adcatal.xls $JBOSS_
 echo "             Import adinvtry data"
 cd $JBOSS_DATA_DIR/adcom && mkdir adinvtry
 cd $JBOSS_HOME/adcom/adinvtry && mkdir data
-cp $ADCOM_HOME/adcom.configuration/all-servers/adcom/adstock/adinvtry.xls $JBOSS_DATA_DIR/adcom/adinvtry/
+cp $ADCOM_HOME/adcom.configuration/all-servers/adcom/adinvtry/adinvtry.xls $JBOSS_DATA_DIR/adcom/adinvtry/
 
-# cd $JBOSS_HOME/ && mkdir adcom
-# echo "             Copying the .xls file"
-# cd $JBOSS_HOME/adcom/ && mkdir adcatal
-# cd $JBOSS_HOME/adcom/adcatal && mkdir data
-# cp $ADCOM_HOME/adcom.configuration/all-servers/adcom/adcatal/data/adcatal.xls $JBOSS_HOME/adcom/adcatal/data/
+echo "             Import adstock data"
+cd $JBOSS_DATA_DIR/adcom && mkdir adstock
+cd $JBOSS_HOME/adcom/adstock && mkdir data
+cp $ADCOM_HOME/adcom.configuration/all-servers/adcom/adstock/adstock.xls $JBOSS_DATA_DIR/adcom/adstock/
 
 # echo "             Back to adcom home"
 # cd $ADCOM_HOME

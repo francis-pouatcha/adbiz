@@ -15,7 +15,7 @@ import org.adorsys.adcore.xls.StepCallback;
 @Startup
 public class DataSheetLoader extends AbstractLoader {
 
-	String dataDir = "adcom/adstock/data";
+	String dataDir = "standalone/data/adcom/adstock";
 
 	@EJB
 	private CorLdrStepCallback stepCallback;

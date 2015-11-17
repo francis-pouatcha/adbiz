@@ -11,7 +11,6 @@ import javax.validation.constraints.NotNull;
 
 import org.adorsys.adcore.annotation.Description;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
-import org.apache.commons.lang3.StringUtils;
 
 @MappedSuperclass
 public abstract class StkAbstractStockQty extends CoreAbstIdentifObject {
@@ -205,7 +204,6 @@ public abstract class StkAbstractStockQty extends CoreAbstIdentifObject {
 
 	@Override
 	protected String makeIdentif() {
-		if(StringUtils.isNotBlank(stkMvntIdentif)) return stkMvntIdentif;
 		return getArtPic() + "_" + getLotPic() + "_" + getSection() + "_" + getSeqNbr();
 	}
 }
