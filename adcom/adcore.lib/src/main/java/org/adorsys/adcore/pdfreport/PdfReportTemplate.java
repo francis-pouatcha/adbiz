@@ -11,7 +11,6 @@ import org.adorsys.adcore.props.AbstEntiyProps;
 import org.adorsys.adcore.utils.DateUtil;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.jgroups.util.UUID;
 
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -85,7 +84,7 @@ public abstract class PdfReportTemplate<T> {
 		document = new Document(PageSize.A4.rotate(),5,5,5,5);
 		FileOutputStream fos = null;
 		try {
-			file = File.createTempFile(username + "_" + props.getEntityClass().getSimpleName() + "_" + UUID.randomUUID().toString(), "."+ userLanguage +".pdf");
+			file = File.createTempFile(username + "_" + props.getEntityClass().getSimpleName() + "_" + java.util.UUID.randomUUID().toString(), "."+ userLanguage +".pdf");
 			fos = new FileOutputStream(file);
 			PdfWriter.getInstance(document, fos);
 		} catch (IOException | DocumentException e) {

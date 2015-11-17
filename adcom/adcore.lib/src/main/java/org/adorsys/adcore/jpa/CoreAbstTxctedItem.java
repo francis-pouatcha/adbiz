@@ -5,9 +5,9 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
+import org.adorsys.adcore.annotation.Description;
 import org.adorsys.adcore.utils.BigDecimalUtils;
 import org.adorsys.adcore.utils.FinancialOps;
-import org.jboss.annotation.javaee.Description;
 
 /**
  * The qty delivered is the target qty,

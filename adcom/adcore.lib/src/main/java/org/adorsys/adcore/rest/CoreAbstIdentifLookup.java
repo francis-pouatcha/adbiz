@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -19,11 +20,11 @@ import org.adorsys.adcore.jpa.CoreSortOrder;
 import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
-import org.apache.deltaspike.core.util.ReflectionUtils;
-import org.apache.log4j.Logger;
 
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
 public abstract class CoreAbstIdentifLookup<E extends CoreAbstIdentifObject> {
+
+	public static final Logger LOG = Logger.getLogger(CoreAbstIdentifLookup.class.getName());
 
 	protected abstract CoreAbstIdentifRepo<E> getRepo();
 	protected abstract Class<E> getEntityClass();
@@ -228,10 +229,9 @@ public abstract class CoreAbstIdentifLookup<E extends CoreAbstIdentifObject> {
 				}
 			}
 		}
-		Logger.getLogger("Requete:").info("Requete: "+qBuilder);
+		LOG.info("Requete: "+qBuilder);
 		return qBuilder;
 	}
-	
 	
 	public String prepareWhereOp(String fieldName){
 		StringBuilder builder = new StringBuilder();

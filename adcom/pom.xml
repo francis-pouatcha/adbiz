@@ -145,18 +145,6 @@
 				<version>1.9.2</version>
 			</dependency>
 			<dependency>
-				<groupId>org.jboss.web</groupId>
-				<artifactId>jbossweb</artifactId>
-				<version>7.4.8.Final</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.jboss.as</groupId>
-				<artifactId>jboss-as-security</artifactId>
-				<version>7.2.0.Final</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
 				<groupId>org.jboss.resteasy</groupId>
 				<artifactId>resteasy-jackson-provider</artifactId>
 				<version>3.0.6.Final</version>
@@ -178,12 +166,6 @@
 				<groupId>org.apache.pdfbox</groupId>
 				<artifactId>pdfbox</artifactId>
 				<version>1.8.5</version>
-			</dependency>
-			<dependency>
-				<artifactId>jboss-as-web</artifactId>
-				<groupId>org.jboss.as</groupId>
-				<version>7.4.0.Final-redhat-4</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>com.lowagie</groupId>

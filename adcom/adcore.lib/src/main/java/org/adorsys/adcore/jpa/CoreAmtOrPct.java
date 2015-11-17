@@ -1,6 +1,6 @@
 package org.adorsys.adcore.jpa;
 
-import org.jboss.annotation.javaee.Description;
+import org.adorsys.adcore.annotation.Description;
 
 @Description("AmtOrPct.java_description")
 public enum CoreAmtOrPct
