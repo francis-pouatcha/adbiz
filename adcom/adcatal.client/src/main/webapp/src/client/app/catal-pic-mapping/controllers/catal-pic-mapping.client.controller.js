@@ -25,15 +25,15 @@
         };
         vm.createForm = function (model) {
             utils.templateModal(model, 'createForm',
-                'app/catal-pic-mapping/views/create.html', vm);
+                'src/client/app/catal-pic-mapping/views/create.html', vm);
         };
         vm.editForm = function (model) {
             utils.templateModal(model, 'editForm',
-                'app/catal-pic-mapping/views/edit.html', vm);
+                'src/client/app/catal-pic-mapping/views/edit.html', vm);
         };
         vm.showForm = function (model) {
             utils.templateModal(model, 'showForm',
-                'app/catal-pic-mapping/views/view.html', vm);
+                'src/client/app/catal-pic-mapping/views/view.html', vm);
         };
 
         vm.init = function () {

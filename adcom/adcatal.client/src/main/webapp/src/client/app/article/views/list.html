@@ -23,7 +23,9 @@
               <th>{{'CatalArticle.active' | translate}}</th>
               <th>{{'CatalArticle.authorizedSale' | translate}}</th>
           </thead>
-          <tr ng-repeat="article in vm.data">
+          <tr dir-paginate="article in vm.data.list | itemsPerPage: vm.pagination.itemsPerPage"
+              total-items="vm.data.total"
+              current-page="vm.pagination.current">
               <td name="identif-catalArticle" >{{article.identif}}</td>
               <td>{{article.sppu}}</td>
               <td>{{article.maxDisctRate}}</td>
@@ -40,14 +42,19 @@
                       <a class="btn btn-default" title="Edit" href="#/article/{{article.id}}/edit">
                         <span class="glyphicon glyphicon-edit"></span>
                       </a>
-                      <a class="btn btn-danger " title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove(article)" item="article">
+                      <!--<a class="btn btn-danger " title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove(article)" item="article">
                         <span class="glyphicon glyphicon-remove-circle"></span>
-                      </a>
+                      </a>-->
                   </div>
               </td>
           </tr>
       </table>
-
+        <div class="pull-right">
+            <dir-pagination-controls on-page-change="vm.paginate(newPageNumber)"
+                                     boundary-links="true"
+                                     max-size="vm.pagination.maxSize">
+            </dir-pagination-controls>
+        </div>
     </div>
   </div>
 

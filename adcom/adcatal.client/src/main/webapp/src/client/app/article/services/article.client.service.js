@@ -21,6 +21,18 @@
             findByLike: {
                 method: 'POST',
                 url: API_BASE_URL + '/catalarticles/findByLike'
+            },
+            findCustom:{
+                method: 'POST',
+                url: API_BASE_URL + '/catalarticles/findCustom'
+            },
+            listAll:{
+                method: 'GET',
+                url: API_BASE_URL + '/catalarticles',
+                params:{
+                    start: -1,
+                    max: 20
+                }
             }
         };
 

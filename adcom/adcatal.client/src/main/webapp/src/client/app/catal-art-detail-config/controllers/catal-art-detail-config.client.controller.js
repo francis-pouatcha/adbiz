@@ -28,16 +28,16 @@
         };
         vm.createForm = function(model) {
             utils.templateModal(model, 'createForm',
-                'app/catal-art-detail-config/views/create.html', vm);
+                'src/client/app/catal-art-detail-config/views/create.html', vm);
         };
 
         vm.editForm = function(model) {
             utils.templateModal(model, 'editForm',
-                'app/catal-art-detail-config/views/edit.html', vm);
+                'src/client/app/catal-art-detail-config/views/edit.html', vm);
         };
         vm.showForm = function(model) {
             utils.templateModal(model, 'showForm',
-                'app/catal-art-detail-config/views/view.html', vm);
+                'src/client/app/catal-art-detail-config/views/view.html', vm);
         };
         vm.init = function() {
             CatalArtDetailConfig.findBy(coreSearchInputInit(), function(response) {

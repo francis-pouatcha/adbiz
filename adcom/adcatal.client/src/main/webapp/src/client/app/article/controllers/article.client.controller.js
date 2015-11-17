@@ -9,7 +9,7 @@
         '$location',
         'Article',
         'CatalArtLangMapping',
-        'TableSettings',
+        'utils',
         'ArticleForm',
         '$translate'];
     /* @ngInject */
@@ -18,24 +18,40 @@
                                $location,
                                Article,
                                CatalArtLangMapping,
-                               TableSettings,
+                               utils,
                                ArticleForm,
                                $translate) {
         var vm = this;
         vm.data = [];
-        vm.tableParams = TableSettings.getParams(Article);
         vm.article = {};
+
+        // Initialize Search input and pagination
+        vm.searchInput = utils.searchInputInit().searchInput;
+        vm.searchInput.className = 'org.adorsys.adcatal.jpa.CatalArtLangMappingSearchInput';
+        vm.pagination = utils.searchInputInit().pagination;
+
         vm.setFormFields = function(disabled) {
             vm.formFields = ArticleForm.getFormFields(disabled);
         };
 
-        init();
+        findCustom();
 
-        function init() {
-            Article.query({start:0, max:20} , function(data) {
-                vm.data = data.resultList;
-            });
+        function findCustom() {
+            Article.findCustom(vm.searchInput, function(response){
+                    vm.data.list = response.resultList;
+                    vm.data.total = response.total;
+                },
+                function(errorResponse) {
+                    vm.error = errorResponse.data.summary;
+                });
+
         }
+
+        // Paginate over the list
+        vm.paginate = function(newPage){
+            utils.pagination(vm.searchInput, vm.pagination, newPage);
+            findCustom();
+        };
 
         vm.create = function() {
             var catalArtLangMapping = {};
@@ -70,7 +86,7 @@
                 article = Article.get({articleId:article.id}, function() {
                     article.$remove(function() {
                         logger.success('Article deleted');
-                        vm.tableParams.reload();
+                        //vm.tableParams.reload();
                     });
                 });
             } else {
@@ -93,7 +109,6 @@
         };
 
         function coreSearchInputInit() {
-
             vm.articleId = $stateParams.articleId;
             var coreSearchInput = {};
             coreSearchInput.entity = {};
@@ -107,17 +122,17 @@
         }
 
         vm.toViewArticle = function() {
-             Article.get({articleId: $stateParams.articleId}, function(data){
+            Article.get({articleId: $stateParams.articleId}, function(data){
                 vm.article = data;
 
-                 ArticleForm.catalArticleId = $stateParams.articleId;
-                 vm.setFormFields(true);
+                ArticleForm.catalArticleId = $stateParams.articleId;
+                vm.setFormFields(true);
 
-                 CatalArtLangMapping.findBy(coreSearchInputInit(), function (response) {
-                     console.log(response.resultList);
-                     vm.article.artName = response.resultList[0].artName;
-                     vm.article.shortName = response.resultList[0].shortName;
-                 });
+                CatalArtLangMapping.findBy(coreSearchInputInit(), function (response) {
+                    console.log(response.resultList);
+                    vm.article.artName = response.resultList[0].artName;
+                    vm.article.shortName = response.resultList[0].shortName;
+                });
             });
 
         };
@@ -125,9 +140,6 @@
             vm.article = Article.get({articleId: $stateParams.articleId});
             vm.setFormFields(false);
         };
-        activate();
-        function activate() {
-            //logger.info('Activated Article View');
-        }
+
     }
 })();

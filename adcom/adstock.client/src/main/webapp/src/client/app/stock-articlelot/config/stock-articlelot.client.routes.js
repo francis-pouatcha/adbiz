@@ -14,6 +14,16 @@
     function getStates(BASE_VIEW_STOCK) {
         return [
             {
+                state: 'Articlelot',
+                config: {
+                    url: '/',
+                    templateUrl: BASE_VIEW_STOCK+'/app/stock-articlelot/views/list.html',
+                    controller: 'StockArticlelotController',
+                    controllerAs: 'vm',
+                    title: 'List Stock-articlelots'
+                }
+            },
+            {
                 state: 'listStock-articlelot',
                 config: {
                     url: '/stock-articlelot',

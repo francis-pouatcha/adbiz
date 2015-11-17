@@ -27,15 +27,15 @@
         };
         vm.createForm = function (model) {
             utils.templateModal(model, 'createForm',
-                'app/catal-prod-fmly-lang-map/views/create.html', vm);
+                'src/client/app/catal-prod-fmly-lang-map/views/create.html', vm);
         };
         vm.editForm = function (model) {
             utils.templateModal(model, 'editForm',
-                'app/catal-prod-fmly-lang-map/views/edit.html', vm);
+                'src/client/app/catal-prod-fmly-lang-map/views/edit.html', vm);
         };
         vm.showForm = function (model) {
             utils.templateModal(model, 'showForm',
-                'app/catal-prod-fmly-lang-map/views/view.html', vm);
+                'src/client/app/catal-prod-fmly-lang-map/views/view.html', vm);
         };
 
         vm.init = function () {

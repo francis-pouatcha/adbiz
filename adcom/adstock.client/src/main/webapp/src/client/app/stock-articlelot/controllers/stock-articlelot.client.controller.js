@@ -129,6 +129,7 @@
             StockArticlelot.findCustom(vm.searchInput, function(response){
                 vm.data.list = response.resultList;
                 vm.data.total = response.total;
+                    console.log(vm.data);
             }, 
             function(errorResponse) {
                 vm.error = errorResponse.data.summary;

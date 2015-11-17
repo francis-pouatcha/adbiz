@@ -58,7 +58,7 @@
                 stkMvnt = StkMvnt.get({stkMvntId:stkMvnt.id}, function() {
                     stkMvnt.$remove(function() {
                         logger.success('StkMvnt deleted');
-                        vm.tableParams.reload();
+
                     });
                 });
             } else {

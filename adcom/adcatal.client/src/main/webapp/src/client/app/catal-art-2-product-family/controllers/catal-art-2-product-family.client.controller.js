@@ -25,15 +25,15 @@
 
         vm.createForm = function(model) {
             utils.templateModal(model, 'createForm',
-                'app/catal-art-2-product-family/views/create.html', vm);
+                'src/client/app/catal-art-2-product-family/views/create.html', vm);
         };
         vm.editForm = function(model) {
             utils.templateModal(model, 'editForm',
-                'app/catal-art-2-product-family/views/edit.html', vm);
+                'src/client/app/catal-art-2-product-family/views/edit.html', vm);
         };
         vm.showForm = function(model) {
             utils.templateModal(model, 'showForm',
-                'app/catal-art-2-product-family/views/view.html', vm);
+                'src/client/app/catal-art-2-product-family/views/view.html', vm);
         };
         vm.init = function() {
             CatalArt2ProductFamily.findBy(coreSearchInputInit(), function(response) {
