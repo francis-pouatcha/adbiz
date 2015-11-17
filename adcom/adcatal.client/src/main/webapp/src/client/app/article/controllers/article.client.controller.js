@@ -46,7 +46,6 @@
                 });
 
         }
-
         // Paginate over the list
         vm.paginate = function(newPage){
             utils.pagination(vm.searchInput, vm.pagination, newPage);
