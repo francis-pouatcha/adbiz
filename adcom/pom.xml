@@ -37,10 +37,10 @@
 		<module>adcost.server</module>
 		<module>addashboard.client</module>
 		<module>adbase.server</module>
+		<module>adinvtry.client</module>
 <!-- 
 		<module>adprocmt.lib</module>
 		<module>adprocmt.server</module>
-		<module>adinvtry.client</module>
 		<module>adres.client</module>
 		
 		<module>adbase.client</module>
@@ -234,11 +234,6 @@
 		<pluginManagement>
 			<plugins>
 				<plugin>
-					<groupId>org.jboss.as.plugins</groupId>
-					<artifactId>jboss-as-maven-plugin</artifactId>
-					<version>7.6.Final</version>
-				</plugin>
-				<plugin>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.2</version>
 					<configuration>
@@ -313,19 +308,16 @@
 					</configuration>
 				</plugin>
 				<plugin>
-					<artifactId>maven-ear-plugin</artifactId>
-					<version>2.10</version>
-					<configuration>
-						<defaultLibBundleDir>lib/</defaultLibBundleDir>
-						<skinnyWars>true</skinnyWars>
-					</configuration>
-				</plugin>
-				<plugin>
 					<artifactId>maven-war-plugin</artifactId>
 					<version>2.4</version>
 					<configuration>
 						<failOnMissingWebXml>false</failOnMissingWebXml>
 					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.wildfly.plugins</groupId>
+					<artifactId>wildfly-maven-plugin</artifactId>
+					<version>1.1.0.Alpha4</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -341,17 +333,10 @@
 				<artifactId>site-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
-				<artifactId>maven-ear-plugin</artifactId>
-			</plugin>
-			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.jboss.as.plugins</groupId>
-				<artifactId>jboss-as-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
