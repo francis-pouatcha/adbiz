@@ -17,6 +17,18 @@
             update: {
                 method: 'PUT'
             },
+            findCustom:{
+                method: 'POST',
+                url: API_BASE_ADINVTRY_URL + '/invinvtrys/findCustom'
+            },
+            listAll:{
+                method: 'GET',
+                url: API_BASE_ADINVTRY_URL + '/invinvtrys',
+                params:{
+                    start: -1,
+                    max: 20
+                }
+            },
             close: {
                 method: 'PUT',
                 url: API_BASE_ADINVTRY_URL + '/inventory/:identif/close'

@@ -6,19 +6,36 @@
         .module('app.invinvtry')
         .controller('invInvtrysCtlr', invInvtrysCtlr);
 
-    invInvtrysCtlr.$inject = ['$scope','invInvtryManagerResource' ];
+    invInvtrysCtlr.$inject = ['$scope','invInvtryManagerResource','utils'];
     /* @ngInject */
-    function invInvtrysCtlr($scope, invInvtryManagerResource) {
+    function invInvtrysCtlr($scope, invInvtryManagerResource, utils) {
 
-        $scope.invInvtrys = [];
+        $scope.data = {};
+        $scope.data.invInvtrys = [];
+        $scope.data.total;
 
-        init();
+        // Initialize Search input and pagination
+        $scope.searchInput = utils.searchInputInit().searchInput;
+        $scope.searchInput.className = 'org.adorsys.adinvtry.jpa.InvInvtrySearchInput';
+        $scope.pagination = utils.searchInputInit().pagination;
 
-        function init(){
-            invInvtryManagerResource.query({start:0, max:20}, function(response){
-                $scope.invInvtrys = response;
-            });
+        findCustom();
+
+        function findCustom() {
+            invInvtryManagerResource.findCustom($scope.searchInput, function(response){
+                    $scope.data.invInvtrys = response.resultList;
+                    $scope.data.total = response.total;
+                },
+                function(errorResponse) {
+                    $scope.error = errorResponse.data.summary;
+                });
+
         }
+        // Paginate over the list
+        $scope.paginate = function(newPage){
+            utils.pagination($scope.searchInput, $scope.pagination, newPage);
+            findCustom();
+        };
     }
 
 
