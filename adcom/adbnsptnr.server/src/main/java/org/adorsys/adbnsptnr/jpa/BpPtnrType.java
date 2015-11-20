@@ -1,6 +1,6 @@
 package org.adorsys.adbnsptnr.jpa;
 
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
 
 @Description("BpPtnrType_description")
 public enum BpPtnrType

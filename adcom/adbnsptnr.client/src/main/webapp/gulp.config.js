@@ -10,17 +10,11 @@ module.exports = function() {
     var bowerFiles = wiredep({devDependencies: true})['js'];
     var bower = {
         json: require('./bower.json'),
-        directory: './bower_components/',
+        //directory: '../../../../jslibs/bower_components/',
+        directory: 'bower_components/',
         ignorePath: '../..'
     };
     var nodeModules = 'node_modules';
-
-    var karma = {
-        files: [bower.directory+'*.js',
-                clientApp + 'blocks/router/*.js',
-                clientApp+'*.js'],
-        exclude: []
-    };
 
     var config = {
         /**
@@ -43,12 +37,14 @@ module.exports = function() {
         // app js, with no specs
         js: [
                 clientApp + '**/*.module.js',
-                clientApp + '**/*.js',
+                clientApp + 'blocks/**/*.js',
+            clientApp + '**/*.js',
                 '!' + clientApp + '**/*.spec.js'
         ],
         jsOrder: [
             '**/app.module.js',
             '**/*.module.js',
+            '**/*.service.js',
             '**/*.js'
         ],
         less: client + 'styles/styles.less',
@@ -159,10 +155,24 @@ module.exports = function() {
         var options = {
             files: [].concat(
                 bowerFiles,
+                bower.directory + 'angular/angular.js',
+                bower.directory + 'angular-mocks/angular-mocks.js',
+                bower.directory + 'angular-animate/angular-animate.js',
+                bower.directory + 'angular-ui-router/release/angular-ui-router.js',
+                bower.directory + 'angular-route/angular-route.js',
+                clientApp + 'blocks/**/*.module.js',
+                clientApp + 'blocks/**/*.provider.js',
+                clientApp + 'blocks/**/*.js',
+                clientApp + 'blocks/router/router-helper.provider.js',
+                clientApp + 'blocks/router/router.module.js',
                 config.specHelpers,
-                    clientApp + '**/*.module.js',
-                    clientApp + '**/*.js',
-                    temp + config.templateCache.file,
+                client + 'core/*.js',
+                clientApp + '**/*.module.js',
+                clientApp + 'article/config/*.js',
+                clientApp + 'article/services/*.service.js',
+                clientApp + 'article/controllers/*.js',
+                clientApp + 'article/services/*.js',
+                temp + config.templateCache.file,
                 config.serverIntegrationSpecs
             ),
             exclude: [],

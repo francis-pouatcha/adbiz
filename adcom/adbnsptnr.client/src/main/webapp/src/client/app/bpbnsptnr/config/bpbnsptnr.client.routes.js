@@ -17,13 +17,13 @@
                 state: 'listBpbnsptnr',
                 config: {
                     url: '/bpbnsptnr',
-                    templateUrl: 'app/bpbnsptnr/views/list.html',
+                    templateUrl: 'src/client/app/bpbnsptnr/views/list.html',
                     controller: 'BpbnsptnrController',
                     controllerAs: 'vm',
                     title: 'List Bpbnsptnrs',
                     settings: {
                         nav: 3,
-                        content: '<i class="fa fa-folder-open"></i> Bpbnsptnrs'
+                        content: '<i class="fa fa-folder-open"></i> Partner'
                     }
                 }
             },
@@ -31,7 +31,7 @@
                 state: 'createBpbnsptnr',
                 config: {
                     url: '/bpbnsptnr/create',
-                    templateUrl: 'app/bpbnsptnr/views/create.html',
+                    templateUrl: 'src/client/app/bpbnsptnr/views/create.html',
                     controller: 'BpbnsptnrController',
                     controllerAs: 'vm',
                     title: 'Create Bpbnsptnr'
@@ -41,7 +41,7 @@
                 state: 'viewBpbnsptnr',
                 config: {
                     url: '/bpbnsptnr/:bpbnsptnrId',
-                    templateUrl: 'app/bpbnsptnr/views/view.html',
+                    templateUrl: 'src/client/app/bpbnsptnr/views/view.html',
                     controller: 'BpbnsptnrController',
                     controllerAs: 'vm',
                     title: 'View Bpbnsptnr'
@@ -51,7 +51,7 @@
                 state: 'editBpbnsptnr',
                 config: {
                     url: '/bpbnsptnr/:bpbnsptnrId/edit',
-                    templateUrl: 'app/bpbnsptnr/views/edit.html',
+                    templateUrl: 'src/client/app/bpbnsptnr/views/edit.html',
                     controller: 'BpbnsptnrController',
                     controllerAs: 'vm',
                     title: 'Edit Bpbnsptnr'

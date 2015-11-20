@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 import org.adorsys.adbase.jpa.BaseCountryName;
 import org.adorsys.adcore.jpa.AbstractMvmtData;
 import org.adorsys.adcore.utils.SequenceGenerator;
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
 import org.apache.commons.lang3.StringUtils;
 
 @Entity

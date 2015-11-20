@@ -7,12 +7,12 @@ import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.adorsys.adcore.jpa.CoreAbstTimedData;
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 
 @Entity
 @Description("BpPtnrContact_description")
-public class BpPtnrContact extends CoreAbstTimedData {
+public class BpPtnrContact extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = -6876392363267204213L;
 

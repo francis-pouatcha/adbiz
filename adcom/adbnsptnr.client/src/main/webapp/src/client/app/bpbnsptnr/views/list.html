@@ -7,7 +7,7 @@
     <div class="panel-body">
 
       <div class="pull-right">
-        <a type="button" class="btn btn-success" href="/bpbnsptnr/create">
+        <a type="button" class="btn btn-success" href="#/bpbnsptnr/create">
           <i class="glyphicon glyphicon-open"></i> New Bpbnsptnr
         </a>
       </div>
@@ -18,10 +18,10 @@
               <td data-title="'Address'" sortable="'address'" filter="{'address': 'text'}">{{bpbnsptnr.address}}</td>
               <td>
                  <div class="table-actions">
-                      <a class="btn btn-default" title="View" href="/bpbnsptnr/{{bpbnsptnr.id}}">
+                      <a class="btn btn-default" title="View" href="#/bpbnsptnr/{{bpbnsptnr.id}}">
                         <span class="glyphicon glyphicon-eye-open"></span>
                       </a>
-                      <a class="btn btn-default" title="Edit" href="/bpbnsptnr/{{bpbnsptnr.id}}/edit">
+                      <a class="btn btn-default" title="Edit" href="#/bpbnsptnr/{{bpbnsptnr.id}}/edit">
                         <span class="glyphicon glyphicon-edit"></span>
                       </a>
                       <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove(bpbnsptnr)" item="bpbnsptnr">

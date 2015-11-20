@@ -6,12 +6,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
-import org.adorsys.adcore.jpa.CoreAbstTimedData;
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 
 @Entity
 @Description("BpPtnrCreditDtls_description")
-public class BpPtnrCreditDtls extends CoreAbstTimedData {
+public class BpPtnrCreditDtls extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = 3088436723152282857L;
 

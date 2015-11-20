@@ -10,14 +10,14 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-import org.adorsys.adcore.jpa.CoreAbstTimedData;
+import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 import org.adorsys.adcore.utils.CalendarUtil;
-import org.adorsys.javaext.description.Description;
 import org.apache.commons.lang3.StringUtils;
 
 @Entity
 @Description("BpIndivPtnrName_description")
-public class BpIndivPtnrName extends CoreAbstTimedData {
+public class BpIndivPtnrName extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = -7316060758866987627L;
 

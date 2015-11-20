@@ -4,9 +4,19 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="today-datas">
+                    	 <li class="blightblue" ng-show="vm.hasWorkspace('adbnsptnr.client')"  >
+                            <a ng-href="{{GlobalCtlr.BASE_SERVER}}/adbnsptnr.client" target="_self" >
+                                <div class="pull-left"><i class="glyphicon glyphicon-icon-group"></i></div>
+                                <div class="datas-text pull-right">
+                                    <span class="bold">Business Partner</span> Creation des fournisseurs, clients, assureurs
+                                </div>
+                                <div class="clearfix"></div>
+                            </a>
+                        </li>
+                        
                         <li class="blightblue" ng-show="vm.hasWorkspace('adcatal.client')" >
                             <a ng-href="{{GlobalCtlr.BASE_SERVER}}/adcatal.client" target="_self" >
-                                <div class="pull-left"><i class="glyphicon glyphicon-th"></i></div>
+                                <div class="pull-left"><i class="glyphicon glyphicon-icon-group"></i></div>
                                 <div class="datas-text pull-right">
                                     <span class="bold">CATALOGUE</span> creer, editer, manager les articles
                                 </div>
@@ -16,9 +26,9 @@
 
                         <li class="borange" ng-show="vm.hasWorkspace('adstock.client')"  >
                             <a ng-href="{{GlobalCtlr.BASE_SERVER}}/adstock.client" target="_self" >
-                                <div class="pull-left"><i class="glyphicon glyphicon-home"></i></div>
+                                <div class="pull-left"><i class="glyphicon glyphicon-icon-inbox"></i></div>
                                 <div class="datas-text pull-right">
-                                    <span class="bold">STOCK</span> visualiser le stock, editer le prix par lot
+                                    <span class="bold">STOCK</span> visualiser le stock par lot, rayon...
                                 </div>
                                 <div class="clearfix"></div>
                             </a>

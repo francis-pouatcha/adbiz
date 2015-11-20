@@ -5,12 +5,12 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.adorsys.adcore.jpa.CoreAbstTimedData;
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 
 @Entity
 @Description("BpPtnrCtgryDtls_description")
-public class BpPtnrCtgryDtls extends CoreAbstTimedData {
+public class BpPtnrCtgryDtls extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = -3436596869400887986L;
 
