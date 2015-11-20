@@ -173,7 +173,7 @@ cp $ADCOM_HOME/adcatal.client/target/adcatal.client.war $JBOSS_HOME/standalone/d
 cp $ADCOM_HOME/adstock.client/target/adstock.client.war $JBOSS_HOME/standalone/deployments/
 cp $ADCOM_HOME/adinvtry.client/target/adinvtry.client.war $JBOSS_HOME/standalone/deployments/
 
-#cp $ADCOM_HOME/adbnsptnr.client/target/adbnsptnr.client.war $JBOSS_HOME/standalone/deployments/
+cp $ADCOM_HOME/adbnsptnr.client/target/adbnsptnr.client.war $JBOSS_HOME/standalone/deployments/
 
 
 cp $ADCOM_HOME/adcatal.server/target/adcatal.server.war $JBOSS_HOME/standalone/deployments/
