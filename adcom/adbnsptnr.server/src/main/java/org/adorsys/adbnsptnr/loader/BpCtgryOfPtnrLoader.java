@@ -10,7 +10,7 @@ import org.adorsys.adbnsptnr.rest.BpCtgryOfPtnrEJB;
 import org.adorsys.adcore.xls.AbstractObjectLoader;
 
 @Stateless
-public class BpCtgryOfPtnrLoader extends AbstractObjectLoader<BpCtgryOfPtnr> {
+public class BpCtgryOfPtnrLoader extends CoreAbstEntityLoader<BpCtgryOfPtnr> {
 
 	@Inject
 	private BpCtgryOfPtnrEJB ejb;

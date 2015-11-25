@@ -6,14 +6,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
-import org.adorsys.adcore.jpa.CoreAbstTimedData;
 import org.adorsys.adcore.utils.BigDecimalUtils;
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 import org.apache.commons.lang3.StringUtils;
 
 @Entity
 @Description("BpLegalPtnrId_description")
-public class BpLegalPtnrId extends CoreAbstTimedData {
+public class BpLegalPtnrId extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = -1682554156480323362L;
 

@@ -36,6 +36,11 @@
             utils.pagination($scope.searchInput, $scope.pagination, newPage);
             findCustom();
         };
+
+        $scope.show = function(invtry, index){
+
+
+        }
     }
 
 
@@ -52,15 +57,7 @@
     }
 
 
-    angular
-        .module('app.invinvtry')
-        .controller('invInvtryShowCtlr', invInvtryShowCtlr);
 
-    invInvtryShowCtlr.$inject = ['$scope'];
-    /* @ngInject */
-    function invInvtryShowCtlr($scope) {
-
-    }
 
 })();
 

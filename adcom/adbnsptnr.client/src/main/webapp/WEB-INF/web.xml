@@ -4,24 +4,7 @@
 
     <module-name>adbnsptnr.client</module-name>
 
-    <security-constraint>
-        <web-resource-collection>
-        	<web-resource-name>all</web-resource-name>
-            <url-pattern>/*</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>role.adbnsptnr.client</role-name>
-        </auth-constraint>
-    </security-constraint>
-    <login-config>
-        <auth-method>KEYCLOAK</auth-method>
-        <realm-name>adcom</realm-name>
-    </login-config>
-    <security-role>
-        <role-name>role.adbnsptnr.client</role-name>
-    </security-role>
-
     <welcome-file-list>
-        <welcome-file>/build/index.html</welcome-file>
+        <welcome-file>/src/client/index.html</welcome-file>
     </welcome-file-list>
 </web-app>

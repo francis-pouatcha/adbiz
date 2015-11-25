@@ -1,7 +1,6 @@
 package org.adorsys.adbnsptnr.jpa;
 
-import org.adorsys.javaext.description.Description;
-
+import org.adorsys.adcore.annotation.Description;
 @Description("BpPtnrContactRole_description")
 public enum BpPtnrContactRole
 {

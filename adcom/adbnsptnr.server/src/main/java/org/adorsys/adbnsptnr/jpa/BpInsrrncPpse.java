@@ -12,8 +12,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.adorsys.adcore.jpa.CoreAbstTimedData;
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 
 /**
  * A purpose of an insurance contract.
@@ -23,7 +23,7 @@ import org.adorsys.javaext.description.Description;
  */
 @Entity
 @Description("BpInsrrncPpse_description")
-public class BpInsrrncPpse extends CoreAbstTimedData {
+public class BpInsrrncPpse extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = 1867049695472622853L;
 

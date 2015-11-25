@@ -8,12 +8,12 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.adorsys.adbase.jpa.BaseCountryName;
-import org.adorsys.adcore.jpa.CoreAbstIdentifData;
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 
 @Entity
 @Description("BpBnsPtnr_description")
-public class BpBnsPtnr extends CoreAbstIdentifData {
+public class BpBnsPtnr extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = -9038535636658903372L;
 
