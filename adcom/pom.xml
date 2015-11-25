@@ -20,7 +20,7 @@
 				
 		<module>adres.lib</module>
 
-		<module>adcatal.client.sample</module>
+		
 
 		<module>adcore.lib</module>
 		<module>adbase.lib</module>
