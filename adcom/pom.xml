@@ -38,9 +38,9 @@
 		<module>addashboard.client</module>
 		<module>adbase.server</module>
 		<module>adinvtry.client</module>
-<!-- 
 		<module>adprocmt.lib</module>
 		<module>adprocmt.server</module>
+<!-- 
 		<module>adres.client</module>
 		
 		<module>adbase.client</module>

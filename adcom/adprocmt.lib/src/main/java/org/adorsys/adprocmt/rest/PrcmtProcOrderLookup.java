@@ -2,7 +2,6 @@ package org.adorsys.adprocmt.rest;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 
 import org.adorsys.adcore.repo.CoreAbstBsnsObjectRepo;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjectLookup;
@@ -15,22 +14,14 @@ public class PrcmtProcOrderLookup extends CoreAbstBsnsObjectLookup<PrcmtProcOrde
 	@Inject
 	private PrcmtProcOrderRepository repository;
 
-	@Inject
-	private EntityManager em ;
-
 	@Override
 	protected CoreAbstBsnsObjectRepo<PrcmtProcOrder> getBsnsRepo() {
 		return repository;
 	}
 
 	@Override
-	protected Class<PrcmtProcOrder> getBsnsObjClass() {
+	protected Class<PrcmtProcOrder> getEntityClass() {
 		return PrcmtProcOrder.class;
-	}
-
-	@Override
-	protected EntityManager getEntityManager() {
-		return em;
 	}
 
 	

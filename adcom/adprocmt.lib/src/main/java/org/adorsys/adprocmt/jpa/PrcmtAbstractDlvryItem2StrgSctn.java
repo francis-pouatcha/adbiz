@@ -6,14 +6,14 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
-import org.adorsys.adcore.jpa.CoreAbstIdentifData;
+import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 import org.adorsys.adcore.utils.BigDecimalUtils;
-import org.adorsys.javaext.description.Description;
 import org.apache.commons.lang3.StringUtils;
 
 @MappedSuperclass
 @Description("PrcmtDelivery_description")
-public abstract class PrcmtAbstractDlvryItem2StrgSctn extends CoreAbstIdentifData {
+public abstract class PrcmtAbstractDlvryItem2StrgSctn extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = 2920134612071462983L;
 

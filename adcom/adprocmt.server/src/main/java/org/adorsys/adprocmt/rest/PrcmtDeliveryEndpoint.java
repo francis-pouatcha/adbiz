@@ -22,11 +22,16 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.adorsys.adbase.security.SecurityUtil;
+import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchInput;
+import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchResult;
 import org.adorsys.adcore.pdfreport.PdfReportTemplate;
+import org.adorsys.adcore.rest.CoreAbstBsnsObjectEndpoint;
+import org.adorsys.adcore.rest.CoreAbstBsnsObjectLookup;
 import org.adorsys.adprocmt.jpa.PrcmtDelivery;
 import org.adorsys.adprocmt.jpa.PrcmtDeliverySearchInput;
 import org.adorsys.adprocmt.jpa.PrcmtDeliverySearchResult;
 import org.adorsys.adprocmt.jpa.PrcmtDlvryItem;
+import org.adorsys.adprocmt.repo.PrcmtDeliveryRepository;
 
 /**
  * 
@@ -34,183 +39,33 @@ import org.adorsys.adprocmt.jpa.PrcmtDlvryItem;
 @Stateless
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 @Path("/prcmtdeliverys")
-public class PrcmtDeliveryEndpoint
+public class PrcmtDeliveryEndpoint extends CoreAbstBsnsObjectEndpoint<PrcmtDelivery, CoreAbstBsnsObjectSearchInput<PrcmtDelivery>, CoreAbstBsnsObjectSearchResult<PrcmtDelivery>>
 {
 
-   @Inject
-   private PrcmtDeliveryEJB ejb;
+	@Inject
+	private PrcmtDeliveryRepository repo;
+	@Inject
+	private PrcmtDeliveryLookup lookup;
+	
+	@Override
+	protected CoreAbstBsnsObjectLookup<PrcmtDelivery> getLookup() {
+		return lookup;
+	}
 
-   @POST
-   @Consumes({ "application/json", "application/xml" })
-   @Produces({ "application/json", "application/xml" })
-   public PrcmtDelivery create(PrcmtDelivery entity)
-   {
-      return detach(ejb.createCustom(entity));
-   }
+	@Override
+	protected Field[] getEntityFields() {
+		return PrcmtDelivery_.class.getFields();
+	}
 
-   @DELETE
-   @Path("/{id}")
-   public Response deleteById(@PathParam("id") String id)
-   {
-      PrcmtDelivery deleted = ejb.deleteById(id);
-      if (deleted == null)
-         return Response.status(Status.NOT_FOUND).build();
+	@Override
+	protected CoreAbstBsnsObjectSearchResult<PrcmtDelivery> newSearchResult(
+			Long size, List<PrcmtDelivery> resultList,
+			CoreAbstBsnsObjectSearchInput<PrcmtDelivery> searchInput) {
+		return new PrcmtDeliverySearchResult(size, resultList, searchInput);
+	}
 
-      return Response.ok(detach(deleted)).build();
-   }
-   @PUT
-   @Path("/{id}")
-   @Produces({ "application/json", "application/xml" })
-   @Consumes({ "application/json", "application/xml" })
-   public PrcmtDelivery update(PrcmtDelivery entity)
-   {
-      return detach(ejb.update(entity));
-   }
-
-   @GET
-   @Path("/{id}")
-   @Produces({ "application/json", "application/xml" })
-   public Response findById(@PathParam("id") String id)
-   {
-      PrcmtDelivery found = ejb.findById(id);
-      if (found == null)
-         return Response.status(Status.NOT_FOUND).build();
-      return Response.ok(detach(found)).build();
-   }
-
-   @GET
-   @Produces({ "application/json", "application/xml" })
-   public PrcmtDeliverySearchResult listAll(@QueryParam("start") int start,
-         @QueryParam("max") int max)
-   {
-      List<PrcmtDelivery> resultList = ejb.listAll(start, max);
-      PrcmtDeliverySearchInput searchInput = new PrcmtDeliverySearchInput();
-      searchInput.setStart(start);
-      searchInput.setMax(max);
-      return new PrcmtDeliverySearchResult((long) resultList.size(),
-            detach(resultList), detach(searchInput));
-   }
-   
-  
-
-   @GET
-   @Path("/count")
-   public Long count()
-   {
-      return ejb.count();
-   }
-
-   @POST
-   @Path("/findBy")
-   @Produces({ "application/json", "application/xml" })
-   @Consumes({ "application/json", "application/xml" })
-   public PrcmtDeliverySearchResult findBy(PrcmtDeliverySearchInput searchInput)
-   {
-      SingularAttribute<PrcmtDelivery, ?>[] attributes = readSeachAttributes(searchInput);
-      Long count = ejb.countBy(searchInput.getEntity(), attributes);
-      List<PrcmtDelivery> resultList = ejb.findBy(searchInput.getEntity(),
-            searchInput.getStart(), searchInput.getMax(), attributes);
-      return new PrcmtDeliverySearchResult(count, detach(resultList),
-            detach(searchInput));
-   }
-   
-   @POST
-   @Path("/findCustom")
-   @Produces({ "application/json", "application/xml" })
-   @Consumes({ "application/json", "application/xml" })
-   public PrcmtDeliverySearchResult findCustom(PrcmtDeliverySearchInput searchInput)
-   {
-      return ejb.findCustom(searchInput);
-   }
-
-   @POST
-   @Path("/countBy")
-   @Consumes({ "application/json", "application/xml" })
-   public Long countBy(PrcmtDeliverySearchInput searchInput)
-   {
-      SingularAttribute<PrcmtDelivery, ?>[] attributes = readSeachAttributes(searchInput);
-      return ejb.countBy(searchInput.getEntity(), attributes);
-   }
-
-   @POST
-   @Path("/findByLike")
-   @Produces({ "application/json", "application/xml" })
-   @Consumes({ "application/json", "application/xml" })
-   public PrcmtDeliverySearchResult findByLike(PrcmtDeliverySearchInput searchInput)
-   {
-      SingularAttribute<PrcmtDelivery, ?>[] attributes = readSeachAttributes(searchInput);
-      Long countLike = ejb.countByLike(searchInput.getEntity(), attributes);
-      List<PrcmtDelivery> resultList = ejb.findByLike(searchInput.getEntity(),
-            searchInput.getStart(), searchInput.getMax(), attributes);
-      return new PrcmtDeliverySearchResult(countLike, detach(resultList),
-            detach(searchInput));
-   }
-
-   @POST
-   @Path("/countByLike")
-   @Consumes({ "application/json", "application/xml" })
-   public Long countByLike(PrcmtDeliverySearchInput searchInput)
-   {
-      SingularAttribute<PrcmtDelivery, ?>[] attributes = readSeachAttributes(searchInput);
-      return ejb.countByLike(searchInput.getEntity(), attributes);
-   }
-
-   @SuppressWarnings("unchecked")
-   private SingularAttribute<PrcmtDelivery, ?>[] readSeachAttributes(
-         PrcmtDeliverySearchInput searchInput)
-   {
-      List<String> fieldNames = searchInput.getFieldNames();
-      List<SingularAttribute<PrcmtDelivery, ?>> result = new ArrayList<SingularAttribute<PrcmtDelivery, ?>>();
-      for (String fieldName : fieldNames)
-      {
-         Field[] fields = PrcmtDelivery_.class.getFields();
-         for (Field field : fields)
-         {
-            if (field.getName().equals(fieldName))
-            {
-               try
-               {
-                  result.add((SingularAttribute<PrcmtDelivery, ?>) field.get(null));
-               }
-               catch (IllegalArgumentException e)
-               {
-                  throw new IllegalStateException(e);
-               }
-               catch (IllegalAccessException e)
-               {
-                  throw new IllegalStateException(e);
-               }
-            }
-         }
-      }
-      return result.toArray(new SingularAttribute[result.size()]);
-   }
-
-   
-
-   private PrcmtDelivery detach(PrcmtDelivery entity)
-   {
-      if (entity == null)
-         return null;
-
-      return entity;
-   }
-
-   private List<PrcmtDelivery> detach(List<PrcmtDelivery> list)
-   {
-      if (list == null)
-         return list;
-      List<PrcmtDelivery> result = new ArrayList<PrcmtDelivery>();
-      for (PrcmtDelivery entity : list)
-      {
-         result.add(detach(entity));
-      }
-      return result;
-   }
-
-   private PrcmtDeliverySearchInput detach(PrcmtDeliverySearchInput searchInput)
-   {
-      searchInput.setEntity(detach(searchInput.getEntity()));
-      return searchInput;
-   }
+	@Override
+	protected CoreAbstBsnsObjectSearchInput<PrcmtDelivery> newSearchInput() {
+		return new PrcmtDeliverySearchInput();
+	}
 }

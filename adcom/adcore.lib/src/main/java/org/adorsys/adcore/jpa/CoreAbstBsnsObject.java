@@ -15,6 +15,7 @@ import javax.validation.constraints.Size;
 import org.adorsys.adcore.annotation.DateFormatPattern;
 import org.adorsys.adcore.utils.BigDecimalUtils;
 import org.adorsys.adcore.utils.FinancialOps;
+import org.apache.commons.lang3.StringUtils;
 
 @MappedSuperclass
 public abstract class CoreAbstBsnsObject extends CoreAbstBsnsObjectHeader {
@@ -667,4 +668,11 @@ public abstract class CoreAbstBsnsObject extends CoreAbstBsnsObjectHeader {
 		}
 		this.slsNetPymtAmt = FinancialOps.substract(this.slsNetPrcTaxIncl, this.slsPymtDscntAmt);
 	}
+	
+	@Override
+	protected String makeIdentif() {
+		if(StringUtils.isBlank(identif)) throw new IllegalStateException("Identifier must be set before creation");
+		return identif;
+	}
+	
 }
