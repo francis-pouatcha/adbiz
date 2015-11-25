@@ -157,6 +157,12 @@ public abstract class CoreAbstBsnsObject extends CoreAbstBsnsObjectHeader {
 	@DateFormatPattern(pattern = "dd-MM-yyyy HH:mm")
 	private Date postedDate;
 	
+	@Column
+	private String status;
+	
+	@Column
+	private String login;
+	
 	/*
 	 * Define the group to which this inventory belongs to. IT is necessary to
 	 * help select inventory belonging to the same group and compare them and even merge them.
@@ -448,6 +454,22 @@ public abstract class CoreAbstBsnsObject extends CoreAbstBsnsObjectHeader {
 
 	public void setPostedDate(Date postedDate) {
 		this.postedDate = postedDate;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 	public String getTxGroup() {

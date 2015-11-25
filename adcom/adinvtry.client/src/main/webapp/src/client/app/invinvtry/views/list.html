@@ -58,9 +58,7 @@
                         </div>
                         <div class="form-group col-lg-2">
                             <label class=" control-label" for="acsngUser"> {{'InvInvtry_acsngUser_description.title' | translate}}</label>
-                            <input type="text" ng-model="searchInput.entity.acsngUser" id="acsngUser" name="acsngUser" class="form-control" ng-change="onUserChanged()"
-                                   typeahead="loginName as (loginName.loginName + ' : ' + loginName.fullName) for loginName in invInvtryUtils.loadUsers($viewValue)"
-                                   typeahead-loading="loading" typeahead-min-length="3" typeahead-on-select='onUserSelected($item, $model, $label)'>
+                            <input type="text" ng-model="searchInput.entity.acsngUser" id="acsngUser" name="acsngUser" class="form-control" >
                         </div>
 
                         <div class="col-lg-2">
@@ -185,7 +183,7 @@
                     <tr>
                         <th> {{'InvInvtry_invtryNbr_description.title' | translate}}</th>
                         <th> {{'InvInvtry_acsngUser_description.title' | translate}}</th>
-                       <!-- <th> {{'InvInvtry_invtryGroup_description.title' | translate}}</th>-->
+                        <th> {{'InvInvtry_invtryGroup_description.title' | translate}}</th>
                         <th> {{'InvInvtry_gapSaleAmtHT_description.title' | translate}}</th>
                         <th> {{'InvInvtry_gapPurchAmtHT_description.title' | translate}}</th>
                         <th> {{'InvInvtry_invtryStatus_description.title' | translate}}</th>
@@ -203,18 +201,17 @@
                         total-items="data.total"
                         current-page="pagination.current" >
                         <td>{{invtry.identif}}</td>
-                        <td>{{invtry.acsngUser}}</td>
-                        <!--<td>{{invtry.invtryGroup}}</td>-->
+                        <td>{{invtry.login}}</td>
+                        <td>{{invtry.invtryGroup}}</td>
                         <td>{{invtry.gapSaleAmtHT}}</td>
                         <td>{{invtry.gapPurchAmtHT}}</td>
-                        <td>{{invtry.invtryStatus}}</td>
+                        <td>{{invtry.status}}</td>
                         <td>{{invtry.prepareDt | date:'yyyy-MM-dd HH:mm'}}</td>
                         <td>{{invtry.rangeStart}}</td>
                         <td>{{invtry.rangeEnd}}</td>
                         <td>{{invtry.section}}</td>
                         <td>{{invtry.descptn}}</td>
-                        <td><a href="" ng-click="show(invtry, $index)"><i class="glyphicon glyphicon-eye-open"></i></a></td>
-                        <!--<td><input type="checkbox" ng-checked="isSelected(invtry)" ng-click="selChanged(invtry)"> </td>-->
+                        <td><a href="#/invinvtry/{{invtry.identif}}/show/"><i class="glyphicon glyphicon-eye-open"></i></a></td>
                     </tr>
                     </tbody>
                 </table>
@@ -228,26 +225,5 @@
         </div>
     </div>
 </div>
-<!--<div class="panel panel-default">
-    <div class="panel-body">
-        <div class="row">
-            <div class="col-lg-2">
-                <button class="btn-default btn" ng-click="merge()" ng-disabled="!mainInvtry.invtryNbr || selection.length<1 || (selection.indexOf(mainInvtry.invtryNbr)!=-1 && selection.length<2)"><i class="glyphicon glyphicon-link" ></i>  {{'Entity_merge.title' | translate}} </button>
-            </div>
-            <div class="col-lg-3">
-                <span ng-show="mainInvtry.invtryNbr">{{'InvInvtry_mainInvtry_description.title' | translate}}: {{mainInvtry.invtryNbr}}</span>
-            </div>
-            <div class="col-lg-5">
-                <span ng-show="selection.length>0"> {{'Entity_selected.title' | translate}}: {{selection}}</span>
-            </div>
-            <div class="col-lg-2">
-	                	<span class="pull-right">
-	                    	<button class="btn-default btn" ng-click="compare()" ng-disabled="selection.length<1"><i class="glyphicon glyphicon-tasks"></i> {{'Entity_compare.title' | translate}}</button>
-		                </span>
-            </div>
-        </div>
-    </div>
-</div>-->
-
 </section>
 
