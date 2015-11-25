@@ -1,6 +1,6 @@
 package org.adorsys.adprocmt.spi.dflt;
 
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
 
 @Description("ProcmtPOTriggerModeEnum_description")
 public enum ProcmtPOTriggerModeEnum

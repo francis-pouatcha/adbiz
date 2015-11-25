@@ -4,12 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
-import org.adorsys.adcore.jpa.CoreAbstIdentifData;
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 
 @MappedSuperclass
 @Description("PrcmtDelivery_description")
-public abstract class PrcmtAbstractDlvry2PO extends CoreAbstIdentifData {
+public abstract class PrcmtAbstractDlvry2PO extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = -586699504276634188L;
 

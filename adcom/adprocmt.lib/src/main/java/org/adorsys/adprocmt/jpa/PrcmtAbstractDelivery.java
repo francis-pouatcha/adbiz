@@ -8,13 +8,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import org.adorsys.adcore.annotation.Description;
 import org.adorsys.adcore.jpa.CoreAbstBsnsObject;
-import org.adorsys.javaext.description.Description;
-import org.adorsys.javaext.format.DateFormatPattern;
 
 @MappedSuperclass
 @Description("PrcmtDelivery_description")
-public class PrcmtAbstractDelivery extends CoreAbstBsnsObject {
+public abstract class PrcmtAbstractDelivery extends CoreAbstBsnsObject {
 	private static final long serialVersionUID = 6822137801850663249L;
 
 	@Column
@@ -24,7 +23,6 @@ public class PrcmtAbstractDelivery extends CoreAbstBsnsObject {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Description("PrcmtDelivery_dtOnDlvrySlip_description")
-	@DateFormatPattern(pattern = "dd-MM-yyyy")
 	private Date dtOnDlvrySlip;
 
 	@Temporal(TemporalType.TIMESTAMP)

@@ -8,8 +8,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import org.adorsys.adcore.annotation.Description;
 import org.adorsys.adcore.jpa.CoreAbstBsnsObject;
-import org.adorsys.javaext.description.Description;
 
 @MappedSuperclass
 @Description("PrcmtProcOrder_description")

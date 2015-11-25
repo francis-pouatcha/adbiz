@@ -8,8 +8,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-import org.adorsys.adcore.jpa.CoreAbstIdentifData;
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 
 /**
  * Holds the processing state of an article being delivered.
@@ -19,7 +19,7 @@ import org.adorsys.javaext.description.Description;
  */
 @Entity
 @Description("PrcmtDlvryArtPrcssng_description")
-public class PrcmtDlvryArtPrcssng extends CoreAbstIdentifData {
+public class PrcmtDlvryArtPrcssng extends CoreAbstIdentifObject {
 	
 	private static final long serialVersionUID = 3429165427168415386L;
 

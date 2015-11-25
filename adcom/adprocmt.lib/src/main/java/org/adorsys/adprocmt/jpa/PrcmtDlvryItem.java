@@ -2,9 +2,8 @@ package org.adorsys.adprocmt.jpa;
 
 import javax.persistence.Entity;
 
-import org.adorsys.adcore.jpa.CoreAbstBsnsItemHeader;
+import org.adorsys.adcore.annotation.Description;
 import org.adorsys.adcore.jpa.CoreAbstTxctedItem;
-import org.adorsys.javaext.description.Description;
 
 @Entity
 @Description("PrcmtDlvryItem_description")
@@ -13,6 +12,6 @@ public class PrcmtDlvryItem extends CoreAbstTxctedItem {
 
 	public void fillDataFromOrderItem(PrcmtPOItem poItem) {
 		poItem.copyTo(this);
-		new CoreAbstBsnsItemHeader().copyTo(this);// cleaup header info.
+		resetHeader();
 	}
 }

@@ -2,7 +2,7 @@ package org.adorsys.adprocmt.jpa;
 
 import javax.persistence.Entity;
 
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
 
 @Entity
 @Description("PrcmtDelivery_description")
