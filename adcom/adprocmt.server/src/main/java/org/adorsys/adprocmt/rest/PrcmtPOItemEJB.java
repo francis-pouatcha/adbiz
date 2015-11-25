@@ -11,17 +11,22 @@ import org.adorsys.adbase.security.SecurityUtil;
 import org.adorsys.adcore.repo.CoreAbstBsnsItemRepo;
 import org.adorsys.adcore.rest.CoreAbstBsnsItemEJB;
 import org.adorsys.adcore.rest.CoreAbstBsnsItemLookup;
-import org.adorsys.adcore.rest.CoreAbstTxctedItemEJB;
+import org.adorsys.adcore.rest.CoreAbstBsnsObjInjector;
+import org.adorsys.adprocmt.jpa.PrcmtJob;
 import org.adorsys.adprocmt.jpa.PrcmtPOItem;
+import org.adorsys.adprocmt.jpa.PrcmtProcOrder;
+import org.adorsys.adprocmt.jpa.PrcmtProcOrderCstr;
+import org.adorsys.adprocmt.jpa.PrcmtProcOrderHstry;
+import org.adorsys.adprocmt.jpa.PrcmtStep;
 import org.adorsys.adprocmt.repo.PrcmtPOItemRepository;
 
 @Stateless
-public class PrcmtPOItemEJB extends CoreAbstTxctedItemEJB<PrcmtPOItem> {
+public class PrcmtPOItemEJB extends CoreAbstBsnsItemEJB<PrcmtProcOrder, PrcmtPOItem, PrcmtProcOrderHstry, PrcmtJob, PrcmtStep, PrcmtProcOrderCstr> {
 
 	@Inject
 	private PrcmtPOItemRepository repository;
 	@Inject
-	private SecurityUtil securityUtil;
+	private PrcmtProcOrder securityUtil;
 	@Inject
 	private PrcmtPOItemLookup lookup;
 	@EJB
@@ -32,37 +37,15 @@ public class PrcmtPOItemEJB extends CoreAbstTxctedItemEJB<PrcmtPOItem> {
 	@Inject
 	@PcrmInconsistentProcOrderEvent
 	private Event<String> inconsistentEvent;
-
-	public PrcmtPOItem create(PrcmtPOItem entity) {
-
-		String currentLoginName = securityUtil.getCurrentLoginName();
-		Date now = new Date();
-		entity.setAcsngUser(currentLoginName);
-		entity.setAcsngDt(now);
-		return super.create(entity);
-	}
-
-	@Override
-	protected CoreAbstBsnsItemRepo<PrcmtPOItem> getBsnsRepo() {
-		return repository;
-	}
-
-	@Override
-	protected CoreAbstBsnsItemLookup<PrcmtPOItem> getLookup() {
-		return lookup;
-	}
 	
 	@Override
-	protected CoreAbstBsnsItemEJB<PrcmtPOItem> getEjb() {
-		return ejb;
+	protected CoreAbstBsnsObjInjector<PrcmtProcOrder, PrcmtPOItem, PrcmtProcOrderHstry, PrcmtJob, PrcmtStep, PrcmtProcOrderCstr> getInjector() {
+		return null;
+	}
+	@Override
+	protected CoreAbstBsnsItemRepo<PrcmtPOItem> getBsnsRepo() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	@Override
-	protected void fireInconsistentEvent(String hldrNbr) {
-		inconsistentEvent.fire(hldrNbr);
-	}
-	@Override
-	protected void fireConsistentEvent(String hldrNbr) {
-		consistentEvent.fire(hldrNbr);
-	}
 }

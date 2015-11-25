@@ -2,7 +2,6 @@ package org.adorsys.adprocmt.rest;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 
 import org.adorsys.adcore.repo.CoreAbstBsnsItemRepo;
 import org.adorsys.adcore.rest.CoreAbstBsnsItemLookup;
@@ -14,8 +13,6 @@ public class PrcmtPOItemLookup extends CoreAbstBsnsItemLookup<PrcmtPOItem> {
 
 	@Inject
 	private PrcmtPOItemRepository repository;
-	@Inject
-	private EntityManager em;
 
 	@Override
 	protected CoreAbstBsnsItemRepo<PrcmtPOItem> getBsnsRepo() {
@@ -23,13 +20,8 @@ public class PrcmtPOItemLookup extends CoreAbstBsnsItemLookup<PrcmtPOItem> {
 	}
 
 	@Override
-	protected Class<PrcmtPOItem> getBsnsObjClass() {
+	protected Class<PrcmtPOItem> getEntityClass() {
 		return PrcmtPOItem.class;
-	}
-
-	@Override
-	protected EntityManager getEntityManager() {
-		return em;
 	}
 
 }

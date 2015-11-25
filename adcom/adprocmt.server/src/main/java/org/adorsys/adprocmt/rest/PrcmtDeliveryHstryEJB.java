@@ -1,46 +1,40 @@
 package org.adorsys.adprocmt.rest;
 
 import javax.ejb.Stateless;
-import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
-import org.adorsys.adcore.repo.CoreAbstBsnsObjHstryRepo;
+import org.adorsys.adcore.repo.CoreAbstIdentifObjectHstryRepo;
+import org.adorsys.adcore.rest.CoreAbstBsnsObjInjector;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjectHstryEJB;
+import org.adorsys.adprocmt.jpa.PrcmtDelivery;
+import org.adorsys.adprocmt.jpa.PrcmtDeliveryCstr;
 import org.adorsys.adprocmt.jpa.PrcmtDeliveryHstry;
+import org.adorsys.adprocmt.jpa.PrcmtDlvryItem;
+import org.adorsys.adprocmt.jpa.PrcmtJob;
+import org.adorsys.adprocmt.jpa.PrcmtStep;
 import org.adorsys.adprocmt.repo.PrcmtDeliveryHstryRepository;
 
 @Stateless
-public class PrcmtDeliveryHstryEJB extends CoreAbstBsnsObjectHstryEJB<PrcmtDeliveryHstry>{
-
+public class PrcmtDeliveryHstryEJB extends CoreAbstBsnsObjectHstryEJB<PrcmtDelivery, PrcmtDlvryItem, PrcmtDeliveryHstry, PrcmtJob, PrcmtStep, PrcmtDeliveryCstr>
+{
 	@Inject
-	private PrcmtDeliveryHstryRepository repository;
+	private PrcmtDeliveryHstryRepository repo;
 	
 	@Inject
-	@PrcmtDeliveryHstryEvent
-	private Event<PrcmtDeliveryHstry> deliveryHstryEvent;
-
-//	public PrcmtDeliveryHstry create(PrcmtDeliveryHstry entity) {
-//		PrcmtDeliveryHstry deliveryHstry = repository.save(attach(entity));
-//		if(CoreHistoryTypeEnum.CLOSING.name().equals(deliveryHstry.getHstryType())){
-//			deliveryClosingEvent.fire(deliveryHstry);
-//		} else if (CoreHistoryTypeEnum.CLOSED.name().equals(deliveryHstry.getHstryType())){
-//			deliveryClosedEvent.fire(deliveryHstry);
-//		}
-//		return deliveryHstry;
-//	}
+	private PrcmtDeliveryInjector injector;
 
 	@Override
-	protected CoreAbstBsnsObjHstryRepo<PrcmtDeliveryHstry> getRepo() {
-		return repository;
-	}
-
-	@Override
-	protected void fireEvent(PrcmtDeliveryHstry hstry) {
-		deliveryHstryEvent.fire(hstry);
+	protected CoreAbstBsnsObjInjector<PrcmtDelivery, PrcmtDlvryItem, PrcmtDeliveryHstry, PrcmtJob, PrcmtStep, PrcmtDeliveryCstr> getInjector() {
+		return injector;
 	}
 
 	@Override
 	protected PrcmtDeliveryHstry newHstryObj() {
 		return new PrcmtDeliveryHstry();
+	}
+
+	@Override
+	protected CoreAbstIdentifObjectHstryRepo<PrcmtDeliveryHstry> getRepo() {
+		return repo;
 	}
 }

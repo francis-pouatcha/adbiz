@@ -2,8 +2,7 @@ package org.adorsys.adprocmt.jpa;
 
 import javax.persistence.Entity;
 
-import org.adorsys.adcore.jpa.CoreAbstBsnsObjectHeader;
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
 
 @Entity
 @Description("PrcmtDelivery_description")
@@ -12,8 +11,7 @@ public class PrcmtDelivery extends PrcmtAbstractDelivery {
 
 	public void fillDataFromOrder(PrcmtProcOrder procOrder) {
 		procOrder.copyTo(this);
-		CoreAbstBsnsObjectHeader header = new CoreAbstBsnsObjectHeader();
-		header.copyTo(this);
+		resetHeader();
 	}
 
 	
