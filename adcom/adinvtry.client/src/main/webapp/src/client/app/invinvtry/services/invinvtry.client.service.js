@@ -29,6 +29,10 @@
                     max: 20
                 }
             },
+            getInvtry:{
+                method: 'GET',
+                url: API_BASE_ADINVTRY_URL + '/invinvtrys/:identif'
+            },
             prepare: {
                 method: 'PUT',
                 url: API_BASE_ADINVTRY_URL + '/inventory/prepare/:identif'
@@ -64,7 +68,7 @@
 
         };
 
-        var API_URL = API_BASE_ADINVTRY_URL + '/invinvtrys/:identif';
+        var API_URL = API_BASE_ADINVTRY_URL + '/inventory/:identif';
 
         return $resource(API_URL, params, actions);
 

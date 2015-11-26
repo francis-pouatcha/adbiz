@@ -40,19 +40,19 @@
 
         function processSearchInput(searchInput){
 
-            if(angular.isDefined(searchInput.entity.invtryNbr) && searchInput.entity.invtryNbr){
-                searchInput.fieldNames.push('invtryNbr');
+            if(angular.isDefined(searchInput.entity.identif) && searchInput.entity.identif){
+                searchInput.fieldNames.push('identif');
             }
-            if(angular.isDefined(searchInput.entity.acsngUser) && searchInput.entity.acsngUser){
+            if(angular.isDefined(searchInput.entity.login) && searchInput.entity.login){
                 searchInput.fieldNames.push('login');
             }
-            if(angular.isDefined(searchInput.entity.invtryStatus) && searchInput.entity.invtryStatus){
+            if(angular.isDefined(searchInput.entity.status) && searchInput.entity.status){
                 searchInput.fieldNames.push('status');
             }
             if(angular.isDefined(searchInput.entity.invtryGroup) && searchInput.entity.invtryGroup){
                 searchInput.fieldNames.push('invtryGroup');
             }
-            if(angular.isDefined(searchInput.entity.invInvtryType) && searchInput.entity.invInvtryType){
+            if(angular.isDefined(searchInput.entity.txType) && searchInput.entity.txType){
                 searchInput.fieldNames.push('txType');
             }
             if(angular.isDefined(searchInput.entity.descptn) && searchInput.entity.descptn){
@@ -100,7 +100,7 @@
 
         $scope.onSectionSelected = function(item,model,label){
             $scope.searchInput.entity.section=item.identif;
-            $scope.display.section=item.strgSection;
+            $scope.display.section=item.identif;
             $scope.display.sectionName=item.name;
         }
     }
@@ -174,7 +174,7 @@
         }
 
         function getInvtry(){
-            invInvtryManagerResource.get({identif:$scope.invtryNbr}, function(invInvtry){
+            invInvtryManagerResource.getInvtry({identif:$scope.invtryNbr}, function(invInvtry){
                 $scope.invInvtry = invInvtry;
                 $scope.invtryCopy = angular.copy($scope.invInvtry);
                 fixDateFields();
@@ -185,8 +185,8 @@
 
         function loadInvInvtryItems() {
             prepareSearchInput();
-            if($scope.searchInput.fieldNames.length==1 && $scope.searchInput.fieldNames.indexOf('invtryNbr')!=-1){
-                genericResource.customMethod(invInvtryUtils.invinvtrysUrlBase+'/findByInvtryNbrSortedBySectionAndArtName',$scope.searchInput)
+            if($scope.searchInput.fieldNames.length==1 && $scope.searchInput.fieldNames.indexOf('cntnrIdentif')!=-1){
+                genericResource.customMethod(invInvtryUtils.invinvtrysUrlBase+'/findByBsnsObjNbrSorted',$scope.searchInput)
                     .success(function(searchResult){
                         itemsResultHandler.searchResult(searchResult);
                     })
@@ -204,10 +204,10 @@
             }
         }
         function prepareSearchInput(){
-            $scope.searchInput.entity.invtryNbr=$scope.invInvtry.invtryNbr;
+            $scope.searchInput.entity.cntnrIdentif=$scope.invInvtry.identif;
             $scope.searchInput.fieldNames = [];
-            if(angular.isDefined($scope.searchInput.entity.invtryNbr) && $scope.searchInput.entity.invtryNbr){
-                $scope.searchInput.fieldNames.push('invtryNbr');
+            if(angular.isDefined($scope.searchInput.entity.cntnrIdentif) && $scope.searchInput.entity.cntnrIdentif){
+                $scope.searchInput.fieldNames.push('cntnrIdentif');
             }
 
             if(angular.isDefined($scope.searchInput.entity.lotPic) && $scope.searchInput.entity.lotPic){
@@ -420,9 +420,9 @@
         };
 
         $scope.onSectionSelectedInSearch = function(item,model,label){
-            $scope.searchInput.entity.section=item.strgSection;
+            $scope.searchInput.entity.section=item.identif;
             $scope.display.sectionName=item.name;
-            $scope.display.sectionCode=item.sectionCode;
+            $scope.display.sectionCode=item.identif;
         };
 
         $scope.onArticleLotChangedInSearch = function(){

@@ -1,41 +1,3 @@
-<!--<section class="mainbar">
-
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      Invinvtry List
-    </div>
-    <div class="panel-body">
-
-      <div class="pull-right">
-        <a type="button" class="btn btn-success" href="#/invinvtry/create">
-          <i class="glyphicon glyphicon-open"></i> New Invinvtry
-        </a>
-      </div>
-
-      <table ng-table="vm.tableParams" show-filter="true" class="table table-condensed table-striped">
-          <tr ng-repeat="invinvtry in $data">
-              <td data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">{{invinvtry.name}}</td>
-              <td data-title="'Address'" sortable="'address'" filter="{'address': 'text'}">{{invinvtry.address}}</td>
-              <td>
-                 <div class="table-actions">
-                      <a class="btn btn-default" title="View" href="/invinvtry/{{invinvtry.id}}">
-                        <span class="glyphicon glyphicon-eye-open"></span>
-                      </a>
-                      <a class="btn btn-default" title="Edit" href="/invinvtry/{{invinvtry.id}}/edit">
-                        <span class="glyphicon glyphicon-edit"></span>
-                      </a>
-                      <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove(invinvtry)" item="invinvtry">
-                        <span class="glyphicon glyphicon-remove-circle"></span>
-                      </a>
-                  </div>
-              </td>
-          </tr>
-      </table>
-
-    </div>
-  </div>
-
-</section>-->
 
 <section ng-cloak id="invIntrySearchPanel" class="mainbar">
 <div class="panel panel-primary">
@@ -50,24 +12,24 @@
                     <div class="row" >
                         <div class="col-lg-2">
                             <div class="form-group">
-                                <label class=" control-label" for="invtryNbr"> {{'InvInvtry_invtryNbr_description.title' | translate}}</label>
+                                <label class=" control-label" for="identif"> {{'InvInvtry_invtryNbr_description.title' | translate}}</label>
                                 <div class="">
-                                    <input type="text" id="invtryNbr" ng-model="searchInput.entity.invtryNbr" class="form-control">
+                                    <input type="text" id="identif" ng-model="searchInput.entity.identif" class="form-control">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group col-lg-2">
-                            <label class=" control-label" for="acsngUser"> {{'InvInvtry_acsngUser_description.title' | translate}}</label>
-                            <input type="text" ng-model="searchInput.entity.acsngUser" id="acsngUser" name="acsngUser" class="form-control" >
+                            <label class=" control-label" for="login"> {{'InvInvtry_acsngUser_description.title' | translate}}</label>
+                            <input type="text" ng-model="searchInput.entity.login" id="login" name="login" class="form-control" >
                         </div>
 
                         <div class="col-lg-2">
                             <div class="form-group">
-                                <label class=" control-label" for="invtryStatus"> {{'InvInvtry_invtryStatus_description.title' | translate}}</label>
+                                <label class=" control-label" for="status"> {{'InvInvtry_invtryStatus_description.title' | translate}}</label>
                                 <div class="">
-                                    <select class="form-control" name="invtryStatus" id="invtryStatus" ng-model="searchInput.entity.invtryStatus"
-                                            ng-options="invtryStatus.enumKey as (invtryStatus.translKey | translate)
-							                    	for invtryStatus in invInvtryUtils.invInvntrStati" >
+                                    <select class="form-control" name="status" id="invtryStatus" ng-model="searchInput.entity.status"
+                                            ng-options="status.enumKey as (status.translKey | translate)
+							                    	for status in invInvtryUtils.invInvntrStati" >
                                         <option value=""/>
                                     </select>
                                 </div>
@@ -121,9 +83,9 @@
                         <div class="form-group col-lg-4">
                             <label> {{'InvInvtry_invInvtryType_description.title' | translate}} :</label>
                             <div ng-class="{ 'has-error' : invInvtryForm.invMode.$invalid }" >
-                                <select class="form-control" name="invInvtryType" id="invInvtryType" ng-model="searchInput.entity.invInvtryType"
-                                        ng-options="invInvtryType.enumKey as (invInvtryType.translKey | translate)
-			                   				for invInvtryType in invInvtryUtils.invInvtryTypes" >
+                                <select class="form-control" name="txType" id="txType" ng-model="searchInput.entity.txType"
+                                        ng-options="txType.enumKey as (txType.translKey | translate)
+			                   				for txType in invInvtryUtils.invInvtryTypes" >
                                     <option value=""/>
                                 </select>
                             </div>
@@ -131,13 +93,13 @@
                         <div class="form-group col-lg-2">
                             <label class=" control-label" for="createSectionCode"> {{'InvInvtryItem_section_description.title' | translate}}</label>
                             <input type="text" ng-model="searchInput.entity.section" id="createSectionCode" name="createSectionCode" class="form-control" ng-change="onSectionChanged()"
-                                   autocomplete="off" typeahead="stkSection as (stkSection.sectionCode + ' : ' + stkSection.name) for stkSection in invInvtryUtils.loadStkSectionArticleLots($viewValue)"
+                                   autocomplete="off" typeahead="stkSection as (stkSection.identif + ' : ' + stkSection.name) for stkSection in invInvtryUtils.loadStkSectionArticleLots($viewValue)"
                                    typeahead-loading="loading" typeahead-min-length="4" typeahead-on-select='onSectionSelected($item, $model, $label)'>
                         </div>
                         <div class="form-group col-lg-4">
                             <label class=" control-label" for="createSectionName"> {{'InvInvtryItem_sectionName_description.title' | translate}}</label>
                             <input type="text" ng-model="display.sectionName" id="createSectionName" name="createSectionName" class="form-control"
-                                   autocomplete="off" typeahead="stkSection as (stkSection.sectionCode + ' : ' + stkSection.name) for stkSection in invInvtryUtils.loadStkSectionArticleLotsByName($viewValue)"
+                                   autocomplete="off" typeahead="stkSection as (stkSection.identif + ' : ' + stkSection.name) for stkSection in invInvtryUtils.loadStkSectionArticleLotsByName($viewValue)"
                                    typeahead-loading="loading" typeahead-min-length="4" typeahead-on-select='onSectionSelected($item, $model, $label)'>
                         </div>
                         <div class="form-group col-lg-1">
