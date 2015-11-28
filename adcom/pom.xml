@@ -25,9 +25,6 @@
 		<module>adcore.lib</module>
 		<module>adbase.lib</module>
 		<module>adcatal.lib</module>
-		<module>adres.client</module>
-		<module>adcatal.client</module>
-		<module>adstock.client</module>
 		<module>adstock.lib</module>
 		<module>adcost.lib</module>
 		<module>adinvtry.lib</module>
@@ -35,18 +32,20 @@
 		<module>adstock.server</module>
 		<module>adinvtry.server</module>
 		<module>adcost.server</module>
-		<module>addashboard.client</module>
 		<module>adbase.server</module>
-		<module>adinvtry.client</module>
-		<!-- <module>adbnsptnr.client</module>
-		<module>adbnsptnr.server</module> -->
+
 		<module>adprocmt.lib</module>
 		<module>adprocmt.server</module>
-<!-- 
+		<!-- 
 		<module>adres.client</module>
-		
-		<module>adbase.client</module>
-		<module>adlogin.client</module>
+		<module>adcatal.client</module>
+		<module>adstock.client</module>
+		<module>adinvtry.client</module>
+		<module>addashboard.client</module>
+		<module>adbnsptnr.client</module>
+		<module>adbnsptnr.server</module> 
+		-->
+<!-- 
 		<module>adacc.client</module>
 		<module>adprocmt.client</module>
 		<module>adstock.client</module>

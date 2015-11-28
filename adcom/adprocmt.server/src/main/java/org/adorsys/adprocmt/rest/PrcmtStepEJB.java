@@ -22,5 +22,4 @@ public class PrcmtStepEJB extends CoreAbstEntityStepEJB<PrcmtStep>{
 	protected CoreAbstIdentifRepo<PrcmtStep> getRepo() {
 		return repository;
 	}
-
 }

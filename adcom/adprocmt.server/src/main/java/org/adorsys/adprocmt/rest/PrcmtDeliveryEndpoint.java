@@ -43,8 +43,6 @@ public class PrcmtDeliveryEndpoint extends CoreAbstBsnsObjectEndpoint<PrcmtDeliv
 {
 
 	@Inject
-	private PrcmtDeliveryRepository repo;
-	@Inject
 	private PrcmtDeliveryLookup lookup;
 	
 	@Override

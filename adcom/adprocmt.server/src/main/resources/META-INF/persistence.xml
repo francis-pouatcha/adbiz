@@ -7,10 +7,8 @@
 
     <jar-file>lib/adcore.lib-${project.version}.jar</jar-file>
     <jar-file>lib/adcatal.lib-${project.version}.jar</jar-file>
-    <jar-file>lib/adbase.lib-${project.version}.jar</jar-file>
     <jar-file>lib/adprocmt.lib-${project.version}.jar</jar-file>
     <jar-file>lib/adstock.lib-${project.version}.jar</jar-file>
-    <jar-file>lib/adcshdwr.lib-${project.version}.jar</jar-file>
     
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
