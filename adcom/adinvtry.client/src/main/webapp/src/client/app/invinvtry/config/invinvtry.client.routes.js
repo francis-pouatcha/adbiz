@@ -50,7 +50,7 @@
             {
                 state: 'viewInvinvtry',
                 config: {
-                    url: '/InvInvtrys/show/',
+                    url: '/invinvtry/:invtryNbr/show/',
                     templateUrl: '/adinvtry.client/src/client/app/invinvtry/views/view.html',
                     controller: 'invInvtryShowCtlr',
                     //controllerAs: 'vm',

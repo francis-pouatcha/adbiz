@@ -29,6 +29,14 @@
                     max: 20
                 }
             },
+            getInvtry:{
+                method: 'GET',
+                url: API_BASE_ADINVTRY_URL + '/invinvtrys/:identif'
+            },
+            prepare: {
+                method: 'PUT',
+                url: API_BASE_ADINVTRY_URL + '/inventory/prepare/:identif'
+            },
             close: {
                 method: 'PUT',
                 url: API_BASE_ADINVTRY_URL + '/inventory/:identif/close'
@@ -67,19 +75,19 @@
     }])
 
 
-    /*angular
+    angular
         .module('app.invinvtry')
         .factory('invInvtryUtils', invInvtryUtils);
 
-    invInvtryUtils.$inject = ['$translate','genericResource','invInvtryState','API_BASE_URL', 'BASE_SERVER'];
-    *//* @ngInject *//*
-    function invInvtryUtils($translate,API_BASE_URL, BASE_SERVER) {
+    invInvtryUtils.$inject = ['$translate','genericResource','API_BASE_URL', 'BASE_SERVER'];
+    /* @ngInject */
+    function invInvtryUtils($translate, genericResource, API_BASE_URL, BASE_SERVER) {
 
         var service = {};
 
         service.inventoryManagerUrlBase = API_BASE_URL + "/inventory";
         service.urlBase= API_BASE_URL + '/invinvtrys';
-        service.invinvtrysUrlBase= API_BASE_URL+ '/invinvtryitems';
+        service.invinvtrysUrlBase= BASE_SERVER+ '/adinvtry.server/rest/invinvtryitems';
         service.stksectionsUrlBase=BASE_SERVER+'/adstock.server/rest/stksections';
         service.stkarticlelotsUrlBase=BASE_SERVER+'/adstock.server/rest/stkarticlelots';
         service.catalarticlesUrlBase=BASE_SERVER+'/adcatal.server/rest/catalarticles';
@@ -121,8 +129,8 @@
         ];
 
 
-        service.loadSectionsBySectionCode = function(sectionCode){
-            return genericResource.findByLikePromissed(service.stksectionsUrlBase, 'sectionCode', sectionCode, 'org.adorsys.adstock.jpa.StkSection')
+        service.loadSectionsBySectionCode = function(identif){
+            return genericResource.findByLikePromissed(service.stksectionsUrlBase, 'identif', identif, 'org.adorsys.adstock.jpa.StkSection')
                 .then(function(entitySearchResult){
                     return entitySearchResult.resultList;
                 });
@@ -152,7 +160,7 @@
         };
 
         service.loadStkSectionArticleLots = function(strgSection){
-            return genericResource.findByLikePromissed(service.stksectionsUrlBase, 'sectionCode', strgSection, 'org.adorsys.adstock.jpa.StkSection')
+            return genericResource.findByLikePromissed(service.stksectionsUrlBase, 'identif', strgSection, 'org.adorsys.adstock.jpa.StkSection')
                 .then(function(entitySearchResult){
                     return entitySearchResult.resultList;
                 });
@@ -237,7 +245,25 @@
             return angular.isDefined(invInvtry) && angular.isDefined(invInvtry.mergedDate) && invInvtry.mergedDate;
         }
         return service;
+    }
 
-    }*/
+    angular
+     .module('app.invinvtry')
+    .factory('invInvtryState',['$rootScope','searchResultHandler',function($rootScope,searchResultHandler){
+        var service = {};
+        service.selection = [];
+        service.mainInvtry = {};
+        service.resultHandler = searchResultHandler.newResultHandler('invtryNbr');
+        service.itemsResultHandler = function(){
+            var itemsResultHandlerVar = service.resultHandler.dependent('items');
+            if(angular.isUndefined(itemsResultHandlerVar)){
+                itemsResultHandlerVar = searchResultHandler.newResultHandler('identif');
+                service.resultHandler.dependent('items', itemsResultHandlerVar);
+            }
+            return itemsResultHandlerVar;
+        };
+        service.compareResultHandler = searchResultHandler.newResultHandler('salIndex');
+        return service;
+    }])
 
 })();
