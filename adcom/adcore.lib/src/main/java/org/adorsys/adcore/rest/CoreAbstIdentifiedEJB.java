@@ -1,5 +1,7 @@
 package org.adorsys.adcore.rest;
 
+import java.util.List;
+
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
@@ -34,6 +36,25 @@ public abstract class CoreAbstIdentifiedEJB<E extends CoreAbstIdentifObject> {
 
 	public E deleteById(String id) {
 		E entity = getRepo().findBy(id);
+		return internalDelete(entity);
+	}
+	
+	public E deleteByIdentif(String identif){
+		E entity = getRepo().findByIdentif(identif).getSingleResult();
+		return internalDelete(entity);
+	}
+	
+	public List<E> deleteByCntnrIdentif(String cntnrIdentif){
+		long count = getRepo().findByCntnrIdentif(cntnrIdentif).count();
+		if(count>1000) throw new UnsupportedOperationException("Bulk delete not allowed for child collections with more that 1000 Items");
+		List<E> resultList = getRepo().findByCntnrIdentif(cntnrIdentif).getResultList();
+		for (E entity : resultList) {
+			internalDelete(entity);
+		}
+		return resultList;
+	}
+	
+	private E internalDelete(E entity){
 		if (entity != null) {
 			getRepo().remove(entity);
 			fireEntityDeletedEvent(entity);

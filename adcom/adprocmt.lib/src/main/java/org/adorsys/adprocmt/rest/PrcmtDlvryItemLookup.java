@@ -57,16 +57,26 @@ public class PrcmtDlvryItemLookup extends CoreAbstBsnsItemLookup<PrcmtDlvryItem>
 		return strgSctnRepository.findBy(PrcmtDlvryItem2StrgSctn.toId(dlvryItemNbr, strgSctn));
 	}
 
-	public List<PrcmtDlvryItem2Ou> listDlvryItem2Ou(String dlvryItemNbr){
-		return ouRepository.findByDlvryItemNbr(dlvryItemNbr);
+	public Long countDlvryItem2Ou(String dlvryItemNbr){
+		return ouRepository.findByCntnrIdentif(dlvryItemNbr).count();
 	}
-	public List<PrcmtDlvryItem2POItem> listDlvryItem2POItem(String dlvryItemNbr){
-		return poItemRepository.findByDlvryItemNbr(dlvryItemNbr);
+	public Long countDlvryItem2POItem(String dlvryItemNbr){
+		return poItemRepository.findByCntnrIdentif(dlvryItemNbr).count();
 	}
-	public List<PrcmtDlvryItem2StrgSctn> listDlvryItem2StrgSctn(String dlvryItemNbr){
-		return strgSctnRepository.findByDlvryItemNbr(dlvryItemNbr);
+	public Long countDlvryItem2StrgSctn(String dlvryItemNbr){
+		return strgSctnRepository.findByCntnrIdentif(dlvryItemNbr).count();
 	}
 
+	public List<PrcmtDlvryItem2Ou> listDlvryItem2Ou(String dlvryItemNbr, int start, int max){
+		return ouRepository.findByCntnrIdentif(dlvryItemNbr).firstResult(start).maxResults(max).getResultList();
+	}
+	public List<PrcmtDlvryItem2POItem> listDlvryItem2POItem(String dlvryItemNbr, int start, int max){
+		return poItemRepository.findByCntnrIdentif(dlvryItemNbr).firstResult(start).maxResults(max).getResultList();
+	}
+	public List<PrcmtDlvryItem2StrgSctn> listDlvryItem2StrgSctn(String dlvryItemNbr, int start, int max){
+		return strgSctnRepository.findByCntnrIdentif(dlvryItemNbr).firstResult(start).maxResults(max).getResultList();
+	}
+	
 	@Override
 	protected Class<PrcmtDlvryItem> getEntityClass() {
 		return PrcmtDlvryItem.class;

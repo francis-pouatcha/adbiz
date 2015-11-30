@@ -126,7 +126,7 @@ public abstract class StkAbstLot2Section extends CoreAbstIdentifObject {
 		this.artPic = artPic;
 	}
 	
-	public static String toLotPicAndDectionKey(String lotPic, String section){
+	public static String toLotPicAndSectionKey(String lotPic, String section){
 		return lotPic +"_"+ section;
 	}
 

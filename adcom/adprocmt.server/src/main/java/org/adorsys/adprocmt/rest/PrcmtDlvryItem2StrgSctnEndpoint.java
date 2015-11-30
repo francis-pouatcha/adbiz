@@ -16,6 +16,7 @@ import org.adorsys.adcore.rest.CoreAbstIdentifReadEndpoint;
 import org.adorsys.adprocmt.jpa.PrcmtDlvryItem2StrgSctn;
 import org.adorsys.adprocmt.jpa.PrcmtDlvryItem2StrgSctnSearchInput;
 import org.adorsys.adprocmt.jpa.PrcmtDlvryItem2StrgSctnSearchResult;
+import org.adorsys.adprocmt.jpa.PrcmtDlvryItem2StrgSctn_;
 
 /**
  * 

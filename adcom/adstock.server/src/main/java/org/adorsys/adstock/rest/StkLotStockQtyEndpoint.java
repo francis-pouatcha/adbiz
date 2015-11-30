@@ -11,36 +11,25 @@ import javax.ws.rs.Path;
 
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
-import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
-import org.adorsys.adcore.rest.CoreAbstIdentifiedEndpoint;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
+import org.adorsys.adcore.rest.CoreAbstIdentifReadEndpoint;
 import org.adorsys.adstock.jpa.StkLotStockQty;
 import org.adorsys.adstock.jpa.StkLotStockQtySearchInput;
 import org.adorsys.adstock.jpa.StkLotStockQtySearchResult;
 import org.adorsys.adstock.jpa.StkLotStockQty_;
 
-/**
- * 
- */
 @Stateless
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 @Path("/stklotstockqtys")
 public class StkLotStockQtyEndpoint extends
-		CoreAbstIdentifiedEndpoint<StkLotStockQty> {
+	CoreAbstIdentifReadEndpoint<StkLotStockQty> {
 
-	@Inject
-	private StkLotStockQtyEJB ejb;
 	@Inject
 	private StkLotStockQtyLookup lookup;
 
 	@Override
 	protected CoreAbstIdentifLookup<StkLotStockQty> getLookup() {
 		return lookup;
-	}
-
-	@Override
-	protected CoreAbstIdentifiedEJB<StkLotStockQty> getEjb() {
-		return ejb;
 	}
 
 	@Override

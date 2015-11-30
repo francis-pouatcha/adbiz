@@ -1,25 +1,23 @@
 package org.adorsys.adprocmt.loader;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import javax.annotation.PostConstruct;
-import javax.ejb.AccessTimeout;
-import javax.ejb.Schedule;
+import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
-import org.adorsys.adbase.jpa.BaseBatchEvt;
-import org.adorsys.adbase.rest.BaseBatchEvtEJB;
-import org.adorsys.adcore.enums.CoreHistoryTypeEnum;
-import org.adorsys.adstock.api.ModConstants;
+import org.adorsys.adcore.loader.jpa.CorLdrJob;
+import org.adorsys.adcore.loader.jpa.CorLdrPrcssngStep;
+import org.adorsys.adcore.loader.jpa.CorLdrStep;
+import org.adorsys.adcore.rest.CoreAbstEntityJobExecutor;
+import org.adorsys.adcore.xls.AbstractLoader;
+import org.adorsys.adcore.xls.CoreAbstLoaderRegistration;
+import org.adorsys.adprocmt.jpa.PrcmtDelivery;
+import org.adorsys.adprocmt.jpa.PrcmtDlvryItem;
 
 @Startup
 @Singleton
-public class PrcmtLoaderRegistration {
+public class PrcmtLoaderRegistration extends CoreAbstLoaderRegistration {
 
 	@Inject
 	private DataSheetLoader dataSheetLoader;
@@ -27,29 +25,29 @@ public class PrcmtLoaderRegistration {
 	private PrcmtDeliveryLoader prcmtDeliveryLoader;
 	@Inject
 	private PrcmtDlvryItemLoader prcmtDlvryItemLoader;
-	
 	@Inject
-	private BaseBatchEvtEJB batchEvtEJB;
+	private PrcmtLoaderRegistration registration;
+	@EJB
+	private PrcmtDeliveryLoaderExecutor execTask;
 
 	@PostConstruct
 	public void postConstruct(){
-		dataSheetLoader.registerLoader(PrcmtDeliveryExcel.class.getSimpleName(), prcmtDeliveryLoader);
-		dataSheetLoader.registerLoader(PrcmtDlvryItemExcel.class.getSimpleName(), prcmtDlvryItemLoader);
-		createTemplate();
+		dataSheetLoader.registerLoader(PrcmtDelivery.class.getSimpleName(), prcmtDeliveryLoader);
+		dataSheetLoader.registerLoader(PrcmtDlvryItem.class.getSimpleName(), prcmtDlvryItemLoader);
 	}
 
-	@Schedule(minute = "*", second="1/35" ,hour="*", persistent=false)
-	@AccessTimeout(unit=TimeUnit.MINUTES, value=10)
-	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-	public void process() throws Exception {
-		// Ad least one invetory whent thru.
-		List<BaseBatchEvt> found = batchEvtEJB.findByEvtModuleAndEvtKlassAndEvtName(ModConstants.MODULE_NAME, "InvInvtryEvt", CoreHistoryTypeEnum.COMMITTED.name(), 0, 1);
-		if(found.isEmpty()) return;
+	@Override
+	protected AbstractLoader getDataSheetLoader() {
+		return dataSheetLoader;
+	}
 
-		dataSheetLoader.process();
+	@Override
+	protected CoreAbstEntityJobExecutor<CorLdrJob, CorLdrStep, CorLdrPrcssngStep> getExecTask() {
+		return registration;
 	}
-	
-	public void createTemplate(){
-	}
-	
+
+	@Override
+	protected CoreAbstEntityJobExecutor<CorLdrJob, CorLdrStep, CorLdrPrcssngStep> getEjb() {
+		return execTask;
+	}	
 }

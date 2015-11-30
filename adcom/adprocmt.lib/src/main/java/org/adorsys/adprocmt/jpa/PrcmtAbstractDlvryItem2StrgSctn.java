@@ -8,19 +8,12 @@ import javax.validation.constraints.NotNull;
 
 import org.adorsys.adcore.annotation.Description;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
-import org.adorsys.adcore.utils.BigDecimalUtils;
-import org.apache.commons.lang3.StringUtils;
 
 @MappedSuperclass
 @Description("PrcmtDelivery_description")
 public abstract class PrcmtAbstractDlvryItem2StrgSctn extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = 2920134612071462983L;
-
-	@Column
-	@Description("PrcmtDelivery_dlvryItemNbr_description")
-	@NotNull
-	private String dlvryItemNbr;
 
 	@Column
 	@Description("PrcmtProcOrder_strgSection_description")
@@ -38,14 +31,6 @@ public abstract class PrcmtAbstractDlvryItem2StrgSctn extends CoreAbstIdentifObj
 	@Column
 	@Description("PrcmtDlvryItem_stkQtyPreDlvry_description")
 	private BigDecimal stkQtyPreDlvry;
-	
-	public String getDlvryItemNbr() {
-		return dlvryItemNbr;
-	}
-
-	public void setDlvryItemNbr(String dlvryItemNbr) {
-		this.dlvryItemNbr = dlvryItemNbr;
-	}
 
 	public String getStrgSection() {
 		return strgSection;
@@ -76,22 +61,6 @@ public abstract class PrcmtAbstractDlvryItem2StrgSctn extends CoreAbstIdentifObj
 	}
 	@Override
 	protected String makeIdentif() {
-		return toId(dlvryItemNbr, strgSection);
+		return toId(cntnrIdentif, strgSection);
 	}
-	
-	public void copyTo(PrcmtAbstractDlvryItem2StrgSctn target){
-		target.dlvryItemNbr = dlvryItemNbr;
-		target.strgSection=strgSection;
-		target.stkQtyPreDlvry = stkQtyPreDlvry;
-		target.qtyStrd = qtyStrd;
-	}
-	
-	public boolean contentEquals(PrcmtAbstractDlvryItem2StrgSctn target){
-		if(!BigDecimalUtils.numericEquals(target.stkQtyPreDlvry,stkQtyPreDlvry)) return false;
-		if(!BigDecimalUtils.numericEquals(target.qtyStrd,qtyStrd)) return false;
-		if(!StringUtils.equals(target.dlvryItemNbr, dlvryItemNbr)) return false;
-		if(!StringUtils.equals(target.strgSection,strgSection)) return false;
-		return true;
-	}
-	
 }

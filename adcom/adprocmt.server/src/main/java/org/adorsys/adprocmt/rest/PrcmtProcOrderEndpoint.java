@@ -16,6 +16,7 @@ import org.adorsys.adcore.rest.CoreAbstBsnsObjectLookup;
 import org.adorsys.adprocmt.jpa.PrcmtProcOrder;
 import org.adorsys.adprocmt.jpa.PrcmtProcOrderSearchInput;
 import org.adorsys.adprocmt.jpa.PrcmtProcOrderSearchResult;
+import org.adorsys.adprocmt.jpa.PrcmtProcOrder_;
 
 /**
  * 

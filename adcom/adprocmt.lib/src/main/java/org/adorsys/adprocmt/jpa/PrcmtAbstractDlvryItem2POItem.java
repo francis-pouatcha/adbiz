@@ -8,18 +8,17 @@ import javax.validation.constraints.NotNull;
 
 import org.adorsys.adcore.annotation.Description;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
-import org.adorsys.adcore.utils.BigDecimalUtils;
-import org.apache.commons.lang3.StringUtils;
 
+/**
+ * The delivery item number is the container identifier.
+ * 
+ * @author fpo
+ *
+ */
 @MappedSuperclass
 @Description("PrcmtDelivery_description")
 public class PrcmtAbstractDlvryItem2POItem extends CoreAbstIdentifObject {
 	private static final long serialVersionUID = 1040392867591584841L;
-
-	@Column
-	@Description("PrcmtDelivery_dlvryItemNbr_description")
-	@NotNull
-	private String dlvryItemNbr;
 
 	@Column
 	@Description("PrcmtProcOrder_poItemNbr_description")
@@ -41,15 +40,6 @@ public class PrcmtAbstractDlvryItem2POItem extends CoreAbstIdentifObject {
 	@Column
 	@Description("PrcmtDlvryItem_freeQty_description")
 	private BigDecimal freeQty;
-
-	public String getDlvryItemNbr() {
-		return dlvryItemNbr;
-	}
-
-	public void setDlvryItemNbr(String dlvryItemNbr) {
-		this.dlvryItemNbr = dlvryItemNbr;
-	}
-
 
 	public String getPoItemNbr() {
 		return poItemNbr;
@@ -90,26 +80,10 @@ public class PrcmtAbstractDlvryItem2POItem extends CoreAbstIdentifObject {
 
 	@Override
 	protected String makeIdentif() {
-		return toId(dlvryItemNbr, poItemNbr);
+		return toId(cntnrIdentif, poItemNbr);
 	}
 	
 	public static String toId(String dlvryItemNbr, String poItemNbr){
 		return dlvryItemNbr + "_" + poItemNbr;
-	}
-	public void copyTo(PrcmtAbstractDlvryItem2POItem target){
-		target.dlvryItemNbr=dlvryItemNbr;
-		target.poItemNbr=poItemNbr;
-		target.qtyOrdered=qtyOrdered;
-		target.qtyDlvrd=qtyDlvrd;
-		target.freeQty=freeQty;
-	}	
-
-	public boolean contentEquals(PrcmtAbstractDlvryItem2POItem target){
-		if(!BigDecimalUtils.numericEquals(target.freeQty,freeQty)) return false;
-		if(!BigDecimalUtils.numericEquals(target.qtyDlvrd,qtyDlvrd)) return false;
-		if(!BigDecimalUtils.numericEquals(target.qtyOrdered,qtyOrdered)) return false;
-		if(!StringUtils.equals(target.dlvryItemNbr, dlvryItemNbr)) return false;
-		if(!StringUtils.equals(target.poItemNbr,poItemNbr)) return false;
-		return true;
 	}
 }

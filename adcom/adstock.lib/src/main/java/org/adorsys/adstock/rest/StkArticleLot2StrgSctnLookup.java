@@ -26,7 +26,7 @@ public class StkArticleLot2StrgSctnLookup extends
 	}
 
 	public StkArticleLot2StrgSctn findBySectionAndLotPic(String strgSection, String lotPic){
-		String primaryKey = StkArticleLot2StrgSctn.toLotPicAndDectionKey(lotPic, strgSection);
+		String primaryKey = StkArticleLot2StrgSctn.toLotPicAndSectionKey(lotPic, strgSection);
 		return repository.findBy(primaryKey);
 	}
 
@@ -44,5 +44,4 @@ public class StkArticleLot2StrgSctnLookup extends
 	public List<StkArticleLot2StrgSctn> findByClosedDtIsNullDesc(int start, int max){
 		return repository.findByClosedDtIsNull().firstResult(start).maxResults(max).orderDesc("identif").getResultList();
 	}
-
 }

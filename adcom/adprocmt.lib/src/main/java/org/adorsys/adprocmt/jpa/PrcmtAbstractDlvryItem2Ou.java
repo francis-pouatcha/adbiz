@@ -14,6 +14,9 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * The assignment of a certain quantity of a delivery item to an organization unit.
  * 
+ * The delivery item number is also supposed to be unique. So the delivery item
+ * number is the container identifier.
+ * 
  * @author francis
  *
  */
@@ -22,12 +25,6 @@ import org.apache.commons.lang3.StringUtils;
 public class PrcmtAbstractDlvryItem2Ou extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = 1040392867591584841L;
-
-	
-	@Column
-	@Description("PrcmtDelivery_dlvryItemNbr_description")
-	@NotNull
-	private String dlvryItemNbr;
 
 	@Column
 	@Description("PrcmtProcOrder_rcvngOrgUnit_description")
@@ -42,14 +39,6 @@ public class PrcmtAbstractDlvryItem2Ou extends CoreAbstIdentifObject {
 	@Column
 	@Description("PrcmtDlvryItem_freeQty_description")
 	private BigDecimal freeQty;
-
-	public String getDlvryItemNbr() {
-		return dlvryItemNbr;
-	}
-
-	public void setDlvryItemNbr(String dlvryItemNbr) {
-		this.dlvryItemNbr = dlvryItemNbr;
-	}
 
 	public BigDecimal getQtyDlvrd() {
 		return qtyDlvrd;
@@ -80,25 +69,10 @@ public class PrcmtAbstractDlvryItem2Ou extends CoreAbstIdentifObject {
 
 	@Override
 	protected String makeIdentif() {
-		return toId(dlvryItemNbr, rcvngOrgUnit);
+		return toId(cntnrIdentif, rcvngOrgUnit);
 	}
 	
 	public static String toId(String dlvryItemNbr, String rcvngOrgUnit){
 		return dlvryItemNbr + "_" + rcvngOrgUnit;
-	}
-	
-	public void copyTo(PrcmtAbstractDlvryItem2Ou target){
-		target.dlvryItemNbr = dlvryItemNbr;
-		target.freeQty=freeQty;
-		target.qtyDlvrd=qtyDlvrd;
-		target.rcvngOrgUnit=rcvngOrgUnit;
-	}
-
-	public boolean contentEquals(PrcmtAbstractDlvryItem2Ou target){
-		if(!BigDecimalUtils.numericEquals(target.freeQty,freeQty)) return false;
-		if(!BigDecimalUtils.numericEquals(target.qtyDlvrd,qtyDlvrd)) return false;
-		if(!StringUtils.equals(target.dlvryItemNbr, dlvryItemNbr)) return false;
-		if(!StringUtils.equals(target.rcvngOrgUnit,rcvngOrgUnit)) return false;
-		return true;
 	}
 }

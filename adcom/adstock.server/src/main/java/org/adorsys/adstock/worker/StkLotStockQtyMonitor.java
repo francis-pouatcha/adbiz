@@ -25,14 +25,14 @@ public class StkLotStockQtyMonitor {
 	private Map<String, List<StkLotStockQty>> cache = new HashMap<String, List<StkLotStockQty>>();
 	
 	@Inject
-	private StkStockQtyCtrlWkr wkr;
+	private StkLotStockQtyCtrlWkr wkr;
 	
-	public void handleNewLotStockQtyEvent(@Observes @EntityCreatedEvent StkLotStockQty lotStockQty){
+	public void handleNewStockQtyEvent(@Observes @EntityCreatedEvent StkLotStockQty lotStockQty){
 		newEntry(lotStockQty);
 	}
 	
 	private void newEntry(StkLotStockQty lotStockQty){
-		String key = lotStockQty.artPicAndLotPicAndSection();
+		String key = lotStockQty.artPicAndLotPic();
 		List<StkLotStockQty> list = cache.get(key);
 		if(list==null){
 			synchronized (this) {

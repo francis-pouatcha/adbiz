@@ -4,6 +4,12 @@ import javax.persistence.Entity;
 
 import org.adorsys.adcore.annotation.Description;
 
+/**
+ * Mapping of the location of an article lot.
+ * 
+ * @author fpo
+ *
+ */
 @Entity
 @Description("StkArticleLot2StrgSctn_description")
 public class StkArticleLot2StrgSctn extends StkAbstLot2Section {
@@ -11,6 +17,6 @@ public class StkArticleLot2StrgSctn extends StkAbstLot2Section {
 
 	@Override
 	protected String makeIdentif() {
-		return toLotPicAndDectionKey(getLotPic(), getSection());
+		return toLotPicAndSectionKey(getLotPic(), getSection());
 	}
 }

@@ -14,13 +14,9 @@ import javax.inject.Inject;
 import javax.persistence.OptimisticLockException;
 
 import org.adorsys.adcore.utils.BigDecimalUtils;
-import org.adorsys.adstock.jpa.StkArticleLot2StrgSctn;
 import org.adorsys.adstock.jpa.StkLotStockQty;
-import org.adorsys.adstock.rest.StkArticleLot2StrgSctnEJB;
-import org.adorsys.adstock.rest.StkArticleLot2StrgSctnLookup;
 import org.adorsys.adstock.rest.StkLotStockQtyEJB;
 import org.adorsys.adstock.rest.StkLotStockQtyLookup;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
 /**
@@ -33,17 +29,13 @@ import org.apache.commons.lang3.time.DateUtils;
  *
  */
 @Singleton
-public class StkStockQtyCtrlWkr {
+public class StkLotStockQtyCtrlWkr {
 	
 	private Map<String, StkLotStockQty> cache = new HashMap<String, StkLotStockQty>();
 	@Inject
 	private StkLotStockQtyLookup lotStockQtyLookup;
 	@Inject
 	private StkLotStockQtyEJB lotStockQtyEJB;
-	@Inject
-	private StkArticleLot2StrgSctnEJB articleLot2StrgSctnEJB;
-	@Inject
-	private StkArticleLot2StrgSctnLookup articleLot2StrgSctnLookup;
 
 	/**
 	 * This will remove an obsolete record from the data base. This call is performed by the 
@@ -53,61 +45,65 @@ public class StkStockQtyCtrlWkr {
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public void cleaup(StkLotStockQty lotStockQty){
 		if(lotStockQty.getQtyDt()==null) return;
-		String key = lotStockQty.artPicAndLotPicAndSection();
+		String key = lotStockQty.artPicAndLotPic();
 		if(!cache.containsKey(key))cache.put(key, lotStockQty);
-		
 		process(key);
 	}
 
-	private void process(String artAndLotPicAndSection) {
-		StkLotStockQty lotStockQty = cache.get(artAndLotPicAndSection);
+	private void process(String artAndLotPic) {
+		StkLotStockQty lotStockQty = cache.get(artAndLotPic);
 		if(DateUtils.addMinutes(new Date(), -3).after(lotStockQty.getQtyDt())) return;
-		consolidate(artAndLotPicAndSection);
+		consolidate(artAndLotPic);
 	}
 	
-	private void consolidate(String artAndLotPicAndSection) {
-		StkLotStockQty lotStockQty = cache.get(artAndLotPicAndSection);
-		if(lotStockQty==null) return;
-		String artPic = lotStockQty.getArtPic();
-		String lotPic = lotStockQty.getLotPic();
-		String section = lotStockQty.getSection();
-		
-		StkLotStockQty base = lotStockQtyLookup.findBase(artPic, lotPic, section);
-		if(base==null) return;
-		Integer seqNbr = base.getSeqNbr();
-		List<StkLotStockQty> picAndSeq = lotStockQtyLookup.findByArtPicAndLotPicAndSectionAndSeqNbr(artPic, lotPic, section, seqNbr);
-		BigDecimal baseQty = base.getStockQty();
-		String orgiProcess = base.getOrigProcs();
-		for (StkLotStockQty lsq : picAndSeq) {
-			baseQty = BigDecimalUtils.sum(baseQty,lsq.getStockQty());
-			if(seqNbr < lsq.getSeqNbr()) {
-				seqNbr = lsq.getSeqNbr();
-				orgiProcess = lsq.getOrigProcs();
-			}
-		}
+	private void consolidate(String artAndLotPic) {
 		Date now = new Date();
+		StkLotStockQty lotStockQty = cache.get(artAndLotPic);
+		if(lotStockQty==null) return;
+		String artPic = lotStockQty.getCntnrIdentif();
+		String lotPic = lotStockQty.getLotPic();
+		
+		StkLotStockQty base = lotStockQtyLookup.findBase(artPic, lotPic);
+		if(base==null) return;
+		BigDecimal baseQty = base.getStockQty();
+		Integer seqNbr = base.getSeqNbr();
+		String orgiProcess = base.getOrigProcs();
 		base.setQtyDt(now);
-		base.setStockQty(baseQty);
-		base.setSeqNbr(seqNbr);
-		if(!BigDecimalUtils.greaterZero(baseQty)){
-			StkArticleLot2StrgSctn stkArticleLot2StrgSctn = articleLot2StrgSctnLookup.findBySectionAndLotPic(section, lotPic);
-			stkArticleLot2StrgSctn.setOutOfStockDt(now);
-			if(BigDecimalUtils.isNullOrZero(baseQty)){
-				if(StringUtils.isNotBlank(orgiProcess) && "InvInvtry".equals(orgiProcess)){
-					stkArticleLot2StrgSctn.setClosedDt(now);
+
+		Long countByArtPicAndLotPicAndSeqNbr = lotStockQtyLookup.countByArtPicAndLotPicAndSeqNbr(artPic, lotPic, seqNbr);
+		int max = 100;
+		int processed = 0;
+		while(processed<countByArtPicAndLotPicAndSeqNbr){
+			int start = processed;
+			processed += max;
+			List<StkLotStockQty> picAndSeq = lotStockQtyLookup.findByArtPicAndLotPicAndSeqNbr(artPic, lotPic, seqNbr, start, max);
+			for (StkLotStockQty lsq : picAndSeq) {
+				baseQty = BigDecimalUtils.sum(baseQty,lsq.getStockQty());
+				if(seqNbr < lsq.getSeqNbr()) {
+					seqNbr = lsq.getSeqNbr();
+					orgiProcess = lsq.getOrigProcs();
 				}
 			}
-			articleLot2StrgSctnEJB.update(stkArticleLot2StrgSctn);
 		}
+		base.setStockQty(baseQty);
+		base.setSeqNbr(seqNbr);
+		base.setOrigProcs(orgiProcess);
+
 		try {
 			lotStockQtyEJB.update(base);
 		} catch(OptimisticLockException e){
 			// No opt. Had been taken care of by another thread.
 		}
 		
-		// cleanup
-		for (StkLotStockQty lsq : picAndSeq) {
-			lotStockQtyEJB.deleteById(lsq.getId());
+		processed = 0;
+		while(processed<countByArtPicAndLotPicAndSeqNbr){
+			int start = processed;
+			processed += max;
+			List<StkLotStockQty> picAndSeq = lotStockQtyLookup.findByArtPicAndLotPicAndSeqNbr(artPic, lotPic, seqNbr, start, max);
+			// cleanup
+			for (StkLotStockQty lsq : picAndSeq) {
+				lotStockQtyEJB.deleteById(lsq.getId());
+			}
 		}
 	}
 }

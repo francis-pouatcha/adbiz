@@ -8,17 +8,10 @@ import org.apache.deltaspike.data.api.Repository;
 @Repository(forEntity = StkLotStockQty.class)
 public interface StkLotStockQtyRepository extends CoreAbstIdentifRepo<StkLotStockQty>
 {
-	public QueryResult<StkLotStockQty> findByArtPic(String artPic);
+	public QueryResult<StkLotStockQty> findByCntnrIdentifAndLotPic(String cntnrIdentif,String lotPic);
 
-	public QueryResult<StkLotStockQty> findByArtPicAndLotPic(String artPic,String lotPic);
+	public QueryResult<StkLotStockQty> findByCntnrIdentifAndLotPicAndCnsldtd(String cntnrIdentif,String lotPic,Boolean cnsldtd);
 
-	public QueryResult<StkLotStockQty> findByArtPicAndLotPicAndCnsldtd(String artPic,String lotPic,Boolean cnsldtd);
+	public QueryResult<StkLotStockQty> findByCntnrIdentifAndLotPicAndSeqNbr(String cntnrIdentif,String lotPic, int seqNbr);
 
-	public QueryResult<StkLotStockQty> findByArtPicAndLotPicAndSection(String artPic,String lotPic, String section);
-
-	public QueryResult<StkLotStockQty> findByArtPicAndLotPicAndSectionAndCnsldtd(String artPic,String lotPic,String section,Boolean cnsldtd);
-	
-	public QueryResult<StkLotStockQty> findByArtPicAndLotPicAndSectionAndSeqNbr(String artPic,String lotPic, String section, int seqNbr);
-
-	public QueryResult<StkLotStockQty> findByLotPicAndSection(String lotPic,String section);
 }

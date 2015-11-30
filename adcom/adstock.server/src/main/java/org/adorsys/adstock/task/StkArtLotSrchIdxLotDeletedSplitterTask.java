@@ -60,7 +60,7 @@ public class StkArtLotSrchIdxLotDeletedSplitterTask extends
 	}
 
 	public void handleStkArticleLot2StrgSctnDeletedEvent(@Observes @EntityDeletedEvent StkArticleLot2StrgSctn articleLot2StrgSctn){
-		String lotAndSectionIdx = StkArtLotSrchIdx.toLotPicAndDectionKey(articleLot2StrgSctn.getLotPic(), articleLot2StrgSctn.getSection());
+		String lotAndSectionIdx = StkArtLotSrchIdx.toLotPicAndSectionKey(articleLot2StrgSctn.getLotPic(), articleLot2StrgSctn.getSection());
 		StkJob job = new StkJob();
 		job.setEntIdentif(lotAndSectionIdx);
 		job.setCntnrIdentif(lotAndSectionIdx);

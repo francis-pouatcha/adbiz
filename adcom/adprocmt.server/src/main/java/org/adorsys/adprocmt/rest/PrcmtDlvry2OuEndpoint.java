@@ -9,19 +9,14 @@ import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 
-import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchInput;
-import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchResult;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
-import org.adorsys.adcore.rest.CoreAbstBsnsObjectLookup;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 import org.adorsys.adcore.rest.CoreAbstIdentifReadEndpoint;
-import org.adorsys.adprocmt.jpa.PrcmtDelivery;
-import org.adorsys.adprocmt.jpa.PrcmtDeliverySearchInput;
-import org.adorsys.adprocmt.jpa.PrcmtDeliverySearchResult;
 import org.adorsys.adprocmt.jpa.PrcmtDlvry2Ou;
 import org.adorsys.adprocmt.jpa.PrcmtDlvry2OuSearchInput;
 import org.adorsys.adprocmt.jpa.PrcmtDlvry2OuSearchResult;
+import org.adorsys.adprocmt.jpa.PrcmtDlvry2Ou_;
 
 /**
  * 

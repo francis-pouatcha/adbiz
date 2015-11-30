@@ -1,9 +1,6 @@
 package org.adorsys.adprocmt.loader;
 
-import org.adorsys.adprocmt.jpa.PrcmtAbstractDlvryItem;
-
-public class PrcmtDlvryItemExcel extends PrcmtAbstractDlvryItem {
-	private static final long serialVersionUID = 2831567647414124481L;
+public class PrcmtDlvryItemExcel {
 
 	/*
 	 * A comma separated list of storage sections. strgSection:qtyStrd

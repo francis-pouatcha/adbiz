@@ -18,6 +18,7 @@ import org.adorsys.adcore.rest.CoreAbstBsnsItemLookup;
 import org.adorsys.adprocmt.jpa.PrcmtDlvryItem;
 import org.adorsys.adprocmt.jpa.PrcmtDlvryItemSearchInput;
 import org.adorsys.adprocmt.jpa.PrcmtDlvryItemSearchResult;
+import org.adorsys.adprocmt.jpa.PrcmtDlvryItem_;
 
 /**
  * 

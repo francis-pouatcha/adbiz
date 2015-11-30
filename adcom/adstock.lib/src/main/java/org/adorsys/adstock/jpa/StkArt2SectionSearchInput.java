@@ -1,4 +1,4 @@
-package org.adorsys.adprocmt.jpa;
+package org.adorsys.adstock.jpa;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -12,4 +12,5 @@ import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
  *
  */
 @XmlRootElement
-public class PrcmtDlvryArtPrcssngSearchInput extends CoreAbstIdentifObjectSearchInput<PrcmtDlvryArtPrcssng>{}
+public class StkArt2SectionSearchInput extends CoreAbstIdentifObjectSearchInput<StkArt2Section>
+{}

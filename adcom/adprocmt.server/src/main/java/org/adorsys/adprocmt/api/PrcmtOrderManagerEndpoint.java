@@ -1,64 +1,72 @@
 package org.adorsys.adprocmt.api;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
+import org.adorsys.adcore.exceptions.AdRestException;
+import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchInput;
+import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchResult;
+import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchInput;
+import org.adorsys.adcore.rest.CoreAbstBsnsManagerEndpoint;
+import org.adorsys.adcore.rest.CoreAbstBsnsObjInjector;
+import org.adorsys.adcore.rest.CoreAbstBsnsObjectManager;
+import org.adorsys.adprocmt.jpa.PrcmtDelivery;
+import org.adorsys.adprocmt.jpa.PrcmtJob;
+import org.adorsys.adprocmt.jpa.PrcmtPOItem;
+import org.adorsys.adprocmt.jpa.PrcmtPOItemSearchInput;
+import org.adorsys.adprocmt.jpa.PrcmtPOItemSearchResult;
 import org.adorsys.adprocmt.jpa.PrcmtProcOrder;
+import org.adorsys.adprocmt.jpa.PrcmtProcOrderCstr;
+import org.adorsys.adprocmt.jpa.PrcmtProcOrderHstry;
+import org.adorsys.adprocmt.jpa.PrcmtStep;
+import org.adorsys.adprocmt.rest.PrcmtProcOrderInjector;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 @Path("/order")
-public class PrcmtOrderManagerEndpoint
-{
+public class PrcmtOrderManagerEndpoint extends
+		CoreAbstBsnsManagerEndpoint<PrcmtProcOrder, PrcmtPOItem, PrcmtProcOrderHstry, PrcmtJob, PrcmtStep, PrcmtProcOrderCstr> {
 
-   @Inject
-   private PrcmtOrderManager orderManager; 
+	@Inject
+	private PrcmtOrderManager manager;
+	@Inject
+	private PrcmtProcOrderInjector injector;
 
-   @POST
-   @Path("/create")
-   @Consumes({ "application/json", "application/xml" })
-   @Produces({ "application/json", "application/xml" })
-   public PrcmtOrderHolder createOrder(PrcmtProcOrder prcmtProcOrder){
-      return orderManager.createPcrmtOrder(prcmtProcOrder);
-   }
-   
-   @POST
-   @Path("/update")
-   @Consumes({ "application/json", "application/xml" })
-   @Produces({ "application/json", "application/xml" })
-   public PrcmtOrderHolder updateOrder(PrcmtOrderHolder prcmtOrderHolder){
-      return orderManager.updateOrder(prcmtOrderHolder);
-   }
+	@Override
+	protected CoreAbstBsnsObjectManager<PrcmtProcOrder, PrcmtPOItem, PrcmtProcOrderHstry, PrcmtJob, PrcmtStep, PrcmtProcOrderCstr, CoreAbstBsnsObjectSearchInput<PrcmtProcOrder>> getBsnsObjManager() {
+		return manager;
+	}
 
-   @POST
-   @Path("/close")
-   @Consumes({ "application/json", "application/xml" })
-   @Produces({ "application/json", "application/xml" })
-   public PrcmtOrderHolder closeOrder(PrcmtOrderHolder prcmtOrderHolder){
-      return orderManager.closeOrder(prcmtOrderHolder);
-   }
-   
-   @GET
-   @Path("/{id}")
-   @Produces({ "application/json", "application/xml" })
-   public PrcmtOrderHolder findOrder(@PathParam("id") String id)
-   {
-	   return orderManager.findOrder(id);
-   }
-   
-   @POST
-   @Path("/transform")
-   @Consumes({ "application/json", "application/xml" })
-   @Produces({ "application/json", "application/xml" })
-   public PrcmtDeliveryHolder order2Delivery(PrcmtOrderHolder prcmtOrderHolder){
-      return orderManager.order2Delivery(prcmtOrderHolder);
-   }
+	@Override
+	protected CoreAbstBsnsObjInjector<PrcmtProcOrder, PrcmtPOItem, PrcmtProcOrderHstry, PrcmtJob, PrcmtStep, PrcmtProcOrderCstr> getInjector() {
+		return injector;
+	}
+
+	@Override
+	protected CoreAbstBsnsItemSearchInput<PrcmtPOItem> newItemSearchInput() {
+		return new PrcmtPOItemSearchInput();
+	}
+
+	@Override
+	protected CoreAbstBsnsItemSearchResult<PrcmtPOItem> newItemSearchResult(long count, List<PrcmtPOItem> resultList,
+			CoreAbstBsnsItemSearchInput<PrcmtPOItem> itemSearchInput) {
+		return new PrcmtPOItemSearchResult(count, resultList, itemSearchInput);
+	}
+
+	@POST
+	@Path("/transform")
+	@Consumes({ "application/json", "application/xml" })
+	@Produces({ "application/json", "application/xml" })
+	public PrcmtDelivery order2Delivery(PrcmtProcOrder prcmtOrder) throws AdRestException {
+		return manager.order2Delivery(prcmtOrder);
+	}
+
 }
