@@ -22,38 +22,6 @@ public abstract class StkAbstLotStockQty extends StkAbstStockQty {
 	@NotNull
 	private String lotPic;
 
-	// The originating process. Sales, Inventory, Procurement
-	@Column
-	@Description("StkAbstractStockQty_origProcs_description")
-	private String origProcs;
-
-	// The identifier of the origin process.
-	@Column
-	@Description("StkAbstractStockQty_origProcsNbr_description")
-	private String origProcsNbr;
-	
-	// The identifier of the origin process.
-	@Column
-	@Description("StkAbstractStockQty_stkMvntIdentif_description")
-	@NotNull
-	private String stkMvntIdentif;
-
-	public String getOrigProcs() {
-		return origProcs;
-	}
-
-	public void setOrigProcs(String origProcs) {
-		this.origProcs = origProcs;
-	}
-
-	public String getOrigProcsNbr() {
-		return origProcsNbr;
-	}
-
-	public void setOrigProcsNbr(String origProcsNbr) {
-		this.origProcsNbr = origProcsNbr;
-	}
-
 	public String getLotPic() {
 		return lotPic;
 	}
@@ -64,14 +32,6 @@ public abstract class StkAbstLotStockQty extends StkAbstStockQty {
 
 	public String artPicAndLotPic(){
 		return getCntnrIdentif() + "_" + getLotPic();
-	}
-
-	public String getStkMvntIdentif() {
-		return stkMvntIdentif;
-	}
-
-	public void setStkMvntIdentif(String stkMvntIdentif) {
-		this.stkMvntIdentif = stkMvntIdentif;
 	}
 
 	@Override

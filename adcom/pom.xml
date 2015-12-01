@@ -36,12 +36,12 @@
 
 		<module>adprocmt.lib</module>
 		<module>adprocmt.server</module>
-		<!-- 
 		<module>adres.client</module>
 		<module>adcatal.client</module>
 		<module>adstock.client</module>
 		<module>adinvtry.client</module>
 		<module>addashboard.client</module>
+		<!-- 
 		<module>adbnsptnr.client</module>
 		<module>adbnsptnr.server</module> 
 		-->

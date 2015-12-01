@@ -205,41 +205,28 @@ public abstract class CoreAbstIdentifLookup<E extends CoreAbstIdentifObject> {
 	 */
 	protected StringBuilder preprocessCustomQuery(CoreAbstIdentifObjectSearchInput<E> searchInput, StringBuilder qBuilder){
 		E entity = searchInput.getEntity();
-		Class<?> klass = entity.getClass().getSuperclass();
-		boolean whereSet = false;
-		if(StringUtils.contains(qBuilder, whereClause)){
-			whereSet = true;
-		}
-		
+		if(entity==null) return qBuilder;
+		boolean whereSet = StringUtils.contains(qBuilder, whereClause)?true:false;
 		List<String> fieldNames = searchInput.getFieldNames();
+		Set<String> processedFields =  new HashSet<String>();
 		for(String fieldName: fieldNames){
-			Field field = FieldUtils.getField(klass, fieldName, true);
-			if(field != null){
-				try {
-					if(field.get(field.getDeclaringClass())!=null){
-						String whereOp = prepareWhereOp(fieldName);
-						whereSet = prep(whereSet, qBuilder, whereOp);
-					}
-				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+			if(StringUtils.isBlank(fieldName)) continue;
+			if(processedFields.contains(fieldName)) continue;
+			processedFields.add(fieldName);
+			Field field = FieldUtils.getField(entity.getClass(), fieldName, true);
+			if(field==null) continue;
+			String whereOp = prepareWhereOp(fieldName);
+			whereSet = prep(whereSet, qBuilder, whereOp);
 		}
 		LOG.info("Requete: "+qBuilder);
 		return qBuilder;
 	}
 	
 	public String prepareWhereOp(String fieldName){
-		StringBuilder builder = new StringBuilder();
-		builder.append("e.")
+		return new StringBuilder().append("e.")
                .append(fieldName)
                .append("=:")
-               .append(fieldName);
-		return builder.toString();
+               .append(fieldName).toString();
 	}
 
 	protected StringBuilder preprocessSort(CoreAbstIdentifObjectSearchInput<E> searchInput, StringBuilder qBuilder){
@@ -272,9 +259,9 @@ public abstract class CoreAbstIdentifLookup<E extends CoreAbstIdentifObject> {
 	
 	protected void setParameters(CoreAbstIdentifObjectSearchInput<E> searchInput, Query query)
 	{
-		E entity = searchInput.getEntity();
-
-		if(searchInput.getFieldNames().contains("cntnrIdentif") && StringUtils.isNotBlank(entity.getCntnrIdentif())) query.setParameter("cntnrIdentif", entity.getCntnrIdentif());
+//		E entity = searchInput.getEntity();
+//
+//		if(searchInput.getFieldNames().contains("cntnrIdentif") && StringUtils.isNotBlank(entity.getCntnrIdentif())) query.setParameter("cntnrIdentif", entity.getCntnrIdentif());
 
 		if(searchInput.getValueDtFrom()!=null) query.setParameter("valueDtFrom", searchInput.getValueDtFrom());
 		if(searchInput.getValueDtTo()!=null) query.setParameter("valueDtTo", searchInput.getValueDtTo());
@@ -283,27 +270,26 @@ public abstract class CoreAbstIdentifLookup<E extends CoreAbstIdentifObject> {
 		if(searchInput.getIdentifTo()!=null) query.setParameter("identifTo", searchInput.getIdentifTo());
 	}
 	
+	
 	protected void setCustomParameters(CoreAbstIdentifObjectSearchInput<E> searchInput, Query query){
 		E entity = searchInput.getEntity();
-		Class<?> klass = entity.getClass().getSuperclass();
-		
+		// custom parameter are only read if the entity is not null.
+		if(entity==null) return;
 		List<String> fieldNames = searchInput.getFieldNames();
+		Set<String> processedFields =  new HashSet<String>();
 		for(String fieldName: fieldNames){
-			Field field = FieldUtils.getField(klass, fieldName, true);
+			if(StringUtils.isBlank(fieldName)) continue;
+			if(processedFields.contains(fieldName)) continue;
+			processedFields.add(fieldName);
+			Field field = FieldUtils.getField(entity.getClass(), fieldName, true);
 			if(field!=null){
 				try {
-					if(field.get(field.getDeclaringClass())!=null){
-						query.setParameter(fieldName, field.get(klass));
-					}
-				} catch (IllegalArgumentException e) {
-					throw new IllegalArgumentException();
+					query.setParameter(fieldName, FieldUtils.readField(field, entity, true));
 				} catch (IllegalAccessException e) {
-					throw new IllegalStateException();
+					throw new IllegalStateException(e);
 				}
 			}
 		}
-		
-		
 	}
 	
 

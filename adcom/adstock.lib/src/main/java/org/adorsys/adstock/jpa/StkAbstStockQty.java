@@ -69,6 +69,22 @@ public abstract class StkAbstStockQty extends CoreAbstIdentifObject {
 	@Description("StkAbstStockQty_resvdCncldDt_description")
 	private Date resvdCncldDt;
 
+	// The originating process. Sales, Inventory, Procurement
+	@Column
+	@Description("StkAbstractStockQty_origProcs_description")
+	private String origProcs;
+
+	// The identifier of the origin process.
+	@Column
+	@Description("StkAbstractStockQty_origProcsNbr_description")
+	private String origProcsNbr;
+	
+	// The identifier of the origin process.
+	@Column
+	@Description("StkAbstractStockQty_stkMvntIdentif_description")
+	@NotNull
+	private String stkMvntIdentif;
+	
 	public BigDecimal getStockQty() {
 		return this.stockQty;
 	}
@@ -131,6 +147,29 @@ public abstract class StkAbstStockQty extends CoreAbstIdentifObject {
 
 	public void setRsvrdQty(BigDecimal rsvrdQty) {
 		this.rsvrdQty = rsvrdQty;
+	}
+	public String getOrigProcs() {
+		return origProcs;
+	}
+
+	public void setOrigProcs(String origProcs) {
+		this.origProcs = origProcs;
+	}
+
+	public String getOrigProcsNbr() {
+		return origProcsNbr;
+	}
+
+	public void setOrigProcsNbr(String origProcsNbr) {
+		this.origProcsNbr = origProcsNbr;
+	}
+
+	public String getStkMvntIdentif() {
+		return stkMvntIdentif;
+	}
+
+	public void setStkMvntIdentif(String stkMvntIdentif) {
+		this.stkMvntIdentif = stkMvntIdentif;
 	}
 
 	@Override

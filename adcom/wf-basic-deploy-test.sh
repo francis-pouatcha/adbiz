@@ -1,4 +1,4 @@
-#This script is used to make a full projet deployemnt.
+I#This script is used to make a full projet deployemnt.
 #Please set the $ADCOM_HOME environment variable in your profile.
 #as follow
 

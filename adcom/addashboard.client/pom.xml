@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.adorsys.adcom</groupId>
-		<artifactId>adcom.parent</artifactId>
+		<artifactId>adcom.client.parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>addashboard.client</artifactId>
@@ -27,10 +27,6 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 					<warSourceIncludes>src/**,i18n/**,WEB-INF/**,sample/**</warSourceIncludes>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
 			</plugin>
         </plugins>
 	</build>

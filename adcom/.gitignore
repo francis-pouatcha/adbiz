@@ -18,6 +18,8 @@ adpharma/*/.classpath
 *.class
 jslibs/node_modules/
 
+adcom.client.parent/node
+adres.client/src/main/webapp/node_modules 
 # Node
 ######################
 /node/**
