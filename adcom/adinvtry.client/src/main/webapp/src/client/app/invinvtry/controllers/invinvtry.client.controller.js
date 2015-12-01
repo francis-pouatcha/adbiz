@@ -6,9 +6,9 @@
         .module('app.invinvtry')
         .controller('invInvtrysCtlr', invInvtrysCtlr);
 
-    invInvtrysCtlr.$inject = ['$scope','invInvtryManagerResource','utils', 'invInvtryUtils'];
+    invInvtrysCtlr.$inject = ['$scope','invInvtryManagerResource','utils', 'invInvtryUtils', 'genericResource'];
     /* @ngInject */
-    function invInvtrysCtlr($scope, invInvtryManagerResource, utils, invInvtryUtils) {
+    function invInvtrysCtlr($scope, invInvtryManagerResource, utils, invInvtryUtils, genericResource) {
 
         $scope.data = {};
         $scope.data.invInvtrys = [];
@@ -17,7 +17,7 @@
 
         // Initialize Search input and pagination
         $scope.searchInput = utils.searchInputInit().searchInput;
-        $scope.searchInput.className = 'org.adorsys.adinvtry.jpa.InvInvtrySearchInput';
+        $scope.searchInput.className = 'org.adorsys.adinvtry.rest.InvInvtrySearchInput';
         $scope.pagination = utils.searchInputInit().pagination;
 
         findCustom($scope.searchInput);
@@ -41,31 +41,40 @@
         function processSearchInput(searchInput){
 
             if(angular.isDefined(searchInput.entity.identif) && searchInput.entity.identif){
-                searchInput.fieldNames.push('identif');
+                if(searchInput.fieldNames.indexOf('identif') == -1)
+                    searchInput.fieldNames.push('identif');
             }
             if(angular.isDefined(searchInput.entity.login) && searchInput.entity.login){
-                searchInput.fieldNames.push('login');
+                if(searchInput.fieldNames.indexOf('login') == -1)
+                    searchInput.fieldNames.push('login');
             }
             if(angular.isDefined(searchInput.entity.status) && searchInput.entity.status){
-                searchInput.fieldNames.push('status');
+                if(searchInput.fieldNames.indexOf('status') == -1)
+                    searchInput.fieldNames.push('status');
             }
             if(angular.isDefined(searchInput.entity.invtryGroup) && searchInput.entity.invtryGroup){
-                searchInput.fieldNames.push('invtryGroup');
+                if(searchInput.fieldNames.indexOf('invtryGroup') == -1)
+                    searchInput.fieldNames.push('invtryGroup');
             }
             if(angular.isDefined(searchInput.entity.txType) && searchInput.entity.txType){
-                searchInput.fieldNames.push('txType');
+                if(searchInput.fieldNames.indexOf('txType') == -1)
+                    searchInput.fieldNames.push('txType');
             }
             if(angular.isDefined(searchInput.entity.descptn) && searchInput.entity.descptn){
-                searchInput.fieldNames.push('descptn');
+                if(searchInput.fieldNames.indexOf('descptn') == -1)
+                    searchInput.fieldNames.push('descptn');
             }
             if(angular.isDefined(searchInput.entity.section) && searchInput.entity.section){
-                searchInput.fieldNames.push('section');
+                if(searchInput.fieldNames.indexOf('section') == -1)
+                    searchInput.fieldNames.push('section');
             }
             if(angular.isDefined(searchInput.entity.rangeStart) && searchInput.entity.rangeStart){
-                searchInput.fieldNames.push('rangeStart');
+                if(searchInput.fieldNames.indexOf('rangeStart') == -1)
+                    searchInput.fieldNames.push('rangeStart');
             }
             if(angular.isDefined(searchInput.entity.rangeEnd) && searchInput.entity.rangeEnd){
-                searchInput.fieldNames.push('rangeEnd');
+                if(searchInput.fieldNames.indexOf('rangeEnd') == -1)
+                    searchInput.fieldNames.push('rangeEnd');
             }
         }
 
@@ -82,16 +91,19 @@
                 $scope.display.section='';
                 $scope.display.sectionName='';
                 return;
-            } else if (angular.equals($scope.display.section,$scope.searchInput.entity.section)) {
+            } else if (($scope.display) && angular.equals($scope.display.section,$scope.searchInput.entity.section)) {
                 return;
             }
 
             genericResource.findByLikePromissed(invInvtryUtils.stksectionsUrlBase, 'identif', $scope.searchInput.entity.section)
                 .then(function(entitySearchResult){
                     var resultList = entitySearchResult.resultList;
-                    if(angular.isDefined(resultList) && resultList.length>0)
+                    if(angular.isDefined(resultList) && resultList.length>0){
+                        $scope.display = {};
                         $scope.display.section = resultList[0].identif;
-                    $scope.display.sectionName = resultList[0].name;
+                        $scope.display.sectionName = resultList[0].name;
+                    }
+
                 }, function(error){
                     $scope.display.section = '';
                     $scope.display.sectionName = '';
@@ -262,18 +274,17 @@
         }
 
         $scope.addItem = function(invtryItem){
+            invtryItem.acsngDt=new Date().getTime();
             unsetEditing(invtryItem);
-            invInvtryManagerResource.addItem(invtryItem)
-                .success(function(invtryItem){
+            invInvtryManagerResource.addItem({'identif':invtryItem.artPic}, invtryItem ,function(invtryItem){
                     itemsResultHandler.unshift(invtryItem);
-                    $scope.searchInput.entity.artPic=undefined;
+                    $scope.searchInput.entity.identif=undefined;
                     $scope.searchInput.entity.artName=undefined;
                     $scope.searchInput.entity.lotPic=undefined;
                     $scope.searchInput.entity.asseccedQty=undefined;
-                })
-                .error(function(error){
+                }, function(error){
                     $scope.error = error;
-                });
+            });
         };
         $scope.check = function(){
             invInvtryManagerResource.validate({identif:$scope.invInvtry.identif}, function(invInvtry){
@@ -336,11 +347,10 @@
 
             $scope.asseccedQtyChanged(invtryItem);
 
-            invInvtryManagerResource.updateItem(invtryItem)
-                .success(function(invtryItem){
+            invInvtryManagerResource.updateItem({'identif':invtryItem.cntnrIdentif, 'itemIdentif':invtryItem.artPic},
+                invtryItem, function(invtryItem){
                     itemsResultHandler.replace(invtryItem);
-                })
-                .error(function(data){
+                },function(data){
                     console.log(data);
                     //$scope.error = error;
                 });
@@ -366,21 +376,19 @@
 
         $scope.disableItem = function(invtryItem){
             cleanupItem(invtryItem);
-            invInvtryManagerResource.disableItem(invtryItem)
-                .success(function(invtryItem){
+            invInvtryManagerResource.disableItem({'identif':invtryItem.cntnrIdentif, 'itemIdentif':invtryItem.artPic}
+                ,invtryItem,function(invtryItem){
                     itemsResultHandler.replace(invtryItem);
-                })
-                .error(function(error){
+                },function(error){
                     $scope.error = error;
                 });
         };
         $scope.enableItem = function(invtryItem){
             cleanupItem(invtryItem);
-            invInvtryManagerResource.enableItem(invtryItem)
-                .success(function(invtryItem){
+            invInvtryManagerResource.enableItem({'identif':invtryItem.cntnrIdentif, 'itemIdentif':invtryItem.artPic},
+                invtryItem, function(invtryItem){
                     itemsResultHandler.replace(invtryItem);
-                })
-                .error(function(error){
+                },function(error){
                     $scope.error = error;
                 });
         };
@@ -422,7 +430,7 @@
         $scope.onSectionSelectedInSearch = function(item,model,label){
             $scope.searchInput.entity.section=item.identif;
             $scope.display.sectionName=item.name;
-            $scope.display.sectionCode=item.identif;
+            $scope.display.identif=item.identif;
         };
 
         $scope.onArticleLotChangedInSearch = function(){
@@ -434,7 +442,7 @@
                 return;
             }
             if(angular.isUndefined($scope.searchInput.entity.artPic) || !$scope.searchInput.entity.artPic){
-                genericResource.findByIdentif(invInvtryUtils.stkarticlelotsUrlBase,$scope.searchInput.entity.lotPic.toUpperCase())
+                genericResource.findById(invInvtryUtils.stkarticlelotsUrlBase,$scope.searchInput.entity.lotPic.toUpperCase())
                     .success(function(articleLot){
                         $scope.searchInput.entity.artPic=articleLot.artPic;
                         genericResource.findByIdentif(invInvtryUtils.catalarticlesUrlBase,$scope.searchInput.entity.artPic)
@@ -452,7 +460,7 @@
             }
         };
 
-        $scope.onArticleLotSectionSelectedInSearch = function(item,model,label){
+       /* $scope.onArticleLotSectionSelectedInSearch = function(item,model,label){
             $scope.searchInput.entity.lotPic = item.lotPic;
             var artPic = item.artPic;
             if(	(angular.isUndefined($scope.searchInput.entity.artPic) ||
@@ -471,23 +479,24 @@
                 $scope.searchInput.entity.section=strgSection;
                 $scope.display.sectionName=item.sectionName;
             }
-        };
+        };*/
 
         $scope.showLotsForArtPic = function(lotPic){
             if((angular.isDefined(lotPic) && lotPic.length>=8)){
                 return [];
             }
-            var artPic = $scope.searchInput.entity.artPic;
+            var artPic = $scope.searchInput.entity.identif;
             var section = $scope.searchInput.entity.section;
             if(((angular.isUndefined(artPic) || !artPic)) && ((angular.isUndefined(section) || !section))){
                 return [];
             }
+            console.log(artPic);
             return invInvtryUtils.loadStkSectionArticleLotsByIdentif(artPic,lotPic,section);
         };
 
-        $scope.onArticleLotSelectedInSearch = function(item,model,label){
+        /*$scope.onArticleLotSelectedInSearch = function(item,model,label){
             $scope.searchInput.entity.lotPic=item.lotPic;
-            $scope.searchInput.entity.artPic=item.artPic;
+            $scope.searchInput.entity.identif=item.artPic;
 //    	// read the article name
             genericResource.findByIdentif(invInvtryUtils.catalarticlesUrlBase,item.artPic)
                 .success(function(catalArticle){
@@ -496,13 +505,36 @@
                 .error(function(error){
                     $scope.error=error;
                 });
-        };
+        };*/
 
         $scope.onArticleSelectedInSearch = function(item,model,label){
-            $scope.searchInput.entity.artPic=item.pic;
-            $scope.searchInput.entity.artName=item.features.artName;
+            $scope.searchInput.entity.artPic=item.identif;
+            var searchInput = coreSearchInputInit(item.identif);
+            genericResource.findBy(invInvtryUtils.catalartfeatmappingsUrlBase,searchInput)
+                .success(function(response){
+                    $scope.searchInput.entity.artName=response.resultList[0].artName;
+                })
+                .error(function(error){
+                    $scope.error=error;
+                });
+        };
+
+        $scope.onArticleSelectedInSearchArtName = function(item,model,label){
+            $scope.searchInput.entity.identif=item.cntnrIdentif;
 
         };
+
+        function coreSearchInputInit(identif) {
+            var coreSearchInput = {};
+            coreSearchInput.entity = {};
+            coreSearchInput.entity.cntnrIdentif = identif;
+            //coreSearchInput.entity.langIso2 = $translate.use();
+            coreSearchInput.fieldNames = [];
+            coreSearchInput.fieldNames.push('cntnrIdentif');
+            //coreSearchInput.fieldNames.push('langIso2');
+            coreSearchInput.className = 'org.adorsys.adcatal.jpa.CatalArtLangMappingSearchInput';
+            return coreSearchInput;
+        }
 
     }
 })();
