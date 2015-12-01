@@ -28,6 +28,10 @@ public abstract class InvAbstractInvtryItem extends CoreAbstBsnsItem {
 	@Column
 	@Description("InvInvtryItem_asseccedQty_description")
 	private BigDecimal asseccedQty;
+	
+	@Column
+	@Description("InvInvtryItem_artName_description")
+	private String artName;
 
 	protected void normalize(){
 		this.expectedQty = BigDecimalUtils.zeroIfNull(this.expectedQty);
@@ -51,4 +55,13 @@ public abstract class InvAbstractInvtryItem extends CoreAbstBsnsItem {
 	public void setAsseccedQty(final BigDecimal asseccedQty) {
 		this.asseccedQty = asseccedQty;
 	}
+	
+	public void setArtName(String artName) {
+		this.artName = artName;
+	}
+	
+	public String getArtName() {
+		return this.artName;
+	}
+	
 }

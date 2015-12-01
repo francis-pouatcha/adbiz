@@ -301,6 +301,32 @@
 
         }]);
 
+    angular.module('app.core')
+        .directive('adEnter', function () {
+            return function (scope, element, attrs) {
+                element.bind("keydown keypress", function (event) {
+                    if(event.which === 13) {
+                        scope.$apply(function (){
+                            scope.$eval(attrs.adEnter);
+                        });
+                        event.preventDefault();
+                    }
+                });
+            };
+        });
+    angular.module('app.core')
+        .directive('adFocus', function($timeout) {
+            return {
+                link: function ( scope, element, attrs ) {
+                    scope.$watch( attrs.adFocus, function ( val ) {
+                        if ( angular.isDefined( val ) && val ) {
+                            $timeout( function () { element[0].focus(); } );
+                        }
+                    }, true);
+                }
+            };
+        });
+
     angular
      .module('app.core')
     .factory('searchResultHandler',['utils',function(utils){

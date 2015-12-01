@@ -101,30 +101,30 @@
                         <label class=" control-label" for="artPic">{{'InvInvtryItem_artPic_description.title'| translate}}</label>
                         <input type="text" ng- class="form-control" name="artPic" id="artPic" required autocomplete="off"
                                ng-model="searchInput.entity.identif"
-                               typeahead="article as article.identif for article in invInvtryUtils.loadArticlesByPic($viewValue)"
+                               typeahead="article.identif as article.identif for article in invInvtryUtils.loadArticlesByPic($viewValue)"
                                typeahead-min-length="5"
                                typeahead-loading="loading" typeahead-on-select='onArticleSelectedInSearch($item, $model, $label)' >
                     </div>
                     <div class="form-group col-lg-2" ng-class="{ 'has-error' : invInvtryItemForm.lotPic.$invalid }">
                         <label class=" control-label" for="lotPic">{{'InvInvtryItem_lotPic_description.title'| translate}}</label>
                         <input type="text" ng- class="form-control" name="lotPic" id="lotPic" autocomplete="off" required
-                               ng-model="searchInput.entity.lotPic" ng-change="onArticleLotChangedInSearch()"
-                               typeahead="articleLotSection as (articleLotSection.lotPic + ' : ' + articleLotSection.artName + ' : ' + articleLotSection.sectionName) for articleLotSection in showLotsForArtPic($viewValue)"
+                               ng-model="searchInput.entity.lotPic"
+                               typeahead="articleLotSection.lotPic as articleLotSection.lotPic for articleLotSection in showLotsForArtPic($viewValue)"
                                typeahead-loading="loading" typeahead-min-length="0"
-                               typeahead-on-select='onArticleLotSectionSelectedInSearch($item, $model, $label)' >
+                                >
                     </div>
                     <div class="form-group col-lg-5" >
                         <label class=" control-label" for="searchArtName">{{'InvInvtryItem_artName_description.title'| translate}}</label>
                         <input type="text" class="form-control" id="searchArtName" autocomplete="off"
                                ng-model="searchInput.entity.artName" name="searchArtName"
-                               typeahead="article as article.features.artName for article in invInvtryUtils.loadArticlesByName($viewValue)"
+                               typeahead="article as article.artName for article in invInvtryUtils.loadArticlesByName($viewValue)"
                                typeahead-loading="loading" typeahead-min-length="4"
-                               typeahead-on-select='onArticleSelectedInSearch($item, $model, $label)' >
+                               typeahead-on-select='onArticleSelectedInSearchArtName($item, $model, $label)' >
                     </div>
                     <div class="form-group col-lg-3">
                         <label class=" control-label" for="asseccedQty">{{'InvInvtryItem_asseccedQty_description.title'| translate}}</label>
                         <div ng-class="{ 'has-error' : invInvtryItemForm.asseccedQty.$invalid }" >
-                            <input type="text" class="form-control" name="asseccedQty" id="asseccedQty" ng-model="searchInput.entity.asseccedQty" >
+                            <input type="text" class="form-control" required name="asseccedQty" id="asseccedQty" ng-model="searchInput.entity.asseccedQty" >
                         </div>
                     </div>
                 </div>

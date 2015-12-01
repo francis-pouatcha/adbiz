@@ -19,7 +19,7 @@ public abstract class StkAbstLotStockQty extends StkAbstStockQty {
 	
 	@Column
 	@Description("StkAbstractStockQty_lotPic_description")
-	@NotNull
+	//@NotNull
 	private String lotPic;
 
 	// The originating process. Sales, Inventory, Procurement

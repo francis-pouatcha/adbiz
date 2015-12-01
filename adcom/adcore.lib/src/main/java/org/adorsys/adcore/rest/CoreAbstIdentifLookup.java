@@ -292,7 +292,8 @@ public abstract class CoreAbstIdentifLookup<E extends CoreAbstIdentifObject> {
 			Field field = FieldUtils.getField(klass, fieldName, true);
 			if(field!=null){
 				try {
-					if(field.get(field.getDeclaringClass())!=null){
+					Class<?> declaringClass = field.getDeclaringClass();
+					if(field.get(declaringClass)!=null){
 						query.setParameter(fieldName, field.get(klass));
 					}
 				} catch (IllegalArgumentException e) {

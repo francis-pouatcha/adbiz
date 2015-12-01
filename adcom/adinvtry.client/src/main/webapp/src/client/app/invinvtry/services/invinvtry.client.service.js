@@ -90,7 +90,8 @@
         service.invinvtrysUrlBase= BASE_SERVER+ '/adinvtry.server/rest/invinvtryitems';
         service.stksectionsUrlBase=BASE_SERVER+'/adstock.server/rest/stksections';
         service.stkarticlelotsUrlBase=BASE_SERVER+'/adstock.server/rest/stkarticlelots';
-        service.catalarticlesUrlBase=BASE_SERVER+'/adcatal.server/rest/catalarticles';
+        service.catalarticlesUrlBase=BASE_SERVER+'/adcatal.server/rest/catalarticles'
+        service.catalartfeatmappingsUrlBase=BASE_SERVER+'/adcatal.server/rest/catalartfeatmappings';
         service.loginnamessUrlBase=BASE_SERVER+'/adbase.server/rest/loginnamess';
         service.stkarticlelot2strgsctnsUrlBase=BASE_SERVER+'/adstock.server/rest/stkarticlelot2strgsctns';
         service.alphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -152,8 +153,10 @@
 
         service.loadArticlesByName = function(artName){
             var searchInput = {entity:{},fieldNames:[],start: 0,max: 10};
-            searchInput.codesAndNames = artName;
-            return genericResource.findByLikeWithSearchInputPromissed(service.catalarticlesUrlBase, searchInput)
+            searchInput.className = 'org.adorsys.adcatal.jpa.CatalArtLangMappingSearchInput';
+            searchInput.entity.artName = artName;
+            searchInput.fieldNames.push('artName');
+            return genericResource.findByLikeWithSearchInputPromissed(service.catalartfeatmappingsUrlBase, searchInput)
                 .then(function(entitySearchResult){
                     return entitySearchResult.resultList;
                 });
@@ -168,13 +171,14 @@
 
         service.loadStkSectionArticleLotsByIdentif = function(artPic, lotPic, strgSection){
             var searchInput = {entity:{},fieldNames:[],start: 0,max: 30};
+            searchInput.className = 'org.adorsys.adstock.jpa.StkArticleLot2StrgSctnSearchInput';
             if(angular.isDefined(artPic) && artPic){
                 searchInput.entity.artPic = artPic;
                 searchInput.fieldNames.push('artPic');
             }
             if(angular.isDefined(strgSection) && strgSection){
-                searchInput.entity.strgSection = strgSection;
-                searchInput.fieldNames.push('strgSection');
+                searchInput.entity.section = strgSection;
+                searchInput.fieldNames.push('section');
             }
             if(angular.isDefined(lotPic) && lotPic){
                 searchInput.entity.lotPic = lotPic;
