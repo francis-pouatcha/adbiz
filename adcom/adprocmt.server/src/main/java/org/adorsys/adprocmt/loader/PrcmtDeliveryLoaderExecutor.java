@@ -1,6 +1,7 @@
 package org.adorsys.adprocmt.loader;
 
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
@@ -13,6 +14,7 @@ import org.adorsys.adcore.loader.jpa.CorLdrStep;
 import org.adorsys.adcore.rest.CoreAbstEntityJobExecutor;
 import org.adorsys.adcore.task.CoreAbstEntityBatch;
 
+@Stateless
 public class PrcmtDeliveryLoaderExecutor extends CoreAbstEntityJobExecutor<CorLdrJob, CorLdrStep, CorLdrPrcssngStep>{
 	@Inject
 	private DataSheetLoader dataSheetLoader;

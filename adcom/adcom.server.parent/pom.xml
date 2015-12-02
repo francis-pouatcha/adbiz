@@ -99,11 +99,5 @@
 	</dependencies>
 	<build>
 		<finalName>adcom.server.parent</finalName>
-		<plugins>
-			<plugin>
-				<groupId>org.wildfly.plugins</groupId>
-				<artifactId>wildfly-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
 	</build>
 </project>

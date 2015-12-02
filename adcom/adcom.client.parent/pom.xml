@@ -12,7 +12,7 @@
 	<packaging>pom</packaging>
 
 	<build>
-		<finalName>adcom.clint.parent</finalName>
+		<finalName>adcom.client.parent</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -104,10 +104,6 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.wildfly.plugins</groupId>
-				<artifactId>wildfly-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
 				<groupId>com.github.eirslett</groupId>
