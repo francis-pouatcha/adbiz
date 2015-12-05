@@ -13,10 +13,12 @@ import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjectEndpoint;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjectLookup;
+import org.adorsys.adcore.xls.CoreAbstLoaderRegistration;
 import org.adorsys.adprocmt.jpa.PrcmtDelivery;
 import org.adorsys.adprocmt.jpa.PrcmtDeliverySearchInput;
 import org.adorsys.adprocmt.jpa.PrcmtDeliverySearchResult;
 import org.adorsys.adprocmt.jpa.PrcmtDelivery_;
+import org.adorsys.adprocmt.loader.PrcmtLoaderRegistration;
 
 /**
  * 
@@ -29,6 +31,9 @@ public class PrcmtDeliveryEndpoint extends CoreAbstBsnsObjectEndpoint<PrcmtDeliv
 
 	@Inject
 	private PrcmtDeliveryLookup lookup;
+	
+	@Inject
+	private PrcmtLoaderRegistration loaderRegistration;
 	
 	@Override
 	protected CoreAbstBsnsObjectLookup<PrcmtDelivery> getLookup() {
@@ -50,5 +55,10 @@ public class PrcmtDeliveryEndpoint extends CoreAbstBsnsObjectEndpoint<PrcmtDeliv
 	@Override
 	protected CoreAbstBsnsObjectSearchInput<PrcmtDelivery> newSearchInput() {
 		return new PrcmtDeliverySearchInput();
+	}
+
+	@Override
+	protected CoreAbstLoaderRegistration getLoaderRegistration() {
+		return loaderRegistration;
 	}
 }

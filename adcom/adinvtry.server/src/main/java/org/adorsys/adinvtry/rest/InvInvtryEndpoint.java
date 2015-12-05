@@ -13,8 +13,10 @@ import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjectEndpoint;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjectLookup;
+import org.adorsys.adcore.xls.CoreAbstLoaderRegistration;
 import org.adorsys.adinvtry.jpa.InvInvtry;
 import org.adorsys.adinvtry.jpa.InvInvtry_;
+import org.adorsys.adinvtry.loader.InvLoaderRegistration;
 
 /**
  * 
@@ -27,6 +29,9 @@ public class InvInvtryEndpoint extends CoreAbstBsnsObjectEndpoint<InvInvtry, Cor
 
 	@Inject
 	private InvInvtryLookup lookup;
+	
+	@Inject
+	private InvLoaderRegistration loaderRegistration;
 	
 	@Override
 	protected CoreAbstBsnsObjectLookup<InvInvtry> getLookup() {
@@ -48,5 +53,10 @@ public class InvInvtryEndpoint extends CoreAbstBsnsObjectEndpoint<InvInvtry, Cor
 	@Override
 	protected CoreAbstBsnsObjectSearchInput<InvInvtry> newSearchInput() {
 		return new InvInvtrySearchInput();
+	}
+
+	@Override
+	protected CoreAbstLoaderRegistration getLoaderRegistration() {
+		return loaderRegistration;
 	}
 }
