@@ -23,6 +23,8 @@ public class FinancialOps {
 		if(StringUtils.isBlank(curr))curr=CoreCurrencyEnum.XAF.name();
 		if(amt==null)amt = BigDecimal.ZERO;
 		if(base==null) return BigDecimal.ZERO;
+		if(amt.compareTo(BigDecimal.ZERO)==0 && base.compareTo(BigDecimal.ZERO)==0)
+			return BigDecimal.ZERO;
 		//return base.multiply(ONE_HUNDRED).divide(base, 4, RoundingMode.HALF_EVEN);
 		return amt.multiply(ONE_HUNDRED).divide(base, 4, RoundingMode.HALF_EVEN);
 	}

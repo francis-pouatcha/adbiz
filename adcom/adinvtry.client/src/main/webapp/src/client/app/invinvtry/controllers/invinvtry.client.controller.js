@@ -276,7 +276,7 @@
         $scope.addItem = function(invtryItem){
             invtryItem.acsngDt=new Date().getTime();
             unsetEditing(invtryItem);
-            invInvtryManagerResource.addItem({'identif':invtryItem.artPic}, invtryItem ,function(invtryItem){
+            invInvtryManagerResource.addItem({'identif':$scope.invInvtry.identif}, invtryItem ,function(invtryItem){
                     itemsResultHandler.unshift(invtryItem);
                     $scope.searchInput.entity.identif=undefined;
                     $scope.searchInput.entity.artName=undefined;
@@ -334,6 +334,7 @@
             }
         };
         $scope.editingItem = function(invtryItem, $event){
+            invtryItem.editing=true;
             $scope.editingExpirDt(invtryItem, $event);
             $scope.editingAsseccedQty(invtryItem, $event);
         }
@@ -347,7 +348,7 @@
 
             $scope.asseccedQtyChanged(invtryItem);
 
-            invInvtryManagerResource.updateItem({'identif':invtryItem.cntnrIdentif, 'itemIdentif':invtryItem.artPic},
+            invInvtryManagerResource.updateItem({'identif':invtryItem.cntnrIdentif, 'itemIdentif':invtryItem.identif},
                 invtryItem, function(invtryItem){
                     itemsResultHandler.replace(invtryItem);
                 },function(data){
@@ -360,8 +361,15 @@
             if (event.which === 13 || event.which === 9) $scope.updateItem(invtryItem);
         };
 
+        $scope.itemDisable = function(invtryItem){
+            console.log(invtryItem.disabledDt);
+            if(invtryItem.disabledDt) return true;
+            else return false;
+        }
+
         $scope.cancelEditItem = function(invtryItem){
-            if(!isItemModified(invtryItem)) return;
+            if(isItemModified(invtryItem)) return;
+            invtryItem.editing=false;
             if(angular.isDefined(invtryItem.oldAccessedQty) && angular.isDefined(invtryItem.asseccedQty) && !angular.equals(invtryItem.oldAccessedQty,invtryItem.asseccedQty)){
                 invtryItem.asseccedQty = angular.copy(invtryItem.oldAccessedQty);
             }
@@ -376,7 +384,7 @@
 
         $scope.disableItem = function(invtryItem){
             cleanupItem(invtryItem);
-            invInvtryManagerResource.disableItem({'identif':invtryItem.cntnrIdentif, 'itemIdentif':invtryItem.artPic}
+            invInvtryManagerResource.disableItem({'identif':invtryItem.cntnrIdentif, 'itemIdentif':invtryItem.identif}
                 ,invtryItem,function(invtryItem){
                     itemsResultHandler.replace(invtryItem);
                 },function(error){
@@ -385,7 +393,7 @@
         };
         $scope.enableItem = function(invtryItem){
             cleanupItem(invtryItem);
-            invInvtryManagerResource.enableItem({'identif':invtryItem.cntnrIdentif, 'itemIdentif':invtryItem.artPic},
+            invInvtryManagerResource.enableItem({'identif':invtryItem.cntnrIdentif, 'itemIdentif':invtryItem.identif},
                 invtryItem, function(invtryItem){
                     itemsResultHandler.replace(invtryItem);
                 },function(error){

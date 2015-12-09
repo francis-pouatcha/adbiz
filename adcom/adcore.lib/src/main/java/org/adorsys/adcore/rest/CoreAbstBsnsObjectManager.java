@@ -203,8 +203,9 @@ public abstract class CoreAbstBsnsObjectManager<E extends CoreAbstBsnsObject, I 
 		if(!StringUtils.equals(existing.getIdentif(),item.getIdentif()))
 			throw new AdRestException(Response.Status.CONFLICT);
 
-		if(!DateUtils.isSameInstant(item.getDisabledDt(), existing.getDisabledDt()))
-			throw new IllegalStateException("Use disableItem/enableItem to change the status of an business item.");
+		if(item.getDisabledDt()!=null && existing.getDisabledDt()!=null)
+			if(!DateUtils.isSameInstant(item.getDisabledDt(), existing.getDisabledDt()))
+				throw new IllegalStateException("Use disableItem/enableItem to change the status of an business item.");
 
 		if(!BigDecimalUtils.strictEquals(item.getTrgtQty(), existing.getTrgtQty()))
 			throw new IllegalStateException("Use updateTrgtQty To update the target quantity of this item");

@@ -257,7 +257,7 @@
         var service = {};
         service.selection = [];
         service.mainInvtry = {};
-        service.resultHandler = searchResultHandler.newResultHandler('invtryNbr');
+        service.resultHandler = searchResultHandler.newResultHandler('cntnrIdentif');
         service.itemsResultHandler = function(){
             var itemsResultHandlerVar = service.resultHandler.dependent('items');
             if(angular.isUndefined(itemsResultHandlerVar)){

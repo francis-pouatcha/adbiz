@@ -17,6 +17,14 @@ public abstract class InvAbstractInvtry extends CoreAbstBsnsObject {
 	@Column
 	private String rangeEnd;
 	
+	public String getRangeEnd() {
+		return rangeEnd;
+	}
+
+	public void setRangeEnd(String rangeEnd) {
+		this.rangeEnd = rangeEnd;
+	}
+
 	public String getRangeStart() {
 		return rangeStart;
 	}
