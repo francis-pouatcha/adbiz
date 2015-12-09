@@ -1,10 +1,17 @@
 package org.adorsys.adcore.rest;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 import javax.persistence.metamodel.SingularAttribute;
+import javax.servlet.ServletException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -15,9 +22,15 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.adorsys.adcore.exceptions.AdException;
 import org.adorsys.adcore.jpa.CoreAbstBsnsObject;
 import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchResult;
+import org.adorsys.adcore.xls.CoreAbstLoaderRegistration;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.jboss.resteasy.plugins.providers.multipart.InputPart;
+import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 
 public abstract class CoreAbstBsnsObjectEndpoint<E extends CoreAbstBsnsObject, SI extends CoreAbstBsnsObjectSearchInput<E>, SR extends CoreAbstBsnsObjectSearchResult<E>> {
@@ -154,4 +167,34 @@ public abstract class CoreAbstBsnsObjectEndpoint<E extends CoreAbstBsnsObject, S
 		searchInput.setEntity(detach(searchInput.getEntity()));
 		return searchInput;
 	}
+	
+	@POST
+	@Path("/upload")
+	public void upload(MultipartFormDataInput input) throws ServletException, IOException, AdException {
+		Map<String, List<InputPart>> uploadForm = input.getFormDataMap();
+		Set<String> keySet = uploadForm.keySet();
+		List<File> uploadFiles = new ArrayList<File>();
+		for (String key : keySet) {
+			List<InputPart> inputParts = uploadForm.get(key);
+			for (InputPart inputPart : inputParts) {
+				InputStream inputStream = inputPart.getBody(InputStream.class, null);
+				File file = File.createTempFile(UUID.randomUUID().toString(), "_" + key); 
+				FileUtils.copyInputStreamToFile(inputStream, file);
+				// close input part.
+				IOUtils.closeQuietly(inputStream);
+				uploadFiles.add(file);
+			}
+			
+		}
+		input.close();
+		
+		CoreAbstLoaderRegistration loaderRegistration = getLoaderRegistration();
+		if(loaderRegistration!=null)
+			loaderRegistration.execute(uploadFiles);
+	}
+	
+	protected CoreAbstLoaderRegistration getLoaderRegistration(){
+		return null;
+	}
+	
 }

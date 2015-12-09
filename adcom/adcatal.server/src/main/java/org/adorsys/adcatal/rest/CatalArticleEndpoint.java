@@ -13,10 +13,12 @@ import org.adorsys.adcatal.jpa.CatalArticle;
 import org.adorsys.adcatal.jpa.CatalArticleSearchInput;
 import org.adorsys.adcatal.jpa.CatalArticleSearchResult;
 import org.adorsys.adcatal.jpa.CatalArticle_;
+import org.adorsys.adcatal.loader.CatalLoaderRegistration;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEndpoint;
+import org.adorsys.adcore.xls.CoreAbstLoaderRegistration;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 
 /**
@@ -32,6 +34,8 @@ public class CatalArticleEndpoint extends
 	private CatalArticleEJB ejb;
 	@Inject
 	private CatalArticleLookup lookup;
+	@Inject
+	private CatalLoaderRegistration loaderRegistration;
 
 	@Override
 	protected CoreAbstIdentifLookup<CatalArticle> getLookup() {
@@ -59,4 +63,11 @@ public class CatalArticleEndpoint extends
 			CoreAbstIdentifObjectSearchInput<CatalArticle> searchInput) {
 		return new CatalArticleSearchResult(count, total, resultList, searchInput);
 	}
+
+	@Override
+	protected CoreAbstLoaderRegistration getLoaderRegistration() {
+		return loaderRegistration;
+	}
+	
+	
 }

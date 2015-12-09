@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.metamodel.SingularAttribute;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -12,9 +13,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.adorsys.adcore.exceptions.AdException;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
@@ -162,4 +165,32 @@ public abstract class CoreAbstIdentifReadEndpoint<E extends CoreAbstIdentifObjec
 		searchInput.setEntity(detach(searchInput.getEntity()));
 		return searchInput;
 	}
+	
+	@POST
+	@Path("/download")
+	@Produces({"application/vnd.ms-excel" })
+	public Response download(@PathParam("xlsType") String xlsType,
+			@Context HttpServletResponse response, CoreAbstIdentifObjectSearchInput<E> searchInput) throws AdException {
+		
+		return Response.noContent().build();
+//
+//		String filename = xlsType+".xls";
+//		OutputStream os = null;
+//		try {
+//			File file = new File(DOWNLOAD_DIR, filename);
+//			int sizeOf = (int) FileUtils.sizeOf(file);
+//			response.setContentLength(sizeOf);
+//			os = response.getOutputStream();
+//			FileUtils.copyFile(file, os);
+//			os.flush();
+//			os.close();
+//		} catch (Exception e) {
+//			throw new AdException("Error printing", e);
+//		}
+//
+//		return Response
+//				.ok(os)
+//				.header("Content-Disposition",
+//						"attachment; filename=sample.xls").build();
+	}	
 }

@@ -20,18 +20,13 @@
 				
 		<module>adres.lib</module>
 
-		
-
 		<module>adcore.lib</module>
-		<module>adbase.lib</module>
 		<module>adcatal.lib</module>
 		<module>adstock.lib</module>
-		<module>adcost.lib</module>
 		<module>adinvtry.lib</module>
 		<module>adcatal.server</module>
 		<module>adstock.server</module>
 		<module>adinvtry.server</module>
-		<module>adcost.server</module>
 		<module>adbase.server</module>
 
 		<module>adprocmt.lib</module>
@@ -46,6 +41,9 @@
 		<module>adbnsptnr.server</module> 
 		-->
 <!-- 
+		<module>adcost.server</module>
+		<module>adcost.lib</module>
+		<module>adbase.lib</module>
 		<module>adacc.client</module>
 		<module>adprocmt.client</module>
 		<module>adstock.client</module>
@@ -319,6 +317,14 @@
 					<groupId>org.wildfly.plugins</groupId>
 					<artifactId>wildfly-maven-plugin</artifactId>
 					<version>1.1.0.Alpha4</version>
+					<executions>
+						<execution>
+							<phase>install</phase>
+							<goals>
+								<goal>deploy</goal>
+							</goals>
+						</execution>
+					</executions>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -341,56 +347,25 @@
 			</plugin>
 		</plugins>
 	</build>
-  <profiles>
-    <!--IntegrationTests: mvn -PIT clean verify -->
-    <profile>
-      <id>IT</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>2.18.1</version>
-            <configuration>
-              <skipTests>true</skipTests>
-            </configuration>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-failsafe-plugin</artifactId>
-            <version>2.18.1</version>
-            <executions>
-              <execution>
-                <id>integration-tests</id>
-                <goals>
-                  <goal>integration-test</goal>
-                  <goal>verify</goal>
-                </goals>
-                <configuration>
-                  <includes>
-                    <include>**/*IT.java</include>
-                  </includes>
-                  <systemProperties>
-                    <property>
-                      <name>host</name>
-                      <value>${host}</value>
-                    </property>
-                    <systemProperties>
-                      <property>
-                        <name>port</name>
-                        <value>${port}</value>
-                      </property>
-                    </systemProperties>
-                  </systemProperties>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
+	<profiles>
+		<profile>
+			<id>DPL</id>
+			<activation>
+				<file>
+            		<exists>${basedir}/src/main/webapp</exists>
+        		</file>
+				<property>
+					<name>deploy</name>
+				</property>
+        	</activation>			
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.wildfly.plugins</groupId>
+						<artifactId>wildfly-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

@@ -14,8 +14,10 @@ import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEndpoint;
+import org.adorsys.adcore.xls.CoreAbstLoaderRegistration;
 import org.adorsys.adstock.jpa.StkSection;
 import org.adorsys.adstock.jpa.StkSection_;
+import org.adorsys.adstock.loader.StkLoaderRegistration;
 import org.adorsys.adstock.jpa.StkSectionSearchInput;
 import org.adorsys.adstock.jpa.StkSectionSearchResult;
 
@@ -31,6 +33,8 @@ public class StkSectionEndpoint extends CoreAbstIdentifiedEndpoint<StkSection> {
 	private StkSectionLookup lookup;
 	@Inject
 	private StkSectionEJB ejb;
+	@Inject
+	private StkLoaderRegistration loaderRegistration;
 
 	@Override
 	protected CoreAbstIdentifLookup<StkSection> getLookup() {
@@ -58,4 +62,10 @@ public class StkSectionEndpoint extends CoreAbstIdentifiedEndpoint<StkSection> {
 			CoreAbstIdentifObjectSearchInput<StkSection> searchInput) {
 		return new StkSectionSearchResult(count, total, resultList, searchInput);
 	}
+	
+	@Override
+	protected CoreAbstLoaderRegistration getLoaderRegistration() {
+		return loaderRegistration;
+	}
+	
 }

@@ -86,11 +86,11 @@ public abstract class AbstractLoader {
 			}
 		}
 	}
-	
-	public void processSingleFile(String dir, String fileName, String stepIdentifier){
-		File fileDir = new File(getDir());
-		if(!fileDir.exists()) return;
-		File file = new File(fileDir, fileName);
+
+	public void processSingleFile(String jobIdentif, String absolutePath, String stepIdentifier){
+//		File fileDir = new File(getDir());
+//		if(!fileDir.exists()) return;
+		File file = new File(absolutePath);
 		if(!file.exists()) return;
 
 		FileInputStream fis;
