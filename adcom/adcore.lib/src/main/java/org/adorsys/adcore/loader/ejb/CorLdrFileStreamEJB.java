@@ -2,10 +2,6 @@ package org.adorsys.adcore.loader.ejb;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -23,7 +19,7 @@ import org.apache.commons.io.FileUtils;
 @Stateless
 public class CorLdrFileStreamEJB extends CoreAbstIdentifiedEJB<CorLdrFileStream> {
 
-	private static final int chunkSize = 1024 * 65;
+	private static final int chunkSize = 1024 * 60;
 
 	@Inject
 	private CorLdrFileStreamRepo repo;
