@@ -209,9 +209,10 @@ public abstract class CoreAbstBsnsObjectManager<E extends CoreAbstBsnsObject, I 
 
 		if(!BigDecimalUtils.strictEquals(item.getTrgtQty(), existing.getTrgtQty()))
 			throw new IllegalStateException("Use updateTrgtQty To update the target quantity of this item");
-
-		if(!DateUtils.isSameDay(item.getExpirDt(), existing.getExpirDt()))
-			throw new IllegalStateException("Use updateExpirDt To update the target expiry date of this item");
+		
+		if(item.getExpirDt()!=null && existing.getExpirDt()!=null)
+			if(!DateUtils.isSameDay(item.getExpirDt(), existing.getExpirDt()))
+				throw new IllegalStateException("Use updateExpirDt To update the target expiry date of this item");
 
 		item.setId(existing.getId());
 		return getInjector().getItemEjb().update(item);

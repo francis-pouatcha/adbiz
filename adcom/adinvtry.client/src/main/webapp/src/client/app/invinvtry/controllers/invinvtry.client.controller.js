@@ -256,7 +256,7 @@
         };
 
         $scope.handlePrintRequestEvent = function(){
-            genericResource.builfReportGet(invInvtryUtils.invinvtrysUrlBase+'/invintryreport.pdf',$scope.invInvtry.invtryNbr).success(function(data){
+            genericResource.builfReportGet(invInvtryUtils.invinvtrysUrlBase+'/invintryreport.pdf',$scope.invInvtry.identif).success(function(data){
                 fileExtractor.extractFile(data,"application/pdf");
             }).error(function (error) {
                 $scope.error = error;
@@ -278,7 +278,7 @@
             unsetEditing(invtryItem);
             invInvtryManagerResource.addItem({'identif':$scope.invInvtry.identif}, invtryItem ,function(invtryItem){
                     itemsResultHandler.unshift(invtryItem);
-                    $scope.searchInput.entity.identif=undefined;
+                    $scope.searchInput.entity.artPic=undefined;
                     $scope.searchInput.entity.artName=undefined;
                     $scope.searchInput.entity.lotPic=undefined;
                     $scope.searchInput.entity.asseccedQty=undefined;
@@ -493,7 +493,7 @@
             if((angular.isDefined(lotPic) && lotPic.length>=8)){
                 return [];
             }
-            var artPic = $scope.searchInput.entity.identif;
+            var artPic = $scope.searchInput.entity.artPic;
             var section = $scope.searchInput.entity.section;
             if(((angular.isUndefined(artPic) || !artPic)) && ((angular.isUndefined(section) || !section))){
                 return [];
@@ -528,7 +528,7 @@
         };
 
         $scope.onArticleSelectedInSearchArtName = function(item,model,label){
-            $scope.searchInput.entity.identif=item.cntnrIdentif;
+            $scope.searchInput.entity.artPic=item.identif;
 
         };
 
