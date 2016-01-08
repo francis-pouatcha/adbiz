@@ -179,6 +179,7 @@ cp $ADCOM_HOME/adbnsptnr.client/target/adbnsptnr.client.war $JBOSS_HOME/standalo
 cp $ADCOM_HOME/adcatal.server/target/adcatal.server.war $JBOSS_HOME/standalone/deployments/
 cp $ADCOM_HOME/adstock.server/target/adstock.server.war $JBOSS_HOME/standalone/deployments/
 cp $ADCOM_HOME/adinvtry.server/target/adinvtry.server.war $JBOSS_HOME/standalone/deployments/
+cp $ADCOM_HOME/adreport.server.war $JBOSS_HOME/standalone/deployments/
 #cp $ADCOM_HOME/adbnsptnr.server/target/adbnsptnr.server.war $JBOSS_HOME/standalone/deployments/
 
 echo "             Starting jboss"
@@ -196,6 +197,10 @@ cp $ADCOM_HOME/adcom.configuration/all-servers/adcom/adinvtry/adinvtry.xls $JBOS
 echo "             Import adstock data"
 cd $JBOSS_DATA_DIR/adcom && mkdir adstock
 cp $ADCOM_HOME/adcom.configuration/all-servers/adcom/adstock/adstock.xls $JBOSS_DATA_DIR/adcom/adstock/
+
+echo "             Import report template design"
+cd $JBOSS_DATA_DIR/adcom && mkdir adreport
+cp $ADCOM_HOME/adcom.configuration/all-servers/adcom/adreport/* $JBOSS_DATA_DIR/adcom/adreport/
 
 # echo "             Back to adcom home"
 # cd $ADCOM_HOME
