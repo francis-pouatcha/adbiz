@@ -5,13 +5,19 @@
         .module('app.catalProdFmly')
         .run(appRun);
 
-    appRun.$inject = ['routerHelper','BASE_VIEW'];
+    appRun.$inject = ['routerHelper','BASE_VIEW','$translate'];
     /* @ngInject */
-    function appRun(routerHelper,BASE_VIEW) {
-        routerHelper.configureStates(getStates(BASE_VIEW));
+    function appRun(routerHelper,BASE_VIEW,$translate) {
+
+        $translate('CatalProductFamily.title').then(function(CatalProductFamilyTranslate){
+            console.log(CatalProductFamilyTranslate);
+            routerHelper.configureStates(getStates(BASE_VIEW, CatalProductFamilyTranslate));
+        });
     }
 
-    function getStates(BASE_VIEW) {
+    function getStates(BASE_VIEW,CatalProductFamilyTranslate) {
+
+
         return [
             {
                 state: 'listCatalProdFmly',
@@ -23,7 +29,7 @@
                     title: 'List CatalProdFmlies',
                     settings: {
                         nav: 3,
-                        content: '<i class="fa fa-folder-open"></i> CatalProdFmlies'
+                        content: '<i class="fa fa-folder-open"></i>'+ CatalProductFamilyTranslate
                     }
                 }
             },

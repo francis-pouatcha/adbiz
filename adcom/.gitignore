@@ -30,7 +30,6 @@ node_modules/**/*
 /managerAgent/.idea/
 # Package Files #
 *.jar
-*.war
 *.ear
 .DS_Store
 */.DS_Store
