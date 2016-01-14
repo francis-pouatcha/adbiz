@@ -136,11 +136,92 @@
 
         };
 
+        var getFormSearchFields = function() {
+
+            var fields = [
+                {
+                    className: 'row',
+                    fieldGroup: [
+                        {
+                            className: 'col-xs-2',
+                            type: 'input',
+                            key: 'identif',
+                            templateOptions: {
+                                label: $translate.instant('CIP')
+                            }
+                        },
+                        {
+                            className: 'col-xs-2',
+                            type: 'input',
+                            key: 'sppu',
+                            templateOptions: {
+                                type:'number',
+                                label: $translate.instant('CatalArticle.sppu')
+                            }
+                        },
+                        {
+                            className: 'col-xs-2',
+                            type: 'input',
+                            key: 'maxDisctRate',
+                            templateOptions: {
+                                label: $translate.instant('CatalArticle.maxDisctRate')
+                            }
+                        },
+                        {
+                            className: 'col-xs-2',
+                            type: 'input',
+                            key: 'minStockQty',
+                            templateOptions: {
+                                type: 'number',
+                                label: $translate.instant('CatalArticle.minStockQty'),
+                                max: 99999,
+                                min: 0
+                                //pattern: '\\d{5}',
+                            }
+                        },
+                        {
+                            className: 'col-xs-2',
+                            type: 'input',
+                            key: 'maxStockQty',
+                            templateOptions: {
+                                type: 'number',
+                                label: $translate.instant('CatalArticle.maxStockQty'),
+                                max: 99999,
+                                min: 0
+                                //pattern: '\\d{5}',
+                            }
+                        },
+                        {
+                            //className: 'col-xs-4',
+                            type: 'checkbox',
+                            key: 'active',
+                            templateOptions: {
+                                label: $translate.instant('CatalArticle.active')
+                            }
+                        },
+                        {
+                            //className: 'col-xs-4',
+                            type: 'checkbox',
+                            key: 'authorizedSale',
+                            templateOptions: {
+                                label: $translate.instant('CatalArticle.authorizedSale')
+                            }
+                        }
+
+                    ]
+                }
+            ];
+
+            return fields;
+
+        };
+
         var catalArticleId = '';
 
         var service = {
             getFormFields: getFormFields,
-            catalArticleId: catalArticleId
+            catalArticleId: catalArticleId,
+            getFormSearchFields: getFormSearchFields
         };
 
         return service;

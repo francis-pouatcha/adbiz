@@ -25,17 +25,23 @@
         vm.data = [];
         vm.article = {};
 
-        // Initialize Search input and pagination
-        vm.searchInput = utils.searchInputInit().searchInput;
-        vm.searchInput.className = 'org.adorsys.adcatal.jpa.CatalArtLangMappingSearchInput';
-        vm.searchInput.sortFieldNames.push({fieldName:'valueDt'});
+        function initSearchInput(){
+            // Initialize Search input and pagination
+            vm.searchInput = utils.searchInputInit().searchInput;
+            vm.searchInput.className = 'org.adorsys.adcatal.jpa.CatalArtLangMappingSearchInput';
+            vm.searchInput.sortFieldNames.push({fieldName:'valueDt'});
+        }
 
         vm.pagination = utils.searchInputInit().pagination;
 
         vm.setFormFields = function(disabled, hideName) {
             vm.formFields = ArticleForm.getFormFields(disabled, hideName);
         };
+        vm.setFormSearchFields = function() {
+            vm.formSearchFields = ArticleForm.getFormSearchFields();
+        };
 
+        initSearchInput();
         findCustom();
 
         function findCustom() {
@@ -48,6 +54,20 @@
                 });
 
         }
+
+        vm.search = function(){
+            vm.searchInput = utils.processSearch(vm.searchInput, vm.article);
+            vm.pagination = utils.resetPagination(vm.pagination);
+            findCustom();
+        };
+
+        vm.clear = function(){
+            vm.article = {};
+            initSearchInput();
+            findCustom();
+            return;
+        };
+
         // Paginate over the list
         vm.paginate = function(newPage){
             utils.pagination(vm.searchInput, vm.pagination, newPage);
@@ -81,6 +101,7 @@
                 vm.error = errorResponse.data.summary;
             });
         };
+
         // Remove existing Article
         vm.remove = function(article) {
             if (article) {

@@ -163,7 +163,12 @@
                 'CatalCipOrigine_GOVERNMENT_description':'Governement',
                 'CatalCipOrigine_BROKER_description':'Broker',
                 'CatalCipOrigine_CUSTOMERSERVICE_description':'Customer Service',
-                'CatalCipOrigine_INSURANCE_description':'Insurance'
+                'CatalCipOrigine_INSURANCE_description':'Insurance',
+
+                //------------Common translations-----------//
+
+                'app.core.search.title':'Search',
+                'app.core.clear.title':'Clear'
 
             });
 // francais --------------------------------------------------------------------------------
@@ -322,7 +327,10 @@
                 'CatalCipOrigine_GOVERNMENT_description':'Gouvernement',
                 'CatalCipOrigine_BROKER_description':'Commercant',
                 'CatalCipOrigine_CUSTOMERSERVICE_description':'Service Client',
-                'CatalCipOrigine_INSURANCE_description':'Assurance'
+                'CatalCipOrigine_INSURANCE_description':'Assurance',
+
+                'app.core.search.title':'Rechercher',
+                'app.core.clear.title':'Effacer'
 
             });
             $translateProvider.preferredLanguage('en');
