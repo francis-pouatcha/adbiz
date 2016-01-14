@@ -24,7 +24,7 @@
                     key: 'artName',
                     type: 'input',
                     templateOptions: {
-                        label: $translate.instant('CatalArtFeatMapping.artName'),
+                        label: $translate.instant('CatalFamilyFeatMaping_familyName_description.title'),
                         disabled: disabled
                     }
                 },
@@ -32,7 +32,7 @@
                     key: 'shortName',
                     type: 'input',
                     templateOptions: {
-                        label: $translate.instant('CatalArtFeatMapping.shortName'),
+                        label: $translate.instant('CatalFamilyFeatMaping_shortName_description.title'),
                         disabled: disabled
                     }
                 },
@@ -40,7 +40,7 @@
                     key: 'famPath',
                     type: 'input',
                     templateOptions: {
-                        label: $translate.instant('CatalFamilyFeatMaping.famPath'),
+                        label: $translate.instant('CatalProductFamily.famPath'),
                         disabled: disabled
                     }
                 },

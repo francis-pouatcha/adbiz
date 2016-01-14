@@ -5,28 +5,50 @@
         .module('app.catalProdFmly')
         .factory('CatalProdFmlyForm', factory);
 
-    factory.$inject = ['$translate'];
+    factory.$inject = ['$translate','API_BASE_URL', 'genericResource'];
     /* @ngInject */
-    function factory($translate) {
+    function factory($translate,API_BASE_URL,genericResource) {
+
+        function getCatlProdFmlys(viewValue){
+            return genericResource.findByLikePromissed(API_BASE_URL+'/catalproductfamilys',
+                'identif', viewValue, 'org.adorsys.adcatal.jpa.CatalProdFmlySearchInput')
+                .then(function(entitySearchResult){
+                    return entitySearchResult.resultList;
+                });
+        }
 
         var getFormFields = function(disabled) {
 
             var fields = [
                 {
-                    key: 'parentIdentif',
+                    key: 'identif',
                     type: 'input',
                     templateOptions: {
-                        label: $translate.instant('CatalProductFamily.parentIdentif'),
+                        label: $translate.instant('CatalProductFamily_identif_description.title'),
                         disabled: disabled,
                         required: true
                     }
                 },
                 {
+                    key: 'parentIdentif',
+                    type: 'typeahead',
+                    templateOptions: {
+                        label: $translate.instant('CatalProductFamily.parentIdentif'),
+                        disabled: disabled,
+                        options:function(viewValue){
+                            return getCatlProdFmlys(viewValue);
+                        }
+                    }
+                },
+                {
                     key: 'famPath',
                     type: 'input',
+                    modelOptions: {
+                        getterSetter: true
+                    },
                     templateOptions: {
                         label: $translate.instant('CatalProductFamily.famPath'),
-                        disabled: disabled
+                        disabled: true
                     }
                 }
             ];

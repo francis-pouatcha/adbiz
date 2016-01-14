@@ -28,10 +28,12 @@
         // Initialize Search input and pagination
         vm.searchInput = utils.searchInputInit().searchInput;
         vm.searchInput.className = 'org.adorsys.adcatal.jpa.CatalArtLangMappingSearchInput';
+        vm.searchInput.sortFieldNames.push({fieldName:'valueDt'});
+
         vm.pagination = utils.searchInputInit().pagination;
 
-        vm.setFormFields = function(disabled) {
-            vm.formFields = ArticleForm.getFormFields(disabled);
+        vm.setFormFields = function(disabled, hideName) {
+            vm.formFields = ArticleForm.getFormFields(disabled, hideName);
         };
 
         findCustom();
@@ -125,10 +127,9 @@
                 vm.article = data;
 
                 ArticleForm.catalArticleId = $stateParams.articleId;
-                vm.setFormFields(true);
+                vm.setFormFields(true, false);
 
                 CatalArtLangMapping.findBy(coreSearchInputInit(), function (response) {
-                    console.log(response.resultList);
                     vm.article.artName = response.resultList[0].artName;
                     vm.article.shortName = response.resultList[0].shortName;
                 });
@@ -137,7 +138,7 @@
         };
         vm.toEditArticle = function() {
             vm.article = Article.get({articleId: $stateParams.articleId});
-            vm.setFormFields(false);
+            vm.setFormFields(false, true);
         };
 
     }

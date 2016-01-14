@@ -29,6 +29,8 @@
         };
 
         vm.create = function() {
+
+            vm.catalProdFmly.famPath = '/'+vm.catalProdFmly.identif+'/'+vm.catalProdFmly.parentIdentif+'/'
             // Create new CatalProdFmly object
             var catalProdFmly = new CatalProdFmly(vm.catalProdFmly);
 

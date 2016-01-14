@@ -174,7 +174,7 @@ public abstract class CoreAbstIdentifLookup<E extends CoreAbstIdentifObject> {
 	
 	protected static final String whereClause = " WHERE ";
 	protected static final String andClause = " AND ";
-	protected static final String orderBy = "ORDER BY e.";
+	protected static final String orderBy = " ORDER BY e.";
 	protected static final String orderASC = " ASC";
 	protected static final String orderDESC = " DESC";
 

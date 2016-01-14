@@ -49,7 +49,7 @@ public abstract class CoreAbstIdentifObject extends CoreAbstEntity {
 	protected String cntnrIdentif;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date valueDt;
+	private Date valueDt = new Date();
 
 	@PrePersist
 	public void prePersist() {

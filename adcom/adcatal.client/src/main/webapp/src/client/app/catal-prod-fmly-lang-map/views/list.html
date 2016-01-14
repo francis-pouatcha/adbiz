@@ -2,7 +2,7 @@
 
   <div class="panel panel-primary">
     <div class="panel-body">
-
+        <h2>{{'CatalFamilyFeatMaping_description.title'| translate}}</h2>
       <div class="pull-right">
         <a type="button" class="btn btn-success" ng-click="vmProdFmlyLangMap.createForm({})">
           <i class="glyphicon glyphicon-open"></i>       {{'CatalFamilyFeatMaping.new.title'| translate}}
@@ -12,9 +12,9 @@
 
       <table class="table table-condensed table-striped">
           <thead>
-              <th>{{'CatalArtFeatMapping.artName' | translate}}</th>
-              <th>{{'CatalArtFeatMapping.shortName' | translate}}</th>
-              <th>{{'CatalFamilyFeatMaping.famPath' | translate}}</th>
+              <th>{{'CatalFamilyFeatMaping_familyName_description.title' | translate}}</th>
+              <th>{{'CatalFamilyFeatMaping_shortName_description.title' | translate}}</th>
+              <th>{{'CatalProductFamily.famPath' | translate}}</th>
               <th>{{'langIso2' | translate}}</th>
           </thead>
           <tr ng-repeat="catalProdFmlyLangMap in vmProdFmlyLangMap.data">

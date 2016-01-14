@@ -11,11 +11,11 @@
                 LANG_EN: 'English',
                 logout: 'logout',
                 //--------------Article---------------
-                'CatalArticle.sppu': 'Sales Price per Unit',
+                'CatalArticle.sppu': 'Sales Price',
                 'CatalArticle.maxDisctRate': 'Max Discount',
                 'CIP':'CIP',
-                'CatalArticle.minStockQty': 'Min Quantity Stock',
-                'CatalArticle.maxStockQty': 'Max Quantity Stock',
+                'CatalArticle.minStockQty': 'Min Quantity',
+                'CatalArticle.maxStockQty': 'Max Quantity',
                 'CatalArticle.vatRate': 'V.A.T Rate',
                 'CatalArticle.active': 'Active',
                 'CatalArticle.authorizedSale': 'Authorizedsale',
@@ -70,6 +70,7 @@
                 'CatalArtEquivalence.edit.title':'Edit Article Equivalence',
                 'CatalArtEquivalence.view.title':'View Article Equivalence',
                 'CatalArtEquivalence.back.title':'Back',
+                'CatalArtEquivalence_artEquivCode_description.title':'Article Equivalence Code',
 
                 //------------CatalArtLangMapping--------------
                 'CatalArtFeatMapping.title':'Article Feature Mapping',
@@ -125,6 +126,7 @@
                 'CatalPicMapping.back.title':'Back',
 
                 //------------CatalProductFamily---------------
+                'CatalProductFamily_identif_description.title':'Identifier or this Family',
                 'CatalProductFamily.title': 'Product Family',
                 'CatalProductFamily.parentIdentif': 'Identifier or the Parent Family',
                 'CatalProductFamily.famPath': 'Family Path',
@@ -138,6 +140,7 @@
                 'CatalProductFamily.back.title':'Back',
 
                 //-----------CatalProductFamilyLangMap-----------
+                'CatalFamilyFeatMaping_description.title': 'Family Feature Mapping',
                 'CatalFamilyFeatMaping.title': '',
                 'CatalFamilyFeatMaping.famPath': '',
                 'CatalFamilyFeatMaping.new.title':'New ',
@@ -147,7 +150,20 @@
                 'CatalFamilyFeatMaping.save.title':'Save ',
                 'CatalFamilyFeatMaping.edit.title':'Edit ',
                 'CatalFamilyFeatMapings.view.title':'View ',
-                'CatalFamilyFeatMapings.back.title':'Back'
+                'CatalFamilyFeatMapings.back.title':'Back',
+                'CatalFamilyFeatMaping_familyName_description.title':'Family Name',
+                'CatalFamilyFeatMaping_shortName_description.title':'Familly Shortname',
+
+                //-----CatalCipOrigine ---------------
+                'CatalCipOrigine_MAIN_description':'Main',
+                'CatalCipOrigine_SUPPLIER_description':'Supplier',
+                'CatalCipOrigine_DETAIL_description':'Detail',
+                'CatalCipOrigine_MANUFACTURER_description':'Manufacturer',
+                'CatalCipOrigine_RESALER_description':'Resaler',
+                'CatalCipOrigine_GOVERNMENT_description':'Governement',
+                'CatalCipOrigine_BROKER_description':'Broker',
+                'CatalCipOrigine_CUSTOMERSERVICE_description':'Customer Service',
+                'CatalCipOrigine_INSURANCE_description':'Insurance'
 
             });
 // francais --------------------------------------------------------------------------------
@@ -214,6 +230,7 @@
                 'CatalArtEquivalence.edit.title':'Modifier Article Equivalent',
                 'CatalArtEquivalence.view.title':'Voir Article Equivalent',
                 'CatalArtEquivalence.back.title':'Retour',
+                'CatalArtEquivalence_artEquivCode_description.title':'Code Article Equivalent',
 
                 //------------CatalArtLangMapping--------------
                 'CatalArtFeatMapping.title':'Table de detail de l\'article',
@@ -269,6 +286,7 @@
                 'CatalPicMapping.back.title':'Retour',
 
                 //------------CatalProductFamily---------------
+                'CatalProductFamily_identif_description.title':'Identifiant de cette Famille',
                 'CatalProductFamily.title': 'Famille de produit',
                 'CatalProductFamily.parentIdentif': 'Identifiant de la Famille Parent',
                 'CatalProductFamily.famPath': 'Chemin de famille',
@@ -282,6 +300,7 @@
                 'CatalProductFamily.back.title':'Retour',
 
                 //-----------CatalProductFamilyLangMap-----------
+                'CatalFamilyFeatMaping_description.title': 'Table des Caract\u00E9ristique de Famille',
                 'CatalFamilyFeatMaping.famPath': '',
                 'CatalFamilyFeatMaping.new.title':'Nouveau',
                 'CatalFamilyFeatMaping.list.title':'Liste',
@@ -290,7 +309,20 @@
                 'CatalFamilyFeatMaping.save.title':'Enregistrer ',
                 'CatalFamilyFeatMaping.edit.title':'Modifier ',
                 'CatalFamilyFeatMapings.view.title':'Voir ',
-                'CatalFamilyFeatMapings.back.title':'Retour'
+                'CatalFamilyFeatMapings.back.title':'Retour',
+                'CatalFamilyFeatMaping_familyName_description.title':'Nom de la Famille',
+                'CatalFamilyFeatMaping_shortName_description.title':'Dimunitif Famille',
+
+                //-----CatalCipOrigine ---------------
+                'CatalCipOrigine_MAIN_description':'Principal',
+                'CatalCipOrigine_SUPPLIER_description':'Fournisseur',
+                'CatalCipOrigine_DETAIL_description':'Detail',
+                'CatalCipOrigine_MANUFACTURER_description':'Fabriquant',
+                'CatalCipOrigine_RESALER_description':'Revendeur',
+                'CatalCipOrigine_GOVERNMENT_description':'Gouvernement',
+                'CatalCipOrigine_BROKER_description':'Commercant',
+                'CatalCipOrigine_CUSTOMERSERVICE_description':'Service Client',
+                'CatalCipOrigine_INSURANCE_description':'Assurance'
 
             });
             $translateProvider.preferredLanguage('en');

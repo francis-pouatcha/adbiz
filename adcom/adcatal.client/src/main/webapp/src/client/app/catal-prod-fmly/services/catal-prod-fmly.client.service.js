@@ -16,6 +16,14 @@
         var actions = {
             update: {
                 method: 'PUT'
+            },
+            findByLike: {
+                method: 'POST',
+                url: API_BASE_URL + '/catalproductfamilys/findByLike'
+            },
+            findCustom:{
+                method: 'POST',
+                url: API_BASE_URL + '/catalproductfamilys/findCustom'
             }
         };
 

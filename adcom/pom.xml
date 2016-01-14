@@ -24,6 +24,7 @@
 		<module>adcatal.lib</module>
 		<module>adstock.lib</module>
 		<module>adinvtry.lib</module>
+		<module>adbase.lib</module>
 		<module>adcatal.server</module>
 		<module>adstock.server</module>
 		<module>adinvtry.server</module>
@@ -175,6 +176,11 @@
 				<groupId>com.itextpdf</groupId>
 				<artifactId>itextpdf</artifactId>
 				<version>5.5.6</version>
+			</dependency>
+			<dependency>
+				<groupId>com.h2database</groupId>
+				<artifactId>h2</artifactId>
+				<version>1.4.190</version>
 			</dependency>
 			<dependency>
 		        <groupId>com.jayway.restassured</groupId>

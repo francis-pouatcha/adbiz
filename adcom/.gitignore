@@ -29,6 +29,7 @@ node_modules/**/*
 .mtj.tmp/
 /managerAgent/.idea/
 # Package Files #
+*.war
 *.jar
 *.ear
 .DS_Store

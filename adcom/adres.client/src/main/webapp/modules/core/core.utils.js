@@ -68,6 +68,7 @@
                     start: 0,
                     max: itemsPerPageVar,
                     fieldNames: [],
+                    sortFieldNames: [],
                     className: ''
                 },
                 pagination:{

@@ -9,7 +9,7 @@
     /* @ngInject */
     function factory($translate) {
 
-        var getFormFields = function(disabled) {
+        var getFormFields = function(disabled,hideName) {
 
             var fields = [
                 {
@@ -34,7 +34,8 @@
                                 //pattern: '\\d{5}',
                                 disabled:disabled,
                                 required:true
-                            }
+                            },
+                            hideExpression:''+hideName
                         },
                         {
                             className: 'col-xs-4',
@@ -44,7 +45,8 @@
                                 label: $translate.instant('Article ShortName'),
                                 //pattern: '\\d{5}',
                                 disabled:disabled
-                            }
+                            },
+                            hideExpression:''+hideName
                         }
 
                     ]

@@ -10,6 +10,7 @@
 
     <artifactId>keycloak-model-jpa</artifactId>
     <name>Keycloak Model JPA</name>
+    <version>1.5.0.Final</version>
     <description/>
 
     <dependencies>

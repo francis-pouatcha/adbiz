@@ -4,7 +4,7 @@ public class CoreSortOrder {
 
 	private String fieldName;
 	
-	private Boolean ASC = Boolean.TRUE;
+	private Boolean ASC = Boolean.FALSE;
 
 	public String getFieldName() {
 		return fieldName;
