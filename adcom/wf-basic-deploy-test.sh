@@ -1,4 +1,4 @@
-#This script is used to make a full projet deployemnt.
+I#This script is used to make a full projet deployemnt.
 #Please set the $ADCOM_HOME environment variable in your profile.
 #as follow
 
@@ -178,11 +178,8 @@ cp $ADCOM_HOME/adinvtry.client/target/adinvtry.client.war $JBOSS_HOME/standalone
 cp $ADCOM_HOME/adcatal.server/target/adcatal.server.war $JBOSS_HOME/standalone/deployments/
 cp $ADCOM_HOME/adstock.server/target/adstock.server.war $JBOSS_HOME/standalone/deployments/
 cp $ADCOM_HOME/adinvtry.server/target/adinvtry.server.war $JBOSS_HOME/standalone/deployments/
-cp $ADCOM_HOME/adreport.server.war.zip $JBOSS_HOME/standalone/deployments/
+cp $ADCOM_HOME/adreport.server.war $JBOSS_HOME/standalone/deployments/
 #cp $ADCOM_HOME/adbnsptnr.server/target/adbnsptnr.server.war $JBOSS_HOME/standalone/deployments/
-
-echo "             deploying adreport"
-cd $JBOSS_HOME/standalone/deployments && tar xzf adreport.server.war.zip
 
 echo "             Starting jboss"
 cd $JBOSS_HOME && bin/standalone.sh --debug --server-config=standalone-keycloak.xml --properties=$JBOSS_HOME/keycloak-config.properties > /dev/null &
