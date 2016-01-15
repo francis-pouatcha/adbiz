@@ -22,8 +22,7 @@
     /* jshint ignore:start */
     /* @ngInject */
     angular.element(document).ready(function ($http, Auth) {
-        var keycloakAuth = new Keycloak('http://localhost:8080/addashboard.client/' +
-            'rest/keycloak.json');
+        var keycloakAuth = new Keycloak('rest/keycloak.json');
         console.log(keycloakAuth);
         console.log(keycloakAuth.authServerUrl);
         auth.loggedIn = false;
