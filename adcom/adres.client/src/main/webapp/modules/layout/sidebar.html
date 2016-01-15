@@ -10,6 +10,10 @@
                     <a ui-sref="{{r.name}}"
                        ng-bind-html="r.settings.content"></a>
                 </li>
+                <li class="nlightblue fade-selection-animation"
+                    ng-repeat="rpl in reportLink">
+                    <a href="{{rpl.link}}" target="_blank" >{{rpl.name}}</a>
+                </li>
             </ul>
         </div>
     </ht-sidebar>

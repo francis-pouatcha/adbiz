@@ -228,7 +228,7 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">org.h2.Driver</property>
-            <property name="odaURL">jdbc:h2:~/tools/wildfly-9.0.1.Final/standalone/data</property>
+            <property name="odaURL">jdbc:h2:~/tools/wildfly-9.0.1.Final/standalone/data/addb</property>
             <property name="odaUser">sa</property>
             <encrypted-property name="odaPassword" encryptionID="base64">c2E=</encrypted-property>
         </oda-data-source>
