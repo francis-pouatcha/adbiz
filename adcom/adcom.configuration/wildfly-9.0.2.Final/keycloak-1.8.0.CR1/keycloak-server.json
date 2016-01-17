@@ -1,0 +1,73 @@
+{
+    "providers": [
+    	"module:org.adorsys.adkcloak.connections.b2",
+    	"module:org.adorsys.adkcloak.cache.none",
+    	"module:org.adorsys.adkcloak.model.b2",
+    	"module:org.adorsys.adkcloak.events.b2"
+    ],
+
+    "admin": {
+        "realm": "master"
+    },
+
+    "eventsStore": {
+        "provider": "b2",
+        "b2": {
+            "exclude-events": [ "REFRESH_TOKEN" ]
+        }
+    },
+
+    "realm": {
+        "provider": "b2"
+    },
+
+    "user": {
+        "provider": "b2"
+    },
+
+    "userSessionPersister": {
+        "provider": "b2"
+    },
+
+	"realmCache": {
+	    "provider": "${keycloak.realm.cache.provider:none}"
+	},
+	"userCache": {
+	    "provider": "${keycloak.user.cache.provider:none}"
+	},
+
+    "timer": {
+        "provider": "basic"
+    },
+
+    "theme": {
+        "default": "keycloak",
+        "staticMaxAge": 2592000,
+        "cacheTemplates": true,
+        "cacheThemes": true,
+        "folder": {
+          "dir": "${jboss.server.config.dir}/themes"
+        }
+    },
+
+    "scheduled": {
+        "interval": 900
+    },
+
+    "connectionsHttpClient": {
+        "default": {}
+    },
+
+    "connectionsJpa": {
+        "b2": {
+            "dataSource": "java:jboss/datasources/ADDS",
+            "databaseSchema": "development-update"
+        }
+    },
+
+    "connectionsInfinispan": {
+        "default" : {
+            "cacheContainer" : "java:comp/env/infinispan/Keycloak"
+        }
+    }
+}

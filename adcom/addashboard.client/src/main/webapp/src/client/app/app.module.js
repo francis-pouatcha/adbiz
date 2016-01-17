@@ -34,7 +34,7 @@
             Auth = auth;
             angular.bootstrap(document, ['addashboard']);
         }).error(function () {
-            window.location.reload();
+//            window.location.reload();
         });
 
     });

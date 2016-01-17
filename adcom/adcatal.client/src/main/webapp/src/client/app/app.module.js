@@ -36,7 +36,7 @@
             angular.bootstrap(document, ['adcatal']);
         }).error(function () {
             console.log(keycloakAuth);
-            window.location.reload();
+//            window.location.reload();
         })
     });
     /* jshint ignore:end */

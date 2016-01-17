@@ -28,7 +28,7 @@ public class SimpleKeyCloakConfigResolver implements KeyCloakConfigResolver {
 
 	@Override
 	public String getSecret() {
-		return null;
+		return System.getProperty("adbnsptnr.client.credential");
 	}
 	
 	@Override

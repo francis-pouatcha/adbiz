@@ -1,0 +1,1 @@
+This is an Alternative Bootstrap to the native keycloack bootstrap process found in keycloak.services

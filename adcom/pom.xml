@@ -13,10 +13,12 @@
 		<module>adcom.server.parent</module>
 		<module>adcom.client.parent</module>
 		
-		<module>adkcloak.jpa</module>
-		<module>adkcloak.events.jpa</module>
-		<module>adkcloak.config</module>
+		<module>adcore.xls</module>
+		<module>adkcloak.connections.b2</module>
+		<module>adkcloak.model.b2</module>
+		<module>adkcloak.events.b2</module>
 		<module>adkcloak.services</module>
+		<module>adkcloak.cache.none</module>
 				
 		<module>adres.lib</module>
 
@@ -24,7 +26,6 @@
 		<module>adcatal.lib</module>
 		<module>adstock.lib</module>
 		<module>adinvtry.lib</module>
-		<module>adbase.lib</module>
 		<module>adcatal.server</module>
 		<module>adstock.server</module>
 		<module>adinvtry.server</module>
@@ -41,7 +42,7 @@
 		<module>adbnsptnr.client</module>
 		<module>adbnsptnr.server</module> 
 		-->
-<!-- 
+		<!-- 
 		<module>adcost.server</module>
 		<module>adcost.lib</module>
 		<module>adbase.lib</module>
@@ -70,6 +71,7 @@
 		<module>adcom.configuration</module>
  -->
 		<!-- <module>adcom.test</module> -->
+		<module>adcore.b2</module>
 	</modules>
 	<scm>
 		<connection>scm:git:https://github.com/francis-pouatcha/adcom.git</connection>
@@ -86,22 +88,27 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<github.global.server>github</github.global.server>
-		<keycloak.version>1.5.0.Final</keycloak.version>
+		<keycloak.version>1.8.0.CR1</keycloak.version>
 	    <apache.httpcomponents.version>4.3.6</apache.httpcomponents.version>
+	    <version.org.jboss.resteasy>3.0.6.Final</version.org.jboss.resteasy>
+	    <version.hibernate>4.3.10.Final</version.hibernate>
+	    <hibernate.javax.persistence.artifactId>hibernate-jpa-2.1-api</hibernate.javax.persistence.artifactId>
+	    <version.org.codehaus.jackson>1.9.9</version.org.codehaus.jackson>
+	    <version.org.jboss.logging>3.1.4.GA</version.org.jboss.logging>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.jboss.spec</groupId>
-				<artifactId>jboss-javaee-6.0</artifactId>
-				<version>3.0.3.Final</version>
+				<artifactId>jboss-javaee-7.0</artifactId>
+				<version>1.0.2.Final</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-validator</artifactId>
-				<version>5.2.0.Beta1</version>
+				<version>${version.hibernate}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
@@ -129,6 +136,12 @@
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-entitymanager</artifactId>
+				<version>${version.hibernate}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
 				<groupId>org.apache.poi</groupId>
 				<artifactId>poi</artifactId>
 				<version>3.10-FINAL</version>
@@ -146,20 +159,46 @@
 			</dependency>
 			<dependency>
 				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>jaxrs-api</artifactId>
+				<version>${version.org.jboss.resteasy}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+            	<artifactId>resteasy-jaxrs</artifactId>
+				<version>${version.org.jboss.resteasy}</version>
+				<scope>provided</scope>
+	            <exclusions>
+	                <exclusion>
+	                    <groupId>log4j</groupId>
+	                    <artifactId>log4j</artifactId>
+	                </exclusion>
+	                <exclusion>
+	                    <groupId>org.slf4j</groupId>
+	                    <artifactId>slf4j-api</artifactId>
+	                </exclusion>
+	                <exclusion>
+	                    <groupId>org.slf4j</groupId>
+	                    <artifactId>slf4j-simple</artifactId>
+	                </exclusion>
+	            </exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
 				<artifactId>resteasy-jackson-provider</artifactId>
-				<version>3.0.6.Final</version>
+				<version>${version.org.jboss.resteasy}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.jboss.resteasy</groupId>
 				<artifactId>resteasy-jaxb-provider</artifactId>
-				<version>3.0.6.Final</version>
+				<version>${version.org.jboss.resteasy}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.jboss.resteasy</groupId>
 				<artifactId>resteasy-multipart-provider</artifactId>
-				<version>3.0.6.Final</version>
+				<version>${version.org.jboss.resteasy}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
@@ -177,6 +216,80 @@
 				<artifactId>itextpdf</artifactId>
 				<version>5.5.6</version>
 			</dependency>
+
+	        <dependency>
+	            <groupId>org.codehaus.jackson</groupId>
+	            <artifactId>jackson-core-asl</artifactId>
+				<version>${version.org.codehaus.jackson}</version>
+				<scope>provided</scope>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.codehaus.jackson</groupId>
+	            <artifactId>jackson-mapper-asl</artifactId>
+				<version>${version.org.codehaus.jackson}</version>
+				<scope>provided</scope>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.codehaus.jackson</groupId>
+	            <artifactId>jackson-xc</artifactId>
+				<version>${version.org.codehaus.jackson}</version>
+				<scope>provided</scope>
+	        </dependency>
+
+			<dependency>
+				<groupId>org.keycloak</groupId>
+				<artifactId>keycloak-core</artifactId>
+				<scope>provided</scope>
+				<version>${keycloak.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.keycloak</groupId>
+				<artifactId>keycloak-model-api</artifactId>
+				<scope>provided</scope>
+				<version>${keycloak.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.keycloak</groupId>
+				<artifactId>keycloak-invalidation-cache-model</artifactId>
+				<scope>provided</scope>
+				<version>${keycloak.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.keycloak</groupId>
+				<artifactId>keycloak-services</artifactId>
+				<scope>provided</scope>
+				<version>${keycloak.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.keycloak</groupId>
+				<artifactId>keycloak-timer-api</artifactId>
+				<scope>provided</scope>
+				<version>${keycloak.version}</version>
+			</dependency>
+	        <dependency>
+	            <groupId>org.keycloak</groupId>
+	            <artifactId>keycloak-events-api</artifactId>
+	            <scope>provided</scope>
+				<version>${keycloak.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.keycloak</groupId>
+	            <artifactId>keycloak-events-jpa</artifactId>
+	            <scope>provided</scope>
+				<version>${keycloak.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.keycloak</groupId>
+	            <artifactId>keycloak-connections-jpa</artifactId>
+	            <scope>provided</scope>
+				<version>${keycloak.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.jboss.logging</groupId>
+	            <artifactId>jboss-logging</artifactId>
+				<scope>provided</scope>
+				<version>${version.org.jboss.logging}</version>
+	        </dependency>
 			<dependency>
 				<groupId>com.h2database</groupId>
 				<artifactId>h2</artifactId>
@@ -332,6 +445,27 @@
 						</execution>
 					</executions>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>2.5.5</version>
+					<executions>
+						<execution>
+							<id>pack-module</id>
+							<phase>package</phase>
+							<goals>
+								<goal>single</goal>
+							</goals>
+							<configuration>
+								<appendAssemblyId>false</appendAssemblyId>
+								<descriptors>
+									<descriptor>assembly.xml</descriptor>
+								</descriptors>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				
 			</plugins>
 		</pluginManagement>
 		<plugins>
