@@ -60,7 +60,7 @@ public abstract class CoreAbstEntityBatch<J extends CoreAbstEntityJob, S extends
 		executorMap.put(executorId, executor);
 	}
 
-	@Schedule(minute = "*", second="*/7", hour="*", persistent=false)
+	@Schedule(minute = "*", second="*/2", hour="*", persistent=false)
 	@AccessTimeout(unit=TimeUnit.MINUTES, value=10)
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public void processSteps() throws Exception {

@@ -119,4 +119,13 @@ public abstract class CoreAbstBsnsManagerEndpoint<E extends CoreAbstBsnsObject, 
 		
 		return newItemSearchResult(count, resultList, searchInput);
 	}
+	
+	@PUT
+	@Path("/{identif}/items/{itemIdentif}/targetQty")
+	@Consumes({ "application/json"})
+	@Produces({ "application/json"})
+	public I updatetargetQty(@PathParam("identif") String identif, @PathParam("itemIdentif") String itemIdentif, I item) throws AdException {
+		return getBsnsObjManager().updateTrgtQty(identif, itemIdentif, item.getTrgtQty(), item.getAcsngDt());
+	}
+
 }

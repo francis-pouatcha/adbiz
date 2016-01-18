@@ -54,7 +54,7 @@ public abstract class CoreAbstBsnsObjectManager<E extends CoreAbstBsnsObject, I 
 	private Event<E> entityUpdatingEvent;
 	
 	@Inject
-	private AdcomUser callerPrincipal;
+	protected AdcomUser callerPrincipal;
 	/**
 	 * New business processs. The object is created if necessary.
 	 * 
@@ -241,13 +241,13 @@ public abstract class CoreAbstBsnsObjectManager<E extends CoreAbstBsnsObject, I 
 		return existing;
 	}
 	
-	private E loadExistingBsnsObject(String identif) throws AdRestException{
+	protected E loadExistingBsnsObject(String identif) throws AdRestException{
 		E existing = getInjector().getBsnsObjLookup().findByIdentif(identif);
 		if(existing==null) throw new AdRestException(Response.Status.NOT_FOUND);
 		return existing;
 	}
 	
-	private I loadExistingBsnsItem(String identif, String itemIdentif) throws AdRestException{
+	protected I loadExistingBsnsItem(String identif, String itemIdentif) throws AdRestException{
 		I item = getInjector().getItemLookup().findByIdentif(itemIdentif);
 		
 		if(item==null) throw new AdRestException(Response.Status.NOT_FOUND);
