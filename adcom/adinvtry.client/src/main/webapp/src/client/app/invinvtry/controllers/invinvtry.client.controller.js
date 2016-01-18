@@ -140,8 +140,8 @@
             $scope.invInvtry.status='ONGOING';
             $scope.invInvtry.login = $rootScope.username;
             invInvtryManagerResource.save($scope.invInvtry, function(response){
-
                     $scope.invInvtry = response;
+                    invInvtryManagerResource.prepare({identif:$scope.invInvtry.identif}, function(data){});
                     $location.path('/invinvtry/'+$scope.invInvtry.identif+'/show/');
             },
             function(errorResponse) {
