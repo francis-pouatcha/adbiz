@@ -348,7 +348,7 @@
 
             $scope.asseccedQtyChanged(invtryItem);
 
-            invInvtryManagerResource.updateItem({'identif':invtryItem.cntnrIdentif, 'itemIdentif':invtryItem.identif},
+            invInvtryManagerResource.updateasseccedQty({'identif':invtryItem.cntnrIdentif, 'itemIdentif':invtryItem.identif},
                 invtryItem, function(invtryItem){
                     itemsResultHandler.replace(invtryItem);
                 },function(data){

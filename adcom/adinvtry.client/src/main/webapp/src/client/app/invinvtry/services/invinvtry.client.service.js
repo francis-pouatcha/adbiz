@@ -64,6 +64,10 @@
             enableItem: {
                 method: 'PUT',
                 url: API_BASE_ADINVTRY_URL + '/inventory/:identif/items/:itemIdentif/enable'
+            },
+            updateasseccedQty: {
+                method: 'PUT',
+                url: API_BASE_ADINVTRY_URL + '/inventory/:identif/items/:itemIdentif/asseccedQty'
             }
 
         };
