@@ -70,7 +70,7 @@ public class InvInvtryPrepareExecTask extends CoreAbstEntityJobExecutor<InvJob, 
 
 				InvInvtryItem invtryItem = new InvInvtryItem();
 				StkArticleLot articleLot = articleLotLookup
-						.findByIdentif(invtryItem.getLotPic());
+						.findByIdentif(lot2StrgSctn.getLotPic());
 				articleLot.copyTo(invtryItem);
 				invtryItem.setCntnrIdentif(step.getEntIdentif());
 				invtryItem.setSection(lot2StrgSctn.getSection());
