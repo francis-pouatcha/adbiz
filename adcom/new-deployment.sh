@@ -1,45 +1,21 @@
-#This script is used to make a full projet deployemnt.
-#Please set the $ADCOM_HOME environment variable in your profile.
-#as follow
-
-export JBOSS_DIR=wildfly-9.0.2.Final
-export KEYCLOAK_VERSION=1.8.0.CR1
-
-unset ADCOM_HOME;
-#export $ADCOM_HOME=/path/to/your/adcom
-# Setup ADCOM_HOME
-RESOLVED_ADCOM_HOME=`cd "."; pwd`
-if [ "x$ADCOM_HOME" = "x" ]; then
-    # get the full path (without any relative bits)
-    ADCOM_HOME=$RESOLVED_ADCOM_HOME
-   	echo "             ADCOM_HOME: $ADCOM_HOME"
-else
- SANITIZED_ADCOM_HOME=`cd "$ADCOM_HOME"; pwd`
- if [ "$RESOLVED_ADCOM_HOME" != "$SANITIZED_ADCOM_HOME" ]; then
-   echo ""
-   echo "   WARNING:  ADCOM_HOME may be pointing to a different installation - unpredictable results may occur."
-   echo ""
-   echo "             ADCOM_HOME: $ADCOM_HOME"
-   echo ""
-   sleep 2s
- fi
+########################
+# Redeploy the whole system. 
+# --> Unpack a new version of wildfly, 
+# --> Installs keycloack and extensions,
+# --> Deploys the adcom realm including users and clients.
+# --> Installs applications war (xxx.client.war and xxx.server.war)
+# --> Deploy the initial excel data files.   
+#
+#############
+# Read the build configuration file
+if [ "x$BUILD_CONF" = "x" ]; then
+    CURRENT_DIR=`cd "."; pwd`
+    BUILD_CONF="$CURRENT_DIR/build.conf"
+	APP_LIST_CONF="$CURRENT_DIR/apps-list.conf"
+	DATA_LIST_CONF="$CURRENT_DIR/data-list.conf"
 fi
-export ADCOM_HOME
-# make sure home points to your home directory
-
-# Check TOOLS_HOME
-if [ "x$TOOLS_HOME" = "x" ]; then
-	export TOOLS_HOME=~/tools
-fi
-
-echo ""
-
-if [ ! -d "$TOOLS_HOME" ]; then
-   	echo "             ERROR:  TOOL_HOME not define. And default directory ~/tools not existant."
-   	sleep 2s	
-   	exit
-else 
-	echo "             TOOLS_HOME: $TOOLS_HOME"
+if [ -r "$BUILD_CONF" ]; then
+    . "$BUILD_CONF"
 fi
 
 export RUNNING_JBOSS_PID="$( ps aux | grep '[j]boss' | awk '{print $2}')"
@@ -80,15 +56,6 @@ if [ ! -e "$TOOLS_HOME/$KEYCLOAK_ADAPTER_FILE" ]; then
 else
 	echo "             KEYCLOAK_ADAPTER_FILE: $KEYCLOAK_ADAPTER_FILE"
 fi
-
-export JBOSS_HOME=$TOOLS_HOME/$JBOSS_DIR
-export JBOSS_DATA_DIR=$JBOSS_HOME/standalone/data
-export JBOSS_DEPLOY_DIR=$JBOSS_HOME/standalone/deployments
-export JBOSS_CONFIG_DIR=$JBOSS_HOME/standalone/configuration
-export JBOSS_MODULES_HOME=$JBOSS_HOME/modules/system/layers/base
-
-echo "             JBOSS_HOME: $JBOSS_HOME"
-echo "             JBOSS_DATA_DIR: $JBOSS_DATA_DIR"
 
 
 if [ -d "$JBOSS_HOME" ]; then
@@ -179,36 +146,15 @@ if [ "x$RUNNING_JBOSS_PID" = "x" ]; then
    	echo "             Running jboss instance terminated."
 fi
 
-# deploy modules
-echo "             deploying new artifacts"
-cp $ADCOM_HOME/adres.client/target/adres.client.war $JBOSS_HOME/standalone/deployments/
-cp $ADCOM_HOME/addashboard.client/target/addashboard.client.war $JBOSS_HOME/standalone/deployments/
-cp $ADCOM_HOME/adcatal.client/target/adcatal.client.war $JBOSS_HOME/standalone/deployments/
-#cp $ADCOM_HOME/adstock.client/target/adstock.client.war $JBOSS_HOME/standalone/deployments/
-#cp $ADCOM_HOME/adinvtry.client/target/adinvtry.client.war $JBOSS_HOME/standalone/deployments/
+# deploy application. All applications to be deployed are specified in this file: app-list.conf
+if [ -r "$APP_LIST_CONF" ]; then
+    . "$APP_LIST_CONF"
+fi
 
-#cp $ADCOM_HOME/adbnsptnr.client/target/adbnsptnr.client.war $JBOSS_HOME/standalone/deployments/
-
-
-cp $ADCOM_HOME/adcatal.server/target/adcatal.server.war $JBOSS_HOME/standalone/deployments/
-#cp $ADCOM_HOME/adstock.server/target/adstock.server.war $JBOSS_HOME/standalone/deployments/
-#cp $ADCOM_HOME/adinvtry.server/target/adinvtry.server.war $JBOSS_HOME/standalone/deployments/
-#cp $ADCOM_HOME/adbnsptnr.server/target/adbnsptnr.server.war $JBOSS_HOME/standalone/deployments/
-
-
-cd $JBOSS_DATA_DIR && mkdir adcom
-echo "             Import catalogue data"
-cd $JBOSS_DATA_DIR/adcom && mkdir adcatal
-cp $ADCOM_HOME/adcom.configuration/all-servers/adcom/adcatal/adcatal.xls $JBOSS_DATA_DIR/adcom/adcatal/
-
-
-#echo "             Import adinvtry data"
-#cd $JBOSS_DATA_DIR/adcom && mkdir adinvtry
-#cp $ADCOM_HOME/adcom.configuration/all-servers/adcom/adinvtry/adinvtry.xls $JBOSS_DATA_DIR/adcom/adinvtry/
-
-#echo "             Import adstock data"
-#cd $JBOSS_DATA_DIR/adcom && mkdir adstock
-#cp $ADCOM_HOME/adcom.configuration/all-servers/adcom/adstock/adstock.xls $JBOSS_DATA_DIR/adcom/adstock/
+# deploy application. All data files to be uploaded are specified in this file: data-list.conf
+if [ -r "$DATA_LIST_CONF" ]; then
+    . "$DATA_LIST_CONF"
+fi
 
 # echo "             Back to adcom home"
 # cd $ADCOM_HOME
