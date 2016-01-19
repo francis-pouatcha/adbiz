@@ -203,7 +203,7 @@
                         itemsResultHandler.searchResult(searchResult);
                     })
                     .error(function(error){
-                        $scope.error=error;
+                       // $scope.error=error;
                     });
             } else {
                 genericResource.findByLike(invInvtryUtils.invinvtrysUrlBase,$scope.searchInput)
@@ -211,7 +211,7 @@
                         itemsResultHandler.searchResult(searchResult);
                     })
                     .error(function(error){
-                        $scope.error=error;
+                        //$scope.error=error;
                     });
             }
         }
@@ -233,9 +233,23 @@
             if(angular.isDefined($scope.searchInput.entity.section) && $scope.searchInput.entity.section){
                 $scope.searchInput.fieldNames.push('section');
             }
+            if(angular.isDefined($scope.searchInput.entity.asseccedQty) && $scope.searchInput.entity.asseccedQty){
+                $scope.searchInput.fieldNames.push('asseccedQty');
+            }
         }
         function initView(){
             getInvtry();
+            console.log($scope.invInvtryItems());
+
+            var schedule = setTimeout(function(){
+                                if($scope.invInvtryItems().length > 0){
+                                    clearTimeout(schedule);
+                                }else{
+                                    loadInvInvtryItems();
+                                }
+
+                            },90000);
+
         }
         initView();
 
@@ -528,7 +542,9 @@
         };
 
         $scope.onArticleSelectedInSearchArtName = function(item,model,label){
-            $scope.searchInput.entity.artPic=item.identif;
+            $scope.searchInput.entity.artPic=item.cntnrIdentif;
+            $scope.searchInput.entity.artName=item.artName;
+
 
         };
 

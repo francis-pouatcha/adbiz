@@ -21,6 +21,10 @@ public class CoreAbstBsnsItemSearchInput<E extends CoreAbstBsnsItem> extends Cor
 	private Date expirDtFrom;
 
 	private Date expirDtTo;
+	
+	private String rangeStart;
+	
+	private String rangeEnd;
 
 	private BigDecimal prchUnitPrcPreTaxFrom;
 	private BigDecimal prchUnitPrcPreTaxTo;
@@ -708,5 +712,21 @@ public class CoreAbstBsnsItemSearchInput<E extends CoreAbstBsnsItem> extends Cor
 
 	public void setDisabledDtTo(Date disabledDtTo) {
 		this.disabledDtTo = disabledDtTo;
+	}
+
+	public String getRangeEnd() {
+		return rangeEnd;
+	}
+
+	public void setRangeEnd(String rangeEnd) {
+		this.rangeEnd = rangeEnd;
+	}
+
+	public String getRangeStart() {
+		return rangeStart;
+	}
+
+	public void setRangeStart(String rangeStart) {
+		this.rangeStart = rangeStart;
 	}
 }

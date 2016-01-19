@@ -231,6 +231,8 @@
             <property name="odaURL">jdbc:h2:~/tools/wildfly-9.0.1.Final/standalone/data/addb</property>
             <property name="odaUser">sa</property>
             <encrypted-property name="odaPassword" encryptionID="base64">c2E=</encrypted-property>
+            <property name="OdaConnProfileName">connection</property>
+            <property name="OdaConnProfileStorePath">connection</property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -248,48 +250,15 @@
                     </list-property>
                 </structure>
             </list-property>
-            <list-property name="columnHints">
-                <structure>
-                    <property name="columnName">ARTPIC</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">CIP</text-property>
-                    <text-property name="heading">ARTPIC</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">ARTNAME</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">DESIGNATION</text-property>
-                    <text-property name="heading">ARTNAME</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">SECTION</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">RAYON</text-property>
-                    <text-property name="heading">SECTION</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">PRCHUNITPRCTAXINCL</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">PU</text-property>
-                    <text-property name="heading">PRCHUNITPRCTAXINCL</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">ASSECCEDQTY</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">QTE</text-property>
-                    <text-property name="heading">ASSECCEDQTY</text-property>
-                </structure>
-            </list-property>
+            <list-property name="columnHints"/>
             <list-property name="parameters"/>
             <structure name="cachedMetaData"/>
+            <method name="beforeOpen"><![CDATA[var param = reportContext.getHttpServletRequest().getParameter("invintryNumber");
+this.queryText = "SELECT ARTPIC, ARTNAME, SECTION, PRCHUNITPRCTAXINCL, ASSECCEDQTY FROM INVINVTRYITEM WHERE CNTNRIDENTIF = '"+param+"'";]]></method>
             <property name="dataSource">InvintryDataSource</property>
             <list-property name="resultSet"/>
-            <xml-property name="queryText"><![CDATA[select PUBLIC.INVINVTRYITEM.ARTPIC,
-PUBLIC.INVINVTRYITEM.ARTNAME,
-PUBLIC.INVINVTRYITEM.SECTION,
-PUBLIC.INVINVTRYITEM.PRCHUNITPRCTAXINCL,
-PUBLIC.INVINVTRYITEM.ASSECCEDQTY
-from PUBLIC.INVINVTRYITEM]]></xml-property>
+            <xml-property name="queryText"><![CDATA[select 
+from ]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
