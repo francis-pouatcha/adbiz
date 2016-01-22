@@ -6,6 +6,7 @@
     <jta-data-source>java:jboss/datasources/ADDS</jta-data-source>
 
     <jar-file>lib/adcore.lib-${project.version}.jar</jar-file>
+    <jar-file>lib/adcatal.lib-${project.version}.jar</jar-file>
     <jar-file>lib/adinvtry.lib-${project.version}.jar</jar-file>
     <jar-file>lib/adstock.lib-${project.version}.jar</jar-file>
 

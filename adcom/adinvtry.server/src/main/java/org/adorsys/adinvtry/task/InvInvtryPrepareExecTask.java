@@ -75,13 +75,15 @@ public class InvInvtryPrepareExecTask extends CoreAbstEntityJobExecutor<InvJob, 
 				InvInvtryItem invtryItem = new InvInvtryItem();
 				StkArticleLot articleLot = articleLotLookup
 						.findByIdentif(lot2StrgSctn.getLotPic());
-				//List<CatalArtLangMapping> artLangMap = artLangMappingLookup.findByArtPic(articleLot.getArtPic(), 0, 2);
 				articleLot.copyTo(invtryItem);
 				invtryItem.setCntnrIdentif(step.getEntIdentif());
 				invtryItem.setSection(lot2StrgSctn.getSection());
 				invtryItem.setExpectedQty(lot2StrgSctn.getStockQty());
 				invtryItem.setValueDt(lot2StrgSctn.getQtyDt());
-				//invtryItem.setArtName(artLangMap.get(0).getArtName());
+				List<CatalArtLangMapping> artLangMap = artLangMappingLookup.findByArtPic(articleLot.getArtPic(), 0, 1);
+				if(!artLangMap.isEmpty()){
+					invtryItem.setArtName(artLangMap.iterator().next().getArtName());
+				}
 
 				itemCount = itemLookup.countByCntnrIdentifAndSalIndex(
 						step.getEntIdentif(), salIndex);

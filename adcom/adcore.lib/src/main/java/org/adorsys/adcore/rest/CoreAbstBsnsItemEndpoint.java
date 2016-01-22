@@ -182,7 +182,7 @@ public abstract class CoreAbstBsnsItemEndpoint<E extends CoreAbstBsnsItem, SI ex
 	   }
 
 	   @POST
-	   @Path("/findByHldrNbrAndConflictDtIsNotNullOrderBySalIndexAsc")
+	   @Path("/findConflict")
 	   @Produces({ "application/json", "application/xml" })
 	   @Consumes({ "application/json", "application/xml" })
 	   public SR findConflict(CoreAbstBsnsItemSearchInput<E> searchInput)
