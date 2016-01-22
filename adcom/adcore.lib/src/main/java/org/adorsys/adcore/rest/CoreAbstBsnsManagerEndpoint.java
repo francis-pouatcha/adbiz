@@ -87,19 +87,21 @@ public abstract class CoreAbstBsnsManagerEndpoint<E extends CoreAbstBsnsObject, 
 	@Path("/{identif}/items/{itemIdentif}/disable")
 	@Consumes({ "application/json"})
 	@Produces({ "application/json"})
-	public CoreAbstBsnsItemSearchResult<I> disableItem(@PathParam("identif") String identif, 
+	public I disableItem(@PathParam("identif") String identif, 
 			@PathParam("itemIdentif") String itemIdentif) throws AdRestException {
 		I item = getBsnsObjManager().disableItem(identif, itemIdentif, new Date());
-		return findByCntnrIdentifAndSalIndex(item);
+		return item;
+		//return findByCntnrIdentifAndSalIndex(item);
 	}
 
 	@PUT
 	@Path("/{identif}/items/{itemIdentif}/enable")
 	@Consumes({ "application/json"})
 	@Produces({ "application/json"})
-	public CoreAbstBsnsItemSearchResult<I> enableItem(@PathParam("identif") String identif, @PathParam("itemIdentif") String itemIdentif) throws AdException {
+	public I enableItem(@PathParam("identif") String identif, @PathParam("itemIdentif") String itemIdentif) throws AdException {
 		I item = getBsnsObjManager().enableItem(identif, itemIdentif);
-		return findByCntnrIdentifAndSalIndex(item);
+		return item;
+		//return findByCntnrIdentifAndSalIndex(item);
 	}
 
 	private CoreAbstBsnsItemSearchResult<I> findByCntnrIdentifAndSalIndex(I item) {

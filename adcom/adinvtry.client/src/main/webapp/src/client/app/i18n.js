@@ -10,6 +10,8 @@
                 LANG_FR: 'French',
                 LANG_EN: 'English',
                 logout: 'logout',
+                "reload.title":'Reload',
+                "show_conflict.title":'Show conflict',
 
                 "InvInvtry_acsngDt_description.text":"The recording date of this inventory item.",
                 "InvInvtry_acsngDt_description.title":"Inventory Date",
@@ -139,6 +141,9 @@
                 LANG_FR: 'Francais',
                 LANG_EN: 'Englais',
                 logout: 'deconnection',
+
+                "reload.title":'Recharger',
+                "show_conflict.title":'Montrer les conflits',
 
                 "InvInvtry_acsngDt_description.text":"La date de saisie de cette ligne inventaire.",
                 "InvInvtry_acsngDt_description.title":"Date Inventaire",

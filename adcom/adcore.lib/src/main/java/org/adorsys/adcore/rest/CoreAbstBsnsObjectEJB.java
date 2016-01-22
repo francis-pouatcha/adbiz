@@ -51,7 +51,7 @@ public abstract class CoreAbstBsnsObjectEJB<
 	public E close(E entity){
 		entity = recomputeBusinessObject(entity.getCntnrIdentif(), entity);
 		entity.evlte();
-
+		entity.setClosedDate(new Date());//we have to set closing date here @guymoyo
 		E saved = getBsnsRepo().save(attach(entity));
 		
 		getInjector().getHstrEjb().createHstry(saved.getIdentif(), CoreProcessStatusEnum.CLOSED.name(), CoreHistoryTypeEnum.CLOSED.name(),CoreProcStepEnum.CLOSING.name(), CoreHistoryTypeEnum.CLOSED.name(), prinHstryInfo(saved));
@@ -59,6 +59,8 @@ public abstract class CoreAbstBsnsObjectEJB<
 	}
 
 	public E post(E entity){
+		entity.setPostedDate(new Date());//we have to set posting date here @guymoyo
+		entity=getBsnsRepo().save(attach(entity));
 		getInjector().getHstrEjb().createHstry(entity.getIdentif(), CoreProcessStatusEnum.POSTED.name(), CoreHistoryTypeEnum.POSTED.name(),CoreProcStepEnum.POSTING.name(), CoreHistoryTypeEnum.POSTED.name(), prinHstryInfo(entity));
 		return entity;
 	}

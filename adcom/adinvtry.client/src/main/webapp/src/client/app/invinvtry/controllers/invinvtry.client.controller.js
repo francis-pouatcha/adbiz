@@ -32,6 +32,7 @@
                 });
 
         }
+
         // Paginate over the list
         $scope.paginate = function(newPage){
             utils.pagination($scope.searchInput, $scope.pagination, newPage);
@@ -155,10 +156,10 @@
         .controller('invInvtryShowCtlr', invInvtryShowCtlr);
 
     invInvtryShowCtlr.$inject = ['$scope','invInvtryManagerResource','$location','invInvtryUtils',
-        'invInvtryState','genericResource','searchResultHandler','utils','fileExtractor', '$stateParams', '$http'];
+        'invInvtryState','genericResource','searchResultHandler','utils','fileExtractor', '$stateParams', '$rootScope'];
     /* @ngInject */
     function invInvtryShowCtlr($scope,invInvtryManagerResource,$location,invInvtryUtils,invInvtryState
-                            ,genericResource,searchResultHandler,utils,fileExtractor, $stateParams, $http) {
+                            ,genericResource,searchResultHandler,utils,fileExtractor, $stateParams, $rootScope) {
 
         $scope.invtryNbr = $stateParams.invtryNbr;
         $scope.error = "";
@@ -195,9 +196,32 @@
         }
 
 
+        $scope.reload = function(){
+            loadInvInvtryItems($scope.searchInput);
+        };
+
+        function findConflict(searchInput) {
+            invInvtryManagerResource.findConflict(searchInput, function(response){
+                    $scope.data.invInvtrys = response.resultList;
+                    $scope.data.total = response.total;
+                },
+                function(errorResponse) {
+                    $scope.error = errorResponse.data.summary;
+                });
+
+        }
+
+        $scope.showConflict = function(){
+            findConflict($scope.searchInput);
+        };
+
+
+
         function loadInvInvtryItems() {
             prepareSearchInput();
             if($scope.searchInput.fieldNames.length==1 && $scope.searchInput.fieldNames.indexOf('cntnrIdentif')!=-1){
+                $scope.searchInput.sortFieldNames=[];
+                $scope.searchInput.sortFieldNames.push({fieldName:'artPic'});
                 genericResource.customMethod(invInvtryUtils.invinvtrysUrlBase+'/findByBsnsObjNbrSorted',$scope.searchInput)
                     .success(function(searchResult){
                         itemsResultHandler.searchResult(searchResult);
@@ -239,8 +263,6 @@
         }
         function initView(){
             getInvtry();
-            console.log($scope.invInvtryItems());
-
             var schedule = setTimeout(function(){
                                 if($scope.invInvtryItems().length > 0){
                                     clearTimeout(schedule);
@@ -248,7 +270,7 @@
                                     loadInvInvtryItems();
                                 }
 
-                            },90000);
+                            },120000);
 
         }
         initView();
@@ -289,6 +311,7 @@
 
         $scope.addItem = function(invtryItem){
             invtryItem.acsngDt=new Date().getTime();
+            invtryItem.acsngUser=$rootScope.username;
             unsetEditing(invtryItem);
             invInvtryManagerResource.addItem({'identif':$scope.invInvtry.identif}, invtryItem ,function(invtryItem){
                     itemsResultHandler.unshift(invtryItem);
@@ -375,12 +398,6 @@
             if (event.which === 13 || event.which === 9) $scope.updateItem(invtryItem);
         };
 
-        $scope.itemDisable = function(invtryItem){
-            console.log(invtryItem.disabledDt);
-            if(invtryItem.disabledDt) return true;
-            else return false;
-        }
-
         $scope.cancelEditItem = function(invtryItem){
             if(isItemModified(invtryItem)) return;
             invtryItem.editing=false;
@@ -399,8 +416,8 @@
         $scope.disableItem = function(invtryItem){
             cleanupItem(invtryItem);
             invInvtryManagerResource.disableItem({'identif':invtryItem.cntnrIdentif, 'itemIdentif':invtryItem.identif}
-                ,invtryItem,function(invtryItem){
-                    itemsResultHandler.replace(invtryItem);
+                ,invtryItem,function(result){
+                    var index = itemsResultHandler.replace(result);
                 },function(error){
                     $scope.error = error;
                 });
@@ -408,8 +425,8 @@
         $scope.enableItem = function(invtryItem){
             cleanupItem(invtryItem);
             invInvtryManagerResource.enableItem({'identif':invtryItem.cntnrIdentif, 'itemIdentif':invtryItem.identif},
-                invtryItem, function(invtryItem){
-                    itemsResultHandler.replace(invtryItem);
+                invtryItem, function(result){
+                    itemsResultHandler.replace(result);
                 },function(error){
                     $scope.error = error;
                 });
@@ -418,6 +435,7 @@
         $scope.asseccedQtyChanged = function(invtryItem){
             var dt = new Date();
             invtryItem.acsngDt = dt.getTime();
+            invtryItem.acsngUser=$rootScope.username;
         };
 
         function invtryChangedFctn(){
@@ -455,7 +473,7 @@
             $scope.display.identif=item.identif;
         };
 
-        $scope.onArticleLotChangedInSearch = function(){
+        /*$scope.onArticleLotChangedInSearch = function(){
             if($scope.searchInput.entity.lotPic && $scope.searchInput.entity.lotPic.length<9) return;
             if(
                 (angular.isDefined($scope.searchInput.entity.artPic) && $scope.searchInput.entity.artPic) &&
@@ -464,44 +482,51 @@
                 return;
             }
             if(angular.isUndefined($scope.searchInput.entity.artPic) || !$scope.searchInput.entity.artPic){
-                genericResource.findById(invInvtryUtils.stkarticlelotsUrlBase,$scope.searchInput.entity.lotPic.toUpperCase())
+                genericResource.findByIdentif(invInvtryUtils.stkarticlelotsUrlBase,$scope.searchInput.entity.lotPic.toUpperCase())
                     .success(function(articleLot){
                         $scope.searchInput.entity.artPic=articleLot.artPic;
-                        genericResource.findByIdentif(invInvtryUtils.catalarticlesUrlBase,$scope.searchInput.entity.artPic)
-                            .success(function(catalArticle){
-                                $scope.searchInput.entity.artName=catalArticle.features.artName;
+                        genericResource.findBy(invInvtryUtils.catalartfeatmappingsUrlBase,searchInput)
+                            .success(function(response){
+                                $scope.searchInput.entity.artName=response.resultList[0].artName;
                             })
                             .error(function(error){
                                 $scope.error=error;
                             });
-
                     })
                     .error(function(error){
                         // Ignore
                     });
             }
-        };
-
-       /* $scope.onArticleLotSectionSelectedInSearch = function(item,model,label){
-            $scope.searchInput.entity.lotPic = item.lotPic;
-            var artPic = item.artPic;
-            if(	(angular.isUndefined($scope.searchInput.entity.artPic) ||
-                !$scope.searchInput.entity.artPic) ||
-                $scope.searchInput.entity.artPic!=artPic)
-            {
-                $scope.searchInput.entity.artPic=artPic;
-                $scope.searchInput.entity.artName=item.artName;
-            }
-
-            var strgSection = item.strgSection;
-            if((angular.isUndefined($scope.searchInput.entity.section) ||
-                !$scope.searchInput.entity.section) ||
-                $scope.searchInput.entity.section!=strgSection)
-            {
-                $scope.searchInput.entity.section=strgSection;
-                $scope.display.sectionName=item.sectionName;
-            }
         };*/
+
+        $scope.onArticleLotSectionSelectedInSearch = function(item,model,label){
+            $scope.searchInput.entity.lotPic=item.lotPic;
+            $scope.searchInput.entity.artPic=item.artPic;
+            $scope.searchInput.entity.section = item.section;
+
+            var searchInput = coreSearchInputInit(item.artPic);
+            genericResource.findBy(invInvtryUtils.catalartfeatmappingsUrlBase,searchInput)
+                .success(function(response){
+                    $scope.searchInput.entity.artName=response.resultList[0].artName;
+                })
+                .error(function(error){
+                    $scope.error=error;
+                });
+
+            genericResource.findByLikePromissed(invInvtryUtils.stksectionsUrlBase, 'item.section', $scope.searchInput.entity.section)
+                .then(function(entitySearchResult){
+                    var resultList = entitySearchResult.resultList;
+                    if(angular.isDefined(resultList) && resultList.length>0){
+                        $scope.display = {};
+                        $scope.display.section = resultList[0].identif;
+                        $scope.display.sectionName = resultList[0].name;
+                    }
+
+                }, function(error){
+                    $scope.display.section = '';
+                    $scope.display.sectionName = '';
+                });
+        };
 
         $scope.showLotsForArtPic = function(lotPic){
             if((angular.isDefined(lotPic) && lotPic.length>=8)){
@@ -516,18 +541,6 @@
             return invInvtryUtils.loadStkSectionArticleLotsByIdentif(artPic,lotPic,section);
         };
 
-        /*$scope.onArticleLotSelectedInSearch = function(item,model,label){
-            $scope.searchInput.entity.lotPic=item.lotPic;
-            $scope.searchInput.entity.identif=item.artPic;
-//    	// read the article name
-            genericResource.findByIdentif(invInvtryUtils.catalarticlesUrlBase,item.artPic)
-                .success(function(catalArticle){
-                    $scope.searchInput.entity.artName=catalArticle.features.artName;
-                })
-                .error(function(error){
-                    $scope.error=error;
-                });
-        };*/
 
         $scope.onArticleSelectedInSearch = function(item,model,label){
             $scope.searchInput.entity.artPic=item.identif;

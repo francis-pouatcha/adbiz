@@ -139,7 +139,6 @@
 <div class="panel panel-default ">
     <div class="panel-body">
         <div class="col-lg-12">
-            <div class="table-overflow-middle row">
                 <table class="table table-bordered  table-striped pointer-element" >
                     <thead>
                     <tr>
@@ -183,13 +182,12 @@
                     </tr>
                     </tbody>
                 </table>
-            </div>
-            <div class="pull-right">
-                <dir-pagination-controls on-page-change="$scope.paginate(newPageNumber)"
-                                         boundary-links="true"
-                                         max-size="$scope.pagination.maxSize">
-                </dir-pagination-controls>
-            </div>
+                <div class="pull-right">
+                    <dir-pagination-controls on-page-change="paginate(newPageNumber)"
+                                             boundary-links="true"
+                                             max-size="pagination.maxSize">
+                    </dir-pagination-controls>
+                </div>
         </div>
     </div>
 </div>

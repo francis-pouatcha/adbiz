@@ -21,6 +21,10 @@
                 method: 'POST',
                 url: API_BASE_ADINVTRY_URL + '/invinvtrys/findCustom'
             },
+            findConflict:{
+                method: 'POST',
+                url: API_BASE_ADINVTRY_URL + '/invinvtrys/findConflict'
+            },
             listAll:{
                 method: 'GET',
                 url: API_BASE_ADINVTRY_URL + '/invinvtrys',

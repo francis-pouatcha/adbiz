@@ -115,7 +115,7 @@
         $rootScope.logout = vm.logout;
         $rootScope.appTitle = 'Inventaire';
 
-        $rootScope.reportLink = [
+       /* $rootScope.reportLink = [
             {
                 link:BASE_SERVER+'/adreport.server/frameset?__report=invintry.rptdesign',
                 name:'Rapport Fiche Comptage 1'
@@ -128,7 +128,7 @@
                 link:BASE_SERVER+'/adreport.server/frameset?__report=invintry3.rptdesign',
                 name:'Rapport Fiche Inventaire'
             }
-        ];
+        ];*/
     });
     /* jshint ignore:end */
 

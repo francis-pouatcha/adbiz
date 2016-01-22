@@ -76,7 +76,7 @@ public class InvInvtryManagerEndpoint extends CoreAbstBsnsManagerEndpoint<InvInv
 	@Consumes({ "application/json"})
 	@Produces({ "application/json"})
 	public InvInvtryItem updateasseccedQty(@PathParam("identif") String identif, @PathParam("itemIdentif") String itemIdentif, InvInvtryItem item) throws AdException {
-		return invtryManager.updateAsseccedQty(identif, itemIdentif, item.getAsseccedQty(), item.getAcsngDt());
+		return invtryManager.updateAsseccedQty(identif, itemIdentif, item.getAsseccedQty(), item.getAcsngDt(), item.getAcsngUser());
 	}
 	
 	

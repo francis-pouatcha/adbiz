@@ -6,6 +6,8 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+import org.adorsys.adcatal.jpa.CatalArtLangMapping;
+import org.adorsys.adcatal.rest.CatalArtLangMappingLookup;
 import org.adorsys.adcore.rest.CoreAbstEntityJobExecutor;
 import org.adorsys.adcore.task.CoreAbstEntityBatch;
 import org.adorsys.adinvtry.jpa.InvInvtryItem;
@@ -39,6 +41,8 @@ public class InvInvtryPrepareExecTask extends CoreAbstEntityJobExecutor<InvJob, 
 	private InvStepLookup stepLookup;
 	@Inject
 	private StkArticleLot2StrgSctnLookup lot2SctLookup;
+	@Inject
+	private CatalArtLangMappingLookup artLangMappingLookup;
 
 	public void execute(String stepIdentif) {
 		InvStep step = stepLookup.findByIdentif(stepIdentif);
@@ -71,11 +75,13 @@ public class InvInvtryPrepareExecTask extends CoreAbstEntityJobExecutor<InvJob, 
 				InvInvtryItem invtryItem = new InvInvtryItem();
 				StkArticleLot articleLot = articleLotLookup
 						.findByIdentif(lot2StrgSctn.getLotPic());
+				//List<CatalArtLangMapping> artLangMap = artLangMappingLookup.findByArtPic(articleLot.getArtPic(), 0, 2);
 				articleLot.copyTo(invtryItem);
 				invtryItem.setCntnrIdentif(step.getEntIdentif());
 				invtryItem.setSection(lot2StrgSctn.getSection());
 				invtryItem.setExpectedQty(lot2StrgSctn.getStockQty());
 				invtryItem.setValueDt(lot2StrgSctn.getQtyDt());
+				//invtryItem.setArtName(artLangMap.get(0).getArtName());
 
 				itemCount = itemLookup.countByCntnrIdentifAndSalIndex(
 						step.getEntIdentif(), salIndex);

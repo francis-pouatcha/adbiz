@@ -70,11 +70,12 @@ public class InvInvtryManager  extends CoreAbstBsnsObjectManager<InvInvtry, InvI
 		ejb.prepareInvtry(identif);
 	}
 
-	public InvInvtryItem updateAsseccedQty(String identif, String itemIdentif, BigDecimal asseccedQty, Date acsngDt) throws AdRestException {
+	public InvInvtryItem updateAsseccedQty(String identif, String itemIdentif, BigDecimal asseccedQty, Date acsngDt, String acsngUser) throws AdRestException {
 		loadExistingBsnsObject(identif); 
 		InvInvtryItem existing = loadExistingBsnsItem(identif, itemIdentif);
-
-		String currentLoginName = callerPrincipal.getLoginName();
+		//do not work yet, get currentLoginName in frontend
+		//String currentLoginName = callerPrincipal.getLoginName();
+		String currentLoginName = acsngUser;
 		if(acsngDt==null) acsngDt = new Date();
 		if(existing.getAcsngDt()==null){
 			existing.setAcsngDt(acsngDt);
