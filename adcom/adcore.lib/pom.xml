@@ -15,4 +15,10 @@
 	<build>
 		<finalName>adcore.lib</finalName>
 	</build>
+	<dependencies>
+		<dependency>
+			<groupId>org.keycloak</groupId>
+			<artifactId>keycloak-core</artifactId>
+		</dependency>
+	</dependencies>
 </project>

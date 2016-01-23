@@ -271,8 +271,7 @@
                             </span>
                     <span ng-show="!invtryItem.editingExpirDt">{{invtryItem.expirDt | date:'dd-MM-yyyy'}}</span>
                 </td>
-                <td ng-show="!invtryItem.disabledDt">{{invtryItem.acsngUser}}</td>
-                <td ng-show="invtryItem.disabledDt" style="color: red; text-decoration: line-through;">{{invtryItem.acsngUser}}</td>
+                <td>{{invtryItem.acsngUser}}</td>
                 <td ng-show="!invtryItem.disabledDt">{{invtryItem.acsngDt | date:'dd-MM-yyyy HH:mm'}}</td>
                 <td ng-show="invtryItem.disabledDt" style="color: red; text-decoration: line-through;">{{invtryItem.acsngDt | date:'dd-MM-yyyy HH:mm'}}</td>
                 <td name="asseccedQtyCell" ng-dblclick="editingAsseccedQty(invtryItem,$event)">
@@ -284,7 +283,7 @@
                     <span ng-show="!invtryItem.editingAsseccedQty && invtryItem.disabledDt" style="color: red; text-decoration: line-through;">{{invtryItem.asseccedQty | number:0}}</span>
                 </td>
                 <td>
-                    <div ng-show="!invInvtryUtils.isInvtryOpen(invInvtry)">
+                    <div ng-sho w="!invInvtryUtils.isInvtryOpen(invInvtry)">
                         <span ng-show="!invtryItem.disabledDt" >{{invtryItem.expectedQty | number:0}}</span>
                         <span ng-show="invtryItem.disabledDt" style="color: red; text-decoration: line-through;" >{{invtryItem.expectedQty | number:0}}</span>
                     </div>
