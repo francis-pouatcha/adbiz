@@ -5,6 +5,7 @@ import java.util.List;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
+import org.adorsys.adcore.event.EntityArchivedEvent;
 import org.adorsys.adcore.event.EntityCreatedEvent;
 import org.adorsys.adcore.event.EntityDeletedEvent;
 import org.adorsys.adcore.event.EntityUpdatedEvent;
@@ -26,6 +27,10 @@ public abstract class CoreAbstIdentifiedEJB<E extends CoreAbstIdentifObject> {
 	@Inject
 	@EntityDeletedEvent
 	private Event<E> entityDeletedEvent;
+
+	@Inject
+	@EntityArchivedEvent
+	private Event<E> entityArchivedEvent;
 	
 	public E create(E entity) {
 		E attached = attach(entity);
@@ -38,6 +43,24 @@ public abstract class CoreAbstIdentifiedEJB<E extends CoreAbstIdentifObject> {
 		E entity = getRepo().findBy(id);
 		return internalDelete(entity);
 	}
+	
+	/**
+	 * Delete an object without having affecting history.
+	 * 
+	 * This is used for example in the case of archiving.
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public E archiveById(String id)
+	{
+		E entity = getRepo().findBy(id);
+		getRepo().remove(entity);
+		fireEntityArchivedEvent(entity);
+		return entity;
+	}
+
+
 	
 	public E deleteByIdentif(String identif){
 		E entity = getRepo().findByIdentif(identif).getSingleResult();
@@ -83,5 +106,8 @@ public abstract class CoreAbstIdentifiedEJB<E extends CoreAbstIdentifObject> {
 	}
 	protected void fireEntityUpdatedEvent(E saved) {
 		if(saved!=null) entityUpdatedEvent.fire(saved);
+	}
+	protected void fireEntityArchivedEvent(E entity) {
+		if(entity!=null) entityArchivedEvent.fire(entity);
 	}
 }

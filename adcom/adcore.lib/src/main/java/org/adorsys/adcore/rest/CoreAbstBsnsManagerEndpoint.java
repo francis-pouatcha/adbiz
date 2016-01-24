@@ -9,6 +9,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
 import org.adorsys.adcore.exceptions.AdException;
 import org.adorsys.adcore.exceptions.AdRestException;
@@ -29,6 +30,9 @@ public abstract class CoreAbstBsnsManagerEndpoint<E extends CoreAbstBsnsObject, 
 	protected abstract CoreAbstBsnsObjInjector<E, I, H, J, S, C> getInjector();
 	protected abstract CoreAbstBsnsItemSearchInput<I> newItemSearchInput();
 	protected abstract CoreAbstBsnsItemSearchResult<I> newItemSearchResult(long count, List<I> resultList, CoreAbstBsnsItemSearchInput<I> itemSearchInput);
+	protected CoreAbstArchiveManager<E, ?, I, ?, H, ?, J, S, C> getArchiveManager(){
+		return null;
+	}
 
 	@POST
 	@Consumes({ "application/json"})
@@ -130,4 +134,12 @@ public abstract class CoreAbstBsnsManagerEndpoint<E extends CoreAbstBsnsObject, 
 		return getBsnsObjManager().updateTrgtQty(identif, itemIdentif, item.getTrgtQty(), item.getAcsngDt());
 	}
 
+	@PUT
+	@Path("/{identif}/archive")
+	public Response prepareObj(@PathParam("identif") String identif) {
+		CoreAbstArchiveManager<E,?,I,?,H,?,J,S,C> archiveManager = getArchiveManager();
+		if(archiveManager!=null)
+			archiveManager.archive(identif);
+		return Response.ok().build();
+	}
 }

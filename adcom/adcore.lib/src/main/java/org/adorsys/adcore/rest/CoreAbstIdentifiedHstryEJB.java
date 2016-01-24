@@ -10,6 +10,7 @@ import org.adorsys.adcore.auth.AdcomUser;
 import org.adorsys.adcore.enums.CoreHistoryTypeEnum;
 import org.adorsys.adcore.enums.CoreProcStepEnum;
 import org.adorsys.adcore.enums.CoreProcessStatusEnum;
+import org.adorsys.adcore.event.EntityArchivedEvent;
 import org.adorsys.adcore.event.EntityCreatedEvent;
 import org.adorsys.adcore.event.EntityDeletedEvent;
 import org.adorsys.adcore.event.EntityUpdatedEvent;
@@ -74,6 +75,13 @@ public abstract class CoreAbstIdentifiedHstryEJB<H extends CoreAbstIdentifHstry,
 		h.setEntStatus(CoreProcessStatusEnum.MODIFIED.name());
 		h.setHstryType(CoreHistoryTypeEnum.MODIFIED.name());
 		h.setProcStep(CoreProcStepEnum.MODIFYING.name());
+		create(h);
+	}
+	public void handleEntityArchivedEvent(@Observes @EntityArchivedEvent E entity) {
+		H h = newHstry(entity);
+		h.setEntStatus(CoreProcessStatusEnum.ARCHIVED.name());
+		h.setHstryType(CoreHistoryTypeEnum.ARCHIVED.name());
+		h.setProcStep(CoreProcStepEnum.ARCHIVING.name());
 		create(h);
 	}
 	

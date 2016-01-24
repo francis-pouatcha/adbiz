@@ -51,14 +51,6 @@ public abstract class CoreAbstBsnsObjectHstryEJB<E extends CoreAbstBsnsObject, I
 		}
 	}
 
-//	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-//	public H createHstryCommited(String entIdentif, String txStatus,
-//			String hstryType, String processingStep, String comment,
-//			String addInfo) {
-//		return createItemHstry(entIdentif, null, txStatus, hstryType,
-//				processingStep, comment, addInfo);
-//	}
-
 	public H createHstry(String entIdentif, String txStatus, String hstryType,
 			String processingStep, String comment, String addInfo) {
 		return createItemHstry(entIdentif, null, txStatus, hstryType,
@@ -86,5 +78,9 @@ public abstract class CoreAbstBsnsObjectHstryEJB<E extends CoreAbstBsnsObject, I
 
 	protected void fireEvent(H hstry) {
 		entityHistoryEvent.fire(hstry);
+	}
+
+	public void archiveById(String id) {
+		deleteById(id);
 	}
 }
