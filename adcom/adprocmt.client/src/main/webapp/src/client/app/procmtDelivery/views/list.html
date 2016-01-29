@@ -1,0 +1,156 @@
+
+<section ng-cloak id="invIntrySearchPanel" class="mainbar">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <span><b> {{'Entity_search.title' | translate}}/ {{'Entity_create.title' | translate}}</b></span>
+            <button class="glyphicon glyphicon-collapse-down pull-right" data-toggle="collapse" data-parent="#invIntryShowPanel" data-target="#invInvtrySearchToggle"></button>
+        </div>
+        <div class="panel-collapse collapse" id="invInvtrySearchToggle">
+            <div class="panel-body">
+                <div class="">
+                    <form role="form" class="">
+                        <div class="row" >
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label class=" control-label" for="identif"> {{'PrcmtDelivery_dlvryNbr_description.title' | translate}}</label>
+                                    <div class="">
+                                        <input type="text" id="identif" ng-model="searchInput.entity.identif" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2" >
+                                <div class="form-group">
+                                    <label class=" control-label" for="dlvrySlipNbr"> {{'PrcmtDelivery_dlvrySlipNbr_description.title' | translate}}</label>
+                                    <div class="">
+                                        <input type="text" id="dlvrySlipNbr" ng-model="searchInput.entity.dlvrySlipNbr" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label class=" control-label" for="status"> {{'PrcmtProcOrder_poStatus_description.title' | translate}}</label>
+                                    <div class="">
+                                        <select class="form-control" name="status" id="status" ng-model="searchInput.entity.status"
+                                                ng-options="status.enumKey as (status.translKey | translate)
+							                    	for status in prcmtUtils.status" >
+                                            <option value=""/>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label class=" control-label" for="dtOnDlvrySlip"> {{'PrcmtDelivery_dtOnDlvrySlip_description.title' | translate}}</label>
+                                    <input class="form-control" type="datetime" datetime view="date" min-view="date" views="['date']" dismiss="true" format="dd-MM-yyyy"
+                                           id="dtOnDlvrySlip"  ng-model="searchInput.entity.dtOnDlvrySlip" >
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label class=" control-label" for="orderDt"> {{'PrcmtDelivery_orderDt_description.title' | translate}}</label>
+                                    <input class="form-control" type="datetime" datetime view="datetim" min-view="date" views="['date']" dismiss="true" format="dd-MM-yyyy"
+                                           id="orderDt"  ng-model="searchInput.entity.orderDt" >
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-2">
+                                <label class=" control-label" for="bsnsPartner"> {{'PrcmtDelivery_supplier_description.title' | translate}}</label>
+                                <input type="text" ng-model="searchInput.entity.bsnsPartner" id="bsnsPartner" name="bsnsPartner" class="form-control">
+                            </div>
+
+                        </div>
+                        <div class="row" >
+                            <div class="form-group col-lg-3">
+                                <label> {{'PrcmtDelivery_rcvngOrgUnit_description.title' | translate}} :</label>
+                                <input class="form-control" id="ouIdentif" type="text" ng-model="searchInput.entity.ouIdentif" >
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label class=" control-label" for="valueDtFrom"> {{'valueDtFrom_description.title' | translate}}</label>
+                                    <div class="">
+                                        <input type="date" type="datetime" datetime min-view="date" views="['date']" dismiss="true" format="dd-MM-yyyy"
+                                               id="valueDtFrom" ng-model="searchInput.valueDtFrom" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label class=" control-label" for="valueDtTo"> {{'valueDtTo_description.title' | translate}}</label>
+                                    <div class="">
+                                        <input type="date" type="datetime" datetime min-view="date" views="['date']" dismiss="true" format="dd-MM-yyyy"
+                                               id="valueDtTo" ng-model="searchInput.valueDtTo" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-lg-offset-2">
+                                <div class="form-group">
+                                    <button  ng-click="handleSearchRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                    <button  ng-click="handlePrintRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                                        <i class="glyphicon glyphicon-print"></i>
+                                    </button>
+                                    <a class="btn btn-success" href="#/procmtDelivery/create" style="margin-top: 23px;" >
+                                        <i class="glyphicon-plus"></i>  {{'Entity_create.title' | translate}}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default ">
+        <div class="panel-body">
+            <div class="col-lg-12">
+                <table class="table table-bordered  table-striped pointer-element" >
+                    <thead>
+                    <tr>
+                        <th> {{'PrcmtDelivery_dlvryNbr_description.title' | translate}}</th>
+                        <th> {{'PrcmtDelivery_dlvrySlipNbr_description.title' | translate}}</th>
+                        <th> {{'PrcmtDelivery_dlvryDt_description.title' | translate}}</th>
+                        <th> {{'PrcmtDelivery_dlvryStatus_description.title' | translate}}</th>
+                        <th> {{'PrcmtDelivery_dtOnDlvrySlip_description.title' | translate}}</th>
+                        <th> {{'PrcmtDelivery_netAmtToPay_description.title' | translate}}</th>
+                        <th> {{'PrcmtDelivery_orderDt_description.title' | translate}}</th>
+                        <th> {{'PrcmtDelivery_dlvryCur_description.title' | translate}}</th>
+                        <th> {{'PrcmtDelivery_supplier_description.title' | translate}}</th>
+                        <th> {{'PrcmtDelivery_rcvngOrgUnit_description.title' | translate}}</th>
+                        <th></th>
+                        <!-- <th></th>-->
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr dir-paginate="procmt in data.prcmts | itemsPerPage: pagination.itemsPerPage"
+                        total-items="data.total"
+                        current-page="pagination.current" >
+                        <td data-ng-bind="procmt.identif"></td>
+                        <td data-ng-bind="procmt.dlvrySlipNbr"></td>
+                        <td data-ng-bind="procmt.valueDt | date:'yyyy-MM-dd HH:mm'"></td>
+                        <td data-ng-bind="procmt.status"></td>
+                        <td data-ng-bind="procmt.dtOnDlvrySlip | date:'yyyy-MM-dd HH:mm'"></td>
+                        <td data-ng-bind="procmt.prchNetAmtToPay"></td>
+                        <td data-ng-bind="procmt.orderDt"></td>
+                        <td data-ng-bind="procmt.prchPrcCur"></td>
+                        <td data-ng-bind="procmt.bsnsPartner"></td>
+                        <td data-ng-bind="procmt.ouIdentif"></td>
+                        <td>
+                            <a href="#/procmtDelivery/{{procmt.identif}}/show/"><i class="glyphicon glyphicon-eye-open"></i></a>
+                            <!-- <a href="#/invinvtry/{{procmt.identif}}/archive/"><i class="glyphicon glyphicon-trash"></i></a>-->
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="pull-right">
+                    <dir-pagination-controls on-page-change="paginate(newPageNumber)"
+                                             boundary-links="true"
+                                             max-size="pagination.maxSize">
+                    </dir-pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

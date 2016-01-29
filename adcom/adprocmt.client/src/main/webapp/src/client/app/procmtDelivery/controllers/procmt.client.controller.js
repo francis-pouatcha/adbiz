@@ -3,7 +3,7 @@
     'use strict';
 
     angular
-        .module('app.procmt')
+        .module('app.procmtDelivery')
         .controller('ProcmtCtlr', ProcmtCtlr);
 
     ProcmtCtlr.$inject = ['$scope','procmtManagerResource','utils', 'prcmtUtils', 'genericResource'];
@@ -17,7 +17,7 @@
 
         // Initialize Search input and pagination
         $scope.searchInput = utils.searchInputInit().searchInput;
-        $scope.searchInput.className = 'org.adorsys.adprocmt.jpa.PrcmtProcOrderSearchInput';
+        $scope.searchInput.className = 'org.adorsys.adprocmt.jpa.PrcmtDeliverySearchInput';
         $scope.pagination = utils.searchInputInit().pagination;
 
         findCustom($scope.searchInput);
@@ -78,7 +78,7 @@
     }
 
     angular
-        .module('app.procmt')
+        .module('app.procmtDelivery')
         .controller('ProcmtCreateCtlr', ProcmtCreateCtlr);
 
     ProcmtCreateCtlr.$inject = ['$scope', 'prcmtUtils', 'procmtManagerResource', '$rootScope', '$location'];
@@ -97,7 +97,7 @@
             procmtManagerResource.save($scope.procmt, function(response){
                     $scope.procmt = response;
                     procmtManagerResource.prepare({identif:$scope.procmt.identif}, function(data){});
-                    $location.path('/procmt/'+$scope.procmt.identif+'/show/');
+                    $location.path('/procmtDelivery/'+$scope.procmt.identif+'/show/');
             },
             function(errorResponse) {
                 $scope.error = errorResponse
@@ -106,7 +106,7 @@
     }
 
     angular
-        .module('app.procmt')
+        .module('app.procmtDelivery')
         .controller('ProcmtShowCtlr', procmtShowCtlr);
 
     procmtShowCtlr.$inject = ['$scope','procmtManagerResource','$location','prcmtUtils',
@@ -145,13 +145,13 @@
                 $scope.procmt = procmt;
                 $scope.procmtCopy = angular.copy($scope.procmt);
                 fixDateFields();
-                loadInvInvtryItems();
+                loadProcmtItems();
             })
         }
 
 
         $scope.reload = function(){
-            loadInvInvtryItems($scope.searchInput);
+            loadProcmtItems($scope.searchInput);
         };
 
         function findConflict(searchInput) {
@@ -173,7 +173,7 @@
 
 
 
-        function loadInvInvtryItems() {
+        function loadProcmtItems() {
             prepareSearchInput();
             if($scope.searchInput.fieldNames.length==1 && $scope.searchInput.fieldNames.indexOf('cntnrIdentif')!=-1){
                 $scope.searchInput.sortFieldNames=[];
@@ -223,7 +223,7 @@
                                 if($scope.procmtItems().length > 0){
                                     clearTimeout(schedule);
                                 }else{
-                                    loadInvInvtryItems();
+                                    loadProcmtItems();
                                 }
 
                             },120000);
@@ -238,13 +238,13 @@
         }
 
         $scope.handleSearchRequestEvent = function(){
-            loadInvInvtryItems();
+            loadProcmtItems();
         };
 
         $scope.paginate = function(){
             itemsResultHandler.currentPage($scope.currentPage);
             $scope.searchInput = itemsResultHandler.paginate();
-            loadInvInvtryItems();
+            loadProcmtItems();
         };
 
         $scope.handlePrintRequestEvent = function(){
@@ -257,12 +257,12 @@
         $scope.handleResetRequestEvent = function(){
             $scope.searchInput = itemsResultHandler.newSearchInput();
             $scope.display = itemsResultHandler.displayInfo({});
-            loadInvInvtryItems();
+            loadProcmtItems();
         }
         $scope.handleAlphabeticRequestEvent = function(){
             $scope.searchInput = itemsResultHandler.newSearchInput();
             $scope.searchInput.a2z = true;
-            loadInvInvtryItems();
+            loadProcmtItems();
         }
 
         $scope.addItem = function(procmtItem){
@@ -290,7 +290,7 @@
         $scope.archive = function(){
             procmtManagerResource.archive({identif:$scope.procmt.identif}, function(procmt){
                 $scope.procmt = procmt;
-                $location.path('/procmt');
+                $location.path('/procmtDelivery');
             }, function(error){
                 $scope.error = error;
             })

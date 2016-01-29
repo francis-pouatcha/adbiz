@@ -1,0 +1,345 @@
+<section ng-cloak class="mainbar" id="invIntryShowPanel">
+<div class="error">
+    {{error}}
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <span><b>{{'Entity_info.title'| translate}} : </b></span>
+        <b>{{'PrcmtDelivery_dlvryNbr_description.title'| translate}} </b> <span data-ng-bind="procmt.identif" ></span>
+        <b>{{'Entity_Of.title'| translate}} </b> <span data-ng-bind="procmt.valueDt | date:'dd MMM yyyy'" ></span>
+        <b>{{'Entity_By.title'| translate}} </b> <span data-ng-bind="procmt.login" ></span>
+        <button class="glyphicon glyphicon-collapse-down pull-right" data-toggle="collapse"
+                data-parent="#invIntryShowPanel" data-target="#procmtInfoToggle"></button>
+    </div>
+    <div class="panel-collapse collapse" id="procmtInfoToggle">
+        <div class="panel-body">
+            <form  name="procmtForm" id="procmtForm" novalidate>
+
+                <div class="row" >
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label class=" control-label" for="dlvrySlipNbr"> {{'PrcmtDelivery_dlvrySlipNbr_description.title' | translate}}</label>
+                            <input class="form-control" id="dlvrySlipNbr"  ng-model="procmt.dlvrySlipNbr" >
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label class=" control-label" for="dtOnDlvrySlip"> {{'PrcmtDelivery_dtOnDlvrySlip_description.title' | translate}}</label>
+                            <input class="form-control" type="datetime" date-time id="dtOnDlvrySlip"  ng-model="procmt.dtOnDlvrySlip" >
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label class=" control-label" for="orderDt"> {{'PrcmtDelivery_orderDt_description.title' | translate}}</label>
+                            <input class="form-control" type="datetime" date-time id="orderDt"  ng-model="procmt.orderDt" >
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-3">
+                        <label class=" control-label" for="ouIdentif"> {{'PrcmtDelivery_rcvngOrgUnit_description.title' | translate}}</label>
+                        <input type="text" ng-model="procmt.ouIdentif" id="ouIdentif" name="ouIdentif" class="form-control">
+                    </div>
+
+                </div>
+                <div class="row" >
+
+                    <div class="form-group col-lg-3">
+                        <label class=" control-label"> Description :</label>
+                        <textarea rows="3" id="descptn" name="descptn" class="form-control" ng-model="procmt.descptn" maxlength="256"></textarea>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label class=" control-label" for="status"> {{'PrcmtProcOrder_poStatus_description.title' | translate}}</label>
+                            <input class="form-control" id="status" disabled ng-model="procmt.status" >
+                        </div>
+                    </div>
+
+                    <div class="form-group col-lg-3">
+                        <label> {{'PrcmtDelivery_netAmtToPay_description.title' | translate}} :</label>
+                        <input class="form-control" id="prchNetAmtToPay" type="text" disabled ng-model="procmt.prchNetAmtToPay" >
+                    </div>
+                    <div class="form-group col-lg-3">
+                        <label class=" control-label" for="bsnsPartner"> {{'PrcmtDelivery_supplier_description.title' | translate}}</label>
+                        <input type="text" ng-model="procmt.bsnsPartner" id="bsnsPartner" name="bsnsPartner" class="form-control">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-5">
+	               		<span class="pull-left">
+                            <button ng-click="archive()"
+                                    class="btn-danger btn"><i class="glyphicon glyphicon-trash" ></i> Archive
+                            </button>
+	                    	<button ng-click="check()"
+                                    ng-show="!prcmtUtils.isInvtryClosed(invInvtry) && !prcmtUtils.isInvtryPosted(invInvtry)"
+                                    class="btn-success btn"> {{'Entity_validate.title'| translate}}
+                            </button>
+		                   <button ng-click="update();" ng-show="!prcmtUtils.isInvtryPosted(invInvtry)"
+                                   class="btn-success btn">{{'Entity_save.title'| translate}}
+                           </button>
+		                   <button ng-click="close();"
+                                   ng-show="!prcmtUtils.isInvtryClosed(invInvtry) && !prcmtUtils.isInvtryPosted(invInvtry) && !invInvtry.conflictDt"
+                                   class="btn-success btn">{{'Entity_close.title'| translate}}
+                           </button>
+		                   <button ng-click="post();"
+                                   ng-show="prcmtUtils.isInvtryClosed(invInvtry) && !prcmtUtils.isInvtryPosted(invInvtry)"
+                                   class="btn-success btn">{{'Entity_post.title'| translate}}
+                           </button>
+	               		</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span><b>{{'Entity_search.title'| translate}} {{'PrcmtDlvryItem_description.title'| translate}} </b></span>
+        <button class="glyphicon glyphicon-collapse-down pull-right" data-toggle="collapse"
+                data-parent="#invIntryShowPanel" data-target="#procmtItemSearchToggle"></button>
+    </div>
+    <div class="panel-collapse collapse" id="procmtItemSearchToggle">
+        <div class="panel-body">
+            <form name="procmtItemForm" id="procmtItemForm" novalidate>
+                <div class="row">
+                    <div class="form-group col-lg-2" ng-class="{ 'has-error' : procmtItemForm.artPic.$invalid }">
+                        <label class=" control-label" for="artPic">{{'PrcmtDlvryItem_artPic_description.title'|
+                            translate}}</label>
+                        <input type="text" ng- class="form-control" name="artPic" id="artPic" required
+                               autocomplete="off"
+                               ng-model="searchInput.entity.artPic"
+                               typeahead="article.identif as article.identif for article in prcmtUtils.loadArticlesByPic($viewValue)"
+                               typeahead-min-length="5"
+                               typeahead-loading="loading"
+                               typeahead-on-select='onArticleSelectedInSearch($item, $model, $label)'>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label class=" control-label" for="searchArtName">{{'PrcmtPOItem_artName_description.title'|
+                            translate}}</label>
+                        <input type="text" class="form-control" id="searchArtName" autocomplete="off"
+                               ng-model="searchInput.entity.artName" name="searchArtName"
+                               typeahead="article as article.artName for article in prcmtUtils.loadArticlesByName($viewValue)"
+                               typeahead-loading="loading" typeahead-min-length="4"
+                               typeahead-on-select='onArticleSelectedInSearchArtName($item, $model, $label)'>
+                    </div>
+                    <div class="form-group col-lg-2">
+                        <label class=" control-label" for="trgtQty">{{'PrcmtDlvryItem_qtyDlvrd_description.title'|
+                            translate}}</label>
+                        <div ng-class="{ 'has-error' : procmtItemForm.qtyBilled.$invalid }">
+                            <input type="text" class="form-control" required name="trgtQty" id="trgtQty"
+                                   ng-model="searchInput.entity.trgtQty">
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-2">
+                        <label class=" control-label" for="trgtQty">{{'PrcmtDlvryItem_freeQty_description.title'|
+                            translate}}</label>
+                        <div ng-class="{ 'has-error' : procmtItemForm.freeQty.$invalid }">
+                            <input type="text" class="form-control"  name="freeQty" id="freeQty"
+                                   ng-model="searchInput.entity.freeQty">
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-2">
+                        <label class=" control-label" for="qtyBilled">{{'PrcmtDlvryItem_qtyBilled_description.title'|
+                            translate}}</label>
+                        <div ng-class="{ 'has-error' : procmtItemForm.qtyBilled.$invalid }">
+                            <input type="text" class="form-control"  name="freeQty" id="qtyBilled"
+                                   ng-model="searchInput.entity.qtyBilled">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-2">
+                        <label class=" control-label" for="expirDt">{{'PrcmtDlvryItem_expirDt_description.title'|
+                            translate}}</label>
+                        <input type="datetime" datetime ng-model="searchInput.entity.expirDt"  id="expirDt"
+                               name="expirDt" class="form-control">
+                    </div>
+                    <div class="form-group col-lg-2">
+                        <label class=" control-label" for="pppuPreTax">{{'PrcmtDlvryItem_pppuPreTax_description.title'|
+                            translate}}</label>
+                        <input type="text" ng-model="searchInput.entity.pppuPreTax" id="pppuPreTax"
+                               name="pppuPreTax" class="form-control">
+                    </div>
+                    <div class="form-group col-lg-2">
+                        <label class=" control-label" for="supplier">{{'PrcmtDlvryItem_section_description.title'|
+                            translate}}</label>
+                        <input type="text" ng-model="searchInput.entity.section" id="section" name="section"
+                               class="form-control">
+                    </div>
+                    <div class="form-group col-lg-2">
+                        <label class=" control-label" for="supplier">{{'PrcmtPOItem_supplier_description.title'|
+                            translate}}</label>
+                        <input type="text" ng-model="searchInput.entity.supplier" id="supplier" name="supplier"
+                               class="form-control">
+                    </div>
+                    <div class="form-group col-lg-3" col-lg-offset-1>
+                        <button ng-click="handleSearchRequestEvent()" class="btn btn-default "
+                                style="margin-top: 30px;">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                        <button ng-click="handleAlphabeticRequestEvent()" class="btn btn-default "
+                                style="margin-top: 30px;">
+                            <i class="glyphicon glyphicon-sort-by-alphabet"></i>
+                        </button>
+                        <button ng-click="handleResetRequestEvent()" class="btn btn-default " style="margin-top: 30px;">
+                            <i class="glyphicon glyphicon-flash"></i>{{'Entity_reset.title'| translate}}
+                        </button>
+                        <button ng-click="handlePrintRequestEvent()" class="btn btn-default " style="margin-top: 30px;">
+                            <i class="glyphicon glyphicon-print"></i>
+                        </button>
+                        <button class="btn btn-default" ng-disabled="procmtItemForm.$invalid"
+                                ng-click="addItem(searchInput.entity)" style="margin-top: 30px;"
+                                ng-show="prcmtUtils.isInvtryOpen(procmt)">
+                            <i class="glyphicon glyphicon-plus"></i> {{'Entity_add.title'| translate}}
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default" id="panelV">
+    <div class="panel-heading">
+        <b> {{'PrcmtPOItem_description.title'| translate}} </b>
+        <span ng-show="procmtItems().length==0" class="red" >products are loading ... please wait</span>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered  table-striped">
+            <thead>
+            <tr>
+                <th class="clo-lg-1">{{'PrcmtDlvryItem_artPic_description.title'| translate}}</th>
+                <th class="clo-lg-2">{{'PrcmtDlvryItem_articleName_description.title'| translate}}</th>
+                <th class="clo-lg-1">{{'PrcmtDlvryItem_qtyDlvrd_description.title'| translate}}</th>
+                <th class="clo-lg-1">{{'PrcmtDlvryItem_freeQty_description.title'| translate}}</th>
+                <th class="clo-lg-1">{{'PrcmtDlvryItem_qtyBilled_description.title'| translate}}</th>
+                <th class="clo-lg-1">{{'PrcmtDlvryItem_qtyOrdered_description.title'| translate}}</th>
+                <th class="col-lg-2">{{'PrcmtDlvryItem_expirDt_description.title'| translate}}</th>
+                <th class="col-lg-1">{{'PrcmtDlvryItem_pppuPreTax_description.title'| translate}}</th>
+                <th class="col-lg-1">{{'PrcmtDlvryItem_section_description.title'| translate}}</th>
+                <th class="col-lg-2">{{'PrcmtPOItem_supplier_description.title'| translate}}</th>
+                <th class="col-lg-1">
+                    <span ng-show="!procmt.conflictDt"><i class="glyphicon glyphicon-ok-circle"
+                                                          style="color:green"></i></span>
+                    <span ng-show="procmt.conflictDt"><i class="glyphicon glyphicon-ban-circle"
+                                                         style="color:red"></i></span>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="procmtItem in procmtItems()">
+                <td data-ng-bind="procmtItem.artPic"></td>
+                <td data-ng-bind="procmtItem.artName"></td>
+                <td name="qtyDlvrdCell" ng-dblclick="editingQtyDlvrd(procmtItem,$event)">
+                    <input type="text" name="qtyDlvrd" ad-focus="procmtItem.editingQtyDlvrd"
+                           ad-enter="updateQtyDlvrd(procmtItem)" style="width: 35px"
+                           ng-model="procmtItem.qtyDlvrd" ng-show="procmtItem.editingQtyDlvrd"
+                           ng-blur="updatetrgtQty(procmtItem)">
+                    <span ng-show="!procmtItem.editingQtyDlvrd && !procmtItem.disabledDt">{{procmtItem.trgtQty | number:0}}</span>
+                    <span ng-show="!procmtItem.editingQtyDlvrd && procmtItem.disabledDt" style="color: red; text-decoration: line-through;">{{procmtItem.editingQtyDlvrd | number:0}}</span>
+                </td>
+                <td name="">
+                            <span class="" ng-show="procmtItem.editingFreeQty">
+                                <input ng-model="procmtItem.freeQty" class="form-control">
+                            </span>
+                             <span ng-show="!procmtItem.editingFreeQty" data-ng-bind="procmtItem.freeQty"></span>
+                </td>
+                <td name="">
+                            <span class="" ng-show="procmtItem.editing">
+                                <input ng-model="procmtItem.qtyBilled" class="form-control">
+                            </span>
+                    <span ng-show="!procmtItem.editing" data-ng-bind="procmtItem.qtyBilled"></span>
+                </td>
+                <td name="">
+                            <span class="" ng-show="procmtItem.editing">
+                                <input ng-model="procmtItem.qtyOrdered" class="form-control">
+                            </span>
+                    <span ng-show="!procmtItem.editing" data-ng-bind="procmtItem.qtyOrdered"></span>
+                </td>
+
+                <td name="">
+                            <span class="" ng-show="procmtItem.editing">
+                                <input ng-model="procmtItem.expirDt" class="form-control">
+                            </span>
+                    <span ng-show="!procmtItem.editing" data-ng-bind="procmtItem.expirDt"></span>
+                </td>
+
+                <td name="">
+                            <span class="" ng-show="procmtItem.editing">
+                                <input ng-model="procmtItem.pppuPreTax" class="form-control">
+                            </span>
+                    <span ng-show="!procmtItem.editing" data-ng-bind="procmtItem.pppuPreTax"></span>
+                </td>
+
+                <td name="">
+                            <span class="" ng-show="procmtItem.section">
+                                <input ng-model="procmtItem.freeQty" class="form-control">
+                            </span>
+                    <span ng-show="!procmtItem.editing" data-ng-bind="procmtItem.section"></span>
+                </td>
+                <td name="">
+                            <span class="" ng-show="procmtItem.supplier">
+                                <input ng-model="procmtItem.freeQty" class="form-control">
+                            </span>
+                    <span ng-show="!procmtItem.editing" data-ng-bind="procmtItem.supplier"></span>
+                </td>
+                <td>
+                    <div ng-show="prcmtUtils.isInvtryOpen(procmt)">
+
+                        	<span ng-show="!procmtItem.editing && !procmtItem.disabledDt">
+	                        	<a ng-click="editingItem(procmtItem)" class=""><i class="glyphicon glyphicon-edit"></i></a>
+                        	</span>
+
+                                                   <span ng-show="procmtItem.editing">
+                                                        <a ng-click="updateItem(procmtItem)" class=""><i
+                                                                class="glyphicon glyphicon-save"></i></a>
+                                                    </span>
+
+                        	<span ng-show="!procmtItem.editing && procmtItem.disabledDt" style="margin-left:10px">
+	                        	<a ng-click="enableItem(procmtItem)" class=""><i
+                                        class="glyphicon glyphicon-edit red"></i></a>
+                        	</span>
+                        	<span ng-show="procmtItem.editing && !procmtItem.disabledDt" class="pull-right" style="margin-left: 10px">
+	                        	<a ng-click="disableItem(procmtItem)" class=""><i class="glyphicon glyphicon-trash"></i></a>
+                        	</span>
+                        	<span ng-show="procmtItem.editing" class="pull-right" style="margin-left: 10px">
+	                        	<a ng-click="cancelEditItem(procmtItem)" class=""><i
+                                        class="glyphicon glyphicon-remove"></i></a>
+                        	</span>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <ul class="pull-right">
+            <pagination total-items="totalItems()" items-per-page="itemPerPage()" class="pagination-sm"
+                        ng-model="currentPage" ng-change="paginate()"></pagination>
+        </ul>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12">
+                	<span class="pull-left">
+		                <a class="btn-danger btn" href="#/procmtDelivery"><i class="glyphicon glyphicon-list"></i>
+                            {{'Entity_list.title'| translate}}</a>
+                	</span>
+                	<span class="pull-right" ng-show="!prcmtUtils.isInvtryPosted(procmt)">
+                    	<a class="btn-danger btn" data-toggle="collapse" data-parent="#invIntryShowPanel"
+                           data-target="#procmtInfoToggle"><i class="glyphicon glyphicon-edit"></i>
+                            {{'Entity_edit.title'| translate}}</a>
+                    </span>
+                <div class="col-lg-4">
+                	<span class="pull-left">
+                    	<button class="btn-default btn" ng-click="showConflict()" ><i class="glyphicon glyphicon-tasks"></i> {{'show_conflict.title'| translate}}</button>
+	                </span>
+                </div>
+                <div class="col-lg-2">
+                	<span class="pull-right">
+                    	<button class="btn-default btn" ng-click="reload()" ><i class="glyphicon glyphicon-refresh"></i> {{'reload.title'| translate}}</button>
+	                </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>

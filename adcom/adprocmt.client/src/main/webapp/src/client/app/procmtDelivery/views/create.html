@@ -1,0 +1,75 @@
+
+<section  class="mainbar">
+    <div class="panel panel-primary">
+        <div class="panel-heading"><b>{{'Entity_create.title' | translate}}</b> </div>
+        <div class="panel-body">
+            <label class="error col-lg-offset-3 alert-danger" >{{error}} </label>
+            <form  name="procmtForm" id="procmtForm" novalidate>
+
+                <div class="row" >
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label class=" control-label" for="dlvrySlipNbr"> {{'PrcmtDelivery_dlvrySlipNbr_description.title' | translate}}</label>
+                            <input class="form-control" id="dlvrySlipNbr"  ng-model="procmt.dlvrySlipNbr">
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label class=" control-label" for="dtOnDlvrySlip"> {{'PrcmtDelivery_dtOnDlvrySlip_description.title' | translate}}</label>
+                            <input class="form-control" type="datetime" datetime id="dtOnDlvrySlip"  ng-model="procmt.dtOnDlvrySlip" >
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label class=" control-label" for="orderDt"> {{'PrcmtDelivery_orderDt_description.title' | translate}}</label>
+                            <input class="form-control" type="datetime" datetime id="orderDt"  ng-model="procmt.orderDt" >
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-3">
+                        <label class=" control-label" for="ouIdentif"> {{'PrcmtDelivery_rcvngOrgUnit_description.title' | translate}}</label>
+                        <input type="text" ng-model="procmt.ouIdentif" id="ouIdentif" name="ouIdentif" class="form-control">
+                    </div>
+
+                </div>
+                <div class="row" >
+
+                    <div class="form-group col-lg-3">
+                        <label class=" control-label"> Description :</label>
+                        <textarea rows="3" id="descptn" name="descptn" class="form-control" ng-model="procmt.descptn" maxlength="256"></textarea>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label class=" control-label" for="status"> {{'PrcmtProcOrder_poStatus_description.title' | translate}}</label>
+                            <input class="form-control" id="status" disabled ng-model="procmt.status" ng-init="procmt.status='INITIAL'" >
+                        </div>
+                    </div>
+
+                    <div class="form-group col-lg-3">
+                        <label> {{'PrcmtDelivery_netAmtToPay_description.title' | translate}} :</label>
+                        <input class="form-control" id="prchNetAmtToPay" type="text" ng-model="procmt.prchNetAmtToPay" >
+                    </div>
+                    <div class="form-group col-lg-3">
+                        <label class=" control-label" for="bsnsPartner"> {{'PrcmtDelivery_supplier_description.title' | translate}}</label>
+                        <input type="text" ng-model="procmt.bsnsPartner" id="bsnsPartner" name="bsnsPartner" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <span class="col-lg-4"></span>
+                        <div class="col-lg-2">
+                            <a class="btn-danger btn" href="#/procmtDelivery">
+                                <i class="glyphicon glyphicon-remove" ></i> {{'Entity_cancel.title' | translate}}</a>
+                        </div>
+                        <div class="col-lg-2">
+                            <button ng-click="create();" ng-disabled="procmtForm.$invalid" class="btn-success btn"  >
+                                <i class="glyphicon glyphicon-save"></i>  {{'Entity_save.title' | translate}}</button>
+                        </div>
+                        <span class="col-lg-4"></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+
