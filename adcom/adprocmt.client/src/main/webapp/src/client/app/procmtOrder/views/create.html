@@ -1,0 +1,58 @@
+
+<section  class="mainbar">
+    <div class="panel panel-primary">
+        <div class="panel-heading"><b>{{'Entity_create.title' | translate}}</b> </div>
+        <div class="panel-body">
+            <label class="error col-lg-offset-3 alert-danger" >{{error}} </label>
+            <form  name="procmtForm" id="procmtForm" novalidate>
+
+                <div class="row" >
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class=" control-label" for="status"> {{'PrcmtProcOrder_poStatus_description.title' | translate}}</label>
+                            <input class="form-control" id="status" disabled ng-model="procmt.status" ng-init="procmt.status='INITIAL'" >
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label class=" control-label" for="poTriggerMode"> {{'PrcmtProcOrder_poTriggerMode_description.title' | translate}}</label>
+                        <select class="form-control" name="status" id="poTriggerMode" ng-model="procmt.poTriggerMode"
+                                ng-options="status.enumKey as (status.translKey | translate)
+							                    	for status in prcmtUtils.poTriggerModes" >
+                            <option value=""/>
+                        </select>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="form-group col-lg-6">
+                        <label class=" control-label"> Description :</label>
+                        <textarea rows="3" id="descptn" name="descptn" class="form-control" ng-model="procmt.descptn" maxlength="256"></textarea>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label> {{'PrcmtProcOrder_poType_description.title' | translate}} :</label>
+                            <select class="form-control" name="txType" id="txType" ng-model="procmt.txType"
+                                    ng-options="txType.enumKey as (txType.translKey | translate)
+			                   				for txType in prcmtUtils.POTypes" >
+                                <option value=""/>
+                            </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <span class="col-lg-4"></span>
+                        <div class="col-lg-2">
+                            <a class="btn-danger btn" href="#/procmt">
+                                <i class="glyphicon glyphicon-remove" ></i> {{'Entity_cancel.title' | translate}}</a>
+                        </div>
+                        <div class="col-lg-2">
+                            <button ng-click="create();" ng-disabled="procmtForm.$invalid" class="btn-success btn"  >
+                                <i class="glyphicon glyphicon-save"></i>  {{'Entity_save.title' | translate}}</button>
+                        </div>
+                        <span class="col-lg-4"></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+

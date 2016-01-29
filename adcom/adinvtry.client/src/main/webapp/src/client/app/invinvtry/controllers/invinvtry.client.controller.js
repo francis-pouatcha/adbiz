@@ -202,8 +202,7 @@
 
         function findConflict(searchInput) {
             invInvtryManagerResource.findConflict(searchInput, function(response){
-                    $scope.data.invInvtrys = response.resultList;
-                    $scope.data.total = response.total;
+                    itemsResultHandler.searchResult(response);
                 },
                 function(errorResponse) {
                     $scope.error = errorResponse.data.summary;
@@ -212,6 +211,9 @@
         }
 
         $scope.showConflict = function(){
+            $scope.searchInput = itemsResultHandler.searchInput();
+            $scope.searchInput.fieldNames.push('cntnrIdentif');
+            $scope.searchInput.entity.cntnrIdentif = $scope.invInvtry.identif;
             findConflict($scope.searchInput);
         };
 
@@ -326,6 +328,15 @@
         $scope.check = function(){
             invInvtryManagerResource.validate({identif:$scope.invInvtry.identif}, function(invInvtry){
                 $scope.invInvtry = invInvtry;
+            }, function(error){
+                $scope.error = error;
+            })
+        };
+
+        $scope.archive = function(){
+            invInvtryManagerResource.archive({identif:$scope.invInvtry.identif}, function(invInvtry){
+                $scope.invInvtry = invInvtry;
+                $location.path('/invinvtry');
             }, function(error){
                 $scope.error = error;
             })

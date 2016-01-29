@@ -23,7 +23,7 @@ public abstract class CoreAbstBsnsObject extends CoreAbstBsnsObjectHeader {
 	private static final long serialVersionUID = 8742902615786244347L;
 
 	@Column
-	@NotNull
+	//@NotNull
 	private String prchPrcCur = CoreCurrencyEnum.XAF.name();
 
 	@Column

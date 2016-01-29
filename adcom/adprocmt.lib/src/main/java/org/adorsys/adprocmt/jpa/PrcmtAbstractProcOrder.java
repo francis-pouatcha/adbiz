@@ -23,7 +23,7 @@ public abstract class PrcmtAbstractProcOrder extends CoreAbstBsnsObject {
 
 	@Column
 	@Description("PrcmtProcOrder_poTriggerMode_description")
-	@NotNull
+	//@NotNull
 	private String poTriggerMode;
 
 	public Date getSubmitedDt() {

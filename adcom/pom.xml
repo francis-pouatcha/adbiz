@@ -37,6 +37,7 @@
 		<module>adcatal.client</module>
 		<module>adstock.client</module>
 		<module>adinvtry.client</module>
+		<module>adprocmt.client</module>
 		<module>addashboard.client</module>
 		<!-- 
 		<module>adbnsptnr.client</module>

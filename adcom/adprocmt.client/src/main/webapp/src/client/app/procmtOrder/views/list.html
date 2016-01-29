@@ -1,0 +1,145 @@
+
+<section ng-cloak id="invIntrySearchPanel" class="mainbar">
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <span><b> {{'Entity_search.title' | translate}}/ {{'Entity_create.title' | translate}}</b></span>
+        <button class="glyphicon glyphicon-collapse-down pull-right" data-toggle="collapse" data-parent="#invIntryShowPanel" data-target="#invInvtrySearchToggle"></button>
+    </div>
+    <div class="panel-collapse collapse" id="invInvtrySearchToggle">
+        <div class="panel-body">
+            <div class="">
+                <form role="form" class="">
+                    <div class="row" >
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class=" control-label" for="identif"> {{'PrcmtProcOrder_poNbr_description.title' | translate}}</label>
+                                <div class="">
+                                    <input type="text" id="identif" ng-model="searchInput.entity.identif" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class=" control-label" for="status"> {{'PrcmtProcOrder_poStatus_description.title' | translate}}</label>
+                                <div class="">
+                                    <select class="form-control" name="status" id="status" ng-model="searchInput.entity.status"
+                                            ng-options="status.enumKey as (status.translKey | translate)
+							                    	for status in prcmtUtils.status" >
+                                        <option value=""/>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-3">
+                            <label class=" control-label" for="poTriggerMode"> {{'PrcmtProcOrder_poTriggerMode_description.title' | translate}}</label>
+                            <select class="form-control" name="poTriggerMode" id="poTriggerMode" ng-model="searchInput.entity.poTriggerMode"
+                                    ng-options="status.enumKey as (status.translKey | translate)
+							                    	for status in prcmtUtils.poTriggerModes" >
+                                <option value=""/>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class=" control-label" for="valueDtFrom"> {{'valueDtFrom_description.title' | translate}}</label>
+                                <div class="">
+                                    <input type="datetime" date-time  view="date" min-view="date" views="['date']" dismiss="true" format="dd-MM-yyyy"
+                                           id="valueDtFrom" ng-model="searchInput.valueDtFrom" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class=" control-label" for="valueDtTo"> {{'valueDtTo_description.title' | translate}}</label>
+                                <div class="">
+                                    <input type="datetime" date-time  view="date" min-view="date" views="['date']" dismiss="true" format="dd-MM-yyyy"
+                                           id="valueDtTo" ng-model="searchInput.valueDtTo" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-3">
+                            <label> {{'PrcmtProcOrder_poType_description.title' | translate}} :</label>
+                            <div >
+                                <select class="form-control" name="txType" id="txType" ng-model="searchInput.entity.txType"
+                                        ng-options="txType.enumKey as (txType.translKey | translate)
+			                   				for txType in prcmtUtils.POTypes" >
+                                    <option value=""/>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="form-group col-lg-3">
+                            <label class=" control-label" for="ouIdentif"> {{'PrcmtProcOrder_ordrngOrgUnit_description.title' | translate}}</label>
+                            <input type="text" ng-model="searchInput.entity.ouIdentif" id="ouIdentif" name="ouIdentif" class="form-control">
+                        </div>
+                        <div class="col-lg-6 col-lg-offset-3">
+                            <div class="form-group">
+                                <button  ng-click="handleSearchRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                                <button  ng-click="handlePrintRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                                    <i class="glyphicon glyphicon-print"></i>
+                                </button>
+                                <a class="btn btn-success" href="#/procmt/create" style="margin-top: 23px;" >
+                                    <i class="glyphicon-plus"></i>  {{'Entity_create.title' | translate}} Invinvtry
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default ">
+    <div class="panel-body">
+        <div class="col-lg-12">
+                <table class="table table-bordered  table-striped pointer-element" >
+                    <thead>
+                    <tr>
+                        <th> {{'PrcmtProcOrder_poNbr_description.title' | translate}}</th>
+                        <th> {{'PrcmtProcOrder_createdDt_description.title' | translate}}</th>
+                        <th> {{'PrcmtProcOrder_poTriggerMode_description.title' | translate}}</th>
+                        <th> {{'PrcmtProcOrder_grossPPPreTax_description.title' | translate}}</th>
+                        <th> {{'PrcmtProcOrder_netAmtToPay_description.title' | translate}}</th>
+                        <th> {{'PrcmtProcOrder_poStatus_description.title' | translate}}</th>
+                        <th> {{'PrcmtProcOrder_poCur_description.title' | translate}}</th>
+                        <th> {{'PrcmtProcOrder_ordrngOrgUnit_description.title' | translate}}</th>
+                        <th></th>
+                       <!-- <th></th>-->
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr dir-paginate="procmt in data.prcmts | itemsPerPage: pagination.itemsPerPage"
+                        total-items="data.total"
+                        current-page="pagination.current" >
+                        <td data-ng-bind="procmt.identif"></td>
+                        <td data-ng-bind="procmt.valueDt | date:'yyyy-MM-dd HH:mm'"></td>
+                        <td data-ng-bind="procmt.poTriggerMode"></td>
+                        <td data-ng-bind="procmt.prchGrossPrcPreTax"></td>
+                        <td data-ng-bind="procmt.prchNetAmtToPay"></td>
+                        <td data-ng-bind="procmt.status"></td>
+                        <td data-ng-bind="procmt.prchPrcCur"></td>
+                        <td data-ng-bind="procmt.ouIdentif"></td>
+                        <td>
+                            <a href="#/procmt/{{procmt.identif}}/show/"><i class="glyphicon glyphicon-eye-open"></i></a>
+                           <!-- <a href="#/invinvtry/{{procmt.identif}}/archive/"><i class="glyphicon glyphicon-trash"></i></a>-->
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="pull-right">
+                    <dir-pagination-controls on-page-change="paginate(newPageNumber)"
+                                             boundary-links="true"
+                                             max-size="pagination.maxSize">
+                    </dir-pagination-controls>
+                </div>
+        </div>
+    </div>
+</div>
+</section>
+

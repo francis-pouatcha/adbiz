@@ -1,0 +1,274 @@
+<section ng-cloak class="mainbar" id="invIntryShowPanel">
+<div class="error">
+    {{error}}
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <span><b>{{'Entity_info.title'| translate}} : </b></span>
+        <b>{{'PrcmtProcOrder_poNbr_description.title'| translate}} </b> <span data-ng-bind="procmt.identif" ></span>
+        <b>{{'Entity_Of.title'| translate}} </b> <span data-ng-bind="procmt.valueDt | date:'dd MMM yyyy'" ></span>
+        <b>{{'Entity_By.title'| translate}} </b> <span data-ng-bind="procmt.login" ></span>
+        <button class="glyphicon glyphicon-collapse-down pull-right" data-toggle="collapse"
+                data-parent="#invIntryShowPanel" data-target="#procmtInfoToggle"></button>
+    </div>
+    <div class="panel-collapse collapse" id="procmtInfoToggle">
+        <div class="panel-body">
+            <form  name="procmtForm" id="procmtForm" novalidate>
+
+                <div class="row" >
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class=" control-label" for="status"> {{'PrcmtProcOrder_poStatus_description.title' | translate}}</label>
+                            <select class="form-control" name="status" disabled id="status" ng-model="procmt.status"
+                                    ng-options="status.enumKey as (status.translKey | translate)
+							                    	for status in prcmtUtils.status" >
+                                <option value=""/>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label class=" control-label" for="poTriggerMode"> {{'PrcmtProcOrder_poTriggerMode_description.title' | translate}}</label>
+                        <select class="form-control" disabled name="poTriggerMode" id="poTriggerMode" ng-model="procmt.poTriggerMode"
+                                ng-options="status.enumKey as (status.translKey | translate)
+							                    	for status in prcmtUtils.poTriggerModes" >
+                            <option value=""/>
+                        </select>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="form-group col-lg-6">
+                        <label class=" control-label"> Description :</label>
+                        <textarea rows="3" id="descptn" name="descptn" class="form-control" ng-model="procmt.descptn" maxlength="256"></textarea>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label> {{'PrcmtProcOrder_poType_description.title' | translate}} :</label>
+                        <select class="form-control" name="txType" id="txType" ng-model="procmt.txType"
+                                ng-options="txType.enumKey as (txType.translKey | translate)
+			                   				for txType in prcmtUtils.POTypes" >
+                            <option value=""/>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-5">
+	               		<span class="pull-left">
+                            <button ng-click="archive()"
+                                    class="btn-danger btn"><i class="glyphicon glyphicon-trash" ></i> Archive
+                            </button>
+	                    	<button ng-click="check()"
+                                    ng-show="!prcmtUtils.isInvtryClosed(invInvtry) && !prcmtUtils.isInvtryPosted(invInvtry)"
+                                    class="btn-success btn"> {{'Entity_validate.title'| translate}}
+                            </button>
+		                   <button ng-click="update();" ng-show="!prcmtUtils.isInvtryPosted(invInvtry)"
+                                   class="btn-success btn">{{'Entity_save.title'| translate}}
+                           </button>
+		                   <button ng-click="close();"
+                                   ng-show="!prcmtUtils.isInvtryClosed(invInvtry) && !prcmtUtils.isInvtryPosted(invInvtry) && !invInvtry.conflictDt"
+                                   class="btn-success btn">{{'Entity_close..title'| translate}}
+                           </button>
+		                   <button ng-click="post();"
+                                   ng-show="prcmtUtils.isInvtryClosed(invInvtry) && !prcmtUtils.isInvtryPosted(invInvtry)"
+                                   class="btn-success btn">Transform
+                           </button>
+	               		</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span><b>{{'Entity_search.title'| translate}} {{'PrcmtPOItem_description.title'| translate}} </b></span>
+        <button class="glyphicon glyphicon-collapse-down pull-right" data-toggle="collapse"
+                data-parent="#invIntryShowPanel" data-target="#procmtItemSearchToggle"></button>
+    </div>
+    <div class="panel-collapse collapse" id="procmtItemSearchToggle">
+        <div class="panel-body">
+            <form name="procmtItemForm" id="procmtItemForm" novalidate>
+                <div class="row">
+                    <div class="form-group col-lg-2" ng-class="{ 'has-error' : procmtItemForm.artPic.$invalid }">
+                        <label class=" control-label" for="artPic">{{'PrcmtPOItem_artPic_description.title'|
+                            translate}}</label>
+                        <input type="text" ng- class="form-control" name="artPic" id="artPic" required
+                               autocomplete="off"
+                               ng-model="searchInput.entity.artPic"
+                               typeahead="article.identif as article.identif for article in prcmtUtils.loadArticlesByPic($viewValue)"
+                               typeahead-min-length="5"
+                               typeahead-loading="loading"
+                               typeahead-on-select='onArticleSelectedInSearch($item, $model, $label)'>
+                    </div>
+                    <div class="form-group col-lg-5">
+                        <label class=" control-label" for="searchArtName">{{'PrcmtPOItem_artName_description.title'|
+                            translate}}</label>
+                        <input type="text" class="form-control" id="searchArtName" autocomplete="off"
+                               ng-model="searchInput.entity.artName" name="searchArtName"
+                               typeahead="article as article.artName for article in prcmtUtils.loadArticlesByName($viewValue)"
+                               typeahead-loading="loading" typeahead-min-length="4"
+                               typeahead-on-select='onArticleSelectedInSearchArtName($item, $model, $label)'>
+                    </div>
+                    <div class="form-group col-lg-3">
+                        <label class=" control-label" for="trgtQty">{{'PrcmtPOItem_qtyOrdered_description.title'|
+                            translate}}</label>
+
+                        <div ng-class="{ 'has-error' : procmtItemForm.qtyBilled.$invalid }">
+                            <input type="text" class="form-control" required name="trgtQty" id="trgtQty"
+                                   ng-model="searchInput.entity.trgtQty">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="form-group col-lg-3">
+                        <label class=" control-label" for="expirDt">{{'PrcmtPOItem_expirDt_description.title'|
+                            translate}}</label>
+                        <input type="text" ng-model="searchInput.entity.expirDt" id="expirDt"
+                               name="expirDt" class="form-control">
+                    </div>
+                    <div class="form-group col-lg-3">
+                        <label class=" control-label" for="supplier">{{'PrcmtPOItem_supplier_description.title'|
+                            translate}}</label>
+                        <input type="text" ng-model="searchInput.entity.supplier" id="supplier" name="supplier"
+                               class="form-control">
+                    </div>
+                    <div class="form-group col-lg-4" col-lg-offset-3>
+                        <button ng-click="handleSearchRequestEvent()" class="btn btn-default "
+                                style="margin-top: 30px;">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                        <button ng-click="handleAlphabeticRequestEvent()" class="btn btn-default "
+                                style="margin-top: 30px;">
+                            <i class="glyphicon glyphicon-sort-by-alphabet"></i>
+                        </button>
+                        <button ng-click="handleResetRequestEvent()" class="btn btn-default " style="margin-top: 30px;">
+                            <i class="glyphicon glyphicon-flash"></i>{{'Entity_reset.title'| translate}}
+                        </button>
+                        <button ng-click="handlePrintRequestEvent()" class="btn btn-default " style="margin-top: 30px;">
+                            <i class="glyphicon glyphicon-print"></i>
+                        </button>
+                        <button class="btn btn-default" ng-disabled="procmtItemForm.$invalid"
+                                ng-click="addItem(searchInput.entity)" style="margin-top: 30px;"
+                                ng-show="prcmtUtils.isInvtryOpen(procmt)">
+                            <i class="glyphicon glyphicon-plus"></i> {{'Entity_add.title'| translate}}
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default" id="panelV">
+    <div class="panel-heading">
+        <b> {{'PrcmtPOItem_description.title'| translate}} </b>
+        <span ng-show="procmtItems().length==0" class="red" >products are loading ... please wait</span>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered  table-striped">
+            <thead>
+            <tr>
+                <th class="clo-lg-1">{{'PrcmtPOItem_artPic_description.title'| translate}}</th>
+                <th class="clo-lg-3">{{'PrcmtPOItem_artName_description.title'| translate}}</th>
+                <th class="col-lg-1">{{'PrcmtPOItem_supplier_description.title'| translate}}</th>
+                <th class="col-lg-2">{{'PrcmtPOItem_expirDt_description.title'| translate}}</th>
+                <th class="clo-lg-1">{{'PrcmtPOItem_qtyOrdered_description.title'| translate}}</th>
+
+                <th class="col-lg-1">
+                    <span ng-show="!procmt.conflictDt"><i class="glyphicon glyphicon-ok-circle"
+                                                             style="color:green"></i></span>
+                    <span ng-show="procmt.conflictDt"><i class="glyphicon glyphicon-ban-circle"
+                                                            style="color:red"></i></span>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="procmtItem in procmtItems()">
+                <td data-ng-bind="procmtItem.artPic"></td>
+                <td data-ng-bind="procmtItem.artName"></td>
+                <td name="supplierCell" ng-dblclick="editingSupplier(procmtItem, $event)">
+                            <span class="" ng-show="procmtItem.editingSupplier">
+                                <input ad-focus="procmtItem.editingSupplier"
+                                       ad-enter="updateItem(procmtItem)"
+                                       ng-show="procmtItem.editingSupplier"
+                                       ng-blur="updateItem(procmtItem)"
+                                       ng-model="procmtItem.supplier" class="form-control">
+                            </span>
+                    <span ng-show="!procmtItem.editingSupplier" data-ng-bind="procmtItem.supplier"></span>
+                </td>
+                <td name="expirDtCell" ng-dblclick="editingExpirDt(procmtItem, $event)">
+                            <span class="" ng-show="procmtItem.editingExpirDt">
+                                <input type="datetime" date-time view="date" min-view="date" views="['date']"
+                                       dismiss="true" format="dd MM yyyy" ad-enter="updateItem(procmtItem)"
+                                       ng-model="procmtItem.expirDt" class="form-control">
+                            </span>
+                    <span ng-show="!procmtItem.editingExpirDt" data-ng-bind="procmtItem.expirDt | date:'yyyy-MM-dd HH:mm'"></span>
+                </td>
+                <td name="asseccedQtyCell" ng-dblclick="editingTrgtQty(procmtItem,$event)">
+                    <input type="text" name="trgtQty" ad-focus="procmtItem.editingTrgtQty"
+                           ad-enter="updatetrgtQty(procmtItem)" style="width: 35px"
+                           ng-model="procmtItem.trgtQty" ng-show="procmtItem.editingTrgtQty"
+                           ng-blur="updatetrgtQty(procmtItem)">
+                    <span ng-show="!procmtItem.editingTrgtQty && !procmtItem.disabledDt">{{procmtItem.trgtQty | number:0}}</span>
+                    <span ng-show="!procmtItem.editingTrgtQty && procmtItem.disabledDt" style="color: red; text-decoration: line-through;">{{procmtItem.trgtQty | number:0}}</span>
+                </td>
+                <td>
+                    <div ng-show="prcmtUtils.isInvtryOpen(procmt)">
+
+                        	<span ng-show="!procmtItem.editing && !procmtItem.disabledDt">
+	                        	<a ng-click="editingItem(procmtItem)" class=""><i class="glyphicon glyphicon-edit"></i></a>
+                        	</span>
+
+                                                   <span ng-show="procmtItem.editing">
+                                                        <a ng-click="updateItem(procmtItem)" class=""><i
+                                                                class="glyphicon glyphicon-save"></i></a>
+                                                    </span>
+
+                        	<span ng-show="!procmtItem.editing && procmtItem.disabledDt" style="margin-left:10px">
+	                        	<a ng-click="enableItem(procmtItem)" class=""><i
+                                        class="glyphicon glyphicon-edit red"></i></a>
+                        	</span>
+                        	<span ng-show="procmtItem.editing && !procmtItem.disabledDt" class="pull-right" style="margin-left: 10px">
+	                        	<a ng-click="disableItem(procmtItem)" class=""><i class="glyphicon glyphicon-trash"></i></a>
+                        	</span>
+                        	<span ng-show="procmtItem.editing" class="pull-right" style="margin-left: 10px">
+	                        	<a ng-click="cancelEditItem(procmtItem)" class=""><i
+                                        class="glyphicon glyphicon-remove"></i></a>
+                        	</span>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <ul class="pull-right">
+            <pagination total-items="totalItems()" items-per-page="itemPerPage()" class="pagination-sm"
+                        ng-model="currentPage" ng-change="paginate()"></pagination>
+        </ul>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12">
+                	<span class="pull-left">
+		                <a class="btn-danger btn" href="#/procmt"><i class="glyphicon glyphicon-list"></i>
+                            {{'Entity_list.title'| translate}}</a>
+                	</span>
+                	<span class="pull-right" ng-show="!prcmtUtils.isInvtryPosted(procmt)">
+                    	<a class="btn-danger btn" data-toggle="collapse" data-parent="#invIntryShowPanel"
+                           data-target="#procmtInfoToggle"><i class="glyphicon glyphicon-edit"></i>
+                            {{'Entity_edit.title'| translate}}</a>
+                    </span>
+                <div class="col-lg-4">
+                	<span class="pull-left">
+                    	<button class="btn-default btn" ng-click="showConflict()" ><i class="glyphicon glyphicon-tasks"></i> {{'show_conflict.title'| translate}}</button>
+	                </span>
+                </div>
+                <div class="col-lg-2">
+                	<span class="pull-right">
+                    	<button class="btn-default btn" ng-click="reload()" ><i class="glyphicon glyphicon-refresh"></i> {{'reload.title'| translate}}</button>
+	                </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
