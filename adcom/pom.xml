@@ -72,6 +72,8 @@
  -->
 		<!-- <module>adcom.test</module> -->
 		<module>adcore.b2</module>
+		<module>adkcloak.model.b3</module>
+		<module>adcore.guard</module>
 	</modules>
 	<scm>
 		<connection>scm:git:https://github.com/francis-pouatcha/adcom.git</connection>

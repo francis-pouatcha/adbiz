@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Store a chunk of byte in the database. Generally raw data processed
- * by the deserialization subsystem.
+ * by the serialization subsystem.
  * 
  * @author fpo
  *

@@ -19,6 +19,13 @@ import org.adorsys.adkeycloak.model.b2.jpa.B2UserEntity;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 
+/**
+ * Information to be protected:
+ *  - username/password pair
+ *  - email/password pair
+ * @author fpo
+ *
+ */
 public class UserStore extends B2AbstractUserStore<B2UserEntity> {
 	
 	/*
