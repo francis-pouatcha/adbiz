@@ -31,6 +31,10 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 	@Column
 	@NotNull
 	private String artPic;
+	
+	//default name
+	@Column
+	private String artName;
 
 	@Column
 	private String section;
@@ -625,6 +629,14 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 
 	public Date getPrchRtrnDt() {
 		return prchRtrnDt;
+	}
+	
+	public void setArtName(String artName) {
+		this.artName = artName;
+	}
+	
+	public String getArtName() {
+		return this.artName;
 	}
 
 	public void setPrchRtrnDt(Date prchRtrnDt) {

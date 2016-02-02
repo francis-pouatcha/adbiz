@@ -73,6 +73,7 @@
                 "Entity_reload.title": "Reload",
                 "Entity_showAll.title": "Show All",
                 "Entity_showConflict.title": "Only Conflicts",
+                "Entity_close..title":"Close",
 
                 "BaseCountryName_isoCode_description.title":"Country Code",
                 "BaseCountryName_iso2_description.title":"Country Code Iso 2",
@@ -164,6 +165,7 @@
                 "Entity_reload.title": "Recharger",
                 "Entity_showAll.title": "Toutes les Lignes",
                 "Entity_showConflict.title": "Seulement les Conflits",
+                "Entity_close..title":"Cloturer",
 
                 "BaseCountryName_isoCode_description.title":"Code Pays",
                 "BaseCountryName_iso2_description.title":"Code Pays Iso 2",

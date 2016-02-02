@@ -10,6 +10,8 @@
     <jar-file>lib/adprocmt.lib-${project.version}.jar</jar-file>
     <jar-file>lib/adstock.lib-${project.version}.jar</jar-file>
     
+    <class>org.adorsys.adcore.jpa.CoreAbstEntity</class>
+    
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="hibernate.hbm2ddl.auto" value="update"/>

@@ -23,7 +23,7 @@
             },
             findConflict:{
                 method: 'POST',
-                url: API_BASE_ADINVTRY_URL + '/invinvtrys/findConflict'
+                url: API_BASE_ADINVTRY_URL + '/invinvtryitems/findConflict'
             },
             listAll:{
                 method: 'GET',
@@ -48,6 +48,10 @@
             validate: {
                 method: 'PUT',
                 url: API_BASE_ADINVTRY_URL + '/inventory/:identif/validate'
+            },
+            archive: {
+                method: 'PUT',
+                url: API_BASE_ADINVTRY_URL + '/inventory/:identif/archive'
             },
             post: {
                 method: 'PUT',
