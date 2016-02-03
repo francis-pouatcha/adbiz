@@ -32,7 +32,7 @@
             vm.searchInput.sortFieldNames.push({fieldName:'valueDt'});
         }
 
-        vm.pagination = utils.searchInputInit().pagination;
+        vm.itemsByPage = utils.searchInputInit().pagination.itemsPerPageVar;
 
         vm.setFormFields = function(disabled, hideName) {
             vm.formFields = ArticleForm.getFormFields(disabled, hideName);
@@ -42,37 +42,6 @@
         };
 
         initSearchInput();
-        findCustom();
-
-        function findCustom() {
-            Article.findCustom(vm.searchInput, function(response){
-                    vm.data.list = response.resultList;
-                    vm.data.total = response.total;
-                },
-                function(errorResponse) {
-                    vm.error = errorResponse.data.summary;
-                });
-
-        }
-
-        vm.search = function(){
-            vm.searchInput = utils.processSearch(vm.searchInput, vm.article);
-            vm.pagination = utils.resetPagination(vm.pagination);
-            findCustom();
-        };
-
-        vm.clear = function(){
-            vm.article = {};
-            initSearchInput();
-            findCustom();
-            return;
-        };
-
-        // Paginate over the list
-        vm.paginate = function(newPage){
-            utils.pagination(vm.searchInput, vm.pagination, newPage);
-            findCustom();
-        };
 
         vm.create = function() {
             var catalArtLangMapping = {};
@@ -161,6 +130,26 @@
             vm.article = Article.get({articleId: $stateParams.articleId});
             vm.setFormFields(false, true);
         };
-
+        
+        vm.callServer = function(tableState) {
+    	    var pagination = tableState.pagination;
+    	    var start = pagination.start || 0, number = pagination.number || utils.searchInputInit().stPagination.number;
+    	    processSearch(start, tableState.search);
+        	
+        	Article.findByLike(vm.searchInput, function(response){
+                vm.data.list = response.resultList;
+                tableState.pagination.numberOfPages = Math.ceil(response.count / number)
+            },
+            function(errorResponse) {
+                vm.error = errorResponse.data.summary;
+            });
+        };
+        
+        function processSearch(start, searchObject) {
+        	// First initialize SearchInput-Object and then set Search-Params
+            vm.searchInput = utils.searchInputInit().searchInput;
+        	vm.searchInput.start = start;
+        	vm.searchInput = utils.processSearch(vm.searchInput, searchObject.predicateObject);
+        }
     }
 })();
