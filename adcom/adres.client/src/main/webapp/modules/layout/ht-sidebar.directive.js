@@ -14,7 +14,7 @@
         // Creates:
         //  <div ht-sidebar class="sidebar">
         var directive = {
-            bindToController: true,
+            bindToController: false,
             link: link,
             restrict: 'EA',
             scope: {
