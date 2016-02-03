@@ -9,31 +9,39 @@
         '$stateParams',
         '$location',
         'CatalProdFmly',
-        'TableSettings',
+        'utils',
         'CatalProdFmlyForm'];
     /* @ngInject */
     function CatalProdFmlyController(logger,
         $stateParams,
         $location,
         CatalProdFmly,
-        TableSettings,
+        utils,
         CatalProdFmlyForm) {
 
         var vm = this;
-
-        vm.tableParams = TableSettings.getParams(CatalProdFmly);
+        vm.data = [];
         vm.catalProdFmly = {};
+        
+        function initSearchInput(){
+            // Initialize Search input and pagination
+            vm.searchInput = utils.searchInputInit().searchInput;
+            vm.searchInput.className = 'org.adorsys.adcatal.jpa.CatalProdFmlySearchInput';
+            vm.searchInput.sortFieldNames.push({fieldName:'valueDt'});
+        }
+        
+        vm.itemsByPage = utils.searchInputInit().pagination.itemsPerPageVar;
 
         vm.setFormFields = function(disabled) {
             vm.formFields = CatalProdFmlyForm.getFormFields(disabled);
         };
+        
+        initSearchInput();
 
         vm.create = function() {
-
             vm.catalProdFmly.famPath = '/'+vm.catalProdFmly.identif+'/'+vm.catalProdFmly.parentIdentif+'/'
             // Create new CatalProdFmly object
             var catalProdFmly = new CatalProdFmly(vm.catalProdFmly);
-
             // Redirect after save
             catalProdFmly.$save(function(response) {
                 logger.success('CatalProdFmly created');
@@ -45,7 +53,6 @@
 
         // Remove existing CatalProdFmly
         vm.remove = function(catalProdFmly) {
-
             if (catalProdFmly) {
                 catalProdFmly = CatalProdFmly.get({catalProdFmlyId:catalProdFmly.id}, function() {
                     catalProdFmly.$remove(function() {
@@ -65,7 +72,6 @@
         // Update existing CatalProdFmly
         vm.update = function() {
             var catalProdFmly = vm.catalProdFmly;
-
             catalProdFmly.$update(function() {
                 logger.success('CatalProdFmly updated');
                 $location.path('catal-prod-fmly/' + catalProdFmly.id);
@@ -85,10 +91,26 @@
             vm.setFormFields(false);
         };
 
-        activate();
+        vm.callServer = function(tableState) {
+    	    var pagination = tableState.pagination;
+    	    var start = pagination.start || 0, number = pagination.number || utils.searchInputInit().stPagination.number;
+    	    processSearch(start, tableState.search);
+        	
+        	CatalProdFmly.findByLike(vm.searchInput, function(response) {
+                vm.data.list = response.resultList;
+                tableState.pagination.numberOfPages = Math.ceil(response.count / number)
+                console.log(vm.data.list);
+            },
+            function(errorResponse) {
+                vm.error = errorResponse.data.summary;
+            });
+        };
 
-        function activate() {
-            //logger.info('Activated CatalProdFmly View');
+        function processSearch(start, searchObject) {
+        	// First initialize SearchInput-Object and then set Search-Params
+            vm.searchInput = utils.searchInputInit().searchInput;
+        	vm.searchInput.start = start;
+        	vm.searchInput = utils.processSearch(vm.searchInput, searchObject.predicateObject);
         }
     }
 
