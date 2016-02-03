@@ -2,7 +2,6 @@ package org.adorsys.adstock.jpa;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.NotNull;
 
 import org.adorsys.adcore.annotation.Description;
 

@@ -256,6 +256,13 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 
 	@Column
 	private String mvntDestIdentif;
+
+	// This is just a reservation
+	private Boolean rsvd = Boolean.FALSE;
+	
+	// This is just a proforma
+	private Boolean profmt = Boolean.FALSE;
+	
 	
 	@PrePersist
 	public void prePersist() {
@@ -280,6 +287,54 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 	
 	public CoreStkMvtType getMvntType() {
 		return mvntType;
+	}
+
+	public CoreStkMvtTerminal getMvntOrigin() {
+		return mvntOrigin;
+	}
+
+	public void setMvntOrigin(CoreStkMvtTerminal mvntOrigin) {
+		this.mvntOrigin = mvntOrigin;
+	}
+
+	public String getMvntOriginIdentif() {
+		return mvntOriginIdentif;
+	}
+
+	public void setMvntOriginIdentif(String mvntOriginIdentif) {
+		this.mvntOriginIdentif = mvntOriginIdentif;
+	}
+
+	public CoreStkMvtTerminal getMvntDest() {
+		return mvntDest;
+	}
+
+	public void setMvntDest(CoreStkMvtTerminal mvntDest) {
+		this.mvntDest = mvntDest;
+	}
+
+	public String getMvntDestIdentif() {
+		return mvntDestIdentif;
+	}
+
+	public void setMvntDestIdentif(String mvntDestIdentif) {
+		this.mvntDestIdentif = mvntDestIdentif;
+	}
+
+	public Boolean getRsvd() {
+		return rsvd;
+	}
+
+	public void setRsvd(Boolean rsvd) {
+		this.rsvd = rsvd;
+	}
+
+	public Boolean getProfmt() {
+		return profmt;
+	}
+
+	public void setProfmt(Boolean profmt) {
+		this.profmt = profmt;
 	}
 
 	public void setMvntType(CoreStkMvtType mvntType) {

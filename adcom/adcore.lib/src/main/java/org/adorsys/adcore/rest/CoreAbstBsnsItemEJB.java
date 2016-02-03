@@ -1,6 +1,5 @@
 package org.adorsys.adcore.rest;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -37,66 +36,73 @@ public abstract class CoreAbstBsnsItemEJB<
 		return getBsnsRepo();
 	};
 	
-	public I create(I entity)
-	{
-		String salIndex = entity.getSalIndex();
-		Long cnt = getInjector().getItemLookup().countByCntnrIdentifAndSalIndex(entity.getCntnrIdentif(), salIndex);
-		List<I> found = null;
-		if(cnt>0){
-			found = getInjector().getItemLookup().findByCntnrIdentifAndSalIndex(entity.getCntnrIdentif(), salIndex, 0, cnt.intValue());
-		} else {
-			found = Collections.emptyList();
-		}
-		List<I> compareList = new ArrayList<I>();
-		compareList.add(entity);
-		compareList.addAll(found);
-		Boolean sameQty = checkSameQty(compareList);
+	public I create(I entity) {
+		Date now = new Date();		
+		Boolean sameQty = updateConflicting(entity, now);
+
+		// update persisting entity.
+		if(sameQty && entity.getConflictDt()!=null)entity.setConflictDt(null);
+		if(!sameQty && entity.getConflictDt()==null)entity.setConflictDt(now);
+		I item = internalUpdate(entity);
+
+		return item;
+	}
+	
+	public I update(I entity) {
 		Date now = new Date();
-		if(!sameQty){
-			entity.setConflictDt(now);
-			for (I item : found) {
+		Boolean sameQty = updateConflicting(entity, now);
+
+		// update persisting entity.
+		if(sameQty && entity.getConflictDt()!=null)entity.setConflictDt(null);
+		if(!sameQty && entity.getConflictDt()==null)entity.setConflictDt(now);
+		I item = internalUpdate(entity);
+
+		return item;
+	}
+	
+	protected Boolean updateConflicting(I entity, Date now){
+		// Check if all article counted have the same quantity
+		List<I> compareList = readPeerSalIndex(entity);
+		Boolean sameQty = checkSameQty(compareList);
+
+		for (I item : compareList) {
+			if(item==entity)continue;
+			
+			if(!sameQty){
 				// Only save if conflict date was null.
 				if(item.getConflictDt()==null){
 					item.setConflictDt(now);
 					internalUpdate(item);
 				}
-			}
-		} else { // resolve conflict if any
-			entity.setConflictDt(null);
-			for (I item : found) {
-				// Only save if conflict date was null.
+			} else { 
+				// Only save if conflict date was not null.
 				if(item.getConflictDt()!=null){
 					item.setConflictDt(null);
 					internalUpdate(item);
 				}
 			}
 		}
-
-		I item = internalUpdate(entity);
-
-		return item;
+		return sameQty;
 	}
 	
 	protected Boolean checkSameQty(List<I> compareList) {
-		BigDecimal qty = null;
-		Boolean sameQty = Boolean.FALSE;
-		int count = 0;
+		// return true if single or empty.
+		if(compareList==null || compareList.size()<2) return Boolean.TRUE;
+		
+		I currentItem = null;
 		for (I item : compareList) {
+			// Ignore disabled item.
 			if(item.getDisabledDt()!=null) continue;
-			if(count==0){
-				qty = item.getTrgtQty();
-				if(qty!=null)
-					sameQty = Boolean.TRUE;
-			} else {
-				if(item.getTrgtQty()==null || !BigDecimalUtils.strictEquals(qty, item.getTrgtQty())){
-					sameQty = Boolean.FALSE;
-				} else {
-					sameQty = Boolean.TRUE;
-				}
+			
+			if(currentItem==null) {
+				currentItem=item;
+				continue;
 			}
-			count +=1;
+			
+			if(!BigDecimalUtils.strictEquals(currentItem.getTrgtQty(), item.getTrgtQty())) return Boolean.FALSE;
 		}
-		return sameQty;
+		
+		return Boolean.TRUE;
 	}
 	
 	private I internalUpdate(I item){
@@ -110,65 +116,30 @@ public abstract class CoreAbstBsnsItemEJB<
 	}
 	
 
-	public I update(I entity)
-	{
-		// Make sure there is a consistency, if not set conflicting date.
-		// 1. Select all items of this object with the salIndex.
+	private List<I> readPeerSalIndex(I entity){
+		// The section article lot index
 		String salIndex = entity.getSalIndex();
-		Long cnt = getBsnsRepo().findByCntnrIdentifAndSalIndex(entity.getCntnrIdentif(), salIndex).count();
+		
+		// Do we have this item counted
+		Long cnt = getInjector().getItemLookup().countByCntnrIdentifAndSalIndex(entity.getCntnrIdentif(), salIndex);
+
 		List<I> found = null;
 		if(cnt>0){
-			found = getBsnsRepo().findByCntnrIdentifAndSalIndex(entity.getCntnrIdentif(), salIndex).firstResult(0).maxResults(cnt.intValue()).getResultList();
+			found = getInjector().getItemLookup().findByCntnrIdentifAndSalIndex(entity.getCntnrIdentif(), salIndex, 0, cnt.intValue());
 		} else {
 			found = Collections.emptyList();
 		}
+
 		List<I> compareList = new ArrayList<I>();
+		compareList.add(entity);
 		for (I item : found) {
-			if(StringUtils.equals(item.getId(), entity.getId())){
-				compareList.add(entity);
-			} else {
+			// Add everything but the target entity.
+			if(!StringUtils.equals(item.getId(), entity.getId())){
 				compareList.add(item);
 			}
 		}
-		// 2. Make sure all non disabled have a number.
-		Boolean sameQty = checkSameQty(compareList);
-		I item2 = null;
-		// If not all identical qty, set conflict.
-		// Unless they are discarded.
-		Date now = new Date();
-		if(!sameQty){
-			for (I item : compareList) {
-				if(StringUtils.equals(item.getId(), entity.getId())){
-					if(item.getConflictDt()==null){
-						item.setConflictDt(now);
-					}
-					item2 = internalUpdate(item);
-				} else {
-					// Only save if conflict date was null.
-					if(item.getConflictDt()==null){
-						item.setConflictDt(now);
-						internalUpdate(item);
-					}
-				}
-			}
-		} else { // resolve conflict if any
-			for (I item : compareList) {
-				if(StringUtils.equals(item.getId(), entity.getId())){
-					if(item.getConflictDt()!=null){
-						item.setConflictDt(null);
-					}
-					item2 = internalUpdate(item);
-				} else {
-					// Only save if conflict date was null.
-					if(item.getConflictDt()!=null){
-						item.setConflictDt(null);
-						internalUpdate(item);
-					}
-				}
-			}
-		}
-		return item2;
-	}
+		return compareList;
+	} 
 	
 	public void removeByCntnrIdentif(String bsnsObjNbr, int start, int max) {
 		List<I> resultList = getBsnsRepo().findByCntnrIdentif(bsnsObjNbr).firstResult(start).maxResults(max).getResultList();
@@ -202,13 +173,18 @@ public abstract class CoreAbstBsnsItemEJB<
 	public void makeConsistent(String cntnrIdentif, String salIndex){
 		Long countEnabled = getBsnsRepo().findByCntnrIdentifAndSalIndexAndDisabledDtIsNull(cntnrIdentif, salIndex).count();
 		if(countEnabled==1) return;
+		
 		List<I> resultList = getBsnsRepo().findByCntnrIdentifAndSalIndex(cntnrIdentif, salIndex).getResultList();
+		if(resultList.isEmpty()) return;
+		
 		Boolean sameQty = checkSameQty(resultList);
+		// If any conflict, save and return.
 		if(!sameQty) {
 			setConflicting(resultList, new Date());
 			getInjector().getBsnsObjEjb().handleInconsistentBsnsObj(cntnrIdentif);
 			return;
 		}
+		
 		I oldest = null;
 		for (I item : resultList) {
 			// continue if this item is disabled and there is more than one enabled item.
@@ -224,36 +200,25 @@ public abstract class CoreAbstBsnsItemEJB<
 				continue;
 			}
 		}
-		// enable oldest and 
-		if(oldest!=null){
-			Date date = new Date();
-			for (I splItem : resultList) {
-				boolean update = false;
-				if(StringUtils.equals(oldest.getId(),splItem.getId())){
-					if(splItem.getDisabledDt()==null){
-						splItem.setDisabledDt(date);
-						update = true;
-					}
-					if(splItem.getConflictDt()!=null){
-						splItem.setConflictDt(null);
-						update = true;
-					}
-				}
-				if(update){
-					internalUpdate(splItem);
-				}
-			}
-			boolean update = false;
-			if(oldest.getDisabledDt()!=null){
-				oldest.setDisabledDt(null);
-				update = true;
-			}
-			if(oldest.getConflictDt()!=null){
-				oldest.setConflictDt(null);
-				update = true;
-			}
-			if(update){
-				internalUpdate(oldest);
+		
+		if(oldest==null) return;
+		
+		if(oldest.getDisabledDt()!=null || oldest.getConflictDt()!=null){
+			oldest.setDisabledDt(null);
+			oldest.setConflictDt(null);
+			internalUpdate(oldest);
+		}
+		
+		// enable oldest and
+		resultList = new ArrayList<I>(resultList);
+		resultList.remove(oldest);
+		
+		Date date = new Date();
+		for (I splItem : resultList) {
+			if(splItem.getDisabledDt()==null || splItem.getConflictDt()==null){
+				if(splItem.getDisabledDt()==null)splItem.setDisabledDt(date);
+				if(splItem.getConflictDt()==null)splItem.setConflictDt(date);
+				internalUpdate(splItem);
 			}
 		}
 	}
