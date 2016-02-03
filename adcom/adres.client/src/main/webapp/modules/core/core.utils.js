@@ -75,6 +75,10 @@
                     current: currentVar,
                     itemsPerPage: itemsPerPageVar,
                     maxSize: maxSizeVar
+                },
+                stPagination: {
+                	start: 0,
+                	number: itemsPerPageVar // Number of entries showed per page.
                 }
 
             };

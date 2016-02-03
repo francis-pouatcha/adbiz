@@ -1,39 +1,41 @@
 <section class="mainbar" data-ng-init="vm.toViewArticle()">
 
-  <div class="panel panel-primary">
+<div class="panel panel-primary">
     <div class="panel-heading">
-        {{'CatalArticle.view.title' | translate}}
+        <span data-ng-bind="'CatalArticle.view.title' | translate"></span>
     </div>
     <div class="panel-body">
-
-      <form novalidate>
-        <formly-form model="vm.article" fields="vm.formFields">
-        </formly-form>
-      </form>
-
-      <hr/>
-      <div>
-        <a class="btn btn-success" href="#/article/{{vm.article.id}}/edit">
-          <i class="glyphicon glyphicon-edit"></i> {{'CatalArticle.edit.title' | translate}}
-        </a>
-       <!-- <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove()" item="vm.article">
-          <i class="glyphicon glyphicon-remove-circle"></i> {{'CatalArticle.delete.title' | translate}}
-        </a>-->
-        <a class="btn btn-primary" href="#/article">
-          <i class="glyphicon glyphicon-list"></i> {{'CatalArticle.list.title' | translate}}
-        </a>
-      </div>
-        <hr/>
-        <div>
-
+		<form novalidate>
+			<formly-form model="vm.article" fields="vm.formFields"></formly-form>
+		</form>
+		<hr/>
+		<div>
+			<a class="btn btn-success" href="#/article/{{vm.article.id}}/edit">
+				<i class="glyphicon glyphicon-edit"></i> <span data-ng-bind="'CatalArticle.edit.title' | translate"></span>
+			</a>
+      		<!-- <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove()" item="vm.article">
+         		<i class="glyphicon glyphicon-remove-circle"></i> {{'CatalArticle.delete.title' | translate}}
+       		</a>-->
+			<a class="btn btn-primary" href="#/article">
+				<i class="glyphicon glyphicon-list"></i> <span data-ng-bind="'CatalArticle.list.title' | translate"></span>
+			</a>
+		</div>
+		<hr/>
+		<div>
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#catal-art-lang-mapping" aria-controls="catal-art-lang-mapping" role="tab" data-toggle="tab">{{'CatalArtFeatMapping.title'|translate}}</a></li>
-                <li role="presentation"><a href="#catal-art-2-product-family" aria-controls="catal-art-2-product-family" role="tab" data-toggle="tab">{{'CatalArt2ProductFamily.title'|translate}}</a></li>
-                <li role="presentation"><a href="#catal-art-detail-config" aria-controls="catal-art-detail-config" role="tab" data-toggle="tab">{{'CatalArtDetailConfig.title'|translate}}</a></li>
-                <li role="presentation"><a href="#catal-art-equivalence" aria-controls="catal-art-equivalence" role="tab" data-toggle="tab">{{'CatalArtEquivalence.title'|translate}}</a></li>
-                <li role="presentation"><a href="#catal-pic-mapping" aria-controls="catal-pic-mapping" role="tab" data-toggle="tab">{{'CatalPicMapping.title'|translate}}</a></li>
-                <li role="presentation"><a href="#catal-art-manuf-supp" aria-controls="catal-art-manuf-supp" role="tab" data-toggle="tab">{{'CatalArtManufSupp.title'|translate}}</a></li>
+                <li role="presentation" class="active"><a href="#catal-art-lang-mapping" aria-controls="catal-art-lang-mapping" role="tab" data-toggle="tab">
+                		<span data-ng-bind="'CatalArtFeatMapping.title' | translate"></span></a></li>
+                <li role="presentation"><a href="#catal-art-2-product-family" aria-controls="catal-art-2-product-family" role="tab" data-toggle="tab">
+                		<span data-ng-bind="'CatalArt2ProductFamily.title' | translate"></span></a></li>
+                <li role="presentation"><a href="#catal-art-detail-config" aria-controls="catal-art-detail-config" role="tab" data-toggle="tab">
+                		<span data-ng-bind="'CatalArtDetailConfig.title' | translate"></span></a></li>
+                <li role="presentation"><a href="#catal-art-equivalence" aria-controls="catal-art-equivalence" role="tab" data-toggle="tab">
+                		<span data-ng-bind="'CatalArtEquivalence.title' | translate"></span></a></li>
+                <li role="presentation"><a href="#catal-pic-mapping" aria-controls="catal-pic-mapping" role="tab" data-toggle="tab">
+                		<span data-ng-bind="'CatalPicMapping.title' | translate"></span></a></li>
+                <li role="presentation"><a href="#catal-art-manuf-supp" aria-controls="catal-art-manuf-supp" role="tab" data-toggle="tab">
+                		<span data-ng-bind="'CatalArtManufSupp.title' | translate"></span></a></li>
             </ul>
 
             <!-- Tab panes -->
@@ -58,9 +60,8 @@
                 </div>
             </div>
 
-        </div>
-
-    </div>
-  </div>
+		</div>
+	</div>
+</div>
 
 </section>
