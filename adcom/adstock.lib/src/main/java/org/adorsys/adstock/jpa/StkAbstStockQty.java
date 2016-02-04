@@ -84,6 +84,21 @@ public abstract class StkAbstStockQty extends CoreAbstIdentifObject {
 	@Description("StkAbstractStockQty_stkMvntIdentif_description")
 	@NotNull
 	private String stkMvntIdentif;
+
+	@Column
+	@Description("StkAbstStockQty_stkMvntQty_description")
+	@NotNull
+	private BigDecimal stkMvntQty = BigDecimal.ZERO;
+
+	@Column
+	@Description("StkAbstStockQty_precedingStkQty_description")
+	@NotNull
+	private BigDecimal prcdngStkQty = BigDecimal.ZERO;
+
+	@Column
+	@Description("StkAbstStockQty_prcdngRsvdQty_description")
+	@NotNull
+	private BigDecimal prcdngRsvdQty = BigDecimal.ZERO;
 	
 	public BigDecimal getStockQty() {
 		return this.stockQty;
@@ -172,9 +187,33 @@ public abstract class StkAbstStockQty extends CoreAbstIdentifObject {
 		this.stkMvntIdentif = stkMvntIdentif;
 	}
 
+	public BigDecimal getStkMvntQty() {
+		return stkMvntQty;
+	}
+
+	public void setStkMvntQty(BigDecimal stkMvntQty) {
+		this.stkMvntQty = stkMvntQty;
+	}
+
 	@Override
 	protected String makeIdentif() {
 		return getCntnrIdentif() + "_" + getSeqNbr();
+	}
+
+	public BigDecimal getPrcdngStkQty() {
+		return prcdngStkQty;
+	}
+
+	public void setPrcdngStkQty(BigDecimal prcdngStkQty) {
+		this.prcdngStkQty = prcdngStkQty;
+	}
+
+	public BigDecimal getPrcdngRsvdQty() {
+		return prcdngRsvdQty;
+	}
+
+	public void setPrcdngRsvdQty(BigDecimal prcdngRsvdQty) {
+		this.prcdngRsvdQty = prcdngRsvdQty;
 	}
 	
 }

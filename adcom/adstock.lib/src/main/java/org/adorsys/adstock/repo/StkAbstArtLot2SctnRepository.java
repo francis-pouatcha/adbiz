@@ -12,4 +12,5 @@ public interface StkAbstArtLot2SctnRepository<E extends StkAbstLot2Section> exte
 	
 	public QueryResult<E> findByClosedDtIsNull();
 	
+	public QueryResult<E> findBySectionAndClosedDtIsNull(String section);
 }

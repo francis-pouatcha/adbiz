@@ -22,11 +22,11 @@ public class StkLotStockQtyLookup extends
 		return repository;
 	}
 
-	public StkLotStockQty findBase(String artPic, String lotPic) {
-		List<StkLotStockQty> rl = repository.findByCntnrIdentifAndLotPicAndCnsldtd(artPic, lotPic, Boolean.TRUE).firstResult(0).maxResults(1).getResultList();
-		if (!rl.isEmpty()) return rl.iterator().next();
-		return null;
-	}
+//	public StkLotStockQty findBase(String artPic, String lotPic) {
+//		List<StkLotStockQty> rl = repository.findByCntnrIdentifAndLotPicAndCnsldtd(artPic, lotPic, Boolean.TRUE).firstResult(0).maxResults(1).getResultList();
+//		if (!rl.isEmpty()) return rl.iterator().next();
+//		return null;
+//	}
 
 	public Long countByArtPicAndLotPicAndSeqNbr(String artPic, String lotPic, Integer seqNbr) {
 		return repository.findByCntnrIdentifAndLotPicAndSeqNbr(artPic, lotPic,seqNbr).count();
@@ -34,6 +34,10 @@ public class StkLotStockQtyLookup extends
 	public List<StkLotStockQty> findByArtPicAndLotPicAndSeqNbr(
 			String artPic, String lotPic, Integer seqNbr, int start, int max) {
 		return repository.findByCntnrIdentifAndLotPicAndSeqNbr(artPic, lotPic,seqNbr).orderDesc("seqNbr").firstResult(start).maxResults(max).getResultList();
+	}
+	public List<StkLotStockQty> findByArtPicAndLotPicAndSeqNbr(
+			String artPic, String lotPic, Integer seqNbr) {
+		return repository.findByCntnrIdentifAndLotPicAndSeqNbr(artPic, lotPic,seqNbr).orderDesc("seqNbr").getResultList();
 	}
 
 	public Long countByArtPicAndLotPic(String artPic, String lotPic) {

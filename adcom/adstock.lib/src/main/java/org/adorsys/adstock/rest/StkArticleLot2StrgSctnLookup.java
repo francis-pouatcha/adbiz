@@ -44,4 +44,14 @@ public class StkArticleLot2StrgSctnLookup extends
 	public List<StkArticleLot2StrgSctn> findByClosedDtIsNullDesc(int start, int max){
 		return repository.findByClosedDtIsNull().firstResult(start).maxResults(max).orderDesc("identif").getResultList();
 	}
+
+	public Long countBySectionAndClosedDtIsNull(String section){
+		return repository.findBySectionAndClosedDtIsNull(section).count();
+	}
+	public List<StkArticleLot2StrgSctn> findBySectionAndClosedDtIsNullAsc(String section, int start, int max){
+		return repository.findBySectionAndClosedDtIsNull(section).firstResult(start).maxResults(max).orderAsc("identif").getResultList();
+	}
+	public List<StkArticleLot2StrgSctn> findBySectionAndClosedDtIsNullDesc(String section, int start, int max){
+		return repository.findBySectionAndClosedDtIsNull(section).firstResult(start).maxResults(max).orderDesc("identif").getResultList();
+	}
 }

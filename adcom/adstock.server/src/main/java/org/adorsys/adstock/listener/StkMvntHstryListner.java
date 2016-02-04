@@ -1,10 +1,16 @@
 package org.adorsys.adstock.listener;
 
+import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.enterprise.event.Observes;
 
 import org.adorsys.adcore.event.EntityHstryEvent;
+import org.adorsys.adcore.utils.BigDecimalUtils;
+import org.adorsys.adstock.jpa.StkAbstStockQty;
 import org.adorsys.adstock.jpa.StkArtStockQty;
 import org.adorsys.adstock.jpa.StkArticleLot;
 import org.adorsys.adstock.jpa.StkArticleLot2StrgSctn;
@@ -64,17 +70,23 @@ public class StkMvntHstryListner {
 		String artPic = stkMvnt.getArtPic();
 		String lotPic = stkMvnt.getLotPic();
 		String section = stkMvnt.getSection();
+
+		// handle the stock of all article with this pic 
 		handleArtStockQty(artPic, stkMvnt, hstry);
 
-		StkArticleLot articleLot = articleLotLookup.findByIdentif(StkArticleLot.toId(lotPic));
-		if(articleLot==null){
-			articleLot = new StkArticleLot();
-			stkMvnt.copyTo(articleLot);
-			articleLot.setStkgDt(hstry.getHstryDt());
-			articleLot.setValueDt(hstry.getHstryDt());
-			articleLot = articleLotEJB.create(articleLot);
+		// create the article lot.
+		if(!Boolean.TRUE.equals(stkMvnt.getProfmt())){
+			StkArticleLot articleLot = articleLotLookup.findByIdentif(StkArticleLot.toId(lotPic));
+			if(articleLot==null){
+				articleLot = new StkArticleLot();
+				stkMvnt.copyTo(articleLot);
+				articleLot.setStkgDt(hstry.getHstryDt());
+				articleLot.setValueDt(hstry.getHstryDt());
+				articleLot = articleLotEJB.create(articleLot);
+			}
 		}
 		
+		// Handle the stock of the article lot.
 		handleLotStockQty(artPic, lotPic, stkMvnt, hstry);
 		
 		if(StringUtils.isNotBlank(section))
@@ -82,40 +94,66 @@ public class StkMvntHstryListner {
 	}
 	
 	private void handleArtStockQty(String artPic, StkMvnt stkMvnt, StkMvntHstry hstry){
+		// No stocking for proformat invoice.
+		if(Boolean.TRUE.equals(stkMvnt.getProfmt())) return;
+		
 		StkArtStockQty artStockQty = new StkArtStockQty();
 		artStockQty.setCntnrIdentif(artPic);
-		artStockQty.setQtyDt(hstry.getHstryDt());
-		artStockQty.setOrigProcs(stkMvnt.getOrigProcs());
-		artStockQty.setOrigProcsNbr(stkMvnt.getOrigProcsNbr());
-		artStockQty.setStkMvntIdentif(stkMvnt.getIdentif());
+		List<StkArtStockQty> latestQtyList = null;
+		
 		StkArtStockQty latestQty = artStockQtyLookup.findLatest(artPic);
 		if(latestQty!=null){
-			artStockQty.setSeqNbr(latestQty.getSeqNbr()==null?1:latestQty.getSeqNbr()+1);
+			latestQtyList = artStockQtyLookup.findByArtPicAndSeqNbr(artPic, latestQty.getSeqNbr());
 		} else {
-			artStockQty.setSeqNbr(0);
+			latestQtyList = Collections.emptyList();
 		}
-		artStockQty.setStockQty(stkMvnt.getTrgtQty());
-		artStockQty = artStockQtyEJB.create(artStockQty);		
+		// Handle the stock mvnt
+		handleStockMvnt(artStockQty, latestQtyList, stkMvnt, hstry);
+
+		artStockQtyEJB.create(artStockQty);		
 	}
+	
 	private void handleLotStockQty(String artPic, String lotPic, StkMvnt stkMvnt, StkMvntHstry hstry){
-		StkLotStockQty latestQty = lotStockQtyLookup.findLatest(artPic, lotPic);
+		// No stocking for proformat invoice.
+		if(Boolean.TRUE.equals(stkMvnt.getProfmt())) return;
+
 		StkLotStockQty lotStockQty = new StkLotStockQty();
 		lotStockQty.setCntnrIdentif(artPic);
 		lotStockQty.setLotPic(lotPic);
-		lotStockQty.setQtyDt(hstry.getHstryDt());
-		lotStockQty.setOrigProcs(stkMvnt.getOrigProcs());
-		lotStockQty.setOrigProcsNbr(stkMvnt.getOrigProcsNbr());
-		lotStockQty.setStkMvntIdentif(stkMvnt.getIdentif());
+		StkLotStockQty latestQty = lotStockQtyLookup.findLatest(artPic, lotPic);
+		List<StkLotStockQty> latestQtyList = null;
 		if(latestQty!=null){
-			lotStockQty.setSeqNbr(latestQty.getSeqNbr()==null?1:latestQty.getSeqNbr()+1);
+			latestQtyList = lotStockQtyLookup.findByArtPicAndLotPicAndSeqNbr(artPic, lotPic, latestQty.getSeqNbr());
 		} else {
-			lotStockQty.setSeqNbr(0);
+			latestQtyList = Collections.emptyList();
 		}
-		lotStockQty.setStockQty(stkMvnt.getTrgtQty());
-		lotStockQty = lotStockQtyEJB.create(lotStockQty);
+		// Handle the stock mvnt
+		handleStockMvnt(lotStockQty, latestQtyList, stkMvnt, hstry);
+
+		lotStockQtyEJB.create(lotStockQty);
 	}
 	
 	private void handleLotAndSctnStockQty(String artPic, String lotPic, String section, StkMvnt stkMvnt, StkMvntHstry hstry){
+		// No stocking for proformat invoice.
+		if(Boolean.TRUE.equals(stkMvnt.getProfmt())) return;
+
+		// Lot Stock Qty
+		StkLotInSctnStockQty lotInSctnStockQty = new StkLotInSctnStockQty();
+		lotInSctnStockQty.setCntnrIdentif(artPic);
+		lotInSctnStockQty.setLotPic(lotPic);
+		lotInSctnStockQty.setSection(section);
+		StkLotInSctnStockQty latestQty = lotInSctnStockQtyLookup.findLatest(artPic, lotPic, section);
+		List<StkLotInSctnStockQty> latestQtyList = null;
+		if(latestQty!=null){
+			latestQtyList = lotInSctnStockQtyLookup.findByArtPicAndLotPicAndSectionAndSeqNbr(artPic, lotPic, section, latestQty.getSeqNbr());
+		} else {
+			latestQtyList = Collections.emptyList();
+		}
+		// Handle the stock mvnt
+		handleStockMvnt(lotInSctnStockQty, latestQtyList, stkMvnt, hstry);
+
+		lotInSctnStockQty = lotInSctnStockQtyEJB.create(lotInSctnStockQty);
+	
 		StkArticleLot2StrgSctn strgSctn = lot2StrgSctnLookup.findBySectionAndLotPic(section, lotPic);
 		if(strgSctn==null){
 			strgSctn = new StkArticleLot2StrgSctn();
@@ -123,27 +161,41 @@ public class StkMvntHstryListner {
 			strgSctn.setLotPic(lotPic);
 			strgSctn.setSection(section);
 			strgSctn.setQtyDt(hstry.getHstryDt());
-			strgSctn.setStockQty(stkMvnt.getTrgtQty());
+			strgSctn.setStockQty(lotInSctnStockQty.getStockQty());
 			strgSctn.setSeqNbr(0);
 			strgSctn = lot2StrgSctnEJB.create(strgSctn);
 		}
+	}
+	
+	private void handleStockMvnt(final StkAbstStockQty stockQty, List<? extends StkAbstStockQty> latestQties, StkMvnt stkMvnt, StkMvntHstry hstry){
+		stockQty.setQtyDt(hstry.getHstryDt());
+		stockQty.setOrigProcs(stkMvnt.getOrigProcs());
+		stockQty.setOrigProcsNbr(stkMvnt.getOrigProcsNbr());
+		stockQty.setStkMvntIdentif(stkMvnt.getIdentif());
+		stockQty.setStkMvntQty(stkMvnt.getTrgtQty());
 		
-		StkLotInSctnStockQty latestQty = lotInSctnStockQtyLookup.findLatest(artPic, lotPic, section);
-		// Lot Stock Qty
-		StkLotInSctnStockQty lotInSctnStockQty = new StkLotInSctnStockQty();
-		lotInSctnStockQty.setCntnrIdentif(artPic);
-		lotInSctnStockQty.setLotPic(lotPic);
-		lotInSctnStockQty.setSection(section);
-		lotInSctnStockQty.setQtyDt(hstry.getHstryDt());
-		lotInSctnStockQty.setOrigProcs(stkMvnt.getOrigProcs());
-		lotInSctnStockQty.setOrigProcsNbr(stkMvnt.getOrigProcsNbr());
-		lotInSctnStockQty.setStkMvntIdentif(stkMvnt.getIdentif());
-		if(latestQty!=null){
-			lotInSctnStockQty.setSeqNbr(latestQty.getSeqNbr()==null?1:latestQty.getSeqNbr()+1);
-		} else {
-			lotInSctnStockQty.setSeqNbr(0);
+		StkAbstStockQty latestQty = null;
+		if(!latestQties.isEmpty()){
+			latestQty = latestQties.iterator().next();
+			stockQty.setParentRcrd(latestQty.getId());
 		}
-		lotInSctnStockQty.setStockQty(stkMvnt.getTrgtQty());
-		lotInSctnStockQty = lotInSctnStockQtyEJB.create(lotInSctnStockQty);
+
+		BigDecimal reservedBeforeMe = latestQty==null?BigDecimal.ZERO:latestQty.getPrcdngRsvdQty();
+		BigDecimal stockBeforeMe = latestQty==null?BigDecimal.ZERO:latestQty.getPrcdngStkQty();
+		
+		for (StkAbstStockQty stkAbstStockQty : latestQties) {
+			reservedBeforeMe = BigDecimalUtils.sum(reservedBeforeMe,stkAbstStockQty.getRsvrdQty());
+			stockBeforeMe = BigDecimalUtils.sum(stockBeforeMe,stkAbstStockQty.getStockQty());
+		}		
+		
+		stockQty.setPrcdngStkQty(stockBeforeMe);
+		stockQty.setPrcdngRsvdQty(reservedBeforeMe);
+		stockQty.setSeqNbr(latestQty==null?0:latestQty.getSeqNbr()+1);
+		
+		if (Boolean.TRUE.equals(stkMvnt.getRsvd())){
+			stockQty.setRsvrdQty(BigDecimalUtils.sum(reservedBeforeMe,stkMvnt.getTrgtQty()));
+		} else {
+			stockQty.setStockQty(BigDecimalUtils.sum(stockBeforeMe,stkMvnt.getTrgtQty()));
+		}
 	}
 }

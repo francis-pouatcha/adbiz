@@ -39,7 +39,7 @@ public class InvInvtryPrepareSplitterTask extends CoreAbstEntityJobExecutor<InvJ
 	
 	@EJB
 	private InvInvtryPrepareExecTask execTask;
-
+	
 	@Override
 	public void execute(String stepIdentif) {
 		InvStep step = stepLookup.findByIdentif(stepIdentif);
@@ -48,7 +48,15 @@ public class InvInvtryPrepareSplitterTask extends CoreAbstEntityJobExecutor<InvJ
 		batch.terminateStep(stepIdentif);
 	}
 
+	/*
+	 * Splitting the inentory, we decide what inventory items are going to be part of the 
+	 * inventory process.
+	 */
 	private void splittInSteps(InvStep s) {
+		prepareFreeInv(s);
+	}
+
+	private void prepareFreeInv(InvStep s) {
 		Long count = lot2SctLookup.countByClosedDtIsNull();
 		int max = 100;
 		if(count>10000){
@@ -59,6 +67,7 @@ public class InvInvtryPrepareSplitterTask extends CoreAbstEntityJobExecutor<InvJ
 			int firstResult = start;
 			start+=max;
 			List<StkArticleLot2StrgSctn> list = lot2SctLookup.findByClosedDtIsNullAsc(firstResult, 1);
+			
 			StkArticleLot2StrgSctn first = list.iterator().next();
 			if(start<count){ // there is still another round. 
 				list = lot2SctLookup.findByClosedDtIsNullAsc(start-1, 1);
@@ -67,15 +76,19 @@ public class InvInvtryPrepareSplitterTask extends CoreAbstEntityJobExecutor<InvJ
 			}
 			StkArticleLot2StrgSctn last = list.iterator().next();
 			
-			InvStep step = new InvStep();
-			step.setCntnrIdentif(s.getCntnrIdentif());
-			step.setEntIdentif(s.getEntIdentif());
-			step.setExecutorId(execTask.getExecutorId());
-			step.setSchdldStart(new Date());
-			step.setStepStartId(first.getIdentif());
-			step.setStepEndId(last.getIdentif());
-			stepEJB.create(step);
+			createStep(first, last, s);
 		}
+	}
+	
+	private void createStep(StkArticleLot2StrgSctn first, StkArticleLot2StrgSctn last, InvStep s){
+		InvStep step = new InvStep();
+		step.setCntnrIdentif(s.getCntnrIdentif());
+		step.setEntIdentif(s.getEntIdentif());
+		step.setExecutorId(execTask.getExecutorId());
+		step.setSchdldStart(new Date());
+		step.setStepStartId(first.getIdentif());
+		step.setStepEndId(last.getIdentif());
+		stepEJB.create(step);
 	}
 
 	public void createPrepareJob(String identif){

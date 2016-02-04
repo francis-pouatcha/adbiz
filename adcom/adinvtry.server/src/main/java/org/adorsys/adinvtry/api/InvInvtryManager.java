@@ -27,6 +27,9 @@ import org.adorsys.adinvtry.rest.InvInvtryEJB;
 import org.adorsys.adinvtry.rest.InvInvtryInjector;
 import org.adorsys.adinvtry.rest.InvInvtrySearchInput;
 import org.adorsys.adinvtry.rest.InvInvtrySearchResult;
+import org.adorsys.adstock.jpa.StkLotInSctnStockQty;
+import org.adorsys.adstock.rest.StkLotInSctnStockQtyLookup;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
 @Stateless
@@ -37,6 +40,9 @@ public class InvInvtryManager  extends CoreAbstBsnsObjectManager<InvInvtry, InvI
 	
 	@Inject
 	private InvInvtryEJB ejb;
+	
+	@Inject
+	private StkLotInSctnStockQtyLookup lotInSctnStockQtyLookup;
 
 	@Override
 	protected CoreAbstBsnsObjInjector<InvInvtry, InvInvtryItem, InvInvtryHstry, InvJob, InvStep, InvInvtryCstr> getInjector() {
@@ -74,13 +80,33 @@ public class InvInvtryManager  extends CoreAbstBsnsObjectManager<InvInvtry, InvI
 		loadExistingBsnsObject(identif); 
 		InvInvtryItem existing = loadExistingBsnsItem(identif, itemIdentif);
 		//do not work yet, get currentLoginName in frontend
-		//String currentLoginName = callerPrincipal.getLoginName();
-		String currentLoginName = acsngUser;
-		if(acsngDt==null) acsngDt = new Date();
-		if(existing.getAcsngDt()==null){
+		String currentLoginName = callerPrincipal.getLoginName();
+//		String currentLoginName = acsngUser;
+		
+		// In any case, it is important to read the stock quantity at the moment of the accessment.
+		// I will even prefer we ignore the accessing date given by the front end. As well as the 
+		// user name.
+//		if(acsngDt==null) 
+		acsngDt = new Date();
+		BigDecimal expectedStockQty = readStockQty(existing.getArtPic(), existing.getLotPic(), existing.getSection());
+		
+		Boolean modifyingInv = true;
+		if(existing.getAcsngDt()!=null){
+			// We can modify the current item under following conditions
+			// 1- existing.getAcsngDt()==null ==> It was a prepared inventory.
+			// 2- existing.getAcsngDt()!=null but the currentLoginName has changed
+			// 3- existing.getAcsngDt()!=null, the currentLoginName is same but the expectedStockQty has changed 
+			if(!StringUtils.equals(existing.getAcsngUser(), currentLoginName)){
+				modifyingInv = false;
+			} else if(!BigDecimalUtils.strictEquals(existing.getExpectedQty() ,expectedStockQty)){
+				modifyingInv = false;
+			}
+		}
+		if(modifyingInv){// The is no accessing yet.
 			existing.setAcsngDt(acsngDt);
 			existing.setAsseccedQty(asseccedQty);
 			existing.setAcsngUser(currentLoginName);
+			existing.setExpectedQty(expectedStockQty);
 			existing.evlte();
 			
 			return getInjector().getItemEjb().update(existing);
@@ -92,8 +118,18 @@ public class InvInvtryManager  extends CoreAbstBsnsObjectManager<InvInvtry, InvI
 			invInvtryItem.setValueDt(new Date());
 			invInvtryItem.setAcsngDt(acsngDt);
 			invInvtryItem.setAsseccedQty(asseccedQty);
+			invInvtryItem.setExpectedQty(expectedStockQty);
 			invInvtryItem.evlte();
 			return getInjector().getItemEjb().create(invInvtryItem);
 		}
+	}
+	
+	private BigDecimal readStockQty(String artPic, String lotPic, String section){
+		StkLotInSctnStockQty sctnStockQty = lotInSctnStockQtyLookup.findLatest(artPic, lotPic, section);
+		// Read the current stock quantity. This is very important.
+		// An inventory should always be adaptive. If the expected quatity 
+		// of an inventory item changes, we can not modify that item anymore.
+		// This method will create a new item.
+		return sctnStockQty!=null?sctnStockQty.getStockQty():BigDecimal.ZERO;
 	}
 }

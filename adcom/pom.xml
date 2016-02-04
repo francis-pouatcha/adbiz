@@ -73,6 +73,8 @@
  -->
 		<!-- <module>adcom.test</module> -->
 		<module>adcore.b2</module>
+		
+		
 	</modules>
 	<scm>
 		<connection>scm:git:https://github.com/francis-pouatcha/adcom.git</connection>

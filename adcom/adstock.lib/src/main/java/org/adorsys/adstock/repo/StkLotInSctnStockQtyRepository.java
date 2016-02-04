@@ -1,5 +1,7 @@
 package org.adorsys.adstock.repo;
 
+import java.util.Date;
+
 import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 import org.adorsys.adstock.jpa.StkLotInSctnStockQty;
 import org.apache.deltaspike.data.api.QueryResult;
@@ -17,4 +19,8 @@ public interface StkLotInSctnStockQtyRepository extends CoreAbstIdentifRepo<StkL
 	public QueryResult<StkLotInSctnStockQty> findByCntnrIdentifAndLotPicAndSectionAndCnsldtd(String cntnrIdentif,String lotPic,String section,Boolean cnsldtd);
 	
 	public QueryResult<StkLotInSctnStockQty> findByCntnrIdentifAndLotPicAndSectionAndSeqNbr(String cntnrIdentif,String lotPic, String section, int seqNbr);
+	
+	public QueryResult<StkLotInSctnStockQty> findByCntnrIdentifAndLotPicAndSectionAndQtyDtLessThan(String cntnrIdentif,String lotPic, String section, Date qtyDt);
+	
+	public QueryResult<StkLotInSctnStockQty> findByCntnrIdentifAndLotPicAndSectionAndCnsldtdAndQtyDtLessThan(String cntnrIdentif,String lotPic,String section,Boolean cnsldtd, Date qtyDt);
 }

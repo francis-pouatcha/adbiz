@@ -35,7 +35,7 @@ public abstract class StkAbstractStkMvnt extends CoreAbstBsnsItem {
 	@Description("StkAbstractStockQty_origProcsNbr_description")
 	@NotNull
 	private String origProcsNbr;
-
+	
 	public String getOrigDocNbrs() {
 		return origDocNbrs;
 	}
@@ -58,5 +58,5 @@ public abstract class StkAbstractStkMvnt extends CoreAbstBsnsItem {
 
 	public void setOrigProcsNbr(String origProcsNbr) {
 		this.origProcsNbr = origProcsNbr;
-	}
+	}	
 }
