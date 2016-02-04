@@ -8,7 +8,8 @@
     appRun.$inject = ['routerHelper'];
     /* @ngInject */
     function appRun(routerHelper) {
-        routerHelper.configureStates(getStates());
+        var otherwise = '/procmt';
+        routerHelper.configureStates(getStates(),otherwise);
     }
 
     function getStates() {

@@ -6,9 +6,9 @@
         .module('app.procmt')
         .controller('ProcmtCtlr', ProcmtCtlr);
 
-    ProcmtCtlr.$inject = ['$scope','procmtManagerResource','utils', 'prcmtUtils', 'genericResource'];
+    ProcmtCtlr.$inject = ['$scope','procmtOrderManagerResource','utils', 'prcmtUtils', 'genericResource'];
     /* @ngInject */
-    function ProcmtCtlr($scope, procmtManagerResource, utils, prcmtUtils, genericResource) {
+    function ProcmtCtlr($scope, procmtOrderManagerResource, utils, prcmtUtils, genericResource) {
 
         $scope.data = {};
         $scope.data.prcmts = [];
@@ -23,7 +23,7 @@
         findCustom($scope.searchInput);
 
         function findCustom(searchInput) {
-            procmtManagerResource.findCustom(searchInput, function(response){
+            procmtOrderManagerResource.findCustom(searchInput, function(response){
                     $scope.data.prcmts = response.resultList;
                     $scope.data.total = response.total;
                 },
@@ -81,9 +81,9 @@
         .module('app.procmt')
         .controller('ProcmtCreateCtlr', ProcmtCreateCtlr);
 
-    ProcmtCreateCtlr.$inject = ['$scope', 'prcmtUtils', 'procmtManagerResource', '$rootScope', '$location'];
+    ProcmtCreateCtlr.$inject = ['$scope', 'prcmtUtils', 'procmtOrderManagerResource', '$rootScope', '$location'];
     /* @ngInject */
-    function ProcmtCreateCtlr($scope, prcmtUtils, procmtManagerResource, $rootScope, $location) {
+    function ProcmtCreateCtlr($scope, prcmtUtils, procmtOrderManagerResource, $rootScope, $location) {
 
         $scope.procmt = {};
         $scope.display = {};
@@ -94,9 +94,9 @@
         $scope.create = function(){
             $scope.procmt.status='ONGOING';
             $scope.procmt.login = $rootScope.username;
-            procmtManagerResource.save($scope.procmt, function(response){
+            procmtOrderManagerResource.save($scope.procmt, function(response){
                     $scope.procmt = response;
-                    procmtManagerResource.prepare({identif:$scope.procmt.identif}, function(data){});
+                    procmtOrderManagerResource.prepare({identif:$scope.procmt.identif}, function(data){});
                     $location.path('/procmt/'+$scope.procmt.identif+'/show/');
             },
             function(errorResponse) {
@@ -109,10 +109,10 @@
         .module('app.procmt')
         .controller('ProcmtShowCtlr', procmtShowCtlr);
 
-    procmtShowCtlr.$inject = ['$scope','procmtManagerResource','$location','prcmtUtils',
+    procmtShowCtlr.$inject = ['$scope','procmtOrderManagerResource','$location','prcmtUtils',
         'procmtState','genericResource','searchResultHandler','utils','fileExtractor', '$stateParams', '$rootScope'];
     /* @ngInject */
-    function procmtShowCtlr($scope,procmtManagerResource,$location,prcmtUtils,procmtState
+    function procmtShowCtlr($scope,procmtOrderManagerResource,$location,prcmtUtils,procmtState
                             ,genericResource,searchResultHandler,utils,fileExtractor, $stateParams, $rootScope) {
 
         $scope.procmtNbr = $stateParams.procmtNbr;
@@ -141,7 +141,7 @@
         }
 
         function getInvtry(){
-            procmtManagerResource.get({identif:$scope.procmtNbr}, function(procmt){
+            procmtOrderManagerResource.get({identif:$scope.procmtNbr}, function(procmt){
                 $scope.procmt = procmt;
                 $scope.procmtCopy = angular.copy($scope.procmt);
                 fixDateFields();
@@ -155,7 +155,7 @@
         };
 
         function findConflict(searchInput) {
-            procmtManagerResource.findConflict(searchInput, function(response){
+            procmtOrderManagerResource.findConflict(searchInput, function(response){
                     itemsResultHandler.searchResult(response);
                 },
                 function(errorResponse) {
@@ -269,7 +269,7 @@
             procmtItem.acsngDt=new Date().getTime();
             procmtItem.acsngUser=$rootScope.username;
             unsetEditing(procmtItem);
-            procmtManagerResource.addItem({'identif':$scope.procmt.identif}, procmtItem ,function(procmtItem){
+            procmtOrderManagerResource.addItem({'identif':$scope.procmt.identif}, procmtItem ,function(procmtItem){
                     itemsResultHandler.unshift(procmtItem);
                     $scope.searchInput.entity.artPic=undefined;
                     $scope.searchInput.entity.artName=undefined;
@@ -280,7 +280,7 @@
             });
         };
         $scope.check = function(){
-            procmtManagerResource.validate({identif:$scope.procmt.identif}, function(procmt){
+            procmtOrderManagerResource.validate({identif:$scope.procmt.identif}, function(procmt){
                 $scope.procmt = procmt;
             }, function(error){
                 $scope.error = error;
@@ -288,7 +288,7 @@
         };
 
         $scope.archive = function(){
-            procmtManagerResource.archive({identif:$scope.procmt.identif}, function(procmt){
+            procmtOrderManagerResource.archive({identif:$scope.procmt.identif}, function(procmt){
                 $scope.procmt = procmt;
                 $location.path('/procmt');
             }, function(error){
@@ -368,7 +368,7 @@
 
             $scope.trgtQtyChanged(procmtItem);
 
-            procmtManagerResource.updateItem({'identif':procmtItem.cntnrIdentif, 'itemIdentif':procmtItem.identif},
+            procmtOrderManagerResource.updateItem({'identif':procmtItem.cntnrIdentif, 'itemIdentif':procmtItem.identif},
                 procmtItem, function(procmtItem){
                     if(qtyChanged)
                         $scope.updatetrgtQty(procmtItem);
@@ -389,7 +389,7 @@
 
             $scope.trgtQtyChanged(procmtItem);
 
-            procmtManagerResource.updatetrgtQty({'identif':procmtItem.cntnrIdentif, 'itemIdentif':procmtItem.identif},
+            procmtOrderManagerResource.updatetrgtQty({'identif':procmtItem.cntnrIdentif, 'itemIdentif':procmtItem.identif},
                 procmtItem, function(procmtItem){
                     itemsResultHandler.replace(procmtItem);
                 },function(data){
@@ -422,7 +422,7 @@
 
         $scope.disableItem = function(procmtItem){
             cleanupItem(procmtItem);
-            procmtManagerResource.disableItem({'identif':procmtItem.cntnrIdentif, 'itemIdentif':procmtItem.identif}
+            procmtOrderManagerResource.disableItem({'identif':procmtItem.cntnrIdentif, 'itemIdentif':procmtItem.identif}
                 ,procmtItem,function(result){
                     var index = itemsResultHandler.replace(result);
                 },function(error){
@@ -431,7 +431,7 @@
         };
         $scope.enableItem = function(procmtItem){
             cleanupItem(procmtItem);
-            procmtManagerResource.enableItem({'identif':procmtItem.cntnrIdentif, 'itemIdentif':procmtItem.identif},
+            procmtOrderManagerResource.enableItem({'identif':procmtItem.cntnrIdentif, 'itemIdentif':procmtItem.identif},
                 procmtItem, function(result){
                     itemsResultHandler.replace(result);
                 },function(error){
@@ -451,7 +451,7 @@
 
         $scope.update = function(){
             if(!procmtChangedFctn()) return;
-            procmtManagerResource.update($scope.procmt, function(procmt){
+            procmtOrderManagerResource.update($scope.procmt, function(procmt){
                 $scope.procmt = procmt;
                 refreshDisplay();
             }, function(error){
@@ -460,14 +460,14 @@
         };
 
         $scope.close = function(){
-            procmtManagerResource.close({identif:$scope.procmt.identif}, function(procmt){
+            procmtOrderManagerResource.close({identif:$scope.procmt.identif}, function(procmt){
                 $scope.procmt = procmt;
             }, function(error){
                 $scope.error = error;
             })
         };
         $scope.post = function(){
-            procmtManagerResource.post({identif:$scope.procmt.identif}, function(procmt){
+            procmtOrderManagerResource.post({identif:$scope.procmt.identif}, function(procmt){
                 $scope.procmt = procmt;
             }, function(error){
                 $scope.error = error;

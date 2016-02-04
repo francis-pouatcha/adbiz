@@ -4,7 +4,7 @@
 
     angular
         .module('app.procmtDelivery')
-        .controller('ProcmtCtlr', ProcmtCtlr);
+        .controller('ProcmtDeliveryCtlr', ProcmtCtlr);
 
     ProcmtCtlr.$inject = ['$scope','procmtManagerResource','utils', 'prcmtUtils', 'genericResource'];
     /* @ngInject */
@@ -79,7 +79,7 @@
 
     angular
         .module('app.procmtDelivery')
-        .controller('ProcmtCreateCtlr', ProcmtCreateCtlr);
+        .controller('ProcmtDeliveryCreateCtlr', ProcmtCreateCtlr);
 
     ProcmtCreateCtlr.$inject = ['$scope', 'prcmtUtils', 'procmtManagerResource', '$rootScope', '$location'];
     /* @ngInject */
@@ -107,7 +107,7 @@
 
     angular
         .module('app.procmtDelivery')
-        .controller('ProcmtShowCtlr', procmtShowCtlr);
+        .controller('ProcmtDeliveryShowCtlr', procmtShowCtlr);
 
     procmtShowCtlr.$inject = ['$scope','procmtManagerResource','$location','prcmtUtils',
         'procmtState','genericResource','searchResultHandler','utils','fileExtractor', '$stateParams', '$rootScope'];

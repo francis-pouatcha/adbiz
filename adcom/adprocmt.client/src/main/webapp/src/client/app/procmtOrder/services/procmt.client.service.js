@@ -3,7 +3,7 @@
 
     angular
         .module('app.procmt')
-        .factory('procmtManagerResource',['$http','$resource','API_BASE_ADPROCMT_URL',
+        .factory('procmtOrderManagerResource',['$http','$resource','API_BASE_ADPROCMT_URL',
 
     function($http,$resource,API_BASE_ADPROCMT_URL){
 

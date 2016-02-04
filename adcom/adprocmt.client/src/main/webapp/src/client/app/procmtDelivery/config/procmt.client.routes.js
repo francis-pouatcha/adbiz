@@ -16,9 +16,9 @@
             {
                 state: 'procmtDelivery',
                 config: {
-                    url: '/',
+                    url: '/procmtDelivery',
                     templateUrl: '/adprocmt.client/src/client/app/procmtDelivery/views/list.html',
-                    controller: 'ProcmtCtlr',
+                    controller: 'ProcmtDeliveryCtlr',
                     //controllerAs: 'vm',
                     title: 'List Procurement'
                 }
@@ -28,11 +28,11 @@
                 config: {
                     url: '/procmtDelivery',
                     templateUrl: '/adprocmt.client/src/client/app/procmtDelivery/views/list.html',
-                    controller: 'ProcmtCtlr',
+                    controller: 'ProcmtDeliveryCtlr',
                     //controllerAs: 'vm',
                     title: 'List Procurement',
                     settings: {
-                        nav: 4,
+                        nav: 3,
                         content: '<i class="fa fa-folder-open"></i> Delivery'
                     }
                 }
@@ -42,7 +42,7 @@
                 config: {
                     url: '/procmtDelivery/create',
                     templateUrl: '/adprocmt.client/src/client/app/procmtDelivery/views/create.html',
-                    controller: 'ProcmtCreateCtlr',
+                    controller: 'ProcmtDeliveryCreateCtlr',
                     //controllerAs: 'vm',
                     title: 'Create Procurement'
                 }
@@ -52,7 +52,7 @@
                 config: {
                     url: '/procmtDelivery/:procmtNbr/show/',
                     templateUrl: '/adprocmt.client/src/client/app/procmtDelivery/views/view.html',
-                    controller: 'ProcmtShowCtlr',
+                    controller: 'ProcmtDeliveryShowCtlr',
                     //controllerAs: 'vm',
                     title: 'View Procurement'
                 }
@@ -62,7 +62,7 @@
                 config: {
                     url: '/procmtDelivery/:procmtId/edit',
                     templateUrl: '/adprocmt.client/src/client/app/procmtDelivery/views/edit.html',
-                    controller: 'ProcmtCtlr',
+                    controller: 'ProcmtDeliveryCtlr',
                     //controllerAs: 'vm',
                     title: 'Edit Procurement'
                 }
