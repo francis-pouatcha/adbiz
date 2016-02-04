@@ -182,24 +182,30 @@
         };
 
         service.loadStkSectionArticleLotsByIdentif = function(artPic, lotPic, strgSection){
+            var searchInput = service.prepareStkSectionArticleLotSearchInput(artPic, lotPic, strgSection);
+
+            return genericResource.findByLikeWithSearchInputPromissed(service.stkarticlelot2strgsctnsUrlBase, searchInput)
+                .then(function(entitySearchResult){
+                    return entitySearchResult.resultList;
+                });
+        };
+        
+        service.prepareStkSectionArticleLotSearchInput = function(artPic, lotPic, section){
             var searchInput = {entity:{},fieldNames:[],start: 0,max: 30};
             searchInput.className = 'org.adorsys.adstock.jpa.StkArticleLot2StrgSctnSearchInput';
             if(angular.isDefined(artPic) && artPic){
                 searchInput.entity.artPic = artPic;
                 searchInput.fieldNames.push('artPic');
             }
-            if(angular.isDefined(strgSection) && strgSection){
-                searchInput.entity.section = strgSection;
+            if(angular.isDefined(section) && section){
+                searchInput.entity.section = section;
                 searchInput.fieldNames.push('section');
             }
             if(angular.isDefined(lotPic) && lotPic){
                 searchInput.entity.lotPic = lotPic;
                 searchInput.fieldNames.push('lotPic');
             }
-            return genericResource.findByLikeWithSearchInputPromissed(service.stkarticlelot2strgsctnsUrlBase, searchInput)
-                .then(function(entitySearchResult){
-                    return entitySearchResult.resultList;
-                });
+        	return searchInput;
         };
 
         service.loadStkSectionArticleLotsByName = function(sectionName){

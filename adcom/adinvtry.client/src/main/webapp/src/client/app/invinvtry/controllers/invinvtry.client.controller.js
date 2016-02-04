@@ -563,14 +563,51 @@
                 .error(function(error){
                     $scope.error=error;
                 });
+            
+            updateOnArticleSelcted(item);
         };
 
         $scope.onArticleSelectedInSearchArtName = function(item,model,label){
             $scope.searchInput.entity.artPic=item.cntnrIdentif;
             $scope.searchInput.entity.artName=item.artName;
-
+            
+            updateOnArticleSelcted(item);
 
         };
+        
+        function updateOnArticleSelcted(item){
+
+            // We have the article code. Tentative section and Lot
+            var searchInput = invInvtryUtils.prepareStkSectionArticleLotSearchInput($scope.searchInput.entity.artPic,
+            		$scope.searchInput.entity.lotPic,$scope.searchInput.entity.section);
+
+            genericResource.findByLikeWithSearchInputPromissed(invInvtryUtils.stkarticlelot2strgsctnsUrlBase, searchInput)
+            .then(function(entitySearchResult){
+            	if(entitySearchResult.resultList && entitySearchResult.resultList.length===1){
+            		var lot2Section = entitySearchResult.resultList[0];
+            		$scope.searchInput.entity.lotPic = lot2Section.lotPic;
+            		$scope.searchInput.entity.section = lot2Section.section;
+
+
+                    genericResource.findByLikePromissed(invInvtryUtils.stksectionsUrlBase, 'identif', $scope.searchInput.entity.section)
+                    .then(function(entitySearchResult){
+                        var resultList = entitySearchResult.resultList;
+                        if(angular.isDefined(resultList) && resultList.length>0){
+                            $scope.display = {};
+                            $scope.display.identif = resultList[0].identif;
+                            $scope.display.section = resultList[0].identif;
+                            $scope.display.sectionName = resultList[0].name;
+                        }
+
+                    }, function(error){
+                        $scope.display.identif = '';
+                        $scope.display.section = '';
+                        $scope.display.sectionName = '';
+                    });
+            	
+            	}
+            });
+        }
 
         function coreSearchInputInit(identif) {
             var coreSearchInput = {};
