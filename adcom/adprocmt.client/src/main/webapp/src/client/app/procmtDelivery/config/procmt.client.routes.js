@@ -20,7 +20,7 @@
                     templateUrl: '/adprocmt.client/src/client/app/procmtDelivery/views/list.html',
                     controller: 'ProcmtDeliveryCtlr',
                     //controllerAs: 'vm',
-                    title: 'List Procurement'
+                    title: 'List Procurement Delivery'
                 }
             },
             {
@@ -30,9 +30,9 @@
                     templateUrl: '/adprocmt.client/src/client/app/procmtDelivery/views/list.html',
                     controller: 'ProcmtDeliveryCtlr',
                     //controllerAs: 'vm',
-                    title: 'List Procurement',
+                    title: 'List Procurement Delivery',
                     settings: {
-                        nav: 3,
+                        nav: 2,
                         content: '<i class="fa fa-folder-open"></i> Delivery'
                     }
                 }
@@ -44,7 +44,7 @@
                     templateUrl: '/adprocmt.client/src/client/app/procmtDelivery/views/create.html',
                     controller: 'ProcmtDeliveryCreateCtlr',
                     //controllerAs: 'vm',
-                    title: 'Create Procurement'
+                    title: 'Create Procurement Delivery'
                 }
             },
             {
@@ -54,7 +54,7 @@
                     templateUrl: '/adprocmt.client/src/client/app/procmtDelivery/views/view.html',
                     controller: 'ProcmtDeliveryShowCtlr',
                     //controllerAs: 'vm',
-                    title: 'View Procurement'
+                    title: 'View Procurement Delivery'
                 }
             },
             {
@@ -64,7 +64,7 @@
                     templateUrl: '/adprocmt.client/src/client/app/procmtDelivery/views/edit.html',
                     controller: 'ProcmtDeliveryCtlr',
                     //controllerAs: 'vm',
-                    title: 'Edit Procurement'
+                    title: 'Edit Procurement Delivery'
                 }
             }
         ];

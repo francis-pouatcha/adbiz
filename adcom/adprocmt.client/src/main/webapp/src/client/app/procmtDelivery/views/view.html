@@ -121,7 +121,7 @@
                                typeahead-loading="loading" typeahead-min-length="4"
                                typeahead-on-select='onArticleSelectedInSearchArtName($item, $model, $label)'>
                     </div>
-                    <div class="form-group col-lg-2">
+                    <div class="form-group col-lg-2" ng-class="{ 'has-error' : procmtItemForm.trgtQty.$invalid }">
                         <label class=" control-label" for="trgtQty">{{'PrcmtDlvryItem_qtyDlvrd_description.title'|
                             translate}}</label>
                         <div ng-class="{ 'has-error' : procmtItemForm.qtyBilled.$invalid }">
@@ -141,7 +141,7 @@
                         <label class=" control-label" for="qtyBilled">{{'PrcmtDlvryItem_qtyBilled_description.title'|
                             translate}}</label>
                         <div ng-class="{ 'has-error' : procmtItemForm.qtyBilled.$invalid }">
-                            <input type="text" class="form-control"  name="freeQty" id="qtyBilled"
+                            <input type="text" class="form-control"  name="qtyBilled" id="qtyBilled"
                                    ng-model="searchInput.entity.qtyBilled">
                         </div>
                     </div>
@@ -162,8 +162,14 @@
                     <div class="form-group col-lg-2">
                         <label class=" control-label" for="supplier">{{'PrcmtDlvryItem_section_description.title'|
                             translate}}</label>
-                        <input type="text" ng-model="searchInput.entity.section" id="section" name="section"
-                               class="form-control">
+                        <input type="text" ng-model="searchInput.entity.section" id="sectionCode" name="section"
+                               class="form-control" required
+                               autocomplete="off"
+                               typeahead="stkSection as (stkSection.identif + ' : ' + stkSection.name) for stkSection in prcmtUtils.loadStkSectionArticleLots($viewValue)"
+                               typeahead-loading="loading" typeahead-min-length="4"
+                               typeahead-on-select='onSectionSelectedInSearch($item, $model, $label)'>
+                    </div>
+
                     </div>
                     <div class="form-group col-lg-2">
                         <label class=" control-label" for="supplier">{{'PrcmtPOItem_supplier_description.title'|
@@ -171,7 +177,7 @@
                         <input type="text" ng-model="searchInput.entity.supplier" id="supplier" name="supplier"
                                class="form-control">
                     </div>
-                    <div class="form-group col-lg-3" col-lg-offset-1>
+                    <div class="form-group col-lg-4" col-lg-offset-1>
                         <button ng-click="handleSearchRequestEvent()" class="btn btn-default "
                                 style="margin-top: 30px;">
                             <i class="glyphicon glyphicon-search"></i>
@@ -199,8 +205,8 @@
 </div>
 <div class="panel panel-default" id="panelV">
     <div class="panel-heading">
-        <b> {{'PrcmtPOItem_description.title'| translate}} </b>
-        <span ng-show="procmtItems().length==0" class="red" >products are loading ... please wait</span>
+        <b> {{'PrcmtDelivery_description.title'| translate}} </b>
+        <!--<span ng-show="procmtItems().length==0" class="red" >products are loading ... please wait</span>-->
     </div>
     <div class="panel-body">
         <table class="table table-bordered  table-striped">
@@ -228,19 +234,21 @@
             <tr ng-repeat="procmtItem in procmtItems()">
                 <td data-ng-bind="procmtItem.artPic"></td>
                 <td data-ng-bind="procmtItem.artName"></td>
-                <td name="qtyDlvrdCell" ng-dblclick="editingQtyDlvrd(procmtItem,$event)">
-                    <input type="text" name="qtyDlvrd" ad-focus="procmtItem.editingQtyDlvrd"
-                           ad-enter="updateQtyDlvrd(procmtItem)" style="width: 35px"
-                           ng-model="procmtItem.qtyDlvrd" ng-show="procmtItem.editingQtyDlvrd"
-                           ng-blur="updatetrgtQty(procmtItem)">
-                    <span ng-show="!procmtItem.editingQtyDlvrd && !procmtItem.disabledDt">{{procmtItem.trgtQty | number:0}}</span>
-                    <span ng-show="!procmtItem.editingQtyDlvrd && procmtItem.disabledDt" style="color: red; text-decoration: line-through;">{{procmtItem.editingQtyDlvrd | number:0}}</span>
+                <!-- <td name="qtyDlvrdCell" ng-dblclick="editingQtyDlvrd(procmtItem,$event)">
+                     <input type="text" name="qtyDlvrd" ad-focus="procmtItem.editingQtyDlvrd"
+                            ad-enter="updateQtyDlvrd(procmtItem)" style="width: 35px"
+                            ng-model="procmtItem.trgtQty" ng-show="procmtItem.editing"
+                            ng-blur="updatetrgtQty(procmtItem)">-->
+                <td name="qtyDlvrdCell">
+                    <input type="text" name="trgtQty"
+                            style="width: 35px" ng-model="procmtItem.trgtQty" ng-show="procmtItem.editing">
+                    <span ng-show="!procmtItem.editing">{{procmtItem.trgtQty | number:0}}</span>
                 </td>
                 <td name="">
-                            <span class="" ng-show="procmtItem.editingFreeQty">
+                            <span class="" ng-show="procmtItem.editing">
                                 <input ng-model="procmtItem.freeQty" class="form-control">
                             </span>
-                             <span ng-show="!procmtItem.editingFreeQty" data-ng-bind="procmtItem.freeQty"></span>
+                             <span ng-show="!procmtItem.editing" data-ng-bind="procmtItem.freeQty"></span>
                 </td>
                 <td name="">
                             <span class="" ng-show="procmtItem.editing">
@@ -270,14 +278,14 @@
                 </td>
 
                 <td name="">
-                            <span class="" ng-show="procmtItem.section">
-                                <input ng-model="procmtItem.freeQty" class="form-control">
+                            <span class="" ng-show="procmtItem.editing">
+                                <input ng-model="procmtItem.section" class="form-control">
                             </span>
                     <span ng-show="!procmtItem.editing" data-ng-bind="procmtItem.section"></span>
                 </td>
                 <td name="">
-                            <span class="" ng-show="procmtItem.supplier">
-                                <input ng-model="procmtItem.freeQty" class="form-control">
+                            <span class="" ng-show="procmtItem.editing">
+                                <input ng-model="procmtItem.supplier" class="form-control">
                             </span>
                     <span ng-show="!procmtItem.editing" data-ng-bind="procmtItem.supplier"></span>
                 </td>

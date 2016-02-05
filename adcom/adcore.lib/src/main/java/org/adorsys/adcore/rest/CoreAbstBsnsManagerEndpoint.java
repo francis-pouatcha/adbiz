@@ -136,7 +136,7 @@ public abstract class CoreAbstBsnsManagerEndpoint<E extends CoreAbstBsnsObject, 
 
 	@PUT
 	@Path("/{identif}/archive")
-	public Response prepareObj(@PathParam("identif") String identif) {
+	public Response archive(@PathParam("identif") String identif) {
 		CoreAbstArchiveManager<E,?,I,?,H,?,J,S,C> archiveManager = getArchiveManager();
 		if(archiveManager!=null)
 			archiveManager.archive(identif);
