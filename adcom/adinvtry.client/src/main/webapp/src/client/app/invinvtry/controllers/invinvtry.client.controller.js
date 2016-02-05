@@ -13,6 +13,21 @@
         $scope.data = {};
         $scope.data.invInvtrys = [];
         $scope.data.total;
+        $scope.dateConfig = {
+        	format: 'dd.MM.yyyy',
+        	invtryDtFrom: {
+				opened : false
+			},
+			invtryDtTo: {
+				opened : false
+			},
+			acsngDtFrom: {
+				opened : false
+			},
+			acsngDtTo: {
+				opened : false
+			}
+        };
         $scope.invInvtryUtils=invInvtryUtils;
 
         // Initialize Search input and pagination
@@ -21,6 +36,12 @@
         $scope.pagination = utils.searchInputInit().pagination;
 
         findCustom($scope.searchInput);
+
+		$scope.openDateComponent = function(componentId,$event) {
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope.dateConfig[componentId].opened = true;
+		};
 
         function findCustom(searchInput) {
             invInvtryManagerResource.findCustom(searchInput, function(response){
