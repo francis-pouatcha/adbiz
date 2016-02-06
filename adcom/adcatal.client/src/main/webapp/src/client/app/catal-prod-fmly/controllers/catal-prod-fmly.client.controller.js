@@ -28,9 +28,10 @@
             vm.searchInput = utils.searchInputInit().searchInput;
             vm.searchInput.className = 'org.adorsys.adcatal.jpa.CatalProdFmlySearchInput';
             vm.searchInput.sortFieldNames.push({fieldName:'valueDt'});
+            // Number of entries showed per page.
+            vm.itemsByPage = utils.searchInputInit().stPagination.number;
         }
         
-        vm.itemsByPage = utils.searchInputInit().pagination.itemsPerPageVar;
 
         vm.setFormFields = function(disabled) {
             vm.formFields = CatalProdFmlyForm.getFormFields(disabled);
@@ -99,7 +100,6 @@
         	CatalProdFmly.findByLike(vm.searchInput, function(response) {
                 vm.data.list = response.resultList;
                 tableState.pagination.numberOfPages = Math.ceil(response.count / number)
-                console.log(vm.data.list);
             },
             function(errorResponse) {
                 vm.error = errorResponse.data.summary;

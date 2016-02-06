@@ -21,6 +21,10 @@
                 method: 'POST',
                 url: API_BASE_ADSTOCK_URL + '/stksections/findCustom'
             },
+            findByLike:{
+            	method: 'POST',
+            	url: API_BASE_ADSTOCK_URL + '/stksections/findByLike'
+            },
             listAll:{
                 method: 'GET',
                 url: API_BASE_ADSTOCK_URL + '/stksections',
@@ -34,7 +38,6 @@
         var API_URL = API_BASE_ADSTOCK_URL + '/stksections/:stkSectionId';
 
         return $resource(API_URL, params, actions);
-
     }
 
 })();

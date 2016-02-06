@@ -2,61 +2,73 @@
 
   <div class="panel panel-primary">
     <div class="panel-heading">
-      {{'app.core.list.title' | translate}} {{'StockArticlelots.title' | translate }}
+      <span data-ng-bind="'app.core.list.title' | translate"></span> <span data-ng-bind="'StockArticlelots.title' | translate"></span>
     </div>
     <div class="panel-body">
 
       <div class="pull-right">
         <a type="button" class="btn btn-success" href="#/stock-articlelot/create">
           <i class="glyphicon glyphicon-open"></i> 
-            {{'app.core.new.title' | translate}} {{'StockArticlelot.title' | translate}}
+            <span data-ng-bind="'app.core.new.title' | translate"></span> <span data-ng-bind="'StockArticlelot.title' | translate"></span>
         </a>
       </div>
 
-      <table class="table table-condensed table-striped">
+      <table data-st-table="vm.data.list" data-st-pipe="vm.callServer" class="table table-bordered  table-striped pointer-element">
           <thead>
-          <th>{{'StockArticlelot.lotPic.title' | translate}}</th>
-          <th>{{'StockArticlelot.artPic.title' | translate}}</th>
-          <th>{{'StockArticlelot.section.title' | translate}}</th>
-          <th>{{'StockArticlelot.expirDt.title' | translate}}</th>
-          <th>{{'StockArticlelot.valueDt.title' | translate}}</th>
-              
-          <th>{{'StockArticlelot.supplier.title' | translate}}</th>
-          <th>{{'StockArticlelot.stkUnitValCur.title' | translate}}</th>
-          <th>{{'StockArticlelot.trgtQty.title' | translate}}</th>
-          <th>{{'StockArticlelot.stkgDt.title' | translate}}</th>
+	          <tr>
+		          <th><span data-ng-bind="'StockArticlelot.lotPic.title' | translate"></span></th>
+		          <th><span data-ng-bind="'StockArticlelot.artPic.title' | translate"></span></th>
+		          <th><span data-ng-bind="'StockArticlelot.section.title' | translate"></span></th>
+		          <th><span data-ng-bind="'StockArticlelot.expirDt.title' | translate"></span></th>
+		          <th><span data-ng-bind="'StockArticlelot.valueDt.title' | translate"></span></th>
+		          <th><span data-ng-bind="'StockArticlelot.supplier.title' | translate"></span></th>
+		          <th><span data-ng-bind="'StockArticlelot.stkUnitValCur.title' | translate"></span></th>
+		          <th><span data-ng-bind="'StockArticlelot.trgtQty.title' | translate"></span></th>
+		          <th><span data-ng-bind="'StockArticlelot.stkgDt.title' | translate"></span></th>
+	          </tr>
+			<tr>
+				<th><input data-st-search="lotPic" class="input-sm form-control" type="search"/></th>
+				<th><input data-st-search="artPic" class="input-sm form-control" type="search"/></th>
+				<th><input data-st-search="section" class="input-sm form-control" type="search"/></th>
+				<th><input data-st-search="expirDt" class="input-sm form-control" type="search"/></th>
+				<th><input data-st-search="valueDt" class="input-sm form-control" type="search"/></th>
+				<th><input data-st-search="supplier" class="input-sm form-control" type="search"/></th>
+				<th></th>
+				<th><input data-st-search="trgtQty" class="input-sm form-control" type="search"/></th>
+				<th><input data-st-search="stkgDt" class="input-sm form-control" type="search"/></th>
+    		</tr>
           </thead>
-          <tr dir-paginate="stockArticlelot in vm.data.list | itemsPerPage: vm.pagination.itemsPerPage" 
-              total-items="vm.data.total" 
-              current-page="vm.pagination.current">
-              <td>{{stockArticlelot.lotPic}}</td>
-              <td>{{stockArticlelot.artPic}}</td>
-              <td>{{stockArticlelot.section}}</td>
-              <td>{{stockArticlelot.expirDt | date:'dd-MM-yyyy'}}</td>
-              <td>{{stockArticlelot.valueDt | date:'dd-MM-yyyy HH:mm:ss'}}</td>
-              <td>{{stockArticlelot.supplier}}</td>
-              <td>{{stockArticlelot.stkUnitValCur}}</td>
-              <td>{{stockArticlelot.trgtQty}}</td>
-              <td>{{stockArticlelot.stkgDt | date:'dd-MM-yyyy HH:mm:ss'}}</td>
-              <td>
-                 <div class="table-actions">
-                      <a class="btn btn-default" title="{{'app.core.view.title' | translate}}" href="#/stock-articlelot/{{stockArticlelot.id}}">
-                        <span class="glyphicon glyphicon-eye-open"></span>
-                      </a>
-                      <a class="btn btn-default" title="{{'app.core.edit.title' | translate}}" href="#/stock-articlelot/{{stockArticlelot.id}}/edit">
-                        <span class="glyphicon glyphicon-edit"></span>
-                      </a>
-                  </div>
-              </td>
-          </tr>
+          <tbody>
+	          <tr data-ng-repeat="stockArticlelot in vm.data.list">
+	              <td><span data-ng-bind="stockArticlelot.lotPic"></span></td>
+	              <td><span data-ng-bind="stockArticlelot.artPic"></span></td>
+	              <td><span data-ng-bind="stockArticlelot.section"></span></td>
+	              <td><span data-ng-bind="stockArticlelot.expirDt | date:'dd-MM-yyyy'"></span></td>
+	              <td><span data-ng-bind="stockArticlelot.valueDt | date:'dd-MM-yyyy HH:mm:ss'"></span></td>
+	              <td><span data-ng-bind="stockArticlelot.supplier"></span></td>
+	              <td><span data-ng-bind="stockArticlelot.stkUnitValCur"></span></td>
+	              <td><span data-ng-bind="stockArticlelot.trgtQty"></span></td>
+	              <td><span data-ng-bind="stockArticlelot.stkgDt | date:'dd-MM-yyyy HH:mm:ss'"></span></td>
+	              <td>
+	                 <div class="table-actions">
+	                      <a class="btn btn-default" title="{{'app.core.view.title' | translate}}" href="#/stock-articlelot/{{stockArticlelot.id}}">
+	                        <span class="glyphicon glyphicon-eye-open"></span>
+	                      </a>
+	                      <a class="btn btn-default" title="{{'app.core.edit.title' | translate}}" href="#/stock-articlelot/{{stockArticlelot.id}}/edit">
+	                        <span class="glyphicon glyphicon-edit"></span>
+	                      </a>
+	                  </div>
+	              </td>
+	          </tr>
+          </tbody>
+          <tfoot>
+			<tr>
+				<td colspan="9" class="text-center">
+					<div data-st-pagination="" data-st-items-by-page="vm.itemsByPage"></div>
+				</td>
+			</tr>
+		</tfoot>
       </table>
-      <div class="pull-right">    
-        <dir-pagination-controls on-page-change="vm.paginate(newPageNumber)" 
-                                 boundary-links="true"
-                                 max-size="vm.pagination.maxSize">
-        </dir-pagination-controls>
-      </div> 
-
     </div>
   </div>
 

@@ -9,7 +9,6 @@
         '$stateParams',
         '$location',
         'StkSection',
-        'TableSettings',
         'StkSectionForm',
         'utils'];
     /* @ngInject */
@@ -17,17 +16,14 @@
         $stateParams,
         $location,
         StkSection,
-        TableSettings,
         StkSectionForm,
         utils) {
 
         var vm = this;
         vm.data = {
-            total: 0,
             list: []
         };
         
-        //vm.tableParams = TableSettings.getParams(StkSection);
         vm.stkSection = {};
 
         vm.setFormFields = function(disabled) {
@@ -36,14 +32,17 @@
         
         vm.setSearchFormFields = function(disabled){
             vm.searchFormFields = StkSectionForm.getSearchFormFields(disabled);
+        };
+        
+        function initSearchInput(){
+            // Initialize Search input and pagination
+            vm.searchInput = utils.searchInputInit().searchInput;
+            vm.searchInput.className = 'org.adorsys.adstock.jpa.StkSectionSearchInput';
+            vm.searchInput.sortFieldNames.push({fieldName:'valueDt'});
+            // Number of entries showed per page.
+            vm.itemsByPage = utils.searchInputInit().stPagination.number;
         }
         
-        // Initialize Search input and pagination
-        vm.searchInput = utils.searchInputInit().searchInput;
-        vm.searchInput.className = 'org.adorsys.adstock.jpa.StkSectionSearchInput';
-        vm.pagination = utils.searchInputInit().pagination;
-        
-
         vm.create = function() {
             // Create new StkSection object
             var stkSection = new StkSection(vm.stkSection);
@@ -75,11 +74,6 @@
                 });
             }
         };
-        
-        vm.clear = function(){
-            vm.stkSection = {};
-            return;
-        };
 
         // Update existing StkSection
         vm.update = function() {
@@ -103,44 +97,36 @@
             vm.setFormFields(false);
         };
         
-        // Paginate over the list
-        vm.paginate = function(newPage){
-            utils.pagination(vm.searchInput, vm.pagination, newPage);
-            vm.findCustomSections();
-        };
-        
-        vm.search = function(){
-            vm.searchInput = utils.processSearch(vm.searchInput, vm.stkSection);
-            vm.pagination = utils.resetPagination(vm.pagination);
-            vm.findCustomSections();
-        };
-        
-
-        activate();
-
-        function activate() {
-            //logger.info('Activated StkSection View');
-        };
+        initSearchInput();
         
         function findAllSections(){
             StkSection.listAll(function (response) {
                 vm.data.list = response.resultList;
-                vm.data.total = response.count;
             }, function(errorResponse) {
                 vm.error = errorResponse.data.summary;
             });  
-        };
+        }
         
-        vm.findCustomSections = function(){
-            StkSection.findCustom(vm.searchInput, function(response){
+        vm.callServer = function(tableState) {
+    	    var pagination = tableState.pagination;
+    	    var start = pagination.start || 0, number = pagination.number || utils.searchInputInit().stPagination.number;
+    	    processSearch(start, tableState.search);
+        	
+    	    StkSection.findByLike(vm.searchInput, function(response) {
                 vm.data.list = response.resultList;
-                vm.data.total = response.total;
-            }, 
+                tableState.pagination.numberOfPages = Math.ceil(response.count / number)
+            },
             function(errorResponse) {
                 vm.error = errorResponse.data.summary;
-            });  
+            });
         };
-        
+
+        function processSearch(start, searchObject) {
+        	// First initialize SearchInput-Object and then set Search-Params
+            vm.searchInput = utils.searchInputInit().searchInput;
+        	vm.searchInput.start = start;
+        	vm.searchInput = utils.processSearch(vm.searchInput, searchObject.predicateObject);
+        }
     }
 
 })();
