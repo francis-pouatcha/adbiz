@@ -30,9 +30,9 @@
             vm.searchInput = utils.searchInputInit().searchInput;
             vm.searchInput.className = 'org.adorsys.adcatal.jpa.CatalArtLangMappingSearchInput';
             vm.searchInput.sortFieldNames.push({fieldName:'valueDt'});
+            //Number of entries showed per page.
+            vm.itemsByPage = utils.searchInputInit().stPagination.number;
         }
-
-        vm.itemsByPage = utils.searchInputInit().pagination.itemsPerPageVar;
 
         vm.setFormFields = function(disabled, hideName) {
             vm.formFields = ArticleForm.getFormFields(disabled, hideName);

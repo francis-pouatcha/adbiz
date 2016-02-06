@@ -2,62 +2,66 @@
 
   <div class="panel panel-primary">
     <div class="panel-heading">
-      {{'app.core.list.title' | translate}} {{'StkMvnts.title' | translate }}
+       <span data-ng-bind="'app.core.list.title' | translate"></span> <span data-ng-bind="'StkMvnts.title' | translate"></span>
     </div>
     <div class="panel-body">
 
-      <!--<div class="pull-right">
-        <a type="button" class="btn btn-success" href="/stk-mvnt/create">
-          <i class="glyphicon glyphicon-open"></i> {{'app.core.new.title' | translate}} {{'StkMvnt.title' | translate}}
-        </a>
-      </div>-->
-        <div class="clear">
-        
-        </div>
-
-      <table class="table table-condensed table-striped">
+      <table data-st-table="vm.data.list" data-st-pipe="vm.callServer" class="table table-bordered  table-striped pointer-element">
           <thead>
-                  <th>{{'StkMvnt.code.title' | translate}}</th>
-                  <th>{{'StkMvnt.lotPic.title' | translate}}</th>
-                  <th>{{'StkMvnt.artPic.title' | translate}}</th>
-                  <th>{{'StkMvnt.section.title' | translate}}</th>
-                  <th>{{'StkMvnt.acsngUser.title' | translate}}</th>
-                  <th>{{'StkMvnt.acsngDt.title' | translate}}</th>
-                  <th>{{'StkMvnt.mvntType.title' | translate}}</th>
-                  <th>{{'StkMvnt.mvntOrigin.title' | translate}}</th>
-                  <th>{{'StkMvnt.mvntDest.title' | translate}}</th>
-          </thead>
-          <tr dir-paginate="stkMvnt in vm.data.list | itemsPerPage: vm.pagination.itemsPerPage" 
-              total-items="vm.data.total" 
-              current-page="vm.pagination.current">
-              <td>{{stkMvnt.identif}}</td>
-              <td>{{stkMvnt.lotPic}}</td>
-              <td>{{stkMvnt.artPic}}</td>
-              <td>{{stkMvnt.section}}</td>
-              <td>{{stkMvnt.acsngUser}}</td>
-              <td>{{stkMvnt.acsngDt}}</td>
-              <td>{{stkMvnt.mvntType}}</td>
-              <td>{{stkMvnt.mvntOrigin}}</td>
-              <td>{{stkMvnt.mvntDest}}</td>
-              <td>
-                 <div class="table-actions">
-                      <a class="btn btn-default" title="{{'app.core.view.title' | translate}}" href="#/stk-mvnt/{{stkMvnt.id}}">
-                        <span class="glyphicon glyphicon-eye-open"></span>
-                      </a>
-                      <a class="btn btn-default" title="{{'app.core.edit.title' | translate}}" href="#/stk-mvnt/{{stkMvnt.id}}/edit">
-                        <span class="glyphicon glyphicon-edit"></span>
-                      </a>
-                  </div>
-              </td>
+			  <tr>
+                  <th><span data-ng-bind="'StkMvnt.code.title' | translate"></span></th>
+                  <th><span data-ng-bind="'StkMvnt.lotPic.title' | translate"></span></th>
+                  <th><span data-ng-bind="'StkMvnt.artPic.title' | translate"></span></th>
+                  <th><span data-ng-bind="'StkMvnt.section.title' | translate"></span></th>
+                  <th><span data-ng-bind="'StkMvnt.acsngUser.title' | translate"></span></th>
+                  <th><span data-ng-bind="'StkMvnt.acsngDt.title' | translate"></span></th>
+                  <th><span data-ng-bind="'StkMvnt.mvntType.title' | translate"></span></th>
+                  <th><span data-ng-bind="'StkMvnt.mvntOrigin.title' | translate"></span></th>
+                  <th><span data-ng-bind="'StkMvnt.mvntDest.title' | translate"></span></th>
              </tr>
+             <tr>
+             	<th><input data-st-search="identif" class="input-sm form-control" type="search"/></th>
+				<th><input data-st-search="lotPic" class="input-sm form-control" type="search"/></th>
+				<th><input data-st-search="artPic" class="input-sm form-control" type="search"/></th>
+				<th><input data-st-search="section" class="input-sm form-control" type="search"/></th>
+				<th><input data-st-search="acsngUser" class="input-sm form-control" type="search"/></th>
+				<th><input data-st-search="acsngDt" class="input-sm form-control" type="search"/></th>
+				<th><input data-st-search="mvntType" class="input-sm form-control" type="search"/></th>
+				<th><input data-st-search="mvntOrigin" class="input-sm form-control" type="search"/></th>
+				<th><input data-st-search="mvntDest" class="input-sm form-control" type="search"/></th>
+             </tr>
+          </thead>
+          <tbody>
+	          <tr data-ng-repeat="stkMvnt in vm.data.list">
+	              <td><span data-ng-bind="stkMvnt.identif"></span></td>
+	              <td><span data-ng-bind="stkMvnt.lotPic"></span></td>
+	              <td><span data-ng-bind="stkMvnt.artPic"></span></td>
+	              <td><span data-ng-bind="stkMvnt.section"></span></td>
+	              <td><span data-ng-bind="stkMvnt.acsngUser"></span></td>
+	              <td><span data-ng-bind="stkMvnt.acsngDt"></span></td>
+	              <td><span data-ng-bind="stkMvnt.mvntType"></span></td>
+	              <td><span data-ng-bind="stkMvnt.mvntOrigin"></span></td>
+	              <td><span data-ng-bind="stkMvnt.mvntDest"></span></td>
+	              <td>
+	                 <div class="table-actions">
+	                      <a class="btn btn-default" title="{{'app.core.view.title' | translate}}" href="#/stk-mvnt/{{stkMvnt.id}}">
+	                        <span class="glyphicon glyphicon-eye-open"></span>
+	                      </a>
+	                      <a class="btn btn-default" title="{{'app.core.edit.title' | translate}}" href="#/stk-mvnt/{{stkMvnt.id}}/edit">
+	                        <span class="glyphicon glyphicon-edit"></span>
+	                      </a>
+	                  </div>
+	              </td>
+	           </tr>
+           </tbody>
+           <tfoot>
+			 <tr>
+				<td colspan="9" class="text-center">
+					<div data-st-pagination="" data-st-items-by-page="vm.itemsByPage"></div>
+				</td>
+			 </tr>
+		  </tfoot>
       </table>
-      <div class="pull-right">    
-        <dir-pagination-controls on-page-change="vm.paginate(newPageNumber)" 
-                                 boundary-links="true"
-                                 max-size="vm.pagination.maxSize">
-        </dir-pagination-controls>
-      </div> 
-
     </div>
   </div>
 
