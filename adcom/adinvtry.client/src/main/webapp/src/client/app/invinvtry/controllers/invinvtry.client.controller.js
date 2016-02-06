@@ -9,80 +9,63 @@
     invInvtrysCtlr.$inject = ['$scope','invInvtryManagerResource','utils', 'invInvtryUtils', 'genericResource'];
     /* @ngInject */
     function invInvtrysCtlr($scope, invInvtryManagerResource, utils, invInvtryUtils, genericResource) {
-
         $scope.data = {};
         $scope.data.invInvtrys = [];
-        $scope.data.total;
+        $scope.dateConfig = {
+        	format: 'dd.MM.yyyy',
+        	invtryDtFrom: {
+				opened : false
+			},
+			invtryDtTo: {
+				opened : false
+			},
+			acsngDtFrom: {
+				opened : false
+			},
+			acsngDtTo: {
+				opened : false
+			}
+        };
         $scope.invInvtryUtils=invInvtryUtils;
-
+        
+        initSearchInput();
+        
         // Initialize Search input and pagination
-        $scope.searchInput = utils.searchInputInit().searchInput;
-        $scope.searchInput.className = 'org.adorsys.adinvtry.rest.InvInvtrySearchInput';
-        $scope.pagination = utils.searchInputInit().pagination;
-
-        findCustom($scope.searchInput);
-
-        function findCustom(searchInput) {
-            invInvtryManagerResource.findCustom(searchInput, function(response){
-                    $scope.data.invInvtrys = response.resultList;
-                    $scope.data.total = response.total;
-                },
-                function(errorResponse) {
-                    $scope.error = errorResponse.data.summary;
-                });
-
+        function initSearchInput(){
+            // Initialize Search input and pagination
+        	$scope.searchInput = utils.searchInputInit().searchInput;
+        	$scope.searchInput.className = 'org.adorsys.adinvtry.rest.InvInvtrySearchInput';
+        	$scope.searchInput.sortFieldNames.push({fieldName:'valueDt'});
+            //Number of entries showed per page.
+        	$scope.itemsByPage = utils.searchInputInit().stPagination.number;
         }
-
-        // Paginate over the list
-        $scope.paginate = function(newPage){
-            utils.pagination($scope.searchInput, $scope.pagination, newPage);
-            findCustom($scope.searchInput);
+        
+        $scope.callServer = function(tableState) {
+    	    var pagination = tableState.pagination;
+    	    var start = pagination.start || 0, number = pagination.number || utils.searchInputInit().stPagination.number;
+    	    processSearch(start, tableState.search);
+        	
+    	    invInvtryManagerResource.findByLike($scope.searchInput, function(response) {
+    	    	$scope.data.invInvtrys = response.resultList;
+                tableState.pagination.numberOfPages = Math.ceil(response.count / number)
+            },
+            function(errorResponse) {
+            	$scope.error = errorResponse.data.summary;
+            });
         };
 
-        function processSearchInput(searchInput){
-
-            if(angular.isDefined(searchInput.entity.identif) && searchInput.entity.identif){
-                if(searchInput.fieldNames.indexOf('identif') == -1)
-                    searchInput.fieldNames.push('identif');
-            }
-            if(angular.isDefined(searchInput.entity.login) && searchInput.entity.login){
-                if(searchInput.fieldNames.indexOf('login') == -1)
-                    searchInput.fieldNames.push('login');
-            }
-            if(angular.isDefined(searchInput.entity.status) && searchInput.entity.status){
-                if(searchInput.fieldNames.indexOf('status') == -1)
-                    searchInput.fieldNames.push('status');
-            }
-            if(angular.isDefined(searchInput.entity.invtryGroup) && searchInput.entity.invtryGroup){
-                if(searchInput.fieldNames.indexOf('invtryGroup') == -1)
-                    searchInput.fieldNames.push('invtryGroup');
-            }
-            if(angular.isDefined(searchInput.entity.txType) && searchInput.entity.txType){
-                if(searchInput.fieldNames.indexOf('txType') == -1)
-                    searchInput.fieldNames.push('txType');
-            }
-            if(angular.isDefined(searchInput.entity.descptn) && searchInput.entity.descptn){
-                if(searchInput.fieldNames.indexOf('descptn') == -1)
-                    searchInput.fieldNames.push('descptn');
-            }
-            if(angular.isDefined(searchInput.entity.section) && searchInput.entity.section){
-                if(searchInput.fieldNames.indexOf('section') == -1)
-                    searchInput.fieldNames.push('section');
-            }
-            if(angular.isDefined(searchInput.entity.rangeStart) && searchInput.entity.rangeStart){
-                if(searchInput.fieldNames.indexOf('rangeStart') == -1)
-                    searchInput.fieldNames.push('rangeStart');
-            }
-            if(angular.isDefined(searchInput.entity.rangeEnd) && searchInput.entity.rangeEnd){
-                if(searchInput.fieldNames.indexOf('rangeEnd') == -1)
-                    searchInput.fieldNames.push('rangeEnd');
-            }
+        function processSearch(start, searchObject) {
+        	// First initialize SearchInput-Object and then set Search-Params
+        	$scope.searchInput = utils.searchInputInit().searchInput;
+        	$scope.searchInput.start = start;
+        	$scope.searchInput = utils.processSearch($scope.searchInput, searchObject.predicateObject);
         }
-
-        $scope.handleSearchRequestEvent = function(){
-            processSearchInput($scope.searchInput);
-            findCustom($scope.searchInput);
-        };
+        
+		$scope.openDateComponent = function(componentId,$event) {
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope.dateConfig[componentId].opened = true;
+		};
 
         $scope.onSectionChanged = function(){
             setSectionName();

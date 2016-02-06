@@ -2,60 +2,71 @@
 
   <div class="panel panel-primary">
     <div class="panel-heading">
-        {{'CatalArticle.list.title' | translate}}
+        <span data-ng-bind="'CatalArticle.list.title' | translate"></span>
     </div>
     <div class="panel-body">
-        <!-- Search form -->
-        <div ng-include src="'src/client/app/article/views/search.html'"></div>
       <div class="pull-right">
         <a type="button" class="btn btn-success" href="#/article/create">
-          <i class="glyphicon glyphicon-open"></i> {{'CatalArticle.new.title' | translate}}
+          <i class="glyphicon glyphicon-open"></i> <span data-ng-bind="'CatalArticle.new.title' | translate"></span>
         </a>
       </div>
 
-      <table  class="table table-condensed table-striped">
-          <thead>
-              <th>{{'CIP' | translate}}</th>
-              <th>{{'CatalArticle.sppu' | translate}}</th>
-              <th>{{'CatalArticle.maxDisctRate' | translate}}</th>
-              <th>{{'CatalArticle.minStockQty' | translate}}</th>
-              <th>{{'CatalArticle.minStockQty' | translate}}</th>
-              <th>{{'CatalArticle.vatRate' | translate}}</th>
-              <th>{{'CatalArticle.active' | translate}}</th>
-              <th>{{'CatalArticle.authorizedSale' | translate}}</th>
-          </thead>
-          <tr dir-paginate="article in vm.data.list | itemsPerPage: vm.pagination.itemsPerPage"
-              total-items="vm.data.total"
-              current-page="vm.pagination.current">
-              <td name="identif-catalArticle" >{{article.identif}}</td>
-              <td>{{article.sppu}}</td>
-              <td>{{article.maxDisctRate}}</td>
-              <td>{{article.minStockQty}}</td>
-              <td>{{article.maxStockQty}}</td>
-              <td>{{article.vatRate}}</td>
-              <td>{{article.active}}</td>
-              <td>{{article.authorizedSale}}</td>
-              <td>
-                 <div class="table-actions">
-                      <a class="btn btn-default" title="View" href="#/article/{{article.id}}">
-                        <span class="glyphicon glyphicon-eye-open"></span>
-                      </a>
-                      <a class="btn btn-default" title="Edit" href="#/article/{{article.id}}/edit">
-                        <span class="glyphicon glyphicon-edit"></span>
-                      </a>
-                      <!--<a class="btn btn-danger " title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove(article)" item="article">
-                        <span class="glyphicon glyphicon-remove-circle"></span>
-                      </a>-->
-                  </div>
-              </td>
-          </tr>
+      <table data-st-table="vm.data.list" data-st-pipe="vm.callServer" class="table table-condensed table-striped">
+          	<thead>
+          		<tr>
+		        	<th><span data-ng-bind="'CIP' | translate"></span></th>
+					<th><span data-ng-bind="'CatalArticle.sppu' | translate"></span></th>
+					<th><span data-ng-bind="'CatalArticle.maxDisctRate' | translate"></span></th>
+					<th><span data-ng-bind="'CatalArticle.minStockQty' | translate"></span></th>
+					<th><span data-ng-bind="'CatalArticle.maxStockQty' | translate"></span></th>
+					<th><span data-ng-bind="'CatalArticle.vatRate' | translate"></span></th>
+					<th><span data-ng-bind="'CatalArticle.active' | translate"></span></th>
+					<th><span data-ng-bind="'CatalArticle.authorizedSale' | translate"></span></th>
+              	</tr>
+                <tr>
+			  		<th><input data-st-search="identif" class="input-sm form-control" type="search"/></th>
+             		<th><input data-st-search="sppu" class="input-sm form-control" type="number"/></th>
+             		<th><input data-st-search="maxDisctRate" class="input-sm form-control" type="search"/></th>
+             		<th><input data-st-search="minStockQty" class="input-sm form-control" type="number"/></th>
+             		<th><input data-st-search="maxStockQty" class="input-sm form-control" type="number"/></th>
+             		<th></th>
+             		<th><input data-st-search="active" class="input-sm form-control" type="search"/></th>
+             		<th colspan="2"><input data-st-search="authorizedSale" class="input-sm form-control" type="search"/></th>
+				</tr>
+          	</thead>
+          	<tbody>
+	           <tr data-ng-repeat="article in vm.data.list">
+	              <td name="identif-catalArticle" ><span data-ng-bind-html="article.identif"></span></td>
+	              <td><span data-ng-bind-html="article.sppu"></span></td>
+	              <td><span data-ng-bind-html="article.maxDisctRate"></span></td>
+	              <td><span data-ng-bind-html="article.minStockQty"></span></td>
+	              <td><span data-ng-bind-html="article.maxStockQty"></span></td>
+	              <td><span data-ng-bind-html="article.vatRate"></span></td>
+	              <td><span data-ng-bind-html="article.active"></span></td>
+	              <td><span data-ng-bind-html="article.authorizedSale"></span></td>
+	              <td>
+	                 <div class="table-actions">
+	                      <a class="btn btn-default" title="View" href="#/article/{{article.id}}">
+	                        <span class="glyphicon glyphicon-eye-open"></span>
+	                      </a>
+	                      <a class="btn btn-default" title="Edit" href="#/article/{{article.id}}/edit">
+	                        <span class="glyphicon glyphicon-edit"></span>
+	                      </a>
+	                      <!--<a class="btn btn-danger " title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove(article)" item="article">
+	                        <span class="glyphicon glyphicon-remove-circle"></span>
+	                      </a>-->
+	                  </div>
+	              </td>
+	          </tr>
+          </tbody>
+          <tfoot>
+			<tr>
+				<td colspan="9" class="text-center">
+					<div data-st-pagination="" data-st-items-by-page="vm.itemsByPage"></div>
+				</td>
+			</tr>
+		</tfoot>
       </table>
-        <div class="pull-right">
-            <dir-pagination-controls on-page-change="vm.paginate(newPageNumber)"
-                                     boundary-links="true"
-                                     max-size="vm.pagination.maxSize">
-            </dir-pagination-controls>
-        </div>
     </div>
   </div>
 

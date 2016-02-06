@@ -1,36 +1,26 @@
 <section class="mainbar" data-ng-init="vm.toEditCatalProdFmly()">
 
-  <div class="panel panel-primary">
+<div class="panel panel-primary">
     <div class="panel-heading">
-        {{'CatalProductFamily.edit.title'|translate}}
+         <span data-ng-bind="'CatalProductFamily.edit.title' | translate"></span>
     </div>
     <div class="panel-body">
-
-      <form data-ng-submit="vm.update()" novalidate>
-
-        <formly-form model="vm.catalProdFmly" fields="vm.formFields" form="vm.form">
-        </formly-form>
-
-        <hr/>
-        <div class="form-group">
-            <button type="submit" class="btn btn-success" ng-disabled="vm.form.$invalid">
-              <i class="glyphicon glyphicon-ok"></i>       {{'CatalProductFamily.edit.title'|translate}}
-
-            </button>
-            <a class="btn btn-danger" href="#/catal-prod-fmly">
-              <i class="glyphicon glyphicon-remove"></i>       {{'CatalProductFamily.cancel.title'|translate}}
-
-            </a>
-        </div>
-
-        <div data-ng-show="vm.error" class="alert alert-danger form-group">
-          <strong data-ng-bind="vm.error"></strong>
-        </div>
-
-      </form>
-
-
-    </div>
-  </div>
+		<form data-ng-submit="vm.update()" novalidate>
+        	<formly-form model="vm.catalProdFmly" fields="vm.formFields" form="vm.form"></formly-form>
+        	<hr/>
+	        <div class="form-group">
+	            <button type="submit" class="btn btn-success" data-ng-disabled="vm.form.$invalid">
+	              	<i class="glyphicon glyphicon-ok"></i>  <span data-ng-bind="'CatalProductFamily.edit.title' | translate"></span>
+	            </button>
+	            <a class="btn btn-danger" href="#/catal-prod-fmly">
+	              	<i class="glyphicon glyphicon-remove"></i>  <span data-ng-bind="'CatalProductFamily.cancel.title' | translate"></span>
+	            </a>
+	        </div>
+        	<div data-ng-show="vm.error" class="alert alert-danger form-group">
+          		<strong data-ng-bind="vm.error"></strong>
+        	</div>
+		</form>
+	</div>
+</div>
 
 </section>
