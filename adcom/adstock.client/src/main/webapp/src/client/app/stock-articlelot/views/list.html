@@ -24,18 +24,20 @@
 		          <th><span data-ng-bind="'StockArticlelot.supplier.title' | translate"></span></th>
 		          <th><span data-ng-bind="'StockArticlelot.stkUnitValCur.title' | translate"></span></th>
 		          <th><span data-ng-bind="'StockArticlelot.trgtQty.title' | translate"></span></th>
-		          <th><span data-ng-bind="'StockArticlelot.stkgDt.title' | translate"></span></th>
+		          <th colspan="2"><span data-ng-bind="'StockArticlelot.stkgDt.title' | translate"></span></th>
 	          </tr>
 			<tr>
 				<th><input data-st-search="lotPic" class="input-sm form-control" type="search"/></th>
 				<th><input data-st-search="artPic" class="input-sm form-control" type="search"/></th>
 				<th><input data-st-search="section" class="input-sm form-control" type="search"/></th>
-				<th><input data-st-search="expirDt" class="input-sm form-control" type="search"/></th>
+				<th>
+					<st-date-range predicate="expirDt" before="query.before" after="query.after"></st-date-range>
+				</th>
 				<th><input data-st-search="valueDt" class="input-sm form-control" type="search"/></th>
 				<th><input data-st-search="supplier" class="input-sm form-control" type="search"/></th>
 				<th></th>
 				<th><input data-st-search="trgtQty" class="input-sm form-control" type="search"/></th>
-				<th><input data-st-search="stkgDt" class="input-sm form-control" type="search"/></th>
+				<th colspan="2"><input data-st-search="stkgDt" class="input-sm form-control" type="search"/></th>
     		</tr>
           </thead>
           <tbody>
@@ -63,7 +65,7 @@
           </tbody>
           <tfoot>
 			<tr>
-				<td colspan="9" class="text-center">
+				<td colspan="10" class="text-center">
 					<div data-st-pagination="" data-st-items-by-page="vm.itemsByPage"></div>
 				</td>
 			</tr>

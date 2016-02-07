@@ -11,7 +11,7 @@
         </a>
       </div>
 
-      <table data-st-table="vm.data.list" data-st-pipe="vm.callServer" class="table table-condensed table-striped">
+      <table data-st-table="vm.data.list" data-st-pipe="vm.callServer" class="table table-bordered  table-striped pointer-element">
           	<thead>
           		<tr>
 		        	<th><span data-ng-bind="'CIP' | translate"></span></th>
@@ -21,7 +21,7 @@
 					<th><span data-ng-bind="'CatalArticle.maxStockQty' | translate"></span></th>
 					<th><span data-ng-bind="'CatalArticle.vatRate' | translate"></span></th>
 					<th><span data-ng-bind="'CatalArticle.active' | translate"></span></th>
-					<th><span data-ng-bind="'CatalArticle.authorizedSale' | translate"></span></th>
+					<th colspan="2"><span data-ng-bind="'CatalArticle.authorizedSale' | translate"></span></th>
               	</tr>
                 <tr>
 			  		<th><input data-st-search="identif" class="input-sm form-control" type="search"/></th>

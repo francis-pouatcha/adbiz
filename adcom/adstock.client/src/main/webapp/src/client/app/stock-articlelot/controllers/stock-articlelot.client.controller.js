@@ -98,16 +98,7 @@
             vm.setFormFields(false);
         };
         
-        //findAllStkArticlesLots();
         initSearchInput();
-        
-        function findAllStkArticlesLots(){
-            StockArticlelot.listAll(function (response) {
-                vm.data.list = response.resultList;
-            }, function(errorResponse) {
-                vm.error = errorResponse.data.summary;
-            });  
-        }
         
         vm.callServer = function(tableState) {
     	    var pagination = tableState.pagination;

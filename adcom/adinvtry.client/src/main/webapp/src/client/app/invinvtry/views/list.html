@@ -177,23 +177,20 @@
 	                        <th><span data-ng-bind="'InvInvtry_startRange_description.title' | translate"></span></th>
 	                        <th><span data-ng-bind="'InvInvtry_endRange_description.title' | translate"></span></th>
 	                        <th><span data-ng-bind="'InvInvtryItem_section_description.title' | translate"></span></th>
-	                        <th><span data-ng-bind="'description' | translate"></span></th>
-	                        <th></th>
-	                        <th></th>
-	                       <!-- <th></th>-->
+	                        <th colspan="3"><span data-ng-bind="'description' | translate"></span></th>
 	                    </tr>
 	                    <tr>
 	                    	<th><input data-st-search="identif" class="input-sm form-control" type="search"/></th>
-	                    	<th></th>
+	                    	<th><input data-st-search="login" class="input-sm form-control" type="search"/></th>
 		             		<th><input data-st-search="invtryGroup" class="input-sm form-control" type="search"/></th>
 		             		<th></th>
 		             		<th></th>
 		             		<th><input data-st-search="status" class="input-sm form-control" type="search"/></th>
-		             		<th><input data-st-search="prepareDt" class="input-sm form-control" type="search"/></th>
+		             		<th><st-date-range predicate="prepareDt" before="query.before" after="query.after"></st-date-range></th>
 		             		<th></th>
 		             		<th></th>
 		             		<th><input data-st-search="section" class="input-sm form-control" type="search"/></th>
-		             		<th><input data-st-search="descptn" class="input-sm form-control" type="search"/></th>
+		             		<th colspan="3"><input data-st-search="descptn" class="input-sm form-control" type="search"/></th>
 	                    </tr>
                     </thead>
                     <tbody>
@@ -222,7 +219,7 @@
                     </tbody>
                     <tfoot>
 						<tr>
-							<td colspan="9" class="text-center">
+							<td colspan="15" class="text-center">
 								<div data-st-pagination="" data-st-items-by-page="itemsByPage"></div>
 							</td>
 						</tr>
