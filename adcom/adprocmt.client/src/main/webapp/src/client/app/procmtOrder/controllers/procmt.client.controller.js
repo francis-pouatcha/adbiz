@@ -6,14 +6,14 @@
         .module('app.procmt')
         .controller('ProcmtCtlr', ProcmtCtlr);
 
-    ProcmtCtlr.$inject = ['$scope','procmtOrderManagerResource','utils', 'prcmtUtils', 'genericResource'];
+    ProcmtCtlr.$inject = ['$scope','procmtOrderManagerResource','utils', 'prcmtOrderUtils', 'genericResource'];
     /* @ngInject */
-    function ProcmtCtlr($scope, procmtOrderManagerResource, utils, prcmtUtils, genericResource) {
+    function ProcmtCtlr($scope, procmtOrderManagerResource, utils, prcmtOrderUtils, genericResource) {
 
         $scope.data = {};
         $scope.data.prcmts = [];
         $scope.data.total;
-        $scope.prcmtUtils=prcmtUtils;
+        $scope.prcmtOrderUtils=prcmtOrderUtils;
 
         // Initialize Search input and pagination
         $scope.searchInput = utils.searchInputInit().searchInput;
@@ -81,14 +81,14 @@
         .module('app.procmt')
         .controller('ProcmtCreateCtlr', ProcmtCreateCtlr);
 
-    ProcmtCreateCtlr.$inject = ['$scope', 'prcmtUtils', 'procmtOrderManagerResource', '$rootScope', '$location'];
+    ProcmtCreateCtlr.$inject = ['$scope', 'prcmtOrderUtils', 'procmtOrderManagerResource', '$rootScope', '$location'];
     /* @ngInject */
-    function ProcmtCreateCtlr($scope, prcmtUtils, procmtOrderManagerResource, $rootScope, $location) {
+    function ProcmtCreateCtlr($scope, prcmtOrderUtils, procmtOrderManagerResource, $rootScope, $location) {
 
         $scope.procmt = {};
         $scope.display = {};
         $scope.error = "";
-        $scope.prcmtUtils=prcmtUtils;
+        $scope.prcmtOrderUtils=prcmtOrderUtils;
 
 
         $scope.create = function(){
@@ -109,15 +109,15 @@
         .module('app.procmt')
         .controller('ProcmtShowCtlr', procmtShowCtlr);
 
-    procmtShowCtlr.$inject = ['$scope','procmtOrderManagerResource','$location','prcmtUtils',
+    procmtShowCtlr.$inject = ['$scope','procmtOrderManagerResource','$location','prcmtOrderUtils',
         'procmtState','genericResource','searchResultHandler','utils','fileExtractor', '$stateParams', '$rootScope'];
     /* @ngInject */
-    function procmtShowCtlr($scope,procmtOrderManagerResource,$location,prcmtUtils,procmtState
+    function procmtShowCtlr($scope,procmtOrderManagerResource,$location,prcmtOrderUtils,procmtState
                             ,genericResource,searchResultHandler,utils,fileExtractor, $stateParams, $rootScope) {
 
         $scope.procmtNbr = $stateParams.procmtNbr;
         $scope.error = "";
-        $scope.prcmtUtils=prcmtUtils;
+        $scope.prcmtOrderUtils=prcmtOrderUtils;
         var itemsResultHandler = procmtState.itemsResultHandler();
         $scope.searchInput = itemsResultHandler.searchInput();
         $scope.itemPerPage=itemsResultHandler.itemPerPage;
@@ -128,16 +128,16 @@
         $scope.selectedIndex=itemsResultHandler.selectedIndex;
         $scope.display = itemsResultHandler.displayInfo();
 
-        $scope.procmtEditable = !prcmtUtils.isInvtryPosted($scope.procmt);
-        $scope.itemEditable = prcmtUtils.isInvtryOpen($scope.procmt);
+        $scope.procmtEditable = !prcmtOrderUtils.isInvtryPosted($scope.procmt);
+        $scope.itemEditable = prcmtOrderUtils.isInvtryOpen($scope.procmt);
         $scope.procmtCopy = angular.copy($scope.procmt);
 
         $scope.procmtChanged = procmtChangedFctn;
 
         function refreshDisplay(){
             $scope.procmtCopy = angular.copy($scope.procmt);
-            $scope.procmtEditable = !prcmtUtils.isInvtryPosted();
-            $scope.itemEditable = prcmtUtils.isInvtryOpen();
+            $scope.procmtEditable = !prcmtOrderUtils.isInvtryPosted();
+            $scope.itemEditable = prcmtOrderUtils.isInvtryOpen();
         }
 
         function getInvtry(){
@@ -151,7 +151,8 @@
 
 
         $scope.reload = function(){
-            loadInvInvtryItems($scope.searchInput);
+            $scope.searchInput = itemsResultHandler.searchInput();
+            loadInvInvtryItems();
         };
 
         function findConflict(searchInput) {
@@ -178,7 +179,7 @@
             if($scope.searchInput.fieldNames.length==1 && $scope.searchInput.fieldNames.indexOf('cntnrIdentif')!=-1){
                 $scope.searchInput.sortFieldNames=[];
                 $scope.searchInput.sortFieldNames.push({fieldName:'artPic'});
-                genericResource.customMethod(prcmtUtils.procmtsUrlBase+'/findByBsnsObjNbrSorted',$scope.searchInput)
+                genericResource.customMethod(prcmtOrderUtils.procmtsUrlBase+'/findByBsnsObjNbrSorted',$scope.searchInput)
                     .success(function(searchResult){
                         itemsResultHandler.searchResult(searchResult);
                     })
@@ -186,7 +187,7 @@
                        // $scope.error=error;
                     });
             } else {
-                genericResource.findByLike(prcmtUtils.procmtsUrlBase,$scope.searchInput)
+                genericResource.findByLike(prcmtOrderUtils.procmtsUrlBase,$scope.searchInput)
                     .success(function(searchResult){
                         itemsResultHandler.searchResult(searchResult);
                     })
@@ -219,14 +220,14 @@
         }
         function initView(){
             getInvtry();
-            var schedule = setTimeout(function(){
+            /*var schedule = setTimeout(function(){
                                 if($scope.procmtItems().length > 0){
                                     clearTimeout(schedule);
                                 }else{
                                     loadInvInvtryItems();
                                 }
 
-                            },120000);
+                            },120000);*/
 
         }
         initView();
@@ -248,7 +249,7 @@
         };
 
         $scope.handlePrintRequestEvent = function(){
-            genericResource.builfReportGet(prcmtUtils.procmtsUrlBase+'/procmtreport.pdf',$scope.procmt.identif).success(function(data){
+            genericResource.builfReportGet(prcmtOrderUtils.procmtsUrlBase+'/procmtreport.pdf',$scope.procmt.identif).success(function(data){
                 fileExtractor.extractFile(data,"application/pdf");
             }).error(function (error) {
                 $scope.error = error;
@@ -300,8 +301,8 @@
         function unsetEditing(procmtItem){
             if(angular.isDefined(procmtItem.editingExpirDt))
                 delete procmtItem.editingExpirDt;
-            if(angular.isDefined(procmtItem.editingQtyDlvrd))
-                delete procmtItem.editingQtyDlvrd;
+            if(angular.isDefined(procmtItem.editingTrgtQty))
+                delete procmtItem.editingTrgtQty;
             if(angular.isDefined(procmtItem.editingSupplier))
                 delete procmtItem.editingSupplier;
         }
@@ -337,43 +338,31 @@
                 procmtItem.oldSupplier = angular.copy(procmtItem.supplier);
             }
         };
-        $scope.editingQtyDlvrd = function(procmtItem, $event){
+        $scope.editingTrgtQty = function(procmtItem, $event){
             // First set editing flag.
-            procmtItem.editingQtyDlvrd = true;
+            procmtItem.editingTrgtQty = true;
             // Then clone and hold clone.
             if(angular.isUndefined(procmtItem.oldTrgtQty) && angular.isDefined(procmtItem.trgtQty)){
                 procmtItem.oldTrgtQty = angular.copy(procmtItem.trgtQty);
-            }
-            if(angular.isUndefined(procmtItem.oldAccessedDt) && angular.isDefined(procmtItem.acsngDt)){
-                procmtItem.oldAccessedDt = angular.copy(procmtItem.acsngDt);
             }
         };
         $scope.editingItem = function(procmtItem, $event){
             procmtItem.editing=true;
             $scope.editingExpirDt(procmtItem, $event);
-            $scope.editingQtyDlvrd(procmtItem, $event);
             $scope.editingSupplier(procmtItem, $event);
         }
 
         $scope.updateItem = function(procmtItem){
-            var changed = isItemModified(procmtItem);
-            var qtyChanged=false;
-            if((angular.isDefined(procmtItem.oldTrgtQty)&& (!angular.equals(procmtItem.oldTrgtQty,procmtItem.trgtQty)))){
-                qtyChanged=true;
-            }
 
+            var changed = isItemModified(procmtItem);
             cleanupItem(procmtItem);
 
             if(!changed) return;
 
-            $scope.trgtQtyChanged(procmtItem);
-
             procmtOrderManagerResource.updateItem({'identif':procmtItem.cntnrIdentif, 'itemIdentif':procmtItem.identif},
                 procmtItem, function(procmtItem){
-                    if(qtyChanged)
-                        $scope.updatetrgtQty(procmtItem);
-                    else
                         itemsResultHandler.replace(procmtItem);
+                        procmtItem.editing=false;
                 },function(data){
                     console.log(data);
                     //$scope.error = error;
@@ -382,9 +371,7 @@
 
         $scope.updatetrgtQty = function(procmtItem){
             var changed = isItemModified(procmtItem);
-
             cleanupItem(procmtItem);
-
             if(!changed) return;
 
             $scope.trgtQtyChanged(procmtItem);
@@ -392,6 +379,7 @@
             procmtOrderManagerResource.updatetrgtQty({'identif':procmtItem.cntnrIdentif, 'itemIdentif':procmtItem.identif},
                 procmtItem, function(procmtItem){
                     itemsResultHandler.replace(procmtItem);
+                    procmtItem.editing=false;
                 },function(data){
                     console.log(data);
                     //$scope.error = error;
@@ -474,6 +462,15 @@
             })
         };
 
+        $scope.transform = function(){
+            procmtOrderManagerResource.transform($scope.procmt, function(procmtDlvry){
+                var procmtDlvry=procmtDlvry;
+                $location.path('/procmtDelivery/'+procmtDlvry.identif+'/show/');
+            }, function(error){
+                $scope.error = error;
+            })
+        };
+
         $scope.onSectionSelectedInSearch = function(item,model,label){
             $scope.searchInput.entity.section=item.identif;
             $scope.display.sectionName=item.name;
@@ -484,7 +481,7 @@
         $scope.onArticleSelectedInSearch = function(item,model,label){
             $scope.searchInput.entity.artPic=item.identif;
             var searchInput = coreSearchInputInit(item.identif);
-            genericResource.findBy(prcmtUtils.catalartfeatmappingsUrlBase,searchInput)
+            genericResource.findBy(prcmtOrderUtils.catalartfeatmappingsUrlBase,searchInput)
                 .success(function(response){
                     $scope.searchInput.entity.artName=response.resultList[0].artName;
                 })

@@ -151,7 +151,8 @@
 
 
         $scope.reload = function(){
-            loadProcmtItems($scope.searchInput);
+            $scope.searchInput = itemsResultHandler.searchInput();
+            loadProcmtItems();
         };
 
         function findConflict(searchInput) {
@@ -219,15 +220,6 @@
         }
         function initView(){
             getInvtry();
-            var schedule = setTimeout(function(){
-                                if($scope.procmtItems().length > 0){
-                                    clearTimeout(schedule);
-                                }else{
-                                    loadProcmtItems();
-                                }
-
-                            },120000);
-
         }
         initView();
 
@@ -277,7 +269,9 @@
                     $scope.searchInput.entity.expirDt=undefined;
                     $scope.searchInput.entity.trgtQty=undefined;
                 $scope.searchInput.entity.qtyBilled=undefined;
-                $scope.searchInput.entity.pppuPreTax=undefined;
+                $scope.searchInput.entity.prchNetPrcTaxIncl=undefined;
+                $scope.searchInput.entity.slsNetPrcTaxIncl=undefined;
+                $scope.searchInput.entity.section=undefined;
                 }, function(error){
                     $scope.error = error;
             });
@@ -303,8 +297,8 @@
         function unsetEditing(procmtItem){
             if(angular.isDefined(procmtItem.editingExpirDt))
                 delete procmtItem.editingExpirDt;
-            if(angular.isDefined(procmtItem.editingQtyDlvrd))
-                delete procmtItem.editingQtyDlvrd;
+            if(angular.isDefined(procmtItem.editingTrgtQty))
+                delete procmtItem.editingTrgtQty;
             if(angular.isDefined(procmtItem.editingSupplier))
                 delete procmtItem.editingSupplier;
         }
@@ -341,9 +335,9 @@
                 procmtItem.oldSupplier = angular.copy(procmtItem.supplier);
             }
         };
-        $scope.editingQtyDlvrd = function(procmtItem, $event){
+        $scope.editingTrgtQty = function(procmtItem, $event){
             // First set editing flag.
-            procmtItem.editingQtyDlvrd = true;
+            procmtItem.editingTrgtQty = true;
             // Then clone and hold clone.
             if(angular.isUndefined(procmtItem.oldTrgtQty) && angular.isDefined(procmtItem.trgtQty)){
                 procmtItem.oldTrgtQty = angular.copy(procmtItem.trgtQty);
@@ -354,26 +348,19 @@
         };
         $scope.editingItem = function(procmtItem, $event){
             procmtItem.editing=true;
-            $scope.editingExpirDt(procmtItem, $event);
-            $scope.editingQtyDlvrd(procmtItem, $event);
-            $scope.editingSupplier(procmtItem, $event);
+
         }
 
         $scope.updateItem = function(procmtItem){
-            var changed = isItemModified(procmtItem);
-            if(!changed) return;
-            $scope.editing=undefined;
-            $scope.trgtQtyChanged(procmtItem);
-            if((angular.isDefined(procmtItem.oldTrgtQty)&& (!angular.equals(procmtItem.oldTrgtQty,procmtItem.trgtQty)))){
-                var oldTrgtQty = procmtItem.oldTrgtQty;
-                $scope.updatetrgtQty(procmtItem);
-                procmtItem.trgtQty = oldTrgtQty;//cause backend refuse change  trgQty on update
-            }
+
+            //var changed = isItemModified(procmtItem); will check if is modified before proceed
+            //if(!changed) return;
             cleanupItem(procmtItem);
 
             procmtManagerResource.updateItem({'identif':procmtItem.cntnrIdentif, 'itemIdentif':procmtItem.identif},
                 procmtItem, function(procmtItem){
-                        itemsResultHandler.replace(procmtItem);
+                    itemsResultHandler.replace(procmtItem);
+                    procmtItem.editing=false;
                 },function(data){
                     console.log(data);
                     //$scope.error = error;
@@ -381,8 +368,15 @@
         };
 
         $scope.updatetrgtQty = function(procmtItem){
+            var changed = isItemModified(procmtItem);
+            cleanupItem(procmtItem);
+            if(!changed) return;
+
+            $scope.trgtQtyChanged(procmtItem);
+
             procmtManagerResource.updatetrgtQty({'identif':procmtItem.cntnrIdentif, 'itemIdentif':procmtItem.identif},
                 procmtItem, function(procmtItem){
+                    itemsResultHandler.replace(procmtItem);
                 },function(data){
                     console.log(data);
                     //$scope.error = error;

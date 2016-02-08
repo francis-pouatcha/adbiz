@@ -21,7 +21,7 @@
                             <label class=" control-label" for="status"> {{'PrcmtProcOrder_poStatus_description.title' | translate}}</label>
                             <select class="form-control" name="status" disabled id="status" ng-model="procmt.status"
                                     ng-options="status.enumKey as (status.translKey | translate)
-							                    	for status in prcmtUtils.status" >
+							                    	for status in prcmtOrderUtils.status" >
                                 <option value=""/>
                             </select>
                         </div>
@@ -30,7 +30,7 @@
                         <label class=" control-label" for="poTriggerMode"> {{'PrcmtProcOrder_poTriggerMode_description.title' | translate}}</label>
                         <select class="form-control" disabled name="poTriggerMode" id="poTriggerMode" ng-model="procmt.poTriggerMode"
                                 ng-options="status.enumKey as (status.translKey | translate)
-							                    	for status in prcmtUtils.poTriggerModes" >
+							                    	for status in prcmtOrderUtils.poTriggerModes" >
                             <option value=""/>
                         </select>
                     </div>
@@ -44,7 +44,7 @@
                         <label> {{'PrcmtProcOrder_poType_description.title' | translate}} :</label>
                         <select class="form-control" name="txType" id="txType" ng-model="procmt.txType"
                                 ng-options="txType.enumKey as (txType.translKey | translate)
-			                   				for txType in prcmtUtils.POTypes" >
+			                   				for txType in prcmtOrderUtils.POTypes" >
                             <option value=""/>
                         </select>
                     </div>
@@ -56,20 +56,24 @@
                                     class="btn-danger btn"><i class="glyphicon glyphicon-trash" ></i> Archive
                             </button>
 	                    	<button ng-click="check()"
-                                    ng-show="!prcmtUtils.isInvtryClosed(invInvtry) && !prcmtUtils.isInvtryPosted(invInvtry)"
+                                    ng-show="!prcmtOrderUtils.isInvtryClosed(procmt) && !prcmtOrderUtils.isInvtryPosted(procmt)"
                                     class="btn-success btn"> {{'Entity_validate.title'| translate}}
                             </button>
-		                   <button ng-click="update();" ng-show="!prcmtUtils.isInvtryPosted(invInvtry)"
+		                   <button ng-click="update();" ng-show="!prcmtOrderUtils.isInvtryPosted(procmt)"
                                    class="btn-success btn">{{'Entity_save.title'| translate}}
                            </button>
 		                   <button ng-click="close();"
-                                   ng-show="!prcmtUtils.isInvtryClosed(invInvtry) && !prcmtUtils.isInvtryPosted(invInvtry) && !invInvtry.conflictDt"
-                                   class="btn-success btn">{{'Entity_close..title'| translate}}
+                                   ng-show="!prcmtOrderUtils.isInvtryClosed(procmt) && !prcmtOrderUtils.isInvtryPosted(procmt) && !procmt.conflictDt"
+                                   class="btn-success btn">{{'Entity_close.title'| translate}}
                            </button>
 		                   <button ng-click="post();"
-                                   ng-show="prcmtUtils.isInvtryClosed(invInvtry) && !prcmtUtils.isInvtryPosted(invInvtry)"
-                                   class="btn-success btn">Transform
+                                   ng-show="prcmtOrderUtils.isInvtryClosed(procmt) && !prcmtOrderUtils.isInvtryPosted(procmt)"
+                                   class="btn-success btn">{{'Entity_post.title'| translate}}
                            </button>
+                            <button ng-click="transform();"
+                                    ng-show="prcmtOrderUtils.isInvtryPosted(procmt)"
+                                    class="btn-success btn">Transform
+                            </button>
 	               		</span>
                     </div>
                 </div>
@@ -93,7 +97,7 @@
                         <input type="text" ng- class="form-control" name="artPic" id="artPic" required
                                autocomplete="off"
                                ng-model="searchInput.entity.artPic"
-                               typeahead="article.identif as article.identif for article in prcmtUtils.loadArticlesByPic($viewValue)"
+                               typeahead="article.identif as article.identif for article in prcmtOrderUtils.loadArticlesByPic($viewValue)"
                                typeahead-min-length="5"
                                typeahead-loading="loading"
                                typeahead-on-select='onArticleSelectedInSearch($item, $model, $label)'>
@@ -103,7 +107,7 @@
                             translate}}</label>
                         <input type="text" class="form-control" id="searchArtName" autocomplete="off"
                                ng-model="searchInput.entity.artName" name="searchArtName"
-                               typeahead="article as article.artName for article in prcmtUtils.loadArticlesByName($viewValue)"
+                               typeahead="article as article.artName for article in prcmtOrderUtils.loadArticlesByName($viewValue)"
                                typeahead-loading="loading" typeahead-min-length="4"
                                typeahead-on-select='onArticleSelectedInSearchArtName($item, $model, $label)'>
                     </div>
@@ -148,7 +152,7 @@
                         </button>
                         <button class="btn btn-default" ng-disabled="procmtItemForm.$invalid"
                                 ng-click="addItem(searchInput.entity)" style="margin-top: 30px;"
-                                ng-show="prcmtUtils.isInvtryOpen(procmt)">
+                                ng-show="prcmtOrderUtils.isInvtryOpen(procmt)">
                             <i class="glyphicon glyphicon-plus"></i> {{'Entity_add.title'| translate}}
                         </button>
                     </div>
@@ -160,7 +164,7 @@
 <div class="panel panel-default" id="panelV">
     <div class="panel-heading">
         <b> {{'PrcmtPOItem_description.title'| translate}} </b>
-        <span ng-show="procmtItems().length==0" class="red" >products are loading ... please wait</span>
+        <!--<span ng-show="procmtItems().length==0" class="red" >products are loading ... please wait</span>-->
     </div>
     <div class="panel-body">
         <table class="table table-bordered  table-striped">
@@ -211,7 +215,7 @@
                     <span ng-show="!procmtItem.editingTrgtQty && procmtItem.disabledDt" style="color: red; text-decoration: line-through;">{{procmtItem.trgtQty | number:0}}</span>
                 </td>
                 <td>
-                    <div ng-show="prcmtUtils.isInvtryOpen(procmt)">
+                    <div ng-show="prcmtOrderUtils.isInvtryOpen(procmt)">
 
                         	<span ng-show="!procmtItem.editing && !procmtItem.disabledDt">
 	                        	<a ng-click="editingItem(procmtItem)" class=""><i class="glyphicon glyphicon-edit"></i></a>
@@ -252,7 +256,7 @@
 		                <a class="btn-danger btn" href="#/procmt"><i class="glyphicon glyphicon-list"></i>
                             {{'Entity_list.title'| translate}}</a>
                 	</span>
-                	<span class="pull-right" ng-show="!prcmtUtils.isInvtryPosted(procmt)">
+                	<span class="pull-right" ng-show="!prcmtOrderUtils.isInvtryPosted(procmt)">
                     	<a class="btn-danger btn" data-toggle="collapse" data-parent="#invIntryShowPanel"
                            data-target="#procmtInfoToggle"><i class="glyphicon glyphicon-edit"></i>
                             {{'Entity_edit.title'| translate}}</a>

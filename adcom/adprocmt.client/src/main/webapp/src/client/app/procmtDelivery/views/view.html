@@ -70,18 +70,18 @@
                                     class="btn-danger btn"><i class="glyphicon glyphicon-trash" ></i> Archive
                             </button>
 	                    	<button ng-click="check()"
-                                    ng-show="!prcmtUtils.isInvtryClosed(invInvtry) && !prcmtUtils.isInvtryPosted(invInvtry)"
+                                    ng-show="!prcmtUtils.isInvtryClosed(procmt) && !prcmtUtils.isInvtryPosted(procmt)"
                                     class="btn-success btn"> {{'Entity_validate.title'| translate}}
                             </button>
-		                   <button ng-click="update();" ng-show="!prcmtUtils.isInvtryPosted(invInvtry)"
+		                   <button ng-click="update();"
                                    class="btn-success btn">{{'Entity_save.title'| translate}}
                            </button>
 		                   <button ng-click="close();"
-                                   ng-show="!prcmtUtils.isInvtryClosed(invInvtry) && !prcmtUtils.isInvtryPosted(invInvtry) && !invInvtry.conflictDt"
+                                   ng-show="!prcmtUtils.isInvtryClosed(procmt) && !prcmtUtils.isInvtryPosted(procmt) && !procmt.conflictDt"
                                    class="btn-success btn">{{'Entity_close.title'| translate}}
                            </button>
 		                   <button ng-click="post();"
-                                   ng-show="prcmtUtils.isInvtryClosed(invInvtry) && !prcmtUtils.isInvtryPosted(invInvtry)"
+                                   ng-show="prcmtUtils.isInvtryClosed(procmt) && !prcmtUtils.isInvtryPosted(procmt)"
                                    class="btn-success btn">{{'Entity_post.title'| translate}}
                            </button>
 	               		</span>
@@ -154,13 +154,19 @@
                                name="expirDt" class="form-control">
                     </div>
                     <div class="form-group col-lg-2">
-                        <label class=" control-label" for="pppuPreTax">{{'PrcmtDlvryItem_pppuPreTax_description.title'|
+                        <label class=" control-label" for="prchNetPrcTaxIncl">{{'PrcmtDlvryItem_pppuPreTax_description.title'|
                             translate}}</label>
-                        <input type="text" ng-model="searchInput.entity.pppuPreTax" id="pppuPreTax"
-                               name="pppuPreTax" class="form-control">
+                        <input type="text" ng-model="searchInput.entity.prchNetPrcTaxIncl" id="prchNetPrcTaxIncl"
+                               name="prchNetPrcTaxIncl" class="form-control">
                     </div>
                     <div class="form-group col-lg-2">
-                        <label class=" control-label" for="supplier">{{'PrcmtDlvryItem_section_description.title'|
+                        <label class=" control-label" for="prchNetPrcTaxIncl">{{'PrcmtDlvryItem_sppuPreTax_description.title'|
+                            translate}}</label>
+                        <input type="text" ng-model="searchInput.entity.slsNetPrcTaxIncl" id="slsNetPrcTaxIncl"
+                               name="slsNetPrcTaxIncl" class="form-control">
+                    </div>
+                    <div class="form-group col-lg-2">
+                        <label class=" control-label" for="sectionCode">{{'PrcmtDlvryItem_section_description.title'|
                             translate}}</label>
                         <input type="text" ng-model="searchInput.entity.section" id="sectionCode" name="section"
                                class="form-control" required
@@ -169,15 +175,20 @@
                                typeahead-loading="loading" typeahead-min-length="4"
                                typeahead-on-select='onSectionSelectedInSearch($item, $model, $label)'>
                     </div>
-
-                    </div>
                     <div class="form-group col-lg-2">
                         <label class=" control-label" for="supplier">{{'PrcmtPOItem_supplier_description.title'|
                             translate}}</label>
                         <input type="text" ng-model="searchInput.entity.supplier" id="supplier" name="supplier"
                                class="form-control">
                     </div>
-                    <div class="form-group col-lg-4" col-lg-offset-1>
+                    <div class="form-group col-lg-2">
+                        <button class="btn btn-default" ng-disabled="procmtItemForm.$invalid"
+                                ng-click="addItem(searchInput.entity)" style="margin-top: 30px;"
+                                ng-show="prcmtUtils.isInvtryOpen(procmt)">
+                            <i class="glyphicon glyphicon-plus"></i> {{'Entity_add.title'| translate}}
+                        </button>
+                    </div>
+                    <div class="row pull-right form-group ">
                         <button ng-click="handleSearchRequestEvent()" class="btn btn-default "
                                 style="margin-top: 30px;">
                             <i class="glyphicon glyphicon-search"></i>
@@ -192,12 +203,13 @@
                         <button ng-click="handlePrintRequestEvent()" class="btn btn-default " style="margin-top: 30px;">
                             <i class="glyphicon glyphicon-print"></i>
                         </button>
-                        <button class="btn btn-default" ng-disabled="procmtItemForm.$invalid"
+                        <button class="btn btn-default col-right-1" ng-disabled="procmtItemForm.$invalid"
                                 ng-click="addItem(searchInput.entity)" style="margin-top: 30px;"
                                 ng-show="prcmtUtils.isInvtryOpen(procmt)">
                             <i class="glyphicon glyphicon-plus"></i> {{'Entity_add.title'| translate}}
                         </button>
                     </div>
+
                 </div>
             </form>
         </div>
@@ -217,9 +229,9 @@
                 <th class="clo-lg-1">{{'PrcmtDlvryItem_qtyDlvrd_description.title'| translate}}</th>
                 <th class="clo-lg-1">{{'PrcmtDlvryItem_freeQty_description.title'| translate}}</th>
                 <th class="clo-lg-1">{{'PrcmtDlvryItem_qtyBilled_description.title'| translate}}</th>
-                <th class="clo-lg-1">{{'PrcmtDlvryItem_qtyOrdered_description.title'| translate}}</th>
-                <th class="col-lg-2">{{'PrcmtDlvryItem_expirDt_description.title'| translate}}</th>
+                <th class="col-lg-1">{{'PrcmtDlvryItem_expirDt_description.title'| translate}}</th>
                 <th class="col-lg-1">{{'PrcmtDlvryItem_pppuPreTax_description.title'| translate}}</th>
+                <th class="col-lg-1">{{'PrcmtDlvryItem_sppuPreTax_description.title'| translate}}</th>
                 <th class="col-lg-1">{{'PrcmtDlvryItem_section_description.title'| translate}}</th>
                 <th class="col-lg-2">{{'PrcmtPOItem_supplier_description.title'| translate}}</th>
                 <th class="col-lg-1">
@@ -234,15 +246,13 @@
             <tr ng-repeat="procmtItem in procmtItems()">
                 <td data-ng-bind="procmtItem.artPic"></td>
                 <td data-ng-bind="procmtItem.artName"></td>
-                <!-- <td name="qtyDlvrdCell" ng-dblclick="editingQtyDlvrd(procmtItem,$event)">
-                     <input type="text" name="qtyDlvrd" ad-focus="procmtItem.editingQtyDlvrd"
-                            ad-enter="updateQtyDlvrd(procmtItem)" style="width: 35px"
-                            ng-model="procmtItem.trgtQty" ng-show="procmtItem.editing"
-                            ng-blur="updatetrgtQty(procmtItem)">-->
-                <td name="qtyDlvrdCell">
-                    <input type="text" name="trgtQty"
-                            style="width: 35px" ng-model="procmtItem.trgtQty" ng-show="procmtItem.editing">
-                    <span ng-show="!procmtItem.editing">{{procmtItem.trgtQty | number:0}}</span>
+                <td name="asseccedQtyCell" ng-dblclick="editingTrgtQty(procmtItem,$event)">
+                    <input type="text" name="trgtQty" class="form-control" ad-focus="procmtItem.editingTrgtQty"
+                           ad-enter="updatetrgtQty(procmtItem)" style="width: 35px"
+                           ng-model="procmtItem.trgtQty" ng-show="procmtItem.editingTrgtQty"
+                           ng-blur="updatetrgtQty(procmtItem)">
+                    <span ng-show="!procmtItem.editingTrgtQty && !procmtItem.disabledDt">{{procmtItem.trgtQty | number:0}}</span>
+                    <span ng-show="!procmtItem.editingTrgtQty && procmtItem.disabledDt" style="color: red; text-decoration: line-through;">{{procmtItem.trgtQty | number:0}}</span>
                 </td>
                 <td name="">
                             <span class="" ng-show="procmtItem.editing">
@@ -256,12 +266,6 @@
                             </span>
                     <span ng-show="!procmtItem.editing" data-ng-bind="procmtItem.qtyBilled"></span>
                 </td>
-                <td name="">
-                            <span class="" ng-show="procmtItem.editing">
-                                <input ng-model="procmtItem.qtyOrdered" class="form-control">
-                            </span>
-                    <span ng-show="!procmtItem.editing" data-ng-bind="procmtItem.qtyOrdered"></span>
-                </td>
 
                 <td name="">
                             <span class="" ng-show="procmtItem.editing">
@@ -272,9 +276,15 @@
 
                 <td name="">
                             <span class="" ng-show="procmtItem.editing">
-                                <input ng-model="procmtItem.pppuPreTax" class="form-control">
+                                <input ng-model="procmtItem.prchNetPrcTaxIncl" class="form-control">
                             </span>
-                    <span ng-show="!procmtItem.editing" data-ng-bind="procmtItem.pppuPreTax"></span>
+                    <span ng-show="!procmtItem.editing" data-ng-bind="procmtItem.prchNetPrcTaxIncl"></span>
+                </td>
+                <td name="">
+                            <span class="" ng-show="procmtItem.editing">
+                                <input ng-model="procmtItem.slsNetPrcPreTax" class="form-control">
+                            </span>
+                    <span ng-show="!procmtItem.editing" data-ng-bind="procmtItem.slsNetPrcPreTax"></span>
                 </td>
 
                 <td name="">

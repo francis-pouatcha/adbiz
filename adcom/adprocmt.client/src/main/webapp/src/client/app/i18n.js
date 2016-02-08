@@ -219,7 +219,8 @@
                 "PrcmtDlvryItem_articleName_description.title":"Article Name",
                 "PrcmtDlvryItem_qtyBilled_description.title":"Invoice Qty",
                 "PrcmtDlvryItem_section_description.title":"section",
-                "Entity_close.title":"Close"
+                "Entity_close.title":"Close",
+                "Entity_post.title":"Post"
 
 
 
@@ -443,7 +444,8 @@
                 "PrcmtDlvryItem_articleName_description.title":"Nom Article",
                 "PrcmtDlvryItem_qtyBilled_description.title":"Qte factur\u00E9",
                 "PrcmtDlvryItem_section_description.title":"section",
-                "Entity_close.title":"Fermer"
+                "Entity_close.title":"Fermer",
+                "Entity_post.title":"Poster"
 
             });
             $translateProvider.preferredLanguage('en');

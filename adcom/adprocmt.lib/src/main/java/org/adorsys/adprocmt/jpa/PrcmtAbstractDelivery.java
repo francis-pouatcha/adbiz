@@ -18,7 +18,7 @@ public abstract class PrcmtAbstractDelivery extends CoreAbstBsnsObject {
 
 	@Column
 	@Description("PrcmtDelivery_dlvrySlipNbr_description")
-	@NotNull(message = "PrcmtDelivery_dlvrySlipNbr_NotNull_validation")
+	//@NotNull(message = "PrcmtDelivery_dlvrySlipNbr_NotNull_validation")
 	private String dlvrySlipNbr;
 
 	@Temporal(TemporalType.TIMESTAMP)

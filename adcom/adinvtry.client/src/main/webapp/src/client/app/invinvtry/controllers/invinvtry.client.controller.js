@@ -197,7 +197,8 @@
 
 
         $scope.reload = function(){
-            loadInvInvtryItems($scope.searchInput);
+            $scope.searchInput = itemsResultHandler.searchInput();
+            loadInvInvtryItems(x);
         };
 
         function findConflict(searchInput) {
