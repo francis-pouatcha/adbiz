@@ -12,8 +12,6 @@ import org.adorsys.adcore.loader.jpa.CorLdrStep;
 import org.adorsys.adcore.rest.CoreAbstEntityJobExecutor;
 import org.adorsys.adcore.xls.AbstractLoader;
 import org.adorsys.adcore.xls.CoreAbstLoaderRegistration;
-import org.adorsys.adprocmt.jpa.PrcmtDelivery;
-import org.adorsys.adprocmt.jpa.PrcmtDlvryItem;
 
 @Startup
 @Singleton
@@ -28,12 +26,12 @@ public class PrcmtLoaderRegistration extends CoreAbstLoaderRegistration {
 	@Inject
 	private PrcmtLoaderRegistration registration;
 	@EJB
-	private PrcmtDeliveryLoaderExecutor execTask;
+	private PrcmtLoaderExecutor execTask;
 
 	@PostConstruct
 	public void postConstruct(){
-		dataSheetLoader.registerLoader(PrcmtDelivery.class.getSimpleName(), prcmtDeliveryLoader);
-		dataSheetLoader.registerLoader(PrcmtDlvryItem.class.getSimpleName(), prcmtDlvryItemLoader);
+		dataSheetLoader.registerLoader(PrcmtDeliveryExcel.class.getSimpleName(), prcmtDeliveryLoader);
+		dataSheetLoader.registerLoader(PrcmtDlvryItemExcel.class.getSimpleName(), prcmtDlvryItemLoader);
 	}
 
 	@Override

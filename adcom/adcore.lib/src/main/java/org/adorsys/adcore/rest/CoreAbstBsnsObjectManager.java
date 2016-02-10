@@ -154,14 +154,14 @@ public abstract class CoreAbstBsnsObjectManager<E extends CoreAbstBsnsObject, I 
 
 		
 		if(BigDecimalUtils.strictEquals(existing.getTrgtQty(), trgtQty) && 
-				DateUtils.truncatedEquals(existing.getAcsngDt(),acsngDt, Calendar.SECOND))
+				DateUtils.truncatedEquals(existing.getAcsngDt(),acsngDt, Calendar.MINUTE))
 			return existing;
 
 		if(!BigDecimalUtils.strictEquals(trgtQty, existing.getTrgtQty())){
 			existing.setTrgtQty(trgtQty);
 		}
 		if(acsngDt==null) acsngDt = new Date();
-		if(!DateUtils.truncatedEquals(existing.getAcsngDt(),acsngDt, Calendar.SECOND)){
+		if(!DateUtils.truncatedEquals(existing.getAcsngDt(),acsngDt, Calendar.MINUTE)){
 			existing.setAcsngDt(acsngDt);
 		}
 		String currentLoginName = callerPrincipal.getLoginName();

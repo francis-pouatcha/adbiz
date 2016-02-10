@@ -87,7 +87,7 @@ CoreAbstBsnsObjInjector<PrcmtProcOrder, PrcmtPOItem, PrcmtProcOrderHstry, PrcmtJ
 
 	@Override
 	public String getSequenceGeneratorPrefix() {
-		return SequenceGenerator.INVENTORY_SEQUENCE_PREFIXE;
+		return SequenceGenerator.PRCMT_ORDER_SEQUENCE_PREFIXE;
 	}
 
 	@Override

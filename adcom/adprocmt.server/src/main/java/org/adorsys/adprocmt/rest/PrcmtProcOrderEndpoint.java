@@ -18,9 +18,6 @@ import org.adorsys.adprocmt.jpa.PrcmtProcOrderSearchInput;
 import org.adorsys.adprocmt.jpa.PrcmtProcOrderSearchResult;
 import org.adorsys.adprocmt.jpa.PrcmtProcOrder_;
 
-/**
- * 
- */
 @Stateless
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 @Path("/prcmtprocorders")

@@ -20,9 +20,6 @@ import org.adorsys.adprocmt.jpa.PrcmtDeliverySearchResult;
 import org.adorsys.adprocmt.jpa.PrcmtDelivery_;
 import org.adorsys.adprocmt.loader.PrcmtLoaderRegistration;
 
-/**
- * 
- */
 @Stateless
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 @Path("/prcmtdeliverys")

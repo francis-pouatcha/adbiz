@@ -31,32 +31,38 @@ public abstract class CoreAbstLoader<T extends Object> {
 	protected abstract StepCallback getStepCallback();
 
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-	public void load(HSSFSheet hssfSheet){
-		load(hssfSheet, null);
+	public boolean load(HSSFSheet hssfSheet){
+		return load(hssfSheet, null);
 	}
 
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-	public void load(HSSFSheet hssfSheet, String stepIdentifier){
+	public boolean load(HSSFSheet hssfSheet, String stepIdentifier){
 		Iterator<Row> rowIterator = hssfSheet.rowIterator();
 		List<PropertyDesc> fields = null;
 		if(rowIterator.hasNext()){
 			Row headerRow = rowIterator.next();
 			fields = prepare(headerRow);
 		}
-		if(fields==null || fields.isEmpty()) return;
+		if(fields==null || fields.isEmpty()) return true;
 		CellParser cellParser = new CellParser(hssfSheet.getWorkbook());
 		T last = null;
 		while(rowIterator.hasNext()){
 			Row row = rowIterator.next();
 			last = getLoader().update(row, fields, cellParser, stepIdentifier);
+			// Return false if the entity is not saved so loading can be cleanly interupted. 
+			if(last==null) return false;
 		}
-		getLoader().done(last);
+		return getLoader().done(last);
 	}
 	
 	/*
 	 * Allows the release of resources.
+	 * 
+	 * Returns true if the loader should proceed with the following sheets.
+	 * 
 	 */
-	public void done(T last){
+	public boolean done(T last){
+		return true;
 	}
 	
 	public T update(Row row, List<PropertyDesc> fields, CellParser cellParser, String stepIdentifier) {
@@ -65,6 +71,8 @@ public abstract class CoreAbstLoader<T extends Object> {
 			propertyDesc.setProperty(row, newObject, cellParser);
 		}
 		T save = save(newObject, fields);
+		if(save==null) return null;
+			
 		if(getStepCallback()!=null)getStepCallback().markSynchPoint(stepIdentifier,row.getRowNum());
 		return save;
 	}

@@ -29,7 +29,6 @@
 		<module>adcatal.server</module>
 		<module>adstock.server</module>
 		<module>adinvtry.server</module>
-		<module>adbase.server</module>
 
 		<module>adprocmt.lib</module>
 		<module>adprocmt.server</module>
@@ -44,6 +43,7 @@
 		<module>adbnsptnr.server</module> 
 		-->
 		<!-- 
+		<module>adbase.server</module>
 		<module>adcost.server</module>
 		<module>adcost.lib</module>
 		<module>adbase.lib</module>

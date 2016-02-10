@@ -19,11 +19,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.adorsys.adcom</groupId>
-			<artifactId>adbase.lib</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.adorsys.adcom</groupId>
 			<artifactId>adsales.lib</artifactId>
 			<version>${project.version}</version>
 		</dependency>

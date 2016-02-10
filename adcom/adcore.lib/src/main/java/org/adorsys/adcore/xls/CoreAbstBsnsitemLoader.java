@@ -34,14 +34,14 @@ public abstract class CoreAbstBsnsitemLoader<E extends CoreAbstBsnsObject, I ext
 	}
 
 	@Override
-	public void done(I last) {
+	public boolean done(I last) {
 		
-		if(last==null || last.getCntnrIdentif()==null) return;
+		if(last==null || last.getCntnrIdentif()==null) return true;
 		
 		String identif = last.getCntnrIdentif();
 		
 		Long count = getLookup().countByIdentif(identif);
-		if(count<=0) return;
+		if(count<=0) return true;
 
 		try {
 			getManager().close(identif);
@@ -49,6 +49,6 @@ public abstract class CoreAbstBsnsitemLoader<E extends CoreAbstBsnsObject, I ext
 		} catch (AdRestException e) {
 			throw new IllegalStateException(e);
 		}
-		
+		return true;
 	}
 }

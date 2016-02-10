@@ -120,6 +120,5 @@ public class PrcmtOrderManager extends CoreAbstBsnsObjectManager<PrcmtProcOrder,
 
 	public void prepareProcmtOrder(String identif) {
 		// TODO Auto-generated method stub
-		
 	}
 }

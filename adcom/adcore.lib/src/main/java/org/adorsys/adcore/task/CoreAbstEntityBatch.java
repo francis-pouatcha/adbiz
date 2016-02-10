@@ -94,7 +94,10 @@ public abstract class CoreAbstEntityBatch<J extends CoreAbstEntityJob, S extends
 			int execTimeMilisec = executor.estimateExecTimeMilisec(step.getIdentif());
 			boolean leased = getBatch().lease(step.getIdentif(), execTimeMilisec);
 			if(!leased) return;
-
+			if(job.getStartTime()==null){
+				job.setStartTime(new Date());
+				getJobEjb().update(job);
+			}
 			executor.execute(step.getIdentif());
 		}
 	}

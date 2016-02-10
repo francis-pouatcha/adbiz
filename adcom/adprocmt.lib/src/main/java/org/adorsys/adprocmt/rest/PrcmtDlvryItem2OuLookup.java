@@ -22,4 +22,8 @@ public class PrcmtDlvryItem2OuLookup extends CoreAbstIdentifLookup<PrcmtDlvryIte
 		return PrcmtDlvryItem2Ou.class;
 	}
 
+	public PrcmtDlvryItem2Ou findByCntnrIdentifAndRcvngOrgUnit(String cntnrIdentif, String rcvngOrgUnit) {
+		return repo.findByCntnrIdentifAndRcvngOrgUnit(cntnrIdentif, rcvngOrgUnit).getOptionalResult();
+	}
+
 }

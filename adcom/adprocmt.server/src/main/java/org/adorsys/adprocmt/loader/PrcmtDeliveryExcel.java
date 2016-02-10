@@ -1,8 +1,8 @@
 package org.adorsys.adprocmt.loader;
 
-import org.adorsys.adprocmt.jpa.PrcmtAbstractDelivery;
+import org.adorsys.adprocmt.jpa.PrcmtDelivery;
 
-public class PrcmtDeliveryExcel extends PrcmtAbstractDelivery {
+public class PrcmtDeliveryExcel extends PrcmtDelivery {
 	private static final long serialVersionUID = -9117914013087417999L;
 
 	private String rcvngOrgUnits;

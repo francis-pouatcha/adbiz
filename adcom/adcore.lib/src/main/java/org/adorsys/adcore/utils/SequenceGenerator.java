@@ -26,6 +26,7 @@ public class SequenceGenerator {
 	public static final String ID_SEQUENCE_PREFIXE = "ID";
 	public static final String BUSINESS_PARTNER_CATEGORY_SEQUENCE_PREFIXE = "BPC";
 	public static final String PRCMT_ORDER_SEQUENCE_PREFIXE = "PO";
+	public static final String PRCMT_DELIVERY_SEQUENCE_PREFIXE = "PDE";
 	public static final String APPOINTMENT_NUMBER_SEQUENCE_PREFIXE = "APT";
 	public static final String APPOINTMENTREPPORT_NUMBER_SEQUENCE_PREFIXE="APTREP";
 	public static final String DIRECT_SALES_SEQUENCE_PREFIXE = "DS";

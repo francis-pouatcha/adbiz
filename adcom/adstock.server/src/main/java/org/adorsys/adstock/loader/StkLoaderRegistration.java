@@ -12,6 +12,7 @@ import org.adorsys.adcore.loader.jpa.CorLdrStep;
 import org.adorsys.adcore.rest.CoreAbstEntityJobExecutor;
 import org.adorsys.adcore.xls.AbstractLoader;
 import org.adorsys.adcore.xls.CoreAbstLoaderRegistration;
+import org.adorsys.adstock.jpa.StkArt2Section;
 import org.adorsys.adstock.jpa.StkSection;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
@@ -23,6 +24,8 @@ public class StkLoaderRegistration extends CoreAbstLoaderRegistration {
 	private DataSheetLoader dataSheetLoader;
 	@Inject
 	private StkSectionLoader stkSectionLoader;
+	@Inject
+	private StkArt2SectionLoader stkArt2SectionLoader;
 	@EJB
 	private StkLoaderRegistration registration;
 	@EJB
@@ -32,6 +35,7 @@ public class StkLoaderRegistration extends CoreAbstLoaderRegistration {
 	public void postConstruct(){
 		super.postConstruct();
 		dataSheetLoader.registerLoader(StkSection.class.getSimpleName(), stkSectionLoader);
+		dataSheetLoader.registerLoader(StkArt2Section.class.getSimpleName(), stkArt2SectionLoader);
 		createTemplate();
 	}
 
@@ -55,5 +59,4 @@ public class StkLoaderRegistration extends CoreAbstLoaderRegistration {
 	protected CoreAbstEntityJobExecutor<CorLdrJob, CorLdrStep, CorLdrPrcssngStep> getEjb() {
 		return registration;
 	}
-	
 }

@@ -18,9 +18,6 @@ import org.adorsys.adprocmt.jpa.PrcmtDlvryItem2OuSearchInput;
 import org.adorsys.adprocmt.jpa.PrcmtDlvryItem2OuSearchResult;
 import org.adorsys.adprocmt.jpa.PrcmtDlvryItem2Ou_;
 
-/**
- * 
- */
 @Stateless
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 @Path("/prcmtdlvryitem2ous")

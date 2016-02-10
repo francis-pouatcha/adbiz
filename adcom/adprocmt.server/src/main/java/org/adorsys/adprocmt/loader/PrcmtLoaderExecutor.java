@@ -14,11 +14,11 @@ import org.adorsys.adcore.xls.CorAbstDataSheetLoaderExecutor;
 
 @Startup
 @Singleton
-public class PrcmtDeliveryLoaderExecutor extends CorAbstDataSheetLoaderExecutor {
+public class PrcmtLoaderExecutor extends CorAbstDataSheetLoaderExecutor {
 	@Inject
 	private DataSheetLoader dataSheetLoader;
 	@EJB
-	private PrcmtDeliveryLoaderExecutor ejb;
+	private PrcmtLoaderExecutor ejb;
 
 	@Override
 	protected CoreAbstEntityJobExecutor<CorLdrJob, CorLdrStep, CorLdrPrcssngStep> getEjb() {

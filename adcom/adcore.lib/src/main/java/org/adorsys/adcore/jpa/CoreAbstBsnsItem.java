@@ -48,6 +48,9 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 
 	@Column
 	private String supplier;
+
+	@Column
+	private String manufacturerPic;
 	
 	/*
 	 * The expiration date of this lot. This is decisive for the splitting in lots.
@@ -188,11 +191,36 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date slsRtrnDt;
 	
+	/*
+	 * The stock valuation. At any given time, this can be calculated by the system 
+	 * or set manually.
+	 */
 	@Column
 	private BigDecimal stkUnitValPreTax;
 	
 	@Column
 	private BigDecimal stkValPreTax;
+
+	/*
+	 * Acquisition Cost per unit. This includes besides the purchase price HT the 
+	 * transportation cost, and the handling cost and any purchase commission directly or indirectly assignable 
+	 * to this article.
+	 *  
+	 * Coût de revient
+	 */
+	@Column
+	private BigDecimal acqrdCostPuPreTax;
+	@Column
+	private BigDecimal acqrdCostPreTax;
+	
+	/*
+	 * Beside the acquisition cost, this can be regularly updated with the value induces by this item being
+	 * stored in the warehouse (space, guards, operation of the warehouse, ...).
+	 */
+	@Column
+	private BigDecimal stredCostPuPreTax;
+	@Column
+	private BigDecimal stredCostPreTax;
 
 	@Column
 	@NotNull
@@ -262,7 +290,6 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 	
 	// This is just a proforma
 	private Boolean profmt = Boolean.FALSE;
-	
 	
 	@PrePersist
 	public void prePersist() {
@@ -440,6 +467,14 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 
 	public void setSupplier(String supplier) {
 		this.supplier = supplier;
+	}
+
+	public String getManufacturerPic() {
+		return manufacturerPic;
+	}
+
+	public void setManufacturerPic(String manufacturerPic) {
+		this.manufacturerPic = manufacturerPic;
 	}
 
 	public String getSection() {
@@ -866,6 +901,38 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 		this.trgtQty = trgtQty;
 	}
 
+	public BigDecimal getAcqrdCostPuPreTax() {
+		return acqrdCostPuPreTax;
+	}
+
+	public void setAcqrdCostPuPreTax(BigDecimal acqrdCostPuPreTax) {
+		this.acqrdCostPuPreTax = acqrdCostPuPreTax;
+	}
+
+	public BigDecimal getAcqrdCostPreTax() {
+		return acqrdCostPreTax;
+	}
+
+	public void setAcqrdCostPreTax(BigDecimal acqrdCostPreTax) {
+		this.acqrdCostPreTax = acqrdCostPreTax;
+	}
+
+	public BigDecimal getStredCostPuPreTax() {
+		return stredCostPuPreTax;
+	}
+
+	public void setStredCostPuPreTax(BigDecimal stredCostPuPreTax) {
+		this.stredCostPuPreTax = stredCostPuPreTax;
+	}
+
+	public BigDecimal getStredCostPreTax() {
+		return stredCostPreTax;
+	}
+
+	public void setStredCostPreTax(BigDecimal stredCostPreTax) {
+		this.stredCostPreTax = stredCostPreTax;
+	}
+
 	protected void normalize(){
 		this.trgtQty = BigDecimalUtils.zeroIfNull(this.trgtQty);
 		this.prchVatPct=BigDecimalUtils.zeroIfNull(this.prchVatPct);
@@ -916,6 +983,15 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 		} else {
 			this.slsRstckgFeesPrct = FinancialOps.prctFromAmt(this.slsUnitPrcPreTax, this.slsRstckgUnitFeesPreTax, this.slsUnitPrcCur);
 		}
+
+		this.stkUnitValPreTax = BigDecimalUtils.zeroIfNull(this.stkUnitValPreTax);
+		this.stkValPreTax = BigDecimalUtils.zeroIfNull(this.stkValPreTax);
+
+		this.acqrdCostPuPreTax = BigDecimalUtils.zeroIfNull(this.acqrdCostPuPreTax);
+		this.acqrdCostPreTax = BigDecimalUtils.zeroIfNull(this.acqrdCostPreTax);
+		
+		this.stredCostPuPreTax = BigDecimalUtils.zeroIfNull(this.stredCostPuPreTax);
+		this.stredCostPreTax = BigDecimalUtils.zeroIfNull(this.stredCostPreTax);
 	}
 	
 	protected void computeSlsNetPrcTaxIncl() {
@@ -932,6 +1008,7 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 		this.slsVatAmt = FinancialOps.amtFromPrct(this.slsNetPrcPreTax, this.slsVatPct, this.slsUnitPrcCur);
 
 		this.slsNetPrcTaxIncl = FinancialOps.add(this.slsNetPrcPreTax, this.slsVatAmt, this.slsUnitPrcCur);
+
 	}
 	
 	protected void computePrchNetPrcTaxIncl() {
@@ -951,6 +1028,15 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 
 		this.prchNetPrcTaxIncl = FinancialOps.add(this.prchNetPrcPreTax, this.prchVatAmt, this.prchUnitPrcCur);
 	}
+
+	protected void computeValAmnt() {
+
+		setStkValPreTax(FinancialOps.qtyTmsPrice(getTrgtQty(), getStkUnitValPreTax(), getStkUnitValCur()));
+
+		setAcqrdCostPreTax(FinancialOps.qtyTmsPrice(getTrgtQty(), getAcqrdCostPuPreTax(), getStkUnitValCur()));
+		
+		setStredCostPreTax(FinancialOps.qtyTmsPrice(getTrgtQty(), getStredCostPuPreTax(), getStkUnitValCur()));
+	}
 	
 	public void evlte() {
 		normalize();
@@ -959,6 +1045,7 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 		setPrchGrossPrcPreTax(FinancialOps.qtyTmsPrice(this.trgtQty, getPrchUnitPrcPreTax(), getPrchUnitPrcCur()));
 		computeSlsNetPrcTaxIncl();
 		setStkValPreTax(FinancialOps.qtyTmsPrice(this.trgtQty, getStkUnitValPreTax(), getStkUnitValCur()));
+		computeValAmnt();
 	}
 	
 }

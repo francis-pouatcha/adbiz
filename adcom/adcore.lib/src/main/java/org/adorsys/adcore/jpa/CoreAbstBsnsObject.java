@@ -139,6 +139,13 @@ public abstract class CoreAbstBsnsObject extends CoreAbstBsnsObjectHeader {
 	@Size(max = 256, message = "InvInvtry_descptn_Size_validation")
 	private String descptn;
 
+	/*
+	 * The section of a business object can be used to identify the 
+	 * store location, where the business is taking place.
+	 * 
+	 * The section of a item will then be the location of the item in the 
+	 * corresponding storage.
+	 */
 	@Column
 	private String section;
 

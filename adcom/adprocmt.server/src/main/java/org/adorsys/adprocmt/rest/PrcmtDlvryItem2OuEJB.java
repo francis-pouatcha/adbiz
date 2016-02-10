@@ -1,5 +1,6 @@
 package org.adorsys.adprocmt.rest;
 
+import javax.ejb.Stateless;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
@@ -10,6 +11,7 @@ import org.adorsys.adprocmt.jpa.PrcmtDlvryItem;
 import org.adorsys.adprocmt.jpa.PrcmtDlvryItem2Ou;
 import org.adorsys.adprocmt.repo.PrcmtDlvryItem2OuRepository;
 
+@Stateless
 public class PrcmtDlvryItem2OuEJB extends CoreAbstIdentifiedEJB<PrcmtDlvryItem2Ou>{
 
 	@Inject

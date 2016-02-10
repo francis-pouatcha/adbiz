@@ -28,7 +28,7 @@ public abstract class PrcmtAbstractDelivery extends CoreAbstBsnsObject {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Description("PrcmtDelivery_orderDt_description")
 	private Date orderDt;
-
+	
 	public String getDlvrySlipNbr() {
 		return this.dlvrySlipNbr;
 	}

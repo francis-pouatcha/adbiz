@@ -1,12 +1,21 @@
 package org.adorsys.adstock.jpa;
 
 import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
 import org.adorsys.adcore.annotation.Description;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
+import org.apache.commons.lang3.StringUtils;
 
+/**
+ * The container of this section is the cntnrIdentif
+ * 
+ * @author fpo
+ *
+ */
 @MappedSuperclass
 @Description("StkSection_description")
 public class StkAbstractSection extends CoreAbstIdentifObject {
@@ -29,6 +38,14 @@ public class StkAbstractSection extends CoreAbstIdentifObject {
 	@Column
 	@Description("StkSection_wharehouse_description")
 	private String wharehouse;
+	
+	@Enumerated(EnumType.STRING)
+	private StkSectionType sectionType;
+	
+	/*
+	 * The path to the root section.
+	 */
+	private String path;
 
 	public String getName() {
 		return this.name;
@@ -62,8 +79,34 @@ public class StkAbstractSection extends CoreAbstIdentifObject {
 		this.wharehouse = wharehouse;
 	}
 
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+	
+	public StkSectionType getSectionType() {
+		return sectionType;
+	}
+
+	public void setSectionType(StkSectionType sectionType) {
+		this.sectionType = sectionType;
+	}
+
 	@Override
 	protected String makeIdentif() {
 		throw new IllegalStateException("Identifier is supposed to be set by caller.");
+	}
+	
+	public boolean isChildOf(String parentCode){
+		if(StringUtils.isBlank(parentCode)) return true;
+		if(StringUtils.isBlank(path)) return true;// root
+		return StringUtils.containsIgnoreCase(path, makePathComponent(parentCode));
+	}
+	
+	public String makePathComponent(String code){
+		return "(" + code + ")";
 	}
 }

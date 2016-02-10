@@ -8,8 +8,6 @@ import javax.validation.constraints.NotNull;
 
 import org.adorsys.adcore.annotation.Description;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
-import org.adorsys.adcore.utils.BigDecimalUtils;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * The assignment of a certain quantity of a delivery item to an organization unit.

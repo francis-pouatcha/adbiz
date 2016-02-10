@@ -87,11 +87,11 @@ public abstract class AbstractLoader {
 		}
 	}
 
-	public void processSingleFile(String jobIdentif, String absolutePath, String stepIdentifier){
+	public boolean processSingleFile(String jobIdentif, String absolutePath, String stepIdentifier){
 //		File fileDir = new File(getDir());
 //		if(!fileDir.exists()) return;
 		File file = new File(absolutePath);
-		if(!file.exists()) return;
+		if(!file.exists()) return true;
 
 		FileInputStream fis;
 		try {
@@ -99,8 +99,11 @@ public abstract class AbstractLoader {
 		} catch (FileNotFoundException e) {
 			throw new IllegalStateException(e);
 		}
-		loadFile(fis, stepIdentifier);
-		IOUtils.closeQuietly(fis);
+		try {
+			return loadFile(fis, stepIdentifier);
+		} finally {
+			IOUtils.closeQuietly(fis);
+		}
 	}
 	
 	public void exportTemplate(HSSFWorkbook workbook){
@@ -125,7 +128,7 @@ public abstract class AbstractLoader {
 		}
 	}
 
-	public void loadFile(FileInputStream fis, String stepIdentifier) {
+	public boolean loadFile(FileInputStream fis, String stepIdentifier) {
 		try {
 			HSSFWorkbook workbook = new HSSFWorkbook(fis);
 			int numberOfSheets = workbook.getNumberOfSheets();
@@ -135,14 +138,22 @@ public abstract class AbstractLoader {
 				String sheetName = sheet.getSheetName();
 				@SuppressWarnings("rawtypes")
 				CoreAbstLoader loader = loaders.get(sheetName);
-				if(loader!=null)loader.load(sheet, stepIdentifier);
+				if(loader!=null){
+					boolean continueLoad = loader.load(sheet, stepIdentifier);
+					if(!continueLoad) {
+						return false;
+					}
+				}
 			}
-			if(getStepCallback()!=null)getStepCallback().done(stepIdentifier);
+			if(getStepCallback()!=null){
+				getStepCallback().done(stepIdentifier);
+			}
 		} catch (IOException e) {
 			throw new IllegalStateException(e);
 		} finally {
 			IOUtils.closeQuietly(fis);
 		}
+		return true;
 	}
 
 	public String getProcessedSuffix() {

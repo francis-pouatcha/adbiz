@@ -20,9 +20,6 @@ import org.adorsys.adprocmt.jpa.PrcmtPOItemSearchInput;
 import org.adorsys.adprocmt.jpa.PrcmtPOItemSearchResult;
 import org.adorsys.adprocmt.jpa.PrcmtPOItem_;
 
-/**
- * 
- */
 @Stateless
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 @Path("/prcmtpoitems")

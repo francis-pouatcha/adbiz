@@ -132,4 +132,5 @@ public class InvInvtryManager  extends CoreAbstBsnsObjectManager<InvInvtry, InvI
 		// This method will create a new item.
 		return sctnStockQty!=null?sctnStockQty.getStockQty():BigDecimal.ZERO;
 	}
+	
 }

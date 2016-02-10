@@ -2,6 +2,7 @@ package org.adorsys.adcore.xls;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,6 +14,7 @@ import javax.inject.Inject;
 import org.adorsys.adcore.loader.ejb.CorLdrBatch;
 import org.adorsys.adcore.loader.ejb.CorLdrFileStreamEJB;
 import org.adorsys.adcore.loader.ejb.CorLdrFileStreamLookup;
+import org.adorsys.adcore.loader.ejb.CorLdrStepEJB;
 import org.adorsys.adcore.loader.ejb.CorLdrStepLookup;
 import org.adorsys.adcore.loader.jpa.CorLdrFileStream;
 import org.adorsys.adcore.loader.jpa.CorLdrJob;
@@ -28,6 +30,8 @@ public abstract class CorAbstDataSheetLoaderExecutor extends CoreAbstEntityJobEx
 	
 	@Inject
 	private CorLdrStepLookup stepLookup;
+	@Inject
+	private CorLdrStepEJB stepEJB;
 	@EJB
 	private CorLdrBatch batch;
 
@@ -55,9 +59,17 @@ public abstract class CorAbstDataSheetLoaderExecutor extends CoreAbstEntityJobEx
 				try {
 					File createTempFile = File.createTempFile(UUID.randomUUID().toString(), name);
 					fileStreamEJB.load(corLdrFileStream, createTempFile);
-					getLoader().processSingleFile(step.getCntnrIdentif(), createTempFile.getAbsolutePath(), step.getIdentif());
+					boolean finishedProcessing = getLoader().processSingleFile(step.getCntnrIdentif(), createTempFile.getAbsolutePath(), step.getIdentif());
 					FileUtils.deleteQuietly(createTempFile);
-					fileStreamEJB.deleteById(corLdrFileStream.getId());
+					if(finishedProcessing) {
+						fileStreamEJB.deleteById(corLdrFileStream.getId());
+					} else {
+						step = stepLookup.findByIdentif(stepIdentif);
+						step.setLeaseEnd(new Date());
+						step.setStepOwner(null);
+						step.setStarted(null);
+						stepEJB.update(step);
+					}
 				} catch (IOException e) {
 					throw new IllegalStateException(e);
 				}

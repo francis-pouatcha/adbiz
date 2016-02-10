@@ -43,6 +43,11 @@ public abstract class CoreAbstIdentifLookup<E extends CoreAbstIdentifObject> {
 		if(StringUtils.isBlank(identif)) return null;
 		return getRepo().findOptionalByIdentif(identif);
 	}
+
+	public E findByIdentifThrowException(String identif) {
+		if(StringUtils.isBlank(identif)) return null;
+		return getRepo().findByIdentif(identif).getSingleResult();
+	}
 	
 	public Long countByIdentif(String identif){
 		return getRepo().findByIdentif(identif).count();
