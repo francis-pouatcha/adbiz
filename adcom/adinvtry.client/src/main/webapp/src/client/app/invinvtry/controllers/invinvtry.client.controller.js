@@ -197,7 +197,8 @@
 
 
         $scope.reload = function(){
-            loadInvInvtryItems($scope.searchInput);
+            $scope.searchInput = itemsResultHandler.searchInput();
+            loadInvInvtryItems(x);
         };
 
         function findConflict(searchInput) {
@@ -211,6 +212,7 @@
         }
 
         $scope.showConflict = function(){
+            $scope.showConfilct=true;
             $scope.searchInput = itemsResultHandler.searchInput();
             $scope.searchInput.fieldNames.push('cntnrIdentif');
             $scope.searchInput.entity.cntnrIdentif = $scope.invInvtry.identif;
@@ -220,6 +222,7 @@
 
 
         function loadInvInvtryItems() {
+            $scope.showConfilct=false;
             prepareSearchInput();
             if($scope.searchInput.fieldNames.length==1 && $scope.searchInput.fieldNames.indexOf('cntnrIdentif')!=-1){
                 $scope.searchInput.sortFieldNames=[];

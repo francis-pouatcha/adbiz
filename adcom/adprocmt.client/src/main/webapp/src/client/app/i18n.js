@@ -79,7 +79,7 @@
                 "PrcmtPOItem_pppuCur_description.text":"The currency of the purchase price per unit.",
                 "PrcmtPOItem_pppuCur_description.title":"Currency of the Purchase Price per Unit",
                 "PrcmtPOItem_pppuPreTax_description.text":"The purchase price per unit.",
-                "PrcmtPOItem_pppuPreTax_description.title":"Purchase Price per Unit",
+                "PrcmtPOItem_pppuPreTax_description.title":"Purchase Price/U",
                 "PrcmtPOItem_qtyOrdered_description.text":"The quantity ordered in this lot.",
                 "PrcmtPOItem_qtyOrdered_description.title":"Quantity Ordered",
                 "PrcmtPOItem_rebate_description.text":"Rebate or Discount amount.",
@@ -185,7 +185,7 @@
                 "PrcmtDlvryItem_pppuCur_description.text":"The currency of the purchase price per unit.",
                 "PrcmtDlvryItem_pppuCur_description.title":"Currency of the Purchase Price per Unit",
                 "PrcmtDlvryItem_pppuPreTax_description.text":"The purchase price per unit.",
-                "PrcmtDlvryItem_pppuPreTax_description.title":"Purchase Price per Unit",
+                "PrcmtDlvryItem_pppuPreTax_description.title":"Purchase Price/U",
                 "PrcmtDlvryItem_purchRtrnDays_description.text":"The time in days in which a return on purchase is accepted.",
                 "PrcmtDlvryItem_purchRtrnDays_description.title":"Return on Purchase in Days",
                 "PrcmtDlvryItem_purchWrntyDys_description.text":"Purchase Warranty Time in Days",
@@ -218,7 +218,10 @@
                 "PrcmtDlvryItem_vatSalesPct_description.title":"VAT Rate",
                 "PrcmtDlvryItem_articleName_description.title":"Article Name",
                 "PrcmtDlvryItem_qtyBilled_description.title":"Invoice Qty",
-                "PrcmtDlvryItem_section_description.title":"section"
+                "PrcmtDlvryItem_section_description.title":"section",
+                "Entity_close.title":"Close",
+                "Entity_post.title":"Post"
+
 
 
             });
@@ -299,7 +302,7 @@
                 "PrcmtPOItem_pppuCur_description.text":"La d\u00E9vise du prix d achat unitaire.",
                 "PrcmtPOItem_pppuCur_description.title":"D\u00E9vise du Prix d Achat Unitaire",
                 "PrcmtPOItem_pppuPreTax_description.text":"Prix d achat unitaire.",
-                "PrcmtPOItem_pppuPreTax_description.title":"Prix d Achat Unitaire",
+                "PrcmtPOItem_pppuPreTax_description.title":"Prix d Achat/U",
                 "PrcmtPOItem_qtyOrdered_description.text":"La quantit\u00E9 de produits command\u00E9s dans le lot.",
                 "PrcmtPOItem_qtyOrdered_description.title":"Quantit\u00E9 Command\u00E9e",
                 "PrcmtPOItem_rebate_description.text":"Montant de la remise",
@@ -440,7 +443,9 @@
                 "PrcmtDlvryItem_vatSalesPct_description.title":"Taux TVA",
                 "PrcmtDlvryItem_articleName_description.title":"Nom Article",
                 "PrcmtDlvryItem_qtyBilled_description.title":"Qte factur\u00E9",
-                "PrcmtDlvryItem_section_description.title":"section"
+                "PrcmtDlvryItem_section_description.title":"section",
+                "Entity_close.title":"Fermer",
+                "Entity_post.title":"Poster"
 
             });
             $translateProvider.preferredLanguage('en');

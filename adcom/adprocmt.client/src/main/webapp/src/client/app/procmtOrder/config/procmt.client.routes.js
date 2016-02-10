@@ -8,7 +8,8 @@
     appRun.$inject = ['routerHelper'];
     /* @ngInject */
     function appRun(routerHelper) {
-        routerHelper.configureStates(getStates());
+        var otherwise = '/procmt';
+        routerHelper.configureStates(getStates(),otherwise);
     }
 
     function getStates() {
@@ -20,7 +21,7 @@
                     templateUrl: '/adprocmt.client/src/client/app/procmtOrder/views/list.html',
                     controller: 'ProcmtCtlr',
                     //controllerAs: 'vm',
-                    title: 'List Procurement'
+                    title: 'List Procurement Order'
                 }
             },
             {
@@ -30,9 +31,9 @@
                     templateUrl: '/adprocmt.client/src/client/app/procmtOrder/views/list.html',
                     controller: 'ProcmtCtlr',
                     //controllerAs: 'vm',
-                    title: 'List Procurement',
+                    title: 'List Procurement Order',
                     settings: {
-                        nav: 3,
+                        nav: 1,
                         content: '<i class="fa fa-folder-open"></i> Orders'
                     }
                 }
@@ -44,7 +45,7 @@
                     templateUrl: '/adprocmt.client/src/client/app/procmtOrder/views/create.html',
                     controller: 'ProcmtCreateCtlr',
                     //controllerAs: 'vm',
-                    title: 'Create Procurement'
+                    title: 'Create Procurement Order'
                 }
             },
             {
@@ -54,7 +55,7 @@
                     templateUrl: '/adprocmt.client/src/client/app/procmtOrder/views/view.html',
                     controller: 'ProcmtShowCtlr',
                     //controllerAs: 'vm',
-                    title: 'View Procurement'
+                    title: 'View Procurement Order'
                 }
             },
             {
@@ -64,7 +65,7 @@
                     templateUrl: '/adprocmt.client/src/client/app/procmtOrder/views/edit.html',
                     controller: 'ProcmtController',
                     //controllerAs: 'vm',
-                    title: 'Edit Procurement'
+                    title: 'Edit Procurement Order'
                 }
             }
         ];

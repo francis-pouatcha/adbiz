@@ -34,7 +34,7 @@ public class PrcmtAbstractDlvryItem2POItem extends CoreAbstIdentifObject {
 	
 	@Column
 	@Description("PrcmtDlvryItem_qtyDlvrd_description")
-	@NotNull
+	//@NotNull when we transform order to delivery, we dont konw yet the qtyDlvrd
 	private BigDecimal qtyDlvrd;
 	
 	@Column

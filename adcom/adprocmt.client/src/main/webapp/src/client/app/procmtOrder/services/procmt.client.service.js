@@ -3,7 +3,7 @@
 
     angular
         .module('app.procmt')
-        .factory('procmtManagerResource',['$http','$resource','API_BASE_ADPROCMT_URL',
+        .factory('procmtOrderManagerResource',['$http','$resource','API_BASE_ADPROCMT_URL',
 
     function($http,$resource,API_BASE_ADPROCMT_URL){
 
@@ -57,6 +57,10 @@
                 method: 'PUT',
                 url: API_BASE_ADPROCMT_URL + '/order/:identif/post'
             },
+            transform: {
+                method: 'POST',
+                url: API_BASE_ADPROCMT_URL + '/order/transform'
+            },
             addItem: {
                 method: 'POST',
                 url: API_BASE_ADPROCMT_URL + '/order/:identif/items'
@@ -89,7 +93,7 @@
 
     angular
         .module('app.procmt')
-        .factory('prcmtUtils', prcmtUtils);
+        .factory('prcmtOrderUtils', prcmtUtils);
 
     prcmtUtils.$inject = ['$translate','genericResource','API_BASE_URL', 'BASE_SERVER'];
     /* @ngInject */

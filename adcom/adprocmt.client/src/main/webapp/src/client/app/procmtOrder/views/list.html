@@ -24,7 +24,7 @@
                                 <div class="">
                                     <select class="form-control" name="status" id="status" ng-model="searchInput.entity.status"
                                             ng-options="status.enumKey as (status.translKey | translate)
-							                    	for status in prcmtUtils.status" >
+							                    	for status in prcmtOrderUtils.status" >
                                         <option value=""/>
                                     </select>
                                 </div>
@@ -34,7 +34,7 @@
                             <label class=" control-label" for="poTriggerMode"> {{'PrcmtProcOrder_poTriggerMode_description.title' | translate}}</label>
                             <select class="form-control" name="poTriggerMode" id="poTriggerMode" ng-model="searchInput.entity.poTriggerMode"
                                     ng-options="status.enumKey as (status.translKey | translate)
-							                    	for status in prcmtUtils.poTriggerModes" >
+							                    	for status in prcmtOrderUtils.poTriggerModes" >
                                 <option value=""/>
                             </select>
                         </div>
@@ -63,7 +63,7 @@
                             <div >
                                 <select class="form-control" name="txType" id="txType" ng-model="searchInput.entity.txType"
                                         ng-options="txType.enumKey as (txType.translKey | translate)
-			                   				for txType in prcmtUtils.POTypes" >
+			                   				for txType in prcmtOrderUtils.POTypes" >
                                     <option value=""/>
                                 </select>
                             </div>
