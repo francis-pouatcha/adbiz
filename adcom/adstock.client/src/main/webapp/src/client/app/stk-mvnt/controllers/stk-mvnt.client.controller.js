@@ -91,8 +91,7 @@
             vm.setFormFields(false);
         };
 
-        //findAllStkmvnts();
-//        findCustomStkmvnts();
+        initSearchInput();
         
         function findAllStkmvnts(){
             StkMvnt.listAll(function (response) {
@@ -102,16 +101,6 @@
                 vm.error = errorResponse.data.summary;
             });  
         }
-
-//        function findCustomStkmvnts(){
-//            StkMvnt.findCustom(vm.searchInput, function(response){
-//                vm.data.list = response.resultList;
-//                vm.data.total = response.total;
-//            }, 
-//            function(errorResponse) {
-//                vm.error = errorResponse.data.summary;
-//            });  
-//        }
         
         vm.callServer = function(tableState) {
     	    var pagination = tableState.pagination;
@@ -129,9 +118,8 @@
 
         function processSearch(start, searchObject) {
         	// First initialize SearchInput-Object and then set Search-Params
-            vm.searchInput = utils.searchInputInit().searchInput;
-        	vm.searchInput.start = start;
         	vm.searchInput = utils.processSearch(vm.searchInput, searchObject.predicateObject);
+        	vm.searchInput.start = start;
         }
     }
 

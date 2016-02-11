@@ -2,162 +2,11 @@
 <section data-ng-cloak id="invIntrySearchPanel" class="mainbar">
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <span><b><span data-ng-bind="'Entity_search.title' | translate"></span>/ <span data-ng-bind="'Entity_create.title' | translate"></span></b></span>
+        <span><b><span data-ng-bind="'Entity_create.title' | translate"></span></b></span>
         <button class="glyphicon glyphicon-collapse-down pull-right" data-toggle="collapse" data-parent="#invIntryShowPanel" data-target="#invInvtrySearchToggle"></button>
     </div>
     <div class="panel-collapse collapse" id="invInvtrySearchToggle">
-        <div class="panel-body">
-            <div class="">
-                <form role="form" class="">
-                    <div class="row" >
-                        <div class="col-lg-2">
-                            <div class="form-group">
-                                <label class=" control-label" for="identif"><span data-ng-bind="'InvInvtry_invtryNbr_description.title' | translate"></span></label>
-                                <div class="">
-                                    <input type="text" id="identif" data-ng-model="searchInput.entity.identif" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group col-lg-2">
-                            <label class=" control-label" for="login"><span data-ng-bind="'InvInvtry_acsngUser_description.title' | translate"></span></label>
-                            <input type="text" data-ng-model="searchInput.entity.login" id="login" name="login" class="form-control" >
-                        </div>
-
-                        <div class="col-lg-2">
-                            <div class="form-group">
-                                <label class=" control-label" for="status"><span data-ng-bind="'InvInvtry_invtryStatus_description.title' | translate"></span></label>
-                                <div class="">
-                                    <select class="form-control" name="status" id="invtryStatus" data-ng-model="searchInput.entity.status"
-                                            data-ng-options="status.enumKey as (status.translKey | translate)
-							                    	for status in invInvtryUtils.invInvntrStati" >
-                                        <option value=""/>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group col-lg-2">
-                            <label class=" control-label" for="invtryGroup"><span data-ng-bind="'InvInvtry_invtryGroup_description.title' | translate"></span></label>
-                            <input type="text" data-ng-model="searchInput.entity.txGroup" id="invtryGroup" name="invtryGroup" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row" >
-                        <div class="col-lg-2">
-                            <div class="form-group">
-                                <label class=" control-label" for="invtryDtFrom"><span data-ng-bind="'InvInvtry_invtryDtFrom_description.title' | translate"></span></label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="invtryDtFrom" name="invtryDtFrom"
-						            	data-datepicker-popup="{{dateConfig.format}}" data-ng-model="searchInput.invtryDtFrom" 
-										data-is-open="dateConfig.invtryDtFrom.opened" data-ng-required="true" 
-										data-show-button-bar="false" placeholder="{{dateConfig.format}}"/>
-						            <span class="input-group-btn">
-						                <button style="height:34px;" class="btn btn-default" data-ng-click="openDateComponent('invtryDtFrom', $event)">
-						                	<i class="glyphicon glyphicon-calendar"></i>
-						                </button>
-						            </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="form-group">
-                                <label class=" control-label" for="invtryDtTo"><span data-ng-bind="'InvInvtry_invtryDtTo_description.title' | translate"></span></label>
-                                <div class="input-group">
-									<input type="text" class="form-control" id="invtryDtTo" name="invtryDtTo"
-						            	data-datepicker-popup="{{dateConfig.format}}" data-ng-model="searchInput.invtryDtTo" 
-										data-is-open="dateConfig.invtryDtTo.opened" data-ng-required="true" 
-										data-show-button-bar="false" placeholder="{{dateConfig.format}}"/>
-						            <span class="input-group-btn">
-						                <button style="height:34px;" class="btn btn-default" data-ng-click="openDateComponent('invtryDtTo', $event)">
-						                	<i class="glyphicon glyphicon-calendar"></i>
-						                </button>
-						            </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="form-group">
-                                <label class=" control-label" for="acsngDtFrom"><span data-ng-bind="'InvInvtry_acsngDtFrom_description.title' | translate"></span></label>
-                                <div class="input-group">
-									<input type="text" class="form-control" id="acsngDtFrom" name="acsngDtFrom"
-						            	data-datepicker-popup="{{dateConfig.format}}" data-ng-model="searchInput.acsngDtFrom" 
-										data-is-open="dateConfig.acsngDtFrom.opened" data-ng-required="true" 
-										data-show-button-bar="false" placeholder="{{dateConfig.format}}"/>
-						            <span class="input-group-btn">
-						                <button style="height:34px;" class="btn btn-default" data-ng-click="openDateComponent('acsngDtFrom', $event)">
-						                	<i class="glyphicon glyphicon-calendar"></i>
-						                </button>
-						            </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="form-group">
-                                <label class=" control-label" for="acsngDtTo"><span data-ng-bind="'InvInvtry_acsngDtTo_description.title' | translate"></span></label>
-                                <div class="input-group">
-						            <input type="text" class="form-control" id="acsngDtTo" name="acsngDtTo"
-						            	data-datepicker-popup="{{dateConfig.format}}" data-ng-model="searchInput.acsngDtTo" 
-										data-is-open="dateConfig.acsngDtTo.opened" data-ng-required="true" 
-										data-show-button-bar="false" placeholder="{{dateConfig.format}}"/>
-						            <span class="input-group-btn">
-						                <button style="height:34px;" class="btn btn-default" data-ng-click="openDateComponent('acsngDtTo', $event)">
-						                	<i class="glyphicon glyphicon-calendar"></i>
-						                </button>
-						            </span>
-						      	</div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row" >
-                        <div class="form-group col-lg-4">
-                            <label><span data-ng-bind="'InvInvtry_invInvtryType_description.title' | translate"></span>:</label>
-                            <div data-ng-class="{ 'has-error' : invInvtryForm.invMode.$invalid }" >
-                                <select class="form-control" name="txType" id="txType" data-ng-model="searchInput.entity.txType"
-                                        data-ng-options="txType.enumKey as (txType.translKey | translate)
-			                   				for txType in invInvtryUtils.invInvtryTypes" >
-                                    <option value=""/>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group col-lg-2">
-                            <label class=" control-label" for="createSectionCode"><span data-ng-bind="'InvInvtryItem_section_description.title' | translate"></span></label>
-                            <input type="text" data-ng-model="searchInput.entity.section" id="createSectionCode" name="createSectionCode" class="form-control" data-ng-change="onSectionChanged()"
-                                   autocomplete="off" typeahead="stkSection as (stkSection.identif + ' : ' + stkSection.name) for stkSection in invInvtryUtils.loadStkSectionArticleLots($viewValue)"
-                                   typeahead-loading="loading" typeahead-min-length="4" typeahead-on-select='onSectionSelected($item, $model, $label)'>
-                        </div>
-                        <div class="form-group col-lg-4">
-                            <label class=" control-label" for="createSectionName"><span data-ng-bind="'InvInvtryItem_sectionName_description.title' | translate"></span></label>
-                            <input type="text" data-ng-model="display.sectionName" id="createSectionName" name="createSectionName" class="form-control"
-                                   autocomplete="off" typeahead="stkSection as (stkSection.identif + ' : ' + stkSection.name) for stkSection in invInvtryUtils.loadStkSectionArticleLotsByName($viewValue)"
-                                   typeahead-loading="loading" typeahead-min-length="4" typeahead-on-select='onSectionSelected($item, $model, $label)'>
-                        </div>
-                        <div class="form-group col-lg-1">
-                            <label class=" control-label" for="createRangeStart"><span data-ng-bind="'InvInvtryItem_artNameStart_description.title' | translate"></span></label>
-                            <input type="text" data-ng-model="searchInput.entity.rangeStart" id="createRangeStart" name="createRangeStart" class="form-control">
-                        </div>
-                        <div class="form-group col-lg-1">
-                            <label class=" control-label" for="createRangeEnd"><span data-ng-bind="'InvInvtryItem_artNameEnd_description.title' | translate"></span></label>
-                            <input type="text" data-ng-model="searchInput.entity.rangeEnd" id="createRangeEnd" name="createRangeEnd" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row" >
-                        <div class="form-group col-lg-6">
-                            <label class=" control-label"><span data-ng-bind="'InvInvtry_descptn_description.title' | translate"></span>:</label>
-                            <input type="text" id="descptn" name="descptn" class="form-control" data-ng-model="searchInput.entity.descptn"/>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <button  data-ng-click="handlePrintRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
-                                    <i class="glyphicon glyphicon-print"></i>
-                                </button>
-                                <a class="btn btn-success" href="#/invinvtry/create" style="margin-top: 23px;" >
-                                    <i class="glyphicon-plus"></i><span data-ng-bind="'Entity_create.title' | translate"></span> Invinvtry
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+	      <div data-ng-include="'/adinvtry.client/src/client/app/invinvtry/views/create.html'"></div>
     </div>
 </div>
 
@@ -186,7 +35,7 @@
 		             		<th></th>
 		             		<th></th>
 		             		<th><input data-st-search="status" class="input-sm form-control" type="search"/></th>
-		             		<th><st-date-range predicate="prepareDt" before="query.before" after="query.after"></st-date-range></th>
+		             		<th><st-date-search predicate="prepareDt" selected-date="query"></st-date-search></th>
 		             		<th></th>
 		             		<th></th>
 		             		<th><input data-st-search="section" class="input-sm form-control" type="search"/></th>

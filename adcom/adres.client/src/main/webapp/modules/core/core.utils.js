@@ -108,6 +108,10 @@
 
 
         service.processSearch = function(searchInput, object){
+        	if (searchInput) {
+        		searchInput.entity = {}
+        		searchInput.fieldNames = [];
+        	}
             for(var key in object){
                 if(object.hasOwnProperty(key)){
                     var keyValue = Object.getOwnPropertyDescriptor(object, key).value;

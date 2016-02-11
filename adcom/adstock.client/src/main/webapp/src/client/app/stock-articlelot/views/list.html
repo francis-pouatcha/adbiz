@@ -20,9 +20,6 @@
 		          <th><span data-ng-bind="'StockArticlelot.artPic.title' | translate"></span></th>
 		          <th><span data-ng-bind="'StockArticlelot.section.title' | translate"></span></th>
 		          <th><span data-ng-bind="'StockArticlelot.expirDt.title' | translate"></span></th>
-		          <th><span data-ng-bind="'StockArticlelot.valueDt.title' | translate"></span></th>
-		          <th><span data-ng-bind="'StockArticlelot.supplier.title' | translate"></span></th>
-		          <th><span data-ng-bind="'StockArticlelot.stkUnitValCur.title' | translate"></span></th>
 		          <th><span data-ng-bind="'StockArticlelot.trgtQty.title' | translate"></span></th>
 		          <th colspan="2"><span data-ng-bind="'StockArticlelot.stkgDt.title' | translate"></span></th>
 	          </tr>
@@ -30,14 +27,12 @@
 				<th><input data-st-search="lotPic" class="input-sm form-control" type="search"/></th>
 				<th><input data-st-search="artPic" class="input-sm form-control" type="search"/></th>
 				<th><input data-st-search="section" class="input-sm form-control" type="search"/></th>
-				<th>
-					<st-date-range predicate="expirDt" before="query.before" after="query.after"></st-date-range>
-				</th>
-				<th><input data-st-search="valueDt" class="input-sm form-control" type="search"/></th>
-				<th><input data-st-search="supplier" class="input-sm form-control" type="search"/></th>
-				<th></th>
+				<th><st-date-search predicate="expirDt" selected-date="query.expirDt"></st-date-search></th>
+<!-- 				<th> -->
+<!-- 					<st-date-range predicate="expirDt" before="query.before" after="query.after"></st-date-range> -->
+<!-- 				</th> -->
 				<th><input data-st-search="trgtQty" class="input-sm form-control" type="search"/></th>
-				<th colspan="2"><input data-st-search="stkgDt" class="input-sm form-control" type="search"/></th>
+				<th colspan="2"><st-date-search predicate="stkgDt" selected-date="query.stkgDt"></st-date-search></th>
     		</tr>
           </thead>
           <tbody>
@@ -46,9 +41,6 @@
 	              <td><span data-ng-bind="stockArticlelot.artPic"></span></td>
 	              <td><span data-ng-bind="stockArticlelot.section"></span></td>
 	              <td><span data-ng-bind="stockArticlelot.expirDt | date:'dd-MM-yyyy'"></span></td>
-	              <td><span data-ng-bind="stockArticlelot.valueDt | date:'dd-MM-yyyy HH:mm:ss'"></span></td>
-	              <td><span data-ng-bind="stockArticlelot.supplier"></span></td>
-	              <td><span data-ng-bind="stockArticlelot.stkUnitValCur"></span></td>
 	              <td><span data-ng-bind="stockArticlelot.trgtQty"></span></td>
 	              <td><span data-ng-bind="stockArticlelot.stkgDt | date:'dd-MM-yyyy HH:mm:ss'"></span></td>
 	              <td>

@@ -1,12 +1,9 @@
 
-<section  class="mainbar">
-    <div class="panel panel-primary">
-        <div class="panel-heading"><b><span data-ng-bind="'Entity_create.title' | translate"></span></b> </div>
-        <div class="panel-body">
+        <div class="panel-body" data-ng-controller="invInvtryCreateCtlr">
             <label class="error col-lg-offset-3 alert-danger" ><span data-ng-bind="error"></span></label>
             <form  name="invInvtryForm" id="invInvtryForm" novalidate>
                 <div class="row" >
-                    <div class="form-group col-lg-3">
+                    <div class="form-group col-lg-6">
                         <label> <span data-ng-bind="'InvInvtry_invInvtryType_description.title' | translate"></span>:</label>
                         <div data-ng-class="{ 'has-error' : invInvtryForm.invMode.$invalid }" >
                             <select class="form-control" name="invInvtryType" id="invInvtryType" data-ng-model="invInvtry.txType"
@@ -28,25 +25,19 @@
                                <!--autocomplete="off" typeahead="loginName as (loginName.loginName + ' : ' + loginName.fullName) for loginName in invInvtryUtils.loadUsersByName($viewValue)"-->
                                <!--typeahead-loading="loading" typeahead-min-length="3" typeahead-on-select='onUserSelectedInCreate($item, $model, $label)'>-->
                     <!--</div>-->
-                    <div class="form-group col-lg-2">
+                    <div class="form-group col-lg-4">
                         <label class=" control-label" for="txGroup"> <span data-ng-bind="'InvInvtry_invtryGroup_description.title' | translate"></span></label>
                         <input type="text" data-ng-model="invInvtry.txGroup" id="txGroup" name="txGroup" class="form-control">
                     </div>
                 </div>
-                <div class="row" >
-                    <div class="form-group col-lg-12">
-                        <label class=" control-label"> <span data-ng-bind="'InvInvtry_descptn_description.title' | translate"></span>:</label>
-                        <textarea rows="3" id="descptn" name="descptn" class="form-control" data-ng-model="invInvtry.descptn" maxlength="256"></textarea>
-                    </div>
-                </div>
                 <div class="row">
-                    <div class="form-group col-lg-2">
+                    <div class="form-group col-lg-3">
                         <label class=" control-label" for="createSectionCode"><span data-ng-bind="'InvInvtryItem_section_description.title' | translate"></span></label>
                         <input type="text" placeholder="RAY-0001" data-ng-model="invInvtry.section" id="createSectionCode" name="createSectionCode" class="form-control"
                                autocomplete="off" typeahead="stkSection as (stkSection.identif + ' : ' + stkSection.name) for stkSection in invInvtryUtils.loadStkSectionArticleLots($viewValue)"
                                typeahead-loading="loading" typeahead-min-length="4" typeahead-on-select='onSectionSelectedInCreate($item, $model, $label)'>
                     </div>
-                    <div class="form-group col-lg-4">
+                    <div class="form-group col-lg-5">
                         <label class=" control-label" for="createSectionName"><span data-ng-bind="'InvInvtryItem_sectionName_description.title' | translate"></span></label>
                         <input type="text" placeholder="SANOFI" data-ng-model="display.sectionName" id="createSectionName" name="createSectionName" class="form-control"
                                autocomplete="off" typeahead="stkSection as (stkSection.identif + ' : ' + stkSection.name) for stkSection in invInvtryUtils.loadStkSectionArticleLotsByName($viewValue)"
@@ -61,23 +52,26 @@
                         <input type="text" data-ng-model="invInvtry.rangeEnd" id="createRangeEnd" name="createRangeEnd" class="form-control">
                     </div>
                 </div>
+                <div class="row" >
+                    <div class="form-group col-lg-12">
+                        <label class=" control-label"> <span data-ng-bind="'InvInvtry_descptn_description.title' | translate"></span>:</label>
+                        <textarea rows="2" id="descptn" name="descptn" class="form-control" data-ng-model="invInvtry.descptn" maxlength="256"></textarea>
+                    </div>
+                </div>
                 <div class="row">
-                    <div class="form-group">
-                        <span class="col-lg-4"></span>
-                        <div class="col-lg-2">
-                            <a class="btn-danger btn" href="#/InvInvtrys">
-                                <i class="glyphicon glyphicon-remove" ></i><span data-ng-bind="'Entity_cancel.title' | translate"></span></a>
-                        </div>
-                        <div class="col-lg-2">
+                    <div class="form-group pull-right">
+<!--                         <span class="col-lg-4"></span> -->
+<!--                         <div class="col-lg-2"> -->
+<!--                             <a class="btn-danger btn" href="#/InvInvtrys"> -->
+<!--                                 <i class="glyphicon glyphicon-remove" ></i><span data-ng-bind="'Entity_cancel.title' | translate"></span></a> -->
+<!--                         </div> -->
+                        <div>
                             <button data-ng-click="create();" data-ng-disabled="invInvtryForm.$invalid" class="btn-success btn"  >
                                 <i class="glyphicon glyphicon-save"></i><span data-ng-bind="'Entity_save.title' | translate"></span></button>
                         </div>
-                        <span class="col-lg-4"></span>
                     </div>
                 </div>
             </form>
         </div>
-    </div>
-</section>
 
 

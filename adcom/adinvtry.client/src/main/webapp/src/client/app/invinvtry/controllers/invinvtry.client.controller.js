@@ -12,7 +12,7 @@
         $scope.data = {};
         $scope.data.invInvtrys = [];
         $scope.dateConfig = {
-        	format: 'dd.MM.yyyy',
+        	format: 'dd-MM-yyyy',
         	invtryDtFrom: {
 				opened : false
 			},
@@ -56,9 +56,8 @@
 
         function processSearch(start, searchObject) {
         	// First initialize SearchInput-Object and then set Search-Params
-        	$scope.searchInput = utils.searchInputInit().searchInput;
-        	$scope.searchInput.start = start;
         	$scope.searchInput = utils.processSearch($scope.searchInput, searchObject.predicateObject);
+        	$scope.searchInput.start = start;
         }
         
 		$scope.openDateComponent = function(componentId,$event) {
@@ -100,7 +99,10 @@
             $scope.display.sectionName=item.name;
         }
     }
-
+    
+    /*******************************
+     * CREATE INVINTRY starts here *
+     *****************************/
     angular
         .module('app.invinvtry')
         .controller('invInvtryCreateCtlr', invInvtryCreateCtlr);
@@ -134,6 +136,9 @@
         };
     }
 
+    /*******************************
+     * SHOW INVINTRY starts here *
+     *****************************/
     angular
         .module('app.invinvtry')
         .controller('invInvtryShowCtlr', invInvtryShowCtlr);
@@ -162,6 +167,17 @@
         $scope.invtryCopy = angular.copy($scope.invInvtry);
 
         $scope.invtryChanged = invtryChangedFctn;
+        $scope.dateConfig = {
+        	format: 'dd-MM-yyyy',
+        	invtryvalueDt: {
+				opened : false
+			}
+        };
+		$scope.openDateComponent = function(componentId,$event) {
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope.dateConfig[componentId].opened = true;
+		};
 
         function refreshDisplay(){
             $scope.invtryCopy = angular.copy($scope.invInvtry);
@@ -285,17 +301,19 @@
             }).error(function (error) {
                 $scope.error = error;
             });
-        }
+        };
+
         $scope.handleResetRequestEvent = function(){
             $scope.searchInput = itemsResultHandler.newSearchInput();
             $scope.display = itemsResultHandler.displayInfo({});
             loadInvInvtryItems();
-        }
+        };
+
         $scope.handleAlphabeticRequestEvent = function(){
             $scope.searchInput = itemsResultHandler.newSearchInput();
             $scope.searchInput.a2z = true;
             loadInvInvtryItems();
-        }
+        };
 
         $scope.addItem = function(invtryItem){
             invtryItem.acsngDt=new Date().getTime();
@@ -311,6 +329,7 @@
                     $scope.error = error;
             });
         };
+
         $scope.check = function(){
             invInvtryManagerResource.validate({identif:$scope.invInvtry.identif}, function(invInvtry){
                 $scope.invInvtry = invInvtry;
@@ -371,7 +390,7 @@
             invtryItem.editing=true;
             $scope.editingExpirDt(invtryItem, $event);
             $scope.editingAsseccedQty(invtryItem, $event);
-        }
+        };
 
         $scope.updateItem = function(invtryItem){
             var changed = isItemModified(invtryItem);
@@ -408,7 +427,7 @@
                 invtryItem.expirDt = angular.copy(invtryItem.oldExpirDt);
             }
             cleanupItem(invtryItem);
-        }
+        };
 
         $scope.disableItem = function(invtryItem){
             cleanupItem(invtryItem);
@@ -419,6 +438,7 @@
                     $scope.error = error;
                 });
         };
+
         $scope.enableItem = function(invtryItem){
             cleanupItem(invtryItem);
             invInvtryManagerResource.enableItem({'identif':invtryItem.cntnrIdentif, 'itemIdentif':invtryItem.identif},
@@ -437,7 +457,7 @@
 
         function invtryChangedFctn(){
             return !angular.equals($scope.invInvtry, $scope.invtryCopy);
-        };
+        }
 
         $scope.update = function(){
             if(!invtryChangedFctn()) return;

@@ -147,9 +147,8 @@
         
         function processSearch(start, searchObject) {
         	// First initialize SearchInput-Object and then set Search-Params
-            vm.searchInput = utils.searchInputInit().searchInput;
-        	vm.searchInput.start = start;
         	vm.searchInput = utils.processSearch(vm.searchInput, searchObject.predicateObject);
+        	vm.searchInput.start = start;
         }
     }
 })();
