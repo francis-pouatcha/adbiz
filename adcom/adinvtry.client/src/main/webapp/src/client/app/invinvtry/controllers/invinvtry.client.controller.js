@@ -197,7 +197,7 @@
 
         $scope.reload = function(){
             $scope.searchInput = itemsResultHandler.searchInput();
-            loadInvInvtryItems(x);
+            loadInvInvtryItems(x); // FIXME the variable (x) is not defined hier, please this it again
         };
 
         function findConflict(searchInput) {
