@@ -3,7 +3,9 @@
 
     var appModule = angular.module('adinvtry', [
         'app.core',
-        'app.layout'
+        'app.layout',
+        'smart-table',
+        'ui.bootstrap'
     ]);
 
     var auth = {};

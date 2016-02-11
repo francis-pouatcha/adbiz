@@ -1,62 +1,67 @@
-<section class="mainbar" data-ng-init="vm.findCustomSections()">
+<section class="mainbar">
 
   <div class="panel panel-primary">
     <div class="panel-heading">
-      {{'app.core.list.title' | translate}} {{'StockSections.title' | translate }}
+      <span data-ng-bind="'app.core.list.title' | translate"></span> <span data-ng-bind="'StockSections.title' | translate"></span>
     </div>
     <div class="panel-body">
-        
-        <!-- Search form -->
-        <div ng-include src="'src/client/app/stk-section/views/search.html'"></div>
 
       <div class="pull-right">
         <a type="button" class="btn btn-success" href="#/stk-section/create">
           <i class="glyphicon glyphicon-open"></i> 
-          {{'app.core.new.title' | translate}} {{'StockSection.title' | translate}}
+          <span data-ng-bind="'app.core.new.title' | translate"></span> <span data-ng-bind="'StockSection.title' | translate"></span>
         </a>
       </div>
 
-      <table class="table table-condensed table-striped">
+      <table data-st-table="vm.data.list" data-st-pipe="vm.callServer" class="table table-bordered  table-striped pointer-element">
           <thead>
-          <th>{{'StockSection.code.title' | translate}}</th>
-          <th>{{'StockSection.name.title' | translate}}</th>
-          <th>{{'StockSection.position.title' | translate}}</th>
-          <th>{{'StockSection.geoCode.title' | translate}}</th>
-          <th>{{'StockSection.wharehouse.title' | translate}}</th>
-          </thead>
-          <tr dir-paginate="stkSection in vm.data.list | itemsPerPage: vm.pagination.itemsPerPage" 
-              total-items="vm.data.total" 
-              current-page="vm.pagination.current">
-              <td>{{stkSection.identif}}</td>
-              <td>{{stkSection.name}}</td>
-              <td>{{stkSection.position}}</td>
-              <td>{{stkSection.geoCode}}</td>
-              <td>{{stkSection.wharehouse}}</td>
-              <td>
-                 <div class="table-actions">
-                      <a class="btn btn-default" title="{{'app.core.view.title' | translate}}" href="#/stk-section/{{stkSection.id}}">
-                        <span class="glyphicon glyphicon-eye-open"></span>
-                      </a>
-                      <a class="btn btn-default" title="{{'app.core.edit.title' | translate}}" href="#/stk-section/{{stkSection.id}}/edit">
-                        <span class="glyphicon glyphicon-edit"></span>
-                      </a>
-                      <a class="btn btn-danger" title="{{'app.core.delete.title' | translate}}" 
-                         ng-really-message="{{'app.core.delete.confirmation.title' | translate}} {{'StockSection.title' | translate}}" 
-                         ng-really-click="vm.remove(stkSection)" item="stkSection">
-                        <span class="glyphicon glyphicon-remove-circle"></span>
-                      </a>
-                  </div>
-              </td>
+          <tr>
+	          <th><span data-ng-bind="'StockSection.code.title' | translate"></span></th>
+	          <th><span data-ng-bind="'StockSection.name.title' | translate"></span></th>
+	          <th><span data-ng-bind="'StockSection.position.title' | translate"></span></th>
+	          <th><span data-ng-bind="'StockSection.geoCode.title' | translate"></span></th>
+	          <th colspan="2"><span data-ng-bind="'StockSection.wharehouse.title' | translate"></span></th>
           </tr>
+          <tr>
+				<th><input data-st-search="identif" class="input-sm form-control" type="search"/></th>
+				<th><input data-st-search="name" class="input-sm form-control" type="search"/></th>
+				<th><input data-st-search="position" class="input-sm form-control" type="search"/></th>
+				<th><input data-st-search="geoCode" class="input-sm form-control" type="search"/></th>
+				<th colspan="2"><input data-st-search="wharehouse" class="input-sm form-control" type="search"/></th>
+    		</tr>
+          </thead>
+          <tbody>
+	          <tr data-ng-repeat="stkSection in vm.data.list">
+	              <td><span data-ng-bind="stkSection.identif"></span></td>
+	              <td><span data-ng-bind="stkSection.name"></span></td>
+	              <td><span data-ng-bind="stkSection.position"></span></td>
+	              <td><span data-ng-bind="stkSection.geoCode"></span></td>
+	              <td><span data-ng-bind="stkSection.wharehouse"></span></td>
+	              <td>
+	                 <div class="table-actions">
+	                      <a class="btn btn-default" title="{{'app.core.view.title' | translate}}" href="#/stk-section/{{stkSection.id}}">
+	                        <span class="glyphicon glyphicon-eye-open"></span>
+	                      </a>
+	                      <a class="btn btn-default" title="{{'app.core.edit.title' | translate}}" href="#/stk-section/{{stkSection.id}}/edit">
+	                        <span class="glyphicon glyphicon-edit"></span>
+	                      </a>
+	                      <a class="btn btn-danger" title="{{'app.core.delete.title' | translate}}" 
+	                         data-ng-really-message="{{'app.core.delete.confirmation.title' | translate}} {{'StockSection.title' | translate}}" 
+	                         data-ng-really-click="vm.remove(stkSection)" item="stkSection">
+	                        <span class="glyphicon glyphicon-remove-circle"></span>
+	                      </a>
+	                  </div>
+	              </td>
+	          </tr>
+          </tbody>
+         <tfoot>
+			<tr>
+				<td colspan="9" class="text-center">
+					<div data-st-pagination="" data-st-items-by-page="vm.itemsByPage"></div>
+				</td>
+			</tr>
+		</tfoot>
       </table>
-    
-    <div class="pull-right">    
-        <dir-pagination-controls on-page-change="vm.paginate(newPageNumber)" 
-                                 boundary-links="true"
-                                 max-size="vm.pagination.maxSize">
-        </dir-pagination-controls>
-    </div>    
-
     </div>
   </div>
 

@@ -21,6 +21,10 @@
                 method: 'POST',
                 url: API_BASE_ADINVTRY_URL + '/invinvtrys/findCustom'
             },
+            findByLike:{
+            	method: 'POST',
+            	url: API_BASE_ADINVTRY_URL + '/invinvtrys/findByLike'
+            },
             findConflict:{
                 method: 'POST',
                 url: API_BASE_ADINVTRY_URL + '/invinvtryitems/findConflict'

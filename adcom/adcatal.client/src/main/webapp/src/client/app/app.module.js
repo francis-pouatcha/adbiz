@@ -3,7 +3,8 @@
 
     var appModule = angular.module('adcatal', [
         'app.core',
-        'app.layout'
+        'app.layout',
+        'smart-table'
     ]);
 
     var auth = {};

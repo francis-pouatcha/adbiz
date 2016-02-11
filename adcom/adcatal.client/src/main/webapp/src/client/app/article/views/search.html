@@ -1,20 +1,17 @@
 <div data-ng-init="vm.setFormSearchFields()">
       
   <form data-ng-submit="vm.search()" novalidate>
-    <legend>{{'app.core.search.title' | translate}} {{'CatalArticle.new.title' | translate}}</legend>
+    <legend><span data-ng-bind="'app.core.search.title' | translate"></span> <span data-ng-bind="'CatalArticle.new.title' | translate"></span></legend>
     <fieldset>  
-        <formly-form model="vm.article" fields="vm.formSearchFields" form="vm.form">
-        </formly-form>
-
+        <formly-form model="vm.article" fields="vm.formSearchFields" form="vm.form"></formly-form>
         <div class="form-group">
-            <button type="submit" class="btn btn-success" ng-disabled="vm.form.$invalid">
-              <i class="glyphicon glyphicon-search"></i> {{'app.core.search.title' | translate}}
+            <button type="submit" class="btn btn-success" data-ng-disabled="vm.form.$invalid">
+              <i class="glyphicon glyphicon-search"></i> <span data-ng-bind="'app.core.search.title' | translate"></span>
             </button>
             <a class="btn btn-danger" 
-               title="{{'app.core.clear.title' | translate}}" 
-               ng-click="vm.clear()">
+               title="{{'app.core.clear.title' | translate}}" data-ng-click="vm.clear()">
                <span class="glyphicon glyphicon-trash"></span>
-                {{'app.core.clear.title' | translate}}
+                <span data-ng-bind="'app.core.clear.title' | translate"></span>
             </a>
         </div>
     </fieldset>
