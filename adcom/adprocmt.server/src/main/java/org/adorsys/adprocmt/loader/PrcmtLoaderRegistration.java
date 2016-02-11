@@ -12,6 +12,7 @@ import org.adorsys.adcore.loader.jpa.CorLdrStep;
 import org.adorsys.adcore.rest.CoreAbstEntityJobExecutor;
 import org.adorsys.adcore.xls.AbstractLoader;
 import org.adorsys.adcore.xls.CoreAbstLoaderRegistration;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 @Startup
 @Singleton
@@ -23,15 +24,17 @@ public class PrcmtLoaderRegistration extends CoreAbstLoaderRegistration {
 	private PrcmtDeliveryLoader prcmtDeliveryLoader;
 	@Inject
 	private PrcmtDlvryItemLoader prcmtDlvryItemLoader;
-	@Inject
+	@EJB
 	private PrcmtLoaderRegistration registration;
 	@EJB
 	private PrcmtLoaderExecutor execTask;
 
 	@PostConstruct
 	public void postConstruct(){
+		super.postConstruct();
 		dataSheetLoader.registerLoader(PrcmtDeliveryExcel.class.getSimpleName(), prcmtDeliveryLoader);
 		dataSheetLoader.registerLoader(PrcmtDlvryItemExcel.class.getSimpleName(), prcmtDlvryItemLoader);
+		createTemplate();
 	}
 
 	@Override
@@ -41,11 +44,18 @@ public class PrcmtLoaderRegistration extends CoreAbstLoaderRegistration {
 
 	@Override
 	protected CoreAbstEntityJobExecutor<CorLdrJob, CorLdrStep, CorLdrPrcssngStep> getExecTask() {
-		return registration;
+		return execTask;
 	}
 
 	@Override
 	protected CoreAbstEntityJobExecutor<CorLdrJob, CorLdrStep, CorLdrPrcssngStep> getEjb() {
-		return execTask;
+		return registration;
 	}	
+
+	public void createTemplate(){
+		HSSFWorkbook workbook = new HSSFWorkbook();
+		prcmtDeliveryLoader.createTemplate(workbook);
+		prcmtDlvryItemLoader.createTemplate(workbook);
+		dataSheetLoader.exportTemplate(workbook);
+	}
 }

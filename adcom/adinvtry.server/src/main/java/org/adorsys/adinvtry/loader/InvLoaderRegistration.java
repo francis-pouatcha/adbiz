@@ -14,6 +14,7 @@ import org.adorsys.adcore.xls.AbstractLoader;
 import org.adorsys.adcore.xls.CoreAbstLoaderRegistration;
 import org.adorsys.adinvtry.jpa.InvInvtry;
 import org.adorsys.adinvtry.jpa.InvInvtryItem;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 @Startup
 @Singleton
@@ -36,6 +37,7 @@ public class InvLoaderRegistration extends CoreAbstLoaderRegistration{
 		super.postConstruct();
 		dataSheetLoader.registerLoader(InvInvtry.class.getSimpleName(), intInvInvtryLoader);
 		dataSheetLoader.registerLoader(InvInvtryItem.class.getSimpleName(), invInvtryItemLoader);
+		createTemplate();
 	}
 
 	@Override
@@ -51,5 +53,12 @@ public class InvLoaderRegistration extends CoreAbstLoaderRegistration{
 	@Override
 	protected CoreAbstEntityJobExecutor<CorLdrJob, CorLdrStep, CorLdrPrcssngStep> getExecTask() {
 		return execTask;
+	}
+
+	public void createTemplate(){
+		HSSFWorkbook workbook = new HSSFWorkbook();
+		intInvInvtryLoader.createTemplate(workbook);
+		invInvtryItemLoader.createTemplate(workbook);
+		dataSheetLoader.exportTemplate(workbook);
 	}
 }

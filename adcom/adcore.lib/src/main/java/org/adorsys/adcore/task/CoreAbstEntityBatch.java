@@ -60,11 +60,11 @@ public abstract class CoreAbstEntityBatch<J extends CoreAbstEntityJob, S extends
 		executorMap.put(executorId, executor);
 	}
 
-	@Schedule(minute = "*", second="*/2", hour="*", persistent=false)
+	@Schedule(minute = "*", second="*/5", hour="*", persistent=false)
 	@AccessTimeout(unit=TimeUnit.MINUTES, value=10)
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public void processSteps() throws Exception {
-		RandomMilisec.doWait(3);
+		RandomMilisec.doWait(5);
 		Date now = new Date();
 		Long count = getStepLookup().countByStartedIsNullAndSchdldStartLessThan(now);
 		int start = 0;

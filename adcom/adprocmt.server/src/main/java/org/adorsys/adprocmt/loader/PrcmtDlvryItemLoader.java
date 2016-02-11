@@ -63,10 +63,12 @@ import org.adorsys.adstock.rest.StkLotInSctnStockQtyLookup;
 import org.adorsys.adstock.rest.StkSectionLookup;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
+import org.jboss.resteasy.logging.Logger;
 
 @Stateless
 public class PrcmtDlvryItemLoader extends CoreAbstBsnsitemLoader<PrcmtDelivery, PrcmtDlvryItem, PrcmtDeliveryHstry, PrcmtJob, PrcmtStep, PrcmtDeliveryCstr, CoreAbstBsnsObjectSearchInput<PrcmtDelivery>> {
 
+	private static final Logger LOG = Logger.getLogger(PrcmtDlvryItemLoader.class);
 	@Inject
 	private PrcmtDeliveryManager manager;
 	@Inject
@@ -107,7 +109,7 @@ public class PrcmtDlvryItemLoader extends CoreAbstBsnsitemLoader<PrcmtDelivery, 
 	
 	@Inject
 	private StkSectionLookup stkSectionLookup;
-	
+
 	@Override
 	protected PrcmtDlvryItem newObject() {
 		return new PrcmtDlvryItemExcel();
@@ -132,62 +134,61 @@ public class PrcmtDlvryItemLoader extends CoreAbstBsnsitemLoader<PrcmtDelivery, 
 	protected StepCallback getStepCallback() {
 		return stepCallback;
 	}
-	
-	private PrcmtDlvryItemExcel toItemExcel(PrcmtDlvryItem entity){
-		PrcmtDlvryItemExcel itemExcel = null;
-		if(entity instanceof PrcmtDlvryItemExcel){
-			itemExcel = (PrcmtDlvryItemExcel) entity;
-		} else {
-			itemExcel = new PrcmtDlvryItemExcel();
-			itemExcel.copyFrom(entity);
-		}
-		return itemExcel;
-	}
-	
+
 	@Override
 	public PrcmtDlvryItem save(PrcmtDlvryItem entity, List<PropertyDesc> fields) {
-		Date now = new Date();
-		PrcmtDlvryItemExcel itemExcel = toItemExcel(entity);
 		
-		if(StringUtils.isBlank(itemExcel.getCntnrIdentif())) throw new IllegalStateException("Missing cntnrIdentif for PrcmtDlvryItem with artPic: " + itemExcel.getArtPic());
+		String recvngOus = null;
+		String strgSctns = null;
+		Date now = new Date();
+		if(entity instanceof PrcmtDlvryItemExcel){
+			PrcmtDlvryItemExcel itemExcel = (PrcmtDlvryItemExcel) entity;
+			recvngOus = itemExcel.getRecvngOus();
+			strgSctns = itemExcel.getStrgSctns();
+			PrcmtDlvryItem prcmtDlvryItem = new PrcmtDlvryItem();
+			prcmtDlvryItem.copyFrom(entity);
+			entity = prcmtDlvryItem;
+			entity.setValueDt(now);
+		}		
+		
+		if(StringUtils.isBlank(entity.getCntnrIdentif())) throw new IllegalStateException("Missing cntnrIdentif for PrcmtDlvryItem with artPic: " + entity.getArtPic());
 		
 		// First use the specified distribution in the excel file.
-		List<PrcmtDlvryItem2StrgSctn> item2SectionList = processSectionFromExcel(itemExcel, now);
-		if(item2SectionList.isEmpty()) item2SectionList = processSectionFromItem(itemExcel, now);
-		if(item2SectionList.isEmpty()) item2SectionList = discoverSection(itemExcel, now);
+		List<PrcmtDlvryItem2StrgSctn> item2SectionList = processSectionFromExcel(entity, strgSctns, now);
+		if(item2SectionList.isEmpty()) item2SectionList = processSectionFromItem(entity, now);
+		if(item2SectionList.isEmpty()) item2SectionList = discoverSection(entity, now);
 		
+		// Interupt the process and wait for system to load..
+		LOG.warn("No section found to store article: " + entity.getArtPic()  + " will wait for stock to load.");
+		if(item2SectionList.isEmpty()) return null;
 
 		// First use the distribution in the excel file.
-		List<PrcmtDlvryItem2Ou> item2Ous = processOrgUnitsFromExcel(itemExcel, now);
-		if(item2Ous.isEmpty())item2Ous = processOrgUnitsFromItem(itemExcel, now);
-		if(item2Ous.isEmpty())item2Ous =  processOrgUnitsFromDlvry(itemExcel, now);
-		
-		PrcmtDlvryItem item = new PrcmtDlvryItem();
-		item.setValueDt(now);
-		item.copyFrom(itemExcel);
+		List<PrcmtDlvryItem2Ou> item2Ous = processOrgUnitsFromExcel(entity, recvngOus, now);
+		if(item2Ous.isEmpty())item2Ous = processOrgUnitsFromItem(entity, now);
+		if(item2Ous.isEmpty())item2Ous =  processOrgUnitsFromDlvry(entity, now);
 		
 		// Look for an existing delivery line 
 		PrcmtDlvryItem existingItem = null;
 		// What if the item does not have a lotPic
-		if(StringUtils.isBlank(item.getLotPic())){
-			PrcmtDelivery delivery = lookup.findByIdentifThrowException(item.getCntnrIdentif());
-			existingItem = findMatchingItemFromDelivery(delivery, item, item2SectionList, item2Ous);
+		if(StringUtils.isBlank(entity.getLotPic())){
+			PrcmtDelivery delivery = lookup.findByIdentifThrowException(entity.getCntnrIdentif());
+			existingItem = findMatchingItemFromDelivery(delivery, entity, item2SectionList, item2Ous);
 		} else {
-			List<PrcmtDlvryItem> found = itemLookup.findByCntnrIdentifAndArtPicAndLotPic(item.getCntnrIdentif(), item.getArtPic(), item.getLotPic(),0,1);
+			List<PrcmtDlvryItem> found = itemLookup.findByCntnrIdentifAndArtPicAndLotPic(entity.getCntnrIdentif(), entity.getArtPic(), entity.getLotPic(),0,1);
 			if(!found.isEmpty())existingItem=found.iterator().next();
 		}
 		if(existingItem!=null){
 			// add free and target quantities.
-			existingItem.setTrgtQty(BigDecimalUtils.sum(existingItem.getTrgtQty(), item.getTrgtQty()));
-			existingItem.setFreeQty(BigDecimalUtils.sum(existingItem.getFreeQty(), item.getFreeQty()));
-			item = itemEjb.update(existingItem);
+			existingItem.setTrgtQty(BigDecimalUtils.sum(existingItem.getTrgtQty(), entity.getTrgtQty()));
+			existingItem.setFreeQty(BigDecimalUtils.sum(existingItem.getFreeQty(), entity.getFreeQty()));
+			entity = itemEjb.update(existingItem);
 		} else {
-			if(StringUtils.isBlank(item.getLotPic())){
-				List<StkArticleLot> candidateLots = selectArticleLotFromPeerArtPic(item);
+			if(StringUtils.isBlank(entity.getLotPic())){
+				List<StkArticleLot> candidateLots = selectArticleLotFromPeerArtPic(entity);
 				String lotPic = null;
 				// If size > 1 narrow
 				if(candidateLots.size()>1){
-					StkArticleLot lot = narrowArticleLotCandidates(item, item2SectionList, candidateLots);
+					StkArticleLot lot = narrowArticleLotCandidates(entity, item2SectionList, candidateLots);
 					lotPic = lot.getLotPic();
 				} else if (candidateLots.size()==1){
 					StkArticleLot lot = candidateLots.iterator().next();
@@ -195,15 +196,17 @@ public class PrcmtDlvryItemLoader extends CoreAbstBsnsitemLoader<PrcmtDelivery, 
 				} else { // generate LotPic
 					lotPic = SequenceGenerator.getSequence(SequenceGenerator.LOT_SEQUENCE_PREFIXE);
 				}
-				item.setLotPic(lotPic);
+				entity.setLotPic(lotPic);
 			}
-			item = super.save(item, fields);
+			entity = super.save(entity, fields);
 		}
 		
-		storeStorageSections(existingItem, item2SectionList);
-		storeRecievingOUs(existingItem, item2Ous);
+		if(entity==null) return null;
 		
-		return item;
+		storeStorageSections(entity, item2SectionList);
+		storeRecievingOUs(entity, item2Ous);
+		
+		return entity;
 	}
 	
 	/*
@@ -261,7 +264,7 @@ public class PrcmtDlvryItemLoader extends CoreAbstBsnsitemLoader<PrcmtDelivery, 
 		}		
 	}
 	
-	private List<PrcmtDlvryItem2Ou> processOrgUnitsFromDlvry(PrcmtDlvryItemExcel itemExcel, Date now) {
+	private List<PrcmtDlvryItem2Ou> processOrgUnitsFromDlvry(PrcmtDlvryItem itemExcel, Date now) {
 		List<PrcmtDlvryItem2Ou> item2Ous = new ArrayList<PrcmtDlvryItem2Ou>();
 		Long ouCount = dlvry2OuLookup.countByCntnrIdentif(itemExcel.getCntnrIdentif());
 		if(ouCount>0){
@@ -311,7 +314,7 @@ public class PrcmtDlvryItemLoader extends CoreAbstBsnsitemLoader<PrcmtDelivery, 
 		return item2Ous;		
 	}
 
-	private List<PrcmtDlvryItem2Ou> processOrgUnitsFromItem(PrcmtDlvryItemExcel itemExcel, Date now) {
+	private List<PrcmtDlvryItem2Ou> processOrgUnitsFromItem(PrcmtDlvryItem itemExcel, Date now) {
 		List<PrcmtDlvryItem2Ou> item2Ous = new ArrayList<PrcmtDlvryItem2Ou>();
 		
 		if(StringUtils.isBlank(itemExcel.getOrgUnit())) return item2Ous;
@@ -326,7 +329,7 @@ public class PrcmtDlvryItemLoader extends CoreAbstBsnsitemLoader<PrcmtDelivery, 
 		return item2Ous;
 	}
 
-	private List<PrcmtDlvryItem2StrgSctn> processSectionFromItem(final PrcmtDlvryItemExcel itemExcel, Date now){
+	private List<PrcmtDlvryItem2StrgSctn> processSectionFromItem(final PrcmtDlvryItem itemExcel, Date now){
 		List<PrcmtDlvryItem2StrgSctn> item2SectionList = new ArrayList<PrcmtDlvryItem2StrgSctn>();
 		// If no distribution yet and a line comes with a section code. All articles will be stored in that section.
 		if(item2SectionList.isEmpty() && StringUtils.isNotBlank(itemExcel.getSection())){// No section defined. Discover some.
@@ -337,7 +340,7 @@ public class PrcmtDlvryItemLoader extends CoreAbstBsnsitemLoader<PrcmtDelivery, 
 		return item2SectionList;
 	}
 
-	private List<PrcmtDlvryItem2StrgSctn> discoverSection(final PrcmtDlvryItemExcel itemExcel, Date now){
+	private List<PrcmtDlvryItem2StrgSctn> discoverSection(final PrcmtDlvryItem itemExcel, Date now){
 		List<PrcmtDlvryItem2StrgSctn> item2SectionList = new ArrayList<PrcmtDlvryItem2StrgSctn>();
 
 		PrcmtDelivery delivery = lookup.findByIdentifThrowException(itemExcel.getCntnrIdentif());
@@ -347,23 +350,22 @@ public class PrcmtDlvryItemLoader extends CoreAbstBsnsitemLoader<PrcmtDelivery, 
 		if(StringUtils.isBlank(foundSection)) {
 			// Try to discover a section in this location at the lot level.
 			StkArticleLot2StrgSctn articleLot2StrgSctn = articleLot2StrgSctnLookup.discoverSection(itemExcel.getArtPic(), delivery.getSection());
-			foundSection = articleLot2StrgSctn.getSection();
+			if(articleLot2StrgSctn!=null)foundSection = articleLot2StrgSctn.getSection();
 		}
 		
 		if(StringUtils.isNotBlank(foundSection)) {
 			PrcmtDlvryItem2StrgSctn item2Section = createPrcmtDlvryItem2StrgSctn(itemExcel, now, foundSection, itemExcel.getTrgtQty());
 			item2SectionList.add(item2Section);		
 			itemExcel.setSection(foundSection);
-		} else {
-			throw new IllegalStateException("No section found to store article: " + itemExcel.getArtPic());
+//		} else {
+//			throw new IllegalStateException("No section found to store article: " + itemExcel.getArtPic());
 		}
 
 		return item2SectionList;
 	}
 	
-	private List<PrcmtDlvryItem2Ou> processOrgUnitsFromExcel(PrcmtDlvryItemExcel itemExcel, Date now) {
+	private List<PrcmtDlvryItem2Ou> processOrgUnitsFromExcel(PrcmtDlvryItem itemExcel, String recvngOus, Date now) {
 		List<PrcmtDlvryItem2Ou> ouList = new ArrayList<PrcmtDlvryItem2Ou>();
-		String recvngOus = itemExcel.getRecvngOus();
 		if(StringUtils.isBlank(recvngOus)) return ouList;
 		
 		String[] recvngOuArray = StringUtils.split(recvngOus, ENTRY_SEPARATOR);
@@ -388,10 +390,9 @@ public class PrcmtDlvryItemLoader extends CoreAbstBsnsitemLoader<PrcmtDelivery, 
 		return ouList ;
 	}
 
-	private List<PrcmtDlvryItem2StrgSctn> processSectionFromExcel(PrcmtDlvryItemExcel itemExcel, Date now){
+	private List<PrcmtDlvryItem2StrgSctn> processSectionFromExcel(PrcmtDlvryItem itemExcel, String strgSctns, Date now){
 		// first check if storage sections are defined
 		List<PrcmtDlvryItem2StrgSctn> item2SectionList = new ArrayList<PrcmtDlvryItem2StrgSctn>(); 
-		String strgSctns = itemExcel.getStrgSctns();
 		if(StringUtils.isBlank(strgSctns)) return item2SectionList;
 			
 		String[] strgSctnArray = StringUtils.split(strgSctns, ",");
@@ -410,7 +411,7 @@ public class PrcmtDlvryItemLoader extends CoreAbstBsnsitemLoader<PrcmtDelivery, 
 		return item2SectionList;
 	}
 	
-	private PrcmtDlvryItem2StrgSctn createPrcmtDlvryItem2StrgSctn(PrcmtDlvryItemExcel itemExcel, Date now, String section, BigDecimal qtyStored){
+	private PrcmtDlvryItem2StrgSctn createPrcmtDlvryItem2StrgSctn(PrcmtDlvryItem itemExcel, Date now, String section, BigDecimal qtyStored){
 		PrcmtDlvryItem2StrgSctn item2Section = new PrcmtDlvryItem2StrgSctn();
 		item2Section.setValueDt(now);
 		item2Section.setCntnrIdentif(itemExcel.getCntnrIdentif());

@@ -12,8 +12,8 @@ import org.adorsys.adcore.rest.CoreAbstEntityJobExecutor;
 import org.adorsys.adcore.xls.AbstractLoader;
 import org.adorsys.adcore.xls.CorAbstDataSheetLoaderExecutor;
 
-@Startup
 @Singleton
+@Startup
 public class PrcmtLoaderExecutor extends CorAbstDataSheetLoaderExecutor {
 	@Inject
 	private DataSheetLoader dataSheetLoader;

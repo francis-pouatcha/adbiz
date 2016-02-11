@@ -67,47 +67,24 @@ public class PrcmtDeliveryLoader extends CoreAbstBsnsObjectLoader<PrcmtDelivery,
 
 	@Override
 	public PrcmtDelivery save(PrcmtDelivery entity, List<PropertyDesc> fields) {
+		// Read extra data
+		String rcvngOrgUnits = null;
+		String procmtOrderNbrs = null;
+		if(entity instanceof PrcmtDeliveryExcel){
+			PrcmtDeliveryExcel excelEntity = (PrcmtDeliveryExcel) entity;
+			rcvngOrgUnits = excelEntity.getRcvngOrgUnits();
+			procmtOrderNbrs = excelEntity.getProcmtOrderNbrs();
+			PrcmtDelivery prcmtDelivery = new PrcmtDelivery();
+			prcmtDelivery.copyFrom(entity);
+			entity = prcmtDelivery;
+		}
 		Date now = new Date();
-		PrcmtDelivery prcmtDelivery = new PrcmtDelivery();
-		prcmtDelivery.copyFrom(entity);
-		prcmtDelivery.setValueDt(now);
-		prcmtDelivery = super.save(entity, fields);
-		if(!(entity instanceof PrcmtDeliveryExcel)) return prcmtDelivery;
-		
-		PrcmtDeliveryExcel excelEntity = (PrcmtDeliveryExcel) entity;
-		
+		entity.setValueDt(now);
+		entity = super.save(entity, fields);
 
-		List<PrcmtDlvry2Ou> ouList= new ArrayList<PrcmtDlvry2Ou>();
-		String rcvngOrgUnits = excelEntity.getRcvngOrgUnits();
-		if(StringUtils.isNotBlank(rcvngOrgUnits)){
-			String[] rcvngOrgUnitArray = StringUtils.split(rcvngOrgUnits,',');
-			for (String rcvngOrgUnit : rcvngOrgUnitArray) {
-				if(StringUtils.isBlank(rcvngOrgUnit)) continue;
-				int rcvngOrgUnitPercentage = getPercentage(rcvngOrgUnit);
-				String rcvngOrgUnitName = getUnitName(rcvngOrgUnit);
-				PrcmtDlvry2Ou prcmtDlvry2Ou = new PrcmtDlvry2Ou();
-				prcmtDlvry2Ou.setCntnrIdentif(prcmtDelivery.getIdentif());
-				prcmtDlvry2Ou.setRcvngOrgUnit(rcvngOrgUnitName);
-				prcmtDlvry2Ou.setQtyPct(BigDecimal.valueOf(rcvngOrgUnitPercentage));
-				prcmtDlvry2Ou.setValueDt(now);
-				ouList.add(prcmtDlvry2Ou);
-			}
-			checkConsistent(ouList, rcvngOrgUnits);
-		}
+		List<PrcmtDlvry2Ou> ouList= processOrganizationUnits(entity.getIdentif(), rcvngOrgUnits, now);
 
-		List<PrcmtDlvry2PO> poList = new ArrayList<PrcmtDlvry2PO>();
-		String procmtOrderNbrs = excelEntity.getProcmtOrderNbrs();
-		if(StringUtils.isNotBlank(procmtOrderNbrs)){
-			String[] procmtOrderNbrArray = StringUtils.split(procmtOrderNbrs);
-			for (String procmtOrderNbr : procmtOrderNbrArray) {
-				if(StringUtils.isBlank(procmtOrderNbr)) continue;
-				PrcmtDlvry2PO prcmtDlvry2PO = new PrcmtDlvry2PO();
-				prcmtDlvry2PO.setCntnrIdentif(prcmtDelivery.getIdentif());
-				prcmtDlvry2PO.setPoNbr(procmtOrderNbr.trim());
-				prcmtDlvry2PO.setValueDt(now);
-				poList.add(prcmtDlvry2PO);
-			}
-		}
+		List<PrcmtDlvry2PO> poList = processPurchaseOrder(entity.getIdentif(), procmtOrderNbrs, now);
 		
 		for (PrcmtDlvry2Ou prcmtDlvry2Ou : ouList) {
 			prcmtDlvry2OuEjb.create(prcmtDlvry2Ou);
@@ -117,7 +94,43 @@ public class PrcmtDeliveryLoader extends CoreAbstBsnsObjectLoader<PrcmtDelivery,
 			prcmtDlvry2POEjb.create(prcmtDlvry2PO);
 		}
 		
-		return prcmtDelivery;
+		return entity;
+	}
+	
+	private List<PrcmtDlvry2PO> processPurchaseOrder(String dlvryIdentif, String procmtOrderNbrs, Date now){
+		List<PrcmtDlvry2PO> poList = new ArrayList<PrcmtDlvry2PO>();
+		if(StringUtils.isNotBlank(procmtOrderNbrs)){
+			String[] procmtOrderNbrArray = StringUtils.split(procmtOrderNbrs);
+			for (String procmtOrderNbr : procmtOrderNbrArray) {
+				if(StringUtils.isBlank(procmtOrderNbr)) continue;
+				PrcmtDlvry2PO prcmtDlvry2PO = new PrcmtDlvry2PO();
+				prcmtDlvry2PO.setCntnrIdentif(dlvryIdentif);
+				prcmtDlvry2PO.setPoNbr(procmtOrderNbr.trim());
+				prcmtDlvry2PO.setValueDt(now);
+				poList.add(prcmtDlvry2PO);
+			}
+		}
+		return poList;
+	}
+	
+	private List<PrcmtDlvry2Ou> processOrganizationUnits(String dlvryIdentif, String rcvngOrgUnits, Date now){
+		List<PrcmtDlvry2Ou> ouList= new ArrayList<PrcmtDlvry2Ou>();
+		if(StringUtils.isNotBlank(rcvngOrgUnits)){
+			String[] rcvngOrgUnitArray = StringUtils.split(rcvngOrgUnits,',');
+			for (String rcvngOrgUnit : rcvngOrgUnitArray) {
+				if(StringUtils.isBlank(rcvngOrgUnit)) continue;
+				int rcvngOrgUnitPercentage = getPercentage(rcvngOrgUnit);
+				String rcvngOrgUnitName = getUnitName(rcvngOrgUnit);
+				PrcmtDlvry2Ou prcmtDlvry2Ou = new PrcmtDlvry2Ou();
+				prcmtDlvry2Ou.setCntnrIdentif(dlvryIdentif);
+				prcmtDlvry2Ou.setRcvngOrgUnit(rcvngOrgUnitName);
+				prcmtDlvry2Ou.setQtyPct(BigDecimal.valueOf(rcvngOrgUnitPercentage));
+				prcmtDlvry2Ou.setValueDt(now);
+				ouList.add(prcmtDlvry2Ou);
+			}
+			checkConsistent(ouList, rcvngOrgUnits);
+		}		
+		return ouList;
 	}
 	
 	private void checkConsistent(List<PrcmtDlvry2Ou> ouList, String rcvngOrgUnits) {

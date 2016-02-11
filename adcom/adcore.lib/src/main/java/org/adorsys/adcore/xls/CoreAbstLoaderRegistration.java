@@ -57,11 +57,11 @@ public abstract class CoreAbstLoaderRegistration extends CoreAbstEntityJobExecut
 		for (File file : listFiles) {
 			registeredCount = registerSingleStep(file, registeredCount);
 		}
-		if(registeredCount<=0){
-			getBatch().reschedule(stepIdentif, 5000);
-		} else {
-			getBatch().reschedule(stepIdentif, 300000);
-		}
+//		if(registeredCount<=0){
+//			getBatch().reschedule(stepIdentif, 5000);
+//		} else {
+//			getBatch().reschedule(stepIdentif, 300000);
+//		}
 	}
 
 	@Override
