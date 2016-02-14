@@ -10,7 +10,9 @@
                 LANG_FR: 'French',
                 LANG_EN: 'English',
                 logout: 'logout',
+                "all.title": 'All',
                 "reload.title":'Reload',
+                "Action.title": 'Action',
                 "show_conflict.title":'Show conflict',
                 "valueDtFrom_description.title":"Value date from",
                 "valueDtTo_description.title":"Value date to",
@@ -231,7 +233,9 @@
                 LANG_EN: 'Englais',
                 logout: 'deconnection',
 
+                "all.title": 'Tous',
                 "reload.title":'Recharger',
+                "Action.title": 'Action',
                 "show_conflict.title":'Montrer les conflits',
 
                 "valueDtFrom_description.title":"Date du",

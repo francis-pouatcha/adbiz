@@ -21,6 +21,10 @@
                 method: 'POST',
                 url: API_BASE_ADPROCMT_URL + '/prcmtprocorders/findCustom'
             },
+            findByLike:{
+            	method: 'POST',
+            	url: API_BASE_ADPROCMT_URL + '/prcmtprocorders/findByLike'
+            },
             findConflict:{
                 method: 'POST',
                 url: API_BASE_ADPROCMT_URL + '/prcmtpoitems/findConflict'
@@ -120,12 +124,14 @@
         };
 
         service.poTriggerModes = [
+            {enumKey:'All', translKey:'all.title'},
             {enumKey:'MANUAL', translKey:'ProcmtPOTriggerModeEnum_MANUAL_description.title'},
             {enumKey:'STOCK_SHORTAGE', translKey:'ProcmtPOTriggerModeEnum_STOCK_SHORTAGE_description.title'},
             {enumKey:'MOST_SOLD', translKey:'ProcmtPOTriggerModeEnum_MOST_SOLD_description.title'}
         ];
 
         service.POTypes = [
+            {enumKey:'All', translKey:'all.title'},
             {enumKey:'ORDINARY', translKey:'ProcmtPOTypeEnum_ORDINARY_description.title'},
             {enumKey:'PACKAGED', translKey:'ProcmtPOTypeEnum_PACKAGED_description.title'},
             {enumKey:'SPECIAL', translKey:'ProcmtPOTypeEnum_SPECIAL_description.title'}
@@ -142,6 +148,7 @@
             return service.translations[service.invInvntrStatusI18nMsgTitleKey(enumKey)];
         };
         service.status = [
+            {enumKey:'All', translKey:'all.title'},
             {enumKey:'INITIALIZING', translKey:'INITIALIZING_description.title'},
             {enumKey:'SUSPENDED', translKey:'SUSPENDED_description.title'},
             {enumKey:'ONGOING', translKey:'ONGOING_description.title'},

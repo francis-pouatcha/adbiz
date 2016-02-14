@@ -21,6 +21,10 @@
                 method: 'POST',
                 url: API_BASE_ADPROCMT_URL + '/prcmtdeliverys/findCustom'
             },
+            findByLike:{
+            	method: 'POST',
+            	url: API_BASE_ADPROCMT_URL + '/prcmtdeliverys/findByLike'
+            },
             findConflict:{
                 method: 'POST',
                 url: API_BASE_ADPROCMT_URL + '/prcmtdlvryitems/findConflict'
@@ -138,6 +142,7 @@
             return service.translations[service.invInvntrStatusI18nMsgTitleKey(enumKey)];
         };
         service.status = [
+            {enumKey:'All', translKey:'all.title'},
             {enumKey:'INITIALIZING', translKey:'INITIALIZING_description.title'},
             {enumKey:'SUSPENDED', translKey:'SUSPENDED_description.title'},
             {enumKey:'ONGOING', translKey:'ONGOING_description.title'},

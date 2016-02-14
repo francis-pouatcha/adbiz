@@ -14,69 +14,41 @@
         $scope.data.prcmts = [];
         $scope.data.total;
         $scope.prcmtUtils=prcmtUtils;
-
-        // Initialize Search input and pagination
-        $scope.searchInput = utils.searchInputInit().searchInput;
-        $scope.searchInput.className = 'org.adorsys.adprocmt.jpa.PrcmtDeliverySearchInput';
-        $scope.pagination = utils.searchInputInit().pagination;
-
-        findCustom($scope.searchInput);
-
-        function findCustom(searchInput) {
-            procmtManagerResource.findCustom(searchInput, function(response){
-                    $scope.data.prcmts = response.resultList;
-                    $scope.data.total = response.total;
-                },
-                function(errorResponse) {
-                    $scope.error = errorResponse.data.summary;
-                });
+        
+        function initSearchInput(){
+            // Initialize Search input and pagination
+        	$scope.searchInput = utils.searchInputInit().searchInput;
+        	$scope.searchInput.className = 'org.adorsys.adprocmt.jpa.PrcmtDeliverySearchInput';
+            //Number of entries showed per page.
+            $scope.itemsByPage = utils.searchInputInit().stPagination.number;
         }
 
-        // Paginate over the list
-        $scope.paginate = function(newPage){
-            utils.pagination($scope.searchInput, $scope.pagination, newPage);
-            findCustom($scope.searchInput);
+        initSearchInput();
+
+        $scope.callServer = function(tableState) {
+    	    var pagination = tableState.pagination;
+    	    var start = pagination.start || 0, number = pagination.number || utils.searchInputInit().stPagination.number;
+    	    processSearch(start, tableState.search);
+        	
+    	    procmtManagerResource.findByLike($scope.searchInput, function(response){
+    	    	$scope.data.prcmts = response.resultList;
+                tableState.pagination.numberOfPages = Math.ceil(response.count / number)
+            },
+            function(errorResponse) {
+            	$scope.error = errorResponse.data.summary;
+            });
         };
-
-        function processSearchInput(searchInput){
-
-            if(angular.isDefined(searchInput.entity.identif) && searchInput.entity.identif){
-                if(searchInput.fieldNames.indexOf('identif') == -1)
-                    searchInput.fieldNames.push('identif');
-            }
-            if(angular.isDefined(searchInput.entity.status) && searchInput.entity.status){
-                if(searchInput.fieldNames.indexOf('status') == -1)
-                    searchInput.fieldNames.push('status');
-            }
-            if(angular.isDefined(searchInput.entity.poTriggerMode) && searchInput.entity.poTriggerMode){
-                if(searchInput.fieldNames.indexOf('poTriggerMode') == -1)
-                    searchInput.fieldNames.push('poTriggerMode');
-            }
-            if(angular.isDefined(searchInput.entity.txType) && searchInput.entity.txType){
-                if(searchInput.fieldNames.indexOf('txType') == -1)
-                    searchInput.fieldNames.push('txType');
-            }
-            if(angular.isDefined(searchInput.entity.ouIdentif) && searchInput.entity.ouIdentif){
-                if(searchInput.fieldNames.indexOf('ouIdentif') == -1)
-                    searchInput.fieldNames.push('ouIdentif');
-            }
-            if(angular.isDefined(searchInput.entity.valueDtFrom) && searchInput.entity.valueDtFrom){
-                if(searchInput.fieldNames.indexOf('valueDtFrom') == -1)
-                    searchInput.fieldNames.push('valueDtFrom');
-            }
-            if(angular.isDefined(searchInput.entity.valueDtTo) && searchInput.entity.valueDtTo){
-                if(searchInput.fieldNames.indexOf('valueDtTo') == -1)
-                    searchInput.fieldNames.push('valueDtTo');
-            }
+        
+        function processSearch(start, searchObject) {
+        	// First initialize SearchInput-Object and then set Search-Params
+        	$scope.searchInput = utils.processSearch($scope.searchInput, searchObject.predicateObject);
+        	$scope.searchInput.start = start;
         }
-
-        $scope.handleSearchRequestEvent = function(){
-            processSearchInput($scope.searchInput);
-            findCustom($scope.searchInput);
-        };
-
     }
 
+    /*****************************
+     * CREATE PROCUMENT DELIVERY *
+     ****************************/
     angular
         .module('app.procmtDelivery')
         .controller('ProcmtDeliveryCreateCtlr', ProcmtCreateCtlr);
@@ -89,7 +61,14 @@
         $scope.display = {};
         $scope.error = "";
         $scope.prcmtUtils=prcmtUtils;
-
+        $scope.dateConfig = {
+        	dtOnDlvrySlip: {
+				opened : false
+			},
+			orderDt: {
+				opened : false
+			}
+        };
 
         $scope.create = function(){
             $scope.procmt.status='ONGOING';
@@ -103,8 +82,17 @@
                 $scope.error = errorResponse
             });
         };
+        
+		$scope.openDateComponent = function(componentId,$event) {
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope.dateConfig[componentId].opened = true;
+		};
     }
 
+    /*****************************
+     * SHOW PROCUMENT DELIVERY *
+     ****************************/
     angular
         .module('app.procmtDelivery')
         .controller('ProcmtDeliveryShowCtlr', procmtShowCtlr);
