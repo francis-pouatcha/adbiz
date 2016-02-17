@@ -46,11 +46,11 @@
 	                    <tr data-ng-repeat="procmt in data.prcmts">
 	                        <td data-ng-bind="procmt.identif"></td>
 	                        <td data-ng-bind="procmt.dlvrySlipNbr"></td>
-	                        <td data-ng-bind="procmt.valueDt | date:'yyyy-MM-dd HH:mm'"></td>
+	                        <td data-ng-bind="procmt.valueDt | date:'dd-MM-yyyy HH:mm'"></td>
 	                        <td data-ng-bind="procmt.status"></td>
-	                        <td data-ng-bind="procmt.dtOnDlvrySlip | date:'yyyy-MM-dd HH:mm'"></td>
+	                        <td data-ng-bind="procmt.dtOnDlvrySlip | date:'dd-MM-yyyy'"></td>
 	                        <td data-ng-bind="procmt.prchNetAmtToPay"></td>
-	                        <td data-ng-bind="procmt.orderDt"></td>
+	                        <td data-ng-bind="procmt.orderDt | date:'dd-MM-yyyy'"></td>
 <!-- 	                        <td data-ng-bind="procmt.prchPrcCur"></td> -->
 	                        <td data-ng-bind="procmt.bsnsPartner"></td>
 	                        <td data-ng-bind="procmt.ouIdentif"></td>

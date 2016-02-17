@@ -10,6 +10,9 @@
                 LANG_FR: 'French',
                 LANG_EN: 'English',
                 logout: 'logout',
+                "Action.title": 'Action',
+                "Boolean.true": 'yes',
+                "Boolean.false": 'no',
                 //--------------Article---------------
                 'CatalArticle.sppu': 'Sales Price',
                 'CatalArticle.maxDisctRate': 'Max Discount',
@@ -176,6 +179,9 @@
                 LANG_FR: 'Francais',
                 LANG_EN: 'Englais',
                 logout: 'deconnection',
+                "Action.title": 'Action',
+                "Boolean.true": 'oui',
+                "Boolean.false": 'non',
                 //--------------Article---------------
                 'CatalArticle.sppu': 'Prix de vente Unitaire',
                 'CatalArticle.maxDisctRate': 'Remise Maximale',

@@ -9,6 +9,7 @@
             $translateProvider.translations('en', {
 
                 //------------Common translations-----------//
+            	"Action.title": 'Action',
                 'app.core.list.title':'List',
                 'app.core.new.title':'New',
                 'app.core.delete.title':'Delete',
@@ -25,6 +26,7 @@
                 'StockArticlelot.lotPic.title': 'Lot PIC',
                 'StockArticlelot.artPic.title': 'PIC',
                 'StockArticlelot.section.title': 'Section',
+                'StockArticlelot.name.title': 'Name',
                 'StockArticlelot.acsngUser.title':'Creation User',
                 'StockArticlelot.expirDt.title':'Expiration Date',
                 'StockArticlelot.valueDt.title':'Creation Date',
@@ -33,6 +35,9 @@
                 'StockArticlelot.stkUnitValCur.title':'Unit Currency',
                 'StockArticlelot.trgtQty.title':'Lot Qty',
                 'StockArticlelot.stkgDt.title':'Stkg. Date',
+                'StockArticlelot.deliveredTrgtQty.title': 'Delivered Lot Qty',
+                'StockArticlelot.salesPrice.title': 'Sales price',
+                'StockArticlelot.buyingPrice.title': "Buying price",
 
                 'StockArticlelot.prchGrossPrcPreTax.title':'Total PP PreTax',
                 'StockArticlelot.prchNetPrcPreTax.title':'Total Net PP PreTax',
@@ -85,6 +90,7 @@
                 'StkMvnt.origProcsNbr.title':'Origin Process Nbr',
                 'StkMvnt.title':'Stock Movement',
                 'StkMvnts.title':'Stock Movements',
+                'StkMvnt.name.title': 'Name',
 
 
                 LANG_FR: 'French',
@@ -96,6 +102,7 @@
             $translateProvider.translations('fr', {
 
                 //------------Common translations-----------//
+            	"Action.title": 'Action',
                 'app.core.list.title':'Liste',
                 'app.core.new.title':'Creer',
                 'app.core.delete.title':'Supprimer',
@@ -113,6 +120,7 @@
                 'StockArticlelot.lotPic.title': 'CIP Lot',
                 'StockArticlelot.artPic.title': 'CIP',
                 'StockArticlelot.section.title': 'Emplacement',
+                'StockArticlelot.name.title': 'Designation',
                 'StockArticlelot.acsngUser.title':'Utilisateur création',
                 'StockArticlelot.expirDt.title':'Date d\'expiration',
                 'StockArticlelot.valueDt.title':'Date Création',
@@ -121,6 +129,9 @@
                 'StockArticlelot.stkUnitValCur.title':'Devise Unite',
                 'StockArticlelot.trgtQty.title':'Qté de Lot',
                 'StockArticlelot.stkgDt.title':'Date Stkg.',
+                'StockArticlelot.deliveredTrgtQty.title': 'Qté de Lot livrée',
+                'StockArticlelot.salesPrice.title': 'Prix de vente',
+                'StockArticlelot.buyingPrice.title': "Prix d'achat",
 
                 'StockArticlelot.prchGrossPrcPreTax.title':'PA HT Total',
                 'StockArticlelot.prchNetPrcPreTax.title':'PA Net HT Total',
@@ -171,6 +182,7 @@
                 'StkMvnt.origProcsNbr.title':'Num Process Origine',
                 'StkMvnt.title':'Mouvement de Stock',
                 'StkMvnts.title':'Mouvements de Stock',
+                'StkMvnt.name.title': 'Designation',
 
                 LANG_FR: 'Francais',
                 LANG_EN: 'Englais'

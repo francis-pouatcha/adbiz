@@ -21,7 +21,8 @@
 					<th><span data-ng-bind="'CatalArticle.maxStockQty' | translate"></span></th>
 					<th><span data-ng-bind="'CatalArticle.vatRate' | translate"></span></th>
 					<th><span data-ng-bind="'CatalArticle.active' | translate"></span></th>
-					<th colspan="2"><span data-ng-bind="'CatalArticle.authorizedSale' | translate"></span></th>
+					<th><span data-ng-bind="'CatalArticle.authorizedSale' | translate"></span></th>
+					<th><span data-ng-bind="'Action.title' | translate"></span></th>
               	</tr>
                 <tr>
 			  		<th><input data-st-search="identif" class="input-sm form-control" type="search"/></th>
@@ -31,7 +32,8 @@
              		<th><input data-st-search="maxStockQty" class="input-sm form-control" type="number"/></th>
              		<th></th>
              		<th><input data-st-search="active" class="input-sm form-control" type="search"/></th>
-             		<th colspan="2"><input data-st-search="authorizedSale" class="input-sm form-control" type="search"/></th>
+             		<th><input data-st-search="authorizedSale" class="input-sm form-control" type="search"/></th>
+             		<th></th>
 				</tr>
           	</thead>
           	<tbody>
@@ -42,8 +44,8 @@
 	              <td><span data-ng-bind-html="article.minStockQty"></span></td>
 	              <td><span data-ng-bind-html="article.maxStockQty"></span></td>
 	              <td><span data-ng-bind-html="article.vatRate"></span></td>
-	              <td><span data-ng-bind-html="article.active"></span></td>
-	              <td><span data-ng-bind-html="article.authorizedSale"></span></td>
+	              <td><span data-ng-bind-html="'Boolean.' + article.active | translate"></span></td>
+	              <td><span data-ng-bind-html="'Boolean.' + article.authorizedSale | translate"></span></td>
 	              <td>
 	                 <div class="table-actions">
 	                      <a class="btn btn-default" title="View" href="#/article/{{article.id}}">
