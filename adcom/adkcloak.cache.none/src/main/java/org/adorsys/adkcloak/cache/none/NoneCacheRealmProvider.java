@@ -53,12 +53,12 @@ public class NoneCacheRealmProvider implements CacheRealmProvider {
 
 	@Override
 	public ClientModel getClientById(String id, RealmModel realm) {
-		return getClientById(id, realm);
+		return delegate.getClientById(id, realm);
 	}
 
 	@Override
 	public ClientTemplateModel getClientTemplateById(String id, RealmModel realm) {
-		return getClientTemplateById(id, realm);
+		return delegate.getClientTemplateById(id, realm);
 	}
 
 	@Override

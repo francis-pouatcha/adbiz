@@ -10,7 +10,7 @@
 # Read the build configuration file
 if [ "x$BUILD_CONF" = "x" ]; then
     CURRENT_DIR=`cd "."; pwd`
-    BUILD_CONF="$CURRENT_DIR/build.conf"
+    BUILD_CONF="$CURRENT_DIR/build-1.8.1.conf"
 	APP_LIST_CONF="$CURRENT_DIR/apps-list.conf"
 	DATA_LIST_CONF="$CURRENT_DIR/data-list.conf"
 fi
@@ -80,23 +80,23 @@ cd $ADCOM_HOME/adcore.xls/target/adcore.xls && cp -r org $JBOSS_MODULES_HOME/
 
 # deploy adcore.b2
 # cd $ADCOM_HOME/adcore.b2 && mvn clean install
-cd $ADCOM_HOME/adcore.b2/target/adcore.b2 && cp -r org $JBOSS_MODULES_HOME/
+# cd $ADCOM_HOME/adcore.b2/target/adcore.b2 && cp -r org $JBOSS_MODULES_HOME/
 
 # Override Keycloak JPA Connection Implementation.
 # cd $ADCOM_HOME/adkcloak.connections.b2 && mvn clean install
-cd $ADCOM_HOME/adkcloak.connections.b2/target/adkcloak.connections.b2 && cp -r org $JBOSS_MODULES_HOME/
+# cd $ADCOM_HOME/adkcloak.connections.b2/target/adkcloak.connections.b2 && cp -r org $JBOSS_MODULES_HOME/
 
 # Override invalidation cache
 # cd $ADCOM_HOME/adkcloak.cache.none && mvn clean install
-cd $ADCOM_HOME/adkcloak.cache.none/target/adkcloak.cache.none && cp -r org $JBOSS_MODULES_HOME/
+# cd $ADCOM_HOME/adkcloak.cache.none/target/adkcloak.cache.none && cp -r org $JBOSS_MODULES_HOME/
 
 # Override Keycloak JPA Implementation.
 # cd $ADCOM_HOME/adkcloak.model.b2 && mvn clean install
-cd $ADCOM_HOME/adkcloak.model.b2/target/adkcloak.model.b2 && cp -r org $JBOSS_MODULES_HOME/
+# cd $ADCOM_HOME/adkcloak.model.b2/target/adkcloak.model.b2 && cp -r org $JBOSS_MODULES_HOME/
 
 # Override Keycloak Event B2 Implementation.
 # cd $ADCOM_HOME/adkcloak.events.b2 && mvn clean install
-cd $ADCOM_HOME/adkcloak.events.b2/target/adkcloak.events.b2 && cp -r org $JBOSS_MODULES_HOME/
+# cd $ADCOM_HOME/adkcloak.events.b2/target/adkcloak.events.b2 && cp -r org $JBOSS_MODULES_HOME/
 
 # deploy adkcloak.services
 # cd $ADCOM_HOME/adkcloak.services && mvn clean install
@@ -119,7 +119,7 @@ else
 fi
 
 cp $ADCOM_HOME/adcom.configuration/$JBOSS_DIR/keycloak-$KEYCLOAK_VERSION/standalone-keycloak.xml $JBOSS_CONFIG_DIR/standalone-keycloak.xml
-cp $ADCOM_HOME/adcom.configuration/$JBOSS_DIR/keycloak-$KEYCLOAK_VERSION/keycloak-server.json $JBOSS_CONFIG_DIR/keycloak-server.json
+cp $ADCOM_HOME/adcom.configuration/$JBOSS_DIR/keycloak-$KEYCLOAK_VERSION/keycloak-server-jpa.json $JBOSS_CONFIG_DIR/keycloak-server.json
 cp $ADCOM_HOME/adcom.configuration/$JBOSS_DIR/keycloak-$KEYCLOAK_VERSION/keycloak-add-user.json $JBOSS_CONFIG_DIR/keycloak-add-user.json
 
 echo "             Starting jboss"

@@ -17,6 +17,7 @@ import org.keycloak.models.RoleContainerModel;
 import org.keycloak.models.RoleModel;
 import org.keycloak.models.UserModel;
 import org.keycloak.models.UserProvider;
+import org.keycloak.models.utils.KeycloakModelUtils;
 import org.keycloak.models.utils.ModelToRepresentation;
 import org.keycloak.models.utils.RepresentationToModel;
 import org.keycloak.representations.idm.ClientRepresentation;
@@ -29,17 +30,11 @@ import org.keycloak.services.managers.RealmManager;
 public class RealmClient {
 
 	KeycloakProperties properties = KeycloakProperties.singleton();
-    KeycloakSession session;
 	KeycloakSessionFactory sessionFactory;
-	RealmProvider realmProvider;
-	UserProvider userProvider;
 	String contextPath;
 	public RealmClient(KeycloakSessionFactory sessionFactory, String contextPath){
 		initDefaultValues();
 		this.sessionFactory = sessionFactory;
-		this.session = sessionFactory.create();//new KeycloakSessionWrapper();
-		this.realmProvider = session.getProvider(RealmProvider.class);
-		this.userProvider = session.getProvider(UserProvider.class);
 		this.contextPath = contextPath;
 	}
 	
@@ -50,11 +45,26 @@ public class RealmClient {
     	properties.addProperperty("cors-max-age","10000");
     	properties.addProperperty("cors-allowed-methods","POST, PUT, DELETE, GET");
     }
+    
+    private KeycloakSession newSession(){
+    	return sessionFactory.create();
+    }
 	
+	private RealmProvider getRealmProvider(KeycloakSession session){
+//		return session.getProvider(RealmProvider.class);
+		return session.realms();
+	}
+	private UserProvider getUserProvider(KeycloakSession session){
+		return session.getProvider(UserProvider.class);
+	}
+    
 	public ClientReprestn findClient(String realmId, String clientId) {
-        session.getTransaction().begin();
-        try {
-			ClientModel model = realmProvider.getClientById(clientId, realmProvider.getRealm(realmId));
+		KeycloakSession session = newSession();
+		try {
+			session.getTransaction().begin();
+			RealmProvider realmProvider = getRealmProvider(session);
+			RealmModel realm = realmProvider.getRealm(realmId);
+			ClientModel model = realmProvider.getClientById(clientId, realm);
 			if(model==null) return null;
 			ClientRepresentation clientRepresentation = ModelToRepresentation.toRepresentation(model);
 			
@@ -62,40 +72,55 @@ public class RealmClient {
 			copy(res, clientRepresentation);
 			res.setRealmId(realmId);
 			return res;
-        } finally {
-        	session.getTransaction().commit();
-        }
+		} catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			throw ex;
+		} finally {
+			if(session.getTransaction().isActive() && !session.getTransaction().getRollbackOnly())session.getTransaction().commit();
+			session.close();
+		}
 	}
 
 	public void createClient(ClientReprestn t) {
-        session.getTransaction().begin();
-        try {
-	        ClientRepresentation rr = new ClientRepresentation();
-	        copy(rr, t);
-	        String redirectUriCsStg = t.getRedirectUriCsStg();
-	        if(StringUtils.isNotBlank(redirectUriCsStg)){
-	        	String[] split = redirectUriCsStg.split(",");
-	        	List<String> redirectUris = new ArrayList<String>();
-	        	for (String redirectUri : split) {
-	        		if(StringUtils.isNotBlank(redirectUri))
-	        			redirectUris.add(redirectUri);
-				}
-				rr.setRedirectUris(redirectUris);
-	        }
-	        RealmModel realm = realmProvider.getRealm(t.getRealmId());
+
+        ClientRepresentation rr = new ClientRepresentation();
+        copy(rr, t);
+        String redirectUriCsStg = t.getRedirectUriCsStg();
+        if(StringUtils.isNotBlank(redirectUriCsStg)){
+        	String[] split = redirectUriCsStg.split(",");
+        	List<String> redirectUris = new ArrayList<String>();
+        	for (String redirectUri : split) {
+        		if(StringUtils.isNotBlank(redirectUri))
+        			redirectUris.add(redirectUri);
+			}
+			rr.setRedirectUris(redirectUris);
+        }
+		KeycloakSession session = newSession();
+		try {
+			session.getTransaction().begin();
+			RealmProvider realmProvider = getRealmProvider(session);
+			RealmModel realm = realmProvider.getRealm(t.getRealmId());
 	        ClientModel clientModel = RepresentationToModel.createClient(session, realm, rr, true);
 	        String clientSecret = clientModel.getSecret();
 	        String credentialKey =clientModel.getClientId() + ".credential";
 	        properties.addProperperty(credentialKey, clientSecret);
-        } finally {
-        	session.getTransaction().commit();
-        }
+		} catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			throw ex;
+		} finally {
+			if(session.getTransaction().isActive() && !session.getTransaction().getRollbackOnly())session.getTransaction().commit();
+			session.close();
+		}
+
 	}
 
 	public ClientRoleReprestn findClientRole(String realmId, String clientId, String name) {
-        session.getTransaction().begin();
-        try {
-	        RealmModel realm = realmProvider.getRealm(realmId);
+		KeycloakSession session = newSession();
+		try {
+			session.getTransaction().begin();
+			RealmProvider realmProvider = getRealmProvider(session);
+			RealmModel realm = realmProvider.getRealm(realmId);
+	
 	        ClientModel clientModel = realm.getClientById(clientId);
 	        RoleModel roleModel = clientModel.getRole(name);
 	        if(roleModel==null) return null;
@@ -106,68 +131,94 @@ public class RealmClient {
 			res.setRealmId(realmId);
 			res.setClientId(clientId);
 			return res;
-        } finally {
-        	session.getTransaction().commit();
-        }
+		} catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			throw ex;
+		} finally {
+			if(session.getTransaction().isActive() && !session.getTransaction().getRollbackOnly())session.getTransaction().commit();
+			session.close();
+		}
 	}
 
 	public void createClientRole(ClientRoleReprestn t) {
-        session.getTransaction().begin();
-        try {
-	        RealmModel realm = realmProvider.getRealm(t.getRealmId());
+		KeycloakSession session = newSession();
+		try {
+			session.getTransaction().begin();
+			RealmProvider realmProvider = getRealmProvider(session);
+			RealmModel realm = realmProvider.getRealm(t.getRealmId());
+			if(t.getId()==null || t.getId().trim().length()==0)t.setId(KeycloakModelUtils.generateId());
 	        ClientModel clientModel = realm.getClientById(t.getClientId());
 			RoleModel role = clientModel.addRole(t.getId(), t.getName());
 	        role.setDescription(t.getDescription());
 	        boolean scopeParamRequired = t.isScopeParamRequired()==null ? false : t.isScopeParamRequired();
 	        role.setScopeParamRequired(scopeParamRequired);
-        } finally {
-        	session.getTransaction().commit();
-        }
+
+		} catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			throw ex;
+		} finally {
+			if(session.getTransaction().isActive() && !session.getTransaction().getRollbackOnly())session.getTransaction().commit();
+			session.close();
+		}
 	}
 
 	public RealmRepresentation findRealm(String realmId) {
-        session.getTransaction().begin();
-        try {
-	        RealmModel realm = realmProvider.getRealm(realmId);
+		KeycloakSession session = newSession();
+		try {
+			session.getTransaction().begin();
+			RealmProvider realmProvider = getRealmProvider(session);
+			RealmModel realm = realmProvider.getRealm(realmId);
 	        if(realm==null)return null;
 	        return ModelToRepresentation.toRepresentation(realm, false);
-        } finally {
-        	session.getTransaction().commit();
-        }
+		} catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			throw ex;
+		} finally {
+			if(session.getTransaction().isActive() && !session.getTransaction().getRollbackOnly())session.getTransaction().commit();
+			session.close();
+		}
 	}
 
+	static class MyRealmManager extends RealmManager{
+
+		public MyRealmManager(KeycloakSession session, RealmProvider rp) {
+			super(session);
+			model = rp;
+		}
+	}
+	
 	public RealmRepresentation createRealm(RealmRepresentation t) {
-        session.getTransaction().begin();
-        try {
-	        RealmManager realmManager = new RealmManager(session);
+		KeycloakSession session = newSession();
+		try {
+			session.getTransaction().begin();
+//	        RealmManager realmManager = new MyRealmManager(new MyKeycloakSession(session), getRealmProvider(session));
+			RealmManager realmManager = new RealmManager(session);
 	        realmManager.setContextPath(contextPath);
-//	        RealmModel realm = realmManager.createRealm(t.getId(), t.getRealm());
-//	        
+	//	        RealmModel realm = realmManager.createRealm(t.getId(), t.getRealm());
+	//	        
 	        RealmModel realm = realmManager.importRealm(t);
-//	        grantPermissionsToRealmAdmin(realm);
+	//	        grantPermissionsToRealmAdmin(realm);
 	        RealmRepresentation realmRepresentation = ModelToRepresentation.toRepresentation(realm, false);
 	        properties.addProperperty("realm-public-key", realmRepresentation.getPublicKey());
+
 	        return realmRepresentation;
-        } finally {
-        	session.getTransaction().commit();
-        }
+		} catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			throw ex;
+		} finally {
+			if(session.getTransaction().isActive() && !session.getTransaction().getRollbackOnly())session.getTransaction().commit();
+			session.close();
+		}
 
 	}
-//    private void grantPermissionsToRealmAdmin(RealmModel realm) {
-//    	RealmModel adminRealm = new PatchedRealmManager(session, contextPath).getKeycloakAdminstrationRealm();
-//    	UserModel adminUser = userProvider.getUserByUsername("admin", adminRealm);
-//    	ClientModel realmAdminApp = adminRealm.getMasterAdminClient();
-//    	for (String r : AdminRoles.ALL_REALM_ROLES) {
-//    		RoleModel role = realmAdminApp.getRole(r);
-//    		adminUser.grantRole(role);
-//    	}
-//    }
 
 	public RoleRepresentation findClientRoleComposite(String realmId, String compositeRoleId, String childRoleClientId,
 			String childRoleName) {
-        session.getTransaction().begin();
-        try {
-	        RealmModel realm = realmProvider.getRealm(realmId);
+		KeycloakSession session = newSession();
+		try {
+			session.getTransaction().begin();
+			RealmProvider realmProvider = getRealmProvider(session);
+			RealmModel realm = realmProvider.getRealm(realmId);
 	        RoleModel compositeRole = realm.getRoleById(compositeRoleId);
 	        if(!compositeRole.isComposite()) return null;
 	        Set<RoleModel> composites = compositeRole.getComposites();
@@ -182,15 +233,21 @@ public class RealmClient {
 				}
 			}
 			return null;
-        } finally {
-        	session.getTransaction().commit();
-        }
+		} catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			throw ex;
+		} finally {
+			if(session.getTransaction().isActive() && !session.getTransaction().getRollbackOnly())session.getTransaction().commit();
+			session.close();
+		}
 	}
 
 	public RoleReprestn findRealmRole(String realmId, String realmRoleName) {
-        session.getTransaction().begin();
-        try {
-	        RealmModel realm = realmProvider.getRealm(realmId);
+		KeycloakSession session = newSession();
+		try {
+			session.getTransaction().begin();
+			RealmProvider realmProvider = getRealmProvider(session);
+			RealmModel realm = realmProvider.getRealm(realmId);
 	        RoleModel roleModel = realm.getRole(realmRoleName);
 	        if(roleModel==null) return null;
 	        RoleRepresentation roleRepresentation = ModelToRepresentation.toRepresentation(roleModel);
@@ -199,15 +256,21 @@ public class RealmClient {
 			copy(res, roleRepresentation);
 			res.setRealmId(realmId);
 			return res;
-        } finally {
-        	session.getTransaction().commit();
-        }
+		} catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			throw ex;
+		} finally {
+			if(session.getTransaction().isActive() && !session.getTransaction().getRollbackOnly())session.getTransaction().commit();
+			session.close();
+		}
 	}
 
 	public RoleRepresentation findRealmRoleComposite(String realmId, String compositeRoleId, String childRoleName) {
-        session.getTransaction().begin();
-        try {
-	        RealmModel realm = realmProvider.getRealm(realmId);
+		KeycloakSession session = newSession();
+		try {
+			session.getTransaction().begin();
+			RealmProvider realmProvider = getRealmProvider(session);
+			RealmModel realm = realmProvider.getRealm(realmId);
 	        RoleModel compositeRole = realm.getRoleById(compositeRoleId);
 	        if(!compositeRole.isComposite()) return null;
 	        Set<RoleModel> composites = compositeRole.getComposites();
@@ -223,44 +286,63 @@ public class RealmClient {
 			}
 	
 			return null;
-        } finally {
-        	session.getTransaction().commit();
-        }
+		} catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			throw ex;
+		} finally {
+			if(session.getTransaction().isActive() && !session.getTransaction().getRollbackOnly())session.getTransaction().commit();
+			session.close();
+		}
 	}
 
 	public void addComposite(String realmId, String compositeRoleId, RoleRepresentation childRole) {
-        session.getTransaction().begin();
-        try {
-	        RealmModel realm = realmProvider.getRealm(realmId);
+		KeycloakSession session = newSession();
+		try {
+			session.getTransaction().begin();
+			RealmProvider realmProvider = getRealmProvider(session);
+			RealmModel realm = realmProvider.getRealm(realmId);
 	        RoleModel compositeRoleModel = realm.getRoleById(compositeRoleId);
 	        RoleModel childRoleModel = realm.getRoleById(childRole.getId());
 	        compositeRoleModel.addCompositeRole(childRoleModel);
-        } finally {
-        	session.getTransaction().commit();
-        }
+
+		} catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			throw ex;
+		} finally {
+			if(session.getTransaction().isActive() && !session.getTransaction().getRollbackOnly())session.getTransaction().commit();
+			session.close();
+		}
 	}
 
 	public UserReprestn findUser(String realmId, String username) {
-        session.getTransaction().begin();
-        try {
-	        RealmModel realm = realmProvider.getRealm(realmId);
-			UserModel userModel = userProvider.getUserByUsername(username, realm);
+		KeycloakSession session = newSession();
+		try {
+			session.getTransaction().begin();
+			RealmProvider realmProvider = getRealmProvider(session);
+			RealmModel realm = realmProvider.getRealm(realmId);
+			UserModel userModel = getUserProvider(session).getUserByUsername(username, realm);
 			if(userModel==null)return null;
 	        UserRepresentation orig = ModelToRepresentation.toRepresentation(userModel);
 			UserReprestn res = new UserReprestn();
 			copy(res, orig);
 			res.setRealmId(realmId);
 			return res;
-        } finally {
-        	session.getTransaction().commit();
-        }
+		} catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			throw ex;
+		} finally {
+			if(session.getTransaction().isActive() && !session.getTransaction().getRollbackOnly())session.getTransaction().commit();
+			session.close();
+		}
 	}
 
 	public UserClientRoles findUserClientRole(UserClientRoles ucr) {
-        session.getTransaction().begin();
-        try {
-	        RealmModel realm = realmProvider.getRealm(ucr.getRealmId());
-			UserModel userModel = userProvider.getUserByUsername(ucr.getUsername(), realm);
+		KeycloakSession session = newSession();
+		try {
+			session.getTransaction().begin();
+			RealmProvider realmProvider = getRealmProvider(session);
+			RealmModel realm = realmProvider.getRealm(ucr.getRealmId());
+			UserModel userModel = getUserProvider(session).getUserByUsername(ucr.getUsername(), realm);
 			if(userModel==null) throw new IllegalStateException("No user with username: " + ucr.getUsername());
 			ClientModel clientModel = realm.getClientById(ucr.getClientId());
 			if(clientModel==null) throw new IllegalStateException("No clinet with id: " + ucr.getClientId());
@@ -270,52 +352,78 @@ public class RealmClient {
 				
 			}
 			return null;
-        } finally {
-        	session.getTransaction().commit();
-        }
+		} catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			throw ex;
+		} finally {
+			if(session.getTransaction().isActive() && !session.getTransaction().getRollbackOnly())session.getTransaction().commit();
+			session.close();
+		}
 	}
 
 	public UserClientRoles addClientRole(UserClientRoles ucr) {
-        session.getTransaction().begin();
-        try {
-	        RealmModel realm = realmProvider.getRealm(ucr.getRealmId());
-			UserModel userModel = userProvider.getUserByUsername(ucr.getUsername(), realm);
+		KeycloakSession session = newSession();
+		try {
+			session.getTransaction().begin();
+			RealmProvider realmProvider = getRealmProvider(session);
+			RealmModel realm = realmProvider.getRealm(ucr.getRealmId());
+			UserModel userModel = getUserProvider(session).getUserByUsername(ucr.getUsername(), realm);
 			if(userModel==null) throw new IllegalStateException("No user with username: " + ucr.getUsername());
 			ClientModel clientModel = realm.getClientById(ucr.getClientId());
 			if(clientModel==null) throw new IllegalStateException("No clinet with id: " + ucr.getClientId());
 			RoleModel roleModel = clientModel.getRole(ucr.getRoleName());
 			if(roleModel==null) throw new IllegalStateException("No role with name "+ ucr.getRoleName() +" for client  " + ucr.getClientId());
 			userModel.grantRole(roleModel);
+			session.getTransaction().commit();
 			return ucr;
-        } finally {
-        	session.getTransaction().commit();
-        }
+		} catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			throw ex;
+		} finally {
+			if(session.getTransaction().isActive() && !session.getTransaction().getRollbackOnly())session.getTransaction().commit();
+			session.close();
+		}
 	}
 
 	public void addCredential(UserCredentials cred) {
-        session.getTransaction().begin();
-        try {
-	        RealmModel realm = realmProvider.getRealm(cred.getRealmId());
-			UserModel userModel = userProvider.getUserByUsername(cred.getUsername(), realm);
+		KeycloakSession session = newSession();
+		try {
+			session.getTransaction().begin();
+			RealmProvider realmProvider = getRealmProvider(session);
+			RealmModel realm = realmProvider.getRealm(cred.getRealmId());
+			UserModel userModel = getUserProvider(session).getUserByUsername(cred.getUsername(), realm);
 			if(userModel==null) throw new IllegalStateException("No user with username: " + cred.getUsername());
 	
 			UserRepresentation userRep = ModelToRepresentation.toRepresentation(userModel);
 			if(userRep.getCredentials()==null)userRep.setCredentials(new ArrayList<CredentialRepresentation>());;
 			userRep.getCredentials().add(cred);
 			RepresentationToModel.createCredentials(userRep, userModel);
-        } finally {
-        	session.getTransaction().commit();
-        }
+
+		} catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			throw ex;
+		} finally {
+			if(session.getTransaction().isActive() && !session.getTransaction().getRollbackOnly())session.getTransaction().commit();
+			session.close();
+		}
 	}
 
 	public void createUser(UserReprestn userRep) {
-        session.getTransaction().begin();
-        try {
-	        RealmModel newRealm = realmProvider.getRealm(userRep.getRealmId());
+		KeycloakSession session = newSession();
+		try {
+			session.getTransaction().begin();
+			RealmProvider realmProvider = getRealmProvider(session);
+	
+			RealmModel newRealm = realmProvider.getRealm(userRep.getRealmId());
 			RepresentationToModel.createUser(session, newRealm, userRep, newRealm.getClientNameMap());
-        } finally {
-        	session.getTransaction().commit();
-        }
+
+		} catch(RuntimeException ex){
+			session.getTransaction().rollback();
+			throw ex;
+		} finally {
+			if(session.getTransaction().isActive() && !session.getTransaction().getRollbackOnly())session.getTransaction().commit();
+			session.close();
+		}
 	}
 
 	public void copy(Object dest, Object orig){
