@@ -11,6 +11,7 @@
                 //------------Common translations-----------//
             	"Action.title": 'Action',
                 'app.core.list.title':'List',
+                'app.core.create.title':'Create',
                 'app.core.new.title':'New',
                 'app.core.delete.title':'Delete',
                 'app.core.save.title':'Save',

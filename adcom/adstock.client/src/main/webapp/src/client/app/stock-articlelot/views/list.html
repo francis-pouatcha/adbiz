@@ -1,17 +1,27 @@
-<section class="mainbar">
+<section class="mainbar" id="stockArticlelotPanel">
 
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <span data-ng-bind="'app.core.list.title' | translate"></span> <span data-ng-bind="'StockArticlelots.title' | translate"></span>
-    </div>
+	<div class="panel panel-primary">
+	    <div class="panel-heading">
+	        <b><span data-ng-bind="'app.core.create.title' | translate"></span> <span data-ng-bind="'app.core.new.title' | translate"></span> <span data-ng-bind="'StockArticlelot.title' | translate"></span></b>
+	        <button class="glyphicon glyphicon-collapse-down pull-right" data-toggle="collapse" data-parent="#stockArticlelotPanel" data-target="#stockArticlelotCreateToggle"></button>
+	    </div>
+	    <div class="panel-collapse collapse" id="stockArticlelotCreateToggle">
+	    	<div data-ng-include="'/adstock.client/src/client/app/stock-articlelot/views/create.html'"></div>
+	    </div>
+	</div>
+	
+  <div class="panel panel-default">
+<!--     <div class="panel-heading"> -->
+<!--       <span data-ng-bind="'app.core.list.title' | translate"></span> <span data-ng-bind="'StockArticlelots.title' | translate"></span> -->
+<!--     </div> -->
     <div class="panel-body">
 
-      <div class="pull-right">
-        <a type="button" class="btn btn-success" href="#/stock-articlelot/create">
-          <i class="glyphicon glyphicon-open"></i> 
-            <span data-ng-bind="'app.core.new.title' | translate"></span> <span data-ng-bind="'StockArticlelot.title' | translate"></span>
-        </a>
-      </div>
+<!--       <div class="pull-right"> -->
+<!--         <a type="button" class="btn btn-success" href="#/stock-articlelot/create"> -->
+<!--           <i class="glyphicon glyphicon-open"></i>  -->
+<!--             <span data-ng-bind="'app.core.new.title' | translate"></span> <span data-ng-bind="'StockArticlelot.title' | translate"></span> -->
+<!--         </a> -->
+<!--       </div> -->
 
       <table data-st-table="vm.data.list" data-st-pipe="vm.callServer" class="table table-bordered  table-striped pointer-element">
           <thead>
