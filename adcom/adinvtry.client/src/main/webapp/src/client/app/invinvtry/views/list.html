@@ -1,196 +1,79 @@
 
-<section ng-cloak id="invIntrySearchPanel" class="mainbar">
+<section data-ng-cloak id="invIntrySearchPanel" class="mainbar">
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <span><b> {{'Entity_search.title' | translate}}/ {{'Entity_create.title' | translate}}</b></span>
+        <span><b><span data-ng-bind="'Entity_create.title' | translate"></span></b></span>
         <button class="glyphicon glyphicon-collapse-down pull-right" data-toggle="collapse" data-parent="#invIntryShowPanel" data-target="#invInvtrySearchToggle"></button>
     </div>
     <div class="panel-collapse collapse" id="invInvtrySearchToggle">
-        <div class="panel-body">
-            <div class="">
-                <form role="form" class="">
-                    <div class="row" >
-                        <div class="col-lg-2">
-                            <div class="form-group">
-                                <label class=" control-label" for="identif"> {{'InvInvtry_invtryNbr_description.title' | translate}}</label>
-                                <div class="">
-                                    <input type="text" id="identif" ng-model="searchInput.entity.identif" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group col-lg-2">
-                            <label class=" control-label" for="login"> {{'InvInvtry_acsngUser_description.title' | translate}}</label>
-                            <input type="text" ng-model="searchInput.entity.login" id="login" name="login" class="form-control" >
-                        </div>
-
-                        <div class="col-lg-2">
-                            <div class="form-group">
-                                <label class=" control-label" for="status"> {{'InvInvtry_invtryStatus_description.title' | translate}}</label>
-                                <div class="">
-                                    <select class="form-control" name="status" id="invtryStatus" ng-model="searchInput.entity.status"
-                                            ng-options="status.enumKey as (status.translKey | translate)
-							                    	for status in invInvtryUtils.invInvntrStati" >
-                                        <option value=""/>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group col-lg-2">
-                            <label class=" control-label" for="invtryGroup"> {{'InvInvtry_invtryGroup_description.title' | translate}}</label>
-                            <input type="text" ng-model="searchInput.entity.txGroup" id="invtryGroup" name="invtryGroup" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row" >
-                        <div class="col-lg-2">
-                            <div class="form-group">
-                                <label class=" control-label" for="invtryDtFrom"> {{'InvInvtry_invtryDtFrom_description.title' | translate}}</label>
-                                <div class="">
-                                    <input type="datetime" date-time  view="date" min-view="date" views="['date']" dismiss="true" format="dd-MM-yyyy"
-                                           id="invtryDtFrom" ng-model="searchInput.invtryDtFrom" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="form-group">
-                                <label class=" control-label" for="invtryDtTo"> {{'InvInvtry_invtryDtTo_description.title' | translate}}</label>
-                                <div class="">
-                                    <input type="datetime" date-time  view="date" min-view="date" views="['date']" dismiss="true" format="dd-MM-yyyy"
-                                           id="invtryDtTo" ng-model="searchInput.invtryDtTo" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="form-group">
-                                <label class=" control-label" for="acsngDtFrom"> {{'InvInvtry_acsngDtFrom_description.title' | translate}}</label>
-                                <div class="">
-                                    <input type="datetime" date-time  view="date" min-view="date" views="['date']" dismiss="true" format="dd-MM-yyyy"
-                                           id="acsngDtFrom" ng-model="searchInput.acsngDtFrom" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="form-group">
-                                <label class=" control-label" for="acsngDtTo">{{'InvInvtry_acsngDtTo_description.title' | translate}}</label>
-                                <div class="">
-                                    <input type="datetime" date-time  view="date" min-view="date" views="['date']" dismiss="true" format="dd-MM-yyyy"
-                                           id="acsngDtTo" ng-model="searchInput.acsngDtTo" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row" >
-                        <div class="form-group col-lg-4">
-                            <label> {{'InvInvtry_invInvtryType_description.title' | translate}} :</label>
-                            <div ng-class="{ 'has-error' : invInvtryForm.invMode.$invalid }" >
-                                <select class="form-control" name="txType" id="txType" ng-model="searchInput.entity.txType"
-                                        ng-options="txType.enumKey as (txType.translKey | translate)
-			                   				for txType in invInvtryUtils.invInvtryTypes" >
-                                    <option value=""/>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group col-lg-2">
-                            <label class=" control-label" for="createSectionCode"> {{'InvInvtryItem_section_description.title' | translate}}</label>
-                            <input type="text" ng-model="searchInput.entity.section" id="createSectionCode" name="createSectionCode" class="form-control" ng-change="onSectionChanged()"
-                                   autocomplete="off" typeahead="stkSection as (stkSection.identif + ' : ' + stkSection.name) for stkSection in invInvtryUtils.loadStkSectionArticleLots($viewValue)"
-                                   typeahead-loading="loading" typeahead-min-length="4" typeahead-on-select='onSectionSelected($item, $model, $label)'>
-                        </div>
-                        <div class="form-group col-lg-4">
-                            <label class=" control-label" for="createSectionName"> {{'InvInvtryItem_sectionName_description.title' | translate}}</label>
-                            <input type="text" ng-model="display.sectionName" id="createSectionName" name="createSectionName" class="form-control"
-                                   autocomplete="off" typeahead="stkSection as (stkSection.identif + ' : ' + stkSection.name) for stkSection in invInvtryUtils.loadStkSectionArticleLotsByName($viewValue)"
-                                   typeahead-loading="loading" typeahead-min-length="4" typeahead-on-select='onSectionSelected($item, $model, $label)'>
-                        </div>
-                        <div class="form-group col-lg-1">
-                            <label class=" control-label" for="createRangeStart"> {{'InvInvtryItem_artNameStart_description.title' | translate}}</label>
-                            <input type="text" ng-model="searchInput.entity.rangeStart" id="createRangeStart" name="createRangeStart" class="form-control">
-                        </div>
-                        <div class="form-group col-lg-1">
-                            <label class=" control-label" for="createRangeEnd"> {{'InvInvtryItem_artNameEnd_description.title' | translate}}</label>
-                            <input type="text" ng-model="searchInput.entity.rangeEnd" id="createRangeEnd" name="createRangeEnd" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row" >
-                        <div class="form-group col-lg-6">
-                            <label class=" control-label">{{'InvInvtry_descptn_description.title' | translate}}:</label>
-                            <input type="text" id="descptn" name="descptn" class="form-control" ng-model="searchInput.entity.descptn"/>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <button  ng-click="handleSearchRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
-                                    <i class="glyphicon glyphicon-search"></i>
-                                </button>
-                                <button  ng-click="handlePrintRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
-                                    <i class="glyphicon glyphicon-print"></i>
-                                </button>
-                                <a class="btn btn-success" href="#/invinvtry/create" style="margin-top: 23px;" >
-                                    <i class="glyphicon-plus"></i>  {{'Entity_create.title' | translate}} Invinvtry
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+	      <div data-ng-include="'/adinvtry.client/src/client/app/invinvtry/views/create.html'"></div>
     </div>
 </div>
 
 <div class="panel panel-default ">
     <div class="panel-body">
         <div class="col-lg-12">
-                <table class="table table-bordered  table-striped pointer-element" >
+                <table data-st-table="data.invInvtrys" data-st-pipe="callServer" class="table table-bordered  table-striped pointer-element" >
                     <thead>
-                    <tr>
-                        <th> {{'InvInvtry_invtryNbr_description.title' | translate}}</th>
-                        <th> {{'InvInvtry_acsngUser_description.title' | translate}}</th>
-                        <th> {{'InvInvtry_invtryGroup_description.title' | translate}}</th>
-                        <th> {{'InvInvtry_gapSaleAmtHT_description.title' | translate}}</th>
-                        <th> {{'InvInvtry_gapPurchAmtHT_description.title' | translate}}</th>
-                        <th> {{'InvInvtry_invtryStatus_description.title' | translate}}</th>
-                        <th> {{'InvInvtry_invtryDt_description.title' | translate}}</th>
-                        <th> {{'InvInvtry_startRange_description.title' | translate}}</th>
-                        <th> {{'InvInvtry_endRange_description.title' | translate}}</th>
-                        <th> {{'InvInvtryItem_section_description.title' | translate}}</th>
-                        <th> {{'description' | translate}}</th>
-                        <th></th>
-                        <th></th>
-                       <!-- <th></th>-->
-                    </tr>
+	                    <tr>
+	                        <th><span data-ng-bind="'InvInvtry_invtryNbr_description.title' | translate"></span></th>
+	                        <th><span data-ng-bind="'InvInvtry_acsngUser_description.title' | translate"></span></th>
+	                        <th><span data-ng-bind="'InvInvtry_invtryGroup_description.title' | translate"></span></th>
+	                        <th><span data-ng-bind="'InvInvtry_gapSaleAmtHT_description.title' | translate"></span></th>
+	                        <th><span data-ng-bind="'InvInvtry_gapPurchAmtHT_description.title' | translate"></span></th>
+	                        <th><span data-ng-bind="'InvInvtry_invtryStatus_description.title' | translate"></span></th>
+	                        <th><span data-ng-bind="'InvInvtry_invtryDt_description.title' | translate"></span></th>
+	                        <th><span data-ng-bind="'InvInvtry_startRange_description.title' | translate"></span></th>
+	                        <th><span data-ng-bind="'InvInvtry_endRange_description.title' | translate"></span></th>
+	                        <th><span data-ng-bind="'InvInvtryItem_section_description.title' | translate"></span></th>
+	                        <th colspan="3"><span data-ng-bind="'description' | translate"></span></th>
+	                    </tr>
+	                    <tr>
+	                    	<th><input data-st-search="identif" class="input-sm form-control" type="search"/></th>
+	                    	<th><input data-st-search="login" class="input-sm form-control" type="search"/></th>
+		             		<th><input data-st-search="invtryGroup" class="input-sm form-control" type="search"/></th>
+		             		<th></th>
+		             		<th></th>
+		             		<th><input data-st-search="status" class="input-sm form-control" type="search"/></th>
+		             		<th><st-date-search predicate="prepareDt" selected-date="query"></st-date-search></th>
+		             		<th></th>
+		             		<th></th>
+		             		<th><input data-st-search="section" class="input-sm form-control" type="search"/></th>
+		             		<th colspan="3"><input data-st-search="descptn" class="input-sm form-control" type="search"/></th>
+	                    </tr>
                     </thead>
                     <tbody>
-                    <tr dir-paginate="invtry in data.invInvtrys | itemsPerPage: pagination.itemsPerPage"
-                        total-items="data.total"
-                        current-page="pagination.current" >
-                        <td>{{invtry.identif}}</td>
-                        <td>{{invtry.login}}</td>
-                        <td>{{invtry.invtryGroup}}</td>
-                        <td>{{invtry.gapSaleAmtHT}}</td>
-                        <td>{{invtry.gapPurchAmtHT}}</td>
-                        <td>{{invtry.status}}</td>
-                        <td>{{invtry.prepareDt | date:'yyyy-MM-dd HH:mm'}}</td>
-                        <td>{{invtry.rangeStart}}</td>
-                        <td>{{invtry.rangeEnd}}</td>
-                        <td>{{invtry.section}}</td>
-                        <td>{{invtry.descptn}}</td>
+                    <tr data-ng-repeat="invtry in data.invInvtrys">
+                        <td><span data-ng-bind-html="invtry.identif"></span></td>
+                        <td><span data-ng-bind-html="invtry.login"></span></td>
+                        <td><span data-ng-bind-html="invtry.invtryGroup"></span></td>
+                        <td><span data-ng-bind-html="invtry.gapSaleAmtHT"></span></td>
+                        <td><span data-ng-bind-html="invtry.gapPurchAmtHT"></span></td>
+                        <td><span data-ng-bind-html="invtry.status"></span></td>
+                        <td><span data-ng-bind-html="invtry.valueDt | date:'yyyy-MM-dd HH:mm'"></span></td>
+                        <td><span data-ng-bind-html="invtry.rangeStart"></span></td>
+                        <td><span data-ng-bind-html="invtry.rangeEnd"></span></td>
+                        <td><span data-ng-bind-html="invtry.section"></span></td>
+                        <td><span data-ng-bind-html="invtry.descptn"></span></td>
                         <td>
                             <a href="#/invinvtry/{{invtry.identif}}/show/"><i class="glyphicon glyphicon-eye-open"></i></a>
                            <!-- <a href="#/invinvtry/{{invtry.identif}}/archive/"><i class="glyphicon glyphicon-trash"></i></a>-->
                         </td>
                         <td>
-								<a ng-href="{{GlobalCtlr.BASE_SERVER}}/adreport.server/frameset?__report=invintry.rptdesign&invintryNumber={{invtry.identif}}" target="_blank" title="Fiche Comptage 1" class="btn btn-primary" ><i class="glyphicon glyphicon-file" style="color: white;"></i></a>
-								<a ng-href="{{GlobalCtlr.BASE_SERVER}}/adreport.server/frameset?__report=invintry2.rptdesign&invintryNumber={{invtry.identif}}" target="_blank" title="Fiche Comptage 2" class="btn btn-info" ><i class="glyphicon glyphicon-file " style="color: white;"></i></a>
-								<a ng-href="{{GlobalCtlr.BASE_SERVER}}/adreport.server/frameset?__report=invintry3.rptdesign&invintryNumber={{invtry.identif}}" target="_blank" title="Rapport Inventaire" class="btn btn-success" ><i class="glyphicon glyphicon-file " style="color: white;"></i></a>
+							<a data-ng-href="{{GlobalCtlr.BASE_SERVER}}/adreport.server/frameset?__report=invintry.rptdesign&invintryNumber={{invtry.identif}}" target="_blank" title="Fiche Comptage 1" class="btn btn-primary" ><i class="glyphicon glyphicon-file" style="color: white;"></i></a>
+							<a data-ng-href="{{GlobalCtlr.BASE_SERVER}}/adreport.server/frameset?__report=invintry2.rptdesign&invintryNumber={{invtry.identif}}" target="_blank" title="Fiche Comptage 2" class="btn btn-info" ><i class="glyphicon glyphicon-file " style="color: white;"></i></a>
+							<a data-ng-href="{{GlobalCtlr.BASE_SERVER}}/adreport.server/frameset?__report=invintry3.rptdesign&invintryNumber={{invtry.identif}}" target="_blank" title="Rapport Inventaire" class="btn btn-success" ><i class="glyphicon glyphicon-file " style="color: white;"></i></a>
                         </td>
                     </tr>
                     </tbody>
+                    <tfoot>
+						<tr>
+							<td colspan="15" class="text-center">
+								<div data-st-pagination="" data-st-items-by-page="itemsByPage"></div>
+							</td>
+						</tr>
+					</tfoot>
                 </table>
-                <div class="pull-right">
-                    <dir-pagination-controls on-page-change="paginate(newPageNumber)"
-                                             boundary-links="true"
-                                             max-size="pagination.maxSize">
-                    </dir-pagination-controls>
-                </div>
         </div>
     </div>
 </div>

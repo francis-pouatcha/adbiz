@@ -1,34 +1,28 @@
 <section class="mainbar" data-ng-init="vm.toViewCatalProdFmly()">
 
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-        {{'CatalProductFamily.view.title'|translate}}
-    </div>
-    <div class="panel-body">
-
-      <form novalidate>
-        <formly-form model="vm.catalProdFmly" fields="vm.formFields">
-        </formly-form>
-      </form>
-
-      <hr/>
-      <div>
-        <a class="btn btn-success" href="#/catal-prod-fmly/{{vm.catalProdFmly.id}}/edit">
-          <i class="glyphicon glyphicon-edit"></i>       {{'CatalProductFamily.edit.title'|translate}}
-
-        </a>
-        <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove()" item="vm.catalProdFmly">
-          <i class="glyphicon glyphicon-remove-circle"></i>       {{'CatalProductFamily.delete.title'|translate}}
-
-        </a>
-        <a class="btn btn-primary" href="#/catal-prod-fmly">
-          <i class="glyphicon glyphicon-list"></i>       {{'CatalProductFamily.list.title'|translate}}
-
-        </a>
-      </div>
-       <hr/>
-        <div ng-include src="'src/client/app/catal-prod-fmly-lang-map/views/list.html'" ></div>
-    </div>
-  </div>
+	<div class="panel panel-primary">
+	    <div class="panel-heading">
+	        <span data-ng-bind="'CatalProductFamily.view.title' | translate"></span>
+	    </div>
+    	<div class="panel-body">
+      		<form novalidate>
+		        <formly-form model="vm.catalProdFmly" fields="vm.formFields"></formly-form>
+	      	</form>
+			<hr/>
+      		<div>
+        		<a class="btn btn-success" href="#/catal-prod-fmly/{{vm.catalProdFmly.id}}/edit">
+          			<i class="glyphicon glyphicon-edit"></i> <span data-ng-bind="'CatalProductFamily.edit.title' | translate"></span>
+        		</a>
+        		<a class="btn btn-danger" title="Remove" data-ng-really-message="Are you sure ?" data-ng-really-click="vm.remove()" item="vm.catalProdFmly">
+          			<i class="glyphicon glyphicon-remove-circle"></i> <span data-ng-bind="'CatalProductFamily.delete.title' | translate"></span>
+        		</a>
+        		<a class="btn btn-primary" href="#/catal-prod-fmly">
+          			<i class="glyphicon glyphicon-list"></i> <span data-ng-bind="'CatalProductFamily.list.title' | translate"></span>
+        		</a>
+      		</div>
+       		<hr/>
+        	<div data-ng-include src="'src/client/app/catal-prod-fmly-lang-map/views/list.html'" ></div>
+    	</div>
+  	</div>
 
 </section>

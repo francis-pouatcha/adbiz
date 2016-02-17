@@ -75,6 +75,10 @@
                     current: currentVar,
                     itemsPerPage: itemsPerPageVar,
                     maxSize: maxSizeVar
+                },
+                stPagination: {
+                	start: 0,
+                	number: itemsPerPageVar // Number of entries showed per page.
                 }
 
             };
@@ -104,6 +108,10 @@
 
 
         service.processSearch = function(searchInput, object){
+        	if (searchInput) {
+        		searchInput.entity = {}
+        		searchInput.fieldNames = [];
+        	}
             for(var key in object){
                 if(object.hasOwnProperty(key)){
                     var keyValue = Object.getOwnPropertyDescriptor(object, key).value;

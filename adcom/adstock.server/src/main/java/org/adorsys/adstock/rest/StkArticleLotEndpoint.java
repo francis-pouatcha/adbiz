@@ -63,7 +63,7 @@ public class StkArticleLotEndpoint extends CoreAbstBsnsItemEndpoint<StkArticleLo
 	protected CoreAbstBsnsItemSearchResult<StkArticleLot> newSearchResult(
 			Long size, List<StkArticleLot> resultList,
 			CoreAbstBsnsItemSearchInput<StkArticleLot> searchInput) {
-		return null;
+		return new StkArticleLotSearchResult(size, null, resultList, searchInput);
 	}
 
 }

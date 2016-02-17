@@ -21,6 +21,10 @@
                 method: 'POST',
                 url: API_BASE_ADSTOCK_URL + '/stkarticlelots/findCustom'
             },
+            findByLike:{
+            	method: 'POST',
+            	url: API_BASE_ADSTOCK_URL + '/stkarticlelots/findByLike'
+            },
             listAll:{
                 method: 'GET',
                 url: API_BASE_ADSTOCK_URL + '/stkarticlelots',
