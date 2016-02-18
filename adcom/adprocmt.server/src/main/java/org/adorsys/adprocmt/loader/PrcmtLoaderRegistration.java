@@ -12,6 +12,8 @@ import org.adorsys.adcore.loader.jpa.CorLdrStep;
 import org.adorsys.adcore.rest.CoreAbstEntityJobExecutor;
 import org.adorsys.adcore.xls.AbstractLoader;
 import org.adorsys.adcore.xls.CoreAbstLoaderRegistration;
+import org.adorsys.adprocmt.api.PrcmtDeliveryExcel;
+import org.adorsys.adprocmt.api.PrcmtDlvryItemExcel;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 @Startup

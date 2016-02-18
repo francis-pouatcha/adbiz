@@ -1,6 +1,7 @@
 package org.adorsys.adprocmt.api;
 
 import java.lang.reflect.Field;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -12,6 +13,8 @@ import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjInjector;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjectManager;
+import org.adorsys.adcore.utils.BigDecimalUtils;
+import org.adorsys.adcore.utils.SequenceGenerator;
 import org.adorsys.adprocmt.jpa.PrcmtDelivery;
 import org.adorsys.adprocmt.jpa.PrcmtDeliveryCstr;
 import org.adorsys.adprocmt.jpa.PrcmtDeliveryHstry;
@@ -33,11 +36,17 @@ import org.adorsys.adprocmt.rest.PrcmtDlvry2POEJB;
 import org.adorsys.adprocmt.rest.PrcmtDlvryItem2OuEJB;
 import org.adorsys.adprocmt.rest.PrcmtDlvryItem2POItemEJB;
 import org.adorsys.adprocmt.rest.PrcmtDlvryItem2StrgSctnEJB;
+import org.adorsys.adstock.jpa.StkArticleLot;
+import org.apache.commons.lang3.StringUtils;
+import org.jboss.resteasy.logging.Logger;
 
 @Stateless
 public class PrcmtDeliveryManager  extends CoreAbstBsnsObjectManager<PrcmtDelivery, PrcmtDlvryItem, PrcmtDeliveryHstry, PrcmtJob, PrcmtStep, PrcmtDeliveryCstr, CoreAbstBsnsObjectSearchInput<PrcmtDelivery>>{
+	private static final Logger LOG = Logger.getLogger(PrcmtDeliveryManager.class);
 	@Inject
 	private PrcmtDeliveryInjector injector;
+	@Inject
+	private ProcurementDeliveryHelper helper;
 	
 	@Override
 	protected CoreAbstBsnsObjInjector<PrcmtDelivery, PrcmtDlvryItem, PrcmtDeliveryHstry, PrcmtJob, PrcmtStep, PrcmtDeliveryCstr> getInjector() {
@@ -151,4 +160,76 @@ public class PrcmtDeliveryManager  extends CoreAbstBsnsObjectManager<PrcmtDelive
 		String identif = PrcmtDlvryItem2StrgSctn.toId(itemIdentif, sectionIdentif);
 		return prcmtDlvryItem2StrgSctnEJB.deleteByIdentif(identif);
 	}
+
+	/**
+	 * Adding a procurement delivery item to the procurement.
+	 */
+	@Override
+	public PrcmtDlvryItem addItem(String identif, PrcmtDlvryItem entity) throws AdRestException {
+		return addItem(identif, entity, null, null);
+	}
+	
+	
+	public PrcmtDlvryItem addItem(String identif, PrcmtDlvryItem entity, String strgSctns, String recvngOus) throws AdRestException {
+		Date now = new Date();
+		if(StringUtils.isBlank(identif)) throw new IllegalStateException("Missing cntnrIdentif for PrcmtDlvryItem with artPic: " + entity.getArtPic());
+		entity.setCntnrIdentif(identif);
+		
+		// First use the specified distribution in the excel file.
+		List<PrcmtDlvryItem2StrgSctn> item2SectionList = helper.processSectionFromExcel(entity, strgSctns, now);
+		if(item2SectionList.isEmpty()) item2SectionList = helper.processSectionFromItem(entity, now);
+		if(item2SectionList.isEmpty()) item2SectionList = helper.discoverSection(entity, now);
+		
+		// Interupt the process and wait for system to load..
+		LOG.warn("No section found to store article: " + entity.getArtPic()  + " will wait for stock to load.");
+		if(item2SectionList.isEmpty()) return null;
+
+		// First use the distribution in the excel file.
+		List<PrcmtDlvryItem2Ou> item2Ous = helper.processOrgUnitsFromExcel(entity, recvngOus, now);
+		if(item2Ous.isEmpty())item2Ous = helper.processOrgUnitsFromItem(entity, now);
+		if(item2Ous.isEmpty())item2Ous =  helper.processOrgUnitsFromDlvry(entity, now);
+		
+		// Look for an existing delivery line 
+		PrcmtDlvryItem existingItem = null;
+		// What if the item does not have a lotPic
+		if(StringUtils.isBlank(entity.getLotPic())){
+			PrcmtDelivery delivery = injector.getBsnsObjLookup().findByIdentifThrowException(entity.getCntnrIdentif());
+			existingItem = helper.findMatchingItemFromDelivery(delivery, entity, item2SectionList, item2Ous);
+		} else {
+			List<PrcmtDlvryItem> found = injector.getItemLookup().findByCntnrIdentifAndArtPicAndLotPic(entity.getCntnrIdentif(), entity.getArtPic(), entity.getLotPic(),0,1);
+			if(!found.isEmpty())existingItem=found.iterator().next();
+		}
+		if(existingItem!=null){
+			// add free and target quantities.
+			existingItem.setTrgtQty(BigDecimalUtils.sum(existingItem.getTrgtQty(), entity.getTrgtQty()));
+			existingItem.setFreeQty(BigDecimalUtils.sum(existingItem.getFreeQty(), entity.getFreeQty()));
+			entity = injector.getItemEjb().update(existingItem);// ?????????
+		} else {
+			if(StringUtils.isBlank(entity.getLotPic())){
+				List<StkArticleLot> candidateLots = helper.selectArticleLotFromPeerArtPic(entity);
+				String lotPic = null;
+				// If size > 1 narrow
+				if(candidateLots.size()>1){
+					StkArticleLot lot = helper.narrowArticleLotCandidates(entity, item2SectionList, candidateLots);
+					lotPic = lot.getLotPic();
+				} else if (candidateLots.size()==1){
+					StkArticleLot lot = candidateLots.iterator().next();
+					lotPic = lot.getLotPic();
+				} else { // generate LotPic
+					lotPic = SequenceGenerator.getSequence(SequenceGenerator.LOT_SEQUENCE_PREFIXE);
+				}
+				entity.setLotPic(lotPic);
+			}
+			entity = injector.getItemEjb().create(entity);// ????????????????
+		}
+		
+		if(entity==null) return null;
+		
+		helper.storeStorageSections(entity, item2SectionList);
+		helper.storeRecievingOUs(entity, item2Ous);
+		
+		return entity;
+		
+//		return super.addItem(identif, item); ??????
+	}	
 }

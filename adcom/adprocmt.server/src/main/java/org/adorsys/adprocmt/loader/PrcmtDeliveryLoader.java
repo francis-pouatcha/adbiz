@@ -18,6 +18,7 @@ import org.adorsys.adcore.xls.CoreAbstBsnsObjectLoader;
 import org.adorsys.adcore.xls.CoreAbstLoader;
 import org.adorsys.adcore.xls.PropertyDesc;
 import org.adorsys.adcore.xls.StepCallback;
+import org.adorsys.adprocmt.api.PrcmtDeliveryExcel;
 import org.adorsys.adprocmt.api.PrcmtDeliveryManager;
 import org.adorsys.adprocmt.jpa.PrcmtDelivery;
 import org.adorsys.adprocmt.jpa.PrcmtDeliveryCstr;

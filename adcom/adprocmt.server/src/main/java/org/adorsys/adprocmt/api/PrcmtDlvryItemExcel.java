@@ -1,4 +1,4 @@
-package org.adorsys.adprocmt.loader;
+package org.adorsys.adprocmt.api;
 
 import org.adorsys.adprocmt.jpa.PrcmtDlvryItem;
 

@@ -12,7 +12,7 @@ import org.adorsys.adcore.jpa.CoreAbstBsnsItem;
 
 @MappedSuperclass
 @Description("StkArticleLot_description")
-public class StkAbstractArticleLot extends CoreAbstBsnsItem {
+public abstract class StkAbstractArticleLot extends CoreAbstBsnsItem {
 
 	private static final long serialVersionUID = 6790628013825127916L;
 
