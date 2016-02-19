@@ -1,28 +1,10 @@
 <section class="mainbar" id="stockArticlelotPanel">
 
-	<div class="panel panel-primary">
-	    <div class="panel-heading">
-	        <b><span data-ng-bind="'app.core.create.title' | translate"></span> <span data-ng-bind="'app.core.new.title' | translate"></span> <span data-ng-bind="'StockArticlelot.title' | translate"></span></b>
-	        <button class="glyphicon glyphicon-collapse-down pull-right" data-toggle="collapse" data-parent="#stockArticlelotPanel" data-target="#stockArticlelotCreateToggle"></button>
-	    </div>
-	    <div class="panel-collapse collapse" id="stockArticlelotCreateToggle">
-	    	<div data-ng-include="'/adstock.client/src/client/app/stock-articlelot/views/create.html'"></div>
-	    </div>
-	</div>
-	
-  <div class="panel panel-default">
-<!--     <div class="panel-heading"> -->
-<!--       <span data-ng-bind="'app.core.list.title' | translate"></span> <span data-ng-bind="'StockArticlelots.title' | translate"></span> -->
-<!--     </div> -->
+<div class="panel panel-primary">
+    <div class="panel-heading">
+      <span data-ng-bind="'app.core.list.title' | translate"></span> <span data-ng-bind="'StockArticlelots.title' | translate"></span>
+    </div>
     <div class="panel-body">
-
-<!--       <div class="pull-right"> -->
-<!--         <a type="button" class="btn btn-success" href="#/stock-articlelot/create"> -->
-<!--           <i class="glyphicon glyphicon-open"></i>  -->
-<!--             <span data-ng-bind="'app.core.new.title' | translate"></span> <span data-ng-bind="'StockArticlelot.title' | translate"></span> -->
-<!--         </a> -->
-<!--       </div> -->
-
       <table data-st-table="vm.data.list" data-st-pipe="vm.callServer" class="table table-bordered  table-striped pointer-element">
           <thead>
 	          <tr>
@@ -32,7 +14,7 @@
 		          <th><span data-ng-bind="'StockArticlelot.section.title' | translate"></span></th>
 		          <th><span data-ng-bind="'StockArticlelot.expirDt.title' | translate"></span></th>
 		          <th><span data-ng-bind="'StockArticlelot.trgtQty.title' | translate"></span></th>
-		          <th><span data-ng-bind="'StockArticlelot.deliveredTrgtQty.title' | translate"></span></th>
+<!-- 		          <th><span data-ng-bind="'StockArticlelot.deliveredTrgtQty.title' | translate"></span></th> -->
 		          <th><span data-ng-bind="'StockArticlelot.salesPrice.title' | translate"></span></th>
 		          <th><span data-ng-bind="'StockArticlelot.buyingPrice.title' | translate"></span></th>
 		          <th><span data-ng-bind="'Action.title' | translate"></span></th>
@@ -44,9 +26,9 @@
 				<th><input data-st-search="section" class="input-sm form-control" type="search"/></th>
 				<th><st-date-search predicate="expirDt" selected-date="query.expirDt"></st-date-search></th>
 				<th><input data-st-search="trgtQty" class="input-sm form-control" type="search"/></th>
-				<th><input data-st-search="" class="input-sm form-control" type="search"/></th> <!-- FIXME -->
-				<th><input data-st-search="" class="input-sm form-control" type="search"/></th>
-				<th><input data-st-search="" class="input-sm form-control" type="search"/></th>
+<!-- 				<th><input data-st-search="" class="input-sm form-control" type="search"/></th> FIXME -->
+				<th><input data-st-search="slsNetPrcTaxIncl" class="input-sm form-control" type="search"/></th>
+				<th><input data-st-search="prchNetPrcTaxIncl" class="input-sm form-control" type="search"/></th>
 				<th></th>
     		</tr>
           </thead>
@@ -58,9 +40,9 @@
 	              <td><span data-ng-bind="stockArticlelot.section"></span></td>
 	              <td><span data-ng-bind="stockArticlelot.expirDt | date:'dd-MM-yyyy'"></span></td>
 	              <td><span data-ng-bind="stockArticlelot.trgtQty"></span></td>
-	              <td><span data-ng-bind=""></span></td><!-- FIXME -->
-	              <td><span data-ng-bind=""></span></td>
-	              <td><span data-ng-bind=""></span></td>
+<!-- 	              <td><span data-ng-bind="stockArticlelot."></span></td>FIXME Qte lot livree -->
+	              <td><span data-ng-bind="stockArticlelot.slsNetPrcTaxIncl"></span></td>
+	              <td><span data-ng-bind="stockArticlelot.prchNetPrcTaxIncl"></span></td>
 	              <td>
 	                 <div class="table-actions">
 	                      <a class="btn btn-default" title="{{'app.core.view.title' | translate}}" href="#/stock-articlelot/{{stockArticlelot.id}}">
@@ -82,6 +64,6 @@
 		</tfoot>
       </table>
     </div>
-  </div>
+ </div>
 
 </section>

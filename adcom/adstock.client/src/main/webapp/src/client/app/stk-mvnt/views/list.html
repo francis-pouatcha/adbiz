@@ -14,9 +14,9 @@
                   <th><span data-ng-bind="'StkMvnt.name.title' | translate"></span></th>
                   <th><span data-ng-bind="'StkMvnt.acsngDt.title' | translate"></span></th>
                   <th><span data-ng-bind="'StkMvnt.mvntType.title' | translate"></span></th>
-                  <!-- FIXME ajouter cette colonne Qte initiale -->
-                  <!-- FIXME ajouter cette colonne Qte deplacee -->
-                  <!-- FIXME ajouter cette colonne Qte finale -->
+                  <th><span data-ng-bind="'StkMvnt.beforeQty.title' | translate"></span></th>
+                  <th><span data-ng-bind="'StkMvnt.trgtQty.title' | translate"></span></th>
+                  <th><span data-ng-bind="'StkMvnt.afterQty.title' | translate"></span></th>
                   <th><span data-ng-bind="'StkMvnt.acsngUser.title' | translate"></span></th>
                   <th><span data-ng-bind="'StkMvnt.mvntOrigin.title' | translate"></span></th>
                   <th><span data-ng-bind="'StkMvnt.mvntDest.title' | translate"></span></th>
@@ -28,6 +28,9 @@
 				<th><input data-st-search="artName" class="input-sm form-control" type="search"/></th>
 				<th></th>
 				<th><input data-st-search="mvntType" class="input-sm form-control" type="search"/></th>
+				<th><input data-st-search="qtyBefore" class="input-sm form-control" type="search"/></th>
+				<th><input data-st-search="trgtQty" class="input-sm form-control" type="search"/></th>
+				<th><input data-st-search="qtyAfter" class="input-sm form-control" type="search"/></th>
 				<th><input data-st-search="acsngUser" class="input-sm form-control" type="search"/></th>
 				<th><input data-st-search="mvntOrigin" class="input-sm form-control" type="search"/></th>
 				<th><input data-st-search="mvntDest" class="input-sm form-control" type="search"/></th>
@@ -41,6 +44,9 @@
 	              <td><span data-ng-bind="stkMvnt.artName"></span></td>
 	              <td><span data-ng-bind="stkMvnt.acsngDt"></span></td>
 	              <td><span data-ng-bind="stkMvnt.mvntType"></span></td>
+	              <td><span data-ng-bind="stkMvnt.qtyBefore"></span></td>
+	              <td><span data-ng-bind="stkMvnt.trgtQty"></span></td>
+	              <td><span data-ng-bind="stkMvnt.qtyAfter"></span></td>
 	              <td><span data-ng-bind="stkMvnt.acsngUser"></span></td>
 	              <td><span data-ng-bind="stkMvnt.mvntOrigin"></span></td>
 	              <td><span data-ng-bind="stkMvnt.mvntDest"></span></td>

@@ -1,51 +1,46 @@
-<section class="mainbar">
+<section class="mainbar" id="articlePanel">
 
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-        <span data-ng-bind="'CatalArticle.list.title' | translate"></span>
-    </div>
+	<div class="panel panel-primary">
+	    <div class="panel-heading">
+	        <b><span data-ng-bind="'app.core.create.title' | translate"></span> <span data-ng-bind="'CatalArticle.new.title' | translate"></span></b>
+	        <button class="glyphicon glyphicon-collapse-down pull-right" data-toggle="collapse" data-parent="#articlePanel" data-target="#articleCreateToggle"></button>
+	    </div>
+	    <div class="panel-collapse collapse" id="articleCreateToggle">
+	    	<div data-ng-include="'/adcatal.client/src/client/app/article/views/create.html'"></div>
+	    </div>
+	</div>
+
+	<div class="panel panel-default">
     <div class="panel-body">
-      <div class="pull-right">
-        <a type="button" class="btn btn-success" href="#/article/create">
-          <i class="glyphicon glyphicon-open"></i> <span data-ng-bind="'CatalArticle.new.title' | translate"></span>
-        </a>
-      </div>
-
-      <table data-st-table="vm.data.list" data-st-pipe="vm.callServer" class="table table-bordered  table-striped pointer-element">
+		<table data-st-table="vm.data.list" data-st-pipe="vm.callServer" class="table table-bordered  table-striped pointer-element">
           	<thead>
           		<tr>
 		        	<th><span data-ng-bind="'CIP' | translate"></span></th>
-					<th><span data-ng-bind="'CatalArticle.sppu' | translate"></span></th>
 					<th><span data-ng-bind="'CatalArticle.maxDisctRate' | translate"></span></th>
 					<th><span data-ng-bind="'CatalArticle.minStockQty' | translate"></span></th>
 					<th><span data-ng-bind="'CatalArticle.maxStockQty' | translate"></span></th>
 					<th><span data-ng-bind="'CatalArticle.vatRate' | translate"></span></th>
-					<th><span data-ng-bind="'CatalArticle.active' | translate"></span></th>
-					<th><span data-ng-bind="'CatalArticle.authorizedSale' | translate"></span></th>
+					<th><span data-ng-bind="'CatalArticle.sppu' | translate"></span></th>
 					<th><span data-ng-bind="'Action.title' | translate"></span></th>
               	</tr>
                 <tr>
 			  		<th><input data-st-search="identif" class="input-sm form-control" type="search"/></th>
-             		<th><input data-st-search="sppu" class="input-sm form-control" type="number"/></th>
              		<th><input data-st-search="maxDisctRate" class="input-sm form-control" type="search"/></th>
              		<th><input data-st-search="minStockQty" class="input-sm form-control" type="number"/></th>
              		<th><input data-st-search="maxStockQty" class="input-sm form-control" type="number"/></th>
              		<th></th>
-             		<th><input data-st-search="active" class="input-sm form-control" type="search"/></th>
-             		<th><input data-st-search="authorizedSale" class="input-sm form-control" type="search"/></th>
+             		<th><input data-st-search="sppu" class="input-sm form-control" type="number"/></th>
              		<th></th>
 				</tr>
           	</thead>
           	<tbody>
 	           <tr data-ng-repeat="article in vm.data.list">
 	              <td name="identif-catalArticle" ><span data-ng-bind-html="article.identif"></span></td>
-	              <td><span data-ng-bind-html="article.sppu"></span></td>
 	              <td><span data-ng-bind-html="article.maxDisctRate"></span></td>
 	              <td><span data-ng-bind-html="article.minStockQty"></span></td>
 	              <td><span data-ng-bind-html="article.maxStockQty"></span></td>
 	              <td><span data-ng-bind-html="article.vatRate"></span></td>
-	              <td><span data-ng-bind-html="'Boolean.' + article.active | translate"></span></td>
-	              <td><span data-ng-bind-html="'Boolean.' + article.authorizedSale | translate"></span></td>
+	              <td><span data-ng-bind-html="article.sppu"></span></td>
 	              <td>
 	                 <div class="table-actions">
 	                      <a class="btn btn-default" title="View" href="#/article/{{article.id}}">
@@ -60,16 +55,16 @@
 	                  </div>
 	              </td>
 	          </tr>
-          </tbody>
-          <tfoot>
-			<tr>
-				<td colspan="9" class="text-center">
-					<div data-st-pagination="" data-st-items-by-page="vm.itemsByPage"></div>
-				</td>
-			</tr>
-		</tfoot>
-      </table>
+          	</tbody>
+          	<tfoot>
+				<tr>
+					<td colspan="9" class="text-center">
+						<div data-st-pagination="" data-st-items-by-page="vm.itemsByPage"></div>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
     </div>
-  </div>
+	</div>
 
 </section>
