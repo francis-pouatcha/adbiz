@@ -101,6 +101,7 @@ public class InvInvtryPrepareExecTask extends CoreAbstEntityJobExecutor<InvJob, 
 				invtryItem.setSection(lot2StrgSctn.getSection());
 				// Nicht sinnvoll
 //				invtryItem.setExpectedQty(lot2StrgSctn.getStockQty());
+//				invtryItem.setQtyBefore(lot2StrgSctn.getStockQty());
 				invtryItem.setValueDt(lot2StrgSctn.getQtyDt());
 				if(!artLangMap.isEmpty()){
 					invtryItem.setArtName(artLangMap.iterator().next().getArtName());

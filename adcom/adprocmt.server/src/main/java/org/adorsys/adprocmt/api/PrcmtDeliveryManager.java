@@ -1,6 +1,7 @@
 package org.adorsys.adprocmt.api;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -37,6 +38,8 @@ import org.adorsys.adprocmt.rest.PrcmtDlvryItem2OuEJB;
 import org.adorsys.adprocmt.rest.PrcmtDlvryItem2POItemEJB;
 import org.adorsys.adprocmt.rest.PrcmtDlvryItem2StrgSctnEJB;
 import org.adorsys.adstock.jpa.StkArticleLot;
+import org.adorsys.adstock.jpa.StkLotInSctnStockQty;
+import org.adorsys.adstock.rest.StkLotInSctnStockQtyLookup;
 import org.apache.commons.lang3.StringUtils;
 import org.jboss.resteasy.logging.Logger;
 
@@ -47,6 +50,8 @@ public class PrcmtDeliveryManager  extends CoreAbstBsnsObjectManager<PrcmtDelive
 	private PrcmtDeliveryInjector injector;
 	@Inject
 	private ProcurementDeliveryHelper helper;
+	@Inject
+	private StkLotInSctnStockQtyLookup lotInSctnStockQtyLookup;
 	
 	@Override
 	protected CoreAbstBsnsObjInjector<PrcmtDelivery, PrcmtDlvryItem, PrcmtDeliveryHstry, PrcmtJob, PrcmtStep, PrcmtDeliveryCstr> getInjector() {
@@ -203,6 +208,8 @@ public class PrcmtDeliveryManager  extends CoreAbstBsnsObjectManager<PrcmtDelive
 			// add free and target quantities.
 			existingItem.setTrgtQty(BigDecimalUtils.sum(existingItem.getTrgtQty(), entity.getTrgtQty()));
 			existingItem.setFreeQty(BigDecimalUtils.sum(existingItem.getFreeQty(), entity.getFreeQty()));
+			BigDecimal stockQtyBefore = readStockQty(existingItem.getArtPic(), existingItem.getLotPic(), item2SectionList);
+			existingItem.setQtyBefore(stockQtyBefore);
 			entity = injector.getItemEjb().update(existingItem);// ?????????
 		} else {
 			if(StringUtils.isBlank(entity.getLotPic())){
@@ -220,6 +227,8 @@ public class PrcmtDeliveryManager  extends CoreAbstBsnsObjectManager<PrcmtDelive
 				}
 				entity.setLotPic(lotPic);
 			}
+			BigDecimal stockQtyBefore = readStockQty(entity.getArtPic(), entity.getLotPic(), item2SectionList);
+			entity.setQtyBefore(stockQtyBefore);
 			entity = injector.getItemEjb().create(entity);// ????????????????
 		}
 		
@@ -232,4 +241,13 @@ public class PrcmtDeliveryManager  extends CoreAbstBsnsObjectManager<PrcmtDelive
 		
 //		return super.addItem(identif, item); ??????
 	}	
+
+	private BigDecimal readStockQty(String artPic, String lotPic, List<PrcmtDlvryItem2StrgSctn> item2SectionList){
+		BigDecimal result = BigDecimal.ZERO;
+		for (PrcmtDlvryItem2StrgSctn prcmtDlvryItem2StrgSctn : item2SectionList) {
+			StkLotInSctnStockQty sctnStockQty = lotInSctnStockQtyLookup.findLatest(artPic, lotPic, prcmtDlvryItem2StrgSctn.getStrgSection());
+			if(sctnStockQty!=null) result = BigDecimalUtils.sum(result, sctnStockQty.getStockQty());
+		}
+		return result;
+	}
 }

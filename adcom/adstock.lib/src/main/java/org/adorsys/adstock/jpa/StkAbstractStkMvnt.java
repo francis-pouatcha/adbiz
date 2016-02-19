@@ -58,5 +58,5 @@ public abstract class StkAbstractStkMvnt extends CoreAbstBsnsItem {
 
 	public void setOrigProcsNbr(String origProcsNbr) {
 		this.origProcsNbr = origProcsNbr;
-	}	
+	}
 }

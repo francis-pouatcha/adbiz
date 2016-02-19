@@ -2,10 +2,8 @@ package org.adorsys.adinvtry.api;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -17,10 +15,10 @@ import org.adorsys.adcore.rest.CoreAbstBsnsObjInjector;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjectManager;
 import org.adorsys.adcore.utils.BigDecimalUtils;
 import org.adorsys.adinvtry.jpa.InvInvtry;
-import org.adorsys.adinvtry.jpa.InvInvtry_;
 import org.adorsys.adinvtry.jpa.InvInvtryCstr;
 import org.adorsys.adinvtry.jpa.InvInvtryHstry;
 import org.adorsys.adinvtry.jpa.InvInvtryItem;
+import org.adorsys.adinvtry.jpa.InvInvtry_;
 import org.adorsys.adinvtry.jpa.InvJob;
 import org.adorsys.adinvtry.jpa.InvStep;
 import org.adorsys.adinvtry.rest.InvInvtryEJB;
@@ -30,7 +28,6 @@ import org.adorsys.adinvtry.rest.InvInvtrySearchResult;
 import org.adorsys.adstock.jpa.StkLotInSctnStockQty;
 import org.adorsys.adstock.rest.StkLotInSctnStockQtyLookup;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
 
 @Stateless
 public class InvInvtryManager  extends CoreAbstBsnsObjectManager<InvInvtry, InvInvtryItem, InvInvtryHstry, InvJob, InvStep, InvInvtryCstr, CoreAbstBsnsObjectSearchInput<InvInvtry>>{
@@ -107,6 +104,7 @@ public class InvInvtryManager  extends CoreAbstBsnsObjectManager<InvInvtry, InvI
 			existing.setAsseccedQty(asseccedQty);
 			existing.setAcsngUser(currentLoginName);
 			existing.setExpectedQty(expectedStockQty);
+			existing.setQtyBefore(expectedStockQty);
 			existing.evlte();
 			
 			return getInjector().getItemEjb().update(existing);
@@ -119,6 +117,7 @@ public class InvInvtryManager  extends CoreAbstBsnsObjectManager<InvInvtry, InvI
 			invInvtryItem.setAcsngDt(acsngDt);
 			invInvtryItem.setAsseccedQty(asseccedQty);
 			invInvtryItem.setExpectedQty(expectedStockQty);
+			invInvtryItem.setQtyBefore(expectedStockQty);
 			invInvtryItem.evlte();
 			return getInjector().getItemEjb().create(invInvtryItem);
 		}

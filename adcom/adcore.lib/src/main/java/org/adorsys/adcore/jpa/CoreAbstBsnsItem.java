@@ -59,69 +59,132 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date expirDt;
 
+	/*
+	 * Purchase Unit Price Before Tax 
+	 */
 	@Column
 	private BigDecimal prchUnitPrcPreTax;
 
+	/*
+	 * Purchase Unit Price Tax Included
+	 */
 	@Column
 	private BigDecimal prchUnitPrcTaxIncl;
 
+	/*
+	 * Purchase restocking fees in percentage.
+	 */
 	@Column
 	private BigDecimal prchRstckgFeesPrct;
 	
+	/*
+	 * Purchase restocking unit fees before tax.
+	 */
 	@Column
 	private BigDecimal prchRstckgUnitFeesPreTax;
 	
+	/*
+	 * Type of restocking fees selected
+	 */
 	@Column
 	@Enumerated(EnumType.STRING)
 	private CoreRstkgFeesType prchRstckgFeesType;
 	
+	/*
+	 * Purchase price currency.
+	 */
 	@Column
 	@NotNull
 	private String prchUnitPrcCur = CoreCurrencyEnum.XAF.name();
 
+	/*
+	 * Total value of restocking fees
+	 */
 	@Column
 	private BigDecimal prchRstckgFeesPreTax;
 	
+	/*
+	 * Purchase gross price before tax
+	 */
 	@Column
 	private BigDecimal prchGrossPrcPreTax;
 	
+	/*
+	 * Type of Rebate from supplier
+	 */
 	@Column
 	@Enumerated(EnumType.STRING)
 	private CoreAmtOrPct prchRebateType;
 	
+	/*
+	 * Rebate Amount
+	 */
 	@Column
 	private BigDecimal prchRebateAmt;
 
+	/*
+	 * Percentage of rebate 
+	 */
 	@Column
 	private BigDecimal prchRebatePct;
 
+	/*
+	 * Purchase net value after rebate but before tax.
+	 */
 	@Column
 	private BigDecimal prchNetPrcPreTax;
 
+	/*
+	 * Purchase value added tax
+	 */
 	@Column
 	private BigDecimal prchVatPct;
-
+	
+	/*
+	 * Purchase value amount.
+	 */
 	@Column
 	private BigDecimal prchVatAmt;
 
+	/*
+	 * Purchase value unit amount.
+	 */
 	@Column
 	private BigDecimal prchVatUnitAmt;
 	
+	/*
+	 * Purchase price tax included.
+	 */
 	@Column
 	private BigDecimal prchNetPrcTaxIncl;
 
+	/*
+	 * Number of waranty days given by supplier
+	 */
 	@Column
 	private BigDecimal prchWrntyDays;
 
+	/*
+	 * Number of days, for return
+	 */
 	@Column
 	private BigDecimal prchRtrnDays;
 	
+	/*
+	 * Date the waranty runs of.
+	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date prchWrntyDt;
 	
+	/*
+	 * Last date to return to supplier.
+	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date prchRtrnDt;
 	
+	/*
+	 * Sales price before tax
+	 */
 	@Column
 	private BigDecimal slsUnitPrcPreTax;
 
@@ -282,6 +345,12 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 	@Enumerated(EnumType.STRING)
 	private CoreStkMvtTerminal mvntDest;
 
+	@Column
+	private BigDecimal qtyBefore;	
+
+	@Column
+	private BigDecimal qtyAfter;	
+	
 	@Column
 	private String mvntDestIdentif;
 
@@ -932,9 +1001,27 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 	public void setStredCostPreTax(BigDecimal stredCostPreTax) {
 		this.stredCostPreTax = stredCostPreTax;
 	}
+	
+	public BigDecimal getQtyBefore() {
+		return qtyBefore;
+	}
+
+	public void setQtyBefore(BigDecimal qtyBefore) {
+		this.qtyBefore = qtyBefore;
+	}
+
+	public BigDecimal getQtyAfter() {
+		return qtyAfter;
+	}
+
+	public void setQtyAfter(BigDecimal qtyAfter) {
+		this.qtyAfter = qtyAfter;
+	}
 
 	protected void normalize(){
 		this.trgtQty = BigDecimalUtils.zeroIfNull(this.trgtQty);
+		this.qtyAfter = BigDecimalUtils.zeroIfNull(this.qtyAfter);
+		this.qtyBefore = BigDecimalUtils.zeroIfNull(this.qtyBefore);
 		this.prchVatPct=BigDecimalUtils.zeroIfNull(this.prchVatPct);
 		this.prchVatAmt=BigDecimalUtils.zeroIfNull(this.prchVatAmt);
 		this.prchUnitPrcPreTax = BigDecimalUtils.zeroIfNull(this.prchUnitPrcPreTax);
@@ -1046,6 +1133,7 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 		computeSlsNetPrcTaxIncl();
 		setStkValPreTax(FinancialOps.qtyTmsPrice(this.trgtQty, getStkUnitValPreTax(), getStkUnitValCur()));
 		computeValAmnt();
+		this.qtyAfter = BigDecimalUtils.subs(this.qtyBefore, this.trgtQty);
 	}
 	
 }
