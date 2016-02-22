@@ -1,12 +1,9 @@
 package org.adorsys.adstock.jpa;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -26,13 +23,6 @@ public class StkArtLotSrchIdx extends StkAbstLot2Section {
 	@NotNull
 	private String artLMIdx;
 
-	/*
-	 * The expiration date of this lot. This is decisive for the splitting in lots.
-	 * All articles in the same lot have the same expiration date.
-	 */
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date expirDt;
-	
 	@Column
 	private BigDecimal slsUnitPrcPreTax;
 
@@ -71,14 +61,6 @@ public class StkArtLotSrchIdx extends StkAbstLot2Section {
 
 	public void setArtName(String artName) {
 		this.artName = artName;
-	}
-
-	public Date getExpirDt() {
-		return expirDt;
-	}
-
-	public void setExpirDt(Date expirDt) {
-		this.expirDt = expirDt;
 	}
 
 	public BigDecimal getSlsUnitPrcPreTax() {

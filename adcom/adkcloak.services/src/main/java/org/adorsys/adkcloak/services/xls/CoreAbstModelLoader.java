@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.adorsys.adcore.xls.CoreAbstLoader;
 import org.adorsys.adcore.xls.PropertyDesc;
+import org.adorsys.adcore.xls.StepCallback;
 import org.keycloak.models.KeycloakSession;
 
 public abstract class CoreAbstModelLoader<T> extends CoreAbstLoader<T>{
@@ -33,7 +34,8 @@ public abstract class CoreAbstModelLoader<T> extends CoreAbstLoader<T>{
 		}
 		return found;
 	}
-	
-	
-
+	@Override
+	protected StepCallback getStepCallback() {
+		return null;
+	}
 }

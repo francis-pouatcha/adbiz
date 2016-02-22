@@ -29,12 +29,5 @@ public class InvLoaderExecutor extends CorAbstDataSheetLoaderExecutor {
 	@Override
 	protected AbstractLoader getLoader() {
 		return dataSheetLoader;
-	}
-
-	@Override
-	public void execute(String stepIdentif) {
-		super.execute(stepIdentif);
-	}
-	
-	
+	}	
 }

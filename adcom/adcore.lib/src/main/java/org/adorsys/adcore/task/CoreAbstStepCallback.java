@@ -7,22 +7,22 @@ import org.adorsys.adcore.rest.CoreAbstEntityStepLookup;
 import org.adorsys.adcore.xls.StepCallback;
 
 public abstract class CoreAbstStepCallback<J extends CoreAbstEntityJob, S extends CoreAbstEntityStep> implements StepCallback {
-	protected abstract CoreAbstEntityStepLookup<S> getStelLookup();
-	protected abstract CoreAbstEntityStepEJB<S> getStelEJB();
+	protected abstract CoreAbstEntityStepLookup<S> getStepLookup();
+	protected abstract CoreAbstEntityStepEJB<S> getStepEJB();
 	@Override
 	public int readSyncPoint(String stepIdentif) {
-		S s = getStelLookup().findByIdentif(stepIdentif);
+		S s = getStepLookup().findByIdentif(stepIdentif);
 		if(s!=null) return s.getSynchPointStart()==null?0:new Integer(s.getSynchPointStart());
 		return 0;
 	}
 	
 	@Override
 	public void markSynchPoint(String stepIdentif, int rowNum) {
-		S s = getStelLookup().findByIdentif(stepIdentif);
+		S s = getStepLookup().findByIdentif(stepIdentif);
 		if(s!=null){
 			s.setSynchPointStart(""+rowNum);
 			s.setSynchPointEnd(""+rowNum);
-			getStelEJB().update(s);
+			getStepEJB().update(s);
 		}
 	}
 }

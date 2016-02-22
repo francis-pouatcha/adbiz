@@ -2,10 +2,14 @@ package org.adorsys.adcore.xls;
 
 import java.util.List;
 
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+
 import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 
+@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 public abstract class CoreAbstEntityLoader<T extends CoreAbstIdentifObject> extends CoreAbstLoader<T>{
 
 	protected abstract CoreAbstIdentifLookup<T> getLookup();

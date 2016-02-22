@@ -22,11 +22,6 @@ public class DataSheetLoader extends AbstractLoader {
 	public String getDir() {
 		return dataDir;
 	}
-	
-	@Override
-	public String getFileName() {
-		return "adinvtry.tpl.xls";
-	}
 
 	@Override
 	protected StepCallback getStepCallback() {

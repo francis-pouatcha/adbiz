@@ -23,11 +23,6 @@ public class DataSheetLoader extends AbstractLoader {
 	}
 
 	@Override
-	public String getFileName() {
-		return "adprocmt.tpl.xls";
-	}
-
-	@Override
 	protected StepCallback getStepCallback() {
 		return stepCallback;
 	}

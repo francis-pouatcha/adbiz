@@ -30,9 +30,10 @@ public abstract class AbstractLoader {
 	String processedSuffix = ".processed";
 
 	public abstract String getDir();
-	public abstract String getSuffix();	
 
-	private List<File> listFiles(){
+	protected abstract StepCallback getStepCallback();
+	
+	public List<File> listFiles(){
 		List<File> result = new ArrayList<File>();
 		
 		File newFileDir = new File(getDir());
@@ -43,21 +44,20 @@ public abstract class AbstractLoader {
 				// Noop
 			}
 		}
-		
 		File[] list = newFileDir.listFiles();
 
 		if(list==null) return result;
-		String suffix = getSuffix();
 		for (File file : list) {
 			String fileName = file.getName();
 			if(fileName.startsWith(".")) continue;
 			if(FilenameUtils.isExtension(fileName, getProcessedSuffix())) continue;
-			if(!StringUtils.endsWithIgnoreCase(fileName, suffix)) continue;
+			if(!StringUtils.endsWithIgnoreCase(fileName, getSuffix())) continue;
 			result.add(file);
 		}
 		
 		return result;
 	}
+
 	
 	public void process() throws Exception {
 		List<File> listFiles = listFiles();
@@ -69,7 +69,7 @@ public abstract class AbstractLoader {
 				} catch (FileNotFoundException e) {
 					throw new IllegalStateException(e);
 				}
-				loadFile(fis);
+				loadFile(fis, null);
 				IOUtils.closeQuietly(fis);
 			} finally {
 				file.renameTo(new File(file.getPath() + getProcessedSuffix()));
@@ -77,9 +77,9 @@ public abstract class AbstractLoader {
 		}
 	}
 
-	public void processSingleFile(String absolutePath){
+	public boolean processSingleFile(String cntnrIdentif, String absolutePath, String stepIdentifier){
 		File file = new File(absolutePath);
-		if(!file.exists()) return;
+		if(!file.exists()) return true;
 
 		FileInputStream fis;
 		try {
@@ -87,11 +87,14 @@ public abstract class AbstractLoader {
 		} catch (FileNotFoundException e) {
 			throw new IllegalStateException(e);
 		}
-		loadFile(fis);
-		IOUtils.closeQuietly(fis);
+		try {
+			return loadFile(fis, stepIdentifier);
+		} finally {
+			IOUtils.closeQuietly(fis);
+		}
 	}
 
-	public void loadFile(FileInputStream fis) {
+	public boolean loadFile(FileInputStream fis, String stepIdentifier) {
 		try {
 			HSSFWorkbook workbook = new HSSFWorkbook(fis);
 			int numberOfSheets = workbook.getNumberOfSheets();
@@ -101,18 +104,27 @@ public abstract class AbstractLoader {
 				String sheetName = sheet.getSheetName();
 				@SuppressWarnings("rawtypes")
 				CoreAbstLoader loader = loaders.get(sheetName);
-				if(loader!=null)loader.load(sheet);
+				if(loader!=null){
+					boolean continueLoad = loader.load(sheet, stepIdentifier);
+					if(!continueLoad) {
+						return false;
+					}
+				}
 			}
 		} catch (IOException e) {
 			throw new IllegalStateException(e);
 		} finally {
 			IOUtils.closeQuietly(fis);
 		}
+		return true;
 	}
 
 	public String getProcessedSuffix() {
 		return processedSuffix;
 	}
+	public String getSuffix(){
+		return EXCEL_SUFFIX;
+	}	
 
 	public void registerLoader(String key, CoreAbstLoader<?> value){
 		loaders.put(key, value);

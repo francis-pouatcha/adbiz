@@ -23,4 +23,11 @@ public class StkArticleLotLookup extends CoreAbstBsnsItemLookup<StkArticleLot>{
 	protected Class<StkArticleLot> getEntityClass() {
 		return StkArticleLot.class;
 	}
+	
+	public Long countByLotPic(String lotPic){
+		return repository.findByIdentif(lotPic).count();
+	}
+	public StkArticleLot findByLotPic(String lotPic){
+		return repository.findOptionalByIdentif(lotPic);
+	}
 }

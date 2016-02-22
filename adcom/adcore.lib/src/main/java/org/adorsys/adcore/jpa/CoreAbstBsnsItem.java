@@ -1133,7 +1133,7 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 		computeSlsNetPrcTaxIncl();
 		setStkValPreTax(FinancialOps.qtyTmsPrice(this.trgtQty, getStkUnitValPreTax(), getStkUnitValCur()));
 		computeValAmnt();
-		this.qtyAfter = BigDecimalUtils.subs(this.qtyBefore, this.trgtQty);
+		this.qtyAfter = BigDecimalUtils.sum(this.qtyBefore, this.trgtQty);
 	}
 	
 }

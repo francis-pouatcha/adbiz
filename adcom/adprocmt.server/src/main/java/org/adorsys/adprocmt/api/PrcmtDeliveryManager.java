@@ -186,8 +186,10 @@ public class PrcmtDeliveryManager  extends CoreAbstBsnsObjectManager<PrcmtDelive
 		if(item2SectionList.isEmpty()) item2SectionList = helper.discoverSection(entity, now);
 		
 		// Interupt the process and wait for system to load..
-		LOG.warn("No section found to store article: " + entity.getArtPic()  + " will wait for stock to load.");
-		if(item2SectionList.isEmpty()) return null;
+		if(item2SectionList.isEmpty()){
+			LOG.warn("No section found to store article: " + entity.getArtPic()  + " will wait for stock to load.");
+			return null;
+		}
 
 		// First use the distribution in the excel file.
 		List<PrcmtDlvryItem2Ou> item2Ous = helper.processOrgUnitsFromExcel(entity, recvngOus, now);
@@ -213,7 +215,7 @@ public class PrcmtDeliveryManager  extends CoreAbstBsnsObjectManager<PrcmtDelive
 			entity = injector.getItemEjb().update(existingItem);// ?????????
 		} else {
 			if(StringUtils.isBlank(entity.getLotPic())){
-				List<StkArticleLot> candidateLots = helper.selectArticleLotFromPeerArtPic(entity);
+				List<StkArticleLot> candidateLots = helper.selectArticleLotFromPeerArtPic(entity, 1000);
 				String lotPic = null;
 				// If size > 1 narrow
 				if(candidateLots.size()>1){

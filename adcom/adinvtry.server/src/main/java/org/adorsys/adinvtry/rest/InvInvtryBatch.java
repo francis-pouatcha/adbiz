@@ -1,7 +1,7 @@
 package org.adorsys.adinvtry.rest;
 
 import javax.ejb.EJB;
-import javax.ejb.Singleton;
+import javax.ejb.Stateless;
 
 import org.adorsys.adcore.rest.CoreAbstEntityJobEJB;
 import org.adorsys.adcore.rest.CoreAbstEntityJobLookup;
@@ -14,7 +14,7 @@ import org.adorsys.adinvtry.jpa.InvJob;
 import org.adorsys.adinvtry.jpa.InvPrcssgStep;
 import org.adorsys.adinvtry.jpa.InvStep;
 
-@Singleton
+@Stateless
 public class InvInvtryBatch extends CoreAbstEntityBatch<InvJob, InvStep, InvPrcssgStep> {
 
 	@EJB

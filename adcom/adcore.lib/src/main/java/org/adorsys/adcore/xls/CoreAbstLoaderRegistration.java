@@ -121,7 +121,7 @@ public abstract class CoreAbstLoaderRegistration extends CoreAbstEntityJobExecut
 	}
 	
 	private int registerSingleStep(File file, int registeredCount){
-		String entityIdentif = file.getAbsolutePath();
+		String entityIdentif = file.getName();
 		String cntnrIdentif = getDataSheetLoader().getDir();
 		Long count = stepLookup.countByCntnrIdentifAndEntIdentif(cntnrIdentif, entityIdentif);
 		if(count>0) return registeredCount;			

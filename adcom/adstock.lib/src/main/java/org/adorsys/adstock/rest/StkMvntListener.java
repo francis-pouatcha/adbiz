@@ -12,6 +12,13 @@ import org.adorsys.adstock.jpa.StkMvntHstryGtwy;
 import org.adorsys.adstock.repo.StkMvntHstryGtwyRepo;
 import org.adorsys.adstock.repo.StkMvntRepository;
 
+/**
+ * This interface is used to transactionally send stock movement events 
+ * to the stock module.
+ * 
+ * @author fpo
+ *
+ */
 @Stateless
 public class StkMvntListener {
 

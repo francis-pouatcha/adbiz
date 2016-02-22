@@ -1,103 +1,77 @@
 package org.adorsys.adcore.xls;
 
-import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
 public abstract class CoreAbstLoader<T extends Object> {
+	private static Logger LOG = Logger.getLogger(CoreAbstLoader.class.getSimpleName());
 
 	private XlsConverterFactory xlsConverterFactory = XlsConverterFactory.singleton();
 		
 	protected abstract T newObject();
 	
 	protected abstract CoreAbstLoader<T> getLoader();
+	protected abstract StepCallback getStepCallback();
 
-	public void load(HSSFSheet hssfSheet){
+	public boolean load(HSSFSheet hssfSheet, String stepIdentifier){
 		Iterator<Row> rowIterator = hssfSheet.rowIterator();
 		List<PropertyDesc> fields = null;
 		if(rowIterator.hasNext()){
 			Row headerRow = rowIterator.next();
 			fields = prepare(headerRow);
 		}
-		if(fields==null || fields.isEmpty()) return;
+		if(fields==null || fields.isEmpty()) return true;
 		CellParser cellParser = new CellParser(hssfSheet.getWorkbook());
 		T last = null;
+		boolean hadRow = false;
 		while(rowIterator.hasNext()){
+			hadRow = true;
 			Row row = rowIterator.next();
-			last = getLoader().update(row, fields, cellParser);
+			last = getLoader().update(row, fields, cellParser, stepIdentifier);
+			// Return false if the entity is not saved so loading can be cleanly interupted. 
+			if(last==null) return false;
 		}
-		getLoader().done(last);
+		LOG.info("last element : " + last);
+		if(hadRow)
+			return getLoader().done(last);
+		
+		return true;
 	}
 	
 	/*
 	 * Allows the release of resources.
+	 * 
+	 * Returns true if the loader should proceed with the following sheets.
+	 * 
 	 */
-	public void done(T last){
+	public boolean done(T last){
+		if(last==null) return false;
+		return true;
 	}
 	
-	public T update(Row row, List<PropertyDesc> fields, CellParser cellParser) {
+	public T update(Row row, List<PropertyDesc> fields, CellParser cellParser, String stepIdentifier) {
 		T newObject = newObject();
 		for (PropertyDesc propertyDesc : fields) {
 			propertyDesc.setProperty(row, newObject, cellParser);
 		}
 		T save = save(newObject, fields);
+		if(save==null) return null;
+		if(getStepCallback()!=null)getStepCallback().markSynchPoint(stepIdentifier,row.getRowNum());
 		return save;
 	}
 
 	public abstract T save(T entity, List<PropertyDesc> fields);
-	
-	public void createTemplate(HSSFWorkbook workbook){
-		T newObject = newObject();
-		Class<? extends Object> beanKlass = newObject.getClass();
-		String sheetName = beanKlass.getSimpleName();
-		HSSFSheet hssfSheet = workbook.getSheet(sheetName);
-		if(hssfSheet!=null){
-			int sheetIndex = workbook.getSheetIndex(hssfSheet);
-			workbook.removeSheetAt(sheetIndex);
-		}
-		hssfSheet = workbook.createSheet(sheetName);
-		HSSFRow row = hssfSheet.createRow(0);
-		PropertyDescriptor[] propertyDescriptors = PropertyUtils.getPropertyDescriptors(beanKlass);
-		List<PropertyDescriptor> descList = cleanDescriptors(propertyDescriptors);
-		int i = -1;
-		for (PropertyDescriptor propertyDescriptor : descList) {
-			String fieldName = propertyDescriptor.getName();
-			if(!PropertyUtils.isWriteable(newObject, fieldName)) continue;
-			i+=1;
-			HSSFCell cell = row.createCell(i, Cell.CELL_TYPE_STRING);
-			cell.setCellValue(fieldName);
-		}
-	}
-	
-	// remove 
-	private List<PropertyDescriptor> cleanDescriptors(
-			PropertyDescriptor[] propertyDescriptors) {
-		List<PropertyDescriptor> result = new ArrayList<PropertyDescriptor>();
-		PropertyDescriptor identifDescriptor = null;
-		for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {
-			String fieldName = propertyDescriptor.getName();
-			if("id".equals(fieldName) || 
-					"version".equals(fieldName) ||
-					"class".equals(fieldName)
-					) continue;
-			result.add(propertyDescriptor);
-		}
-		// take identif if no other field
-		if(result.isEmpty()) result.add(identifDescriptor);
-		return result ;
-	}
+
 	protected List<PropertyDesc> prepare(Row propertyNames){
 		T newObject = newObject();
 		List<PropertyDesc> resultList = new ArrayList<PropertyDesc>();

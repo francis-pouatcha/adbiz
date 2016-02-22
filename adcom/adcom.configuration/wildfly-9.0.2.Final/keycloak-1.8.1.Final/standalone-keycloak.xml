@@ -149,7 +149,7 @@
 			<datasources>
 				<datasource jndi-name="java:jboss/datasources/ADDS"
 					pool-name="ADDS" enabled="true" use-java-context="true">
-					<connection-url>jdbc:h2:${jboss.server.data.dir}/addb;AUTO_SERVER=TRUE
+					<connection-url>jdbc:h2:${jboss.server.data.dir}/addb;AUTO_SERVER=TRUE;MVCC=true
 					</connection-url>
 					<driver>h2</driver>
 					<security>
@@ -159,7 +159,7 @@
 				</datasource>
 				<datasource jndi-name="java:jboss/datasources/KeycloakDS"
 					pool-name="KeycloakDS" enabled="true" use-java-context="true">
-					<connection-url>jdbc:h2:${jboss.server.data.dir}/keycloak;AUTO_SERVER=TRUE
+					<connection-url>jdbc:h2:${jboss.server.data.dir}/keycloak;AUTO_SERVER=TRUE;MVCC=true
 					</connection-url>
 					<driver>h2</driver>
 					<security>
@@ -250,10 +250,10 @@
 			</passivation-stores>
 			<async thread-pool-name="default" />
 			<timer-service thread-pool-name="default"
-				default-data-store="default-file-store">
+				default-data-store="clustered-store">
 				<data-stores>
-					<file-data-store name="default-file-store" path="timer-service-data"
-						relative-to="jboss.server.data.dir" />
+					<database-data-store name="clustered-store"
+						datasource-jndi-name="java:jboss/datasources/ADDS" />
 				</data-stores>
 			</timer-service>
 			<remote connector-ref="http-remoting-connector"

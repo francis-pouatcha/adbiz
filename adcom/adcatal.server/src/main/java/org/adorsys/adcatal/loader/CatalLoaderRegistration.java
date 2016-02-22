@@ -21,7 +21,6 @@ import org.adorsys.adcore.loader.jpa.CorLdrStep;
 import org.adorsys.adcore.rest.CoreAbstEntityJobExecutor;
 import org.adorsys.adcore.xls.AbstractLoader;
 import org.adorsys.adcore.xls.CoreAbstLoaderRegistration;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 @Startup
 @Singleton
@@ -64,22 +63,6 @@ public class CatalLoaderRegistration extends CoreAbstLoaderRegistration {
 		dataSheetLoader.registerLoader(CatalProdFmly.class.getSimpleName(), catalProductFamilyLoader);
 		dataSheetLoader.registerLoader(CatalProdFmlyLangMap.class.getSimpleName(), catalProdFmlyLangMapLoader);
 		dataSheetLoader.registerLoader(CatalArt2ProductFamily.class.getSimpleName(), catalArt2ProductFamilyLoader);
-
-		createTemplate();
-	}
-
-	public void createTemplate(){
-		HSSFWorkbook workbook = new HSSFWorkbook();
-		catalProductFamilyLoader.createTemplate(workbook);
-		catalProdFmlyLangMapLoader.createTemplate(workbook);
-		catalArticleLoader.createTemplate(workbook);
-		catalArtLangMappingLoader.createTemplate(workbook);
-		catalArt2ProductFamilyLoader.createTemplate(workbook);
-		catalPicMappingLoader.createTemplate(workbook);
-		catalArtManufSuppLoader.createTemplate(workbook);
-		catalArtEquivalenceLoader.createTemplate(workbook);
-		catalArtDetailConfigLoader.createTemplate(workbook);
-		dataSheetLoader.exportTemplate(workbook);
 	}
 
 	@Override

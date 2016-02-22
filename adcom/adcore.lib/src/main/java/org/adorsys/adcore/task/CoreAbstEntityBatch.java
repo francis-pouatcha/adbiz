@@ -1,16 +1,15 @@
 package org.adorsys.adcore.task;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
-import javax.ejb.AccessTimeout;
+import javax.ejb.Asynchronous;
+import javax.ejb.Lock;
+import javax.ejb.LockType;
 import javax.ejb.Schedule;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.inject.Inject;
 import javax.persistence.EntityExistsException;
 import javax.persistence.LockModeType;
 import javax.persistence.LockTimeoutException;
@@ -39,10 +38,16 @@ import org.apache.commons.lang3.time.DateUtils;
  * @param <J>
  * @param <S>
  */
+@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+@Lock(LockType.READ)
 public abstract class CoreAbstEntityBatch<J extends CoreAbstEntityJob, S extends CoreAbstEntityStep, PS extends CoreAbstPrcssngStep> {
 	
-	private final String processId = UUID.randomUUID().toString();
-
+	@Inject
+	private CoreProcessIdHolder processIdHolder;
+	
+	@Inject
+	private CoreBatchTaskSynchronizer taskSynchronizer;
+	
 	protected abstract CoreAbstEntityJobEJB<J> getJobEjb();
 	protected abstract CoreAbstEntityJobLookup<J> getJobLookup();
 	protected abstract CoreAbstEntityStepEJB<S> getStepEjb();
@@ -50,33 +55,55 @@ public abstract class CoreAbstEntityBatch<J extends CoreAbstEntityJob, S extends
 	protected abstract CoreAbstEntityBatch<J,S,PS> getBatch();
 	protected abstract CoreAbstPrcssngStepEJB<PS> getPrcssngStepEJB();
 	protected abstract CoreAbstPrcssngStepLookup<PS> getPrcssngStepLookup();
-	
+
 	public String getCurrentProcessIdentif() {
-		return processId;
+		return processIdHolder.getProcessId();
 	}
 	
-	private Map<String, CoreEntityJobExecutor<J,S>> executorMap = new HashMap<String, CoreEntityJobExecutor<J,S>>();
 	public void registerJobExecutor(String executorId, CoreEntityJobExecutor<J,S> executor){
-		executorMap.put(executorId, executor);
+		taskSynchronizer.registerJobExecutor(executorId, executor);
+	}
+	
+	@SuppressWarnings({"unchecked" })
+	private CoreEntityJobExecutor<J,S> getExecutor(String executorId){
+		Object executor = taskSynchronizer.getExecutor(executorId);
+		if(executor==null) return null;
+		return (CoreEntityJobExecutor<J, S>) executor;
+	}
+	
+
+	@Schedule(minute = "*", second="*/5", hour="*")
+	public void processSteps() throws Exception {
+		getBatch().processStepsAsynch();
 	}
 
-	@Schedule(minute = "*", second="*/5", hour="*", persistent=false)
-	@AccessTimeout(unit=TimeUnit.MINUTES, value=10)
+	@Asynchronous
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-	public void processSteps() throws Exception {
-		RandomMilisec.doWait(5);
-		Date now = new Date();
-		Long count = getStepLookup().countByStartedIsNullAndSchdldStartLessThan(now);
-		int start = 0;
-		int max = 100;
-		while(start<count){
-			int firstResult = start;
-			start+=max;
-			List<S> schdledList = getStepLookup().findByStartedIsNullAndSchdldStartLessThan(now, firstResult, max);
-			for (S step : schdledList) {
-				if(step.getEnded()!=null) continue;
-				doExecuteStep(step);
+	public void processStepsAsynch() throws Exception {
+		
+		// Return if another job running.
+		if (!taskSynchronizer.processStepsBusyCompareAndSet(false, true)) {
+            return;
+        }
+		
+		try {
+			RandomMilisec.doWait(3);
+			Date now = new Date();
+			Long count = getStepLookup().countByStartedIsNullAndSchdldStartLessThan(now);
+			int start = 0;
+			int max = 100;
+			while(start<count){
+				int firstResult = start;
+				start+=max;
+				List<S> schdledList = getStepLookup().findByStartedIsNullAndSchdldStartLessThan(now, firstResult, max);
+				for (S step : schdledList) {
+					if(step.getEnded()!=null || step.getStarted()!=null) continue;
+					if(step.getSchdldStart()!=null && step.getSchdldStart().after(now)) continue;
+					doExecuteStep(step);
+				}
 			}
+		} finally {
+			taskSynchronizer.processStepsBusySet(false);
 		}
 	}
 	
@@ -88,7 +115,7 @@ public abstract class CoreAbstEntityBatch<J extends CoreAbstEntityJob, S extends
 			return;
 		}
 		if(job.canExecute()){
-			CoreEntityJobExecutor<J, S> executor = executorMap.get(step.getExecutorId());
+			CoreEntityJobExecutor<J, S> executor = getExecutor(step.getExecutorId());
 			if(executor==null) return;
 			
 			int execTimeMilisec = executor.estimateExecTimeMilisec(step.getIdentif());
@@ -96,6 +123,7 @@ public abstract class CoreAbstEntityBatch<J extends CoreAbstEntityJob, S extends
 			if(!leased) return;
 			if(job.getStartTime()==null){
 				job.setStartTime(new Date());
+				job.setJobStatus(CoreJobStatusEnum.RUNNING.name());
 				getJobEjb().update(job);
 			}
 			executor.execute(step.getIdentif());
@@ -107,20 +135,33 @@ public abstract class CoreAbstEntityBatch<J extends CoreAbstEntityJob, S extends
 	 * have been executed.
 	 *  
 	 */
-	@Schedule(minute = "*/5", hour="*", persistent=false)
-	@AccessTimeout(unit=TimeUnit.MINUTES, value=15)
-	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	@Schedule(minute = "*/5", hour="*")
 	public void cleanupJobs() throws Exception {
-		Long count = getJobLookup().countByJobStatus(CoreJobStatusEnum.TERMINATED.name());
-		int start = 0;
-		int max = 100;
-		while(start<count){
-			int firstResult = start;
-			start+=max;
-			List<J> terminatedJobs = getJobLookup().findByJobStatus(CoreJobStatusEnum.TERMINATED.name(), firstResult, max);
-			for (J j : terminatedJobs) {
-				getJobEjb().deleteById(j.getId());
+		getBatch().cleanupJobsAsynch();
+	}
+	
+	@Asynchronous
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public void cleanupJobsAsynch() throws Exception {
+		// Return if another job running.
+		if (!taskSynchronizer.cleanupJobsBusyCompareAndSet(false, true)) {
+            return;
+        }
+		
+		try {
+			Long count = getJobLookup().countByJobStatus(CoreJobStatusEnum.TERMINATED.name());
+			int start = 0;
+			int max = 100;
+			while(start<count){
+				int firstResult = start;
+				start+=max;
+				List<J> terminatedJobs = getJobLookup().findByJobStatus(CoreJobStatusEnum.TERMINATED.name(), firstResult, max);
+				for (J j : terminatedJobs) {
+					getJobEjb().deleteById(j.getId());
+				}
 			}
+		} finally {
+			taskSynchronizer.cleanupJobsBusySet(false);
 		}
 	}
 	
@@ -138,7 +179,7 @@ public abstract class CoreAbstEntityBatch<J extends CoreAbstEntityJob, S extends
 		
 		S s = getStepLookup().findByIdentif(stepIdentifier);
 		Date now = new Date();
-		if(s.getLeaseEnd()!=null && s.getLeaseEnd().before(now)) {
+		if(s.getLeaseEnd()!=null && s.getLeaseEnd().after(now)) {
 			getBatch().unLock(stepIdentifier);
 			return false;
 		}
@@ -152,6 +193,7 @@ public abstract class CoreAbstEntityBatch<J extends CoreAbstEntityJob, S extends
 		return true;
 	}
 	
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public boolean reschedule(String stepIdentifier, int inTimeMilisec){
 		boolean locked = getBatch().lock(stepIdentifier);
 		if(!locked) return false;
@@ -172,14 +214,14 @@ public abstract class CoreAbstEntityBatch<J extends CoreAbstEntityJob, S extends
 	public boolean lock(String lockIdentifier) throws PersistenceException{
 		PS ps = getPrcssngStepLookup().findByIdentif(lockIdentifier);
 		if(ps!=null){
-			// if valueDate older than 3 seconds, recover.
-			if(DateUtils.addSeconds(new Date(), -3).before(ps.getValueDt())){
+			// if valueDate older than 20 seconds, recover.
+			if(DateUtils.addSeconds(new Date(), -20).before(ps.getValueDt())){
 				// Somebody else owns the lock.
 				return false;
 			}
 				
 			// recover
-			ps.setCntnrIdentif(processId);
+			ps.setCntnrIdentif(getCurrentProcessIdentif());
 			ps.setValueDt(new Date());
 			try {
 				getPrcssngStepEJB().lock(ps, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
@@ -192,7 +234,7 @@ public abstract class CoreAbstEntityBatch<J extends CoreAbstEntityJob, S extends
 
 		} else {
 			ps = getPrcssngStepEJB().newInstance();
-			ps.setCntnrIdentif(processId);
+			ps.setCntnrIdentif(getCurrentProcessIdentif());
 			ps.setIdentif(lockIdentifier);
 			ps.setValueDt(new Date());
 			try {
@@ -208,7 +250,7 @@ public abstract class CoreAbstEntityBatch<J extends CoreAbstEntityJob, S extends
 	public boolean unLock(String lockIdentifier) throws PersistenceException{
 		PS ps = getPrcssngStepLookup().findByIdentif(lockIdentifier);
 		if(ps==null) return true;
-		if(!processId.equals(ps.getCntnrIdentif())) return false;
+		if(!getCurrentProcessIdentif().equals(ps.getCntnrIdentif())) return false;
 		getPrcssngStepEJB().deleteById(ps.getId());
 		return true;
 	}
@@ -221,27 +263,45 @@ public abstract class CoreAbstEntityBatch<J extends CoreAbstEntityJob, S extends
 	 * 	- The leaseEnd is not null
 	 * 	- The lease end is more that x minutes in the past.
 	 */
-	@Schedule(minute = "*/13", hour="*", persistent=false)
-	@AccessTimeout(unit=TimeUnit.MINUTES, value=15)
-	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	@Schedule(minute = "*/13", hour="*")
 	public void recoverSteps(){
-		Date now = new Date();
-		Long count = getStepLookup().countByStartedIsNotNullAndEndedIsNullAndLeaseEndLessThan(now);
-		if(count<=0) return; // No step to recover
-		int start = 0;
-		int max = 100;
-		while(start<count){
-			int firstResult = start;
-			start+=max;
-			List<S> list = getStepLookup().findByStartedIsNotNullAndEndedIsNullAndLeaseEndLessThan(now, firstResult, max);
-			for (S step : list) {
-				doExecuteStep(step);
+		getBatch().recoverStepsAsynch();
+	}
+	
+	@Asynchronous
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public void recoverStepsAsynch(){
+		// Return if another job running.
+		if (!taskSynchronizer.recoverStepsBusyCompareAndSet(false, true)) {
+            return;
+        }
+		
+		try {
+			
+			Date now = new Date();
+			Long count = getStepLookup().countByStartedIsNotNullAndEndedIsNullAndLeaseEndLessThan(now);
+			if(count<=0) return; // No step to recover
+			int start = 0;
+			int max = 100;
+			while(start<count){
+				int firstResult = start;
+				start+=max;
+				List<S> list = getStepLookup().findByStartedIsNotNullAndEndedIsNullAndLeaseEndLessThan(now, firstResult, max);
+				for (S step : list) {
+					doExecuteStep(step);
+				}
 			}
+		} finally {
+			taskSynchronizer.recoverStepsBusySet(false);			
 		}
 	}
 	
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public void terminateJob(String jobIdentif){
-		getBatch().lock(jobIdentif);
+		// We can only terminate a job if there is no open steps.
+		Long stepCount = getStepLookup().countByCntnrIdentifAndEndedIsNotNull(jobIdentif);
+		if(stepCount>0) return;
+		if(!getBatch().lock(jobIdentif)) return;
 		J j = getJobLookup().findByIdentif(jobIdentif);
 		j.setEndTime(new Date());
 		j.setJobStatus(CoreJobStatusEnum.TERMINATED.name());
@@ -249,8 +309,9 @@ public abstract class CoreAbstEntityBatch<J extends CoreAbstEntityJob, S extends
 		getBatch().unLock(jobIdentif);
 	}
 	
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public void terminateStep(String stepIdentif){
-		getBatch().lock(stepIdentif);
+		if(!getBatch().lock(stepIdentif)) return;
 		S s = getStepLookup().findByIdentif(stepIdentif);
 		if(s!=null && s.getEnded()==null){
 			s.setEnded(new Date());

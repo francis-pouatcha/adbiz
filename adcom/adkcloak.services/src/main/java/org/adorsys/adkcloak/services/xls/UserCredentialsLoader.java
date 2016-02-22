@@ -62,6 +62,6 @@ public class UserCredentialsLoader extends CoreAbstModelLoader<UserCredentials> 
 	@Override
 	protected UserCredentials create(UserCredentials t) {
 		realmClient.addCredential(t);
-		return lookup(t);
+		return t;
 	}
 }

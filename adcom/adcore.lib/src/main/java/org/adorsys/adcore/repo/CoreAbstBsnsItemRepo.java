@@ -32,6 +32,7 @@ public interface CoreAbstBsnsItemRepo<E extends CoreAbstBsnsItem> extends CoreAb
 	public QueryResult<E> findByCntnrIdentifAndConflictDtIsNotNull(String cntnrIdentif);
 	
 	public QueryResult<E> findByArtPic(String artPic);
+	public QueryResult<E> findByArtPicAndExpirDt(String artPic, Date expirDt);
 
 	public QueryResult<E> findByArtPicLike(String artPic);
 
@@ -46,10 +47,15 @@ public interface CoreAbstBsnsItemRepo<E extends CoreAbstBsnsItem> extends CoreAb
 	public QueryResult<E> findBySupplierAndExpirDtBetween(String supplier, Date fromDt, Date toDt);
 
 	public QueryResult<E> findByArtPicAndSupplierPic(String artPic, String supplierPic);
+	public QueryResult<E> findByArtPicAndSupplierPicAndExpirDt(String artPic, String supplierPic, Date expirDt);
 
 	public QueryResult<E> findByArtPicAndSupplierPicAndManufacturerPic(String artPic, String supplierPic,
 			String manufacturerPic);
 
 	public QueryResult<E> findByArtPicAndManufacturerPic(String artPic, String manufacturerPic);
+	public QueryResult<E> findByArtPicAndManufacturerPicAndExpirDt(String artPic, String manufacturerPic, Date expirDt);
+	
+	public QueryResult<E> findByArtPicAndSupplierPicAndManufacturerPicAndExpirDt(String artPic, String supplierPic,
+			String manufacturerPic, Date expirDt);
 	
 }

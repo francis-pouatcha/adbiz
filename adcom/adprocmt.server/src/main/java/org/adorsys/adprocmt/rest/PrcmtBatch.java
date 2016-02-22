@@ -1,7 +1,7 @@
 package org.adorsys.adprocmt.rest;
 
 import javax.ejb.EJB;
-import javax.ejb.Singleton;
+import javax.ejb.Stateless;
 
 import org.adorsys.adcore.rest.CoreAbstEntityJobEJB;
 import org.adorsys.adcore.rest.CoreAbstEntityJobLookup;
@@ -14,7 +14,7 @@ import org.adorsys.adprocmt.jpa.PrcmtJob;
 import org.adorsys.adprocmt.jpa.PrcmtPrcssgStep;
 import org.adorsys.adprocmt.jpa.PrcmtStep;
 
-@Singleton
+@Stateless
 public class PrcmtBatch extends CoreAbstEntityBatch<PrcmtJob, PrcmtStep, PrcmtPrcssgStep> {
 
 	@EJB

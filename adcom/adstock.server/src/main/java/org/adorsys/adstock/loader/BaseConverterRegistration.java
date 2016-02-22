@@ -14,8 +14,7 @@ public class BaseConverterRegistration {
 	@Inject
 	private StkSectionTypeConverter sectionTypeConverter;
 	
-	@Inject
-	private XlsConverterFactory converterFactory;
+	private XlsConverterFactory converterFactory = XlsConverterFactory.singleton();
 	
 	@PostConstruct
 	public void postConstruct(){

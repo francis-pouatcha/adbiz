@@ -43,13 +43,13 @@ public abstract class StkAbstArtLotMgmnt extends CoreAbstIdentifObject {
 	 * Generate new lot per supplier product id code.
 	 */
 	@Description("StkAbstArtLotMgmnt_lotAssgnmtManufPic_description")
-	private Boolean lotAssgnmtManufPic = Boolean.TRUE;
+	private Boolean lotAssgnmtManufPic = Boolean.FALSE;
 	
 	/*
 	 * Generate new lot for each expir date.
 	 */
 	@Description("StkAbstArtLotMgmnt_lotAssgnmtExpirDt_description")
-	private Boolean lotAssgnmtExpirDt = Boolean.TRUE;
+	private Boolean lotAssgnmtExpirDt = Boolean.FALSE;
 
 	/*
 	 * Generate new lot for each po item.

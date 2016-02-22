@@ -1,7 +1,7 @@
 package org.adorsys.adcore.loader.ejb;
 
 import javax.ejb.EJB;
-import javax.ejb.Singleton;
+import javax.ejb.Stateless;
 
 import org.adorsys.adcore.loader.jpa.CorLdrJob;
 import org.adorsys.adcore.loader.jpa.CorLdrPrcssngStep;
@@ -14,7 +14,7 @@ import org.adorsys.adcore.rest.CoreAbstPrcssngStepEJB;
 import org.adorsys.adcore.rest.CoreAbstPrcssngStepLookup;
 import org.adorsys.adcore.task.CoreAbstEntityBatch;
 
-@Singleton
+@Stateless
 public class CorLdrBatch extends CoreAbstEntityBatch<CorLdrJob, CorLdrStep, CorLdrPrcssngStep> {
 
 	@EJB

@@ -22,15 +22,17 @@ public class CorLdrStepCallback extends CoreAbstStepCallback<CorLdrJob, CorLdrSt
 	@Override
 	public void done(String stepIdentif) {
 		batch.terminateStep(stepIdentif);
+		
+		// Mark the job done if not further steps.
 	}
 
 	@Override
-	protected CoreAbstEntityStepLookup<CorLdrStep> getStelLookup() {
+	protected CoreAbstEntityStepLookup<CorLdrStep> getStepLookup() {
 		return stepLookup;
 	}
 
 	@Override
-	protected CoreAbstEntityStepEJB<CorLdrStep> getStelEJB() {
+	protected CoreAbstEntityStepEJB<CorLdrStep> getStepEJB() {
 		return stepEJB;
 	}
 

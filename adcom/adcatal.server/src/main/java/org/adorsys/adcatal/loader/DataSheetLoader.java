@@ -24,11 +24,6 @@ public class DataSheetLoader extends AbstractLoader {
 	}
 
 	@Override
-	public String getFileName() {
-		return "adcatal.tpl.xls";
-	}
-
-	@Override
 	protected StepCallback getStepCallback() {
 		return stepCallback;
 	}

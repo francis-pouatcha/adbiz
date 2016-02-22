@@ -2,6 +2,7 @@ package org.adorsys.adstock.listener;
 
 import java.math.BigDecimal;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -70,6 +71,7 @@ public class StkMvntHstryListner {
 		String artPic = stkMvnt.getArtPic();
 		String lotPic = stkMvnt.getLotPic();
 		String section = stkMvnt.getSection();
+		Date expirDt = stkMvnt.getExpirDt();
 
 		// handle the stock of all article with this pic 
 		handleArtStockQty(artPic, stkMvnt, hstry);
@@ -90,7 +92,7 @@ public class StkMvntHstryListner {
 		handleLotStockQty(artPic, lotPic, stkMvnt, hstry);
 		
 		if(StringUtils.isNotBlank(section))
-			handleLotAndSctnStockQty(artPic, lotPic, section, stkMvnt, hstry);
+			handleLotAndSctnStockQty(artPic, lotPic, expirDt, section, stkMvnt, hstry);
 	}
 	
 	private void handleArtStockQty(String artPic, StkMvnt stkMvnt, StkMvntHstry hstry){
@@ -133,7 +135,7 @@ public class StkMvntHstryListner {
 		lotStockQtyEJB.create(lotStockQty);
 	}
 	
-	private void handleLotAndSctnStockQty(String artPic, String lotPic, String section, StkMvnt stkMvnt, StkMvntHstry hstry){
+	private void handleLotAndSctnStockQty(String artPic, String lotPic, Date expirDt, String section, StkMvnt stkMvnt, StkMvntHstry hstry){
 		// No stocking for proformat invoice.
 		if(Boolean.TRUE.equals(stkMvnt.getProfmt())) return;
 
@@ -159,6 +161,7 @@ public class StkMvntHstryListner {
 			strgSctn = new StkArticleLot2StrgSctn();
 			strgSctn.setArtPic(artPic);
 			strgSctn.setLotPic(lotPic);
+			strgSctn.setExpirDt(expirDt);
 			strgSctn.setSection(section);
 			strgSctn.setQtyDt(hstry.getHstryDt());
 			strgSctn.setStockQty(lotInSctnStockQty.getStockQty());

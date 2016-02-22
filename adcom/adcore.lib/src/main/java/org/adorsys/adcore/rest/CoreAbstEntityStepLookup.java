@@ -3,10 +3,14 @@ package org.adorsys.adcore.rest;
 import java.util.Date;
 import java.util.List;
 
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+
 import org.adorsys.adcore.jpa.CoreAbstEntityStep;
 import org.adorsys.adcore.repo.CoreAbstEntityStepRepo;
 import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 
+@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 public abstract class CoreAbstEntityStepLookup<E extends CoreAbstEntityStep>
 		extends CoreAbstIdentifLookup<E> {
 	protected abstract CoreAbstEntityStepRepo<E> getStepRepo();
@@ -77,6 +81,16 @@ public abstract class CoreAbstEntityStepLookup<E extends CoreAbstEntityStep>
 				.maxResults(max).getResultList();
 	}
 
+	public Long countByEndedIsNull() {
+		return getStepRepo().findByEndedIsNull().count();
+	}
+
+	public List<E> findByEndedIsNull(
+			Date now, int start, int max) {
+		return getStepRepo().findByEndedIsNull().firstResult(start)
+				.maxResults(max).getResultList();
+	}
+	
 	//===============================================================================================//
 	//					CONTAINER AND ENTITY IDENTIF
 	//==============================================================================================//

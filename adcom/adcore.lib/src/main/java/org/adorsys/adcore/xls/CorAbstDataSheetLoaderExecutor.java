@@ -2,7 +2,6 @@ package org.adorsys.adcore.xls;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,7 +13,6 @@ import javax.inject.Inject;
 import org.adorsys.adcore.loader.ejb.CorLdrBatch;
 import org.adorsys.adcore.loader.ejb.CorLdrFileStreamEJB;
 import org.adorsys.adcore.loader.ejb.CorLdrFileStreamLookup;
-import org.adorsys.adcore.loader.ejb.CorLdrStepEJB;
 import org.adorsys.adcore.loader.ejb.CorLdrStepLookup;
 import org.adorsys.adcore.loader.jpa.CorLdrFileStream;
 import org.adorsys.adcore.loader.jpa.CorLdrJob;
@@ -30,8 +28,6 @@ public abstract class CorAbstDataSheetLoaderExecutor extends CoreAbstEntityJobEx
 	
 	@Inject
 	private CorLdrStepLookup stepLookup;
-	@Inject
-	private CorLdrStepEJB stepEJB;
 	@EJB
 	private CorLdrBatch batch;
 
@@ -63,12 +59,9 @@ public abstract class CorAbstDataSheetLoaderExecutor extends CoreAbstEntityJobEx
 					FileUtils.deleteQuietly(createTempFile);
 					if(finishedProcessing) {
 						fileStreamEJB.deleteById(corLdrFileStream.getId());
+						batch.terminateStep(stepIdentif);
 					} else {
-						step = stepLookup.findByIdentif(stepIdentif);
-						step.setLeaseEnd(new Date());
-						step.setStepOwner(null);
-						step.setStarted(null);
-						stepEJB.update(step);
+						batch.reschedule(stepIdentif, 8000);
 					}
 				} catch (IOException e) {
 					throw new IllegalStateException(e);

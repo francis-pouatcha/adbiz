@@ -202,11 +202,18 @@ public abstract class CoreAbstBsnsItemLookup<E extends CoreAbstBsnsItem> extends
 	public Long countByArtPic(String artPic){
 		return getBsnsRepo().findByArtPic(artPic).count();
 	}
+	public Long countByArtPicAndExpirDt(String artPic, Date expirDt){
+		return getBsnsRepo().findByArtPicAndExpirDt(artPic, expirDt).count();
+	}
+
 	public List<E> findByArtPicOrderByLotPic(String artPic, int start, int max){
 		return getBsnsRepo().findByArtPic(artPic).orderAsc("lotPic").firstResult(start).maxResults(max).getResultList();
 	}
 	public List<E> findByArtPic(String artPic, int start, int max){
 		return getBsnsRepo().findByArtPic(artPic).firstResult(start).maxResults(max).getResultList();
+	}
+	public List<E> findByArtPicAndExpirDt(String artPic, Date expirDt, int start, int max){
+		return getBsnsRepo().findByArtPicAndExpirDt(artPic, expirDt).firstResult(start).maxResults(max).getResultList();
 	}
 
 	public Long countByArtPicAndSupplierPic(String artPic, String supplierPic){
@@ -216,6 +223,13 @@ public abstract class CoreAbstBsnsItemLookup<E extends CoreAbstBsnsItem> extends
 		return getBsnsRepo().findByArtPicAndSupplierPic(artPic, supplierPic).firstResult(start).maxResults(max).getResultList();
 	}
 
+	public Long countByArtPicAndSupplierPicAndExpirDt(String artPic, String supplierPic, Date expirDt){
+		return getBsnsRepo().findByArtPicAndSupplierPicAndExpirDt(artPic, supplierPic,expirDt).count();
+	}
+	public List<E> findByArtPicAndSupplierPicAndExpirDt(String artPic, String supplierPic, Date expirDt, int start, int max){
+		return getBsnsRepo().findByArtPicAndSupplierPicAndExpirDt(artPic, supplierPic,expirDt).firstResult(start).maxResults(max).getResultList();
+	}
+	
 	public Long countByExpirDtBetween(Date fromDt, Date toDt){
 		return getBsnsRepo().findByExpirDtBetween(fromDt, toDt).count();
 	}
@@ -244,6 +258,22 @@ public abstract class CoreAbstBsnsItemLookup<E extends CoreAbstBsnsItem> extends
 	}
 	public List<E> findByArtPicAndManufacturerPic(String artPic, String manufacturerPic, int start, int max) {
 		return getBsnsRepo().findByArtPicAndManufacturerPic(artPic,manufacturerPic).firstResult(start).maxResults(max).getResultList();
+	}
+	
+	public Long countByArtPicAndManufacturerPicAndExpirDt(String artPic, String manufacturerPic, Date expirDt) {
+		return getBsnsRepo().findByArtPicAndManufacturerPicAndExpirDt(artPic,manufacturerPic, expirDt).count();
+	}
+	public List<E> findByArtPicAndManufacturerPicAndExpirDt(String artPic, String manufacturerPic, Date expirDt, int start, int max) {
+		return getBsnsRepo().findByArtPicAndManufacturerPicAndExpirDt(artPic,manufacturerPic, expirDt).firstResult(start).maxResults(max).getResultList();
+	}
+	
+	public Long countByArtPicAndSupplierPicAndManufacturerPicAndExpirDt(String artPic, String supplierPic,
+			String manufacturerPic, Date expirDt) {
+		return getBsnsRepo().findByArtPicAndSupplierPicAndManufacturerPicAndExpirDt(artPic, supplierPic,manufacturerPic, expirDt).count();
+	}
+	public List<E> findByArtPicAndSupplierPicAndManufacturerPicAndExpirDt(String artPic, String supplierPic,
+			String manufacturerPic, Date expirDt, int start, int max) {
+		return getBsnsRepo().findByArtPicAndSupplierPicAndManufacturerPicAndExpirDt(artPic, supplierPic,manufacturerPic, expirDt).firstResult(start).maxResults(max).getResultList();
 	}
 	
 	/**

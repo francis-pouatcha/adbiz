@@ -15,8 +15,7 @@ public class BaseConverterRegistration {
 	@Inject
 	private InvInvtryTypeConverter invInvtryTypeConverter;
 	
-	@Inject
-	private XlsConverterFactory converterFactory;
+	private XlsConverterFactory converterFactory = XlsConverterFactory.singleton();
 	
 	@PostConstruct
 	public void postConstruct(){

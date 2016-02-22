@@ -291,7 +291,7 @@ public class ProcurementDeliveryHelper {
 		return null;
 	}
 	
-	public List<StkArticleLot> selectArticleLotFromPeerArtPic(PrcmtDlvryItem item){
+	public List<StkArticleLot> selectArticleLotFromPeerArtPic(PrcmtDlvryItem item, int maxResult){
 
 		final String artPic = item.getArtPic();
 		StkArtLotMgmnt current = artLotMgmntLookup.findCurrentByArtPic(artPic);
@@ -300,57 +300,75 @@ public class ProcurementDeliveryHelper {
 		if(Boolean.TRUE.equals(current.getLotAssgnmtManual())) throw new IllegalStateException("Missing Article Lot. Musst be manually assigned."); 
 		
 		List<StkArticleLot> candidateLots = new ArrayList<StkArticleLot>();
-		Selector selector = new Selector();
+//		Selector selector = new Selector();
 		// Do i have a dlvryItem of this delivery with the same artPic?
 
 		// No need to search. Each delivery creates a propert lot.
 		if(Boolean.TRUE.equals(current.getLotAssgnmtDlvry())) return candidateLots;
 		// There is no article lot with this article code yet
-		selector.count = articleLotLookup.countByArtPic(artPic);
-		if(selector.count<=0)return candidateLots;
-		selector.selections=Selections.ArtPic;
+		Long artLotCount = articleLotLookup.countByArtPic(artPic);
+		if(artLotCount<=0)return candidateLots;
 		
 		Long expirDtCount = -1l;
-		if(Boolean.TRUE.equals(current.getLotAssgnmtExpirDt()) && item.getExpirDt()!=null){
+		Date expirDt = item.getExpirDt();
+		if(Boolean.TRUE.equals(current.getLotAssgnmtExpirDt()) && expirDt!=null){
 			// trim expir date to the day and look for candidates.
-			Date expirDt = item.getExpirDt();
 			expirDt = DateUtils.truncate(expirDt, Calendar.DAY_OF_MONTH);
-			expirDtCount = articleLot2StrgSctnLookup.countByArtPicAndExpitDt(artPic, expirDt);
+			expirDtCount = articleLotLookup.countByArtPicAndExpirDt(artPic, expirDt);
 			if(expirDtCount<=0)return candidateLots;
-			// If we find more than 100 we discard the expirdate stuff.
-		} else {
-			expirDtCount =0l;
 		}
 		
-		if(Boolean.TRUE.equals(current.getLotAssgnmtSupplrPic()) && StringUtils.isNotBlank(item.getSupplierPic())){
-			selector.count = articleLotLookup.countByArtPicAndSupplierPic(artPic, item.getSupplierPic());
-			if(selector.count<=0) return candidateLots;
-			selector.selections=Selections.ArtPicAndSupplierPic;
+		Long supplrPicCount = -1l;
+		String supplierPic = item.getSupplierPic();
+		if(Boolean.TRUE.equals(current.getLotAssgnmtSupplrPic()) && StringUtils.isNotBlank(supplierPic)){
+			supplrPicCount = articleLotLookup.countByArtPicAndSupplierPic(artPic, supplierPic);
+			if(supplrPicCount<=0)return candidateLots;
+		}
 
-			if(Boolean.TRUE.equals(current.getLotAssgnmtManufPic()) && StringUtils.isNotBlank(item.getManufacturerPic())){
-				selector.count = articleLotLookup.countByArtPicAndSupplierPicAndManufacturerPic(artPic, item.getSupplierPic(), item.getManufacturerPic());
-				if(selector.count<=0) return candidateLots;
-				selector.selections=Selections.ArtPicAndSupplierPicAndManufacturerPic;
-			}
+		Long manufPicCount = -1L;
+		String manufacturerPic = item.getManufacturerPic();
+		if(Boolean.TRUE.equals(current.getLotAssgnmtManufPic()) && StringUtils.isNotBlank(manufacturerPic)){
+			manufPicCount = articleLotLookup.countByArtPicAndManufacturerPic(artPic, manufacturerPic);
+			if(manufPicCount<=0)return candidateLots;
 		}
 		
-		if(Boolean.TRUE.equals(current.getLotAssgnmtManufPic()) && StringUtils.isNotBlank(item.getManufacturerPic())){
-			selector.count = articleLotLookup.countByArtPicAndManufacturerPic(artPic, item.getManufacturerPic());
-			if(selector.count<=0) return candidateLots;
-			selector.selections=Selections.ArtPicAndManufacturerPic;
+		if(expirDtCount>0 && supplrPicCount>0 && manufPicCount>0){
+			Long count = articleLotLookup.countByArtPicAndSupplierPicAndManufacturerPicAndExpirDt(artPic, supplierPic, manufacturerPic, expirDt);
+			if(count<=0)return candidateLots;
+			return articleLotLookup.findByArtPicAndSupplierPicAndManufacturerPicAndExpirDt(artPic, supplierPic, manufacturerPic, expirDt, 0, maxResult);
 		}
-		
-		switch (selector.selections) {
-		case ArtPicAndSupplierPic:
-			return articleLotLookup.findByArtPicAndSupplierPic(artPic, item.getSupplierPic(), 0, selector.count.intValue());
-		case ArtPicAndManufacturerPic:
-			return articleLotLookup.findByArtPicAndManufacturerPic(artPic, item.getManufacturerPic(), 0, selector.count.intValue());
-		case ArtPicAndSupplierPicAndManufacturerPic:
-			return articleLotLookup.findByArtPicAndSupplierPicAndManufacturerPic(artPic, item.getSupplierPic(), item.getManufacturerPic(), 0, selector.count.intValue());
-		case ArtPic:
-		default:
-			return articleLotLookup.findByArtPic(artPic, 0, selector.count.intValue());
+		if(expirDtCount>0 && supplrPicCount>0){
+			Long count = articleLotLookup.countByArtPicAndSupplierPicAndExpirDt(artPic, supplierPic, expirDt);
+			if(count<=0)return candidateLots;
+			return articleLotLookup.findByArtPicAndSupplierPicAndExpirDt(artPic, supplierPic, expirDt, 0, maxResult);
+		}		
+		if(expirDtCount>0 && manufPicCount>0){
+			Long count = articleLotLookup.countByArtPicAndManufacturerPicAndExpirDt(artPic, manufacturerPic, expirDt);
+			if(count<=0)return candidateLots;
+			return articleLotLookup.findByArtPicAndManufacturerPicAndExpirDt(artPic, manufacturerPic, expirDt, 0, maxResult);
 		}
+		if(supplrPicCount>0 && manufPicCount>0){
+			Long count = articleLotLookup.countByArtPicAndSupplierPicAndManufacturerPic(artPic, supplierPic, manufacturerPic);
+			if(count<=0)return candidateLots;
+			return articleLotLookup.findByArtPicAndSupplierPicAndManufacturerPicAndExpirDt(artPic, supplierPic, manufacturerPic, expirDt, 0, maxResult);
+		}
+		if(expirDtCount>0){
+			Long count = articleLotLookup.countByArtPicAndExpirDt(artPic, expirDt);
+			if(count<=0)return candidateLots;
+			return articleLotLookup.findByArtPicAndExpirDt(artPic, expirDt, 0, maxResult);
+		}		
+		if(supplrPicCount>0){
+			Long count = articleLotLookup.countByArtPicAndSupplierPic(artPic, supplierPic);
+			if(count<=0)return candidateLots;
+			return articleLotLookup.findByArtPicAndSupplierPic(artPic, supplierPic, 0, maxResult);
+		}		
+		if(manufPicCount>0){
+			Long count = articleLotLookup.countByArtPicAndManufacturerPic(artPic, manufacturerPic);
+			if(count<=0)return candidateLots;
+			return articleLotLookup.findByArtPicAndManufacturerPic(artPic, manufacturerPic, 0, maxResult);
+		}
+
+		return articleLotLookup.findByArtPic(artPic, 0, maxResult);
 	}
 	
 	

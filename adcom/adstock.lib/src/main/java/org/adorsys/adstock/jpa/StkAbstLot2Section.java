@@ -41,6 +41,10 @@ public abstract class StkAbstLot2Section extends CoreAbstIdentifObject {
 	@Description("StkAbstractLot2Section_closedDt_description")
 	private Date closedDt;	
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Description("StkAbstractLot2Section_expirDt_description")
+	private Date expirDt;	
+	
 	/*
 	 * Date from which this article goes out of stock. It set automatically
 	 * by the qty consolidation process.
@@ -128,6 +132,14 @@ public abstract class StkAbstLot2Section extends CoreAbstIdentifObject {
 	
 	public static String toLotPicAndSectionKey(String lotPic, String section){
 		return lotPic +"_"+ section;
+	}
+
+	public Date getExpirDt() {
+		return expirDt;
+	}
+
+	public void setExpirDt(Date expirDt) {
+		this.expirDt = expirDt;
 	}
 
 }

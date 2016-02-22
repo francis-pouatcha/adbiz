@@ -38,7 +38,7 @@ public class StkMvntHstryGtwyProcessor {
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public void loadGtwy(){
 		Long count = gtwyRepo.count();
-		if(count>500) count = 500l;
+		if(count>1200) count = 1200l;
 		int start = 0;
 		int max = 100;
 		while (start<count){

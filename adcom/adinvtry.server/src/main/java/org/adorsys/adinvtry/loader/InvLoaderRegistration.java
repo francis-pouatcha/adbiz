@@ -6,7 +6,9 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 
+import org.adorsys.adcore.loader.ejb.CorLdrConstraintChecker;
 import org.adorsys.adcore.loader.jpa.CorLdrJob;
+import org.adorsys.adcore.loader.jpa.CorLdrJobCstr;
 import org.adorsys.adcore.loader.jpa.CorLdrPrcssngStep;
 import org.adorsys.adcore.loader.jpa.CorLdrStep;
 import org.adorsys.adcore.rest.CoreAbstEntityJobExecutor;
@@ -14,7 +16,6 @@ import org.adorsys.adcore.xls.AbstractLoader;
 import org.adorsys.adcore.xls.CoreAbstLoaderRegistration;
 import org.adorsys.adinvtry.jpa.InvInvtry;
 import org.adorsys.adinvtry.jpa.InvInvtryItem;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 @Startup
 @Singleton
@@ -28,7 +29,8 @@ public class InvLoaderRegistration extends CoreAbstLoaderRegistration{
 	private InvInvtryItemLoader invInvtryItemLoader;
 	@EJB
 	private InvLoaderRegistration registration;
-	
+	@Inject
+	private CorLdrConstraintChecker constraintChecker;
 	@EJB
 	private InvLoaderExecutor execTask;
 	
@@ -37,7 +39,7 @@ public class InvLoaderRegistration extends CoreAbstLoaderRegistration{
 		super.postConstruct();
 		dataSheetLoader.registerLoader(InvInvtry.class.getSimpleName(), intInvInvtryLoader);
 		dataSheetLoader.registerLoader(InvInvtryItem.class.getSimpleName(), invInvtryItemLoader);
-		createTemplate();
+		dataSheetLoader.registerLoader(CorLdrJobCstr.class.getSimpleName(), constraintChecker);
 	}
 
 	@Override
@@ -53,12 +55,5 @@ public class InvLoaderRegistration extends CoreAbstLoaderRegistration{
 	@Override
 	protected CoreAbstEntityJobExecutor<CorLdrJob, CorLdrStep, CorLdrPrcssngStep> getExecTask() {
 		return execTask;
-	}
-
-	public void createTemplate(){
-		HSSFWorkbook workbook = new HSSFWorkbook();
-		intInvInvtryLoader.createTemplate(workbook);
-		invInvtryItemLoader.createTemplate(workbook);
-		dataSheetLoader.exportTemplate(workbook);
 	}
 }
