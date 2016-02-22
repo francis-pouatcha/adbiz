@@ -15,6 +15,7 @@ import org.adorsys.adstock.jpa.StkMvnt;
 import org.adorsys.adstock.rest.StkArticleLotLookup;
 import org.adorsys.adstock.rest.StkLotInSctnStockQtyLookup;
 import org.adorsys.adstock.rest.StkMvntEJB;
+import org.adorsys.adstock.vo.StkMvntDto;
 import org.apache.commons.lang3.StringUtils;
 
 @Stateless
@@ -43,7 +44,7 @@ public class StkStockManager  {
 	 * @return
 	 * @throws AdException 
 	 */
-	public StkMvnt moveIn(StkMvnt stkMvnt) throws AdException {
+	public StkMvnt moveIn(StkMvntDto stkMvnt) throws AdException {
 		StkMvnt perstMvnt = initStkMvnt(stkMvnt);
 		// Information we are interested in from outside.
 		BigDecimal trgtQty = BigDecimalUtils.zeroIfNull(stkMvnt.getTrgtQty());
@@ -51,12 +52,14 @@ public class StkStockManager  {
 			trgtQty = BigDecimalUtils.negate(trgtQty);
 		}
 		perstMvnt.setTrgtQty(trgtQty);
+		perstMvnt.setMvntDestIdentif(stkMvnt.getSection());
+		perstMvnt.setMvntDest(stkMvnt.getMvntTerminal());
 		stkMvntEJB.create(perstMvnt);
 		return perstMvnt;
 	}
 	
 	
-	private StkMvnt initStkMvnt(StkMvnt stkMvnt) throws AdException {
+	private StkMvnt initStkMvnt(StkMvntDto stkMvnt) throws AdException {
 		// The lotPic hast to be a vaild one.
 		String lotPic = stkMvnt.getLotPic();
 		if(StringUtils.isBlank(lotPic))throw new AdException("Missing lot pic");
@@ -82,7 +85,7 @@ public class StkStockManager  {
 		return perstMvnt;
 	}
 
-	public StkMvnt moveOut(StkMvnt stkMvnt) throws AdException {
+	public StkMvnt moveOut(StkMvntDto stkMvnt) throws AdException {
 		StkMvnt perstMvnt = initStkMvnt(stkMvnt);
 		// Information we are interested in from outside.
 		BigDecimal trgtQty = BigDecimalUtils.zeroIfNull(stkMvnt.getTrgtQty());
@@ -90,6 +93,8 @@ public class StkStockManager  {
 			trgtQty = BigDecimalUtils.negate(trgtQty);
 		}
 		perstMvnt.setTrgtQty(trgtQty);
+		perstMvnt.setMvntOrigin(stkMvnt.getMvntTerminal());
+		perstMvnt.setMvntOriginIdentif(stkMvnt.getSection());
 		stkMvntEJB.create(perstMvnt);
 		return perstMvnt;
 	}
@@ -101,5 +106,12 @@ public class StkStockManager  {
 		// of an inventory item changes, we can not modify that item anymore.
 		// This method will create a new item.
 		return sctnStockQty!=null?sctnStockQty.getStockQty():BigDecimal.ZERO;
+	}
+
+
+	public void transfer(StkMvntDto mvnOut, StkMvntDto mvnIn) throws AdException {
+		moveOut(mvnOut);
+		moveIn(mvnIn);
+		
 	}
 }

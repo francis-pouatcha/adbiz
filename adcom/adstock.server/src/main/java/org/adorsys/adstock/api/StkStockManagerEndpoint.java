@@ -11,6 +11,7 @@ import javax.ws.rs.Produces;
 
 import org.adorsys.adcore.exceptions.AdException;
 import org.adorsys.adstock.jpa.StkMvnt;
+import org.adorsys.adstock.vo.StkMvntDto;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
@@ -32,15 +33,24 @@ public class StkStockManagerEndpoint  {
 	@Path("/moveIn")
 	@Consumes({ "application/json"})
 	@Produces({ "application/json"})
-	public StkMvnt moveIn(StkMvnt stkMvnt) throws AdException {
-		return stockManager.moveIn(stkMvnt);
+	public StkMvnt moveIn(StkMvntDto stkMvntDto) throws AdException {
+		return stockManager.moveIn(stkMvntDto);
 	}
 	
 	@POST
 	@Path("/moveOut")
 	@Consumes({ "application/json"})
 	@Produces({ "application/json"})
-	public StkMvnt moveOut(StkMvnt stkMvnt) throws AdException {
-		return stockManager.moveOut(stkMvnt);
+	public StkMvnt moveOut(StkMvntDto stkMvntDto) throws AdException {
+		return stockManager.moveOut(stkMvntDto);
+	}
+	
+	
+	@POST
+	@Path("/transfer")
+	@Consumes({ "application/json"})
+	@Produces({ "application/json"})
+	public void transfer(StkMvntDto mvnOut, StkMvntDto mvnIn) throws AdException {
+		stockManager.transfer(mvnOut, mvnIn);
 	}
 }
