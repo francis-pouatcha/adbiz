@@ -18,6 +18,7 @@
         .constant('API_BASE_ADINVTRY_URL', 'http://localhost:8080/adinvtry.server/rest')
 
         .constant('API_BASE_ADPROCMT_URL', 'http://localhost:8080/adprocmt.server/rest')
+        .constant('API_BASE_SALES_URL', 'http://localhost:8080/adsales.server/rest')
 
 
         .constant('BASE_VIEW_STOCK', '/adstock.client/src/client')

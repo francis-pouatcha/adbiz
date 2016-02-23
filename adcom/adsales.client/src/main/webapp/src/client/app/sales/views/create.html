@@ -1,0 +1,78 @@
+<div class="panel-body" data-ng-controller="ProcmtDeliveryCreateCtlr">
+    <label class="error col-lg-offset-3 alert-danger" ><span data-ng-bind="error"></span></label>
+    <form  name="procmtForm" id="procmtForm" novalidate>
+
+        <div class="row" >
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label class=" control-label" for="dlvrySlipNbr"><span data-ng-bind="'PrcmtDelivery_dlvrySlipNbr_description.title' | translate"></span></label>
+                    <input class="form-control" id="dlvrySlipNbr" data-ng-model="procmt.dlvrySlipNbr">
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label class=" control-label" for="dtOnDlvrySlip"><span data-ng-bind="'PrcmtDelivery_dtOnDlvrySlip_description.title' | translate"></span></label>
+                    <div class="input-group" style="max-width:200px;">
+                        <input type="text" class="form-control" id="dtOnDlvrySlip" name="dtOnDlvrySlip"
+			            	data-datepicker-popup="dd-MM-yyyy" data-ng-model="procmt.dtOnDlvrySlip" 
+							data-is-open="dateConfig.dtOnDlvrySlip.opened" data-show-button-bar="false" />
+			            <span class="input-group-btn">
+			                <button style="height:34px;" class="btn btn-default" data-ng-click="openDateComponent('dtOnDlvrySlip', $event)">
+			                	<i class="glyphicon glyphicon-calendar"></i>
+			                </button>
+			            </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label class=" control-label" for="orderDt"><span data-ng-bind="'PrcmtDelivery_orderDt_description.title' | translate"></span></label>
+                    <div class="input-group" style="max-width:200px;">
+                        <input type="text" class="form-control" id="orderDt" name="orderDt"
+			            	data-datepicker-popup="dd-MM-yyyy" data-ng-model="procmt.orderDt" 
+							data-is-open="dateConfig.orderDt.opened" data-show-button-bar="false" />
+			            <span class="input-group-btn">
+			                <button style="height:34px;" class="btn btn-default" data-ng-click="openDateComponent('orderDt', $event)">
+			                	<i class="glyphicon glyphicon-calendar"></i>
+			                </button>
+			            </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-lg-3">
+                <label class=" control-label" for="ouIdentif"><span data-ng-bind="'PrcmtDelivery_rcvngOrgUnit_description.title' | translate"></span></label>
+                <input type="text" data-ng-model="procmt.ouIdentif" id="ouIdentif" name="ouIdentif" class="form-control">
+            </div>
+
+        </div>
+        <div class="row" >
+            <div class="form-group col-lg-3">
+                <label class=" control-label"> Description :</label>
+                <textarea rows="3" id="descptn" name="descptn" class="form-control" data-ng-model="procmt.descptn" maxlength="256"></textarea>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label class=" control-label" for="status"><span data-ng-bind="'PrcmtProcOrder_poStatus_description.title' | translate"></span></label>
+                    <input class="form-control" id="status" disabled data-ng-model="procmt.status" data-ng-init="procmt.status='INITIAL'" >
+                </div>
+            </div>
+
+            <div class="form-group col-lg-3">
+                <label><span data-ng-bind="'PrcmtDelivery_netAmtToPay_description.title' | translate"></span>:</label>
+                <input class="form-control" id="prchNetAmtToPay" type="text" data-ng-model="procmt.prchNetAmtToPay" >
+            </div>
+            <div class="form-group col-lg-3">
+                <label class=" control-label" for="bsnsPartner"><span data-ng-bind="'PrcmtDelivery_supplier_description.title' | translate"></span></label>
+                <input type="text" data-ng-model="procmt.bsnsPartner" id="bsnsPartner" name="bsnsPartner" class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group pull-right">
+                 <button data-ng-click="create();" data-ng-disabled="procmtForm.$invalid" class="btn-success btn"  >
+                     <i class="glyphicon glyphicon-save"></i><span data-ng-bind="'Entity_save.title' | translate"></span></button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
