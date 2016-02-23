@@ -11,6 +11,7 @@
                 LANG_EN: 'English',
                 logout: 'logout',
                 "reload.title":'Reload',
+                "Action.title": 'Action',
                 "show_conflict.title":'Show conflict',
 
                 "InvInvtry_acsngDt_description.text":"The recording date of this inventory item.",
@@ -143,6 +144,7 @@
                 logout: 'deconnection',
 
                 "reload.title":'Recharger',
+                "Action.title": 'Action',
                 "show_conflict.title":'Montrer les conflits',
 
                 "InvInvtry_acsngDt_description.text":"La date de saisie de cette ligne inventaire.",

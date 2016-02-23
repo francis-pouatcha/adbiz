@@ -1,26 +1,30 @@
-<section class="mainbar" >
+<section class="mainbar" id="productFamilyPanel">
 
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <span data-ng-bind="'CatalProductFamily.list.title' | translate"></span>
-    </div>
+	<div class="panel panel-primary">
+	    <div class="panel-heading">
+	        <b><span data-ng-bind="'app.core.create.title' | translate"></span> <span data-ng-bind="'CatalProductFamily.new.title' | translate"></span></b>
+	        <button class="glyphicon glyphicon-collapse-down pull-right" data-toggle="collapse" data-parent="#productFamilyPanel" data-target="#productFamilyCreateToggle"></button>
+	    </div>
+	    <div class="panel-collapse collapse" id="productFamilyCreateToggle">
+	    	<div data-ng-include="'/adcatal.client/src/client/app/catal-prod-fmly/views/create.html'"></div>
+	    </div>
+	</div>
+
+<div class="panel panel-default">
     <div class="panel-body">
-		<div class="pull-right">
-			<a type="button" class="btn btn-success" href="#/catal-prod-fmly/create">
-				<i class="glyphicon glyphicon-open"></i> <span data-ng-bind="'CatalProductFamily.new.title' | translate"></span>
-			</a>
-		</div>
 		<table data-st-table="vm.data.list" data-st-pipe="vm.callServer" class="table table-bordered  table-striped pointer-element">
 			<thead>
 				<tr>
 	          		<th><span data-ng-bind="'CatalProductFamily.parentIdentif' | translate"></span></th>
 	         		<th><span data-ng-bind="'cntnrIdentif' | translate"></span></th>
-	          		<th colspan="2"><span data-ng-bind="'CatalProductFamily.famPath' | translate"></span></th>
+	          		<th><span data-ng-bind="'CatalProductFamily.famPath' | translate"></span></th>
+	          		<th><span data-ng-bind="'Action.title' | translate"></span></th>
           		</tr>
           		<tr>
 			  		<th><input data-st-search="parentIdentif" class="input-sm form-control" type="search"/></th>
              		<th><input data-st-search="identif" class="input-sm form-control" type="search"/></th>
-             		<th colspan="2"><input data-st-search="famPath" class="input-sm form-control" type="search"/></th>
+             		<th><input data-st-search="famPath" class="input-sm form-control" type="search"/></th>
+             		<th></th>
 				</tr>
           	</thead>
           	<tbody>

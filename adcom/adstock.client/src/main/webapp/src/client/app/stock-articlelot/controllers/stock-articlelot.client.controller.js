@@ -30,7 +30,6 @@
             // Initialize Search input and pagination
             vm.searchInput = utils.searchInputInit().searchInput;
             vm.searchInput.className = 'org.adorsys.adstock.jpa.StkArticleLotSearchInput';
-            vm.searchInput.sortFieldNames.push({fieldName:'valueDt'});
             // Number of entries showed per page.
             vm.itemsByPage = utils.searchInputInit().stPagination.number;
         }

@@ -21,40 +21,52 @@
 
             var fields = [
                 {
-                    key: 'identif',
-                    type: 'input',
-                    templateOptions: {
-                        label: $translate.instant('CatalProductFamily_identif_description.title'),
-                        disabled: disabled,
-                        required: true
-                    }
+                	className: 'row',
+                    fieldGroup: [
+		                {
+		                	className: 'col-xs-6',
+		                    key: 'identif',
+		                    type: 'input',
+		                    templateOptions: {
+		                        label: $translate.instant('CatalProductFamily_identif_description.title'),
+		                        disabled: disabled,
+		                        required: true
+		                    }
+		                },
+		                {
+		                	className: 'col-xs-6',
+		                    key: 'parentIdentif',
+		                    type: 'typeahead',
+		                    templateOptions: {
+		                        label: $translate.instant('CatalProductFamily.parentIdentif'),
+		                        disabled: disabled,
+		                        options:function(viewValue){
+		                            return getCatlProdFmlys(viewValue);
+		                        }
+		                    }
+		                }
+		            ]
                 },
                 {
-                    key: 'parentIdentif',
-                    type: 'typeahead',
-                    templateOptions: {
-                        label: $translate.instant('CatalProductFamily.parentIdentif'),
-                        disabled: disabled,
-                        options:function(viewValue){
-                            return getCatlProdFmlys(viewValue);
+                	className: 'row',
+                    fieldGroup: [
+                        {
+                        	className: 'col-xs-6',
+		                    key: 'famPath',
+		                    type: 'input',
+		                    modelOptions: {
+		                        getterSetter: true
+		                    },
+		                    templateOptions: {
+		                        label: $translate.instant('CatalProductFamily.famPath'),
+		                        disabled: true
+		                    }
                         }
-                    }
-                },
-                {
-                    key: 'famPath',
-                    type: 'input',
-                    modelOptions: {
-                        getterSetter: true
-                    },
-                    templateOptions: {
-                        label: $translate.instant('CatalProductFamily.famPath'),
-                        disabled: true
-                    }
+                    ]
                 }
             ];
 
             return fields;
-
         };
 
 

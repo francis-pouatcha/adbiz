@@ -22,6 +22,12 @@
 .ng-table-pagination {
     font-size: 14px;
 }
+
+ng-form.formly {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
 .table-actions {
     width: 160px;
 }
@@ -65,7 +71,7 @@ select {
 }
 input[type="radio"],
 input[type="checkbox"] {
-    margin: 0 0 0 !important;
+/*     margin: 0 0 0 !important; */
     margin-right: 5px !important;
     line-height: 23px !important;
     border: 0 !important;

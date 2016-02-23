@@ -204,7 +204,7 @@
                                        dismiss="true" format="dd MM yyyy" ad-enter="updateItem(procmtItem)"
                                        ng-model="procmtItem.expirDt" class="form-control">
                             </span>
-                    <span ng-show="!procmtItem.editingExpirDt" data-ng-bind="procmtItem.expirDt | date:'yyyy-MM-dd HH:mm'"></span>
+                    <span ng-show="!procmtItem.editingExpirDt" data-ng-bind="procmtItem.expirDt | date:'dd-MM-yyyy HH:mm'"></span>
                 </td>
                 <td name="asseccedQtyCell" ng-dblclick="editingTrgtQty(procmtItem,$event)">
                     <input type="text" name="trgtQty" ad-focus="procmtItem.editingTrgtQty"

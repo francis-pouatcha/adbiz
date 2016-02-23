@@ -10,7 +10,7 @@
     </div>
 </div>
 
-<div class="panel panel-default ">
+<div class="panel panel-default">
     <div class="panel-body">
         <div class="col-lg-12">
                 <table data-st-table="data.prcmts" data-st-pipe="callServer" class="table table-bordered  table-striped pointer-element" >
@@ -40,7 +40,7 @@
                     <tbody>
 	                    <tr data-ng-repeat="procmt in data.prcmts">
 	                        <td data-ng-bind="procmt.identif"></td>
-	                        <td data-ng-bind="procmt.valueDt | date:'yyyy-MM-dd HH:mm'"></td>
+	                        <td data-ng-bind="procmt.valueDt | date:'dd-MM-yyyy HH:mm'"></td>
 	                        <td data-ng-bind="procmt.poTriggerMode | translate"></td>
 	                        <td data-ng-bind="procmt.prchGrossPrcPreTax"></td>
 	                        <td data-ng-bind="procmt.prchNetAmtToPay"></td>

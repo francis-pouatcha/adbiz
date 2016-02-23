@@ -23,23 +23,21 @@
 	                        <th><span data-ng-bind="'InvInvtry_gapPurchAmtHT_description.title' | translate"></span></th>
 	                        <th><span data-ng-bind="'InvInvtry_invtryStatus_description.title' | translate"></span></th>
 	                        <th><span data-ng-bind="'InvInvtry_invtryDt_description.title' | translate"></span></th>
-	                        <th><span data-ng-bind="'InvInvtry_startRange_description.title' | translate"></span></th>
-	                        <th><span data-ng-bind="'InvInvtry_endRange_description.title' | translate"></span></th>
 	                        <th><span data-ng-bind="'InvInvtryItem_section_description.title' | translate"></span></th>
-	                        <th colspan="3"><span data-ng-bind="'description' | translate"></span></th>
+	                        <th><span data-ng-bind="'description' | translate"></span></th>
+	                        <th  colspan="2"><span data-ng-bind="'Action.title' | translate"></span></th>
 	                    </tr>
 	                    <tr>
 	                    	<th><input data-st-search="identif" class="input-sm form-control" type="search"/></th>
 	                    	<th><input data-st-search="login" class="input-sm form-control" type="search"/></th>
 		             		<th><input data-st-search="invtryGroup" class="input-sm form-control" type="search"/></th>
-		             		<th></th>
-		             		<th></th>
+		             		<th><input data-st-search="gapSaleAmtHT" class="input-sm form-control" type="search"/></th>
+		             		<th><input data-st-search="gapPurchAmtHT" class="input-sm form-control" type="search"/></th>
 		             		<th><input data-st-search="status" class="input-sm form-control" type="search"/></th>
-		             		<th><st-date-search predicate="prepareDt" selected-date="query"></st-date-search></th>
-		             		<th></th>
-		             		<th></th>
+		             		<th><st-date-search predicate="valueDt" selected-date="query.valueDt"></st-date-search></th>
 		             		<th><input data-st-search="section" class="input-sm form-control" type="search"/></th>
-		             		<th colspan="3"><input data-st-search="descptn" class="input-sm form-control" type="search"/></th>
+		             		<th><input data-st-search="descptn" class="input-sm form-control" type="search"/></th>
+		             		<th  colspan="2"></th>
 	                    </tr>
                     </thead>
                     <tbody>
@@ -50,9 +48,7 @@
                         <td><span data-ng-bind-html="invtry.gapSaleAmtHT"></span></td>
                         <td><span data-ng-bind-html="invtry.gapPurchAmtHT"></span></td>
                         <td><span data-ng-bind-html="invtry.status"></span></td>
-                        <td><span data-ng-bind-html="invtry.valueDt | date:'yyyy-MM-dd HH:mm'"></span></td>
-                        <td><span data-ng-bind-html="invtry.rangeStart"></span></td>
-                        <td><span data-ng-bind-html="invtry.rangeEnd"></span></td>
+                        <td><span data-ng-bind-html="invtry.valueDt | date:'dd-MM-yyyy HH:mm'"></span></td>
                         <td><span data-ng-bind-html="invtry.section"></span></td>
                         <td><span data-ng-bind-html="invtry.descptn"></span></td>
                         <td>
