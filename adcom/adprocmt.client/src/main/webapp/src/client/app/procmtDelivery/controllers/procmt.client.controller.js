@@ -119,6 +119,20 @@
         $scope.procmtEditable = !prcmtUtils.isInvtryPosted($scope.procmt);
         $scope.itemEditable = prcmtUtils.isInvtryOpen($scope.procmt);
         $scope.procmtCopy = angular.copy($scope.procmt);
+        
+        $scope.dateConfig = {
+        	dtOnDlvrySlip: {
+				opened : false
+			},
+			orderDt: {
+				opened : false
+			}
+        };
+		$scope.openDateComponent = function(componentId,$event) {
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope.dateConfig[componentId].opened = true;
+		};
 
         $scope.procmtChanged = procmtChangedFctn;
 

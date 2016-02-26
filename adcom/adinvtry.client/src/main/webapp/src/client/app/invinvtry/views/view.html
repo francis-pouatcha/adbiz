@@ -15,12 +15,12 @@
         <div class="panel-body">
             <form name="invInvtryForm" id="invInvtryForm" novalidate>
                 <div class="row">
-                    <div class="form-group col-lg-2" ng-class="{ 'has-error' : invInvtryForm.invtryDt.$invalid }">
+                    <div class="form-group col-lg-2" data-ng-class="{ 'has-error' : invInvtryForm.invtryDt.$invalid }">
                         <label class=" control-label" for="invtryDt"><span data-ng-bind="'InvInvtry_invtryDt_description.title' | translate"></span></label>
                         
                         <div class="input-group" style="width:150px;">
                             <input type="text" class="form-control" id="invtryvalueDt" name="invtryvalueDt"
-				            	data-datepicker-popup="dd-MM-yyyy" data-ng-model="invInvtry.valueDt" 
+				            	data-datepicker-popup="dd.MM.yyyy" data-ng-model="invInvtry.valueDt" 
 								data-is-open="dateConfig.invtryvalueDt.opened" 
 								data-show-button-bar="false" data-ng-disabled="!invtryEditable"/>
 				            <span class="input-group-btn">
@@ -30,9 +30,9 @@
 				            </span>
                         </div>
                     </div>
-                    <div class="form-group col-lg-3" ng-class="{ 'has-error' : invInvtryForm.acsngUser.$invalid }">
+                    <div class="form-group col-lg-3" data-ng-class="{ 'has-error' : invInvtryForm.acsngUser.$invalid }">
                         <label class=" control-label" for="acsngUser"><span data-ng-bind="'InvInvtry_acsngUser_description.title' | translate"></span></label>
-                        <input type="text" ng-model="invInvtry.login" id="acsngUser" name="acsngUser"
+                        <input type="text" data-ng-model="invInvtry.login" id="acsngUser" name="acsngUser"
                                class="form-control" disabled autocomplete="off"
                                typeahead="loginName as (loginName.loginName + ' : ' + loginName.fullName) for loginName in invInvtryUtils.loadUsers($viewValue)"
                                typeahead-loading="loading" typeahead-min-length="3"
@@ -41,7 +41,7 @@
                     <div class="form-group col-lg-4">
                         <label class=" control-label" for="invInvtryType"><span data-ng-bind="'InvInvtry_invInvtryType_description.title' | translate"></span>:</label>
 
-                        <div ng-class="{ 'has-error' : invInvtryForm.invMode.$invalid }">
+                        <div data-ng-class="{ 'has-error' : invInvtryForm.invMode.$invalid }">
                             <!--<input class="form-control" ng-model="invInvtry.txType" disabled/>-->
                             <select class="form-control" name="invInvtryType" id="invInvtryType" data-ng-model="invInvtry.txType" data-ng-disabled="!invtryEditable"
                                     data-ng-options="invInvtryType.enumKey as (invInvtryType.translKey | translate)
@@ -141,7 +141,7 @@
                                typeahead-min-length="5" typeahead-loading="loading"
                                typeahead-on-select='onArticleSelectedInSearch($item, $model, $label)' />
                     </div>
-                    <div class="form-group col-lg-2" ng-class="{ 'has-error' : invInvtryItemForm.lotPic.$invalid }">
+                    <div class="form-group col-lg-2" data-ng-class="{ 'has-error' : invInvtryItemForm.lotPic.$invalid }">
                         <label class=" control-label" for="lotPic"><span data-ng-bind="'InvInvtryItem_lotPic_description.title' | translate"></span></label>
                         <input type="text" data-ng-class="form-control" name="lotPic" id="lotPic" autocomplete="off"
                                required data-ng-model="searchInput.entity.lotPic"
