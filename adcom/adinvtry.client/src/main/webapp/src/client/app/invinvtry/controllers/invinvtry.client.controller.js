@@ -168,7 +168,6 @@
 
         $scope.invtryChanged = invtryChangedFctn;
         $scope.dateConfig = {
-        	format: 'dd-MM-yyyy',
         	invtryvalueDt: {
 				opened : false
 			}
