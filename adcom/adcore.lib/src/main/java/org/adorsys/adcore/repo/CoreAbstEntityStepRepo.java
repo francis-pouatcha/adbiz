@@ -47,4 +47,5 @@ public interface CoreAbstEntityStepRepo<E extends CoreAbstEntityStep> extends Co
 
 	public QueryResult<E> findByEndedIsNull();
 	
+	public QueryResult<E> findByEntIdentif(String entIdentif);
 }

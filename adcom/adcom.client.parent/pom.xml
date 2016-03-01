@@ -10,6 +10,18 @@
 	</parent>
 	<artifactId>adcom.client.parent</artifactId>
 	<packaging>pom</packaging>
+	<dependencies>
+		<dependency>
+			<groupId>org.adorsys.adcom</groupId>
+			<artifactId>adres.lib</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>jaxrs-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<finalName>adcom.client.parent</finalName>
@@ -81,12 +93,6 @@
 					</executions>
 						 -->
 				</plugin>
-				<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>exec-maven-plugin</artifactId> 
-					<version>1.2.1</version> <executions> <execution> <id>gulp build</id> <phase>compile</phase> 
-					<goals> <goal>exec</goal> </goals> <configuration> <executable>gulp</executable> 
-					<workingDirectory>${basedir}/src/main/webapp</workingDirectory> <arguments> 
-					<argument>build</argument> </arguments> </configuration> </execution> </executions> 
-					</plugin> -->
 				<plugin>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.1</version>
@@ -105,11 +111,13 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 			</plugin>
-			<!--<plugin>
+			<plugin>
 				<groupId>org.wildfly.plugins</groupId>
 				<artifactId>wildfly-maven-plugin</artifactId>
+				<configuration>
+					<skip>false</skip>
+				</configuration>
 			</plugin>
-			-->
 			 <plugin>
 				<groupId>com.github.eirslett</groupId>
 				<artifactId>frontend-maven-plugin</artifactId>

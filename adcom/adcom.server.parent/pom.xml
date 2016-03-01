@@ -12,6 +12,39 @@
 	<packaging>pom</packaging>
 	<dependencies>
 		<dependency>
+			<groupId>org.adorsys.adcom</groupId>
+			<artifactId>adcore.env</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>	
+		<dependency>
+			<groupId>org.adorsys.adcom</groupId>
+			<artifactId>adcore.xls</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>	
+		<dependency>
+			<groupId>org.adorsys.adcom</groupId>
+			<artifactId>adkcloak.adapter</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>	
+		<dependency>
+			<groupId>org.adorsys.adcom</groupId>
+			<artifactId>adcore.lib</artifactId>
+			<version>${project.version}</version>
+			<scope>compile</scope>
+		</dependency>	
+		<dependency>
+			<groupId>org.keycloak</groupId>
+			<artifactId>keycloak-adapter-core</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-adapter-spi</artifactId>
+        </dependency>
+	
+		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.1-api</artifactId>
 			<scope>provided</scope>

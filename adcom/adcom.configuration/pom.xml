@@ -7,4 +7,33 @@
   </parent>
   <artifactId>adcom.configuration</artifactId>
   <packaging>pom</packaging>
+	<build>
+		<finalName>adcom.dist</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>pack-module</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<tarLongFileMode>gnu</tarLongFileMode>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>org.adorsys.adcom</groupId>
+			<artifactId>adcom.deploy</artifactId>
+			<version>${project.version}</version>
+			<type>tar.gz</type>
+		</dependency>	
+	</dependencies>
 </project>

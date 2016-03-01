@@ -1,0 +1,17 @@
+idp-server:
+  build: .
+  dockerfile: ./Dockerfile
+  ports:
+    - "8080:8080"
+    - "8787:8787"
+    - "9990:9990"
+    - "9999:9999"
+  environment:
+    - DB=h2
+  env_file:
+    - ./adcom-env-docker.properties
+  hostname: docker
+  volumes:
+    - ./appdata/:/opt/jboss/wildfly/standalone/appdata
+
+  

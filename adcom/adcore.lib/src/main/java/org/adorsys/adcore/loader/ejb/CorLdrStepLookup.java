@@ -1,5 +1,7 @@
 package org.adorsys.adcore.loader.ejb;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -25,4 +27,12 @@ public class CorLdrStepLookup extends
 		return CorLdrStep.class;
 	}
 
+	public List<CorLdrStep> findByEntIdentif(String entityIdentif, int start, int max) {
+		return getStepRepo().findByEntIdentif(entityIdentif).firstResult(start).maxResults(max).getResultList();
+	}
+
+	public Long countByEntIdentif(String entityIdentif){
+		return getStepRepo().findByEntIdentif(entityIdentif).count();
+	}
+	
 }

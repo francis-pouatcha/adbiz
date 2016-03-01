@@ -9,6 +9,13 @@
 	<artifactId>adcore.xls</artifactId>
 	<dependencies>
 		<dependency>
+			<groupId>org.adorsys.adcom</groupId>
+			<artifactId>adcore.env</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	
+		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 		</dependency>

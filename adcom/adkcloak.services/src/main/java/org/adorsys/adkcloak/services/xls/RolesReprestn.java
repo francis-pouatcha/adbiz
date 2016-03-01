@@ -9,8 +9,6 @@ public class RolesReprestn {
 	private String childRoleClientId;
 	private String childRoleName;
 	
-	private String childRoleId;
-	
 	public String getRealmId() {
 		return realmId;
 	}
@@ -40,11 +38,5 @@ public class RolesReprestn {
 	}
 	public void setChildRoleName(String childRoleName) {
 		this.childRoleName = childRoleName;
-	}
-	public String getChildRoleId() {
-		return childRoleId;
-	}
-	public void setChildRoleId(String childRoleId) {
-		this.childRoleId = childRoleId;
 	}
 }

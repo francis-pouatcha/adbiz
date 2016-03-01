@@ -16,6 +16,7 @@ public class KcloakXlsLoader {
 		dataSheetLoader.registerLoader(UserReprestn.class.getSimpleName(), new UserLoader(session,realmClient));
 		dataSheetLoader.registerLoader(UserCredentials.class.getSimpleName(), new UserCredentialsLoader(session,realmClient));
 		dataSheetLoader.registerLoader(UserClientRoles.class.getSimpleName(), new UserClientRolesLoader(session,realmClient));
+		dataSheetLoader.registerLoader(UserRealmRoles.class.getSimpleName(), new UserRealmRolesLoader(session, realmClient));
 	}
 
 	public AbstractLoader getDataSheetLoader() {

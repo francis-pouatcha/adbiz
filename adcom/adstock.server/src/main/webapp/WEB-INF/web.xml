@@ -4,6 +4,11 @@
 
     <module-name>adstock.server</module-name>
 
+    <context-param>
+        <param-name>keycloak.config.resolver</param-name>
+        <param-value>org.adorsys.adstock.boot.StkPropertiesBasedKeycloakConfigResolver</param-value>
+    </context-param>
+
     <security-constraint>
         <web-resource-collection>
         	<web-resource-name>all</web-resource-name>

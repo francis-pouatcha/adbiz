@@ -22,6 +22,12 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.adorsys.adcom</groupId>
+			<artifactId>adkcloak.adapter</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>	
+		<dependency>
 			<groupId>org.keycloak</groupId>
 			<artifactId>keycloak-core</artifactId>
 		</dependency>

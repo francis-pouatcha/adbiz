@@ -1,0 +1,9 @@
+<jboss-deployment-structure>
+    <deployment>
+        <dependencies>
+            <!-- Adorsys extension -->
+            <module name="org.adorsys.adcore.env"/>
+            <module name="org.adorsys.adcore.xls"/>
+        </dependencies>
+    </deployment>
+</jboss-deployment-structure>

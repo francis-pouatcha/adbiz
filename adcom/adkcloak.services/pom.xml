@@ -13,6 +13,13 @@
 			<groupId>org.adorsys.adcom</groupId>
 			<artifactId>adcore.xls</artifactId>
 			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.adorsys.adcom</groupId>
+			<artifactId>adcore.env</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.keycloak</groupId>
