@@ -46,18 +46,22 @@ public class CorLdrConstraintChecker extends CoreAbstLoader<CorLdrJobCstr>{
 	@Override
 	public CorLdrJobCstr save(CorLdrJobCstr cstr, List<PropertyDesc> fields) {
 		if(StringUtils.isBlank(cstr.getCntnrIdentif()) || StringUtils.isBlank(cstr.getEntIdentif())) return cstr;
-		Long count = stepLookup.countByCntnrIdentifAndEntIdentif(cstr.getCntnrIdentif(), cstr.getEntIdentif());
-		if(count<=0) return null;
+		LOG.info(cstr.getCstrDetail() +  " : Checking constraints : " + cstr.getEntIdentif());
+		Long count = stepLookup.countByEntIdentif(cstr.getEntIdentif());
+		if(count<=0) {
+			LOG.info(cstr.getCstrDetail() +  " : No constraint found for : " + cstr.getEntIdentif());
+			return null;
+		}
 		int processed = 0;
 		int max = 100;
 		while(processed<count){
 			int start = processed;
 			processed+=max;
-			List<CorLdrStep> steps = stepLookup.findByCntnrIdentifAndEntIdentif(cstr.getCntnrIdentif(), cstr.getEntIdentif(), start, max);
+			List<CorLdrStep> steps = stepLookup.findByEntIdentif(cstr.getEntIdentif(), start, max);
 			for (CorLdrStep corLdrStep : steps) {
-				LOG.info(cstr.getCstrDetail() +  " : Checking constraints : " + corLdrStep.getCntnrIdentif() + " - " + corLdrStep.getEntIdentif());
+				LOG.info(cstr.getCstrDetail() +  " : Checking constraints : " + corLdrStep.getEntIdentif());
 				if(corLdrStep.getEnded()==null) {
-					LOG.warning(cstr.getCstrDetail() +  " : Contraining step " + corLdrStep.getCntnrIdentif() + " - " + corLdrStep.getEntIdentif() + " not yet ended. Job will wait.");
+					LOG.warning(cstr.getCstrDetail() +  " : Contraining step " + corLdrStep.getEntIdentif() + " not yet ended. Job will wait.");
 					return null;
 				}
 			}

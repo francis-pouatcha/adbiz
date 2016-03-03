@@ -27,13 +27,13 @@
             <groupId>org.keycloak</groupId>
             <artifactId>keycloak-core</artifactId>
             <scope>provided</scope>
-            <version>${keycloak.version}</version>
+            <version>${version.keycloak}</version>
         </dependency>
         <dependency>
             <groupId>org.keycloak</groupId>
             <artifactId>keycloak-adapter-core</artifactId>
             <scope>provided</scope>
-            <version>${keycloak.version}</version>
+            <version>${version.keycloak}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>

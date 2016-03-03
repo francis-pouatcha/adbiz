@@ -44,3 +44,8 @@ flashtransfer/.forge_settings
 ftclient/.forge_settings
 /storyboard/cashierAgent/.~lock.cashierAgent.ppt#
 .forge_settings
+
+zocker_runtime
+/zocker_runtime
+zocker_runtime/**
+zocker_runtime/*

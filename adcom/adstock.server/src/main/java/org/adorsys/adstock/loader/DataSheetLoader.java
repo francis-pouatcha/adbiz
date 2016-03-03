@@ -13,14 +13,12 @@ import org.adorsys.adcore.xls.StepCallback;
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 public class DataSheetLoader extends AbstractLoader {
 
-	String dataDir = "standalone/data/adcom/adstock";
-
 	@EJB
 	private CorLdrStepCallback stepCallback;
 	
 	@Override
 	public String getDir() {
-		return dataDir;
+		return getDataRoot() + "/adcom/adstock";
 	}
 
 	@Override

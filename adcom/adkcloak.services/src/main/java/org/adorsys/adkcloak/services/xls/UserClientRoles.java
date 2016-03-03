@@ -5,6 +5,8 @@ public class UserClientRoles {
 	private String username;
 	private String clientId;
 	private String roleName;
+	private String clientRealmId;
+	
 	public String getRealmId() {
 		return realmId;
 	}
@@ -28,5 +30,11 @@ public class UserClientRoles {
 	}
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
+	}
+	public String getClientRealmId() {
+		return clientRealmId;
+	}
+	public void setClientRealmId(String clientRealmId) {
+		this.clientRealmId = clientRealmId;
 	}
 }

@@ -13,10 +13,11 @@ import org.jboss.resteasy.core.Dispatcher;
 import org.keycloak.services.resources.KeycloakApplication;
 
 public class AdKeycloakApplication extends KeycloakApplication {
-    private static final Logger log = Logger.getLogger(AdKeycloakApplication.class);
+    private static final Logger LOG = Logger.getLogger(AdKeycloakApplication.class);
 
 	public AdKeycloakApplication(@Context ServletContext context, @Context Dispatcher dispatcher) {
 		super(context, dispatcher);
+		LOG.info("Loading initial application realm...");
 		InitialXlsLoad.loadApplicationRealm(sessionFactory, contextPath);
 
 		try {
@@ -25,7 +26,7 @@ public class AdKeycloakApplication extends KeycloakApplication {
 			throw new IllegalStateException(e);
 		}
 
-		log.info("Initial application realm loaded.");
+		LOG.info("Initial application realm loaded.");
 	}
 
 	

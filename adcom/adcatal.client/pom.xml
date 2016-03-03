@@ -10,13 +10,6 @@
 	<packaging>war</packaging>
 	<name>adcatal.client</name>
 	<description>Ad Catalogue Client</description>
-	<dependencies>
-		<dependency>
-			<groupId>org.adorsys.adcom</groupId>
-			<artifactId>adres.lib</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-	</dependencies>
 	<build>
 		<finalName>adcatal.client</finalName>
 		<plugins>

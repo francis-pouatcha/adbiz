@@ -14,16 +14,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.adorsys.adcom</groupId>
-			<artifactId>adcore.xls</artifactId>
-			<version>${project.version}</version>
-		</dependency>	
-		<dependency>
-			<groupId>org.adorsys.adcom</groupId>
-			<artifactId>adcore.lib</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.adorsys.adcom</groupId>
 			<artifactId>adprocmt.lib</artifactId>
 			<version>${project.version}</version>
 		</dependency>

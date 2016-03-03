@@ -4,10 +4,10 @@ import org.adorsys.adcore.xls.AbstractLoader;
 import org.adorsys.adcore.xls.StepCallback;
 
 public class DataSheetLoader extends AbstractLoader {
-
+	
 	@Override
 	public String getDir() {
-		return System.getProperty("jboss.data.dir", "standalone/data");
+		return getDataRoot();
 	}
 
 	@Override

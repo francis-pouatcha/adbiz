@@ -10,13 +10,6 @@
 	<packaging>war</packaging>
 	<name>adprocmt.client</name>
 	<description>Ad Procmt Client</description>
-    <dependencies>
-        <dependency>
-            <groupId>org.adorsys.adcom</groupId>
-            <artifactId>adres.lib</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-    </dependencies>
 	<build>
 		<finalName>adprocmt.client</finalName>
 		<plugins>

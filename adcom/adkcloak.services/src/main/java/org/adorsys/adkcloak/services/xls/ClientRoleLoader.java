@@ -30,8 +30,8 @@ public class ClientRoleLoader extends CoreAbstModelLoader<ClientRoleReprestn> {
 	@Override
 	protected ClientRoleReprestn lookup(Object identif) {
 		try {
-			ClientRoleReprestn id = (ClientRoleReprestn) identif;
-			return realmClient.findClientRole(id.getRealmId(), id.getClientId(),id.getName());
+			ClientRoleReprestn clientRoleRep = (ClientRoleReprestn) identif;
+			return realmClient.findClientRole(clientRoleRep.getRealmId(), clientRoleRep.getClientId(),clientRoleRep.getName());
 		} catch (Failure e) {
 			throw new IllegalStateException(e);
 		}
