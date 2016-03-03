@@ -73,6 +73,8 @@
                 'StockSection.wharehouse.title':'Wharehouse',
                 'StockSection.title':'Section',
                 'StockSections.title':'Sections',
+                'StkSection_parentCode_description.title':'Parent Section Code',
+                'StockSection_type.title':'Section Type',
 
 
                 //--------------StkMvnt----------------//
@@ -190,6 +192,8 @@
                 'StockSection.wharehouse.title':'Magasin',
                 'StockSection.title':'Section',
                 'StockSections.title':'Sections',
+                'StkSection_parentCode_description.title':'Parent Code Rayon',
+                'StockSection_type.title':'Type Section',
 
                 //--------------StkMvnt----------------//
                 'StkMvnt.code.title':'Code Mvnt de Stock',

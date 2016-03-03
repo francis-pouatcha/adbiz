@@ -5,8 +5,8 @@
         .module('app.stkSection')
         .factory('StkSectionForm', factory);
 
-    factory.$inject = ['$translate'];
-    function factory($translate) {
+    factory.$inject = ['$translate','sectionUtil'];
+    function factory($translate,sectionUtil) {
 
         var getFormFields = function(disabled) {
             var fields = [
@@ -32,6 +32,43 @@
                                 disabled:disabled,
                                 required:true
                             }
+                        }
+                    ]
+                },
+                {
+                    className: 'row',
+                    fieldGroup: [
+                        {
+                            className: 'col-xs-6',
+                            type: 'typeahead',
+                            key: 'cntnrIdentif',
+                            templateOptions: {
+                                label: $translate.instant('StkSection_parentCode_description.title'),
+                                disabled:disabled,
+                                options:function(value){
+                                    return sectionUtil.loadSectionsBySectionName(value);
+                                }
+                            }
+                        },
+                        {
+                            className: 'col-xs-6',
+                            type: 'select',
+                            key: 'sectionType',
+                            templateOptions: {
+                                label: $translate.instant('StockSection_type.title'),
+                                disabled:disabled,
+                                options:[
+                                    {'name':'SITE','value':'SITE'},
+                                    {'name':'BUILDING','value':'BUILDING'},
+                                    {'name':'WHAREHOUSE','value':'WHAREHOUSE'},
+                                    {'name':'HALL','value':'HALL'},
+                                    {'name':'BLOCK','value':'BLOCK'},
+                                    {'name':'AISLE','value':'AISLE'},
+                                    {'name':'BIN','value':'BIN'},
+                                    {'name':'POSITION','value':'POSITION'}
+                                ]
+                            }
+
                         }
                     ]
                 },
@@ -68,6 +105,15 @@
                             templateOptions: {
                                 label: $translate.instant('StockSection.position.title'),
                                 disabled: disabled
+                            }
+                        },
+                        {
+                            className: 'col-xs-6',
+                            type: 'input',
+                            key: 'path',
+                            templateOptions: {
+                                label: 'path',
+                                disabled:true
                             }
                         }
                     ]

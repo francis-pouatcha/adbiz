@@ -40,4 +40,34 @@
         return $resource(API_URL, params, actions);
     }
 
+    angular
+        .module('app.stkSection')
+        .factory('sectionUtil', sectionUtil);
+
+    sectionUtil.$inject = ['genericResource', 'BASE_SERVER'];
+    /* @ngInject */
+    function sectionUtil(genericResource, BASE_SERVER) {
+
+        var service = {};
+
+       var stksectionsUrlBase=BASE_SERVER+'/adstock.server/rest/stksections';
+
+        service.loadSectionsBySectionCode = function(identif){
+            return genericResource.findByLikePromissed(stksectionsUrlBase, 'identif', identif, 'org.adorsys.adstock.jpa.StkSection')
+                .then(function(entitySearchResult){
+                    return entitySearchResult.resultList;
+                });
+        };
+
+        service.loadSectionsBySectionName = function(sectionName){
+            return genericResource.findByLikePromissed(stksectionsUrlBase, 'name', sectionName, 'org.adorsys.adstock.jpa.StkSection')
+                .then(function(entitySearchResult){
+                    return entitySearchResult.resultList;
+                });
+        };
+
+        return service;
+
+    }
+
 })();
