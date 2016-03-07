@@ -2,26 +2,29 @@
 (function() {
     'use strict';
 
+    var BaseUrl = 'http://localhost:8080';
+
     angular
         .module('app.core')
         .constant('toastr', toastr)
         .constant('moment', moment)
         .constant('BASE_ROUTE', '/addashboard.client')
-        .constant('BASE_SERVER', 'http://localhost:8080')
 
-        .constant('API_BASE_URL', 'http://localhost:8080/adcatal.server/rest')
+        .constant('BASE_SERVER', BaseUrl)
+
+        .constant('API_BASE_URL', BaseUrl+'/adcatal.server/rest')
         .constant('BASE_VIEW', '/adcatal.client/src/client')
 
         .constant('BASE_ROUTE_DASHBOARD', '/addashboard.client')
 
 
-        .constant('API_BASE_ADINVTRY_URL', 'http://localhost:8080/adinvtry.server/rest')
+        .constant('API_BASE_ADINVTRY_URL', BaseUrl+'/adinvtry.server/rest')
 
-        .constant('API_BASE_ADPROCMT_URL', 'http://localhost:8080/adprocmt.server/rest')
-        .constant('API_BASE_SALES_URL', 'http://localhost:8080/adsales.server/rest')
+        .constant('API_BASE_ADPROCMT_URL', BaseUrl+'/adprocmt.server/rest')
+        .constant('API_BASE_SALES_URL', BaseUrl+'/adsales.server/rest')
 
 
         .constant('BASE_VIEW_STOCK', '/adstock.client/src/client')
-        .constant('API_BASE_ADSTOCK_URL', 'http://localhost:8080/adstock.server/rest');
+        .constant('API_BASE_ADSTOCK_URL', BaseUrl+'/adstock.server/rest');
 
 })();

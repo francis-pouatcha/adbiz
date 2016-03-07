@@ -130,7 +130,7 @@
         formlyConfig.setType({
             name: 'typeahead',
             template: '<input type="text" ng-model="model[options.key]" typeahead-min-length="2"' +
-                'typeahead="item.identif  for item in to.options($viewValue) | limitTo:8" ' +
+                'typeahead="item as item.name for item in to.options($viewValue) | limitTo:8" ' +
                 'class="form-control">',
             wrapper: ['bootstrapLabel', 'bootstrapHasError']
         });

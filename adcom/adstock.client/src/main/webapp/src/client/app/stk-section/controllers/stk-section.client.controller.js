@@ -44,6 +44,12 @@
         }
         
         vm.create = function() {
+
+            //vm.stkSection.path = vm.stkSection.cntnrIdentif.path+"/"+vm.stkSection.name;
+            if(vm.stkSection.cntnrIdentif){
+                vm.stkSection.cntnrIdentif = vm.stkSection.cntnrIdentif.identif;
+            }
+
             // Create new StkSection object
             var stkSection = new StkSection(vm.stkSection);
 
