@@ -5,10 +5,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -100,7 +101,12 @@ public abstract class CoreAbstLoader<T extends Object> {
 			String propertyTypeName = propertyType.getName();
 			Converter converter = xlsConverterFactory.findConverter(propertyTypeName);
 			if(converter==null) continue;
-			PropertyDesc propertyDesc = new PropertyDesc(propertyName, i, converter);
+			PropertyDesc propertyDesc = null;
+			if(StringUtils.equals(Boolean.class.getName(), propertyTypeName)){
+				propertyDesc = new PropertyDesc(propertyName, i, converter, new BooleanComparator());
+			} else {
+				propertyDesc = new PropertyDesc(propertyName, i, converter);
+			}
 			resultList.add(propertyDesc);
 		}
 		return resultList;
@@ -110,13 +116,17 @@ public abstract class CoreAbstLoader<T extends Object> {
 		// do not compare validFrom and validTo
 		for (PropertyDesc propertyDesc : fields) {
 			String propertyName = propertyDesc.getName();
-			try {
-				Object srcProp = PropertyUtils.getProperty(src, propertyName);
-				Object destProp = PropertyUtils.getProperty(dest, propertyName);
-				if(!ObjectUtils.equals(srcProp, destProp)) return false;
-			} catch (IllegalAccessException | InvocationTargetException
-					| NoSuchMethodException e) {
-				throw new IllegalStateException(e);
+			if(propertyDesc.getPropertyComparator()!=null){
+				if(!propertyDesc.getPropertyComparator().objectEquals(src, dest, propertyName)) return false;
+			} else {
+				try {
+					Object srcProp = PropertyUtils.getProperty(src, propertyName);
+					Object destProp = PropertyUtils.getProperty(dest, propertyName);
+					if(!Objects.equals(srcProp, destProp)) return false;
+				} catch (IllegalAccessException | InvocationTargetException
+						| NoSuchMethodException e) {
+					throw new IllegalStateException(e);
+				}
 			}
 		}
 		return true;
