@@ -75,4 +75,4 @@ else
 fi
 
 echo "             Starting jboss"
-cd $JBOSS_HOME && bin/standalone.sh --debug --server-config=standalone-keycloak-$DB.xml --properties=$DIST_HOME/adcom-env-localhost.properties
+cd $JBOSS_HOME && bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0 --debug --server-config=standalone-keycloak-$DB.xml --properties=$DIST_HOME/adcom-env-localhost.properties

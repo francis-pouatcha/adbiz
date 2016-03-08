@@ -15,7 +15,8 @@
     },
 
     "realm": {
-        "provider": "jpa"
+        "provider": "jpa",
+        "ssl-required" : "none"
     },
 
     "user": {
