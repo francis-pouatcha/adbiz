@@ -43,6 +43,12 @@
 				</authorization>
 			</security-realm>
 			<security-realm name="ApplicationRealm">
+				<server-identities>
+					<ssl>
+						<keystore path="adcom.keystore" relative-to="jboss.server.config.dir"
+							keystore-password="changeit" alias="adcom" key-password="changeit" />
+					</ssl>
+				</server-identities>
 				<authentication>
 					<local default-user="$local" allowed-users="*"
 						skip-group-loading="true" />
@@ -268,7 +274,7 @@
 				<local-cache name="realms" />
 				<local-cache name="users" />
 				<local-cache name="sessions" />
-				<local-cache name="offlineSessions"/>
+				<local-cache name="offlineSessions" />
 				<local-cache name="loginFailures" />
 			</cache-container>
 			<cache-container name="server" default-cache="default"
@@ -413,6 +419,7 @@
 			<server name="default-server">
 				<http-listener name="default" socket-binding="http"
 					redirect-socket="https" />
+				<https-listener name="httpsServer" socket-binding="https" security-realm="ApplicationRealm"/>
 				<host name="default-host" alias="localhost">
 					<location name="/" handler="welcome-content" />
 					<filter-ref name="server-header" />

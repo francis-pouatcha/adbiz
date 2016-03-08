@@ -3,7 +3,7 @@
     "resource": "${client.id}",
     "realm-public-key": "${realm-public-key}",
     "auth-server-url": "${auth-server-url}",
-    "ssl-required" : "external",
+    "ssl-required" : "none",
     "expose-token": true,
     "credentials": {
         "secret": "${client.secret}"
