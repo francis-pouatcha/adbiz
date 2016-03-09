@@ -95,21 +95,21 @@
         .module('app.invinvtry')
         .factory('invInvtryUtils', invInvtryUtils);
 
-    invInvtryUtils.$inject = ['$translate','genericResource','API_BASE_URL', 'BASE_SERVER'];
+    invInvtryUtils.$inject = ['$translate','genericResource','API_BASE_ADINVTRY_URL'];
     /* @ngInject */
-    function invInvtryUtils($translate, genericResource, API_BASE_URL, BASE_SERVER) {
+    function invInvtryUtils($translate, genericResource, API_BASE_ADINVTRY_URL, genericResource) {
 
         var service = {};
 
-        service.inventoryManagerUrlBase = API_BASE_URL + "/inventory";
-        service.urlBase= API_BASE_URL + '/invinvtrys';
-        service.invinvtrysUrlBase= BASE_SERVER+ '/adinvtry.server/rest/invinvtryitems';
-        service.stksectionsUrlBase=BASE_SERVER+'/adstock.server/rest/stksections';
-        service.stkarticlelotsUrlBase=BASE_SERVER+'/adstock.server/rest/stkarticlelots';
-        service.catalarticlesUrlBase=BASE_SERVER+'/adcatal.server/rest/catalarticles'
-        service.catalartfeatmappingsUrlBase=BASE_SERVER+'/adcatal.server/rest/catalartfeatmappings';
-        service.loginnamessUrlBase=BASE_SERVER+'/adbase.server/rest/loginnamess';
-        service.stkarticlelot2strgsctnsUrlBase=BASE_SERVER+'/adstock.server/rest/stkarticlelot2strgsctns';
+        service.inventoryManagerUrlBase = API_BASE_ADINVTRY_URL + "/inventory";
+        service.urlBase= API_BASE_ADINVTRY_URL + '/invinvtrys';
+        service.invinvtrysUrlBase=  '/adinvtry.server/rest/invinvtryitems';
+        service.stksectionsUrlBase='/adstock.server/rest/stksections';
+        service.stkarticlelotsUrlBase='/adstock.server/rest/stkarticlelots';
+        service.catalarticlesUrlBase='/adcatal.server/rest/catalarticles'
+        service.catalartfeatmappingsUrlBase='/adcatal.server/rest/catalartfeatmappings';
+        service.loginnamessUrlBase='/adbase.server/rest/loginnamess';
+        service.stkarticlelot2strgsctnsUrlBase='/adstock.server/rest/stkarticlelot2strgsctns';
         service.alphabet = "abcdefghijklmnopqrstuvwxyz";
 
         service.invInvtryTypeI18nMsgTitleKey = function(enumKey){

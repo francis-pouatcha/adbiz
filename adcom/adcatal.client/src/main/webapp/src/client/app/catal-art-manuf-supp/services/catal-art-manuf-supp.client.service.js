@@ -5,9 +5,9 @@
         .module('app.catalArtManufSupp')
         .factory('CatalArtManufSupp', CatalArtManufSupp);
 
-    CatalArtManufSupp.$inject = ['$resource', 'API_BASE_URL'];
+    CatalArtManufSupp.$inject = ['$resource', 'API_BASE_ADCATAL_URL'];
     /* @ngInject */
-    function CatalArtManufSupp($resource, API_BASE_URL) {
+    function CatalArtManufSupp($resource, API_BASE_ADCATAL_URL) {
 
         var params = {
             catalArtManufSuppId: '@id'
@@ -19,11 +19,11 @@
             },
             findBy: {
                 method: 'POST',
-                url: API_BASE_URL + '/catalartmanufsupps/findBy'
+                url: API_BASE_ADCATAL_URL + '/catalartmanufsupps/findBy'
             }
         };
 
-        var API_URL = API_BASE_URL + '/catalartmanufsupps/:catalArtManufSuppId';
+        var API_URL = API_BASE_ADCATAL_URL + '/catalartmanufsupps/:catalArtManufSuppId';
 
         return $resource(API_URL, params, actions);
 

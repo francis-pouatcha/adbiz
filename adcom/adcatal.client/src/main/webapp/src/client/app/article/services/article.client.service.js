@@ -5,9 +5,9 @@
         .module('app.article')
         .factory('Article', Article);
 
-    Article.$inject = ['$resource', 'API_BASE_URL'];
+    Article.$inject = ['$resource', 'API_BASE_ADCATAL_URL'];
     /* @ngInject */
-    function Article($resource, API_BASE_URL) {
+    function Article($resource, API_BASE_ADCATAL_URL) {
 
         var params = {
             articleId: '@id'
@@ -20,15 +20,15 @@
             },
             findByLike: {
                 method: 'POST',
-                url: API_BASE_URL + '/catalarticles/findByLike'
+                url: API_BASE_ADCATAL_URL + '/catalarticles/findByLike'
             },
             findCustom:{
                 method: 'POST',
-                url: API_BASE_URL + '/catalarticles/findCustom'
+                url: API_BASE_ADCATAL_URL + '/catalarticles/findCustom'
             },
             listAll:{
                 method: 'GET',
-                url: API_BASE_URL + '/catalarticles',
+                url: API_BASE_ADCATAL_URL + '/catalarticles',
                 params:{
                     start: -1,
                     max: 20
@@ -36,7 +36,7 @@
             }
         };
 
-        var API_URL = API_BASE_URL + '/catalarticles/:articleId';
+        var API_URL = API_BASE_ADCATAL_URL + '/catalarticles/:articleId';
 
         return $resource(API_URL, params, actions);
 

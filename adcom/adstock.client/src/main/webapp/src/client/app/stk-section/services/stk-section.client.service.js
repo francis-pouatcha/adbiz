@@ -44,13 +44,13 @@
         .module('app.stkSection')
         .factory('sectionUtil', sectionUtil);
 
-    sectionUtil.$inject = ['genericResource', 'BASE_SERVER'];
+    sectionUtil.$inject = ['genericResource'];
     /* @ngInject */
-    function sectionUtil(genericResource, BASE_SERVER) {
+    function sectionUtil(genericResource, genericResource) {
 
         var service = {};
 
-       var stksectionsUrlBase=BASE_SERVER+'/adstock.server/rest/stksections';
+       var stksectionsUrlBase='/adstock.server/rest/stksections';
 
         service.loadSectionsBySectionCode = function(identif){
             return genericResource.findByLikePromissed(stksectionsUrlBase, 'identif', identif, 'org.adorsys.adstock.jpa.StkSection')

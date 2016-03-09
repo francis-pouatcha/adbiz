@@ -96,11 +96,11 @@
     });
     /* jshint ignore:start */
     /* @ngInject */
-    appModule.controller('GlobalController', function($rootScope, Auth, BASE_ROUTE, BASE_SERVER) {
+    appModule.controller('GlobalController', function($rootScope, Auth, BASE_ROUTE, genericResource) {
         var vm = this;
         vm.logout = logout;
         vm.BASE_ROUTE = BASE_ROUTE;
-        vm.BASE_SERVER = BASE_SERVER;
+        vm.urlBase = genericResource.urlBase;
 
         if (Auth.authz) {
             if (Auth.authz.idToken) {

@@ -6,7 +6,7 @@
 
     <context-param>
         <param-name>keycloak.config.resolver</param-name>
-        <param-value>org.adorsys.adstock.boot.StkPropertiesBasedKeycloakConfigResolver</param-value>
+        <param-value>org.adorsys.adstock.boot.StkKeycloakConfigResolver</param-value>
     </context-param>
 
     <security-constraint>

@@ -186,8 +186,13 @@
 
     angular
         .module('app.core')
-        .factory('genericResource',['$http','$q', function($http,$q){
+        .factory('genericResource',['$http','$q','$location', function($http,$q,$location){
             var service = {};
+
+    		service.urlBase = function(){
+    			var portStr = ($location.port()=='80'||location.port()=='443'?'':':'+$location.port())
+    			return $location.protocol() + '://' + $location.host() + portStr;    			
+    		};
 
             service.create = function(urlBase, entity){
                 return $http.post(urlBase,entity);

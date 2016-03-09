@@ -5,9 +5,9 @@
         .module('app.catalArtEquivalence')
         .factory('CatalArtEquivalence', CatalArtEquivalence);
 
-    CatalArtEquivalence.$inject = ['$resource', 'API_BASE_URL'];
+    CatalArtEquivalence.$inject = ['$resource', 'API_BASE_ADCATAL_URL'];
     /* @ngInject */
-    function CatalArtEquivalence($resource, API_BASE_URL) {
+    function CatalArtEquivalence($resource, API_BASE_ADCATAL_URL) {
 
         var params = {
             catalArtEquivalenceId: '@id'
@@ -19,11 +19,11 @@
             },
             findBy: {
                 method: 'POST',
-                url: API_BASE_URL + '/catalartequivalences/findBy'
+                url: API_BASE_ADCATAL_URL + '/catalartequivalences/findBy'
             }
         };
 
-        var API_URL = API_BASE_URL + '/catalartequivalences/:catalArtEquivalenceId';
+        var API_URL = API_BASE_ADCATAL_URL + '/catalartequivalences/:catalArtEquivalenceId';
 
         return $resource(API_URL, params, actions);
 

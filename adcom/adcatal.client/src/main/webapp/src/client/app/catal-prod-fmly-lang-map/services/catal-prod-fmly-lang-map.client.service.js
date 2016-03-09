@@ -5,9 +5,9 @@
         .module('app.catalProdFmlyLangMap')
         .factory('CatalProdFmlyLangMap', CatalProdFmlyLangMap);
 
-    CatalProdFmlyLangMap.$inject = ['$resource', 'API_BASE_URL'];
+    CatalProdFmlyLangMap.$inject = ['$resource', 'API_BASE_ADCATAL_URL'];
     /* @ngInject */
-    function CatalProdFmlyLangMap($resource, API_BASE_URL) {
+    function CatalProdFmlyLangMap($resource, API_BASE_ADCATAL_URL) {
 
         var params = {
             catalProdFmlyLangMapId: '@id'
@@ -19,11 +19,11 @@
             },
             findBy: {
                 method: 'POST',
-                url: API_BASE_URL + '/catalfamilyfeatmapings/findBy'
+                url: API_BASE_ADCATAL_URL + '/catalfamilyfeatmapings/findBy'
             }
         };
 
-        var API_URL = API_BASE_URL + '/catalfamilyfeatmapings/:catalProdFmlyLangMapId';
+        var API_URL = API_BASE_ADCATAL_URL + '/catalfamilyfeatmapings/:catalProdFmlyLangMapId';
 
         return $resource(API_URL, params, actions);
 

@@ -89,12 +89,12 @@
 
     /* @ngInject */
     appModule.config(function ($httpProvider, $locationProvider,
-                               flowFactoryProvider, API_BASE_URL) {
+                               flowFactoryProvider, API_BASE_ADCATAL_URL) {
         $httpProvider.interceptors.push('errorInterceptor');
         $httpProvider.interceptors.push('authInterceptor');
         //$locationProvider.html5Mode(false);
         flowFactoryProvider.defaults = {
-            target: API_BASE_URL + '/importExport/upload',
+            target: API_BASE_ADCATAL_URL + '/importExport/upload',
             permanentErrors: [404, 500, 501],
             maxChunkRetries: 1,
             chunkRetryInterval: 5000,
@@ -114,11 +114,11 @@
     });
     /* jshint ignore:start */
     /* @ngInject */
-    appModule.controller('GlobalController', function ($rootScope, Auth, BASE_ROUTE, BASE_SERVER) {
+    appModule.controller('GlobalController', function ($rootScope, Auth, BASE_ROUTE, genericResource) {
         var vm = this;
         vm.logout = logout;
         vm.BASE_ROUTE = BASE_ROUTE;
-        vm.BASE_SERVER = BASE_SERVER;
+        vm.urlBase = genericResource.urlBase;
 
         if (Auth.authz) {
             if (Auth.authz.idToken) {

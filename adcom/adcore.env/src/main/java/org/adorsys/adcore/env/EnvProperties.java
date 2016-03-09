@@ -103,12 +103,14 @@ public class EnvProperties {
 	private static String replaceStyle1(String env, Map<String, String> context, Set<String> resolving, String propertyName, String propertyValue){
 		resolving.remove(propertyName);
 		context.put(propertyName, propertyValue);
+		if(StringUtils.isBlank(propertyValue)) return env;
 		return StringUtils.replace(env, "${"+propertyName+"}", propertyValue);
 	}
 	
 	private static String replaceStyle2(String env, Map<String, String> context, Set<String> resolving, String propertyName, String propertyValue){
 		resolving.remove(propertyName);
 		context.put(propertyName, propertyValue);
+		if(StringUtils.isBlank(propertyValue)) return env;
 		return StringUtils.replace(env, "$"+propertyName, propertyValue);
 	}
 	private static boolean hasProperties(String env){

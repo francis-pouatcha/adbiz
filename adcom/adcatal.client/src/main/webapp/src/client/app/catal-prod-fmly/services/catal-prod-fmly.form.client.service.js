@@ -5,12 +5,12 @@
         .module('app.catalProdFmly')
         .factory('CatalProdFmlyForm', factory);
 
-    factory.$inject = ['$translate','API_BASE_URL', 'genericResource'];
+    factory.$inject = ['$translate','API_BASE_ADCATAL_URL', 'genericResource'];
     /* @ngInject */
-    function factory($translate,API_BASE_URL,genericResource) {
+    function factory($translate,API_BASE_ADCATAL_URL,genericResource) {
 
         function getCatlProdFmlys(viewValue){
-            return genericResource.findByLikePromissed(API_BASE_URL+'/catalproductfamilys',
+            return genericResource.findByLikePromissed(API_BASE_ADCATAL_URL+'/catalproductfamilys',
                 'identif', viewValue, 'org.adorsys.adcatal.jpa.CatalProdFmlySearchInput')
                 .then(function(entitySearchResult){
                     return entitySearchResult.resultList;

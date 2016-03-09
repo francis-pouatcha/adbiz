@@ -5,9 +5,9 @@
         .module('app.catalArtLangMapping')
         .factory('CatalArtLangMapping', CatalArtLangMapping);
 
-    CatalArtLangMapping.$inject = ['$resource', 'API_BASE_URL'];
+    CatalArtLangMapping.$inject = ['$resource', 'API_BASE_ADCATAL_URL'];
     /* @ngInject */
-    function CatalArtLangMapping($resource, API_BASE_URL) {
+    function CatalArtLangMapping($resource, API_BASE_ADCATAL_URL) {
 
         var params = {
             catalArtLangMappingId: '@id'
@@ -19,11 +19,11 @@
             },
             findBy: {
                 method: 'POST',
-                url: API_BASE_URL + '/catalartfeatmappings/findBy'
+                url: API_BASE_ADCATAL_URL + '/catalartfeatmappings/findBy'
             }
         };
 
-        var API_URL = API_BASE_URL + '/catalartfeatmappings/:catalArtLangMappingId';
+        var API_URL = API_BASE_ADCATAL_URL + '/catalartfeatmappings/:catalArtLangMappingId';
 
         return $resource(API_URL, params, actions);
 

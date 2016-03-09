@@ -5,9 +5,9 @@
         .module('app.catalProdFmly')
         .factory('CatalProdFmly', CatalProdFmly);
 
-    CatalProdFmly.$inject = ['$resource', 'API_BASE_URL'];
+    CatalProdFmly.$inject = ['$resource', 'API_BASE_ADCATAL_URL'];
     /* @ngInject */
-    function CatalProdFmly($resource, API_BASE_URL) {
+    function CatalProdFmly($resource, API_BASE_ADCATAL_URL) {
 
         var params = {
             catalProdFmlyId: '@id'
@@ -19,15 +19,15 @@
             },
             findByLike: {
                 method: 'POST',
-                url: API_BASE_URL + '/catalproductfamilys/findByLike'
+                url: API_BASE_ADCATAL_URL + '/catalproductfamilys/findByLike'
             },
             findCustom:{
                 method: 'POST',
-                url: API_BASE_URL + '/catalproductfamilys/findCustom'
+                url: API_BASE_ADCATAL_URL + '/catalproductfamilys/findCustom'
             }
         };
 
-        var API_URL = API_BASE_URL + '/catalproductfamilys/:catalProdFmlyId';
+        var API_URL = API_BASE_ADCATAL_URL + '/catalproductfamilys/:catalProdFmlyId';
 
         return $resource(API_URL, params, actions);
 

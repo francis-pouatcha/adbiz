@@ -5,9 +5,9 @@
         .module('app.catalArtDetailConfig')
         .factory('CatalArtDetailConfig', CatalArtDetailConfig);
 
-    CatalArtDetailConfig.$inject = ['$resource', 'API_BASE_URL'];
+    CatalArtDetailConfig.$inject = ['$resource', 'API_BASE_ADCATAL_URL'];
     /* @ngInject */
-    function CatalArtDetailConfig($resource, API_BASE_URL) {
+    function CatalArtDetailConfig($resource, API_BASE_ADCATAL_URL) {
 
         var params = {
             catalArtDetailConfigId: '@id'
@@ -19,11 +19,11 @@
             },
             findBy: {
                 method: 'POST',
-                url: API_BASE_URL + '/catalartdetailconfigs/findBy'
+                url: API_BASE_ADCATAL_URL + '/catalartdetailconfigs/findBy'
             }
         };
 
-        var API_URL = API_BASE_URL + '/catalartdetailconfigs/:catalArtDetailConfigId';
+        var API_URL = API_BASE_ADCATAL_URL + '/catalartdetailconfigs/:catalArtDetailConfigId';
 
         return $resource(API_URL, params, actions);
 

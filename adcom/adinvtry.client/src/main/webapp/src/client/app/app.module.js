@@ -93,11 +93,11 @@
     });
     /* jshint ignore:start */
     /* @ngInject */
-    appModule.controller('GlobalController', function($rootScope, Auth, BASE_ROUTE, BASE_SERVER) {
+    appModule.controller('GlobalController', function($rootScope, Auth, BASE_ROUTE, genericResource) {
         var vm = this;
         vm.logout = logout;
         vm.BASE_ROUTE = BASE_ROUTE;
-        vm.BASE_SERVER = BASE_SERVER;
+        vm.urlBase = genericResource.urlBase;
 
         if (Auth.authz) {
             if (Auth.authz.idToken) {
@@ -119,15 +119,15 @@
 
        /* $rootScope.reportLink = [
             {
-                link:BASE_SERVER+'/adreport.server/frameset?__report=invintry.rptdesign',
+                link:genericResource.urlBase()+'/adreport.server/frameset?__report=invintry.rptdesign',
                 name:'Rapport Fiche Comptage 1'
             },
             {
-                link:BASE_SERVER+'/adreport.server/frameset?__report=invintry2.rptdesign',
+                link:genericResource.urlBase()+'/adreport.server/frameset?__report=invintry2.rptdesign',
                 name:'Rapport Fiche Comptage 2'
             },
             {
-                link:BASE_SERVER+'/adreport.server/frameset?__report=invintry3.rptdesign',
+                link:genericResource.urlBase()+'/adreport.server/frameset?__report=invintry3.rptdesign',
                 name:'Rapport Fiche Inventaire'
             }
         ];*/

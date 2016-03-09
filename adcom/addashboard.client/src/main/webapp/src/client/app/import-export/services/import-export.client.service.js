@@ -5,9 +5,9 @@
         .module('app.importExport')
         .factory('ImportExport', ImportExport);
 
-    ImportExport.$inject = ['$resource', 'API_BASE_URL'];
+    ImportExport.$inject = ['$resource', 'API_BASE_ADCATAL_URL'];
     /* @ngInject */
-    function ImportExport($resource, API_BASE_URL) {
+    function ImportExport($resource, API_BASE_ADCATAL_URL) {
 
         var params = {
             importExportId: '@id',
@@ -20,12 +20,12 @@
             },
             export: {
                 method: 'POST',
-                url: API_BASE_URL + '/importExport/download/:xlsType',
+                url: API_BASE_ADCATAL_URL + '/importExport/download/:xlsType',
                 responseType: 'ArrayBuffer'
             }
         };
 
-        var API_URL = API_BASE_URL + '/importExport/:importExportId';
+        var API_URL = API_BASE_ADCATAL_URL + '/importExport/:importExportId';
 
         return $resource(API_URL, params, actions);
 

@@ -5,9 +5,9 @@
         .module('app.bpbnsptnr')
         .factory('Bpbnsptnr', Bpbnsptnr);
 
-    Bpbnsptnr.$inject = ['$resource', 'API_BASE_URL'];
+    Bpbnsptnr.$inject = ['$resource','API_BASE_ADBNSPTNR_URL'];
     /* @ngInject */
-    function Bpbnsptnr($resource, API_BASE_URL) {
+    function Bpbnsptnr($resource, API_BASE_ADBNSPTNR_URL) {
 
         var params = {
             bpbnsptnrId: '@id'
@@ -19,9 +19,7 @@
             }
         };
 
-        var API_URL = API_BASE_URL + '/bpbnsptnr/:bpbnsptnrId';
-
-        return $resource(API_URL, params, actions);
+        return $resource(API_BASE_ADBNSPTNR_URL + '/bpbnsptnr/:bpbnsptnrId', params, actions);
 
     }
 

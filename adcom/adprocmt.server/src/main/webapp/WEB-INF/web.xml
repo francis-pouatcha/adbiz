@@ -6,7 +6,7 @@
 
     <context-param>
         <param-name>keycloak.config.resolver</param-name>
-        <param-value>org.adorsys.adprocmt.boot.PrcmtPropertiesBasedKeycloakConfigResolver</param-value>
+        <param-value>org.adorsys.adprocmt.boot.PrcmtKeycloakConfigResolver</param-value>
     </context-param>
 
     <security-constraint>
