@@ -12,19 +12,13 @@ else
 
 fi
 
-# source the given configuration file
-if [ "x$1" != "x" ]; then
-. $1
-fi
+export ADCOM_DIST=adcom.configuration/target/adcom.dist
 
-export ADCOM_DIST=$CURRENT_DIR/adcom.configuration/target/adcom.dist.tar.gz
-
-if [ ! -e "$ADCOM_DIST" ]; then
+export ADCOM_DIST_FILE=$CURRENT_DIR/adcom.configuration/target/adcom.dist.tar.gz
+if [ ! -e "$ADCOM_DIST_FILE" ]; then
 	cd $CURRENT_DIR && mvn clean install
 fi
 
 export DIST_HOME=$CURRENT_DIR/$DOKCER_RUNTIME
 
-cd $DIST_HOME && tar xzf $ADCOM_DIST
-
-cd $DIST_HOME && ./docker-compose-h2.sh wf9-kc1.8-h2.conf
+cd $DIST_HOME && tar xzf $ADCOM_DIST_FILE

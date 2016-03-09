@@ -25,12 +25,21 @@
 			<unpack>true</unpack>
 			<useProjectArtifact>false</useProjectArtifact>
 			<useTransitiveDependencies>false</useTransitiveDependencies>
+			<outputDirectory>modules/system/add-ons/keycloak</outputDirectory>
+			<includes>
+				<include>org.adorsys.adcom:adkcloak.services</include>
+			</includes>
+		</dependencySet>
+		<dependencySet>
+			<scope>runtime</scope>
+			<unpack>true</unpack>
+			<useProjectArtifact>false</useProjectArtifact>
+			<useTransitiveDependencies>false</useTransitiveDependencies>
 			<outputDirectory>modules/system/layers/base</outputDirectory>
 			<includes>
 				<include>org.adorsys.adcom:adcore.xls</include>
 				<include>org.adorsys.adcom:adcore.env</include>
 				<include>org.adorsys.adcom:adkcloak.adapter</include>
-				<include>org.adorsys.adcom:adkcloak.services</include>
 			</includes>
 		</dependencySet>
 		<dependencySet>

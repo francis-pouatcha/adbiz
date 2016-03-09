@@ -1,0 +1,18 @@
+wildfly:
+  build: .
+  dockerfile: ./Dockerfile-wildfly
+  hostname: docker
+  container_name: idp-server
+  external_links:
+    - idp-db
+  ports:
+    - "8080:8080"
+    - "8787:8787"
+    - "9990:9990"
+    - "9999:9999"
+  env_file:
+    - $PWD/appdata/docker.run-env.properties
+    - $PWD/appdata/docker.run-host-docker.properties
+    - $PWD/appdata/docker.run-dbname-db2.properties
+  volumes:
+    - $PWD/appdata/:$JBOSS_HOME/standalone/appdata

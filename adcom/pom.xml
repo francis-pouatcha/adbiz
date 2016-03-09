@@ -66,8 +66,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<github.global.server>github</github.global.server>
-		<version.keycloak>1.8.1.Final</version.keycloak>
-		<version.wildfly>9.0.2.Final</version.wildfly>
+		<version.keycloak>1.9.0.Final</version.keycloak>
+		<version.wildfly>10.0.0.Final</version.wildfly>
 		<apache.httpcomponents.version>4.3.6</apache.httpcomponents.version>
 		<version.org.jboss.resteasy>3.0.6.Final</version.org.jboss.resteasy>
 		<version.hibernate>4.3.10.Final</version.hibernate>
@@ -230,7 +230,7 @@
 			</dependency>
 			<dependency>
 				<groupId>org.keycloak</groupId>
-				<artifactId>keycloak-model-api</artifactId>
+				<artifactId>keycloak-server-spi</artifactId>
 				<scope>provided</scope>
 				<version>${version.keycloak}</version>
 			</dependency>
@@ -243,12 +243,6 @@
 			<dependency>
 				<groupId>org.keycloak</groupId>
 				<artifactId>keycloak-services</artifactId>
-				<scope>provided</scope>
-				<version>${version.keycloak}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.keycloak</groupId>
-				<artifactId>keycloak-timer-api</artifactId>
 				<scope>provided</scope>
 				<version>${version.keycloak}</version>
 			</dependency>

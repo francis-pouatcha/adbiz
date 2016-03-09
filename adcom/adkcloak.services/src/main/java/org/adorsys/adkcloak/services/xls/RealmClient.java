@@ -442,7 +442,7 @@ public class RealmClient {
 			RealmProvider realmProvider = getRealmProvider(session);
 	
 			RealmModel newRealm = realmProvider.getRealm(userRep.getRealmId());
-			RepresentationToModel.createUser(session, newRealm, userRep, newRealm.getClientNameMap());
+			RepresentationToModel.createUser(session, newRealm, userRep);
 
 		} catch(RuntimeException ex){
 			session.getTransaction().rollback();

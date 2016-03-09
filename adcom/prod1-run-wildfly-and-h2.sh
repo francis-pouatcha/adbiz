@@ -2,14 +2,12 @@
 
 CURRENT_DIR=`cd "."; pwd`
 
-export ADCOM_DIST=adcom.configuration/target/adcom.dist
+cd $CURRENT_DIR && ./local-runtime-dir.sh
+export LOCAL_RUNTIME=local_runtime
+export DIST_HOME=$CURRENT_DIR/$LOCAL_RUNTIME
+cd $DIST_HOME && . wildfly-kc-versions.conf
 
-export DIST_HOME=$CURRENT_DIR/$ADCOM_DIST
-if [ ! -d "$DIST_HOME" ]; then
-	cd $CURRENT_DIR && mvn clean install
-fi
-
-. $DIST_HOME/wf9-kc1.8-h2.conf
+export DB=h2
 
 # Tools dir
 # Check TOOLS_HOME
@@ -60,11 +58,9 @@ if [ ! -d "$JBOSS_HOME" ]; then
 fi
 
 
-cd $JBOSS_HOME && tar xzf $DIST_HOME/adcom.deploy.tar.gz
+cd $JBOSS_HOME && tar xzf $DIST_HOME/zkl.idp.deploy.tar.gz
 
 cp -r $DIST_HOME/appdata $JBOSS_HOME/standalone/appdata
-
-
 
 export H2_CONSOLE_WAR=$TOOLS_HOME/h2console.war
 if [ -e "$H2_CONSOLE_WAR" ]; then
@@ -75,4 +71,5 @@ else
 fi
 
 echo "             Starting jboss"
-cd $JBOSS_HOME && bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0 --debug --server-config=standalone-keycloak-$DB.xml --properties=$DIST_HOME/adcom-env-localhost.properties
+cd $JBOSS_HOME && bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0 $DEBUG -P=$DIST_HOME/appdata/docker.run-env.properties \
+	-P=$DIST_HOME/appdata/docker.run-host-prod1.properties -P=$DIST_HOME/appdata/docker.run-dbname-h2.properties

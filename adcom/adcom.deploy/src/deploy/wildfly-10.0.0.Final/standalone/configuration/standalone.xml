@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 
-<server xmlns="urn:jboss:domain:3.0">
+<server xmlns="urn:jboss:domain:4.0">
+
 	<extensions>
 		<extension module="org.jboss.as.clustering.infinispan" />
 		<extension module="org.jboss.as.connector" />
@@ -22,15 +23,16 @@
 		<extension module="org.jboss.as.transactions" />
 		<extension module="org.jboss.as.webservices" />
 		<extension module="org.jboss.as.weld" />
-		<extension module="org.keycloak.keycloak-server-subsystem" />
-		<extension module="org.wildfly.extension.batch" />
+		<extension module="org.wildfly.extension.batch.jberet" />
 		<extension module="org.wildfly.extension.bean-validation" />
 		<extension module="org.wildfly.extension.io" />
 		<extension module="org.wildfly.extension.request-controller" />
 		<extension module="org.wildfly.extension.security.manager" />
 		<extension module="org.wildfly.extension.undertow" />
+		<extension module="org.keycloak.keycloak-server-subsystem" />
 		<extension module="org.keycloak.keycloak-adapter-subsystem" />
 	</extensions>
+
 	<management>
 		<security-realms>
 			<security-realm name="ManagementRealm">
@@ -67,7 +69,7 @@
 			</formatters>
 			<handlers>
 				<file-handler name="file" formatter="json-formatter"
-					relative-to="jboss.server.data.dir" path="audit-log.log" />
+					path="audit-log.log" relative-to="jboss.server.data.dir" />
 			</handlers>
 			<logger log-boot="true" log-read-only="false" enabled="false">
 				<handlers>
@@ -91,6 +93,7 @@
 			</role-mapping>
 		</access-control>
 	</management>
+
 	<profile>
 		<subsystem xmlns="urn:jboss:domain:logging:3.0">
 			<console-handler name="CONSOLE">
@@ -111,20 +114,11 @@
 			<logger category="com.arjuna">
 				<level name="WARN" />
 			</logger>
-			<logger category="org.apache.tomcat.util.modeler">
-				<level name="WARN" />
-			</logger>
 			<logger category="org.jboss.as.config">
 				<level name="DEBUG" />
 			</logger>
 			<logger category="sun.rmi">
 				<level name="WARN" />
-			</logger>
-			<logger category="jacorb">
-				<level name="WARN" />
-			</logger>
-			<logger category="jacorb.config">
-				<level name="ERROR" />
 			</logger>
 			<root-logger>
 				<level name="INFO" />
@@ -141,28 +135,37 @@
 				<pattern-formatter pattern="%K{level}%d{HH:mm:ss,SSS} %-5p [%c] (%t) %s%e%n" />
 			</formatter>
 		</subsystem>
-		<subsystem xmlns="urn:jboss:domain:batch:1.0">
-			<job-repository>
+		<subsystem xmlns="urn:jboss:domain:batch-jberet:1.0">
+			<default-job-repository name="in-memory" />
+			<default-thread-pool name="batch" />
+			<job-repository name="in-memory">
 				<in-memory />
 			</job-repository>
-			<thread-pool>
+			<thread-pool name="batch">
 				<max-threads count="10" />
 				<keepalive-time time="30" unit="seconds" />
 			</thread-pool>
 		</subsystem>
 		<subsystem xmlns="urn:jboss:domain:bean-validation:1.0" />
-		<subsystem xmlns="urn:jboss:domain:datasources:3.0">
+		<subsystem xmlns="urn:jboss:domain:datasources:4.0">
 			<datasources>
 				<datasource jndi-name="java:jboss/datasources/ADH2DS"
 					pool-name="ADH2DS" enabled="${database.adh2ds.enabled}" use-java-context="true">
-					<connection-url>jdbc:h2:${jboss.server.data.dir}/adh2db;AUTO_SERVER=TRUE;MVCC=true
-					</connection-url>
+                    <connection-url>jdbc:h2:mem:addb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</connection-url>
 					<driver>h2</driver>
 					<security>
 						<user-name>${database.username}</user-name>
 						<password>${database.password}</password>
 					</security>
 				</datasource>
+                <datasource jndi-name="java:jboss/datasources/KeycloakDS" pool-name="KeycloakDS" enabled="true" use-java-context="true">
+                    <connection-url>jdbc:h2:mem:keycloakDS;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</connection-url>
+                    <driver>h2</driver>
+                    <security>
+						<user-name>${database.username}</user-name>
+						<password>${database.password}</password>
+                    </security>
+                </datasource>
 				<drivers>
 					<driver name="h2" module="com.h2database.h2">
 						<xa-datasource-class>org.h2.jdbcx.JdbcDataSource
@@ -176,7 +179,7 @@
 				relative-to="jboss.server.base.dir" scan-interval="5000"
 				runtime-failure-causes-rollback="${jboss.deployment.scanner.rollback.on.failure:false}" />
 		</subsystem>
-		<subsystem xmlns="urn:jboss:domain:ee:3.0">
+		<subsystem xmlns="urn:jboss:domain:ee:4.0">
 			<spec-descriptor-property-replacement>false
 			</spec-descriptor-property-replacement>
 			<concurrent>
@@ -194,13 +197,13 @@
 					<managed-executor-service name="default"
 						jndi-name="java:jboss/ee/concurrency/executor/default"
 						context-service="default" hung-task-threshold="60000"
-						core-threads="5" max-threads="25" keepalive-time="5000" />
+						keepalive-time="5000" />
 				</managed-executor-services>
 				<managed-scheduled-executor-services>
 					<managed-scheduled-executor-service
 						name="default" jndi-name="java:jboss/ee/concurrency/scheduler/default"
 						context-service="default" hung-task-threshold="60000"
-						core-threads="2" keepalive-time="3000" />
+						keepalive-time="3000" />
 				</managed-scheduled-executor-services>
 			</concurrent>
 			<default-bindings context-service="java:jboss/ee/concurrency/context/default"
@@ -208,27 +211,29 @@
 				managed-scheduled-executor-service="java:jboss/ee/concurrency/scheduler/default"
 				managed-thread-factory="java:jboss/ee/concurrency/factory/default" />
 		</subsystem>
-		<subsystem xmlns="urn:jboss:domain:ejb3:3.0">
+		<subsystem xmlns="urn:jboss:domain:ejb3:4.0">
 			<session-bean>
+				<stateless>
+					<bean-instance-pool-ref pool-name="slsb-strict-max-pool" />
+				</stateless>
 				<stateful default-access-timeout="5000" cache-ref="simple"
 					passivation-disabled-cache-ref="simple" />
 				<singleton default-access-timeout="5000" />
 			</session-bean>
 			<pools>
 				<bean-instance-pools>
-					<!-- A sample strict max pool configuration -->
 					<strict-max-pool name="slsb-strict-max-pool"
-						max-pool-size="20" instance-acquisition-timeout="5"
+						derive-size="from-worker-pools" instance-acquisition-timeout="5"
 						instance-acquisition-timeout-unit="MINUTES" />
 					<strict-max-pool name="mdb-strict-max-pool"
-						max-pool-size="20" instance-acquisition-timeout="5"
+						derive-size="from-cpu-count" instance-acquisition-timeout="5"
 						instance-acquisition-timeout-unit="MINUTES" />
 				</bean-instance-pools>
 			</pools>
 			<caches>
 				<cache name="simple" />
-				<cache name="distributable" aliases="passivating clustered"
-					passivation-store-ref="infinispan" />
+				<cache name="distributable" passivation-store-ref="infinispan"
+					aliases="passivating clustered" />
 			</caches>
 			<passivation-stores>
 				<passivation-store name="infinispan"
@@ -236,10 +241,10 @@
 			</passivation-stores>
 			<async thread-pool-name="default" />
 			<timer-service thread-pool-name="default"
-				default-data-store="clustered-store">
+				default-data-store="default-file-store">
 				<data-stores>
-					<database-data-store name="clustered-store"
-						datasource-jndi-name="java:jboss/datasources/${database.pool.name}" />
+					<file-data-store name="default-file-store" path="timer-service-data"
+						relative-to="jboss.server.data.dir" />
 				</data-stores>
 			</timer-service>
 			<remote connector-ref="http-remoting-connector"
@@ -259,14 +264,7 @@
 			<worker name="default" />
 			<buffer-pool name="default" />
 		</subsystem>
-		<subsystem xmlns="urn:jboss:domain:infinispan:3.0">
-			<cache-container name="keycloak" jndi-name="infinispan/Keycloak">
-				<local-cache name="realms" />
-				<local-cache name="users" />
-				<local-cache name="sessions" />
-				<local-cache name="offlineSessions" />
-				<local-cache name="loginFailures" />
-			</cache-container>
+		<subsystem xmlns="urn:jboss:domain:infinispan:4.0">
 			<cache-container name="server" default-cache="default"
 				module="org.wildfly.clustering.server">
 				<local-cache name="default">
@@ -276,10 +274,12 @@
 			<cache-container name="web" default-cache="passivation"
 				module="org.wildfly.clustering.web.infinispan">
 				<local-cache name="passivation">
+					<locking isolation="REPEATABLE_READ" />
 					<transaction mode="BATCH" />
 					<file-store passivation="true" purge="false" />
 				</local-cache>
 				<local-cache name="persistent">
+					<locking isolation="REPEATABLE_READ" />
 					<transaction mode="BATCH" />
 					<file-store passivation="false" purge="false" />
 				</local-cache>
@@ -287,10 +287,12 @@
 			<cache-container name="ejb" aliases="sfsb"
 				default-cache="passivation" module="org.wildfly.clustering.ejb.infinispan">
 				<local-cache name="passivation">
+					<locking isolation="REPEATABLE_READ" />
 					<transaction mode="BATCH" />
 					<file-store passivation="true" purge="false" />
 				</local-cache>
 				<local-cache name="persistent">
+					<locking isolation="REPEATABLE_READ" />
 					<transaction mode="BATCH" />
 					<file-store passivation="false" purge="false" />
 				</local-cache>
@@ -308,9 +310,20 @@
 				</local-cache>
 				<local-cache name="timestamps" />
 			</cache-container>
+			<cache-container name="keycloak" jndi-name="infinispan/Keycloak">
+				<local-cache name="realms" />
+				<local-cache name="users" />
+				<local-cache name="sessions" />
+				<local-cache name="offlineSessions" />
+				<local-cache name="loginFailures" />
+				<local-cache name="work" />
+				<local-cache name="realmVersions">
+					<transaction locking="PESSIMISTIC" mode="BATCH" />
+				</local-cache>
+			</cache-container>
 		</subsystem>
 		<subsystem xmlns="urn:jboss:domain:jaxrs:1.0" />
-		<subsystem xmlns="urn:jboss:domain:jca:3.0">
+		<subsystem xmlns="urn:jboss:domain:jca:4.0">
 			<archive-validation enabled="true" fail-on-error="true"
 				fail-on-warn="false" />
 			<bean-validation enabled="true" />
@@ -351,11 +364,11 @@
 		</subsystem>
 		<subsystem xmlns="urn:jboss:domain:pojo:1.0" />
 		<subsystem xmlns="urn:jboss:domain:remoting:3.0">
-			<endpoint worker="default" />
+			<endpoint />
 			<http-connector name="http-remoting-connector"
 				connector-ref="default" security-realm="ApplicationRealm" />
 		</subsystem>
-		<subsystem xmlns="urn:jboss:domain:resource-adapters:3.0" />
+		<subsystem xmlns="urn:jboss:domain:resource-adapters:4.0" />
 		<subsystem xmlns="urn:jboss:domain:request-controller:1.0" />
 		<subsystem xmlns="urn:jboss:domain:sar:1.0" />
 		<subsystem xmlns="urn:jboss:domain:security-manager:1.0">
@@ -387,6 +400,14 @@
 						<policy-module code="Delegating" flag="required" />
 					</authorization>
 				</security-domain>
+				<security-domain name="jaspitest" cache-type="default">
+					<authentication-jaspi>
+						<login-module-stack name="dummy">
+							<login-module code="Dummy" flag="optional" />
+						</login-module-stack>
+						<auth-module code="Dummy" />
+					</authentication-jaspi>
+				</security-domain>
 				<security-domain name="keycloak">
 					<authentication>
 						<login-module code="org.keycloak.adapters.jboss.KeycloakLoginModule"
@@ -404,7 +425,7 @@
 			<recovery-environment socket-binding="txn-recovery-environment"
 				status-socket-binding="txn-status-manager" />
 		</subsystem>
-		<subsystem xmlns="urn:jboss:domain:undertow:2.0">
+		<subsystem xmlns="urn:jboss:domain:undertow:3.0">
 			<buffer-cache name="default" />
 			<server name="default-server">
 				<http-listener name="default" socket-binding="http"
@@ -425,7 +446,7 @@
 			</handlers>
 			<filters>
 				<response-header name="server-header" header-name="Server"
-					header-value="WildFly/9" />
+					header-value="WildFly/10" />
 				<response-header name="x-powered-by-header"
 					header-name="X-Powered-By" header-value="Undertow/1" />
 			</filters>
@@ -442,12 +463,13 @@
 			</endpoint-config>
 			<client-config name="Standard-Client-Config" />
 		</subsystem>
-		<subsystem xmlns="urn:jboss:domain:weld:2.0" />
+		<subsystem xmlns="urn:jboss:domain:weld:3.0" />
 		<subsystem xmlns="urn:jboss:domain:keycloak-server:1.1">
 			<web-context>auth</web-context>
 		</subsystem>
 		<subsystem xmlns="urn:jboss:domain:keycloak:1.1" />
 	</profile>
+
 	<interfaces>
 		<interface name="management">
 			<inet-address value="${jboss.bind.address.management:127.0.0.1}" />
@@ -455,13 +477,8 @@
 		<interface name="public">
 			<inet-address value="${jboss.bind.address:127.0.0.1}" />
 		</interface>
-		<!-- TODO - only show this if the jacorb subsystem is added -->
-		<interface name="unsecure">
-			<!-- ~ Used for IIOP sockets in the standard configuration. ~ To secure 
-				JacORB you need to setup SSL -->
-			<inet-address value="${jboss.bind.address.unsecure:127.0.0.1}" />
-		</interface>
 	</interfaces>
+
 	<socket-binding-group name="standard-sockets"
 		default-interface="public" port-offset="${jboss.socket.binding.port-offset:0}">
 		<socket-binding name="management-http" interface="management"

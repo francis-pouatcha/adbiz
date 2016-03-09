@@ -27,7 +27,7 @@ public abstract class AbstractLoader {
 	 * extent of file processed.
 	 */
 	public static final String EXCEL_SUFFIX = "xls";
-	public static final String ENV_PROPERTY_NAME_ADCOM_IDP_BOOT_DATASHEET_DIR = "ADCOM_IDP_BOOT_DATASHEET_DIR";
+	public static final String ENV_PROPERTY_NAME_ADCOM_IDP_BOOT_DATASHEET_DIR = "BOOT_DATASHEET_DIR";
 
 	@SuppressWarnings("rawtypes")
 	private Map<String, CoreAbstLoader> loaders = new HashMap<String, CoreAbstLoader>();

@@ -1,6 +1,6 @@
 {
     "providers": [
-        "classpath:${jboss.server.config.dir}/providers/*"
+        "classpath:${jboss.home.dir}/providers/*"
     ],
 
     "admin": {
@@ -22,6 +22,12 @@
         "provider": "jpa"
     },
 
+    "userCache": {
+        "infinispan" : {
+            "enabled": true
+        }
+    },
+
     "userSessionPersister": {
         "provider": "jpa"
     },
@@ -31,12 +37,11 @@
     },
 
     "theme": {
-        "default": "keycloak",
         "staticMaxAge": 2592000,
         "cacheTemplates": true,
         "cacheThemes": true,
         "folder": {
-          "dir": "${jboss.server.config.dir}/themes"
+          "dir": "${jboss.home.dir}/themes"
         }
     },
 
@@ -50,13 +55,21 @@
 
     "connectionsJpa": {
         "default": {
-            "dataSource": "java:jboss/datasources/${database.pool.name}",
+            "dataSource": "java:jboss/datasources/KeycloakDS",
             "databaseSchema": "update"
         }
     },
 
+    "realmCache": {
+        "provider": "infinispan-locking",
+        "infinispan-locking" : {
+            "enabled": true
+        }
+    },
+
     "connectionsInfinispan": {
-        "default" : {
+        "provider": "locking",
+        "locking": {
             "cacheContainer" : "java:comp/env/infinispan/Keycloak"
         }
     }

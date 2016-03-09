@@ -9,11 +9,10 @@
     <dependencies>
     	<module name="org.adorsys.adcore.env"/>
     	<module name="org.adorsys.adcore.xls"/>
-        <module name="org.keycloak.keycloak-common"/>
-    	<module name="org.keycloak.keycloak-core"/>
-    	<module name="org.keycloak.keycloak-model-api"/>
-    	<module name="org.keycloak.keycloak-timer-api"/>
-    	<module name="org.keycloak.keycloak-services"/>
+        <module name="org.keycloak.keycloak-common" services="import"/>
+    	<module name="org.keycloak.keycloak-core" services="import"/>
+    	<module name="org.keycloak.keycloak-server-spi" services="import"/>
+    	<module name="org.keycloak.keycloak-services" services="import"/>
         <module name="org.jboss.logging"/>
     	<module name="javax.servlet.api"/>
         <module name="org.codehaus.jackson.jackson-core-asl"/>

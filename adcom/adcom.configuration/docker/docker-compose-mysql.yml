@@ -1,0 +1,11 @@
+db2:
+  build: .
+  dockerfile: ./Dockerfile-mysql
+  command: db2start
+  hostname: addb    
+  container_name: idp-db
+  environment:
+    LICENSE: accept
+    DB2INST1_PASSWORD: theoldsamepwd12
+  ports:
+    - "50000:50000"

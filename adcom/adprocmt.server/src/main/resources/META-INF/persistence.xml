@@ -3,7 +3,7 @@
   <persistence-unit name="forge-default" transaction-type="JTA" >
     <description>Forge Persistence Unit</description>
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    <jta-data-source>java:jboss/datasources/ADDS</jta-data-source>
+    <jta-data-source>java:jboss/datasources/ADH2DS</jta-data-source>
 
     <jar-file>lib/adcore.lib-${project.version}.jar</jar-file>
     <jar-file>lib/adcatal.lib-${project.version}.jar</jar-file>

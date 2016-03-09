@@ -25,6 +25,19 @@
 		<fileSet>
 			<directory>docker</directory>
 			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>*.conf</include>
+				<include>Dockerfile-wildfly</include>
+			</includes>
+			<filtered>true</filtered>
+		</fileSet>
+		<fileSet>
+			<directory>docker</directory>
+			<outputDirectory>/</outputDirectory>
+			<excludes>
+				<exclude>*.conf</exclude>
+				<exclude>Dockerfile-wildfly</exclude>
+			</excludes>
 		</fileSet>
 	</fileSets>
 
