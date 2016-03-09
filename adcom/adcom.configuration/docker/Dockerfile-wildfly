@@ -2,7 +2,7 @@ FROM jboss/wildfly:${version.wildfly}
 
 MAINTAINER Francis Pouatcha <fpo@adorsys.com>
 
-EXPOSE 8080 8787 9990 9999
+EXPOSE 8080 8787 9990 9999 8443
 
 RUN rm -rf $JBOSS_CONFIG_DIR/standalone_xml_history
 

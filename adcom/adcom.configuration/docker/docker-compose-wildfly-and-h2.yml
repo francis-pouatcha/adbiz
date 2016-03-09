@@ -6,6 +6,7 @@ idp-server:
     - "8787:8787"
     - "9990:9990"
     - "9999:9999"
+    - "8443:8443"
   env_file:
     - $PWD/appdata/docker.run-env.properties
     - $PWD/appdata/docker.run-host-docker.properties
