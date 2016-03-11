@@ -1,4 +1,4 @@
  #!/bin/bash
 
-$JBOSS_HOME/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0 $DEBUG -P=$APP_DATA/docker.run-env.properties \
-	-P=$APP_DATA/docker.run-host-docker.properties -P=$APP_DATA/docker.run-dbname-h2.properties
+$JBOSS_HOME/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0 $DEBUG --server-config=standalone-no-ssl.xml -P=$APP_DATA/docker.run-env.properties \
+	 -P=$APP_DATA/docker.run-dbname-h2.properties

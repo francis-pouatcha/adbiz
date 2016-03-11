@@ -342,7 +342,7 @@ angular.module('ADUtils',[])
     return service;
 	
 }])
-.factory('genericResource',['$http','$q', function($http,$q){
+.factory('genericResource',['$http', '$q', function($http,$q){
     var service = {};
 
     service.create = function(urlBase, entity){

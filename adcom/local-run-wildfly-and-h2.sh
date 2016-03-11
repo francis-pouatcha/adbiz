@@ -70,6 +70,13 @@ else
 	echo "  File $H2_CONSOLE_WAR not available, H2Console will not be deployed."
 fi
 
+if [ "x$AUTH_SERVER_URL" = "x" ]; then
+   	echo "            Missing env property AUTH_SERVER_URL."
+   	sleep 1s	
+   	exit
+fi
+echo "              AUTH_SERVER_URL $AUTH_SERVER_URL"
+
 echo "             Starting jboss"
-cd $JBOSS_HOME && bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0 --debug -P=$DIST_HOME/appdata/docker.run-env.properties \
-	-P=$DIST_HOME/appdata/docker.run-host-local.properties -P=$DIST_HOME/appdata/docker.run-dbname-h2.properties
+
+cd $JBOSS_HOME && bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0 --debug --server-config=standalone-no-ssl.xml -P=$DIST_HOME/appdata/docker.run-env.properties -P=$DIST_HOME/appdata/docker.run-dbname-h2.properties

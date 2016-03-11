@@ -9,9 +9,10 @@ idp-server:
     - "8443:8443"
   env_file:
     - $PWD/appdata/docker.run-env.properties
-    - $PWD/appdata/docker.run-host-docker.properties
     - $PWD/appdata/docker.run-dbname-h2.properties
   hostname: docker
+  environment:
+    AUTH_SERVER_URL: $AUTH_SERVER_URL
   volumes:
     - $PWD/appdata/:$JBOSS_HOME/standalone/appdata
 

@@ -60,7 +60,7 @@ public abstract class KeyCloakConfigEndpoint {
 	private String getAuthServerUrl(UriInfo uriInfo){
 		URI thisServerUri = uriInfo.getBaseUri();
 		String serverUriString = thisServerUri.toString();
-		if(StringUtils.contains(serverUriString, "://")) throw new IllegalStateException("Not an absolute url : " + serverUriString);
+		if(!StringUtils.contains(serverUriString, "://")) throw new IllegalStateException("Not an absolute url : " + serverUriString);
 		String hostAndPort = StringUtils.substringBetween(serverUriString, "://", "/");
 		String scheme = StringUtils.substringBefore(serverUriString, hostAndPort);
 		String mainUrl = scheme + hostAndPort;
