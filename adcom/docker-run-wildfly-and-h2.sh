@@ -2,7 +2,7 @@
 
 CURRENT_DIR=`cd "."; pwd`
 
-cd $CURRENT_DIR && ./docker-runtime-dir.sh
+cd $CURRENT_DIR && ./setup-docker-runtime-dir.sh
 export DOKCER_RUNTIME=zocker_runtime
 export DIST_HOME=$CURRENT_DIR/$DOKCER_RUNTIME
 

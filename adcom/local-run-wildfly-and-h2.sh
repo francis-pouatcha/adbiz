@@ -2,7 +2,7 @@
 
 CURRENT_DIR=`cd "."; pwd`
 
-cd $CURRENT_DIR && ./local-runtime-dir.sh
+cd $CURRENT_DIR && ./setup-local-runtime-dir.sh
 export LOCAL_RUNTIME=local_runtime
 export DIST_HOME=$CURRENT_DIR/$LOCAL_RUNTIME
 cd $DIST_HOME && . wildfly-kc-versions.conf
@@ -79,4 +79,4 @@ echo "              AUTH_SERVER_URL $AUTH_SERVER_URL"
 
 echo "             Starting jboss"
 
-cd $JBOSS_HOME && bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0 --debug --server-config=standalone-no-ssl.xml -P=$DIST_HOME/appdata/docker.run-env.properties -P=$DIST_HOME/appdata/docker.run-dbname-h2.properties
+cd $JBOSS_HOME && bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0 --debug --server-config=standalone-$SSL.xml -P=$DIST_HOME/appdata/docker.run-env.properties -P=$DIST_HOME/appdata/docker.run-dbname-h2.properties
