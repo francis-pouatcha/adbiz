@@ -9,9 +9,9 @@
 	<packaging>pom</packaging>
 	<modules>
 		<!-- POM Modules -->
+		<module>adcom.client.parent</module>
 		<module>adcom.lib.parent</module>
 		<module>adcom.server.parent</module>
-		<module>adcom.client.parent</module>
 
 		<module>adcore.env</module>
 		<module>adcore.xls</module>
