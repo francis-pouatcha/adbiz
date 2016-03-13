@@ -5,6 +5,7 @@
 		<groupId>org.adorsys.adcom</groupId>
 		<artifactId>adcom.client.parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../adcom.client.parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>adprocmt.client</artifactId>
 	<packaging>war</packaging>
