@@ -24,6 +24,10 @@
             findCustom:{
                 method: 'POST',
                 url: API_BASE_ADCATAL_URL + '/catalproductfamilys/findCustom'
+            },
+            findByIdentifIn: {
+                method: 'POST',
+                url: API_BASE_ADCATAL_URL + '/catalproductfamilys/findByIdentifIn'
             }
         };
 

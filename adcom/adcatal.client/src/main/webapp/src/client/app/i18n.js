@@ -16,6 +16,7 @@
                 'app.core.create.title':'Create',
                 //--------------Article---------------
                 'CatalArticle.sppu': 'Sales Price',
+                'CatalArticle.artName': 'Name',
                 'CatalArticle.maxDisctRate': 'Max Discount',
                 'CIP':'CIP',
                 'CatalArticle.minStockQty': 'Min Quantity',

@@ -20,6 +20,10 @@
             findBy: {
                 method: 'POST',
                 url: API_BASE_ADCATAL_URL + '/catalart2productfamilys/findBy'
+            },
+            findByCntnrIdentifIn: {
+                method: 'POST',
+                url: API_BASE_ADCATAL_URL + '/catalart2productfamilys/findByCntnrIdentifIn'
             }
         };
 

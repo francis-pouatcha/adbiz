@@ -16,31 +16,31 @@
           	<thead>
           		<tr>
 		        	<th><span data-ng-bind="'CIP' | translate"></span></th>
-					<th><span data-ng-bind="'CatalArticle.maxDisctRate' | translate"></span></th>
-					<th><span data-ng-bind="'CatalArticle.minStockQty' | translate"></span></th>
-					<th><span data-ng-bind="'CatalArticle.maxStockQty' | translate"></span></th>
-					<th><span data-ng-bind="'CatalArticle.vatRate' | translate"></span></th>
+					<th><span data-ng-bind="'CatalArticle.artName' | translate"></span></th>
+					<th><span data-ng-bind="'CatalArticle.prodFmly' | translate"></span></th>
 					<th><span data-ng-bind="'CatalArticle.sppu' | translate"></span></th>
+					<th><span data-ng-bind="'CatalArticle.vatRate' | translate"></span></th>
+					<th><span data-ng-bind="'CatalArticle.maxDisctRate' | translate"></span></th>
 					<th><span data-ng-bind="'Action.title' | translate"></span></th>
               	</tr>
                 <tr>
 			  		<th><input data-st-search="identif" class="input-sm form-control" type="search"/></th>
-             		<th><input data-st-search="maxDisctRate" class="input-sm form-control" type="search"/></th>
-             		<th><input data-st-search="minStockQty" class="input-sm form-control" type="number"/></th>
-             		<th><input data-st-search="maxStockQty" class="input-sm form-control" type="number"/></th>
+             		<th></th>
              		<th></th>
              		<th><input data-st-search="sppu" class="input-sm form-control" type="number"/></th>
+             		<th></th>
+             		<th><input data-st-search="maxDisctRate" class="input-sm form-control" type="search"/></th>
              		<th></th>
 				</tr>
           	</thead>
           	<tbody>
 	           <tr data-ng-repeat="article in vm.data.list">
 	              <td name="identif-catalArticle" ><span data-ng-bind-html="article.identif"></span></td>
-	              <td><span data-ng-bind-html="article.maxDisctRate"></span></td>
-	              <td><span data-ng-bind-html="article.minStockQty"></span></td>
-	              <td><span data-ng-bind-html="article.maxStockQty"></span></td>
-	              <td><span data-ng-bind-html="article.vatRate"></span></td>
+	              <td><span data-ng-bind-html="article.artName"></span></td>
+	              <td><span data-ng-bind-html="article.famNames"></span></td>
 	              <td><span data-ng-bind-html="article.sppu"></span></td>
+	              <td><span data-ng-bind-html="article.vatRate"></span></td>
+	              <td><span data-ng-bind-html="article.maxDisctRate"></span></td>
 	              <td>
 	                 <div class="table-actions">
 	                      <a class="btn btn-default" title="View" href="#/article/{{article.id}}">

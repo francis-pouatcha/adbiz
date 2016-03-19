@@ -21,6 +21,7 @@ import org.adorsys.adcore.exceptions.AdException;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
+import org.adorsys.adcore.vo.StringListHolder;
 
 public abstract class CoreAbstIdentifReadEndpoint<E extends CoreAbstIdentifObject> {
 
@@ -54,6 +55,47 @@ public abstract class CoreAbstIdentifReadEndpoint<E extends CoreAbstIdentifObjec
 				detach(resultList), detach(searchInput));
 	}
 
+	@GET
+	@Path("/findByCntnrIdentif")
+	@Produces({ "application/json"})
+	public CoreAbstIdentifObjectSearchResult<E> findByCntnrIdentif(@QueryParam("cntnrIdentif") String cntnrIdentif,
+			@QueryParam("start") int start, @QueryParam("max") int max) {
+		Long count = getLookup().countByCntnrIdentif(cntnrIdentif);
+		Long total = getLookup().count();
+		List<E> resultList = getLookup().findByCntnrIdentif(cntnrIdentif, start, max);
+		CoreAbstIdentifObjectSearchInput<E> searchInput = newSearchInput();
+		searchInput.setStart(start);
+		searchInput.setMax(max);
+		return newSearchResult(count,total, detach(resultList), detach(searchInput));
+	}
+	
+	@POST
+	@Path("/findByCntnrIdentifIn")
+	@Produces({ "application/json"})
+	public CoreAbstIdentifObjectSearchResult<E> findByCntnrIdentifIn(StringListHolder cntnrIdentifs) {
+		List<E> resultList = getLookup().findByCntnrIdentifIn(cntnrIdentifs.getList(), cntnrIdentifs.getStart(), cntnrIdentifs.getMax());
+		CoreAbstIdentifObjectSearchInput<E> searchInput = newSearchInput();
+		searchInput.setStart(cntnrIdentifs.getStart());
+		searchInput.setMax(cntnrIdentifs.getMax());
+		Long size = new Long(resultList.size());
+		return newSearchResult(size, size,
+				detach(resultList), detach(searchInput));
+	}
+	
+	
+	@POST
+	@Path("/findByIdentifIn")
+	@Produces({ "application/json"})
+	public CoreAbstIdentifObjectSearchResult<E> findByIdentifIn(StringListHolder cntnrIdentifs) {
+		List<E> resultList = getLookup().findByIdentifIn(cntnrIdentifs.getList());
+		CoreAbstIdentifObjectSearchInput<E> searchInput = newSearchInput();
+		searchInput.setStart(cntnrIdentifs.getStart());
+		searchInput.setMax(cntnrIdentifs.getMax());
+		Long size = new Long(resultList.size());
+		return newSearchResult(size, size,
+				detach(resultList), detach(searchInput));
+	}
+	
 	@GET
 	@Path("/count")
 	public Long count() {
@@ -150,7 +192,7 @@ public abstract class CoreAbstIdentifReadEndpoint<E extends CoreAbstIdentifObjec
 		return entity;
 	}
 
-	private List<E> detach(List<E> list) {
+	protected List<E> detach(List<E> list) {
 		if (list == null)
 			return list;
 		List<E> result = new ArrayList<E>();
@@ -160,7 +202,7 @@ public abstract class CoreAbstIdentifReadEndpoint<E extends CoreAbstIdentifObjec
 		return result;
 	}
 
-	private CoreAbstIdentifObjectSearchInput<E> detach(
+	protected CoreAbstIdentifObjectSearchInput<E> detach(
 			CoreAbstIdentifObjectSearchInput<E> searchInput) {
 		searchInput.setEntity(detach(searchInput.getEntity()));
 		return searchInput;
