@@ -46,7 +46,7 @@
 
     sectionUtil.$inject = ['genericResource'];
     /* @ngInject */
-    function sectionUtil(genericResource, genericResource) {
+    function sectionUtil(genericResource) {
 
         var service = {};
 
