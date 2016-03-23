@@ -36,7 +36,7 @@
     		angular.forEach(artLangMappings, function(artLangMapping){
     			if(angular.equals(this.identif, artLangMapping.cntnrIdentif)){
     				if(userLangIso2==artLangMapping.langIso2){// override entry with user language version
-    					rebuildDisplay(this,artLangMapping);
+    					rebuildDisplay(this,{"artLangMapping":artLangMapping});
     				} else {// only set if not yet set.
     					this.langMappingId = this.langMappingId || artLangMapping.id;
     					this.langIso2 = this.langIso2 ||  artLangMapping.langIso2;
@@ -154,6 +154,7 @@
             articleService.$save(function(response) {
                 logger.success('Article created');
                 catalArtLangMapping.cntnrIdentif = response.id;
+                catalArtLangMapping.langIso2 = userLangIso2;
                 vm.data.push(response);
 
                 var catalArtLangMappingService = new CatalArtLangMapping(catalArtLangMapping);

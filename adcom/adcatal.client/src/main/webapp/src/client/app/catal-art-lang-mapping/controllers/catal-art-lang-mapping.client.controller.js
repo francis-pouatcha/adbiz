@@ -91,7 +91,7 @@
 
         // Update existing catalArtLangMapping
         vm.update = function (catalArtLangMapping) {
-            var index = vm.data.indexOf(vm.model);
+            var index = vm.data.indexOf(catalArtLangMapping);
             var catalArtLangMappingRes = new CatalArtLangMapping(catalArtLangMapping);
             catalArtLangMappingRes.$update(function () {
                 logger.success('catalArtLangMapping updated');

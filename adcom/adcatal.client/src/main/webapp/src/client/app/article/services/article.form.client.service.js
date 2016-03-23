@@ -32,7 +32,7 @@
                             templateOptions: {
                                 label: $translate.instant('CatalArtFeatMapping.artName'),
                                 //pattern: '\\d{5}',
-                                disabled:true,
+                                disabled:disabled,
                                 required:true
                             }
                         },
@@ -43,7 +43,7 @@
                             templateOptions: {
                                 label: $translate.instant('Article ShortName'),
                                 //pattern: '\\d{5}',
-                                disabled:true
+                                disabled:disabled
                             }
                         }
 
