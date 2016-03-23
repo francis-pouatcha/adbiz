@@ -69,13 +69,13 @@
     		},holder);
     	};
     	
-    	
     	var cleanDisplay = function(article){
     		var display = {};
     		cleanArtLangMappingDisplay(article, display);
     		display.famMappings = article.famMappings;
     		article.famMappings = undefined;
-    	}
+    		return display;
+    	};
     	
     	var cleanArtLangMappingDisplay = function(article, display){
     		display.artLangMapping = {};
@@ -95,8 +95,6 @@
     		article.warnings = undefined;
     		display.artLangMapping.substances = article.substances;
     		article.substances = undefined;
-
-    		return display;
     	};
     	
     	var rebuildDisplay = function(article, display){
@@ -114,6 +112,15 @@
     		if(display.famMappings){
     			article.famMappings = display.famMappings;
     		}
+    	};
+    	
+    	var copyLangMapping = function(source, destination){
+    		destination.artName = source.artName;
+    		destination.shortName = source.shortName;
+    		destination.purpose = source.purpose;
+    		destination.usage = source.usage;
+    		destination.warnings = source.warnings;
+    		destination.substances = source.substances;
     	};
     	
         var vm = this;
@@ -139,7 +146,8 @@
         initSearchInput();
 
         vm.create = function() {
-            var catalArtLangMapping = cleanDisplay(vm.article).catalArtLangMapping;
+        	var display = cleanDisplay(vm.article);
+            var catalArtLangMapping = display.artLangMapping;
             // Create new Article object
             var articleService = new Article(vm.article);
             // Redirect after save
@@ -180,15 +188,21 @@
         };
         // Update existing Article
         vm.update = function() {
-            var catalArtLangMapping = cleanDisplay(vm.article).artLangMapping;
+        	var display = cleanDisplay(vm.article);
+            var catalArtLangMapping = display.artLangMapping;
             var article = vm.article;
 
             article.$update(function() {
                 logger.success('Article updated');
-                CatalArtLangMapping.get({catalArtLangMappingId: catalArtLangMapping.id}, function () {
-                    $location.path('article/' + article.id);
+                var catalArtLangMappingRes = CatalArtLangMapping.get({catalArtLangMappingId:catalArtLangMapping.id}, function(){
+                	copyLangMapping(catalArtLangMapping, catalArtLangMappingRes);
+                	catalArtLangMappingRes.$update(function () {
+                        $location.path('/article/' + article.id);
+                    }, function(errorResponse3){
+                        vm.error = errorResponse3.data.summary;
+                    });
                 }, function(errorResponse2){
-                    vm.error = errorResponse2.data.summary;
+                    vm.error = errorResponse3.data.summary;
                 });
             }, function(errorResponse) {
                 vm.error = errorResponse.data.summary;
