@@ -9,7 +9,7 @@
     /* @ngInject */
     function factory($translate) {
 
-        var getFormFields = function(disabled,hideName) {
+        var getFormFields = function(disabled) {
 
             var fields = [
                 {
@@ -32,10 +32,9 @@
                             templateOptions: {
                                 label: $translate.instant('CatalArtFeatMapping.artName'),
                                 //pattern: '\\d{5}',
-                                disabled:disabled,
+                                disabled:true,
                                 required:true
-                            },
-                            hideExpression:''+hideName
+                            }
                         },
                         {
                             className: 'col-xs-4',
@@ -44,9 +43,8 @@
                             templateOptions: {
                                 label: $translate.instant('Article ShortName'),
                                 //pattern: '\\d{5}',
-                                disabled:disabled
-                            },
-                            hideExpression:''+hideName
+                                disabled:true
+                            }
                         }
 
                     ]
@@ -129,7 +127,56 @@
                             }
                         }
                     ]
+                },
+                
+                {
+                    className: 'row',
+                    fieldGroup: [
+                        {
+                            className: 'col-xs-6',
+                            key: 'purpose',
+                            type: 'textarea',
+                            templateOptions: {
+                                label: $translate.instant('CatalAbstractFeatMapping.purpose'),
+                                disabled: disabled
+                            }
+                        },
+                        {
+                            className: 'col-xs-6',
+                            key: 'usage',
+                            type: 'textarea',
+                            templateOptions: {
+                                label: $translate.instant('CatalAbstractFeatMapping.usage'),
+                                disabled: disabled
+                            }
+                        }
+                    ]
+                },
+                
+                {
+                    className: 'row',
+                    fieldGroup: [
+                        {
+                            className: 'col-xs-6',
+                            key: 'warnings',
+                            type: 'textarea',
+                            templateOptions: {
+                                label: $translate.instant('CatalAbstractFeatMapping.warnings'),
+                                disabled: disabled
+                            }
+                        },
+                        {
+                            className: 'col-xs-6',
+                            key: 'substances',
+                            type: 'textarea',
+                            templateOptions: {
+                                label: $translate.instant('CatalAbstractFeatMapping.substances'),
+                                disabled: disabled
+                            }
+                        }
+                    ]
                 }
+                
             ];
 
             return fields;

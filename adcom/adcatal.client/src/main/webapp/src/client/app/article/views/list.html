@@ -25,8 +25,8 @@
               	</tr>
                 <tr>
 			  		<th><input data-st-search="identif" class="input-sm form-control" type="search"/></th>
-             		<th></th>
-             		<th></th>
+			  		<th><input data-st-search="artName" class="input-sm form-control" type="search"/></th>
+			  		<th><input data-st-search="prodFmly" class="input-sm form-control" type="search"/></th>
              		<th><input data-st-search="sppu" class="input-sm form-control" type="number"/></th>
              		<th></th>
              		<th><input data-st-search="maxDisctRate" class="input-sm form-control" type="search"/></th>
@@ -37,7 +37,11 @@
 	           <tr data-ng-repeat="article in vm.data.list">
 	              <td name="identif-catalArticle" ><span data-ng-bind-html="article.identif"></span></td>
 	              <td><span data-ng-bind-html="article.artName"></span></td>
-	              <td><span data-ng-bind-html="article.famNames"></span></td>
+	              <td>
+	              		<div data-ng-repeat="famMapping in article.famMappings">
+						  {{famMapping.artName}}
+						</div>
+	              </td>
 	              <td><span data-ng-bind-html="article.sppu"></span></td>
 	              <td><span data-ng-bind-html="article.vatRate"></span></td>
 	              <td><span data-ng-bind-html="article.maxDisctRate"></span></td>

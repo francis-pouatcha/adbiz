@@ -19,6 +19,7 @@ import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreSortOrder;
 import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
+import org.adorsys.adcore.vo.StringListHolder;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 
@@ -151,14 +152,10 @@ public abstract class CoreAbstIdentifLookup<E extends CoreAbstIdentifObject> {
 		return getRepo().findByCntnrIdentifLessThanEquals(identifEnd).orderDesc("cntnrIdentif").firstResult(firstResult).maxResults(maxResult).getResultList();		
 	}
 
-	/**
-	 * Start and max is valid for each container identifier.
-	 * 
-	 */
-	public List<E> findByCntnrIdentifIn(List<String> cntnrIdentifs, int start, int max) {
+	public List<E> findByCntnrIdentifIn(StringListHolder holder) {
 		Set<E> result = new HashSet<>();
-		for (String cntnrIdentif : cntnrIdentifs) {
-			List<E> found = findByCntnrIdentif(cntnrIdentif, start, max);
+		for (String cntnrIdentif : holder.getList()) {
+			List<E> found = findByCntnrIdentif(cntnrIdentif, holder.getStart(), holder.getMax());
 			result.addAll(found);
 		}
 		return new ArrayList<>(result);

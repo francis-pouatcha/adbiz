@@ -1,0 +1,6 @@
+
+export DB=h2
+export HOST_NAME=localhost
+export SSL=no-ssl
+export AUTH_SERVER_URL=http://localhost:8080/auth
+export DEBUG=--debug

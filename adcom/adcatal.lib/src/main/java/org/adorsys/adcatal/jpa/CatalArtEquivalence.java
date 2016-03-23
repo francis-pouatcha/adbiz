@@ -3,6 +3,7 @@ package org.adorsys.adcatal.jpa;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.adorsys.adcore.annotation.Description;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
@@ -28,6 +29,11 @@ public class CatalArtEquivalence extends CoreAbstIdentifObject {
 	@NotNull
 	private String equivArtIdentif;
 
+	@Column
+	@Description("CatalArtEquivalence_usage_description")
+	@Size(max=256)
+	private String usage;
+
 	public String getArtEquivCode() {
 		return this.artEquivCode;
 	}
@@ -50,6 +56,14 @@ public class CatalArtEquivalence extends CoreAbstIdentifObject {
 
 	public void setEquivArtIdentif(final String equivArtIdentif) {
 		this.equivArtIdentif = equivArtIdentif;
+	}
+
+	public String getUsage() {
+		return usage;
+	}
+
+	public void setUsage(String usage) {
+		this.usage = usage;
 	}
 
 	@Override

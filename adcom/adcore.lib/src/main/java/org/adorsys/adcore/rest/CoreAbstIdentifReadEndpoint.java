@@ -72,11 +72,11 @@ public abstract class CoreAbstIdentifReadEndpoint<E extends CoreAbstIdentifObjec
 	@POST
 	@Path("/findByCntnrIdentifIn")
 	@Produces({ "application/json"})
-	public CoreAbstIdentifObjectSearchResult<E> findByCntnrIdentifIn(StringListHolder cntnrIdentifs) {
-		List<E> resultList = getLookup().findByCntnrIdentifIn(cntnrIdentifs.getList(), cntnrIdentifs.getStart(), cntnrIdentifs.getMax());
+	public CoreAbstIdentifObjectSearchResult<E> findByCntnrIdentifIn(StringListHolder holder) {
+		List<E> resultList = getLookup().findByCntnrIdentifIn(holder);
 		CoreAbstIdentifObjectSearchInput<E> searchInput = newSearchInput();
-		searchInput.setStart(cntnrIdentifs.getStart());
-		searchInput.setMax(cntnrIdentifs.getMax());
+		searchInput.setStart(holder.getStart());
+		searchInput.setMax(holder.getMax());
 		Long size = new Long(resultList.size());
 		return newSearchResult(size, size,
 				detach(resultList), detach(searchInput));

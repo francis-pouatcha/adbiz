@@ -85,9 +85,14 @@
             return fields;
 
         };
+        
+        var makeId = function(cntnrIdentif,langIso2){
+        	return cntnrIdentif + "_" + langIso2;
+        };
 
         var service = {
-            getFormFields: getFormFields
+            getFormFields: getFormFields,
+            makeId: makeId
         };
 
         return service;

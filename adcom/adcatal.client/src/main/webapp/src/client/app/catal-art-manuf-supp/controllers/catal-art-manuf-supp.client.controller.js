@@ -9,17 +9,17 @@
         'CatalArtManufSupp',
         'utils',
         'CatalArtManufSuppForm',
-        'ArticleForm'];
+        'ArticleForm', '$stateParams'];
     /* @ngInject */
     function CatalArtManufSuppController(logger, CatalArtManufSupp,
-                                         utils, CatalArtManufSuppForm, ArticleForm) {
+                                         utils, CatalArtManufSuppForm, ArticleForm, $stateParams) {
 
         var vm = this;
         vm.data = [];
         vm.catalArtManufSupp = {};
 
         vm.setFormFields = function (disabled) {
-            vm.catalArticleId = ArticleForm.catalArticleId;
+            vm.catalArticleId = $stateParams.articleId;
             vm.formFields = CatalArtManufSuppForm.getFormFields(disabled);
             vm.formFields[0].defaultValue = vm.catalArticleId;
         };
@@ -37,13 +37,13 @@
         };
 
         vm.init = function () {
+            vm.catalArticleId = $stateParams.articleId;        	
             CatalArtManufSupp.findBy(coreSearchInputInit(), function (response) {
                 vm.data = response.resultList;
             });
         };
 
         function coreSearchInputInit() {
-            vm.catalArticleId = ArticleForm.catalArticleId;
             var searchInput = {};
             searchInput.entity = {};
             searchInput.entity.cntnrIdentif = vm.catalArticleId;
@@ -54,7 +54,7 @@
         }
 
         vm.create = function (catalArtManufSupp) {
-            vm.catalArticleId = ArticleForm.catalArticleId;
+            vm.catalArticleId = $stateParams.articleId;
             catalArtManufSupp.cntnrIdentif = vm.catalArticleId;
             // Create new catalArtManufSupp object
             var catalArtManufSuppRes = new CatalArtManufSupp(catalArtManufSupp);

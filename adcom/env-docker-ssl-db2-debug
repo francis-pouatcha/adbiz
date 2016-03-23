@@ -1,0 +1,6 @@
+
+export DB=db2
+export HOST_NAME=docker
+export SSL=ssl
+export AUTH_SERVER_URL=https://docker:8443/auth
+export DEBUG=--debug

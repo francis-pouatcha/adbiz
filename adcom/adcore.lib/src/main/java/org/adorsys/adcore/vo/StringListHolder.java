@@ -9,6 +9,7 @@ public class StringListHolder implements Serializable {
 	private List<String> list = new ArrayList<String>();
 	private int start;
 	private int max;
+	private String langIso2;
 
 	public List<String> getList() {
 		return list;
@@ -33,4 +34,13 @@ public class StringListHolder implements Serializable {
 	public void setMax(int max) {
 		this.max = max;
 	}
+
+	public String getLangIso2() {
+		return langIso2;
+	}
+
+	public void setLangIso2(String langIso2) {
+		this.langIso2 = langIso2;
+	}
+	
 }

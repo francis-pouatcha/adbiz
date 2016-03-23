@@ -9,6 +9,7 @@
         '$location',
         'Article',
         'CatalArtLangMapping',
+        'CatalArtLangMappingForm',
         'CatalArt2ProductFamily',
         'CatalProdFmly',
         'CatalProdFmlyLangMap',
@@ -21,12 +22,100 @@
                                $location,
                                Article,
                                CatalArtLangMapping,
+                               CatalArtLangMappingForm,
                                CatalArt2ProductFamily,
                                CatalProdFmly,
                                CatalProdFmlyLangMap,
                                utils,
                                ArticleForm,
                                $translate) {
+    	
+    	var userLangIso2=$translate.use();
+    	
+    	var buildArtLangMappingDisplay = function(article, artLangMappings){
+    		angular.forEach(artLangMappings, function(artLangMapping){
+    			if(angular.equals(this.identif, artLangMapping.cntnrIdentif)){
+    				if(userLangIso2==artLangMapping.langIso2){// override entry with user language version
+    					rebuildDisplay(this,artLangMapping);
+    				} else {// only set if not yet set.
+    					this.langMappingId = this.langMappingId || artLangMapping.id;
+    					this.langIso2 = this.langIso2 ||  artLangMapping.langIso2;
+    					this.artName = this.artName || artLangMapping.artName;
+    					this.shortName = this.shortName || artLangMapping.shortName;
+    					this.purpose = this.purpose || artLangMapping.purpose;
+    					this.usage = this.usage || artLangMapping.usage;
+    					this.warnings = this.warnings || artLangMapping.warnings;
+    					this.substances = this.substances || artLangMapping.substances;
+    				}
+    			}
+    		}, article);
+    	};
+
+    	var buildFamLangMappingDisplay = function(artList, art2ProductFamilies, famLangList){
+    		var holder = {"artList":artList, "art2ProductFamilies":art2ProductFamilies, "famLangList":famLangList};
+    		angular.forEach(holder.artList, function(article){
+    			this.article = article;
+    			angular.forEach(this.art2ProductFamilies, function(art2ProductFamily){
+    				this.art2ProductFamily = art2ProductFamily;
+    				if(this.article.identif==this.art2ProductFamily.artPic){
+    					this.article.famMappings = this.article.famMappings || [];
+    					angular.forEach(this.famLangList, function(prodFmlyLang){
+    						if(this.art2ProductFamily.famCode==prodFmlyLang.cntnrIdentif){
+    							this.article.famMappings.push(prodFmlyLang);
+    						}
+    					}, this);
+    				}
+    			}, this);
+    		},holder);
+    	};
+    	
+    	
+    	var cleanDisplay = function(article){
+    		var display = {};
+    		cleanArtLangMappingDisplay(article, display);
+    		display.famMappings = article.famMappings;
+    		article.famMappings = undefined;
+    	}
+    	
+    	var cleanArtLangMappingDisplay = function(article, display){
+    		display.artLangMapping = {};
+			display.artLangMapping.id = article.langMappingId;
+			article.langMappingId = undefined;
+    		display.artLangMapping.langIso2 = article.langIso2;
+    		article.langIso2 = undefined;
+    		display.artLangMapping.artName = article.artName;
+    		article.artName = undefined;
+    		display.artLangMapping.shortName = article.shortName;
+    		article.shortName = undefined;
+    		display.artLangMapping.purpose = article.purpose;
+    		article.purpose = undefined;
+    		display.artLangMapping.usage = article.usage;
+    		article.usage = undefined;
+    		display.artLangMapping.warnings = article.warnings;
+    		article.warnings = undefined;
+    		display.artLangMapping.substances = article.substances;
+    		article.substances = undefined;
+
+    		return display;
+    	};
+    	
+    	var rebuildDisplay = function(article, display){
+    		if(display.artLangMapping){
+    			article.langMappingId = display.artLangMapping.id;
+    			article.langIso2 = display.artLangMapping.langIso2;
+    			article.artName = display.artLangMapping.artName;
+    			article.shortName = display.artLangMapping.shortName;
+    			article.purpose = display.artLangMapping.purpose;
+    			article.usage = display.artLangMapping.usage;
+    			article.warnings = display.artLangMapping.warnings;
+    			article.substances = display.artLangMapping.substances;
+    		}
+    		
+    		if(display.famMappings){
+    			article.famMappings = display.famMappings;
+    		}
+    	};
+    	
         var vm = this;
         vm.data = [];
         vm.article = {};
@@ -40,8 +129,8 @@
             vm.itemsByPage = utils.searchInputInit().stPagination.number;
         }
 
-        vm.setFormFields = function(disabled, hideName) {
-            vm.formFields = ArticleForm.getFormFields(disabled, hideName);
+        vm.setFormFields = function(disabled) {
+            vm.formFields = ArticleForm.getFormFields(disabled);
         };
         vm.setFormSearchFields = function() {
             vm.formSearchFields = ArticleForm.getFormSearchFields();
@@ -50,24 +139,20 @@
         initSearchInput();
 
         vm.create = function() {
-            var catalArtLangMapping = {};
-            catalArtLangMapping.artName = vm.article.artName;
-            catalArtLangMapping.shortName = vm.article.shortName;
-            catalArtLangMapping.langIso2 = $translate.use();
-            delete vm.article.artName;
-            delete vm.article.shortName;
+            var catalArtLangMapping = cleanDisplay(vm.article).catalArtLangMapping;
             // Create new Article object
-            var article = new Article(vm.article);
+            var articleService = new Article(vm.article);
             // Redirect after save
-            article.$save(function(response) {
+            articleService.$save(function(response) {
                 logger.success('Article created');
                 catalArtLangMapping.cntnrIdentif = response.id;
-                var catalArtLangMappingRes = new CatalArtLangMapping(catalArtLangMapping);
                 vm.data.push(response);
 
-                catalArtLangMappingRes.$save(function (responseTwo) {
+                var catalArtLangMappingService = new CatalArtLangMapping(catalArtLangMapping);
+                catalArtLangMappingService.$save(function (responseTwo) {
+                	buildArtLangMappingDisplay(response, {"artLangMapping":responseTwo});
+                	
                     $location.path('/article/' + response.id);
-
                 }, function (errorResponseTwo) {
                     vm.error = errorResponseTwo.data.summary;
                 });
@@ -95,46 +180,45 @@
         };
         // Update existing Article
         vm.update = function() {
+            var catalArtLangMapping = cleanDisplay(vm.article).artLangMapping;
             var article = vm.article;
 
             article.$update(function() {
                 logger.success('Article updated');
-                $location.path('article/' + article.id);
+                CatalArtLangMapping.get({catalArtLangMappingId: catalArtLangMapping.id}, function () {
+                    $location.path('article/' + article.id);
+                }, function(errorResponse2){
+                    vm.error = errorResponse2.data.summary;
+                });
             }, function(errorResponse) {
                 vm.error = errorResponse.data.summary;
             });
         };
 
-        function coreSearchInputInit() {
-            vm.articleId = $stateParams.articleId;
-            var coreSearchInput = {};
-            coreSearchInput.entity = {};
-            coreSearchInput.entity.cntnrIdentif = vm.articleId;
-            //coreSearchInput.entity.langIso2 = $translate.use();
-            coreSearchInput.fieldNames = [];
-            coreSearchInput.fieldNames.push('cntnrIdentif');
-            //coreSearchInput.fieldNames.push('langIso2');
-            coreSearchInput.className = 'org.adorsys.adcatal.jpa.CatalArtLangMappingSearchInput';
-            return coreSearchInput;
-        }
-
-        vm.toViewArticle = function() {
+        vm.toDisplayArticle = function(disabled) {
             Article.get({articleId: $stateParams.articleId}, function(data){
                 vm.article = data;
 
                 ArticleForm.catalArticleId = $stateParams.articleId;
-                vm.setFormFields(true, false);
-
-                CatalArtLangMapping.findBy(coreSearchInputInit(), function (response) {
-                    vm.article.artName = response.resultList[0].artName;
-                    vm.article.shortName = response.resultList[0].shortName;
+                vm.setFormFields(disabled);
+                CatalArtLangMapping.findByCntnrIdentifIn({"list":[vm.article.identif], "start":0, "max":10, "langIso2":userLangIso2}, function(langResp){
+                	buildArtLangMappingDisplay(vm.article, langResp.resultList);   
+      
+                    CatalArt2ProductFamily.findByCntnrIdentifIn({"list":[vm.article.identif], "start":0, "max":10, "langIso2":userLangIso2},function(art2ProductFamilyResp){
+                    	var art2ProductFamilies = [];
+                    	angular.forEach(art2ProductFamilyResp.resultList,function(art2ProductFamily){
+                    		this.push(art2ProductFamily.famCode);
+                    	},art2ProductFamilies);
+                    	
+                    	CatalProdFmlyLangMap.findByCntnrIdentifIn({"list":art2ProductFamilies, "start":0, "max":1, "langIso2":userLangIso2}, function (langResp) {
+                        	buildFamLangMappingDisplay([vm.article], art2ProductFamilyResp.resultList, langResp.resultList);
+                        });
+                    });                	
+                }, function(errorResponse2){
+                	vm.error = errorResponse2.data.summary;
                 });
             });
 
-        };
-        vm.toEditArticle = function() {
-            vm.article = Article.get({articleId: $stateParams.articleId});
-            vm.setFormFields(false, true);
         };
         
         vm.callServer = function(tableState) {
@@ -150,50 +234,24 @@
                 angular.forEach(response.resultList, function(article){
                 	this.push(article.identif);
                 }, identifs);
-                
-                // read the corresponding art language mapping for the user language. Actualy we use.
-                CatalArtLangMapping.findByCntnrIdentifIn({"list":identifs, "start":0, "max":10}, function (langResp) {
+                CatalArtLangMapping.findByCntnrIdentifIn({"list":identifs, "start":0, "max":10, "langIso2":userLangIso2}, function(langResp){
                 	angular.forEach(response.resultList, function(article){
-                		angular.forEach(langResp.resultList, function(artLangMapping){
-                			if(angular.equals(this.identif, artLangMapping.cntnrIdentif)){
-                				if(angular.isUndefined(this.langMappings))this.langMappings=[];
-
-                				this.langMappings.push(this);
-                    			// Take the value of the first entry
-                                this.artName = this.artName || artLangMapping.artName;
-                                this.shortName = this.shortName || artLangMapping.shortName;
-                			}
-                		}, article);
+                		buildArtLangMappingDisplay(article, langResp.resultList);                    	
                 	}, this);
-                });
+                }, function(errorResponse2){
+                	vm.error = errorResponse2.data.summary;
+                });                
                 
-                
-                CatalArt2ProductFamily.findByCntnrIdentifIn({"list":identifs, "start":0, "max":10},function(art2ProductFamilyResp){
-                	var famCodes = [];
+                CatalArt2ProductFamily.findByCntnrIdentifIn({"list":identifs, "start":0, "max":10, "langIso2":userLangIso2},function(art2ProductFamilyResp){
+                	var art2ProductFamilies = [];
                 	angular.forEach(art2ProductFamilyResp.resultList,function(art2ProductFamily){
                 		this.push(art2ProductFamily.famCode);
-                	},famCodes);
+                	},art2ProductFamilies);
                 	
-                	CatalProdFmlyLangMap.findByCntnrIdentifIn({"list":famCodes, "start":0, "max":10}, function (langResp) {
-                		var holder = {"artList":response.resultList, "famLangList":langResp.resultList, "art2ProductFamilies":art2ProductFamilyResp.resultList};
-                		angular.forEach(holder.artList, function(article){
-                			this.article = article;
-                			angular.forEach(this.art2ProductFamilies, function(art2ProductFamily){
-                				this.art2ProductFamily = art2ProductFamily;
-                				if(this.article.identif==this.art2ProductFamily.artPic){
-                					this.article.productFamilies = this.article.productFamilies || [];
-                					angular.forEach(this.famLangList, function(prodFmlyLang){
-                						if(this.art2ProductFamily.famCode==prodFmlyLang.cntnrIdentif){
-                							this.article.productFamilies.push(prodFmlyLang);
-                							this.article.famNames = this.article.famNames || '';
-                							this.article.famNames += prodFmlyLang.artName + '\n';
-                						}
-                					}, this);
-                				}
-                			}, this);
-                		},holder);
+                	CatalProdFmlyLangMap.findByCntnrIdentifIn({"list":art2ProductFamilies, "start":0, "max":1, "langIso2":userLangIso2}, function (langResp) {
+                    	buildFamLangMappingDisplay(response.resultList, art2ProductFamilyResp.resultList, langResp.resultList);
                     });
-                });
+                });                	
             },
             function(errorResponse) {
                 vm.error = errorResponse.data.summary;

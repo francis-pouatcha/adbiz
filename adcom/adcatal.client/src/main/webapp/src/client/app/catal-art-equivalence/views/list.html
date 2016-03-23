@@ -15,11 +15,13 @@
           <th>{{'CatalArtEquivalence_artEquivCode_description.title' | translate}}</th>
           <th>{{'CatalArtEquivalence.mainArtIdentif' | translate}}</th>
           <th>{{'CatalArtEquivalence.equivArtIdentif' | translate}}</th>
+          <th>{{'CatalArtEquivalence.usage' | translate}}</th>
           </thead>
           <tr ng-repeat="catalArtEquivalence in vmArtEquiv.data">
               <td>{{catalArtEquivalence.artEquivCode}}</td>
-              <td>{{catalArtEquivalence.mainArtIdentif}}</td>
-              <td>{{catalArtEquivalence.equivArtIdentif}}</td>
+              <td>{{catalArtEquivalence.mainArtIdentif}}<br/>{{catalArtEquivalence.displayMainArtName}}</td>
+              <td>{{catalArtEquivalence.equivArtIdentif}}<br/>{{catalArtEquivalence.displayEquivArtName}}</td>
+              <td>{{catalArtEquivalence.usage}}</td>
               <td>
                  <div class="table-actions">
                       <a class="btn btn-default" title="View"ng-click="vmArtEquiv.showForm(catalArtEquivalence)">

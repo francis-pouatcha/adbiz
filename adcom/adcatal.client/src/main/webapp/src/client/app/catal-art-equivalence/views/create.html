@@ -1,4 +1,4 @@
-<section class="" ng-controller="CatalArtEquivalenceController as vm" data-ng-init="vm.setFormFields(false,false)">
+<section class="" ng-controller="CatalArtEquivalenceController as vm" data-ng-init="vm.setCreateFields()">
 
   <div class="panel panel-primary">
     <div class="panel-heading">
@@ -8,7 +8,7 @@
 
         <form novalidate>
 
-            <formly-form model="vmModal.model" fields="vm.formFields" form="vm.form">
+            <formly-form model="vmModal.model" fields="vm.createFields" form="vm.form">
             </formly-form>
 
             <hr/>
