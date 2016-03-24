@@ -55,6 +55,7 @@
 				<include>org.adorsys.adcom:adcatal.client</include>
 				<include>org.adorsys.adcom:adstock.client</include>
 				<include>org.adorsys.adcom:adinvtry.client</include>
+				<include>org.adorsys.adcom:adprocmt.client</include>
 				<include>org.adorsys.adcom:adcatal.server</include>
 				<include>org.adorsys.adcom:adstock.server</include>
 				<include>org.adorsys.adcom:adinvtry.server</include>

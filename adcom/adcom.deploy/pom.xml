@@ -104,6 +104,12 @@
 		</dependency>
 		<dependency>
 			<groupId>org.adorsys.adcom</groupId>
+			<artifactId>adprocmt.client</artifactId>
+			<type>war</type>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.adorsys.adcom</groupId>
 			<artifactId>adcatal.server</artifactId>
 			<type>war</type>
 			<version>${project.version}</version>
