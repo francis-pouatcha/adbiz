@@ -9,14 +9,15 @@
         'CatalArt2ProductFamily',
         'CatalArt2ProductFamilyForm',
         'ArticleForm',
-        'utils'
+        'utils',
+        '$stateParams'
         ];
     /* @ngInject */
     function CatalArt2ProductFamilyController(logger,
         CatalArt2ProductFamily,
         CatalArt2ProductFamilyForm,
         ArticleForm,
-        utils
+        utils, $stateParams
         ) {
 
         var vm = this;
@@ -36,13 +37,13 @@
                 'src/client/app/catal-art-2-product-family/views/view.html', vm);
         };
         vm.init = function() {
+            vm.catalArticleId = $stateParams.articleId;
             CatalArt2ProductFamily.findBy(coreSearchInputInit(), function(response) {
                 vm.data = response.resultList;
             });
         };
 
         function coreSearchInputInit() {
-            vm.catalArticleId = ArticleForm.catalArticleId;
             var coreSearchInput = {};
             coreSearchInput.entity = {};
             coreSearchInput.entity.cntnrIdentif = vm.catalArticleId;
@@ -53,13 +54,13 @@
         }
 
         vm.setFormFields = function(disabled) {
-            vm.catalArticleId = ArticleForm.catalArticleId;
+            vm.catalArticleId = $stateParams.articleId;
             vm.formFields = CatalArt2ProductFamilyForm.getFormFields(disabled);
             vm.formFields[0].defaultValue = vm.catalArticleId;
         };
 
         vm.create = function(catalArt2ProductFamily) {
-            vm.catalArticleId = ArticleForm.catalArticleId;
+            vm.catalArticleId = $stateParams.articleId;
             catalArt2ProductFamily.cntnrIdentif = vm.catalArticleId;
             // Create new CatalArt2ProductFamily object
             var catalArt2ProductFamilyRes = new CatalArt2ProductFamily(catalArt2ProductFamily);

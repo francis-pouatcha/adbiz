@@ -41,7 +41,7 @@
 
     mvntUtils.$inject = ['$translate','genericResource','API_BASE_ADSTOCK_URL'];
     /* @ngInject */
-    function mvntUtils($translate, genericResource, API_BASE_ADSTOCK_URL, genericResource) {
+    function mvntUtils($translate, genericResource, API_BASE_ADSTOCK_URL) {
 
         var service = {};
 

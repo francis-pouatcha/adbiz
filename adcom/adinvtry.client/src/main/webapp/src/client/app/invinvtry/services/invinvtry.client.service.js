@@ -97,7 +97,7 @@
 
     invInvtryUtils.$inject = ['$translate','genericResource','API_BASE_ADINVTRY_URL'];
     /* @ngInject */
-    function invInvtryUtils($translate, genericResource, API_BASE_ADINVTRY_URL, genericResource) {
+    function invInvtryUtils($translate, genericResource, API_BASE_ADINVTRY_URL) {
 
         var service = {};
 

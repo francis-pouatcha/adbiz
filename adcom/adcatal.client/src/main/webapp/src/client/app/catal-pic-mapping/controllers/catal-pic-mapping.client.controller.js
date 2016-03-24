@@ -9,17 +9,17 @@
         'CatalPicMapping',
         'utils',
         'CatalPicMappingForm',
-        'ArticleForm'];
+        'ArticleForm', '$stateParams'];
     /* @ngInject */
     function CatalPicMappingController(logger, CatalPicMapping,
-                                       utils, CatalPicMappingForm, ArticleForm) {
+                                       utils, CatalPicMappingForm, ArticleForm, $stateParams) {
 
         var vm = this;
         vm.data = [];
         vm.catalPicMapping = {};
 
         vm.setFormFields = function (disabled) {
-            vm.catalArticleId = ArticleForm.catalArticleId;
+            vm.catalArticleId = $stateParams.articleId;
             vm.formFields = CatalPicMappingForm.getFormFields(disabled);
             vm.formFields[0].defaultValue = vm.catalArticleId;
         };
@@ -37,13 +37,13 @@
         };
 
         vm.init = function () {
+            vm.catalArticleId = $stateParams.articleId;
             CatalPicMapping.findBy(coreSearchInputInit(), function (response) {
                 vm.data = response.resultList;
             });
         };
 
         function coreSearchInputInit() {
-            vm.catalArticleId = ArticleForm.catalArticleId;
             var searchInput = {};
             searchInput.entity = {};
             searchInput.entity.cntnrIdentif = vm.catalArticleId;
@@ -54,7 +54,7 @@
         }
 
         vm.create = function (catalPicMapping) {
-            vm.catalArticleId = ArticleForm.catalArticleId;
+            vm.catalArticleId = $stateParams.articleId;
             catalPicMapping.cntnrIdentif = vm.catalArticleId;
             // Create new catalPicMapping object
             var catalPicMappingRes = new CatalPicMapping(catalPicMapping);

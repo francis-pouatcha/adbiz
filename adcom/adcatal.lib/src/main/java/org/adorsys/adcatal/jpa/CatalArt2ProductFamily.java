@@ -28,6 +28,7 @@ public class CatalArt2ProductFamily extends CoreAbstIdentifObject {
 
 	public void setArtPic(String artPic) {
 		this.artPic = artPic;
+		setCntnrIdentif(artPic);
 	}
 
 	public String getFamCode() {

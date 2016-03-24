@@ -16,6 +16,7 @@
                 'app.core.create.title':'Create',
                 //--------------Article---------------
                 'CatalArticle.sppu': 'Sales Price',
+                'CatalArticle.artName': 'Name',
                 'CatalArticle.maxDisctRate': 'Max Discount',
                 'CIP':'CIP',
                 'CatalArticle.minStockQty': 'Min Quantity',
@@ -66,6 +67,7 @@
                 'CatalArtEquivalence.title':'Article Equivalence',
                 'CatalArtEquivalence.mainArtIdentif': 'Main Article',
                 'CatalArtEquivalence.equivArtIdentif': 'Equivalent Article',
+                'CatalArtEquivalence.usage': 'Usage',
                 'CatalArtEquivalence.new.title':'New Article Equivalence',
                 'CatalArtEquivalence.list.title':'List Article Equivalence',
                 'CatalArtEquivalence.delete.title':'Delete Article Equivalence',
@@ -235,6 +237,7 @@
                 'CatalArtEquivalence.title':'Articles Equivalents',
                 'CatalArtEquivalence.mainArtIdentif': 'Identifiant du Produit Principal',
                 'CatalArtEquivalence.equivArtIdentif': 'Identifiant du Produit Equivalent',
+                'CatalArtEquivalence.usage': 'Mode d\'emploie',
                 'CatalArtEquivalence.new.title':'Nouvel Article Equivalent',
                 'CatalArtEquivalence.list.title':'Liste Article Equivalent',
                 'CatalArtEquivalence.delete.title':'Supprimer Article Equivalent',

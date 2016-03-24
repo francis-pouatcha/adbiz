@@ -10,17 +10,18 @@
         'CatalArtLangMapping',
         'utils',
         'CatalArtLangMappingForm',
-        'ArticleForm'];
+        'ArticleForm',
+        '$stateParams'];
 
     /* @ngInject */
     function CatalArtLangMappingController(logger, CatalArtLangMapping,
-                                           utils, CatalArtLangMappingForm, ArticleForm) {
+                                           utils, CatalArtLangMappingForm, ArticleForm, $stateParams) {
         var vm = this;
         vm.data = [];
         vm.catalArtLangMapping = {};
 
         vm.setFormFields = function (disabled) {
-            vm.catalArticleId = ArticleForm.catalArticleId;
+            vm.catalArticleId = $stateParams.articleId;
             vm.formFields = CatalArtLangMappingForm.getFormFields(disabled);
             vm.formFields[0].defaultValue = vm.catalArticleId;
         };
@@ -38,13 +39,13 @@
         };
 
         vm.init = function () {
+            vm.catalArticleId = $stateParams.articleId;
             CatalArtLangMapping.findBy(coreSearchInputInit(), function (response) {
                 vm.data = response.resultList;
             });
         };
 
         function coreSearchInputInit() {
-            vm.catalArticleId = ArticleForm.catalArticleId;
             var searchInput = {};
             searchInput.entity = {};
             searchInput.entity.cntnrIdentif = vm.catalArticleId;
@@ -55,7 +56,7 @@
         }
 
         vm.create = function (catalArtLangMapping) {
-            vm.catalArticleId = ArticleForm.catalArticleId;
+            vm.catalArticleId = $stateParams.articleId;
             catalArtLangMapping.cntnrIdentif = vm.catalArticleId;
             // Create new catalArtLangMapping object
             var catalArtLangMappingRes = new CatalArtLangMapping(catalArtLangMapping);
@@ -90,7 +91,7 @@
 
         // Update existing catalArtLangMapping
         vm.update = function (catalArtLangMapping) {
-            var index = vm.data.indexOf(vm.model);
+            var index = vm.data.indexOf(catalArtLangMapping);
             var catalArtLangMappingRes = new CatalArtLangMapping(catalArtLangMapping);
             catalArtLangMappingRes.$update(function () {
                 logger.success('catalArtLangMapping updated');

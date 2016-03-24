@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
+import javax.persistence.EntityNotFoundException;
 
 import org.adorsys.adcore.event.EntityArchivedEvent;
 import org.adorsys.adcore.event.EntityCreatedEvent;
@@ -95,7 +96,28 @@ public abstract class CoreAbstIdentifiedEJB<E extends CoreAbstIdentifObject> {
 	protected E attach(E entity) {
 		if (entity == null)
 			return null;
-		return entity;
+		
+		// Entity being created.
+		if(entity.getId()==null)
+			return entity;
+		
+		// First find the one with the corresponding identif.
+		// Identif is more important that id.
+		E localVersion = getRepo().findOptionalByIdentif(entity.getIdentif());
+		if(localVersion==null) throw new EntityNotFoundException("No entity with identif: "  + entity.getIdentif());
+		return preUpdate(entity, localVersion);
+	}
+	
+	/**
+	 * This method will allow us to reverse undesired changes on key fields.
+	 * 
+	 * @param newVersion
+	 * @param localVersion
+	 * @return
+	 */
+	protected E preUpdate(E newVersion, E localVersion){
+		newVersion.setId(localVersion.getId());
+		return newVersion;
 	}
 
 	protected void fireEntityCreatedEvent(E saved) {

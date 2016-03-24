@@ -9,20 +9,20 @@
         'CatalArtDetailConfig',
         'utils',
         'CatalArtDetailConfigForm',
-        'ArticleForm'];
+        'ArticleForm', '$stateParams'];
     /* @ngInject */
     function CatalArtDetailConfigController(logger,
         CatalArtDetailConfig,
         utils,
         CatalArtDetailConfigForm,
-        ArticleForm) {
+        ArticleForm, $stateParams) {
 
         var vm = this;
         vm.data = [];
         vm.catalArtDetailConfig = {};
 
         vm.setFormFields = function(disabled) {
-            vm.catalArticleId = ArticleForm.catalArticleId;
+            vm.catalArticleId = $stateParams.articleId;
             vm.formFields = CatalArtDetailConfigForm.getFormFields(disabled);
             vm.formFields[0].defaultValue = vm.catalArticleId;
         };
@@ -40,13 +40,13 @@
                 'src/client/app/catal-art-detail-config/views/view.html', vm);
         };
         vm.init = function() {
+            vm.catalArticleId = $stateParams.articleId;
             CatalArtDetailConfig.findBy(coreSearchInputInit(), function(response) {
                 vm.data = response.resultList;
             });
         };
 
         function coreSearchInputInit() {
-            vm.catalArticleId = ArticleForm.catalArticleId;
             var searchInput = {};
             searchInput.entity = {};
             searchInput.entity.cntnrIdentif = vm.catalArticleId;
@@ -57,7 +57,7 @@
         }
 
         vm.create = function(catalArtDetailConfig) {
-            vm.catalArticleId = ArticleForm.catalArticleId;
+            vm.catalArticleId = $stateParams.articleId;
             catalArtDetailConfig.cntnrIdentif = vm.catalArticleId;
             // Create new CatalArtDetailConfig object
             var catalArtDetailConfigRes = new CatalArtDetailConfig(catalArtDetailConfig);

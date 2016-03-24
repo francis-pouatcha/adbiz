@@ -76,6 +76,7 @@
 		<version.org.codehaus.jackson>1.9.9</version.org.codehaus.jackson>
 		<version.org.jboss.logging>3.1.4.GA</version.org.jboss.logging>
 		<jackson.version>2.5.4</jackson.version>
+		<version.deltaspike>1.5.4</version.deltaspike>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -95,13 +96,13 @@
 			<dependency>
 				<groupId>org.apache.deltaspike.modules</groupId>
 				<artifactId>deltaspike-data-module-api</artifactId>
-				<version>1.4.1</version>
+				<version>${version.deltaspike}</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.deltaspike.modules</groupId>
 				<artifactId>deltaspike-data-module-impl</artifactId>
-				<version>1.4.1</version>
+				<version>${version.deltaspike}</version>
 				<scope>compile</scope>
 			</dependency>
 			<dependency>

@@ -10,14 +10,14 @@
         '$location',
         'CatalProdFmly',
         'utils',
-        'CatalProdFmlyForm'];
+        'CatalProdFmlyForm', '$stateParams'];
     /* @ngInject */
     function CatalProdFmlyController(logger,
         $stateParams,
         $location,
         CatalProdFmly,
         utils,
-        CatalProdFmlyForm) {
+        CatalProdFmlyForm, $stateParams) {
 
         var vm = this;
         vm.data = [];

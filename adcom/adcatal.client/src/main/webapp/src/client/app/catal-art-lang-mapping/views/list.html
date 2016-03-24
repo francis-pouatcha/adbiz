@@ -17,7 +17,7 @@
               <td>{{'langIso2' | translate}}</td>
               <td>{{'CatalAbstractFeatMapping.purpose' | translate}}</td>
           </thead>
-          <tr ng-repeat="catalArtLangMapping in vmctrl.data">
+          <tr ng-repeat="catalArtLangMapping in vmctrl.data track by catalArtLangMapping.id">
               <td>{{catalArtLangMapping.artName }}</td>
               <td>{{catalArtLangMapping.shortName}}</td>
               <td>{{catalArtLangMapping.langIso2}}</td>

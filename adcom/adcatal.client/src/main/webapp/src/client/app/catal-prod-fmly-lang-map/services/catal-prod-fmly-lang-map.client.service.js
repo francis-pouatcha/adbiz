@@ -20,6 +20,10 @@
             findBy: {
                 method: 'POST',
                 url: API_BASE_ADCATAL_URL + '/catalfamilyfeatmapings/findBy'
+            },
+            findByCntnrIdentifIn: {
+                method: 'POST',
+                url: API_BASE_ADCATAL_URL + '/catalfamilyfeatmapings/findByCntnrIdentifIn'
             }
         };
 

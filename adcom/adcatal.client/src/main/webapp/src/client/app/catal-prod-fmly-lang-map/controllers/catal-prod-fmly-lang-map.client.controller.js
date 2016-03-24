@@ -10,17 +10,17 @@
         'CatalProdFmlyLangMap',
         'utils',
         'CatalProdFmlyLangMapForm',
-        'CatalProdFmlyForm'];
+        'CatalProdFmlyForm', '$stateParams'];
     /* @ngInject */
     function CatalProdFmlyLangMapController(logger, CatalProdFmlyLangMap,
-                                            utils, CatalProdFmlyLangMapForm, CatalProdFmlyForm) {
+                                            utils, CatalProdFmlyLangMapForm, CatalProdFmlyForm, $stateParams) {
 
         var vm = this;
         vm.data = [];
         vm.catalProdFmlyLangMap = {};
 
         vm.setFormFields = function (disabled) {
-            vm.catalProdFmlyId = CatalProdFmlyForm.catalProdFmlyId;
+            vm.catalArticleId = $stateParams.articleId;
             console.log(vm.catalProdFmlyId);
             vm.formFields = CatalProdFmlyLangMapForm.getFormFields(disabled);
             vm.formFields[0].defaultValue = vm.catalProdFmlyId;
@@ -39,13 +39,13 @@
         };
 
         vm.init = function () {
+            vm.catalArticleId = $stateParams.articleId;
             CatalProdFmlyLangMap.findBy(coreSearchInputInit(), function (response) {
                 vm.data = response.resultList;
             });
         };
 
         function coreSearchInputInit() {
-            vm.catalProdFmlyId = CatalProdFmlyForm.catalProdFmlyId;
             var searchInput = {};
             searchInput.entity = {};
             searchInput.entity.cntnrIdentif = vm.catalProdFmlyId;
@@ -56,7 +56,7 @@
         }
 
         vm.create = function (catalProdFmlyLangMap) {
-            vm.catalProdFmlyId = CatalProdFmlyForm.catalProdFmlyId;
+            vm.catalArticleId = $stateParams.articleId;
             catalProdFmlyLangMap.cntnrIdentif = vm.catalProdFmlyId;
             // Create new catalProdFmlyLangMap object
             var catalProdFmlyLangMapRes = new CatalProdFmlyLangMap(catalProdFmlyLangMap);

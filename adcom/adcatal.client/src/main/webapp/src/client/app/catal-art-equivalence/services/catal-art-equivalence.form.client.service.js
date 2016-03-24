@@ -9,7 +9,7 @@
     /* @ngInject */
     function factory($translate, Article) {
 
-        var getFormFields = function(disabled) {
+        var getCreateFields = function() {
 
             var fields = [
                 {
@@ -26,7 +26,7 @@
                     type: 'typeahead',
                     templateOptions: {
                         label: $translate.instant('CatalArtEquivalence.equivArtIdentif'),
-                        disabled: disabled,
+                        disabled: false,
                         required: true
                     },
                     controller: /* @ngInject */
@@ -49,6 +49,13 @@
                                     });
                             };
                         }
+                },
+                {
+                    key: 'usage',
+                    type: 'textarea',
+                    templateOptions: {
+                        label: $translate.instant('CatalArtEquivalence.usage')
+                    }
                 }
             ];
 
@@ -56,8 +63,44 @@
 
         };
 
+        var getFormFields = function(disabled) {
+
+            var fields = [
+                {
+                    key: 'displayMainArtName',
+                    type: 'input',
+                    templateOptions: {
+                        label: $translate.instant('CatalArtEquivalence.mainArtIdentif'),
+                        disabled: true,
+                        required: true
+                    }
+                },
+                {
+                    key: 'displayEquivArtName',
+                    type: 'input',
+                    templateOptions: {
+                        label: $translate.instant('CatalArtEquivalence.equivArtIdentif'),
+                        disabled: true,
+                        required: true
+                    }
+                },
+                {
+                    key: 'usage',
+                    type: 'textarea',
+                    templateOptions: {
+                        label: $translate.instant('CatalArtEquivalence.usage'),
+                        disabled: disabled
+                    }
+                }
+            ];
+
+            return fields;
+
+        };
+        
         var service = {
-            getFormFields: getFormFields
+            getFormFields: getFormFields,
+            getCreateFields: getCreateFields
         };
 
         return service;
