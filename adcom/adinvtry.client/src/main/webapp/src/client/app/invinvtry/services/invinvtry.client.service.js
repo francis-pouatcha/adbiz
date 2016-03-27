@@ -95,9 +95,9 @@
         .module('app.invinvtry')
         .factory('invInvtryUtils', invInvtryUtils);
 
-    invInvtryUtils.$inject = ['$translate','genericResource','API_BASE_ADINVTRY_URL'];
+    invInvtryUtils.$inject = ['$translate','API_BASE_ADINVTRY_URL','genericResource'];
     /* @ngInject */
-    function invInvtryUtils($translate, genericResource, API_BASE_ADINVTRY_URL) {
+    function invInvtryUtils($translate,API_BASE_ADINVTRY_URL, genericResource) {
 
         var service = {};
 

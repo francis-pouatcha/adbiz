@@ -97,7 +97,7 @@
 
     prcmtUtils.$inject = ['$translate','genericResource','API_BASE_ADPROCMT_URL'];
     /* @ngInject */
-    function prcmtUtils($translate, genericResource, API_BASE_ADPROCMT_URL, genericResource) {
+    function prcmtUtils($translate, genericResource, API_BASE_ADPROCMT_URL) {
 
         var service = {};
 
