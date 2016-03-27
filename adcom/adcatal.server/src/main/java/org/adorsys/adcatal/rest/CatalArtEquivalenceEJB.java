@@ -15,20 +15,8 @@ public class CatalArtEquivalenceEJB extends
 	@Inject
 	private CatalArtEquivalenceRepository repository;
 
-	/**
-	 * Generate the equivalence code
-	 * 
-	 * @param mainArtIdentif
-	 * @param equivArtIdentif
-	 * @return
-	 */
-	public String generateEquivCode(String mainArtIdentif,
-			String equivArtIdentif) {
-		return mainArtIdentif + "-" + equivArtIdentif;
-	}
-
 	@Override
 	protected CoreAbstIdentifRepo<CatalArtEquivalence> getRepo() {
 		return repository;
-	}
+	}	
 }

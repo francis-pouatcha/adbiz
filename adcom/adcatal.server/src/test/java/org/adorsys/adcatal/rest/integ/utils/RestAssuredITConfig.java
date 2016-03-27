@@ -11,8 +11,6 @@ import org.adorsys.adcatal.jpa.CatalArt2ProductFamily;
 import org.adorsys.adcatal.jpa.CatalArt2ProductFamilySearchInput;
 import org.adorsys.adcatal.jpa.CatalArtLangMapping;
 import org.adorsys.adcatal.jpa.CatalArtLangMappingSearchInput;
-import org.adorsys.adcatal.jpa.CatalArtManufSupp;
-import org.adorsys.adcatal.jpa.CatalArtManufSuppSearchInput;
 import org.adorsys.adcatal.jpa.CatalArticle;
 import org.adorsys.adcatal.jpa.CatalArticleSearchInput;
 import org.adorsys.adcatal.jpa.CatalPicMapping;
@@ -21,15 +19,11 @@ import org.adorsys.adcatal.jpa.CatalProdFmly;
 import org.adorsys.adcatal.jpa.CatalProdFmlyLangMap;
 import org.adorsys.adcatal.jpa.CatalProdFmlyLangMapSearchInput;
 import org.adorsys.adcatal.jpa.CatalProdFmlySearchInput;
-import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
-import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
-import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.utils.DateUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.BeforeClass;
 
 import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.specification.ResponseSpecification;
 
 /**
  * Base Class for RestAssured Tests
@@ -182,29 +176,5 @@ public class RestAssuredITConfig {
 		return 	catalProdFmlyLangMapSearchInput;
 		
 	}
-	
-	
-	public static CatalArtManufSuppSearchInput createCatalArtManufSuppSearchInput(CatalArtManufSupp catalArtManufSupp){
-		
-		CatalArtManufSuppSearchInput catalArtManufSuppSearchInput = new CatalArtManufSuppSearchInput();
-		catalArtManufSuppSearchInput.setIdentifFrom(catalArtManufSupp.getIdentif()); 
-		catalArtManufSuppSearchInput.setIdentifTo(catalArtManufSupp.getIdentif());
-		catalArtManufSuppSearchInput.setValueDtFrom(DateUtil.format(catalArtManufSupp.getValueDt(), DateUtil.DATE_TIME_FORMAT));
-		catalArtManufSuppSearchInput.setValueDtTo(DateUtil.format(catalArtManufSupp.getValueDt(), DateUtil.DATE_TIME_FORMAT));
-		catalArtManufSuppSearchInput.setClassName(CatalArtManufSuppSearchInput.class.getName());
-		catalArtManufSuppSearchInput.setStart(0);
-		catalArtManufSuppSearchInput.setMax(5);
-		List<String> fieldNames= new ArrayList<String>();
-		fieldNames.addAll(Arrays.asList("famPath"));
-		catalArtManufSuppSearchInput.setFieldNames(fieldNames);
-		catalArtManufSuppSearchInput.setEntity(catalArtManufSupp);
-		return 	catalArtManufSuppSearchInput;
-	}
-	
-	
-	
-	
-	
-	
 	
 }

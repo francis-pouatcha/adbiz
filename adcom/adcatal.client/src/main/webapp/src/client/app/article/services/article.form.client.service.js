@@ -41,7 +41,7 @@
                             type: 'input',
                             key: 'shortName',
                             templateOptions: {
-                                label: $translate.instant('Article ShortName'),
+                                label: $translate.instant('CatalArtFeatMapping.shortName'),
                                 //pattern: '\\d{5}',
                                 disabled:disabled
                             }

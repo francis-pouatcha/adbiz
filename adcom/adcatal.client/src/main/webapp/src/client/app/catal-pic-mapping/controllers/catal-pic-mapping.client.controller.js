@@ -21,7 +21,7 @@
         vm.setFormFields = function (disabled) {
             vm.catalArticleId = $stateParams.articleId;
             vm.formFields = CatalPicMappingForm.getFormFields(disabled);
-            vm.formFields[0].defaultValue = vm.catalArticleId;
+            vm.formFields[0]['fieldGroup'][0].defaultValue = vm.catalArticleId;
         };
         vm.createForm = function (model) {
             utils.templateModal(model, 'createForm',
@@ -89,7 +89,7 @@
 
         // Update existing catalPicMapping
         vm.update = function (catalPicMapping) {
-            var index = vm.data.indexOf(vm.model);
+            var index = vm.data.indexOf(catalPicMapping);
             var catalPicMappingRes = new CatalPicMapping(catalPicMapping);
             catalPicMappingRes.$update(function () {
                 logger.success('catalPicMapping updated');

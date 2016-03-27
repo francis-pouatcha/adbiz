@@ -21,6 +21,8 @@ public enum CatalCipOrigine {
 	BROKER,
 	@Description("CatalCipOrigine_CUSTOMERSERVICE_description")
 	CUSTOMERSERVICE,
+	@Description("CatalCipOrigine_CUSTOMER_description")
+	CUSTOMER,
 	@Description("CatalCipOrigine_INSURANCE_description")
 	INSURANCE
 }

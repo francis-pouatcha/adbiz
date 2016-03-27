@@ -6,7 +6,7 @@
     </div>
     <div class="panel-body">
 
-      <form data-ng-submit="vm.update()" novalidate>
+      <form data-ng-submit="vm.update(vmModal.model)" novalidate>
 
         <formly-form model="vmModal.model" fields="vm.formFields" form="vm.form">
         </formly-form>

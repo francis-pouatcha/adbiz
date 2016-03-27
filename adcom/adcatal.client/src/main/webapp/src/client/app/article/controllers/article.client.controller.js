@@ -158,9 +158,7 @@
                 vm.data.push(response);
 
                 var catalArtLangMappingService = new CatalArtLangMapping(catalArtLangMapping);
-                catalArtLangMappingService.$save(function (responseTwo) {
-                	buildArtLangMappingDisplay(response, {"artLangMapping":responseTwo});
-                	
+                catalArtLangMappingService.$save(function () {
                     $location.path('/article/' + response.id);
                 }, function (errorResponseTwo) {
                     vm.error = errorResponseTwo.data.summary;
@@ -203,7 +201,7 @@
                         vm.error = errorResponse3.data.summary;
                     });
                 }, function(errorResponse2){
-                    vm.error = errorResponse3.data.summary;
+                    vm.error = errorResponse2.data.summary;
                 });
             }, function(errorResponse) {
                 vm.error = errorResponse.data.summary;

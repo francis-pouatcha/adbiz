@@ -12,18 +12,30 @@
 
       <table class="table table-condensed table-striped">
           <thead>
+          	<!-- 
               <th>{{'CatalPicMapping.artIdentif' | translate}}</th>
+          	 -->
               <th>{{'CatalPicMapping.code' | translate}}</th>
               <th>{{'CatalPicMapping.codeOrigin' | translate}}</th>
-              <th>{{'CatalPicMapping.addInfo' | translate}}</th>
-              <th>{{'CatalPicMapping.priority' | translate}}</th>
+              <th>{{'CatalPicMapping.bpName' | translate}}</th>
+              <th>{{'CatalPicMapping.unitPrice' | translate}}</th>
+              <th>{{'CatalPicMapping.currIso3' | translate}}</th>
+              <th>{{'CatalPicMapping.vatRate' | translate}}</th>
+              <th>{{'CatalPicMapping.returnDays' | translate}}</th>
+              <th>{{'CatalPicMapping.warrantyMonths' | translate}}</th>
           </thead>
           <tr ng-repeat="catalPicMapping in vmPic.data">
+          	<!-- 
               <td>{{catalPicMapping.artIdentif}}</td>
+          	 -->
               <td>{{catalPicMapping.code}}</td>
-              <td>{{catalPicMapping.codeOrigin}}</td>
-              <td>{{catalPicMapping.addInfo}}</td>
-              <td>{{catalPicMapping.priority}}</td>
+              <td>{{('CatalCipOrigine_' + catalPicMapping.codeOrigin + '_description') | translate}}</td>
+              <td>{{catalPicMapping.bpName}}</td>
+              <td>{{catalPicMapping.unitPrice}}</td>
+              <td>{{catalPicMapping.currIso3}}</td>
+              <td>{{catalPicMapping.vatRate}}</td>
+              <td>{{catalPicMapping.returnDays}}</td>
+              <td>{{catalPicMapping.warrantyMonths}}</td>
               <td>
                  <div class="table-actions">
                       <a class="btn btn-default" title="View" ng-click="vmPic.showForm(catalPicMapping)">

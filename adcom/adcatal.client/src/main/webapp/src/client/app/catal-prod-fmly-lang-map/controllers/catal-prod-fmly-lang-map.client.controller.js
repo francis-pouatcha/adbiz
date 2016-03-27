@@ -20,7 +20,7 @@
         vm.catalProdFmlyLangMap = {};
 
         vm.setFormFields = function (disabled) {
-            vm.catalArticleId = $stateParams.articleId;
+            vm.catalProdFmlyId = $stateParams.catalProdFmlyId;
             console.log(vm.catalProdFmlyId);
             vm.formFields = CatalProdFmlyLangMapForm.getFormFields(disabled);
             vm.formFields[0].defaultValue = vm.catalProdFmlyId;
@@ -39,7 +39,7 @@
         };
 
         vm.init = function () {
-            vm.catalArticleId = $stateParams.articleId;
+            vm.catalProdFmlyId = $stateParams.catalProdFmlyId;
             CatalProdFmlyLangMap.findBy(coreSearchInputInit(), function (response) {
                 vm.data = response.resultList;
             });

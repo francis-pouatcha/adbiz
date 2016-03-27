@@ -17,12 +17,14 @@
 				<tr>
 	          		<th><span data-ng-bind="'CatalProductFamily.parentIdentif' | translate"></span></th>
 	         		<th><span data-ng-bind="'cntnrIdentif' | translate"></span></th>
+	          		<th><span data-ng-bind="'CatalProductFamily.artName' | translate"></span></th>
 	          		<th><span data-ng-bind="'CatalProductFamily.famPath' | translate"></span></th>
 	          		<th><span data-ng-bind="'Action.title' | translate"></span></th>
           		</tr>
           		<tr>
 			  		<th><input data-st-search="parentIdentif" class="input-sm form-control" type="search"/></th>
              		<th><input data-st-search="identif" class="input-sm form-control" type="search"/></th>
+             		<th></th>
              		<th><input data-st-search="famPath" class="input-sm form-control" type="search"/></th>
              		<th></th>
 				</tr>
@@ -31,6 +33,7 @@
 	          	<tr data-ng-repeat="catalProdFmly in vm.data.list">
 					<td><span data-ng-bind="catalProdFmly.parentIdentif"></span></td>
 	              	<td><span data-ng-bind="catalProdFmly.identif"></span></td>
+	              	<td><span data-ng-bind-html="catalProdFmly.artName"></span></td>
 	              	<td><span data-ng-bind="catalProdFmly.famPath"></span></td>
 	              	<td>
 	                 	<div class="table-actions">

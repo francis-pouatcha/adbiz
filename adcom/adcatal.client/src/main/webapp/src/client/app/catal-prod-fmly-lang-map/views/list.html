@@ -14,13 +14,13 @@
           <thead>
               <th>{{'CatalFamilyFeatMaping_familyName_description.title' | translate}}</th>
               <th>{{'CatalFamilyFeatMaping_shortName_description.title' | translate}}</th>
-              <th>{{'CatalProductFamily.famPath' | translate}}</th>
+              <td>{{'CatalAbstractFeatMapping.purpose' | translate}}</td>
               <th>{{'langIso2' | translate}}</th>
           </thead>
           <tr ng-repeat="catalProdFmlyLangMap in vmProdFmlyLangMap.data">
               <td>{{catalProdFmlyLangMap.artName}}</td>
               <td>{{catalProdFmlyLangMap.shortName}}</td>
-              <td>{{catalProdFmlyLangMap.famPath}}</td>
+              <td>{{catalProdFmlyLangMap.purpose}}</td>
               <td>{{catalProdFmlyLangMap.langIso2}}</td>
               <td>
                  <div class="table-actions">

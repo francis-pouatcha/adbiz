@@ -99,7 +99,6 @@ public class CatalPicMappingEndpointIT extends RestAssuredITConfig {
 	private CatalPicMapping createCatalPicMapping(){
 		 CatalPicMapping catalPicMapping = new CatalPicMapping();
 		 catalPicMapping.setCode("00001");
-		 catalPicMapping.setPriority(1);
 		 return catalPicMapping;
 	}
 	
@@ -121,7 +120,6 @@ public class CatalPicMappingEndpointIT extends RestAssuredITConfig {
     }
 	
 	private CatalPicMapping updateCatalPicMapping(CatalPicMapping catalPicMapping){
-		catalPicMapping.setPriority(3);
 		catalPicMapping.setCode("8086515");
 		return catalPicMapping;
 	}

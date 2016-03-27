@@ -2,6 +2,8 @@ package org.adorsys.adcatal.jpa;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -65,10 +67,16 @@ public class CatalArtEquivalence extends CoreAbstIdentifObject {
 	public void setUsage(String usage) {
 		this.usage = usage;
 	}
+	
+	@PrePersist
+	public void prePersist(){
+		super.prePersist();
+		setCntnrIdentif(mainArtIdentif);
+	}
 
 	@Override
 	protected String makeIdentif() {
-		artEquivCode = mainArtIdentif+"-"+equivArtIdentif;
+		artEquivCode = mainArtIdentif+"_"+equivArtIdentif;
 		return artEquivCode;
 	}
 }

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
 import org.adorsys.adcore.annotation.Description;
+import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 import org.adorsys.adcore.utils.SequenceGenerator;
 
 /**
@@ -19,7 +20,7 @@ import org.adorsys.adcore.utils.SequenceGenerator;
  */
 @Entity
 @Description("CatalArtDetailConfig_description")
-public class CatalArtDetailConfig extends CatalAbstractArticle {
+public class CatalArtDetailConfig extends CoreAbstIdentifObject {
 
 	private static final long serialVersionUID = -2136313145008332965L;
 
@@ -32,20 +33,28 @@ public class CatalArtDetailConfig extends CatalAbstractArticle {
 	private BigDecimal qtyOfDtldInMain;
 
 	/*
-	 * This expresses the proportion of the detailed article in the main article.
-	 */
-	@Column
-	@Description("CatalArtDetailConfig_targetPrprtn_description")
-	@NotNull
-	private BigDecimal pptnOfDtldInMain;
-
-	/*
 	 * Says if the quantitative relation between the main and the proportion should be managed
 	 * in proportions of in absolute quantity
 	 */
 	@Column
 	@Description("CatalArtDetailConfig_mngInPptn_description")
-	private Boolean mngInPptn;
+	private Boolean mngInPptn = Boolean.FALSE;
+	
+	/*
+	 * Distinguishes the detailed article from the main article.  
+	 */
+	@NotNull
+	private String qualifier;
+	
+	@Column
+	@Description("CatalArticle_sppu_description")
+	private BigDecimal sppu;
+	
+	/*
+	 * The identifier of the corresponding article.
+	 */
+	@NotNull
+	private String artIdentif;
 
 	public BigDecimal getQtyOfDtldInMain() {
 		return qtyOfDtldInMain;
@@ -55,20 +64,36 @@ public class CatalArtDetailConfig extends CatalAbstractArticle {
 		this.qtyOfDtldInMain = qtyOfDtldInMain;
 	}
 
-	public BigDecimal getPptnOfDtldInMain() {
-		return pptnOfDtldInMain;
-	}
-
-	public void setPptnOfDtldInMain(BigDecimal pptnOfDtldInMain) {
-		this.pptnOfDtldInMain = pptnOfDtldInMain;
-	}
-
 	public Boolean getMngInPptn() {
 		return mngInPptn;
 	}
 
 	public void setMngInPptn(Boolean mngInPptn) {
 		this.mngInPptn = mngInPptn;
+	}
+
+	public String getQualifier() {
+		return qualifier;
+	}
+
+	public void setQualifier(String qualifier) {
+		this.qualifier = qualifier;
+	}
+
+	public BigDecimal getSppu() {
+		return sppu;
+	}
+
+	public void setSppu(BigDecimal sppu) {
+		this.sppu = sppu;
+	}
+
+	public String getArtIdentif() {
+		return artIdentif;
+	}
+
+	public void setArtIdentif(String artIdentif) {
+		this.artIdentif = artIdentif;
 	}
 
 	@Override

@@ -1,0 +1,170 @@
+/* global toastr:false, moment:false */
+(function() {
+    'use strict';
+
+    angular
+        .module('adcatal')
+        .config(function ($translateProvider) {
+
+        	$translateProvider.translations('fr', {
+                LANG_FR: 'Francais',
+                LANG_EN: 'Englais',
+                logout: 'déconnexion',
+                "Action.title": 'Action',
+                "Boolean.true": 'oui',
+                "Boolean.false": 'non',
+                'app.core.create.title':'Creer',
+                //--------------Article---------------
+                'CatalArticle.sppu': 'Prix de vente Unitaire',
+                'CatalArticle.artName': 'Nom',
+                'CatalArticle.maxDisctRate': 'Remise Maximale',
+                'CIP':'Code Produit',
+                'CatalArticle.minStockQty': 'Quantité Minimale',
+                'CatalArticle.maxStockQty': 'Quantité Maximale',
+                'CatalArticle.vatRate': 'TVA',
+                'CatalArticle.active': 'Actif',
+                'CatalArticle.authorizedSale': 'Vendable',
+                'CatalArticle.title':'Articles',
+                'CatalArticle.new.title':'Nouvel Article',
+                'CatalArticle.list.title':'Liste des Articles',
+                'CatalArticle.delete.title':'Supprimer',
+                'CatalArticle.cancel.title':'Annuler',
+                'CatalArticle.save.title':'Enregistrer',
+                'CatalArticle.edit.title':'Modifier',
+                'CatalArticle.view.title':'Visualiser',
+                'CatalArticle.back.title':'Retour',
+                'CatalArticle.prodFmly': 'Famille',
+
+                //-------------CatalArt2ProductFamily---------
+                'CatalArt2ProductFamily.artPic': 'CIP',
+                'CatalArt2ProductFamily.famCode': 'Code Famille',
+                'CatalArt2ProductFamily.title':'Famille Prodruit',
+                'CatalArt2ProductFamily.new.title':'Nouvelle Famille',
+                'CatalArt2ProductFamily.list.title':'Liste des Familles',
+                'CatalArt2ProductFamily.delete.title':'Supprimer',
+                'CatalArt2ProductFamily.cancel.title':'Annuler',
+                'CatalArt2ProductFamily.save.title':'Enregistrer',
+                'CatalArt2ProductFamily.edit.title':'Modifier',
+                'CatalArt2ProductFamily.view.title':'Visualiser',
+                'CatalArt2ProductFamily.back.title':'Retour',
+
+                //------------CatalArtDetailConfig-------------
+                'CatalArtDetailConfig.title':'Détail d\'Article',
+                'cntnrIdentif': 'Code',
+                'CatalArtDetailConfig.qualifier': 'Qualificatif',
+                'CatalArtDetailConfig.qtyOfDtldInMain': 'Quantité',
+                'CatalArtDetailConfig.sppu': 'Prix',
+                'CatalArtDetailConfig.mngInPptn': 'Gérer en Proportion',
+                'CatalArtDetailConfig.artIdentif': 'Dossier Article',
+                'CatalArtDetailConfig.new.title':'Nouvelle Configuration',
+                'CatalArtDetailConfig.list.title':'Liste des Configurations',
+                'CatalArtDetailConfig.delete.title':'Supprimer',
+                'CatalArtDetailConfig.cancel.title':'Annuler',
+                'CatalArtDetailConfig.save.title':'Enregistrer',
+                'CatalArtDetailConfig.edit.title':'Modifier',
+                'CatalArtDetailConfig.view.title':'Visualiser',
+                'CatalArtDetailConfig.back.title':'Retour',
+
+                //-------------CatalArtEquivalence------------
+                'CatalArtEquivalence.title':'Equivalence d\'Articles',
+                'CatalArtEquivalence.mainArtIdentif': 'Produit Principal',
+                'CatalArtEquivalence.equivArtIdentif': 'Produit Equivalent',
+                'CatalArtEquivalence.usage': 'Mode d\'Emploie',
+                'CatalArtEquivalence.new.title':'Nouvelle Équivalence',
+                'CatalArtEquivalence.list.title':'Liste des Équivalences',
+                'CatalArtEquivalence.delete.title':'Supprimer',
+                'CatalArtEquivalence.cancel.title':'Annuler',
+                'CatalArtEquivalence.save.title':'Enregistrer',
+                'CatalArtEquivalence.edit.title':'Modifier',
+                'CatalArtEquivalence.view.title':'Visualiser',
+                'CatalArtEquivalence.back.title':'Retour',
+                'CatalArtEquivalence_artEquivCode_description.title':'Code de l\'Article Equivalent',
+
+                //------------CatalArtLangMapping--------------
+                'CatalArtFeatMapping.title':'Caractéristiques de l\'Article',
+                'CatalArtFeatMapping.artName': 'Nom',
+                'CatalArtFeatMapping.shortName': 'Nom Abrégé',
+                'langIso2': 'Code Language',
+                'CatalAbstractFeatMapping.purpose': 'Objectif',
+                'CatalAbstractFeatMapping.usage': 'Mode d\'Emploi ',
+                'CatalAbstractFeatMapping.warnings': 'Avertissements',
+                'CatalAbstractFeatMapping.substances': 'Substances',
+                'CatalAbstractFeatMapping.new.title':'Nouvelle Entrée',
+                'CatalAbstractFeatMapping.list.title':'Liste des Entrées',
+                'CatalAbstractFeatMapping.delete.title':'Supprimer',
+                'CatalAbstractFeatMapping.cancel.title':'Annuler',
+                'CatalAbstractFeatMapping.save.title':'Enregistrer',
+                'CatalAbstractFeatMapping.edit.title':'Modifier',
+                'CatalAbstractFeatMapping.view.title':'Visualiser',
+                'CatalAbstractFeatMapping.back.title':'Retour',
+
+                //-----------CatalPicMapping--------------------
+                'CatalPicMapping.title': 'Table des Codes Produit',
+                'CatalPicMapping.artIdentif': 'Identifiant Article',
+                'CatalPicMapping.code': 'Code',
+                'CatalPicMapping.codeOrigin': 'Origine du Code',
+                'CatalPicMapping.bpName': 'Nom du Partenaire',
+                'CatalPicMapping.bpIdentif': 'Identifiant du Partenaire',
+                'CatalPicMapping.warrantyMonths': 'Guarranti en Mois',
+                'CatalPicMapping.returnDays': 'Delais Retour en Jours',
+                'CatalPicMapping.unitPrice': 'Prix',
+                'CatalPicMapping.currIso3': 'Devise',
+                'CatalPicMapping.vatRate': 'TVA',
+                'CatalPicMapping.maxDisctRate': 'Remise Maximale',
+                'CatalPicMapping.addInfo': 'Information Additionnelle',
+                'CatalPicMapping.new.title':'Ajouter Code',
+                'CatalPicMapping.list.title':'Liste des Codes',
+                'CatalPicMapping.delete.title':'Supprimer',
+                'CatalPicMapping.cancel.title':'Annuler',
+                'CatalPicMapping.save.title':'Enregistrer',
+                'CatalPicMapping.edit.title':'Modifier',
+                'CatalPicMapping.view.title':'Visualiser',
+                'CatalPicMapping.back.title':'Retour',
+
+                //------------CatalProductFamily---------------
+                'CatalProductFamily_identif_description.title':'Identifiant Famille',
+                'CatalProductFamily.title': 'Famille de produit',
+                'CatalProductFamily.parentIdentif': 'Famille Parent',
+                'CatalProductFamily.famPath': 'Chemin de Famille',
+                'CatalProductFamily.new.title':'Nouvelle Famille',
+                'CatalProductFamily.list.title':'Liste des Famille',
+                'CatalProductFamily.delete.title':'Supprimer',
+                'CatalProductFamily.cancel.title':'Annuler',
+                'CatalProductFamily.save.title':'Enregistrer',
+                'CatalProductFamily.edit.title':'Modifier',
+                'CatalProductFamily.view.title':'Visualiser',
+                'CatalProductFamily.back.title':'Retour',
+
+                //-----------CatalProductFamilyLangMap-----------
+                'CatalFamilyFeatMaping_description.title': 'Table des Caractéristique de Famille',
+                'CatalFamilyFeatMaping.famPath': 'Chemin',
+                'CatalFamilyFeatMaping.new.title':'Nouvelle Entrée',
+                'CatalFamilyFeatMaping.list.title':'Liste des Entrées',
+                'CatalFamilyFeatMaping.delete.title':'Supprimer',
+                'CatalFamilyFeatMaping.cancel.title':'Annuler',
+                'CatalFamilyFeatMaping.save.title':'Enregistrer',
+                'CatalFamilyFeatMaping.edit.title':'Modifier',
+                'CatalFamilyFeatMapings.view.title':'Voir',
+                'CatalFamilyFeatMapings.back.title':'Retour',
+                'CatalFamilyFeatMaping_familyName_description.title':'Nom',
+                'CatalFamilyFeatMaping_shortName_description.title':'Nom Abrégé',
+
+                //-----CatalCipOrigine ---------------
+                'CatalCipOrigine_MAIN_description':'Principal',
+                'CatalCipOrigine_SUPPLIER_description':'Fournisseur',
+                'CatalCipOrigine_DETAIL_description':'Detail',
+                'CatalCipOrigine_MANUFACTURER_description':'Fabriquant',
+                'CatalCipOrigine_RESALER_description':'Revendeur',
+                'CatalCipOrigine_GOVERNMENT_description':'Gouvernement',
+                'CatalCipOrigine_BROKER_description':'Commercant',
+                'CatalCipOrigine_CUSTOMERSERVICE_description':'Service Client',
+                'CatalCipOrigine_CUSTOMER_description':'Client',
+                'CatalCipOrigine_INSURANCE_description':'Assurance',
+
+                'app.core.search.title':'Rechercher',
+                'app.core.clear.title':'Effacer'
+
+            });
+        });
+
+})();

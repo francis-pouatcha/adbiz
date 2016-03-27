@@ -10,7 +10,6 @@ import org.adorsys.adcatal.jpa.CatalArt2ProductFamily;
 import org.adorsys.adcatal.jpa.CatalArtDetailConfig;
 import org.adorsys.adcatal.jpa.CatalArtEquivalence;
 import org.adorsys.adcatal.jpa.CatalArtLangMapping;
-import org.adorsys.adcatal.jpa.CatalArtManufSupp;
 import org.adorsys.adcatal.jpa.CatalArticle;
 import org.adorsys.adcatal.jpa.CatalPicMapping;
 import org.adorsys.adcatal.jpa.CatalProdFmly;
@@ -37,8 +36,6 @@ public class CatalLoaderRegistration extends CoreAbstLoaderRegistration {
 	@Inject
 	private CatalArtLangMappingLoader catalArtLangMappingLoader;
 	@Inject
-	private CatalArtManufSuppLoader catalArtManufSuppLoader;
-	@Inject
 	private CatalPicMappingLoader catalPicMappingLoader;
 	@Inject
 	private CatalProdFmlyLoader catalProductFamilyLoader;
@@ -58,7 +55,6 @@ public class CatalLoaderRegistration extends CoreAbstLoaderRegistration {
 		dataSheetLoader.registerLoader(CatalArtEquivalence.class.getSimpleName(), catalArtEquivalenceLoader);
 		dataSheetLoader.registerLoader(CatalArticle.class.getSimpleName(), catalArticleLoader);
 		dataSheetLoader.registerLoader(CatalArtLangMapping.class.getSimpleName(), catalArtLangMappingLoader);
-		dataSheetLoader.registerLoader(CatalArtManufSupp.class.getSimpleName(), catalArtManufSuppLoader);
 		dataSheetLoader.registerLoader(CatalPicMapping.class.getSimpleName(), catalPicMappingLoader);
 		dataSheetLoader.registerLoader(CatalProdFmly.class.getSimpleName(), catalProductFamilyLoader);
 		dataSheetLoader.registerLoader(CatalProdFmlyLangMap.class.getSimpleName(), catalProdFmlyLangMapLoader);

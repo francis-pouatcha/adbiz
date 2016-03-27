@@ -6,10 +6,11 @@ import javax.inject.Inject;
 import org.adorsys.adcatal.jpa.CatalArtDetailConfig;
 import org.adorsys.adcatal.repo.CatalArtDetailConfigRepository;
 import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
+import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
 
 @Stateless
 public class CatalArtDetailConfigLookup extends
-		CatalAbstractArticleLookup<CatalArtDetailConfig> {
+CoreAbstIdentifLookup<CatalArtDetailConfig> {
 
 	@Inject
 	private CatalArtDetailConfigRepository repository;

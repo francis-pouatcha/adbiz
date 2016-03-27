@@ -22,6 +22,24 @@
                     }
                 },
                 {
+                    type: 'input',
+                    key: 'qualifier',
+                    templateOptions: {
+                        label: $translate.instant('CatalArtDetailConfig.qualifier'),
+                        //pattern: '\\d{5}',
+                        disabled:disabled,
+                        required:true
+                    }
+                },
+                {
+                    key: 'mngInPptn',
+                    type: 'checkbox',
+                    templateOptions: {
+                        label: $translate.instant('CatalArtDetailConfig.mngInPptn'),
+                        disabled: disabled
+                    }
+                },
+                {
                     key: 'qtyOfDtldInMain',
                     type: 'input',
                     templateOptions: {
@@ -31,20 +49,12 @@
                     }
                 },
                 {
-                    key: 'pptnOfDtldInMain',
                     type: 'input',
+                    key: 'sppu',
                     templateOptions: {
-                        label: $translate.instant('CatalArtDetailConfig.targetPrprtn'),
-                        disabled: disabled,
-                        required: true
-                    }
-                },
-                {
-                    key: 'mngInPptn',
-                    type: 'checkbox',
-                    templateOptions: {
-                        label: $translate.instant('CatalArtDetailConfig.mngInPptn'),
-                        disabled: disabled
+                        type:'number',
+                        label: $translate.instant('CatalArticle.sppu'),
+                        disabled:disabled
                     }
                 }
             ];

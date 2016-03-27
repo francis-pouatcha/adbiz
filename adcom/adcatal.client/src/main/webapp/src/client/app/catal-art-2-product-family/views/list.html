@@ -13,10 +13,16 @@
           <thead>
             <th><span data-ng-bind="'CatalArt2ProductFamily.artPic' | translate"></span></th>
             <th><span data-ng-bind="'CatalArt2ProductFamily.famCode' | translate"></span></th>
+            <th><span data-ng-bind="'CatalArtFeatMapping.shortName' | translate"></span></th>
+            <th><span data-ng-bind="'CatalArtFeatMapping.artName' | translate"></span></th>
+            <th><span data-ng-bind="'CatalAbstractFeatMapping.purpose' | translate"></span></th>
           </thead>
           <tr data-ng-repeat="catalArt2ProductFamily in vmProductFam.data">
               <td data-title="'artPic'" ><span data-ng-bind="catalArt2ProductFamily.artPic"></span></td>
               <td data-title="'famCode'" ><span data-ng-bind="catalArt2ProductFamily.famCode"></span></td>
+              <td data-title="'shortName'" ><span data-ng-bind="catalArt2ProductFamily.shortName"></span></td>
+              <td data-title="'artName'" ><span data-ng-bind="catalArt2ProductFamily.artName"></span></td>
+              <td data-title="'purpose'" ><span data-ng-bind="catalArt2ProductFamily.purpose"></span></td>
               <td>
                  <div class="table-actions">
                       <a class="btn btn-default" title="View" data-ng-click="vmProductFam.showForm(catalArt2ProductFamily)">

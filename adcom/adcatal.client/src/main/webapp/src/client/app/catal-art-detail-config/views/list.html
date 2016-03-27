@@ -12,14 +12,22 @@
 
       <table class="table table-condensed table-striped">
           <thead>
+              <th>{{'CatalArtDetailConfig.qualifier' | translate}}</th>
               <th>{{'CatalArtDetailConfig.qtyOfDtldInMain' | translate}}</th>
-              <th>{{'CatalArtDetailConfig.targetPrprtn' | translate}}</th>
+              <th>{{'CatalArtDetailConfig.sppu' | translate}}</th>
               <th>{{'CatalArtDetailConfig.mngInPptn' | translate}}</th>
+              <th>{{'CatalArtDetailConfig.artIdentif' | translate}}</th>
           </thead>
           <tr ng-repeat="catalArtDetailConfig in vmArtDetail.data">
+              <td>{{catalArtDetailConfig.qualifier}}</td>
               <td>{{catalArtDetailConfig.qtyOfDtldInMain}}</td>
-              <td>{{catalArtDetailConfig.pptnOfDtldInMain}}</td>
+              <td>{{catalArtDetailConfig.sppu}}</td>
               <td>{{catalArtDetailConfig.mngInPptn}}</td>
+              <td>
+                 <a class="btn btn-link" title="{{catalArtDetailConfig.artIdentif}}" href="#/article/{{catalArtDetailConfig.artIdentif}}">
+                 	{{catalArtDetailConfig.artIdentif}}
+                 </a>
+              </td>
               <td>
                  <div class="table-actions">
                       <a class="btn btn-default" title="View" ng-click="vmArtDetail.showForm(catalArtDetailConfig)">

@@ -10,8 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.adorsys.adcatal.jpa.CatalProdFmly;
-import org.adorsys.adcatal.jpa.CatalArtManufSuppSearchInput;
-import org.adorsys.adcatal.jpa.CatalArtManufSuppSearchResult;import org.adorsys.adcatal.jpa.CatalProdFmly;
+import org.adorsys.adcatal.jpa.CatalProdFmly;
 import org.adorsys.adcatal.jpa.CatalProdFmlySearchInput;
 import org.adorsys.adcatal.jpa.CatalProdFmlySearchResult;
 import org.adorsys.adcatal.rest.integ.utils.RestAssuredITConfig;

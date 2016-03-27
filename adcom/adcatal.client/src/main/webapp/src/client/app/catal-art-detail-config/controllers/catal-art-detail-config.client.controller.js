@@ -92,15 +92,22 @@
 
         // Update existing CatalArtDetailConfig
         vm.update = function(catalArtDetailConfig) {
-            var index = vm.data.indexOf(vm.model);
-            var catalArtDetailConfigRes = new CatalArtDetailConfig(catalArtDetailConfig);
-            catalArtDetailConfigRes.$update(function() {
-                logger.success('CatalArtDetailConfig updated');
-                vm.data.splice(index, 1);
-                vm.data.push(catalArtDetailConfig);
-            }, function(errorResponse) {
-                vm.error = errorResponse.data.summary;
+            var index = vm.data.indexOf(catalArtDetailConfig);
+            var catalArtDetailConfigRes = CatalArtDetailConfig
+            .get({catalArtDetailConfigId:catalArtDetailConfig.id}, function() {
+            	catalArtDetailConfigRes.qualifier = catalArtDetailConfig.qualifier;
+            	catalArtDetailConfigRes.sppu = catalArtDetailConfig.sppu;
+            	catalArtDetailConfigRes.qtyOfDtldInMain=catalArtDetailConfig.qtyOfDtldInMain;
+            	catalArtDetailConfigRes.mngInPptn=catalArtDetailConfig.mngInPptn;
+                catalArtDetailConfigRes.$update(function() {
+                    logger.success('CatalArtDetailConfig updated');
+                    vm.data.splice(index, 1);
+                    vm.data.push(catalArtDetailConfigRes);
+                }, function(errorResponse) {
+                    vm.error = errorResponse.data.summary;
+                });
             });
+            
         };
 
         vm.toViewCatalArtDetailConfig = function() {
