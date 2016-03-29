@@ -59,4 +59,6 @@ public class InvInvtryEndpoint extends CoreAbstBsnsObjectEndpoint<InvInvtry, Cor
 	protected CoreAbstLoaderRegistration getLoaderRegistration() {
 		return loaderRegistration;
 	}
+	
+	
 }
