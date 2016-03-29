@@ -4,7 +4,7 @@
 
     <module-name>adinvtry.server</module-name>
 
-    <context-param>
+   <!--  <context-param>
         <param-name>keycloak.config.resolver</param-name>
         <param-value>org.adorsys.adinvtry.boot.InvKeycloakConfigResolver</param-value>
     </context-param>
@@ -24,7 +24,15 @@
     </login-config>
     <security-role>
         <role-name>role.adinvtry.server</role-name>
-    </security-role>
+    </security-role> -->
+<filter>
+	<filter-name>CORS</filter-name>
+	<filter-class>com.thetransactioncompany.cors.CORSFilter</filter-class>
+</filter>
+<filter-mapping>
+        <filter-name>CORS</filter-name>
+        <url-pattern>/*</url-pattern>
+</filter-mapping>
 
     <welcome-file-list>
         <welcome-file>/build/index.html</welcome-file>

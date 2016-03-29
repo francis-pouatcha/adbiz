@@ -11,10 +11,10 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
-*//**
+
  * we will disable this class later for production
  * just for allow CORS request and then make easier web frontend developement
- *//*
+ 
 @WebFilter("/*")
 public class CORSFilter implements Filter {
 
