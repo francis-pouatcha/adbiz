@@ -2,9 +2,11 @@
 
 	<div class="panel panel-primary">
 	    <div class="panel-heading">
+            <a data-toggle="collapse" data-parent="#articlePanel" data-target="#articleCreateToggle">
 	        <b><span data-ng-bind="'app.core.create.title' | translate"></span> <span data-ng-bind="'CatalArticle.new.title' | translate"></span></b>
 	        <button class="glyphicon glyphicon-collapse-down pull-right" data-toggle="collapse" data-parent="#articlePanel" data-target="#articleCreateToggle"></button>
-	    </div>
+            </a>
+	     </div>
 	    <div class="panel-collapse collapse" id="articleCreateToggle">
 	    	<div data-ng-include="'/adcatal.client/src/client/app/article/views/create.html'"></div>
 	    </div>

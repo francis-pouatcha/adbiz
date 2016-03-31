@@ -11,11 +11,11 @@
         'utils',
         'CatalArtLangMappingForm',
         'ArticleForm',
-        '$stateParams'];
+        '$stateParams', '$translate'];
 
     /* @ngInject */
     function CatalArtLangMappingController(logger, CatalArtLangMapping,
-                                           utils, CatalArtLangMappingForm, ArticleForm, $stateParams) {
+                                           utils, CatalArtLangMappingForm, ArticleForm, $stateParams, $translate) {
         var vm = this;
         vm.data = [];
         vm.catalArtLangMapping = {};
@@ -59,6 +59,14 @@
             vm.catalArticleId = $stateParams.articleId;
             catalArtLangMapping.cntnrIdentif = vm.catalArticleId;
             // Create new catalArtLangMapping object
+            var langs = [];
+            angular.forEach(vm.data, function(catalArtLang){
+                langs.push(catalArtLang.langIso2);
+            });
+            if(langs.indexOf(catalArtLangMapping.langIso2)!=-1){
+                logger.error($translate.instant('existin_lang'));
+                return;
+            }
             var catalArtLangMappingRes = new CatalArtLangMapping(catalArtLangMapping);
             catalArtLangMappingRes.$save(function (response) {
                 logger.success('CatalArtLangMapping created');

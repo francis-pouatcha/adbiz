@@ -134,6 +134,7 @@
                 'CatalProductFamily.edit.title':'Edit',
                 'CatalProductFamily.view.title':'View',
                 'CatalProductFamily.back.title':'Back',
+                'CatalProductFamily.artName':'Article Name',
 
                 //-----------CatalProductFamilyLangMap-----------
                 'CatalFamilyFeatMaping_description.title': 'Family Features',
@@ -165,7 +166,8 @@
                 //------------Common translations-----------//
 
                 'app.core.search.title':'Search',
-                'app.core.clear.title':'Clear'
+                'app.core.clear.title':'Clear',
+                'existin_lang':'There is a entity with this language!'
 
             });
 
