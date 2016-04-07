@@ -5,9 +5,9 @@
         .module('app.catalArtEquivalence')
         .factory('CatalArtEquivalenceForm', factory);
 
-    factory.$inject = ['$translate', 'Article'];
+    factory.$inject = ['$translate', 'Article','genericResource'];
     /* @ngInject */
-    function factory($translate, Article) {
+    function factory($translate, Article,genericResource) {
 
         var getCreateFields = function() {
 
@@ -23,15 +23,17 @@
                 },
                 {
                     key: 'equivArtIdentif',
-                    type: 'typeahead',
+                    type: 'typeaheadTwo',
                     templateOptions: {
                         label: $translate.instant('CatalArtEquivalence.equivArtIdentif'),
-                        disabled: false,
-                        required: true
+                        //disabled: false,
+                        required: true,
+                        placeholder: $translate.instant('Cip_or_name')
                     },
                     controller: /* @ngInject */
                         function($scope, Article) {
-                            var coreSearchInput = {};
+                            console.log($translate.proposedLanguage());
+                            /*var coreSearchInput = {};
                             coreSearchInput.start = 0;
                             coreSearchInput.max = 10;
                             coreSearchInput.entity = {};
@@ -44,10 +46,21 @@
                                 coreSearchInput.entity.identif = value;
                                 return Article.findByLike(coreSearchInput)
                                     .$promise.then(function(response) {
-                                        return response.resultList;
+                                            return response.resultList;
 
                                     });
+                            };*/
+                            var searchInput = {entity:{},fieldNames:[],start: 0,max: 10};
+                            searchInput.className = 'org.adorsys.adcatal.jpa.CatalArtLangMappingSearchInput';
+                            searchInput.fieldNames.push('artName');
+                            $scope.to.options = function(value) {
+                                searchInput.entity.artName = value;
+                                return genericResource.findByLikeWithSearchInputPromissed('/adcatal.server/rest/catalartfeatmappings', searchInput)
+                                    .then(function(entitySearchResult){
+                                        return entitySearchResult.resultList;
+                                    });
                             };
+
                         }
                 },
                 {

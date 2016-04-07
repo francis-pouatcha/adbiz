@@ -167,7 +167,8 @@
 
                 'app.core.search.title':'Search',
                 'app.core.clear.title':'Clear',
-                'existin_lang':'There is a entity with this language!'
+                'existin_lang':'There is a entity with this language!',
+                "Cip_or_name":"Name or CIP article"
 
             });
 

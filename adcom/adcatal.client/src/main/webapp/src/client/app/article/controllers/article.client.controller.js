@@ -161,11 +161,13 @@
                 catalArtLangMappingService.$save(function () {
                     $location.path('/article/' + response.id);
                 }, function (errorResponseTwo) {
-                    vm.error = errorResponseTwo.data.summary;
+                    vm.error = errorResponse;
+                    logger.error(errorResponse);
                 });
 
             }, function(errorResponse) {
-                vm.error = errorResponse.data.summary;
+                vm.error = errorResponse;
+                logger.error(errorResponse);
             });
         };
 

@@ -92,6 +92,7 @@
         vm.catalArt2ProductFamily = {};
 
         vm.createForm = function(model) {
+
             utils.templateModal(model, 'createForm',
                 'src/client/app/catal-art-2-product-family/views/create.html', vm);
         };
@@ -100,6 +101,7 @@
                 'src/client/app/catal-art-2-product-family/views/edit.html', vm);
         };
         vm.showForm = function(model) {
+            vm.catalArt2ProductFamily = model;
             utils.templateModal(model, 'showForm',
                 'src/client/app/catal-art-2-product-family/views/view.html', vm);
         };
@@ -142,9 +144,13 @@
         vm.create = function(catalArt2ProductFamily) {
         	var display = cleanDisplay(catalArt2ProductFamily);
             var langMapping = display.langMapping;
-        	
+        	if(!catalArt2ProductFamily.famCode){
+                logger.error('family code non reconnue');
+                return;
+            }
             vm.catalArticleId = $stateParams.articleId;
             catalArt2ProductFamily.cntnrIdentif = vm.catalArticleId;
+            catalArt2ProductFamily.artPic = vm.catalArticleId;
             // Create new CatalArt2ProductFamily object
             var catalArt2ProductFamilyRes = new CatalArt2ProductFamily(catalArt2ProductFamily);
             catalArt2ProductFamilyRes.$save(function(response) {

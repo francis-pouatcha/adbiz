@@ -80,7 +80,7 @@
                             type: 'input',
                             key: 'identif',
                             templateOptions: {
-		                        label: $translate.instant('CatalProductFamily_identif_description.title'),
+		                        label: $translate.instant('cntnrIdentif'),
                                 disabled:disabled,
                                 required:true
                             }

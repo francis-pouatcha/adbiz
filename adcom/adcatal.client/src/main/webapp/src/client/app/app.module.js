@@ -133,5 +133,13 @@
                 'class="form-control">',
             wrapper: ['bootstrapLabel', 'bootstrapHasError']
         });
+        formlyConfig.setType({
+            name: 'typeaheadTwo',
+            template: '<input type="text"' +
+                'ng-model="model[options.key]" typeahead-min-length="2"' +
+                'typeahead="item as item.artName for item in to.options($viewValue) | limitTo:8" ' +
+                'class="form-control">',
+            wrapper: ['bootstrapLabel', 'bootstrapHasError']
+        });
     });
 })();

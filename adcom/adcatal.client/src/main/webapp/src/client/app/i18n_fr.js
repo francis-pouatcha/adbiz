@@ -164,7 +164,8 @@
 
                 'app.core.search.title':'Rechercher',
                 'app.core.clear.title':'Effacer',
-                'existin_lang':'Il existe deja une entite avec cette langue!'
+                'existin_lang':'Il existe deja une entite avec cette langue!',
+                "Cip_or_name":"Nom ou CIP article"
 
             });
         });
