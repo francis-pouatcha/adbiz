@@ -16,6 +16,16 @@ public class CoreAbstIdentifObjectSearchInput<E extends CoreAbstIdentifObject>
 
 	private String identifFrom;
 	private String identifTo;
+	
+	private String artName;
+
+	public String getArtName() {
+		return artName;
+	}
+
+	public void setArtName(String artName) {
+		this.artName = artName;
+	}
 
 	public String getValueDtFrom() {
 		return valueDtFrom;

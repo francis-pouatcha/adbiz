@@ -161,8 +161,7 @@
                 catalArtLangMappingService.$save(function () {
                     $location.path('/article/' + response.id);
                 }, function (errorResponseTwo) {
-                    vm.error = errorResponse;
-                    logger.error(errorResponse);
+                    vm.error = errorResponseTwo.data.summary;
                 });
 
             }, function(errorResponse) {
@@ -240,6 +239,8 @@
     	    var pagination = tableState.pagination;
     	    var start = pagination.start || 0, number = pagination.number || utils.searchInputInit().stPagination.number;
     	    processSearch(start, tableState.search);
+            console.log(tableState.search);
+
         	
         	Article.findByLike(vm.searchInput, function(response){
         		vm.data.list = response.resultList;
@@ -277,6 +278,10 @@
         	// First initialize SearchInput-Object and then set Search-Params
         	vm.searchInput = utils.processSearch(vm.searchInput, searchObject.predicateObject);
         	vm.searchInput.start = start;
+            if(vm.searchInput.entity.artName){
+                vm.searchInput.artName = vm.searchInput.entity.artName;
+                delete vm.searchInput.entity.artName;
+            }
         }
     }
 })();

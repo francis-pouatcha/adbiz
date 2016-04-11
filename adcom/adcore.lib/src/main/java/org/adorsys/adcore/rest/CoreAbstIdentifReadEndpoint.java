@@ -163,7 +163,7 @@ public abstract class CoreAbstIdentifReadEndpoint<E extends CoreAbstIdentifObjec
 	}
 
 	@SuppressWarnings("unchecked")
-	private SingularAttribute<E, ?>[] readSeachAttributes(
+	protected SingularAttribute<E, ?>[] readSeachAttributes(
 			CoreAbstIdentifObjectSearchInput<E> searchInput) {
 		List<String> fieldNames = searchInput.getFieldNames();
 		List<SingularAttribute<E, ?>> result = new ArrayList<SingularAttribute<E, ?>>();
