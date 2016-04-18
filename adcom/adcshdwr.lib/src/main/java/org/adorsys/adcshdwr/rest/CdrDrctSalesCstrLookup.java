@@ -18,4 +18,9 @@ public class CdrDrctSalesCstrLookup extends CoreAbstEntityCstrLookup<CdrDrctSale
 	protected CoreAbstEntityCstrRepo<CdrDrctSalesCstr> getCstrRepo() {
 		return repository;
 	}
+
+	@Override
+	protected Class<CdrDrctSalesCstr> getEntityClass() {
+		return CdrDrctSalesCstr.class;
+	}
 }

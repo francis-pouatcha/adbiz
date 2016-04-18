@@ -297,6 +297,12 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 	
 	@Column
 	private BigDecimal trgtQty;	
+	
+	@Column
+	private BigDecimal expectedQty;
+
+	@Column
+	private BigDecimal asseccedQty;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateFormatPattern(pattern = "dd-MM-yyyy HH:mm")
@@ -1018,7 +1024,26 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 		this.qtyAfter = qtyAfter;
 	}
 
+	public BigDecimal getExpectedQty() {
+		return expectedQty;
+	}
+
+	public void setExpectedQty(BigDecimal expectedQty) {
+		this.expectedQty = expectedQty;
+	}
+
+	public BigDecimal getAsseccedQty() {
+		return asseccedQty;
+	}
+
+	public void setAsseccedQty(BigDecimal asseccedQty) {
+		this.asseccedQty = asseccedQty;
+	}
+
 	protected void normalize(){
+		this.expectedQty = BigDecimalUtils.zeroIfNull(this.expectedQty);
+		this.asseccedQty = BigDecimalUtils.zeroIfNull(this.asseccedQty);
+		
 		this.trgtQty = BigDecimalUtils.zeroIfNull(this.trgtQty);
 		this.qtyAfter = BigDecimalUtils.zeroIfNull(this.qtyAfter);
 		this.qtyBefore = BigDecimalUtils.zeroIfNull(this.qtyBefore);

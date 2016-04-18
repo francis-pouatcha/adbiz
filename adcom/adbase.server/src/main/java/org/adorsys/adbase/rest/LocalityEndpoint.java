@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import org.adorsys.adbase.jpa.Locality;
 import org.adorsys.adbase.jpa.LocalitySearchInput;
 import org.adorsys.adbase.jpa.LocalitySearchResult;
+import org.adorsys.adbase.jpa.Locality_;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
@@ -42,7 +43,7 @@ public class LocalityEndpoint extends CoreAbstIdentifiedEndpoint<Locality> {
 
 	@Override
 	protected Field[] getEntityFields() {
-		return Locality.class.getFields();
+		return Locality_.class.getFields();
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import org.adorsys.adbase.jpa.OuWorkspace;
 import org.adorsys.adbase.jpa.OuWorkspaceSearchInput;
 import org.adorsys.adbase.jpa.OuWorkspaceSearchResult;
+import org.adorsys.adbase.jpa.OuWorkspace_;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
@@ -44,7 +45,7 @@ public class OuWorkspaceEndpoint extends
 
 	@Override
 	protected Field[] getEntityFields() {
-		return OuWorkspace.class.getFields();
+		return OuWorkspace_.class.getFields();
 	}
 
 	@Override

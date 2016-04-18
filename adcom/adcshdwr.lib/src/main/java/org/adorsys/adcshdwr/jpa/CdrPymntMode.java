@@ -1,6 +1,6 @@
 package org.adorsys.adcshdwr.jpa;
 
-import org.adorsys.javaext.description.Description;
+import org.adorsys.adcore.annotation.Description;
 
 @Description("CdrPymntMode_description")
 public enum CdrPymntMode

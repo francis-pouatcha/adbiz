@@ -3,14 +3,15 @@
   <persistence-unit name="forge-default" transaction-type="JTA">
     <description>Forge Persistence Unit</description>
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    <jta-data-source>java:jboss/datasources/ADDS</jta-data-source>
+    <jta-data-source>java:jboss/datasources/ADH2DS</jta-data-source>
 
     <jar-file>lib/adcore.lib-${project.version}.jar</jar-file>
     <jar-file>lib/adbase.lib-${project.version}.jar</jar-file>
+    <jar-file>lib/adcatal.lib-${project.version}.jar</jar-file>
+    <jar-file>lib/adstock.lib-${project.version}.jar</jar-file>
     <jar-file>lib/adcshdwr.lib-${project.version}.jar</jar-file>
 
     <class>org.adorsys.adcore.jpa.CoreAbstEntity</class>
-    <class>org.adorsys.adcore.jpa.CoreAbstIdentifData</class>
 
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>

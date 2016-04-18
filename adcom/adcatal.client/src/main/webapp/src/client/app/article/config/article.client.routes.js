@@ -20,7 +20,7 @@
                     templateUrl: BASE_VIEW_ADCATAL+'/app/article/views/list.html',
                     controller: 'ArticleController',
                     controllerAs: 'vm',
-                    title: 'List Articles'
+                    title: 'CatalArticle.list.title'
 
                 }
             },,
@@ -31,7 +31,7 @@
                     templateUrl: BASE_VIEW_ADCATAL+'/app/article/views/list.html',
                     controller: 'ArticleController',
                     controllerAs: 'vm',
-                    title: 'List Articles',
+                    title: 'CatalArticle.list.title',
                     settings: {
                         nav: 3,
                         content: '<i class="fa fa-folder-open"></i> Articles'
@@ -45,7 +45,7 @@
                     templateUrl: BASE_VIEW_ADCATAL+'/app/article/views/create.html',
                     controller: 'ArticleController',
                     controllerAs: 'vm',
-                    title: 'Create Article'
+                    title: 'CatalArticle.new.title'
                 }
             },
             {
@@ -55,7 +55,7 @@
                     templateUrl: BASE_VIEW_ADCATAL+'/app/article/views/view.html',
                     controller: 'ArticleController',
                     controllerAs: 'vm',
-                    title: 'View Article'
+                    title: 'CatalArticle.view.title'
                 }
             },
             {
@@ -65,7 +65,7 @@
                     templateUrl: BASE_VIEW_ADCATAL+'/app/article/views/edit.html',
                     controller: 'ArticleController',
                     controllerAs: 'vm',
-                    title: 'Edit Article'
+                    title: 'CatalArticle.edit.title'
                 }
             }
         ];

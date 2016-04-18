@@ -1,14 +1,9 @@
 package org.adorsys.adbase.loader;
 
-import java.util.concurrent.TimeUnit;
-
 import javax.annotation.PostConstruct;
-import javax.ejb.AccessTimeout;
-import javax.ejb.Schedule;
+import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
 import org.adorsys.adbase.jpa.BaseCountryName;
@@ -30,11 +25,16 @@ import org.adorsys.adbase.jpa.UserWorkspace;
 import org.adorsys.adbase.jpa.UserWsRestriction;
 import org.adorsys.adbase.jpa.Workspace;
 import org.adorsys.adbase.jpa.WorkspaceRestriction;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.adorsys.adcore.loader.jpa.CorLdrJob;
+import org.adorsys.adcore.loader.jpa.CorLdrPrcssngStep;
+import org.adorsys.adcore.loader.jpa.CorLdrStep;
+import org.adorsys.adcore.rest.CoreAbstEntityJobExecutor;
+import org.adorsys.adcore.xls.AbstractLoader;
+import org.adorsys.adcore.xls.CoreAbstLoaderRegistration;
 
 @Startup
 @Singleton
-public class BaseLoaderRegistration {
+public class BaseLoaderRegistration extends CoreAbstLoaderRegistration {
 
 	@Inject
 	private DataSheetLoader dataSheetLoader;
@@ -77,6 +77,11 @@ public class BaseLoaderRegistration {
 	@Inject
 	private BaseCountryNameLoader baseCountryNameLoader;
 	
+	@EJB
+	private BaseLoaderRegistration registration;
+	@EJB
+	private BaseLoaderExecutor executor;
+	
 	@PostConstruct
 	public void postConstruct(){
 		dataSheetLoader.registerLoader(RoleEntry.class.getSimpleName(), roleEntryLoader);
@@ -98,38 +103,20 @@ public class BaseLoaderRegistration {
 		dataSheetLoader.registerLoader(SecTermRegist.class.getSimpleName(), secTermRegistLoader);
 		dataSheetLoader.registerLoader(SecTerminal.class.getSimpleName(), secTerminalLoader);
 		dataSheetLoader.registerLoader(BaseCountryName.class.getSimpleName(),baseCountryNameLoader);
-		createTemplate();
 	}
 
-	@Schedule(minute = "*", second="1/35" ,hour="*", persistent=false)
-	@AccessTimeout(unit=TimeUnit.MINUTES, value=10)
-	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-	public void process() throws Exception {
-		dataSheetLoader.process();
+	@Override
+	protected AbstractLoader getDataSheetLoader() {
+		return dataSheetLoader;
 	}
-	
-	public void createTemplate(){
-		HSSFWorkbook workbook = new HSSFWorkbook();
-		roleEntryLoader.createTemplate(workbook);
-		permEntryLoader.createTemplate(workbook);
-		countryLoader.createTemplate(workbook);
-		baseCountryNameLoader.createTemplate(workbook);
-		converterCurrRateLoader.createTemplate(workbook);
-		pricingCurrRateLoader.createTemplate(workbook);
-		ouTypeLoader.createTemplate(workbook);
-		orgUnitLoader.createTemplate(workbook);
-		orgContactLoader.createTemplate(workbook);
-		localityLoader.createTemplate(workbook);
-		workspaceLoader.createTemplate(workbook);
-		workspaceRestrictionLoader.createTemplate(workbook);
-		ouWorkspaceLoader.createTemplate(workbook);
-		ouWsRestrictionLoader.createTemplate(workbook);
-		loginLoader.createTemplate(workbook);
-		userWorkspaceLoader.createTemplate(workbook);
-		userWsRestrictionLoader.createTemplate(workbook);
-		secTermRegistLoader.createTemplate(workbook);
-		secTerminalLoader.createTemplate(workbook);
-		dataSheetLoader.exportTemplate(workbook);
+
+	@Override
+	protected CoreAbstEntityJobExecutor<CorLdrJob, CorLdrStep, CorLdrPrcssngStep> getExecTask() {
+		return executor;
 	}
-	
+
+	@Override
+	protected CoreAbstEntityJobExecutor<CorLdrJob, CorLdrStep, CorLdrPrcssngStep> getEjb() {
+		return registration;
+	}
 }

@@ -11,6 +11,7 @@ import javax.ws.rs.Path;
 
 import org.adorsys.adbase.jpa.OrgUnit;
 import org.adorsys.adbase.jpa.OrgUnitSearchResult;
+import org.adorsys.adbase.jpa.OrgUnit_;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
@@ -43,7 +44,7 @@ public class OrgUnitEndpoint extends CoreAbstIdentifiedEndpoint<OrgUnit> {
 
 	@Override
 	protected Field[] getEntityFields() {
-		return OrgUnit.class.getFields();
+		return OrgUnit_.class.getFields();
 	}
 
 	@Override

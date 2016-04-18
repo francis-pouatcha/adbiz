@@ -3,6 +3,7 @@ package org.adorsys.adcore.jpa;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.adorsys.adcore.pdfreport.PdfReportProperties;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.annotate.JsonTypeInfo.As;
 import org.codehaus.jackson.annotate.JsonTypeInfo.Id;
@@ -31,7 +32,7 @@ public abstract class CoreSearchInput<T> {
 	/**
 	 * The max number of records to return.
 	 */
-	private int max = 200;
+	private int max = MAX_MAX;
 
 	/**
 	 * The field names to be included in the search.
@@ -39,6 +40,8 @@ public abstract class CoreSearchInput<T> {
 	private List<String> fieldNames = new ArrayList<String>();
 
 	private List<CoreSortOrder> sortFieldNames = new ArrayList<CoreSortOrder>();
+
+	private PdfReportProperties reportProperties;
 
 	private String className;
 	
@@ -93,12 +96,19 @@ public abstract class CoreSearchInput<T> {
 		return max;
 	}
 
-
 	public String getClassName() {
 		return className;
 	}
 
 	public void setClassName(String className) {
 		this.className = className;
+	}
+
+	public PdfReportProperties getReportProperties() {
+		return reportProperties;
+	}
+
+	public void setReportProperties(PdfReportProperties reportProperties) {
+		this.reportProperties = reportProperties;
 	}
 }

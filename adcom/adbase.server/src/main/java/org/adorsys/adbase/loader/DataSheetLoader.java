@@ -12,20 +12,13 @@ import org.adorsys.adcore.xls.StepCallback;
 @Singleton
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 public class DataSheetLoader extends AbstractLoader {
-
-	String dataDir = "adcom/adbase/data";
 	
 	@EJB
 	private CorLdrStepCallback stepCallback;
 	
 	@Override
 	public String getDir() {
-		return dataDir;
-	}
-
-	@Override
-	public String getFileName() {
-		return "adbase.tpl.xls";
+		return getDataRoot() + "/adcom/adbase";
 	}
 
 	@Override

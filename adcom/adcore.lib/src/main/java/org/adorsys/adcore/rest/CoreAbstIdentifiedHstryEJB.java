@@ -17,6 +17,7 @@ import org.adorsys.adcore.event.EntityUpdatedEvent;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 import org.adorsys.adcore.jpa.CoreAbstIdentifHstry;
 import org.adorsys.adcore.repo.CoreAbstIdentifObjectHstryRepo;
+import org.apache.commons.lang3.StringUtils;
 
 public abstract class CoreAbstIdentifiedHstryEJB<H extends CoreAbstIdentifHstry, E extends CoreAbstIdentifObject> {
 
@@ -50,7 +51,7 @@ public abstract class CoreAbstIdentifiedHstryEJB<H extends CoreAbstIdentifHstry,
 		return getRepo().save(attach(entity));
 	}
 
-	private H attach(H entity) {
+	protected H attach(H entity) {
 		if (entity == null)
 			return null;
 		return entity;
@@ -85,12 +86,13 @@ public abstract class CoreAbstIdentifiedHstryEJB<H extends CoreAbstIdentifHstry,
 		create(h);
 	}
 	
-	private H newHstry(E entity){
+	protected H newHstry(E entity){
 		H h = newHstryObj();
 		h.setCntnrIdentif(entity.getCntnrIdentif());
 		h.setEntIdentif(entity.getIdentif());
 		h.setHstryDt(new Date());
 		h.setOrignLogin(callerPrincipal.getLoginName());
+		h.setOriginUserName(StringUtils.isBlank(callerPrincipal.getFullName())?callerPrincipal.getLoginName():callerPrincipal.getFullName());
 		h.setOrignWrkspc(callerPrincipal.getWorkspaceId());
 		h.setAddtnlInfo(printHstryInfo(entity));
 		return h;

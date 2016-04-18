@@ -36,6 +36,10 @@ public abstract class CoreAbstIdentifHstry extends CoreAbstEntity {
 	@Column
 	@NotNull
 	private String orignLogin;
+	
+	@Column
+	@NotNull
+	private String originUserName;
 
 	@Column
 	@NotNull
@@ -61,6 +65,14 @@ public abstract class CoreAbstIdentifHstry extends CoreAbstEntity {
 	public void prePersist(){
 		if(StringUtils.isBlank(getId()))
 			setId(UUID.randomUUID().toString());
+	}
+
+	public String getOriginUserName() {
+		return originUserName;
+	}
+
+	public void setOriginUserName(String originUserName) {
+		this.originUserName = originUserName;
 	}
 
 	public String getEntIdentif() {

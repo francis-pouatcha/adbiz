@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import org.adorsys.adbase.jpa.Workspace;
 import org.adorsys.adbase.jpa.WorkspaceSearchInput;
 import org.adorsys.adbase.jpa.WorkspaceSearchResult;
+import org.adorsys.adbase.jpa.Workspace_;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
@@ -41,7 +42,7 @@ public class WorkspaceEndpoint extends CoreAbstIdentifiedEndpoint<Workspace> {
 	}
 	@Override
 	protected Field[] getEntityFields() {
-		return Workspace.class.getFields();
+		return Workspace_.class.getFields();
 	}
 	@Override
 	protected CoreAbstIdentifObjectSearchInput<Workspace> newSearchInput() {

@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import org.adorsys.adbase.jpa.OuType;
 import org.adorsys.adbase.jpa.OuTypeSearchInput;
 import org.adorsys.adbase.jpa.OuTypeSearchResult;
+import org.adorsys.adbase.jpa.OuType_;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
@@ -43,7 +44,7 @@ public class OuTypeEndpoint extends CoreAbstIdentifiedEndpoint<OuType> {
 
 	@Override
 	protected Field[] getEntityFields() {
-		return OuType.class.getFields();
+		return OuType_.class.getFields();
 	}
 
 	@Override

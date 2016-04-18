@@ -2,7 +2,6 @@ package org.adorsys.adcshdwr.rest;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 
 import org.adorsys.adcore.repo.CoreAbstBsnsObjectRepo;
 import org.adorsys.adcore.rest.CoreAbstBsnsObjectLookup;
@@ -15,9 +14,6 @@ public class CdrDrctSalesLookup extends CoreAbstBsnsObjectLookup<CdrDrctSales>
 
 	@Inject
 	private CdrDrctSalesRepo repository;
-	
-	@Inject
-	private EntityManager em;
 
 	@Override
 	protected CoreAbstBsnsObjectRepo<CdrDrctSales> getBsnsRepo() {
@@ -25,12 +21,7 @@ public class CdrDrctSalesLookup extends CoreAbstBsnsObjectLookup<CdrDrctSales>
 	}
 
 	@Override
-	protected Class<CdrDrctSales> getBsnsObjClass() {
+	protected Class<CdrDrctSales> getEntityClass() {
 		return CdrDrctSales.class;
-	}
-
-	@Override
-	protected EntityManager getEntityManager() {
-		return em;
 	}
 }

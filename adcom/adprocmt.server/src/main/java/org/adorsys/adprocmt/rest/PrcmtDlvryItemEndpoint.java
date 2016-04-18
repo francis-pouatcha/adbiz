@@ -11,7 +11,6 @@ import javax.ws.rs.Path;
 
 import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchResult;
-import org.adorsys.adcore.pdfreport.PdfReportTemplate;
 import org.adorsys.adcore.props.AbstEntiyProps;
 import org.adorsys.adcore.rest.CoreAbstBsnsItemEndpoint;
 import org.adorsys.adcore.rest.CoreAbstBsnsItemLookup;
@@ -62,12 +61,7 @@ public class PrcmtDlvryItemEndpoint extends
 	}
 
 	@Override
-	protected PdfReportTemplate<PrcmtDlvryItem> getReportTemplate() {
-		return new PrcmtDlvryItemPdfReportTemplate() ;
-	}
-
-	@Override
-	protected AbstEntiyProps<PrcmtDlvryItem> getEntityProps() {
+	protected AbstEntiyProps getEntityProps() {
 		return props;
 	}
 

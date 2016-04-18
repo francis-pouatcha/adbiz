@@ -51,11 +51,6 @@ public class EntityPropsUtils {
 			inputStream = klass.getResourceAsStream(klass.getSimpleName()+"_"+lg+".properties");
 			if(inputStream==null){	
 				return;
-			/*if(lg.equals(defaultLang)){
-					throw new IllegalStateException("Missing property file: " + klass.getSimpleName()+".properties or " + klass.getSimpleName()+"_"+lg+".properties");
-				} else {
-					throw new IllegalStateException("Missing property file: " + klass.getSimpleName()+"_"+lg+".properties");
-			}*/
 			}
 		}
 		

@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import org.adorsys.adbase.jpa.UserWorkspace;
 import org.adorsys.adbase.jpa.UserWorkspaceSearchInput;
 import org.adorsys.adbase.jpa.UserWorkspaceSearchResult;
+import org.adorsys.adbase.jpa.UserWorkspace_;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
@@ -45,7 +46,7 @@ public class UserWorkspaceEndpoint extends
 
 	@Override
 	protected Field[] getEntityFields() {
-		return UserWorkspace.class.getFields();
+		return UserWorkspace_.class.getFields();
 	}
 
 	@Override

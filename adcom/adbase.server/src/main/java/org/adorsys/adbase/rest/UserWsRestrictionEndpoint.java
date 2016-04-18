@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import org.adorsys.adbase.jpa.UserWsRestriction;
 import org.adorsys.adbase.jpa.UserWsRestrictionSearchInput;
 import org.adorsys.adbase.jpa.UserWsRestrictionSearchResult;
+import org.adorsys.adbase.jpa.UserWsRestriction_;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
@@ -44,7 +45,7 @@ public class UserWsRestrictionEndpoint extends
 
 	@Override
 	protected Field[] getEntityFields() {
-		return UserWsRestriction.class.getFields();
+		return UserWsRestriction_.class.getFields();
 	}
 
 	@Override

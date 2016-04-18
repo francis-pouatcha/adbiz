@@ -8,13 +8,13 @@ import org.adorsys.adcore.props.CoreAbstBsnsItemProps;
 import org.adorsys.adinvtry.jpa.InvInvtryItem;
 
 @Singleton
-public class InvInvtryItemProps extends AbstEntiyProps<InvInvtryItem> {
+public class InvInvtryItemProps extends AbstEntiyProps {
 
 	@Inject
 	private CoreAbstBsnsItemProps superProps;
 
 	@Override
-	protected AbstEntiyProps<? super InvInvtryItem> getSuperProps() {
+	protected AbstEntiyProps getSuperProps() {
 		return superProps;
 	}
 

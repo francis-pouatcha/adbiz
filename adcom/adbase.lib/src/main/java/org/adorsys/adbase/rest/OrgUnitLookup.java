@@ -22,4 +22,8 @@ public class OrgUnitLookup extends CoreAbstIdentifLookup<OrgUnit> {
 	protected Class<OrgUnit> getEntityClass() {
 		return OrgUnit.class;
 	}
+	
+	public void findTenant(String realm){
+		
+	}
 }

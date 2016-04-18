@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import org.adorsys.adbase.jpa.ConnectionHistory;
 import org.adorsys.adbase.jpa.ConnectionHistorySearchInput;
 import org.adorsys.adbase.jpa.ConnectionHistorySearchResult;
+import org.adorsys.adbase.jpa.ConnectionHistory_;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
@@ -44,7 +45,7 @@ public class ConnectionHistoryEndpoint extends
 
 	@Override
 	protected Field[] getEntityFields() {
-		return ConnectionHistory.class.getFields();
+		return ConnectionHistory_.class.getFields();
 	}
 
 	@Override

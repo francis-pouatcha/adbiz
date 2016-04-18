@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import org.adorsys.adbase.jpa.ConverterCurrRate;
 import org.adorsys.adbase.jpa.ConverterCurrRateSearchInput;
 import org.adorsys.adbase.jpa.ConverterCurrRateSearchResult;
+import org.adorsys.adbase.jpa.ConverterCurrRate_;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
@@ -41,7 +42,7 @@ public class ConverterCurrRateEndpoint extends CoreAbstIdentifiedEndpoint<Conver
 	}
 	@Override
 	protected Field[] getEntityFields() {
-		return ConverterCurrRate.class.getFields();
+		return ConverterCurrRate_.class.getFields();
 	}
 	@Override
 	protected CoreAbstIdentifObjectSearchInput<ConverterCurrRate> newSearchInput() {

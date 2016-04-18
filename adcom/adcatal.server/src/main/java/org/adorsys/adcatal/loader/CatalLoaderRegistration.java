@@ -75,5 +75,4 @@ public class CatalLoaderRegistration extends CoreAbstLoaderRegistration {
 	protected CoreAbstEntityJobExecutor<CorLdrJob, CorLdrStep, CorLdrPrcssngStep> getEjb() {
 		return registration;
 	}
-	
 }

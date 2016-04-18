@@ -6,7 +6,7 @@ import javax.inject.Singleton;
 import org.adorsys.adcore.jpa.CoreAbstBsnsObject;
 
 @Singleton
-public class CoreAbstBsnsObjectProps  extends AbstEntiyProps<CoreAbstBsnsObject> {
+public class CoreAbstBsnsObjectProps  extends AbstEntiyProps {
 
 	@Inject
 	private CoreAbstBsnsObjectHeaderProps superProps;

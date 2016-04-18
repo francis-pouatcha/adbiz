@@ -11,7 +11,6 @@ import javax.ws.rs.Path;
 
 import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchResult;
-import org.adorsys.adcore.pdfreport.PdfReportTemplate;
 import org.adorsys.adcore.props.AbstEntiyProps;
 import org.adorsys.adcore.rest.CoreAbstBsnsItemEndpoint;
 import org.adorsys.adcore.rest.CoreAbstBsnsItemLookup;
@@ -61,12 +60,7 @@ public class PrcmtPOItemEndpoint extends CoreAbstBsnsItemEndpoint<PrcmtPOItem, C
 	}
 
 	@Override
-	protected PdfReportTemplate<PrcmtPOItem> getReportTemplate() {
-		return new PrcmtPOItemPdfReportTemplate();
-	}
-
-	@Override
-	protected AbstEntiyProps<PrcmtPOItem> getEntityProps() {
+	protected AbstEntiyProps getEntityProps() {
 		return props;
 	}
 

@@ -11,7 +11,6 @@ import javax.ws.rs.Path;
 
 import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchResult;
-import org.adorsys.adcore.pdfreport.PdfReportTemplate;
 import org.adorsys.adcore.props.AbstEntiyProps;
 import org.adorsys.adcore.rest.CoreAbstBsnsItemEndpoint;
 import org.adorsys.adcore.rest.CoreAbstBsnsItemLookup;
@@ -20,9 +19,6 @@ import org.adorsys.adstock.jpa.StkMvntSearchInput;
 import org.adorsys.adstock.jpa.StkMvntSearchResult;
 import org.adorsys.adstock.jpa.StkMvnt_;
 
-/**
- * 
- */
 @Stateless
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 @Path("/stkmvnts")
@@ -58,12 +54,7 @@ public class StkMvntEndpoint
 	}
 
 	@Override
-	protected PdfReportTemplate<StkMvnt> getReportTemplate() {
-		return new StkMvntPdfReportTemplate();
-	}
-
-	@Override
-	protected AbstEntiyProps<StkMvnt> getEntityProps() {
+	protected AbstEntiyProps getEntityProps() {
 		return entityProps;
 	}
 

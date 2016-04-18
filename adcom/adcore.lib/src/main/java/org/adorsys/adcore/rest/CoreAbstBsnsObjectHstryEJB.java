@@ -14,6 +14,7 @@ import org.adorsys.adcore.jpa.CoreAbstBsnsObjectHstry;
 import org.adorsys.adcore.jpa.CoreAbstEntityCstr;
 import org.adorsys.adcore.jpa.CoreAbstEntityJob;
 import org.adorsys.adcore.jpa.CoreAbstEntityStep;
+import org.apache.commons.lang3.StringUtils;
 
 public abstract class CoreAbstBsnsObjectHstryEJB<E extends CoreAbstBsnsObject, I extends CoreAbstBsnsItem, H extends CoreAbstBsnsObjectHstry, J extends CoreAbstEntityJob, S extends CoreAbstEntityStep, C extends CoreAbstEntityCstr>
 		extends CoreAbstIdentifiedHstryEJB<H, E> {
@@ -71,6 +72,7 @@ public abstract class CoreAbstBsnsObjectHstryEJB<E extends CoreAbstBsnsObject, I
 		hstry.setHstryType(hstryType);
 
 		hstry.setOrignLogin(callerPrincipal.getLoginName());
+		hstry.setOriginUserName(StringUtils.isBlank(callerPrincipal.getFullName())?callerPrincipal.getLoginName():callerPrincipal.getFullName());
 		hstry.setOrignWrkspc(callerPrincipal.getWorkspaceId());
 		hstry.setProcStep(processingStep);
 		return create(hstry);

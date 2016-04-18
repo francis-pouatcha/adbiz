@@ -8,16 +8,16 @@ import org.adorsys.adcore.props.CoreAbstBsnsItemProps;
 import org.adorsys.adstock.jpa.StkArticleLot;
 
 @Singleton
-public class StkArticleLotProps extends AbstEntiyProps<StkArticleLot> {
+public class StkArticleLotProps extends AbstEntiyProps {
 
 	@Inject
 	private CoreAbstBsnsItemProps superProps;
 
 	@Override
-	protected AbstEntiyProps<? super StkArticleLot> getSuperProps() {
+	protected AbstEntiyProps getSuperProps() {
 		return superProps;
 	}
-
+	
 	@Override
 	public Class<StkArticleLot> getEntityClass() {
 		return StkArticleLot.class;

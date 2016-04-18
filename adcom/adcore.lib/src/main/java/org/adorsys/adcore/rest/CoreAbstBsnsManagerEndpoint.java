@@ -142,4 +142,20 @@ public abstract class CoreAbstBsnsManagerEndpoint<E extends CoreAbstBsnsObject, 
 			archiveManager.archive(identif);
 		return Response.ok().build();
 	}
+	
+	@PUT
+	@Path("/prepare/{identif}")
+	public Response prepareObj(@PathParam("identif") String identif) {
+		getBsnsObjManager().prepare(identif);
+		return Response.ok().build();
+	}
+	
+	@PUT
+	@Path("/{identif}/items/{itemIdentif}/asseccedQty")
+	@Consumes({ "application/json"})
+	@Produces({ "application/json"})
+	public I updateasseccedQty(@PathParam("identif") String identif, @PathParam("itemIdentif") String itemIdentif, I item) throws AdException {
+		return getBsnsObjManager().updateAsseccedQty(identif, itemIdentif, item.getAsseccedQty(), item.getAcsngDt(), item.getAcsngUser());
+	}
+	
 }

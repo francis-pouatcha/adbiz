@@ -16,6 +16,7 @@ import org.adorsys.adcore.rest.CoreAbstBsnsObjectLookup;
 import org.adorsys.adcshdwr.jpa.CdrDrctSales;
 import org.adorsys.adcshdwr.jpa.CdrDrctSalesSearchInput;
 import org.adorsys.adcshdwr.jpa.CdrDrctSalesSearchResult;
+import org.adorsys.adcshdwr.jpa.CdrDrctSales_;
 
 /**
  * 
@@ -23,7 +24,7 @@ import org.adorsys.adcshdwr.jpa.CdrDrctSalesSearchResult;
 @Stateless
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 @Path("/cdrdrctsaless")
-public class CdrDrctSalesEndpoint extends CoreAbstBsnsObjectEndpoint<CdrDrctSales>{
+public class CdrDrctSalesEndpoint extends CoreAbstBsnsObjectEndpoint<CdrDrctSales, CoreAbstBsnsObjectSearchInput<CdrDrctSales>, CoreAbstBsnsObjectSearchResult<CdrDrctSales>>{
 
 	@Inject
 	private CdrDrctSalesLookup lookup;
@@ -33,12 +34,10 @@ public class CdrDrctSalesEndpoint extends CoreAbstBsnsObjectEndpoint<CdrDrctSale
 		return lookup;
 	}
 
-
 	@Override
 	protected Field[] getEntityFields() {
-		return CdrDrctSales_.class.getFields();;
+		return CdrDrctSales_.class.getFields();
 	}
-
 
 	@Override
 	protected CoreAbstBsnsObjectSearchResult<CdrDrctSales> newSearchResult(
@@ -47,11 +46,8 @@ public class CdrDrctSalesEndpoint extends CoreAbstBsnsObjectEndpoint<CdrDrctSale
 		return new CdrDrctSalesSearchResult(size, resultList, searchInput);
 	}
 
-
 	@Override
 	protected CoreAbstBsnsObjectSearchInput<CdrDrctSales> newSearchInput() {
 		return new CdrDrctSalesSearchInput();
 	}
-
-
 }

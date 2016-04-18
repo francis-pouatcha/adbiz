@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import org.adorsys.adbase.jpa.OrgContact;
 import org.adorsys.adbase.jpa.OrgContactSearchInput;
 import org.adorsys.adbase.jpa.OrgContactSearchResult;
+import org.adorsys.adbase.jpa.OrgContact_;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
@@ -43,7 +44,7 @@ public class OrgContactEndpoint extends CoreAbstIdentifiedEndpoint<OrgContact> {
 
 	@Override
 	protected Field[] getEntityFields() {
-		return OrgContact.class.getFields();
+		return OrgContact_.class.getFields();
 	}
 
 	@Override

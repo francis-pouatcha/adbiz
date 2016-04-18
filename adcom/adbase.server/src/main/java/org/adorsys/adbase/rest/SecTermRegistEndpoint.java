@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import org.adorsys.adbase.jpa.SecTermRegist;
 import org.adorsys.adbase.jpa.SecTermRegistSearchInput;
 import org.adorsys.adbase.jpa.SecTermRegistSearchResult;
+import org.adorsys.adbase.jpa.SecTermRegist_;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
@@ -44,7 +45,7 @@ public class SecTermRegistEndpoint extends
 
 	@Override
 	protected Field[] getEntityFields() {
-		return SecTermRegist.class.getFields();
+		return SecTermRegist_.class.getFields();
 	}
 
 	@Override

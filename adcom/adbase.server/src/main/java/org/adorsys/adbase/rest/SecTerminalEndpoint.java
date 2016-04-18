@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import org.adorsys.adbase.jpa.SecTerminal;
 import org.adorsys.adbase.jpa.SecTerminalSearchInput;
 import org.adorsys.adbase.jpa.SecTerminalSearchResult;
+import org.adorsys.adbase.jpa.SecTerminal_;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
@@ -44,7 +45,7 @@ public class SecTerminalEndpoint extends
 
 	@Override
 	protected Field[] getEntityFields() {
-		return SecTerminal.class.getFields();
+		return SecTerminal_.class.getFields();
 	}
 
 	@Override

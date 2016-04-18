@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import org.adorsys.adbase.jpa.RoleEntry;
 import org.adorsys.adbase.jpa.RoleEntrySearchInput;
 import org.adorsys.adbase.jpa.RoleEntrySearchResult;
+import org.adorsys.adbase.jpa.RoleEntry_;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
@@ -43,7 +44,7 @@ public class RoleEntryEndpoint extends CoreAbstIdentifiedEndpoint<RoleEntry> {
 
 	@Override
 	protected Field[] getEntityFields() {
-		return RoleEntry.class.getFields();
+		return RoleEntry_.class.getFields();
 	}
 
 	@Override

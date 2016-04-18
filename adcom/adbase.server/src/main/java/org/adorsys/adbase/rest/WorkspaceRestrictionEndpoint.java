@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import org.adorsys.adbase.jpa.WorkspaceRestriction;
 import org.adorsys.adbase.jpa.WorkspaceRestrictionSearchInput;
 import org.adorsys.adbase.jpa.WorkspaceRestrictionSearchResult;
+import org.adorsys.adbase.jpa.WorkspaceRestriction_;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
@@ -45,7 +46,7 @@ public class WorkspaceRestrictionEndpoint extends
 
 	@Override
 	protected Field[] getEntityFields() {
-		return WorkspaceRestriction.class.getFields();
+		return WorkspaceRestriction_.class.getFields();
 	}
 
 	@Override

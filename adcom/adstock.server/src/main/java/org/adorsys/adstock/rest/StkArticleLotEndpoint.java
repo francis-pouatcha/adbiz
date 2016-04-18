@@ -11,14 +11,13 @@ import javax.ws.rs.Path;
 
 import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchResult;
-import org.adorsys.adcore.pdfreport.PdfReportTemplate;
 import org.adorsys.adcore.props.AbstEntiyProps;
 import org.adorsys.adcore.rest.CoreAbstBsnsItemEndpoint;
 import org.adorsys.adcore.rest.CoreAbstBsnsItemLookup;
 import org.adorsys.adstock.jpa.StkArticleLot;
-import org.adorsys.adstock.jpa.StkArticleLot_;
 import org.adorsys.adstock.jpa.StkArticleLotSearchInput;
 import org.adorsys.adstock.jpa.StkArticleLotSearchResult;
+import org.adorsys.adstock.jpa.StkArticleLot_;
 
 /**
  * 
@@ -51,12 +50,9 @@ public class StkArticleLotEndpoint extends CoreAbstBsnsItemEndpoint<StkArticleLo
 	protected CoreAbstBsnsItemSearchInput<StkArticleLot> newSearchInput() {
 		return new StkArticleLotSearchInput();
 	}
+
 	@Override
-	protected PdfReportTemplate<StkArticleLot> getReportTemplate() {
-		return new StkArticleLotPdfReportTemplate();
-	}
-	@Override
-	protected AbstEntiyProps<StkArticleLot> getEntityProps() {
+	protected AbstEntiyProps getEntityProps() {
 		return entityProps;
 	}
 	@Override

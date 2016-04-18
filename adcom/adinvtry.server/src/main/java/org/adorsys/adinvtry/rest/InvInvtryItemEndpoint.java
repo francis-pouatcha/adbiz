@@ -11,7 +11,6 @@ import javax.ws.rs.Path;
 
 import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchResult;
-import org.adorsys.adcore.pdfreport.PdfReportTemplate;
 import org.adorsys.adcore.props.AbstEntiyProps;
 import org.adorsys.adcore.rest.CoreAbstBsnsItemEndpoint;
 import org.adorsys.adcore.rest.CoreAbstBsnsItemLookup;
@@ -56,12 +55,7 @@ public class InvInvtryItemEndpoint extends
 	}
 
 	@Override
-	protected PdfReportTemplate<InvInvtryItem> getReportTemplate() {
-		return new InvInvtryItemPdfReportTemplate();
-	}
-
-	@Override
-	protected AbstEntiyProps<InvInvtryItem> getEntityProps() {
+	protected AbstEntiyProps getEntityProps() {
 		return entityProps;
 	}
 

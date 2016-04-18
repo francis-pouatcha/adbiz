@@ -1,9 +1,12 @@
 package org.adorsys.adcore.rest;
 
+import java.io.File;
+import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -17,11 +20,17 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.adorsys.adcore.auth.AdcomUser;
 import org.adorsys.adcore.exceptions.AdException;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
+import org.adorsys.adcore.jpa.CoreSearchInput;
+import org.adorsys.adcore.pdfreport.PdfReportProperties;
+import org.adorsys.adcore.pdfreport.PdfReportTemplate;
+import org.adorsys.adcore.props.AbstEntiyProps;
 import org.adorsys.adcore.vo.StringListHolder;
+import org.apache.commons.io.FileUtils;
 
 public abstract class CoreAbstIdentifReadEndpoint<E extends CoreAbstIdentifObject> {
 
@@ -29,6 +38,17 @@ public abstract class CoreAbstIdentifReadEndpoint<E extends CoreAbstIdentifObjec
 	protected abstract Field[] getEntityFields();
 	protected abstract CoreAbstIdentifObjectSearchInput<E> newSearchInput();
 	protected abstract CoreAbstIdentifObjectSearchResult<E> newSearchResult(Long count, Long total, List<E> resultList, CoreAbstIdentifObjectSearchInput<E> searchInput);
+	@Inject
+	private AdcomUser userPrincipal;
+
+	/**
+	 * Override this to activate reporting.
+	 * 
+	 * @return
+	 */
+	protected AbstEntiyProps getEntityProps(){
+		return null;
+	}
 
 	@GET
 	@Path("/{id}")
@@ -235,4 +255,61 @@ public abstract class CoreAbstIdentifReadEndpoint<E extends CoreAbstIdentifObjec
 //				.header("Content-Disposition",
 //						"attachment; filename=sample.xls").build();
 	}	
+	
+	
+	@POST
+	@Path("/report.pdf")
+	@Consumes({ "application/json", "application/xml" })
+	@Produces({ "application/json", "application/xml", "application/pdf", "application/octet-stream" })
+	public Response generateReport(@Context HttpServletResponse response, CoreAbstIdentifObjectSearchInput<E> searchInput) throws AdException {
+
+		AbstEntiyProps entityProps = getEntityProps();
+		if(entityProps==null) return Response.noContent().build();
+		
+		PdfReportProperties reportProperties = searchInput.getReportProperties();
+		if(reportProperties==null || reportProperties.getReportFields().isEmpty()) return Response.noContent().build();
+		reportProperties.setUsername(userPrincipal.getLoginName());
+
+		OutputStream os = null;
+		PdfReportTemplate reportTemplate = new PdfReportTemplate()
+				.withEntityProps(entityProps)
+				.withReportProperties(reportProperties);
+
+		SingularAttribute<E, ?>[] attributes = readSeachAttributes(searchInput);
+		E entity = searchInput.getEntity();
+		Long count = getLookup().countBy(entity, attributes);
+		int start = searchInput.getStart();
+		int pageSize = CoreSearchInput.MAX_MAX;
+		int max = searchInput.getMax();
+		if(max<=0) max=count.intValue();
+		
+		while (start < max) {
+			int firstResult = start;
+			start += pageSize;
+			List<E> resultList = getLookup().findBy(entity, firstResult, pageSize, attributes);
+			try {
+				reportTemplate.addItems(resultList);
+			} catch (Exception e) {
+				throw new AdException("Error printing", e);
+			}
+		}
+		try {
+			File file = reportTemplate.build();
+			// the contentlength
+			int sizeOf = (int) FileUtils.sizeOf(file);
+			response.setContentLength(sizeOf);
+			os = response.getOutputStream();
+			FileUtils.copyFile(file, os);
+			os.flush();
+			os.close();
+		} catch (Exception e) {
+			throw new AdException("Error printing", e);
+		}
+
+		return Response
+				.ok(os)
+				.header("Content-Disposition",
+						"attachment; filename=report.pdf").build();
+	}
+	
 }

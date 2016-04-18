@@ -167,10 +167,7 @@ public abstract class CoreAbstBsnsObject extends CoreAbstBsnsObjectHeader {
 	
 	@Column
 	private String status;
-	
-	@Column
-	private String login;
-	
+
 	/*
 	 * Define the group to which this inventory belongs to. IT is necessary to
 	 * help select inventory belonging to the same group and compare them and even merge them.
@@ -189,6 +186,8 @@ public abstract class CoreAbstBsnsObject extends CoreAbstBsnsObjectHeader {
 	private String bsnsPartner;
 
 	private String bsnsPrtnrOU;
+	
+	private String bsnsPtnrName;
 	
 	private String docNbr;
 	
@@ -472,14 +471,6 @@ public abstract class CoreAbstBsnsObject extends CoreAbstBsnsObjectHeader {
 		this.status = status;
 	}
 
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
 	public String getTxGroup() {
 		return txGroup;
 	}
@@ -590,6 +581,14 @@ public abstract class CoreAbstBsnsObject extends CoreAbstBsnsObjectHeader {
 
 	public void setDocNbr(String docNbr) {
 		this.docNbr = docNbr;
+	}
+
+	public String getBsnsPtnrName() {
+		return bsnsPtnrName;
+	}
+
+	public void setBsnsPtnrName(String bsnsPtnrName) {
+		this.bsnsPtnrName = bsnsPtnrName;
 	}
 
 	protected void normalize(){

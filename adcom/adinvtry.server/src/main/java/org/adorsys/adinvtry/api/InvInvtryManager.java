@@ -21,7 +21,6 @@ import org.adorsys.adinvtry.jpa.InvInvtryItem;
 import org.adorsys.adinvtry.jpa.InvInvtry_;
 import org.adorsys.adinvtry.jpa.InvJob;
 import org.adorsys.adinvtry.jpa.InvStep;
-import org.adorsys.adinvtry.rest.InvInvtryEJB;
 import org.adorsys.adinvtry.rest.InvInvtryInjector;
 import org.adorsys.adinvtry.rest.InvInvtrySearchInput;
 import org.adorsys.adinvtry.rest.InvInvtrySearchResult;
@@ -34,10 +33,7 @@ public class InvInvtryManager  extends CoreAbstBsnsObjectManager<InvInvtry, InvI
 
 	@Inject
 	private InvInvtryInjector injector;
-	
-	@Inject
-	private InvInvtryEJB ejb;
-	
+
 	@Inject
 	private StkLotInSctnStockQtyLookup lotInSctnStockQtyLookup;
 
@@ -69,10 +65,7 @@ public class InvInvtryManager  extends CoreAbstBsnsObjectManager<InvInvtry, InvI
 		return bsnsObj;
 	}
 	
-	public void prepareInvtry(String identif){
-		ejb.prepareInvtry(identif);
-	}
-
+	@Override
 	public InvInvtryItem updateAsseccedQty(String identif, String itemIdentif, BigDecimal asseccedQty, Date acsngDt, String acsngUser) throws AdRestException {
 		loadExistingBsnsObject(identif); 
 		InvInvtryItem existing = loadExistingBsnsItem(identif, itemIdentif);

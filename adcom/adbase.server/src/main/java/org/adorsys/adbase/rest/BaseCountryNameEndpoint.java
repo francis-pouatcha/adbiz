@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import org.adorsys.adbase.jpa.BaseCountryName;
 import org.adorsys.adbase.jpa.BaseCountryNameSearchInput;
 import org.adorsys.adbase.jpa.BaseCountryNameSearchResult;
+import org.adorsys.adbase.jpa.BaseCountryName_;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
@@ -42,7 +43,7 @@ public class BaseCountryNameEndpoint extends CoreAbstIdentifiedEndpoint<BaseCoun
 
 	@Override
 	protected Field[] getEntityFields() {
-		return BaseCountryName.class.getFields();
+		return BaseCountryName_.class.getFields();
 	}
 
 	@Override

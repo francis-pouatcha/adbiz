@@ -3,7 +3,6 @@ package org.adorsys.adbase.jpa;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.adorsys.adcore.annotation.Description;
@@ -37,9 +36,12 @@ public class OrgUnit extends CoreAbstIdentifObject {
 	@NotNull
 	private String shortName;
 	
-	// Data for printing
-	@Transient
-	private OrgContact contact;
+	@NotNull
+	private String realm;
+	
+	private boolean tenant;
+
+	private String registerNumber;
 
 	public String getCtryIso3() {
 		return this.ctryIso3;
@@ -73,12 +75,28 @@ public class OrgUnit extends CoreAbstIdentifObject {
 		this.shortName = shortName;
 	}
 
-	public OrgContact getContact() {
-		return contact;
+	public String getRealm() {
+		return realm;
 	}
 
-	public void setContact(OrgContact contact) {
-		this.contact = contact;
+	public void setRealm(String realm) {
+		this.realm = realm;
+	}
+
+	public boolean isTenant() {
+		return tenant;
+	}
+
+	public void setTenant(boolean tenant) {
+		this.tenant = tenant;
+	}
+
+	public String getRegisterNumber() {
+		return registerNumber;
+	}
+
+	public void setRegisterNumber(String registerNumber) {
+		this.registerNumber = registerNumber;
 	}
 
 	@Override

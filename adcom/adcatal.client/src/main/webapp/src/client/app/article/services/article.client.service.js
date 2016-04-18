@@ -33,6 +33,10 @@
                     start: -1,
                     max: 20
                 }
+            },
+            findByArtName:{
+                method: 'GET',
+                url: API_BASE_ADCATAL_URL + '/catalarticles/findByArtName'
             }
         };
 

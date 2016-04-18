@@ -8,13 +8,13 @@ import org.adorsys.adcore.props.CoreAbstBsnsItemProps;
 import org.adorsys.adprocmt.jpa.PrcmtDlvryItem;
 
 @Singleton
-public class PrcmtDlvryItemProps extends AbstEntiyProps<PrcmtDlvryItem> {
+public class PrcmtDlvryItemProps extends AbstEntiyProps {
 
 	@Inject
 	private CoreAbstBsnsItemProps superProps;
 
 	@Override
-	protected AbstEntiyProps<? super PrcmtDlvryItem> getSuperProps() {
+	protected AbstEntiyProps getSuperProps() {
 		return superProps;
 	}
 

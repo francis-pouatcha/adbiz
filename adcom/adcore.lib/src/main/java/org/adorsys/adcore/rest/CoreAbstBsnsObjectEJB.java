@@ -51,7 +51,7 @@ public abstract class CoreAbstBsnsObjectEJB<
 	public E close(E entity){
 		entity = recomputeBusinessObject(entity.getCntnrIdentif(), entity);
 		entity.evlte();
-		entity.setClosedDate(new Date());//we have to set closing date here @guymoyo
+		entity.setClosedDate(new Date());
 		E saved = getBsnsRepo().save(attach(entity));
 		
 		getInjector().getHstrEjb().createHstry(saved.getIdentif(), CoreProcessStatusEnum.CLOSED.name(), CoreHistoryTypeEnum.CLOSED.name(),CoreProcStepEnum.CLOSING.name(), CoreHistoryTypeEnum.CLOSED.name(), prinHstryInfo(saved));
@@ -223,5 +223,9 @@ public abstract class CoreAbstBsnsObjectEJB<
 		if(entity.getConflictDt()==null) return;
 		entity.setConflictDt(null);
 		internalUpdate(entity);
+	}
+	
+	public void prepare(String identif) {
+		// Do nothing
 	}
 }

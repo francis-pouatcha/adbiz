@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import org.adorsys.adbase.jpa.PricingCurrRate;
 import org.adorsys.adbase.jpa.PricingCurrRateSearchInput;
 import org.adorsys.adbase.jpa.PricingCurrRateSearchResult;
+import org.adorsys.adbase.jpa.PricingCurrRate_;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
@@ -44,7 +45,7 @@ public class PricingCurrRateEndpoint extends
 
 	@Override
 	protected Field[] getEntityFields() {
-		return PricingCurrRate.class.getFields();
+		return PricingCurrRate_.class.getFields();
 	}
 
 	@Override

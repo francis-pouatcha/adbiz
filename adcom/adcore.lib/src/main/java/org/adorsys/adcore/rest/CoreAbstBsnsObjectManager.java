@@ -257,4 +257,13 @@ public abstract class CoreAbstBsnsObjectManager<E extends CoreAbstBsnsObject, I 
 		
 		return item;
 	}
+	
+	public void prepare(String identif){
+		getInjector().getBsnsObjEjb().prepare(identif);
+	}
+
+	public I updateAsseccedQty(String identif, String itemIdentif, BigDecimal asseccedQty, Date acsngDt, String acsngUser) throws AdRestException {
+		return updateTrgtQty(identif, itemIdentif, asseccedQty, acsngDt);
+	}
+	
 }

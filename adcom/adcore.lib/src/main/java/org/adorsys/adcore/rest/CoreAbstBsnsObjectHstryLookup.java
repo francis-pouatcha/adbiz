@@ -77,6 +77,9 @@ public abstract class CoreAbstBsnsObjectHstryLookup<E extends CoreAbstBsnsObject
 	public List<E> findByEntIdentifAndEntStatusOrderByIdAsc(String identif, String status, int start, int max) {
 		return getRepo().findByEntIdentifAndEntStatus(identif, status).orderAsc("id").firstResult(start).maxResults(max).getResultList();
 	}
+	public List<E> findByEntIdentifAndEntStatusOrderByIdDesc(String identif, String status, int start, int max) {
+		return getRepo().findByEntIdentifAndEntStatus(identif, status).orderDesc("id").firstResult(start).maxResults(max).getResultList();
+	}
 	
 	public boolean hasAnyStatus(String entIdentif, List<String> entStatusList){
 		for (String entStatus : entStatusList) {

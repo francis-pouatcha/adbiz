@@ -24,9 +24,13 @@
 		<module>adcatal.lib</module>
 		<module>adstock.lib</module>
 		<module>adinvtry.lib</module>
+		<module>adcshdwr.lib</module> 
 		<module>adcatal.server</module>
 		<module>adstock.server</module>
 		<module>adinvtry.server</module>
+		<!-- 
+		<module>adcshdwr.server</module> 
+		 -->
 
 		<module>adprocmt.lib</module>
 		<module>adprocmt.server</module>
@@ -36,16 +40,25 @@
 		<module>adinvtry.client</module>
 		<module>adprocmt.client</module>
 		<module>addashboard.client</module>
+		<module>adcshdwr.client</module>
+		
+		<module>adbase.lib</module>
+		<module>adbase.server</module>
+		<!-- 
+		<module>adbnsptnr.client</module> 
+		<module>adbnsptnr.lib</module> 
+		<module>adbnsptnr.server</module>
+		 -->
 
 		<module>adcom.deploy</module>
 		<module>adcom.configuration</module>
-		<!-- <module>adbnsptnr.client</module> <module>adbnsptnr.server</module> -->
-		<!-- <module>adbase.server</module> <module>adcost.server</module> <module>adcost.lib</module> 
-			<module>adbase.lib</module> <module>adacc.client</module> <module>adprocmt.client</module> 
+		<!--  <module>adcost.server</module> <module>adcost.lib</module> 
+			 <module>adacc.lib</module> 
+			<module>adacc.client</module> <module>adprocmt.client</module> 
 			<module>adstock.client</module> <module>adbnsptnr.client</module> <module>adsales.client</module> 
-			<module>adcshdwr.client</module> <module>adacc.lib</module> <module>adcshdwr.lib</module> 
 			<module>adacc.server</module> <module>adsales.lib</module> <module>adbnsptnr.server</module> 
-			<module>adsales.server</module> <module>adcshdwr.server</module> <module>adterm.server</module> 
+			<module>adsales.server</module> 
+			<module>adterm.server</module> 
 			<module>adaptmt.server</module> <module>adaptmt.client</module> <module>admanager.client</module> 
 			<module>adcom.all</module> <module>adcom.configuration</module> -->
 		<!-- <module>adcom.test</module> -->

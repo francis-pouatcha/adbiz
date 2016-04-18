@@ -4,13 +4,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
+import org.adorsys.adcore.jpa.CoreReportField;
 import org.adorsys.adcore.props.AbstEntiyProps;
 import org.adorsys.adcore.utils.DateUtil;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -28,10 +29,10 @@ import com.itextpdf.text.pdf.draw.LineSeparator;
 
 /**
  * @author guymoyo
- * @param <T>
+ * @param 
  *
  */
-public abstract class PdfReportTemplate<T> {
+public class PdfReportTemplate {
 
 	/* The document. */
 	private Document document;
@@ -42,49 +43,40 @@ public abstract class PdfReportTemplate<T> {
 	/* The file or baos if small document.*/
 //	private Outpu baos;
 	File file;
-		
-	private String username = "anonymous";
 	
-	/** The user date. */
-	private Date userDate = new Date();
-	
-	private String userLanguage = "en";
-	
-	private List<String> fieldsName = Collections.emptyList();
+	private PdfReportProperties reportProperties;
+
+	private List<String> fieldNames = Collections.emptyList();
 
 	/** The bold font. */
-	static Font boldFont = FontFactory.getFont("Times-Roman", 10, Font.BOLD);
-	
+	private Font boldFont = FontFactory.getFont("Times-Roman", 10, Font.BOLD);
 	/** The font. */
-	static Font font = FontFactory.getFont("Times-Roman", 10);
+	private Font font = FontFactory.getFont("Times-Roman", 10);
+	
+	private AbstEntiyProps props;
 
-	public PdfReportTemplate<T> withUsername(String username){
-		checkDone();
-		this.username = username;
-		return this;
-	}
-	public PdfReportTemplate<T> withUserDate(Date date){
-		checkDone();
-		this.userDate = date;
-		return this;
-	}
-	public PdfReportTemplate<T> withFields(List<String> fields){
-		checkDone();
-		this.fieldsName = fields;
-		return this;
-	}
-	public PdfReportTemplate<T> withLanguage(String lang){
-		checkDone();
-		this.userLanguage = lang;
+	public PdfReportTemplate withEntityProps(AbstEntiyProps props){
+		this.props = props;
 		return this;
 	}
 	
-	private PdfReportTemplate<T> setup(AbstEntiyProps<T> props) throws DocumentException {
+	public PdfReportTemplate withReportProperties(PdfReportProperties reportProperties){
+		checkDone();
+		this.reportProperties = reportProperties;
+		for (CoreReportField reportField : reportProperties.getReportFields()) {
+			fieldNames.add(reportField.getFieldName());
+		}
+		boldFont = FontFactory.getFont(reportProperties.getFontFamily(), reportProperties.getFontSize(), Font.BOLD);
+		font = FontFactory.getFont(reportProperties.getFontFamily(), reportProperties.getFontSize());
+		return this;
+	}
+
+	private PdfReportTemplate setup() throws DocumentException {
 		checkDone();
 		document = new Document(PageSize.A4.rotate(),5,5,5,5);
 		FileOutputStream fos = null;
 		try {
-			file = File.createTempFile(username + "_" + props.getEntityClass().getSimpleName() + "_" + java.util.UUID.randomUUID().toString(), "."+ userLanguage +".pdf");
+			file = File.createTempFile(reportProperties.getUsername() + "_" + props.getEntityClass().getSimpleName() + "_" + java.util.UUID.randomUUID().toString(), "."+ reportProperties.getUserLanguage() +".pdf");
 			fos = new FileOutputStream(file);
 			PdfWriter.getInstance(document, fos);
 		} catch (IOException | DocumentException e) {
@@ -100,16 +92,16 @@ public abstract class PdfReportTemplate<T> {
 
 	/**
 	 * Adds the items.
-	 * @param <T>
+	 * @param 
 	 * 
 	 * @param items
 	 *            the items
 	 * @throws DocumentException 
 	 */
-	public PdfReportTemplate<T> addItems(List<T> items, AbstEntiyProps<T> props) throws DocumentException {
-		if(document==null) setup(props);
-		for(T entity:items){
-			newTableRow(props.fieldValues(fieldsName, entity));
+	public PdfReportTemplate addItems(List<?> items) throws DocumentException {
+		if(document==null) setup();
+		for(Object entity:items){
+			newTableRow(props.fieldValues(fieldNames, entity));
 		}
 		return this;
 	}
@@ -141,23 +133,34 @@ public abstract class PdfReportTemplate<T> {
 	 * @throws DocumentException
 	 *             the document exception
 	 */
-	private void fillTableHaeder() throws DocumentException {
-		int size = fieldsName.size();
-	
-		reportTable = new PdfPTable(size);
+	private void fillTableHaeder(AbstEntiyProps props) throws DocumentException {
+		int size = reportProperties.getReportFields().size();
+		float[] columnRelWidths = new float[size];
+		for (int i = 0; i < size; i++) {
+			columnRelWidths[i] = reportProperties.getReportFields().get(i).getColumnWidth();
+		}
+		reportTable = new PdfPTable(columnRelWidths);
 		reportTable.setWidthPercentage(100);
 		reportTable.setHeaderRows(1);
 		
 		PdfPCell pdfPCell;
-		for(String fieldName:fieldsName){		
+		for(CoreReportField field:reportProperties.getReportFields()){		
 			pdfPCell = new PdfPCell();
 			pdfPCell.setFixedHeight(38f);
-			pdfPCell.addElement(new Phrase(fieldName,boldFont));
+			String headerText = field.getHeaderText();
+			String fieldName = field.getFieldName();
+			if(StringUtils.isBlank(headerText)){
+				headerText = props.i18n(fieldName, reportProperties.getUserLanguage());
+			}
+			if(StringUtils.isBlank(headerText)){
+				headerText = fieldName;
+			}
+			pdfPCell.addElement(new Phrase(headerText,boldFont));
 			reportTable.addCell(pdfPCell);
 		}
 	}
 
-	private void printReportHeader(AbstEntiyProps<T> props) throws DocumentException {
+	private void printReportHeader(AbstEntiyProps props) throws DocumentException {
 
 		Paragraph paragraph = new Paragraph(new Phrase("LISTE "+props.getEntityClass().getSimpleName(),boldFont));
 		paragraph.setAlignment(Element.ALIGN_CENTER);
@@ -167,99 +170,11 @@ public abstract class PdfReportTemplate<T> {
 
 		document.add(new LineSeparator());
 
-		paragraph = new Paragraph(new Phrase("Imprime Le  : "+DateUtil.format(userDate,DateUtil.DATE_FORMAT_SHORT))+" Par : "+username);
+		paragraph = new Paragraph(new Phrase("Imprime Le  : "+DateUtil.format(reportProperties.getUserDate(),DateUtil.DATE_FORMAT_SHORT))+" Par : "+reportProperties.getUsername());
 		paragraph.setAlignment(Element.ALIGN_RIGHT);
 		document.add(paragraph);
 
 		document.add(Chunk.NEWLINE);
-	}
-
-
-
-	/**
-	 * The Class StandardText.
-	 */
-	static class StandardText extends Phrase{
-		
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = -5796192414147292471L;
-		
-		/**
-		 * Instantiates a new standard text.
-		 */
-		StandardText() {
-			super();
-			setFont(font);
-		}
-		
-		/**
-		 * Instantiates a new standard text.
-		 * 
-		 * @param text
-		 *            the text
-		 */
-		StandardText(String text) {
-			super(text);
-			setFont(font);
-		}
-	}
-
-	/**
-	 * The Class BoldText.
-	 */
-	static class BoldText extends Phrase {
-		
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = -6569891897489003768L;
-		
-		/**
-		 * Instantiates a new bold text.
-		 */
-		BoldText() {
-			super();
-			setFont(boldFont);
-		}
-		
-		/**
-		 * Instantiates a new bold text.
-		 * 
-		 * @param text
-		 *            the text
-		 */
-		BoldText(String text) {
-			super(text);
-			setFont(boldFont);
-		}
-	}
-
-	/**
-	 * The Class RightParagraph.
-	 */
-	static class RightParagraph extends Paragraph {
-		
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = 986392503142787342L;
-
-		/**
-		 * Instantiates a new right paragraph.
-		 * 
-		 * @param phrase
-		 *            the phrase
-		 */
-		public RightParagraph(Phrase phrase) {
-			super(phrase);
-			setAlignment(Element.ALIGN_RIGHT);
-		}
-
-		/**
-		 * Instantiates a new right paragraph.
-		 * 
-		 * @param string
-		 *            the string
-		 */
-		public RightParagraph(String string) {
-			this(new Phrase(string));
-		}
 	}
 
 	/**
@@ -280,9 +195,9 @@ public abstract class PdfReportTemplate<T> {
 	 * @throws DocumentException
 	 *             the document exception
 	 */
-	private void resetDocument(AbstEntiyProps<T> props) throws DocumentException{
+	private void resetDocument(AbstEntiyProps props) throws DocumentException{
 		document.open();
 		printReportHeader(props);
-		fillTableHaeder();
+		fillTableHaeder(props);
 	}
 }

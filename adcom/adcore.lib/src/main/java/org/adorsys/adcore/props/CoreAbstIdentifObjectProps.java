@@ -5,15 +5,15 @@ import javax.inject.Singleton;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 
 @Singleton
-public class CoreAbstIdentifObjectProps extends AbstEntiyProps<CoreAbstIdentifObject> {
+public class CoreAbstIdentifObjectProps extends AbstEntiyProps {
 
 	@Override
-	protected AbstEntiyProps<CoreAbstIdentifObject> getSuperProps() {
+	protected AbstEntiyProps getSuperProps() {
 		return null;
 	}
 
 	@Override
-	public Class<CoreAbstIdentifObject> getEntityClass() {
+	public Class<?> getEntityClass() {
 		return CoreAbstIdentifObject.class;
 	}
 }

@@ -19,11 +19,11 @@ import org.apache.commons.beanutils.PropertyUtils;
  * @author francis
  *
  */
-public abstract class AbstEntiyProps<T> {
+public abstract class AbstEntiyProps {
 
-	protected abstract AbstEntiyProps<? super T> getSuperProps();
+	protected abstract AbstEntiyProps getSuperProps();
 	
-	public abstract Class<T> getEntityClass();
+	public abstract Class<?> getEntityClass();
 	
 	@Inject
 	private EntityPropsUtils propsUtils;
@@ -47,7 +47,7 @@ public abstract class AbstEntiyProps<T> {
 		translations = propsUtils.load(getEntityClass(), null);
 	}
 	
-	public List<String> fieldValues(List<String> fieldsName, T entity) {
+	public List<String> fieldValues(List<String> fieldsName, Object entity) {
 		List<String> listValues = new ArrayList<String>();
 		String value;
 		for(String fieldName:fieldsName){

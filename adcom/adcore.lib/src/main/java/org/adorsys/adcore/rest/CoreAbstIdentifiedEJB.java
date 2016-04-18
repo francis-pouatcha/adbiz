@@ -32,7 +32,7 @@ public abstract class CoreAbstIdentifiedEJB<E extends CoreAbstIdentifObject> {
 	@Inject
 	@EntityArchivedEvent
 	private Event<E> entityArchivedEvent;
-	
+
 	public E create(E entity) {
 		E attached = attach(entity);
 		getRepo().persist(attached);
@@ -92,6 +92,10 @@ public abstract class CoreAbstIdentifiedEJB<E extends CoreAbstIdentifObject> {
 		return saved;
 	}
 
+	protected E silentUpdate(E entity) {
+		E saved = getRepo().save(attach(entity));
+		return saved;
+	}
 
 	protected E attach(E entity) {
 		if (entity == null)

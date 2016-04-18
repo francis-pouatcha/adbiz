@@ -239,7 +239,8 @@
     	    var start = pagination.start || 0, number = pagination.number || utils.searchInputInit().stPagination.number;
     	    processSearch(start, tableState.search);
         	
-        	Article.findByLike(vm.searchInput, function(response){
+    	   if(vm.searchInput.entity.artName && vm.searchInput.entity.artName.length>0){
+           	Article.findByArtName({"artName":vm.searchInput.entity.artName, "start":0, "max":20}, function(response){
         		vm.data.list = response.resultList;
                 tableState.pagination.numberOfPages = Math.ceil(response.count / number);
                 // copy the identif in a list
@@ -269,6 +270,42 @@
             function(errorResponse) {
                 vm.error = errorResponse.data.summary;
             });
+    	   } else if (vm.searchInput.entity.prodFmly && vm.searchInput.entity.prodFmly.length>0){
+    		   // ignore this first
+    	   } else {
+           	Article.findByLike(vm.searchInput, function(response){
+           		vm.searchInput.entity.prodFmly = undefined;
+           		vm.searchInput.entity.artName = undefined;
+        		vm.data.list = response.resultList;
+                tableState.pagination.numberOfPages = Math.ceil(response.count / number);
+                // copy the identif in a list
+                var identifs = [];
+                angular.forEach(response.resultList, function(article){
+                	this.push(article.identif);
+                }, identifs);
+                CatalArtLangMapping.findByCntnrIdentifIn({"list":identifs, "start":0, "max":10, "langIso2":userLangIso2}, function(langResp){
+                	angular.forEach(response.resultList, function(article){
+                		buildArtLangMappingDisplay(article, langResp.resultList);                    	
+                	}, this);
+                }, function(errorResponse2){
+                	vm.error = errorResponse2.data.summary;
+                });                
+                
+                CatalArt2ProductFamily.findByCntnrIdentifIn({"list":identifs, "start":0, "max":10, "langIso2":userLangIso2},function(art2ProductFamilyResp){
+                	var art2ProductFamilies = [];
+                	angular.forEach(art2ProductFamilyResp.resultList,function(art2ProductFamily){
+                		this.push(art2ProductFamily.famCode);
+                	},art2ProductFamilies);
+                	
+                	CatalProdFmlyLangMap.findByCntnrIdentifIn({"list":art2ProductFamilies, "start":0, "max":1, "langIso2":userLangIso2}, function (langResp) {
+                    	buildFamLangMappingDisplay(response.resultList, art2ProductFamilyResp.resultList, langResp.resultList);
+                    });
+                });                	
+            },
+            function(errorResponse) {
+                vm.error = errorResponse.data.summary;
+            });
+    	   }
         };
         
         function processSearch(start, searchObject) {

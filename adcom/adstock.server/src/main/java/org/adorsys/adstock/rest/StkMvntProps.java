@@ -8,13 +8,13 @@ import org.adorsys.adcore.props.CoreAbstBsnsItemProps;
 import org.adorsys.adstock.jpa.StkMvnt;
 
 @Singleton
-public class StkMvntProps extends AbstEntiyProps<StkMvnt> {
+public class StkMvntProps extends AbstEntiyProps {
 
 	@Inject
 	private CoreAbstBsnsItemProps superProps;
-
+	
 	@Override
-	protected AbstEntiyProps<? super StkMvnt> getSuperProps() {
+	protected AbstEntiyProps getSuperProps() {
 		return superProps;
 	}
 

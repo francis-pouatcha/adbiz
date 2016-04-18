@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import org.adorsys.adbase.jpa.Login;
 import org.adorsys.adbase.jpa.LoginSearchInput;
 import org.adorsys.adbase.jpa.LoginSearchResult;
+import org.adorsys.adbase.jpa.Login_;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
@@ -42,7 +43,7 @@ public class LoginEndpoint extends CoreAbstIdentifiedEndpoint<Login> {
 
 	@Override
 	protected Field[] getEntityFields() {
-		return Login.class.getFields();
+		return Login_.class.getFields();
 	}
 
 	@Override

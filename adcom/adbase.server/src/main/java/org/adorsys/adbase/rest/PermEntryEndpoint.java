@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import org.adorsys.adbase.jpa.PermEntry;
 import org.adorsys.adbase.jpa.PermEntrySearchInput;
 import org.adorsys.adbase.jpa.PermEntrySearchResult;
+import org.adorsys.adbase.jpa.PermEntry_;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
@@ -43,7 +44,7 @@ public class PermEntryEndpoint extends CoreAbstIdentifiedEndpoint<PermEntry> {
 
 	@Override
 	protected Field[] getEntityFields() {
-		return PermEntry.class.getFields();
+		return PermEntry_.class.getFields();
 	}
 
 	@Override

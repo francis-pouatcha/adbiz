@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import org.adorsys.adbase.jpa.OuWsRestriction;
 import org.adorsys.adbase.jpa.OuWsRestrictionSearchInput;
 import org.adorsys.adbase.jpa.OuWsRestrictionSearchResult;
+import org.adorsys.adbase.jpa.OuWsRestriction_;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchResult;
 import org.adorsys.adcore.rest.CoreAbstIdentifLookup;
@@ -44,7 +45,7 @@ public class OuWsRestrictionEndpoint extends
 
 	@Override
 	protected Field[] getEntityFields() {
-		return OuWsRestriction.class.getFields();
+		return OuWsRestriction_.class.getFields();
 	}
 
 	@Override

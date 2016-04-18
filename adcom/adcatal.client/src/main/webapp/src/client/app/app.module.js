@@ -124,7 +124,7 @@
     });
     /* jshint ignore:end */
 
-    appModule.run(function(formlyConfig) {
+    appModule.run(function($rootScope, $translate, formlyConfig) {
         formlyConfig.setType({
             name: 'typeahead',
             template: '<input type="text"' +
@@ -132,6 +132,17 @@
                 'typeahead="item.identif  for item in to.options($viewValue) | limitTo:8" ' +
                 'class="form-control">',
             wrapper: ['bootstrapLabel', 'bootstrapHasError']
+        });
+        
+        $rootScope.$on('$stateChangeStart', function(event, toState) {
+            if (toState.title) {
+                $translate(toState.title).then(function(translation) {
+                    $rootScope.pageTitle = translation;
+                },
+                function() {
+                    $rootScope.pageTitle = 'adcatal.client';
+                });
+            }
         });
     });
 })();
