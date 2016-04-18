@@ -292,13 +292,17 @@
         	// First initialize SearchInput-Object and then set Search-Params
         	vm.searchInput = utils.processSearch(vm.searchInput, searchObject.predicateObject);
         	vm.searchInput.start = start;
-            if(vm.searchInput.entity.artName){
+            if(vm.searchInput.entity.artName && vm.searchInput.entity.artName.length>0){
                 vm.searchInput.artName = vm.searchInput.entity.artName;
                 vm.searchInput.entity.artName = undefined;
+            } else {
+            	vm.searchInput.artName = undefined;
             }
-            if(vm.searchInput.entity.prodFmly){
+            if(vm.searchInput.entity.prodFmly && vm.searchInput.entity.prodFmly.length>0){
                 vm.searchInput.prodFmly = vm.searchInput.entity.prodFmly;
                 vm.searchInput.entity.prodFmly = undefined;
+            } else {
+            	vm.searchInput.prodFmly = undefined;
             }
         }
     }
