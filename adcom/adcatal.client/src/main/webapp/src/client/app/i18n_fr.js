@@ -134,6 +134,7 @@
                 'CatalProductFamily.edit.title':'Modifier',
                 'CatalProductFamily.view.title':'Visualiser',
                 'CatalProductFamily.back.title':'Retour',
+                'CatalProductFamily.artName':'Nom Article',
 
                 //-----------CatalProductFamilyLangMap-----------
                 'CatalFamilyFeatMaping_description.title': 'Table des Caractéristique de Famille',
@@ -162,7 +163,9 @@
                 'CatalCipOrigine_INSURANCE_description':'Assurance',
 
                 'app.core.search.title':'Rechercher',
-                'app.core.clear.title':'Effacer'
+                'app.core.clear.title':'Effacer',
+                'existin_lang':'Il existe deja une entite avec cette langue!',
+                "Cip_or_name":"Nom ou CIP article"
 
             });
         });

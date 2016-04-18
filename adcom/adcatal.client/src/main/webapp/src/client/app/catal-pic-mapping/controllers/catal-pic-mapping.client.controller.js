@@ -56,6 +56,7 @@
         vm.create = function (catalPicMapping) {
             vm.catalArticleId = $stateParams.articleId;
             catalPicMapping.cntnrIdentif = vm.catalArticleId;
+            catalPicMapping.artIdentif = vm.catalArticleId;
             // Create new catalPicMapping object
             var catalPicMappingRes = new CatalPicMapping(catalPicMapping);
             catalPicMappingRes.$save(function (response) {

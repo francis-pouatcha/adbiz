@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -78,6 +79,32 @@ public class CatalArticleEndpoint extends
 	@Override
 	protected CoreAbstLoaderRegistration getLoaderRegistration() {
 		return loaderRegistration;
+	}
+	
+	@POST
+	@Path("/findByLike")
+	@Produces({ "application/json"})
+	@Consumes({ "application/json"})
+	public CoreAbstIdentifObjectSearchResult<CatalArticle> findByLike(
+			CatalArticleSearchInput searchInput) {
+		Long total = getLookup().count();
+		
+		if(searchInput.getFieldNames().contains("artName")){
+			
+			Long count = ejb.countByArtNAme(searchInput.getArtName());	
+			List<CatalArticle> resultList = ejb.findByArtNAme(searchInput.getArtName()).firstResult(searchInput.getStart())
+			.maxResults(searchInput.getMax()).getResultList();
+			return newSearchResult(count, total,
+					resultList, detach(searchInput));
+		}
+		
+		SingularAttribute<CatalArticle, ?>[] attributes = readSeachAttributes(searchInput);
+		Long countLike = getLookup().countByLike(searchInput.getEntity(), attributes);
+		List<CatalArticle> resultList = getLookup().findByLike(
+				searchInput.getEntity(), searchInput.getStart(),
+				searchInput.getMax(), attributes);
+		return newSearchResult(countLike, total,
+				detach(resultList), detach(searchInput));
 	}
 	
 

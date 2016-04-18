@@ -16,7 +16,7 @@ public class CoreAbstIdentifObjectSearchInput<E extends CoreAbstIdentifObject>
 
 	private String identifFrom;
 	private String identifTo;
-
+	
 	public String getValueDtFrom() {
 		return valueDtFrom;
 	}

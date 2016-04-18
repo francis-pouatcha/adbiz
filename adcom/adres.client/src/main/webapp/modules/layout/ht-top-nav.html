@@ -13,14 +13,59 @@
                 <li>
                     <div class="dropdown" style="color: #808080;margin-right: 15px;margin-top: 15px">
                         <span data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+                            <i class="glyphicon glyphicon-list"></i> {{'navbar_go_to' | translate}}
+                            <span class="caret"></span>
+                        </span>
+                        <ul class="dropdown-menu" aria-labelledby="dLabel">
+                            <li ng-show="vm.hasWorkspace('addashboard.client')">
+                                <a ng-href="/addashboard.client" >
+                                    DASHBOARD
+                                </a>
+                            </li>
+                            <li ng-show="vm.hasWorkspace('adcatal.client')">
+                                <a ng-href="/adcatal.client">
+                                    CATALOGUE
+                                </a>
+                            </li>
+                            <li ng-show="vm.hasWorkspace('adstock.client')">
+                                <a ng-href="/adstock.client" >
+                                    STOCK
+                                </a>
+                            </li>
+                            <li ng-show="vm.hasWorkspace('adinvtry.client')">
+                                <a ng-href="/adinvtry.client" >
+                                    INVENTAIRE
+                                </a>
+                            </li>
+                            <li ng-show="vm.hasWorkspace('adprocmt.client')">
+                                <a ng-href="/adprocmt.client" >
+                                    APPROVISIONEMENT
+                                </a>
+                            </li>
+                            <li ng-show="vm.hasWorkspace('adsales.client')">
+                                <a ng-href="/adsales.client" >
+                                    VENTE
+                                </a>
+                            </li>
+                            <li ng-show="vm.hasWorkspace('admanager.client')">
+                                <a ng-href="/admanager.client" >
+                                    MANAGER
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="dropdown" style="color: #808080;margin-right: 15px;margin-top: 15px">
+                        <span data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
                             <i class="glyphicon glyphicon-user" ></i> {{vm.username}}
                             <span class="caret"></span>
                         </span>
                         <ul class="dropdown-menu" aria-labelledby="dLabel">
-                            <li><a href="/addashboard.client" >Dashboard</a></li>
-                            <li><a href="#" ng-click="vm.changeLang('fr')" >{{'LANG_FR' | translate}}</a></li>
-                            <li><a href="#" ng-click="vm.changeLang('en')" >{{'LANG_EN' | translate}}</a></li>
-                            <li><a ng-click="vm.logout()" >{{'logout' | translate}}</a></li>
+                            <li><a href="/addashboard.client" ><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
+                            <li><a href="#" ng-click="vm.changeLang('fr')" ><i class="glyphicon glyphicon-flag"></i> {{'LANG_FR' | translate}}</a></li>
+                            <li><a href="#" ng-click="vm.changeLang('en')" ><i class="glyphicon glyphicon-flag"></i> {{'LANG_EN' | translate}}</a></li>
+                            <li><a ng-click="vm.logout()" ><i class="glyphicon glyphicon-log-out"></i> {{'logout' | translate}}</a></li>
                         </ul>
                     </div>
                 </li>

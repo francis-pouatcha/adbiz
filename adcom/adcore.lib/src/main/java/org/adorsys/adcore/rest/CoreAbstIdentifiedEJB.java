@@ -1,5 +1,6 @@
 package org.adorsys.adcore.rest;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.enterprise.event.Event;
@@ -12,6 +13,7 @@ import org.adorsys.adcore.event.EntityDeletedEvent;
 import org.adorsys.adcore.event.EntityUpdatedEvent;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
+import org.apache.deltaspike.data.api.QueryResult;
 
 public abstract class CoreAbstIdentifiedEJB<E extends CoreAbstIdentifObject> {
 
@@ -66,6 +68,15 @@ public abstract class CoreAbstIdentifiedEJB<E extends CoreAbstIdentifObject> {
 	public E deleteByIdentif(String identif){
 		E entity = getRepo().findByIdentif(identif).getSingleResult();
 		return internalDelete(entity);
+	}
+	
+	public E findByIdentif(String identif){
+		Iterator<E> iterator = getRepo().findByIdentif(identif).getResultList().iterator();
+		 if(iterator.hasNext()){
+			 return iterator.next();
+		 }else{
+			 return null;
+		 }
 	}
 	
 	public List<E> deleteByCntnrIdentif(String cntnrIdentif){

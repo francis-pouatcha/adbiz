@@ -154,7 +154,7 @@
 
         // Update existing CatalProdFmly
         vm.update = function() {
-        	var display = cleanDisplay(vm.article);
+        	var display = cleanDisplay(vm.catalProdFmly);
             var langMapping = display.langMapping;
             var catalProdFmly = vm.catalProdFmly;
             

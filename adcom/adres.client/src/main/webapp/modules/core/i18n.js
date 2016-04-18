@@ -90,7 +90,8 @@
                 "workspace_loginName":"Login Name",
                 "workspace_ouWsIdentif":"Workspace",
                 "workspace_admin":"ADMINISTRATION",
-                "workspace_logOut":"Logout"
+                "workspace_logOut":"Logout",
+                "navbar_go_to":"Go to module"
 
             });
 // francais --------------------------------------------------------------------------------
@@ -105,6 +106,7 @@
                 "navbar_user":"Utilisateur",
                 "navbar_logOut":"Deconnexion",
                 "navbar_appMenu":"Menu",
+                "navbar_go_to":"Go to module",
 
                 "Login_partner_logOut.title":"Deconnecter",
                 "Entity_change.title":"Changer  ",

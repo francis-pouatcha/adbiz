@@ -39,6 +39,8 @@
     		var display = {};
     		display.displayMainArtName = articleEquiv.displayMainArtName;
     		display.displayEquivArtName = articleEquiv.displayEquivArtName;
+            delete articleEquiv.displayMainArtName;
+            delete  articleEquiv.displayEquivArtName;
     		
     		return display;
     	};
@@ -108,11 +110,17 @@
         vm.create = function (catalArtEquivalence) {
             vm.catalArticleId = $stateParams.articleId;
             catalArtEquivalence.cntnrIdentif = vm.catalArticleId;
+            if(!catalArtEquivalence.equivArtIdentif.cntnrIdentif || !catalArtEquivalence.equivArtIdentif.artName){
+                logger.error('L article entre nexiste pas');
+                return;
+            }
+            catalArtEquivalence.equivArtIdentif = catalArtEquivalence.equivArtIdentif.cntnrIdentif;
             // Create new catalArtEquivalence object
             var catalArtEquivalenceRes = new CatalArtEquivalence(catalArtEquivalence);
             catalArtEquivalenceRes.$save(function (response) {
                 logger.success('CatalArtEquivalence created');
-                vm.data.push(response);
+                //vm.data.push(response);
+                vm.init();
             }, function (errorResponse) {
                 vm.error = errorResponse.data.summary;
             });

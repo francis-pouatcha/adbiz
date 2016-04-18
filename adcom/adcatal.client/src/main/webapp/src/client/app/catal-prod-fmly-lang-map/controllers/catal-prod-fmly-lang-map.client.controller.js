@@ -10,10 +10,10 @@
         'CatalProdFmlyLangMap',
         'utils',
         'CatalProdFmlyLangMapForm',
-        'CatalProdFmlyForm', '$stateParams'];
+        'CatalProdFmlyForm', '$stateParams','$translate'];
     /* @ngInject */
     function CatalProdFmlyLangMapController(logger, CatalProdFmlyLangMap,
-                                            utils, CatalProdFmlyLangMapForm, CatalProdFmlyForm, $stateParams) {
+                                            utils, CatalProdFmlyLangMapForm, CatalProdFmlyForm, $stateParams,$translate) {
 
         var vm = this;
         vm.data = [];
@@ -59,6 +59,14 @@
             vm.catalArticleId = $stateParams.articleId;
             catalProdFmlyLangMap.cntnrIdentif = vm.catalProdFmlyId;
             // Create new catalProdFmlyLangMap object
+            var langs = [];
+            angular.forEach(vm.data, function(catalArtLang){
+                langs.push(catalArtLang.langIso2);
+            });
+            if(langs.indexOf(catalProdFmlyLangMap.langIso2)!=-1){
+                logger.error($translate.instant('existin_lang'));
+                return;
+            }
             var catalProdFmlyLangMapRes = new CatalProdFmlyLangMap(catalProdFmlyLangMap);
             catalProdFmlyLangMapRes.$save(function (response) {
 

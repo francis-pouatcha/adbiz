@@ -46,7 +46,8 @@
 	                                });
 	                        	};
                   		}
-                },
+                }
+                /*,
                 {
                     key: 'artName',
                     type: 'input',
@@ -106,7 +107,7 @@
                         label: $translate.instant('CatalAbstractFeatMapping.substances'),
                         disabled: true
                     }
-                }
+                }*/
             ];
 
             return fields;

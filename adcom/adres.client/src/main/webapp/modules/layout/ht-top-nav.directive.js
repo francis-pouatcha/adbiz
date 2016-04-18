@@ -19,7 +19,7 @@
         };
 
         /* @ngInject */
-        function TopNavController($translate, $rootScope) {
+        function TopNavController($translate, $rootScope,Auth) {
             var vm = this;
             vm.changeLang = function(lang) {
                 $translate.use(lang);
@@ -28,6 +28,15 @@
             vm.username = $rootScope.username;
             vm.logout = $rootScope.logout;
             vm.appTitle = $rootScope.appTitle;
+
+            vm.hasWorkspace = function (workspace) {
+                if (Auth.authz.hasResourceRole('role.' + workspace, workspace)) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            };
         }
 
         return directive;

@@ -5,6 +5,7 @@
 			<module name="org.adorsys.adcore.env" />
 			<module name="org.adorsys.adcore.xls" />
             <module name="org.adorsys.adkcloak.adapter"/>
+	    	<module name="org.keycloak.keycloak-core"/>
 	    	<module name="org.keycloak.keycloak-adapter-core"/>
 	    	<module name="org.keycloak.keycloak-adapter-spi"/>
 		</dependencies>

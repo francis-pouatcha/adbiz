@@ -22,6 +22,7 @@ import javax.ws.rs.core.Response.Status;
 
 import org.adorsys.adcore.exceptions.AdException;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
+import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 import org.adorsys.adcore.xls.CoreAbstLoaderRegistration;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -35,7 +36,10 @@ public abstract class CoreAbstIdentifiedEndpoint<E extends CoreAbstIdentifObject
 	@POST
 	@Consumes({ "application/json"})
 	@Produces({ "application/json"})
-	public E create(E entity) {
+	public E create(E entity) throws AdException {
+		E findByIdentif = getEjb().findByIdentif(entity.getIdentif());
+		if(findByIdentif!=null)
+			throw new AdException("Identif_used");
 		return detach(getEjb().create(entity));
 	}
 

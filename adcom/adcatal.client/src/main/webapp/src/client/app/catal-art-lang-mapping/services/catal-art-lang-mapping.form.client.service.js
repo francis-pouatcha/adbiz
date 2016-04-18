@@ -42,6 +42,7 @@
                     templateOptions: {
                         label: $translate.instant('langIso2'),
                         disabled: disabled,
+                        required: true,
                         options: [
                             {name: $translate.instant('LANG_FR'), value: 'fr'},
                             {name: $translate.instant('LANG_EN'), value: 'en'}
