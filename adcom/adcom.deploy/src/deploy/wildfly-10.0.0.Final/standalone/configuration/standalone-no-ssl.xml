@@ -152,14 +152,16 @@
 						<password>${database.password}</password>
 					</security>
 				</datasource>
-                <datasource jndi-name="java:jboss/datasources/KeycloakDS" pool-name="KeycloakDS" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:h2:mem:keycloakDS;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</connection-url>
-                    <driver>h2</driver>
-                    <security>
+				<datasource jndi-name="java:jboss/datasources/KeycloakDS"
+					pool-name="KeycloakDS" enabled="true" use-java-context="true">
+					<connection-url>jdbc:h2:mem:keycloakDS;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+					</connection-url>
+					<driver>h2</driver>
+					<security>
 						<user-name>${database.username}</user-name>
 						<password>${database.password}</password>
-                    </security>
-                </datasource>
+					</security>
+				</datasource>
 				<drivers>
 					<driver name="h2" module="com.h2database.h2">
 						<xa-datasource-class>org.h2.jdbcx.JdbcDataSource
@@ -201,7 +203,8 @@
 				</managed-scheduled-executor-services>
 			</concurrent>
 			<default-bindings context-service="java:jboss/ee/concurrency/context/default"
-				datasource="java:jboss/datasources/${database.pool.name}" managed-executor-service="java:jboss/ee/concurrency/executor/default"
+				datasource="java:jboss/datasources/${database.pool.name}"
+				managed-executor-service="java:jboss/ee/concurrency/executor/default"
 				managed-scheduled-executor-service="java:jboss/ee/concurrency/scheduler/default"
 				managed-thread-factory="java:jboss/ee/concurrency/factory/default" />
 		</subsystem>
@@ -422,8 +425,8 @@
 		<subsystem xmlns="urn:jboss:domain:undertow:3.0">
 			<buffer-cache name="default" />
 			<server name="default-server">
-				<http-listener name="default" socket-binding="http"
-					redirect-socket="https" />
+				<http-listener name="default" socket-binding="http" proxy-address-forwarding="true"
+					redirect-socket="proxy-https" />
 				<host name="default-host" alias="localhost">
 					<location name="/" handler="welcome-content" />
 					<filter-ref name="server-header" />
@@ -483,6 +486,7 @@
 		<socket-binding name="https" port="${jboss.https.port:8443}" />
 		<socket-binding name="txn-recovery-environment" port="4712" />
 		<socket-binding name="txn-status-manager" port="4713" />
+		<socket-binding name="proxy-https" port="443" />
 		<outbound-socket-binding name="mail-smtp">
 			<remote-destination host="localhost" port="25" />
 		</outbound-socket-binding>
