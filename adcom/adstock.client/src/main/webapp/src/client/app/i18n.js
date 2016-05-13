@@ -24,6 +24,7 @@
                 'app.core.delete.confirmation.title':'Are you sure to delete this: \n',
 
                 //--------------ArticleLot---------------
+                'Stock-articlelots.title':'Article Lot',
                 'StockArticlelot.lotPic.title': 'Lot PIC',
                 'StockArticlelot.artPic.title': 'PIC',
                 'StockArticlelot.section.title': 'Section',
@@ -66,6 +67,7 @@
 
 
                 //---------------Section------------------//
+                'StkSections.title':'Section',
                 'StockSection.code.title':'Section Code',
                 'StockSection.name.title': 'Name',
                 'StockSection.position.title': 'Position',
@@ -98,6 +100,7 @@
                 'StkMvnt.title':'Stock Movement',
                 'StkMvnts.title':'Stock Movements',
                 'StkMvnt.name.title': 'Name',
+                'StkMvnt.orgUnit.title':'Organisation Unit',
                 "InvInvtryItem_artName_description.title":"Article Name",
                 "Entity_out.title":"Out",
                 "Entity_in.title":"In",
@@ -119,6 +122,12 @@
                 "StkMvtTerminal_SAMPLE_description.title":"Sample",
                 "StkMvtTerminal_EXPIRING_description.title":"Expiring",
                 "StkMvtTerminal_NONE_description.title":"None",
+
+                "Stock-Move-Out":"Stock Out",
+                "Stock-Move-In":"Stock In",
+                "Stock-transfer":"Stock Transfer",
+                "Identif_used":"Code Section already used!",
+                "section_used":"Section already used in article lot!",
 
                 LANG_FR: 'French',
                 LANG_EN: 'English'
@@ -145,6 +154,8 @@
 
 
                 //--------------Article Lot---------------//
+
+                'Stock-articlelots.title':'Lot Article',
                 'StockArticlelot.lotPic.title': 'CIP Lot',
                 'StockArticlelot.artPic.title': 'CIP',
                 'StockArticlelot.section.title': 'Emplacement',
@@ -185,6 +196,7 @@
 
 
                 //-------------Section------------------//
+                'StkSections.title':'Section',
                 'StockSection.code.title':'Code Section',
                 'StockSection.name.title': 'Nom',
                 'StockSection.position.title': 'Position',
@@ -217,6 +229,7 @@
                 'StkMvnt.title':'Mouvement de Stock',
                 'StkMvnts.title':'Mouvements de Stock',
                 'StkMvnt.name.title': 'Designation',
+                'StkMvnt.orgUnit.title':'Organisation',
                 "Entity_out.title":"Sortir",
                 "Entity_in.title":"Entrer",
                 "Entity_transfer.title":"Transferer",
@@ -237,7 +250,11 @@
             "StkMvtTerminal_description.text":"Origine ou la destination du movement de stock.",
              "StkMvtTerminal_description.title":"Origine ou Destination du Mouvement Stock",
                 "InvInvtryItem_artName_description.title":"Nom Article",
-
+            "Stock-Move-Out":"Sortie Stock",
+            "Stock-Move-In":"Entrer Stock",
+                "Stock-transfer":" Transfer Stock",
+                "Identif_used":"Identifiant deja utilise!",
+                "section_used":"Section deja utilise dans les lots d'articles",
 
             LANG_FR: 'Francais',
                 LANG_EN: 'Englais'

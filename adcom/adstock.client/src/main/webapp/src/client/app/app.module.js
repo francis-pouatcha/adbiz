@@ -121,6 +121,19 @@
         $rootScope.username = vm.username;
         $rootScope.logout = vm.logout;
         $rootScope.appTitle = 'Stock';
+
+        /* ARRAY OF REPORT LINKS */
+        $rootScope.reportLink = [
+            {
+                link: '/adreport.server/frameset?__report=stock.rptdesign',
+                name: 'Fiche de suivie du stock'
+            },
+
+            {
+                link: '/adreport.server/frameset?__report=stock4.rptdesign',
+                name: 'Fiche de valorisation de Stock'
+            }
+        ];
     });
     
     /* Runtime configuration */

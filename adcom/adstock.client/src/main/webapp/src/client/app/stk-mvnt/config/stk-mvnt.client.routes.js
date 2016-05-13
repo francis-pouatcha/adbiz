@@ -5,13 +5,15 @@
         .module('app.stkMvnt')
         .run(appRun);
 
-    appRun.$inject = ['routerHelper', 'BASE_VIEW_STOCK'];
+    appRun.$inject = ['routerHelper', 'BASE_VIEW_STOCK','$translate'];
     /* @ngInject */
-    function appRun(routerHelper, BASE_VIEW_STOCK) {
-        routerHelper.configureStates(getStates(BASE_VIEW_STOCK));
+    function appRun(routerHelper, BASE_VIEW_STOCK,$translate) {
+        $translate('StkMvnts.title').then(function(StkMvnts){
+            routerHelper.configureStates(getStates(BASE_VIEW_STOCK, StkMvnts));
+        });
     }
 
-    function getStates(BASE_VIEW_STOCK) {
+    function getStates(BASE_VIEW_STOCK,StkMvnts) {
         return [
             {
                 state: 'listStkMvnt',
@@ -23,7 +25,7 @@
                     title: 'List StkMvnts',
                     settings: {
                         nav: 3,
-                        content: '<i class="fa fa-folder-open"></i> StkMvnts'
+                        content: '<i class="fa fa-folder-open"></i> '+StkMvnts
                     }
                 }
             },

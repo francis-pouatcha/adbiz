@@ -48,9 +48,9 @@
 	                      <a class="btn btn-default" title="{{'app.core.view.title' | translate}}" href="#/stock-articlelot/{{stockArticlelot.id}}">
 	                        <span class="glyphicon glyphicon-eye-open"></span>
 	                      </a>
-	                      <a class="btn btn-default" title="{{'app.core.edit.title' | translate}}" href="#/stock-articlelot/{{stockArticlelot.id}}/edit">
-	                        <span class="glyphicon glyphicon-edit"></span>
-	                      </a>
+                         <a class="btn btn-default" title="print" ng-click="printBarcodeExcel(stockArticlelot.lotPic)">
+                         <span class="glyphicon glyphicon-print"></span>
+                     </a>
 	                  </div>
 	              </td>
 	          </tr>

@@ -26,7 +26,10 @@
 				<th><input data-st-search="lotPic" class="input-sm form-control" type="search"/></th>
 				<th><input data-st-search="artPic" class="input-sm form-control" type="search"/></th>
 				<th><input data-st-search="artName" class="input-sm form-control" type="search"/></th>
-				<th></th>
+				<th>
+                    <st-date-search predicate="acsngDtFrom" selected-date="query.acsngDtFrom"></st-date-search>
+                    <st-date-search predicate="acsngDtTo" selected-date="query.acsngDtTo"></st-date-search>
+                </th>
 				<th><input data-st-search="mvntType" class="input-sm form-control" type="search"/></th>
 				<th><input data-st-search="qtyBefore" class="input-sm form-control" type="search"/></th>
 				<th><input data-st-search="trgtQty" class="input-sm form-control" type="search"/></th>
@@ -42,7 +45,7 @@
 	              <td><span data-ng-bind="stkMvnt.lotPic"></span></td>
 	              <td><span data-ng-bind="stkMvnt.artPic"></span></td>
 	              <td><span data-ng-bind="stkMvnt.artName"></span></td>
-	              <td><span data-ng-bind="stkMvnt.acsngDt"></span></td>
+	              <td><span data-ng-bind="stkMvnt.acsngDt | date:'dd-MM-yyyy'"></span></td>
 	              <td><span data-ng-bind="stkMvnt.mvntType"></span></td>
 	              <td><span data-ng-bind="stkMvnt.qtyBefore"></span></td>
 	              <td><span data-ng-bind="stkMvnt.trgtQty"></span></td>
@@ -54,9 +57,6 @@
 	                 <div class="table-actions">
 	                      <a class="btn btn-default" title="{{'app.core.view.title' | translate}}" href="#/stk-mvnt/{{stkMvnt.id}}">
 	                        <span class="glyphicon glyphicon-eye-open"></span>
-	                      </a>
-	                      <a class="btn btn-default" title="{{'app.core.edit.title' | translate}}" href="#/stk-mvnt/{{stkMvnt.id}}/edit">
-	                        <span class="glyphicon glyphicon-edit"></span>
 	                      </a>
 	                  </div>
 	              </td>

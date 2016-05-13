@@ -230,11 +230,11 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">org.h2.Driver</property>
-            <property name="odaURL">jdbc:h2:~/tools/wildfly-9.0.1.Final/standalone/data/addb</property>
+            <property name="odaURL">jdbc:h2:~/tools/wildfly-10.0.0.Final/standalone/data/addb</property>
             <property name="odaUser">sa</property>
             <encrypted-property name="odaPassword" encryptionID="base64">c2E=</encrypted-property>
-            <property name="OdaConnProfileName">connection</property>
-            <property name="OdaConnProfileStorePath">connection</property>
+            <property name="OdaConnProfileName">connectWilf9.0.2</property>
+            <property name="OdaConnProfileStorePath">connectWild9.0.2</property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -320,9 +320,8 @@
             </list-property>
             <structure name="cachedMetaData"/>
             <method name="beforeOpen"><![CDATA[var param = reportContext.getHttpServletRequest().getParameter("invintryNumber");
-this.queryText = "SELECT ARTPIC, ARTNAME, SECTION, PRCHUNITPRCTAXINCL, ASSECCEDQTY, EXPECTEDQTY FROM INVINVTRYITEM WHERE CNTNRIDENTIF = '"+param+"'";]]></method>
+this.queryText = "SELECT ARTPIC, ARTNAME, SECTION, PRCHUNITPRCTAXINCL, ASSECCEDQTY, EXPECTEDQTY FROM INVINVTRYITEM WHERE CNTNRIDENTIF = '"+param+"' AND ACSNGDT IS NOT NULL";]]></method>
             <property name="dataSource">InvintryDataSource</property>
-            <list-property name="resultSet"/>
             <xml-property name="queryText"><![CDATA[//select PUBLIC.INVINVTRYITEM.ARTPIC,
 //PUBLIC.INVINVTRYITEM.ARTNAME,
 //PUBLIC.INVINVTRYITEM.SECTION,
@@ -511,6 +510,14 @@ this.queryText = "SELECT ARTPIC, ARTNAME, SECTION, PRCHUNITPRCTAXINCL, ASSECCEDQ
             <property name="verticalAlign">bottom</property>
             <property name="height">10px</property>
         </style>
+        <style name="mytable" id="319">
+            <property name="borderLeftColor">#C0C0C0</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#C0C0C0</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+        </style>
     </styles>
     <page-setup>
         <simple-master-page name="Simple MasterPage" id="2">
@@ -582,11 +589,12 @@ Date du: <VALUE-OF>BirtDateTime.day(BirtDateTime.now())+" "+BirtDateTime.month(B
     </page-setup>
     <body>
         <table id="163">
+            <property name="style">mytable</property>
             <property name="marginLeft">10px</property>
-            <property name="marginRight">10px</property>
+            <property name="marginRight">0px</property>
             <property name="whiteSpace">normal</property>
             <property name="overflow">scroll</property>
-            <property name="width">100%</property>
+            <property name="width">98%</property>
             <property name="dataSet">ArtInvintry</property>
             <property name="refTemplateParameter">NewTemplateParameterDefinition2</property>
             <list-property name="boundDataColumns">
@@ -683,6 +691,13 @@ Date du: <VALUE-OF>BirtDateTime.day(BirtDateTime.now())+" "+BirtDateTime.month(B
             </list-property>
             <structure name="toc"/>
             <property name="pageBreakInterval">50</property>
+            <list-property name="sort">
+                <structure>
+                    <expression name="key" type="javascript">row["ARTNAME"]</expression>
+                    <property name="direction">asc</property>
+                    <property name="strength">-1</property>
+                </structure>
+            </list-property>
             <column id="187">
                 <property name="width">1.21875in</property>
             </column>

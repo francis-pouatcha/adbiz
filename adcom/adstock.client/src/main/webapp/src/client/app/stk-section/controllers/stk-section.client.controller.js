@@ -10,14 +10,18 @@
         '$location',
         'StkSection',
         'StkSectionForm',
-        'utils'];
+        'utils',
+        '$translate',
+        'StockArticlelot'];
     /* @ngInject */
     function StkSectionController(logger,
         $stateParams,
         $location,
         StkSection,
         StkSectionForm,
-        utils) {
+        utils,
+        $translate,
+        StockArticlelot) {
 
         var vm = this;
         vm.data = {
@@ -26,8 +30,8 @@
         
         vm.stkSection = {};
 
-        vm.setFormFields = function(disabled) {
-            vm.formFields = StkSectionForm.getFormFields(disabled);
+        vm.setFormFields = function(disable, disableIdentif) {
+            vm.formFields = StkSectionForm.getFormFields(disable,disableIdentif);
         };
         
         vm.setSearchFormFields = function(disabled){
@@ -58,27 +62,43 @@
                 logger.success('StkSection created');
                 $location.path('stk-section/' + response.id);
             }, function(errorResponse) {
-                vm.error = errorResponse.data.summary;
+                vm.error = $translate.instant(errorResponse.data);
                 logger.warn(vm.error);
             });
         };
 
         // Remove existing StkSection
         vm.remove = function(stkSection) {
-            if (stkSection) {
-                stkSection = StkSection.get({stkSectionId:stkSection.id}, function() {
-                    stkSection.$remove(function() {
-                        logger.success('Section deleted');
-                        $location.path('/stk-section');
-                        //vm.tableParams.reload();
-                    });
+            var searchInput = utils.searchInputInit().searchInput;
+            searchInput.className = 'org.adorsys.adstock.jpa.StkArticleLotSearchInput';
+             searchInput.entity.section=stkSection.identif;
+            searchInput.fieldNames.push('section');
+            StockArticlelot.findByLike(searchInput, function(response) {
+                   if(!response.resultList){
+                       if (stkSection) {
+                           stkSection = StkSection.get({stkSectionId:stkSection.id}, function() {
+                               stkSection.$remove(function() {
+                                   logger.success('Section deleted');
+                                   $location.path('/stk-section');
+                                   //vm.tableParams.reload();
+                               });
+                           });
+                       } else {
+                           vm.stkSection.$remove(function() {
+                               logger.success('Section deleted');
+                               $location.path('/stk-section');
+                           });
+                       }
+                   }else{
+                           vm.error = $translate.instant('section_used');;
+                           logger.warn(vm.error);
+                   }
+                },
+                function(errorResponse) {
+                    vm.error = errorResponse;
+                    logger.warn(vm.error);
                 });
-            } else {
-                vm.stkSection.$remove(function() {
-                    logger.success('Section deleted');
-                    $location.path('/stk-section');
-                });
-            }
+
         };
 
         // Update existing StkSection
@@ -89,18 +109,19 @@
                 logger.success('StkSection updated');
                 $location.path('stk-section/' + stkSection.id);
             }, function(errorResponse) {
-                vm.error = errorResponse.data.summary;
+                vm.error = errorResponse;
+                logger.warn(vm.error);
             });
         };
 
         vm.toViewStkSection = function() {
             vm.stkSection = StkSection.get({stkSectionId: $stateParams.stkSectionId});
-            vm.setFormFields(true);
+            vm.setFormFields(true, true);
         };
 
         vm.toEditStkSection = function() {
             vm.stkSection = StkSection.get({stkSectionId: $stateParams.stkSectionId});
-            vm.setFormFields(false);
+            vm.setFormFields(false, true);
         };
         
         initSearchInput();
@@ -115,7 +136,8 @@
                 tableState.pagination.numberOfPages = Math.ceil(response.count / number)
             },
             function(errorResponse) {
-                vm.error = errorResponse.data.summary;
+                vm.error = errorResponse;
+                logger.warn(vm.error);
             });
         };
 

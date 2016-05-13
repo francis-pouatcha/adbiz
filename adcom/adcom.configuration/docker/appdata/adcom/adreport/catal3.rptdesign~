@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="author">Armel Nyobe</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.5.0.v201506092134 Build &lt;@BUILD@></property>
+    <text-property name="title">Catal Report</text-property>
+    <property name="units">in</property>
+    <text-property name="displayName">Catal Report</text-property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="catalDS" id="4">
+            <text-property name="displayName">profil de connexion pour tous les rapports</text-property>
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">org.h2.Driver</property>
+            <property name="odaURL">jdbc:h2:~/tools/wildfly-9.0.2.Final/standalone/data/addb</property>
+            <property name="odaUser">sa</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">c2E=</encrypted-property>
+            <property name="OdaConnProfileName">connectWilf9.0.2</property>
+            <property name="OdaConnProfileStorePath">connectWild9.0.2</property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Catal" id="5">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">ID_RAYON</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ID_RAYON</text-property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">ID_RAYON</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">RAYON</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">RAYON</text-property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">RAYON</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CIP</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">CIP</text-property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">CIP</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">DESIGNATION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">DESIGNATION</text-property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">DESIGNATION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">STOCK</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">STOCK</text-property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">STOCK</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PA</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">PA</text-property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">PA</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PV</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">PV</text-property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">PV</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">TVA</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">TVA</text-property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">TVA</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">MINQTY</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">MINQTY</text-property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">MINQTY</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">ID_RAYON</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">RAYON</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">CIP</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">DESIGNATION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">STOCK</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">PA</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">PV</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">TVA</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">MINQTY</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[var rayon = reportContext.getHttpServletRequest().getParameter('rayon');
+this.queryText = "SELECT * FROM(SELECT STKSECTION.IDENTIF AS ID_RAYON, STKSECTION.NAME  AS RAYON, CATALARTICLE.ID AS CIP , CATALARTLANGMAPPING.ARTNAME AS DESIGNATION , STKARTICLELOT.TRGTQTY AS STOCK , STKARTICLELOT.PRCHUNITPRCTAXINCL AS PA , CATALARTICLE.SPPU AS PV, CATALARTICLE.VATRATE AS TVA, CATALARTICLE.MINSTOCKQTY AS MINQTY FROM STKSECTION INNER JOIN STKARTICLELOT ON STKARTICLELOT.SECTION = STKSECTION.IDENTIF INNER JOIN CATALARTICLE ON CATALARTICLE.ID  = STKARTICLELOT.ARTPIC INNER JOIN CATALARTLANGMAPPING ON CATALARTLANGMAPPING.CNTNRIDENTIF = STKARTICLELOT.ARTPIC ORDER BY CATALARTLANGMAPPING.ARTNAME) WHERE ID_RAYON = '"+rayon+"'";]]></method>
+            <property name="dataSource">catalDS</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">ID_RAYON</property>
+                    <property name="nativeName">IDENTIF</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">RAYON</property>
+                    <property name="nativeName">NAME</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">CIP</property>
+                    <property name="nativeName">ID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">DESIGNATION</property>
+                    <property name="nativeName">ARTNAME</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">STOCK</property>
+                    <property name="nativeName">TRGTQTY</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">PA</property>
+                    <property name="nativeName">PRCHUNITPRCTAXINCL</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">PV</property>
+                    <property name="nativeName">SPPU</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">TVA</property>
+                    <property name="nativeName">VATRATE</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">MINQTY</property>
+                    <property name="nativeName">MINSTOCKQTY</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ID</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>CIP</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>CIP</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ARTNAME</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>DESIGNATION</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>DESIGNATION</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>TRGTQTY</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>3</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>STOCK</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>STOCK</design:label>
+            <design:formattingHints>
+              <design:displaySize>19</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>PRCHUNITPRCTAXINCL</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>3</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>PA</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>PA</design:label>
+            <design:formattingHints>
+              <design:displaySize>19</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SPPU</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>3</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>PV</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>PV</design:label>
+            <design:formattingHints>
+              <design:displaySize>19</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>VATRATE</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>3</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>TVA</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>TVA</design:label>
+            <design:formattingHints>
+              <design:displaySize>19</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>MINSTOCKQTY</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>3</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>MINQTY</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>MINQTY</design:label>
+            <design:formattingHints>
+              <design:displaySize>19</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="header" id="146">
+            <property name="backgroundColor">#888A85</property>
+            <property name="fontWeight">bold</property>
+            <property name="color">#EEEEEC</property>
+            <property name="textAlign">left</property>
+            <property name="verticalAlign">middle</property>
+            <property name="height">50px</property>
+        </style>
+        <style name="details" id="147">
+            <property name="borderBottomColor">#BABDB6</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="paddingBottom">5px</property>
+            <property name="textAlign">left</property>
+            <property name="verticalAlign">bottom</property>
+            <property name="height">40px</property>
+        </style>
+        <style name="legende" id="154">
+            <property name="verticalAlign">middle</property>
+            <property name="height">40px</property>
+        </style>
+        <style name="mytable" id="168">
+            <property name="borderLeftColor">#C0C0C0</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#C0C0C0</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <page-header>
+                <grid id="84">
+                    <column id="85"/>
+                    <row id="86">
+                        <cell id="87">
+                            <text id="90">
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[<SPAN style="margin-right:30%;margin-bottom:50px" >
+<P>
+NOM ENTREPRISE
+</P>
+<P>
+Tel: (+237) 6........
+</P>
+<P>
+Lieu
+</P>
+</SPAN>]]></text-property>
+                            </text>
+                        </cell>
+                    </row>
+                    <row id="88">
+                        <cell id="89">
+                            <text id="91">
+                                <property name="fontWeight">bold</property>
+                                <property name="textUnderline">underline</property>
+                                <property name="marginBottom">10px</property>
+                                <property name="textAlign">center</property>
+                                <property name="contentType">auto</property>
+                                <text-property name="content"><![CDATA[
+CATALOGUE DES PRODUITS PAR RAYON ]]></text-property>
+                            </text>
+                        </cell>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <grid id="155">
+                    <column id="156">
+                        <property name="width">7.291666666666667in</property>
+                    </column>
+                    <column id="157">
+                        <property name="width">0.20833333333333334in</property>
+                    </column>
+                    <column id="158">
+                        <property name="width">0.34375in</property>
+                    </column>
+                    <row id="159">
+                        <cell id="160">
+                            <property name="textAlign">right</property>
+                            <auto-text id="161">
+                                <property name="type">page-number</property>
+                            </auto-text>
+                        </cell>
+                        <cell id="162">
+                            <property name="textAlign">center</property>
+                            <text id="163">
+                                <property name="contentType">plain</property>
+                                <text-property name="content"><![CDATA[/]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="164">
+                            <auto-text id="165">
+                                <property name="type">total-page</property>
+                            </auto-text>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="92">
+            <property name="style">mytable</property>
+            <property name="marginLeft">10px</property>
+            <property name="width">98%</property>
+            <property name="dataSet">Catal</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">CIP</property>
+                    <text-property name="displayName">CIP</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["CIP"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">DESIGNATION</property>
+                    <text-property name="displayName">DESIGNATION</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["DESIGNATION"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">STOCK</property>
+                    <text-property name="displayName">STOCK</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["STOCK"]||0</expression>
+                    <property name="dataType">decimal</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">PA</property>
+                    <text-property name="displayName">PA</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PA"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">PV</property>
+                    <text-property name="displayName">PV</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PV"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">TVA</property>
+                    <text-property name="displayName">TVA</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["TVA"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">min</property>
+                    <text-property name="displayName">MIN</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["MINQTY"]</expression>
+                    <property name="dataType">integer</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">RAYON</property>
+                    <text-property name="displayName">RAYON</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["RAYON"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="125">
+                <property name="width">0.8125in</property>
+            </column>
+            <column id="126">
+                <property name="width">2.875in</property>
+            </column>
+            <column id="127">
+                <property name="width">0.9479166666666666in</property>
+            </column>
+            <column id="128">
+                <property name="width">0.9479166666666666in</property>
+            </column>
+            <column id="129">
+                <property name="width">0.8958333333333334in</property>
+            </column>
+            <column id="130">
+                <property name="width">0.65625in</property>
+            </column>
+            <column id="131">
+                <property name="width">0.8125in</property>
+            </column>
+            <header>
+                <row id="93">
+                    <property name="style">header</property>
+                    <cell id="94">
+                        <label id="132">
+                            <text-property name="text">CIP</text-property>
+                        </label>
+                    </cell>
+                    <cell id="95">
+                        <label id="134">
+                            <text-property name="text">DESIGNATION</text-property>
+                        </label>
+                    </cell>
+                    <cell id="96">
+                        <label id="136">
+                            <text-property name="text">STOCK</text-property>
+                        </label>
+                    </cell>
+                    <cell id="97">
+                        <label id="138">
+                            <text-property name="text">PRIX ACHAT</text-property>
+                        </label>
+                    </cell>
+                    <cell id="98">
+                        <label id="140">
+                            <text-property name="text">PRIX VENTE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="99">
+                        <label id="142">
+                            <text-property name="text">TVA</text-property>
+                        </label>
+                    </cell>
+                    <cell id="100">
+                        <label id="166">
+                            <text-property name="text">RAYON</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="101">
+                    <property name="style">details</property>
+                    <cell id="102">
+                        <data id="133">
+                            <property name="resultSetColumn">CIP</property>
+                        </data>
+                    </cell>
+                    <cell id="103">
+                        <data id="135">
+                            <property name="resultSetColumn">DESIGNATION</property>
+                        </data>
+                    </cell>
+                    <cell id="104">
+                        <list-property name="highlightRules">
+                            <structure>
+                                <property name="operator">eq</property>
+                                <property name="color">#EF2929</property>
+                                <expression name="testExpr" type="javascript">row["STOCK"]</expression>
+                                <simple-property-list name="value1">
+                                    <value type="javascript">0</value>
+                                </simple-property-list>
+                            </structure>
+                            <structure>
+                                <property name="operator">between</property>
+                                <property name="color">#EEAB22</property>
+                                <expression name="testExpr" type="javascript">row["STOCK"]</expression>
+                                <simple-property-list name="value1">
+                                    <value type="javascript">1</value>
+                                </simple-property-list>
+                                <expression name="value2" type="javascript">row["min"]||5</expression>
+                            </structure>
+                        </list-property>
+                        <data id="137">
+                            <list-property name="highlightRules">
+                                <structure>
+                                    <property name="operator">eq</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="color">#EF2929</property>
+                                    <expression name="testExpr" type="javascript">row["STOCK"]</expression>
+                                    <simple-property-list name="value1">
+                                        <value type="javascript">0</value>
+                                    </simple-property-list>
+                                </structure>
+                                <structure>
+                                    <property name="operator">between</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="color">#EEAB22</property>
+                                    <expression name="testExpr" type="javascript">row["STOCK"]</expression>
+                                    <simple-property-list name="value1">
+                                        <value type="javascript">1</value>
+                                    </simple-property-list>
+                                    <expression name="value2" type="javascript">row["min"]||5</expression>
+                                </structure>
+                            </list-property>
+                            <property name="resultSetColumn">STOCK</property>
+                        </data>
+                    </cell>
+                    <cell id="105">
+                        <data id="139">
+                            <property name="resultSetColumn">PA</property>
+                        </data>
+                    </cell>
+                    <cell id="106">
+                        <data id="141">
+                            <property name="resultSetColumn">PV</property>
+                        </data>
+                    </cell>
+                    <cell id="107">
+                        <data id="143">
+                            <property name="resultSetColumn">TVA</property>
+                        </data>
+                    </cell>
+                    <cell id="108">
+                        <data id="167">
+                            <property name="resultSetColumn">RAYON</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="117">
+                    <cell id="118"/>
+                    <cell id="119"/>
+                    <cell id="120"/>
+                    <cell id="121"/>
+                    <cell id="122"/>
+                    <cell id="123"/>
+                    <cell id="124"/>
+                </row>
+            </footer>
+        </table>
+        <grid id="148">
+            <property name="marginTop">20px</property>
+            <property name="marginLeft">10px</property>
+            <property name="width">98%</property>
+            <column id="149">
+                <property name="width">1.1875in</property>
+            </column>
+            <column id="150">
+                <property name="width">6.760416666666667in</property>
+            </column>
+            <row id="151">
+                <property name="style">legende</property>
+                <cell id="152">
+                    <label id="112">
+                        <property name="backgroundColor">#FCAF3E</property>
+                    </label>
+                </cell>
+                <cell id="153">
+                    <property name="paddingLeft">10px</property>
+                    <label id="113">
+                        <property name="fontWeight">bold</property>
+                        <property name="color">#000000</property>
+                        <property name="paddingLeft">10px</property>
+                        <text-property name="text">LA QUANTITE EN STOCK DU PRODUIT EST DEJA INFERIEURE OU EGALE À LA QUANTITE MINIMALE</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="109">
+                <property name="style">legende</property>
+                <cell id="110">
+                    <label id="114">
+                        <property name="backgroundColor">#EF2929</property>
+                    </label>
+                </cell>
+                <cell id="111">
+                    <property name="paddingLeft">10px</property>
+                    <label id="115">
+                        <property name="fontWeight">bold</property>
+                        <property name="paddingLeft">10px</property>
+                        <text-property name="text">LE PRODUIT N'EXISTE PLUS EN STOCK</text-property>
+                    </label>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

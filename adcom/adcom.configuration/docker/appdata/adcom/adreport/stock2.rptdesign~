@@ -1,0 +1,1028 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.5.0.v201506092134 Build &lt;@BUILD@></property>
+    <text-property name="title">Stock Report</text-property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/first_report.gif</property>
+    <property name="cheatSheet">org.eclipse.birt.report.designer.ui.cheatsheet.firstreport</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <template-parameter-definitions>
+        <template-parameter-definition name="NewTemplateParameterDefinition" id="28">
+            <property name="allowedType">Table</property>
+            <text-property name="description">Customer Listing</text-property>
+            <default>
+                <table id="29">
+                    <property name="width">100%</property>
+                    <property name="pageBreakInterval">50</property>
+                    <column id="49"/>
+                    <column id="50"/>
+                    <column id="51"/>
+                    <column id="52"/>
+                    <header>
+                        <row id="30">
+                            <cell id="31">
+                                <label id="32">
+                                    <property name="fontFamily">sans-serif</property>
+                                    <property name="fontWeight">bold</property>
+                                    <text-property name="text">Contact</text-property>
+                                </label>
+                            </cell>
+                            <cell id="33">
+                                <label id="34">
+                                    <property name="fontFamily">sans-serif</property>
+                                    <property name="fontWeight">bold</property>
+                                    <text-property name="text">First</text-property>
+                                </label>
+                            </cell>
+                            <cell id="35">
+                                <label id="36">
+                                    <property name="fontFamily">sans-serif</property>
+                                    <property name="fontWeight">bold</property>
+                                    <text-property name="text">Last</text-property>
+                                </label>
+                            </cell>
+                            <cell id="37">
+                                <label id="38">
+                                    <property name="fontFamily">sans-serif</property>
+                                    <property name="fontWeight">bold</property>
+                                    <text-property name="text">Phone</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                    </header>
+                    <detail>
+                        <row id="39">
+                            <cell id="40"/>
+                            <cell id="41"/>
+                            <cell id="42"/>
+                            <cell id="43"/>
+                        </row>
+                    </detail>
+                    <footer>
+                        <row id="44">
+                            <cell id="45"/>
+                            <cell id="46"/>
+                            <cell id="47"/>
+                            <cell id="48"/>
+                        </row>
+                    </footer>
+                </table>
+            </default>
+        </template-parameter-definition>
+        <template-parameter-definition name="NewTemplateParameterDefinition1" id="78">
+            <property name="allowedType">Table</property>
+            <text-property name="description">Customer Listing Table</text-property>
+            <default>
+                <table id="79">
+                    <property name="width">100%</property>
+                    <property name="refTemplateParameter">NewTemplateParameterDefinition</property>
+                    <property name="pageBreakInterval">50</property>
+                    <column id="99"/>
+                    <column id="100"/>
+                    <column id="101"/>
+                    <column id="102"/>
+                    <header>
+                        <row id="80">
+                            <cell id="81">
+                                <label id="82">
+                                    <property name="fontFamily">sans-serif</property>
+                                    <property name="fontWeight">bold</property>
+                                    <text-property name="text">Contact</text-property>
+                                </label>
+                            </cell>
+                            <cell id="83">
+                                <label id="84">
+                                    <property name="fontFamily">sans-serif</property>
+                                    <property name="fontWeight">bold</property>
+                                    <text-property name="text">First</text-property>
+                                </label>
+                            </cell>
+                            <cell id="85">
+                                <label id="86">
+                                    <property name="fontFamily">sans-serif</property>
+                                    <property name="fontWeight">bold</property>
+                                    <text-property name="text">Last</text-property>
+                                </label>
+                            </cell>
+                            <cell id="87">
+                                <label id="88">
+                                    <property name="fontFamily">sans-serif</property>
+                                    <property name="fontWeight">bold</property>
+                                    <text-property name="text">Phone</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                    </header>
+                    <detail>
+                        <row id="89">
+                            <cell id="90"/>
+                            <cell id="91"/>
+                            <cell id="92"/>
+                            <cell id="93"/>
+                        </row>
+                    </detail>
+                    <footer>
+                        <row id="94">
+                            <cell id="95"/>
+                            <cell id="96"/>
+                            <cell id="97"/>
+                            <cell id="98"/>
+                        </row>
+                    </footer>
+                </table>
+            </default>
+        </template-parameter-definition>
+        <template-parameter-definition name="NewTemplateParameterDefinition2" id="132">
+            <property name="allowedType">Table</property>
+            <text-property name="description">Customer Listing Table</text-property>
+            <default>
+                <table id="133">
+                    <property name="width">100%</property>
+                    <property name="refTemplateParameter">NewTemplateParameterDefinition1</property>
+                    <property name="pageBreakInterval">50</property>
+                    <column id="157"/>
+                    <column id="158"/>
+                    <column id="159"/>
+                    <column id="160"/>
+                    <header>
+                        <row id="134">
+                            <cell id="135">
+                                <label id="136">
+                                    <property name="fontFamily">sans-serif</property>
+                                    <property name="fontWeight">bold</property>
+                                    <text-property name="text">Contact</text-property>
+                                </label>
+                            </cell>
+                            <cell id="137">
+                                <label id="138">
+                                    <property name="fontFamily">sans-serif</property>
+                                    <property name="fontWeight">bold</property>
+                                    <text-property name="text">First</text-property>
+                                </label>
+                            </cell>
+                            <cell id="139">
+                                <label id="140">
+                                    <property name="fontFamily">sans-serif</property>
+                                    <property name="fontWeight">bold</property>
+                                    <text-property name="text">Last</text-property>
+                                </label>
+                            </cell>
+                            <cell id="141">
+                                <label id="142">
+                                    <property name="fontFamily">sans-serif</property>
+                                    <property name="fontWeight">bold</property>
+                                    <text-property name="text">Phone</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                    </header>
+                    <detail>
+                        <row id="143">
+                            <cell id="144">
+                                <data id="145"/>
+                            </cell>
+                            <cell id="146">
+                                <data id="147"/>
+                            </cell>
+                            <cell id="148">
+                                <data id="149"/>
+                            </cell>
+                            <cell id="150">
+                                <data id="151"/>
+                            </cell>
+                        </row>
+                    </detail>
+                    <footer>
+                        <row id="152">
+                            <cell id="153"/>
+                            <cell id="154"/>
+                            <cell id="155"/>
+                            <cell id="156"/>
+                        </row>
+                    </footer>
+                </table>
+            </default>
+        </template-parameter-definition>
+    </template-parameter-definitions>
+    <parameters>
+        <scalar-parameter name="date_deb" id="246">
+            <property name="hidden">false</property>
+            <text-property name="helpText">Saisir la date sous ce format: aaaa-mm-jj</text-property>
+            <text-property name="promptText">Date de début</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Custom</property>
+                <property name="pattern">yyyy-MM-dd</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="temps_deb" id="247">
+            <text-property name="helpText">Saisir l'heure sous ce format: hh:mm</text-property>
+            <text-property name="promptText">Heure de début</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">time</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">00:00:00</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Short Time</property>
+                <property name="pattern">Short Time</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="date_fin" id="299">
+            <text-property name="helpText">Veuillez entrez la date de fin au format: aaaa-mm-jj</text-property>
+            <text-property name="promptText">Date de fin</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Custom</property>
+                <property name="pattern">yyyy-MM-dd</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="temps_fin" id="300">
+            <text-property name="helpText">Veuillez saisir l'heure de fin au format: hh:mm</text-property>
+            <text-property name="promptText">Heure de fin</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">time</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">00:00:00</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Short Time</property>
+                <property name="pattern">Short Time</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="StockDS" id="248">
+            <text-property name="displayName">profil de connexion pour tous les rapports</text-property>
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">org.h2.Driver</property>
+            <property name="odaURL">jdbc:h2:~/tools/wildfly-9.0.2.Final/standalone/data/addb</property>
+            <property name="odaUser">sa</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">c2E=</encrypted-property>
+            <property name="OdaConnProfileName">connectWilf9.0.2</property>
+            <property name="OdaConnProfileStorePath">connectWild9.0.2</property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Stock" id="286">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">CIP</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">CIP</text-property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">CIP</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">RAYON</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">RAYON</text-property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">RAYON</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">STOCK</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">STOCK</text-property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">STOCK</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PA</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">PA</text-property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">PA</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PV</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">PV</text-property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">PV</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">DESIGNATION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">DESIGNATION</text-property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">DESIGNATION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">FAMILLE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">FAMILLE</text-property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">FAMILLE</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">CIP</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">RAYON</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">STOCK</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">PA</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">PV</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">DESIGNATION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">FAMILLE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[var param = reportContext.getHttpServletRequest().getParameter("rayon");
+this.queryText = "SELECT CATALARTICLE.ID AS CIP,STKSECTION.NAME AS RAYON, STKARTICLELOT.TRGTQTY  AS STOCK, STKARTICLELOT.PRCHUNITPRCTAXINCL AS PA, CATALARTICLE.SPPU AS PV, CATALARTLANGMAPPING.ARTNAME AS DESIGNATION, FAMCODE AS FAMILLE FROM CATALARTICLE INNER JOIN CATALARTLANGMAPPING ON CATALARTICLE.ID = CATALARTLANGMAPPING.CNTNRIDENTIF LEFT JOIN STKARTICLELOT ON CATALARTICLE.ID = STKARTICLELOT.ARTPIC INNER JOIN STKSECTION ON STKARTICLELOT.SECTION = STKSECTION.ID RIGHT JOIN CATALART2PRODUCTFAMILY ON CATALARTICLE.ID = CATALART2PRODUCTFAMILY.ARTPIC WHERE STKARTICLELOT.STKGDT BETWEEN '"+vars['debut']+"' AND '"+vars['fin']+"' AND STKARTICLELOT.SECTION = '"+param+"'";]]></method>
+            <method name="afterOpen"><![CDATA[vars['rayon'] = this.getColumnMetaData().getColumnAlias(2)]]></method>
+            <property name="dataSource">StockDS</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">CIP</property>
+                    <property name="nativeName">ARTPIC</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">RAYON</property>
+                    <property name="nativeName">SECTION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">STOCK</property>
+                    <property name="nativeName">TRGTQTY</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">PA</property>
+                    <property name="nativeName">PRCHUNITPRCTAXINCL</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">PV</property>
+                    <property name="nativeName">SLSNETPRCTAXINCL</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">DESIGNATION</property>
+                    <property name="nativeName">ARTNAME</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">FAMILLE</property>
+                    <property name="nativeName">FAMCODE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select 
+from ]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ARTPIC</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>CIP</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>CIP</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SECTION</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>RAYON</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>RAYON</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>TRGTQTY</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>3</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>STOCK</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>STOCK</design:label>
+            <design:formattingHints>
+              <design:displaySize>19</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>PRCHUNITPRCTAXINCL</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>3</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>PA</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>PA</design:label>
+            <design:formattingHints>
+              <design:displaySize>19</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SLSNETPRCTAXINCL</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>3</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>PV</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>PV</design:label>
+            <design:formattingHints>
+              <design:displaySize>19</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ARTNAME</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>DESIGNATION</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>DESIGNATION</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Dates" id="298">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">DATES</property>
+                    <text-property name="displayName">DATES</text-property>
+                    <text-property name="heading">DATES</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">DATES</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">StockDS</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">DATES</property>
+                    <property name="nativeName">STKGDT</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select DISTINCT(STKARTICLELOT.STKGDT) AS DATES
+from STKARTICLELOT]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>STKGDT</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
+            <design:precision>23</design:precision>
+            <design:scale>10</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>DATES</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>DATES</design:label>
+            <design:formattingHints>
+              <design:displaySize>23</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="110">
+            <property name="backgroundColor">#BABDB6</property>
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="header" id="294">
+            <property name="backgroundColor">#BABDB6</property>
+            <property name="color">#EEEEEC</property>
+            <property name="textAlign">left</property>
+            <property name="height">50px</property>
+        </style>
+        <style name="details" id="295">
+            <property name="borderBottomColor">#D3D7CF</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="paddingLeft">5pt</property>
+            <property name="paddingBottom">5px</property>
+            <property name="paddingRight">5pt</property>
+            <property name="verticalAlign">bottom</property>
+            <property name="height">40px</property>
+        </style>
+        <style name="field" id="296">
+            <property name="borderRightColor">#555753</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+        </style>
+        <style name="endField" id="297">
+            <property name="borderLeftColor">#555753</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#C0C0C0</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+        </style>
+        <style name="title" id="312">
+            <property name="backgroundColor">#729FCF</property>
+            <property name="fontWeight">bold</property>
+            <property name="textLineThrough">none</property>
+            <property name="textOverline">none</property>
+            <property name="textUnderline">none</property>
+            <property name="marginBottom">0px</property>
+            <property name="textAlign">center</property>
+            <property name="verticalAlign">middle</property>
+            <property name="height">50px</property>
+        </style>
+        <style name="mytable" id="322">
+            <property name="borderLeftColor">#C0C0C0</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#C0C0C0</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <page-header>
+                <grid id="314">
+                    <property name="marginLeft">10px</property>
+                    <property name="width">98%</property>
+                    <column id="315"/>
+                    <row id="316">
+                        <property name="height">0.25in</property>
+                        <cell id="317">
+                            <text id="320">
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[<SPAN style="margin-right:30%;margin-bottom:50px" >
+<P>
+NOM ENTREPRISE
+</P>
+<P>
+Tel: (+237) 6........
+</P>
+<P>
+Lieu
+</P>
+</SPAN>]]></text-property>
+                            </text>
+                        </cell>
+                    </row>
+                    <row id="318">
+                        <cell id="319">
+                            <text-data id="321">
+                                <property name="style">title</property>
+                                <method name="onCreate"><![CDATA[var name = reportContext.getHttpServletRequest().getParameter('name');
+name;
+this.text = this.text+name;]]></method>
+                                <method name="onRender"><![CDATA[
+]]></method>
+                                <expression name="valueExpr">function formatDate(){
+var year_b = BirtDateTime.year(params["date_deb"].value);
+var month_b = BirtDateTime.month(params["date_deb"].value,3);
+var nday_b = BirtDateTime.weekDay(params["date_deb"].value,5);
+var day_b = BirtDateTime.day(params["date_deb"].value);
+var year_e = BirtDateTime.year(params["date_fin"].value);
+var month_e = BirtDateTime.month(params["date_fin"].value,3);
+var nday_e = BirtDateTime.weekDay(params["date_fin"].value,5);
+var day_e = BirtDateTime.day(params["date_fin"].value);
+ return "Fiche de suivie de Stock du :  "+
+ 			nday_b+" "+day_b+" "+month_b+" "+ year_b+
+ 			" à "+params['temps_deb'].value+"   au    "+
+			nday_e+" "+day_e+" "+month_e+" "+year_e+
+			" à "+params['temps_fin'].value+" pour le rayon  ";
+ }
+ formatDate();</expression>
+                                <property name="contentType">html</property>
+                            </text-data>
+                        </cell>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <grid id="250">
+                    <property name="width">7.84375in</property>
+                    <column id="251">
+                        <property name="width">7.041666666666667in</property>
+                    </column>
+                    <column id="252">
+                        <property name="width">0.23958333333333334in</property>
+                    </column>
+                    <column id="253">
+                        <property name="width">0.5625in</property>
+                    </column>
+                    <row id="254">
+                        <cell id="255">
+                            <property name="textAlign">right</property>
+                            <auto-text id="256">
+                                <property name="type">page-number</property>
+                            </auto-text>
+                        </cell>
+                        <cell id="257">
+                            <text id="258">
+                                <property name="textAlign">center</property>
+                                <property name="contentType">plain</property>
+                                <text-property name="content"><![CDATA[/]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="259">
+                            <auto-text id="260">
+                                <property name="type">total-page</property>
+                            </auto-text>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="163">
+            <property name="style">mytable</property>
+            <property name="marginLeft">10px</property>
+            <property name="width">98%</property>
+            <property name="dataSet">Stock</property>
+            <property name="refTemplateParameter">NewTemplateParameterDefinition2</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">CIP</property>
+                    <text-property name="displayName">CIP</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["CIP"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">DESIGNATION</property>
+                    <text-property name="displayName">DESIGNATION</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["DESIGNATION"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">FAMILLE</property>
+                    <text-property name="displayName">FAMILLE</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["FAMILLE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">RAYON</property>
+                    <text-property name="displayName">RAYON</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["RAYON"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">STOCK</property>
+                    <text-property name="displayName">STOCK</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["STOCK"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">PA</property>
+                    <text-property name="displayName">PA</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PA"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">PV</property>
+                    <text-property name="displayName">PV</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PV"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+            <list-property name="sort">
+                <structure>
+                    <expression name="key" type="javascript">row["DESIGNATION"]</expression>
+                    <property name="direction">asc</property>
+                    <property name="strength">-1</property>
+                </structure>
+            </list-property>
+            <column id="187">
+                <property name="style">field</property>
+                <property name="width">0.5729166666666666in</property>
+            </column>
+            <column id="188">
+                <property name="style">field</property>
+                <property name="width">2.0729166666666665in</property>
+            </column>
+            <column id="189">
+                <property name="style">field</property>
+                <property name="width">0.96875in</property>
+            </column>
+            <column id="264">
+                <property name="style">field</property>
+                <property name="width">0.9375in</property>
+            </column>
+            <column id="268">
+                <property name="style">field</property>
+                <property name="width">0.7291666666666666in</property>
+            </column>
+            <column id="273">
+                <property name="style">field</property>
+                <property name="width">0.59375in</property>
+            </column>
+            <column id="277">
+                <property name="style">field</property>
+                <property name="width">0.7604166666666666in</property>
+            </column>
+            <column id="281">
+                <property name="style">field</property>
+                <property name="width">0.75in</property>
+            </column>
+            <column id="190">
+                <property name="style">endField</property>
+                <property name="width">0.5625in</property>
+            </column>
+            <header>
+                <row id="164">
+                    <property name="style">header</property>
+                    <property name="fontWeight">bold</property>
+                    <cell id="165">
+                        <label id="166">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">CIP</text-property>
+                        </label>
+                    </cell>
+                    <cell id="167">
+                        <label id="168">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">DESIGNATION</text-property>
+                        </label>
+                    </cell>
+                    <cell id="169">
+                        <label id="170">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">FAMILLE DU PRODUIT</text-property>
+                        </label>
+                    </cell>
+                    <cell id="261">
+                        <label id="269">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">SOUS FAMILLE DU PRODUIT</text-property>
+                        </label>
+                    </cell>
+                    <cell id="265">
+                        <label id="282">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">RAYON</text-property>
+                        </label>
+                    </cell>
+                    <cell id="270">
+                        <label id="283">
+                            <text-property name="text">STOCK</text-property>
+                        </label>
+                    </cell>
+                    <cell id="274">
+                        <label id="284">
+                            <text-property name="text">PRIX ACHAT</text-property>
+                        </label>
+                    </cell>
+                    <cell id="278">
+                        <label id="285">
+                            <text-property name="text">PRIX VENTE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="171">
+                        <label id="172">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">REEL</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="173">
+                    <property name="style">details</property>
+                    <cell id="174">
+                        <data id="287">
+                            <property name="resultSetColumn">CIP</property>
+                        </data>
+                    </cell>
+                    <cell id="176">
+                        <data id="288">
+                            <property name="resultSetColumn">DESIGNATION</property>
+                        </data>
+                    </cell>
+                    <cell id="178">
+                        <data id="289">
+                            <property name="resultSetColumn">FAMILLE</property>
+                        </data>
+                    </cell>
+                    <cell id="262"/>
+                    <cell id="266">
+                        <data id="290">
+                            <property name="resultSetColumn">RAYON</property>
+                        </data>
+                    </cell>
+                    <cell id="271">
+                        <data id="291">
+                            <property name="resultSetColumn">STOCK</property>
+                        </data>
+                    </cell>
+                    <cell id="275">
+                        <data id="292">
+                            <property name="resultSetColumn">PA</property>
+                        </data>
+                    </cell>
+                    <cell id="279">
+                        <data id="293">
+                            <property name="resultSetColumn">PV</property>
+                        </data>
+                    </cell>
+                    <cell id="180"/>
+                </row>
+            </detail>
+            <footer>
+                <row id="182">
+                    <cell id="183"/>
+                    <cell id="184"/>
+                    <cell id="185"/>
+                    <cell id="263"/>
+                    <cell id="267"/>
+                    <cell id="272"/>
+                    <cell id="276"/>
+                    <cell id="280"/>
+                    <cell id="186"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+    <property name="pageVariables">
+        <variable-element name="debut">
+            <expression name="value" type="javascript">params["date_deb"].value+" "+params["temps_deb"].value</expression>
+            <property name="type">report</property>
+        </variable-element>
+        <variable-element name="fin">
+            <expression name="value" type="javascript">params["date_fin"].value+" "+params["temps_fin"].value</expression>
+            <property name="type">report</property>
+        </variable-element>
+        <variable-element name="rayon">
+            <expression name="value" type="javascript">"RAY-XXX"</expression>
+            <property name="type">report</property>
+        </variable-element>
+    </property>
+</report>

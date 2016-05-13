@@ -1,0 +1,907 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.5.0.v201506092134 Build &lt;@BUILD@></property>
+    <text-property name="title">Stock Report</text-property>
+    <list-property name="userProperties">
+        <structure>
+            <property name="name">StockCube.Stock.x</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">StockCube.Stock.y</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">StockCube.Stock.width</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">StockCube.Stock.height</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+    </list-property>
+    <property name="StockCube.Stock.x">170</property>
+    <property name="StockCube.Stock.y">60</property>
+    <property name="StockCube.Stock.width">150</property>
+    <property name="StockCube.Stock.height">200</property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="stockDS" id="21">
+            <text-property name="displayName">profil de connexion pour tous les rapports</text-property>
+            <method name="beforeOpen"><![CDATA[
+]]></method>
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">org.h2.Driver</property>
+            <property name="odaURL">jdbc:h2:~/tools/wildfly-10.0.0.Final/standalone/data/addb</property>
+            <property name="odaUser">sa</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">c2E=</encrypted-property>
+            <property name="OdaConnProfileName">connectWilf9.0.2</property>
+            <property name="OdaConnProfileStorePath">connectWild9.0.2</property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Stock" id="22">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">MARGE</property>
+                    <expression name="expression">row["PV"]-row["PA"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">TOTAL_PA</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["PA"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">TOTAL_PV</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["PV"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">TOTAL_MARGE</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["MARGE"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">TOTAL_STOCK</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value">row["STOCK"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">CIP</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">CIP</text-property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">CIP</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">RAYON_ID</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">RAYON_ID</text-property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">RAYON_ID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">RAYON</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">RAYON</text-property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">RAYON</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">STOCK</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">STOCK</text-property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">STOCK</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PA</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">PA</text-property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">PA</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PV</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">PV</text-property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">PV</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">DESIGNATION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">DESIGNATION</text-property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">DESIGNATION</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">CIP</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">RAYON_ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">RAYON</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">STOCK</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">PA</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">PV</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">DESIGNATION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">MARGE</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">TOTAL_PA</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">TOTAL_PV</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">TOTAL_MARGE</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">TOTAL_STOCK</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[var rayon = reportContext.getHttpServletRequest().getParameter('rayon');
+this.queryText = "SELECT * FROM(SELECT CATALARTICLE.ID AS CIP, STKSECTION.ID AS RAYON_ID, STKSECTION.NAME AS RAYON, STKARTICLELOT.TRGTQTY  AS STOCK, STKARTICLELOT.PRCHUNITPRCTAXINCL AS PA, CATALARTICLE.SPPU AS PV, CATALARTLANGMAPPING.ARTNAME AS DESIGNATION FROM CATALARTICLE INNER JOIN CATALARTLANGMAPPING ON CATALARTICLE.ID = CATALARTLANGMAPPING.CNTNRIDENTIF LEFT JOIN STKARTICLELOT ON CATALARTICLE.ID = STKARTICLELOT.ARTPIC INNER JOIN STKSECTION ON STKARTICLELOT.SECTION = STKSECTION.ID) WHERE RAYON_ID = '"+rayon+"'";;]]></method>
+            <property name="dataSource">stockDS</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">CIP</property>
+                    <property name="nativeName">ID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">RAYON_ID</property>
+                    <property name="nativeName">ID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">RAYON</property>
+                    <property name="nativeName">NAME</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">STOCK</property>
+                    <property name="nativeName">TRGTQTY</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">PA</property>
+                    <property name="nativeName">PRCHUNITPRCTAXINCL</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">PV</property>
+                    <property name="nativeName">SPPU</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">3</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">DESIGNATION</property>
+                    <property name="nativeName">ARTNAME</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ARTPIC</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>CIP</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>CIP</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SECTION</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>RAYON</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>RAYON</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>TRGTQTY</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>3</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>STOCK</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>STOCK</design:label>
+            <design:formattingHints>
+              <design:displaySize>19</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>PRCHUNITPRCTAXINCL</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>3</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>PA</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>PA</design:label>
+            <design:formattingHints>
+              <design:displaySize>19</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SLSNETPRCTAXINCL</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>3</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>PV</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>PV</design:label>
+            <design:formattingHints>
+              <design:displaySize>19</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ARTNAME</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>DESIGNATION</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>DESIGNATION</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <cubes>
+        <tabular-cube name="StockCube" id="23">
+            <property name="dimensions">
+                <tabular-dimension name="rayon" id="24">
+                    <property name="defaultHierarchy">NewTabularHierarchy</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy" id="25">
+                            <property name="levels">
+                                <tabular-level name="RAYON" id="26">
+                                    <property name="dataType">string</property>
+                                    <property name="levelType">dynamic</property>
+                                    <list-property name="attributes">
+                                        <structure>
+                                            <property name="name">CIP</property>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">DESIGNATION</property>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="columnName">RAYON</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+            </property>
+            <property name="measureGroups">
+                <tabular-measure-group name="prix_achat" id="27">
+                    <property name="measures">
+                        <tabular-measure name="PA" id="28">
+                            <expression name="measureExpression" type="javascript">dataSetRow["PA"]</expression>
+                            <property name="dataType">decimal</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+                <tabular-measure-group name="prix_vente" id="29">
+                    <property name="measures">
+                        <tabular-measure name="PV" id="30">
+                            <expression name="measureExpression" type="javascript">dataSetRow["PV"]</expression>
+                            <property name="dataType">decimal</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+                <tabular-measure-group name="qte_stock" id="31">
+                    <property name="measures">
+                        <tabular-measure name="STOCK" id="32">
+                            <expression name="measureExpression" type="javascript">dataSetRow["STOCK"]</expression>
+                            <property name="dataType">decimal</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+                <tabular-measure-group name="marge" id="39">
+                    <property name="measures">
+                        <tabular-measure name="MARGE" id="40">
+                            <property name="function">sum</property>
+                            <property name="isCalculated">false</property>
+                            <expression name="measureExpression" type="javascript">dataSetRow["MARGE"]</expression>
+                            <property name="dataType">integer</property>
+                            <property name="isVisible">true</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+            </property>
+            <property name="dataSet">Stock</property>
+        </tabular-cube>
+    </cubes>
+    <styles>
+        <style name="header" id="374">
+            <property name="backgroundColor">#888A85</property>
+            <property name="fontWeight">bold</property>
+            <property name="color">#EEEEEC</property>
+            <property name="paddingLeft">5px</property>
+            <property name="paddingRight">5px</property>
+            <property name="textAlign">left</property>
+            <property name="verticalAlign">middle</property>
+            <property name="height">50px</property>
+        </style>
+        <style name="sub_header" id="375">
+            <property name="backgroundColor">#729FCF</property>
+            <property name="fontWeight">bold</property>
+            <property name="color">#FCAF3E</property>
+            <property name="textAlign">left</property>
+            <property name="verticalAlign">middle</property>
+            <property name="height">40px</property>
+        </style>
+        <style name="details" id="376">
+            <property name="borderBottomColor">#888A85</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="paddingBottom">5px</property>
+            <property name="verticalAlign">bottom</property>
+            <property name="height">40px</property>
+        </style>
+        <style name="footer" id="377">
+            <property name="marginTop">15px</property>
+        </style>
+        <style name="title" id="407">
+            <property name="fontWeight">bold</property>
+            <property name="marginTop">5px</property>
+            <property name="marginBottom">5px</property>
+            <property name="textAlign">center</property>
+            <property name="verticalAlign">middle</property>
+            <property name="height">30px</property>
+        </style>
+        <style name="mytable" id="408">
+            <property name="borderLeftColor">#C0C0C0</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#C0C0C0</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <page-header>
+                <grid id="399">
+                    <column id="400"/>
+                    <row id="401">
+                        <cell id="402">
+                            <text id="405">
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[<SPAN style="margin-right:30%;margin-bottom:50px" >
+<P>
+NOM ENTREPRISE
+</P>
+<P>
+Tel: (+237) 6........
+</P>
+<P>
+Lieu
+</P>
+</SPAN>]]></text-property>
+                            </text>
+                        </cell>
+                    </row>
+                    <row id="403">
+                        <cell id="404">
+                            <label id="406">
+                                <property name="style">title</property>
+                                <text-property name="text">FICHE VALORISATION DE STOCK PAR RAYON</text-property>
+                            </label>
+                        </cell>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <grid id="378">
+                    <column id="379">
+                        <property name="width">7.25in</property>
+                    </column>
+                    <column id="380">
+                        <property name="width">0.20833333333333334in</property>
+                    </column>
+                    <column id="381">
+                        <property name="width">0.3854166666666667in</property>
+                    </column>
+                    <row id="382">
+                        <cell id="383">
+                            <property name="textAlign">right</property>
+                            <auto-text id="384">
+                                <property name="type">page-number</property>
+                            </auto-text>
+                        </cell>
+                        <cell id="385">
+                            <property name="textAlign">center</property>
+                            <text id="386">
+                                <property name="contentType">plain</property>
+                                <text-property name="content"><![CDATA[/]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="387">
+                            <auto-text id="388">
+                                <property name="type">total-page</property>
+                            </auto-text>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="173">
+            <property name="style">mytable</property>
+            <property name="marginLeft">10px</property>
+            <property name="width">98%</property>
+            <property name="dataSet">Stock</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">CIP</property>
+                    <text-property name="displayName">CIP</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["CIP"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">RAYON</property>
+                    <text-property name="displayName">RAYON</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["RAYON"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">DESIGNATION</property>
+                    <text-property name="displayName">DESIGNATION</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["DESIGNATION"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PA</property>
+                    <text-property name="displayName">PA</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PA"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">PV</property>
+                    <text-property name="displayName">PV</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PV"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">MARGE</property>
+                    <text-property name="displayName">MARGE</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["MARGE"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">STOCK</property>
+                    <text-property name="displayName">STOCK</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["STOCK"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">TOTAL_MARGE</property>
+                    <text-property name="displayName">TOTAL_MARGE</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["TOTAL_MARGE"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">TOTAL_PA</property>
+                    <text-property name="displayName">TOTAL_PA</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["TOTAL_PA"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">TOTAL_PV</property>
+                    <text-property name="displayName">TOTAL_PV</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["TOTAL_PV"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">TOTAL_STOCK</property>
+                    <text-property name="displayName">TOTAL_STOCK</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["TOTAL_STOCK"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation</property>
+                    <text-property name="displayName">RANG</text-property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>rayon</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">RANK</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["DESIGNATION"]</expression>
+                        </structure>
+                        <structure>
+                            <property name="name">ascending</property>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+            </list-property>
+            <list-property name="sort">
+                <structure>
+                    <expression name="key" type="javascript">row["DESIGNATION"]</expression>
+                    <property name="direction">asc</property>
+                    <property name="strength">-1</property>
+                </structure>
+            </list-property>
+            <column id="206">
+                <property name="width">0.6666666666666666in</property>
+            </column>
+            <column id="207">
+                <property name="width">0.6354166666666666in</property>
+            </column>
+            <column id="208">
+                <property name="width">3.0520833333333335in</property>
+            </column>
+            <column id="209">
+                <property name="width">0.8541666666666666in</property>
+            </column>
+            <column id="210">
+                <property name="width">0.8020833333333334in</property>
+            </column>
+            <column id="211">
+                <property name="width">0.9791666666666666in</property>
+            </column>
+            <column id="212">
+                <property name="width">0.9583333333333334in</property>
+            </column>
+            <header>
+                <row id="174">
+                    <property name="style">header</property>
+                    <property name="height">0.3958333333333333in</property>
+                    <cell id="175">
+                        <label id="230">
+                            <text-property name="text">N°</text-property>
+                        </label>
+                    </cell>
+                    <cell id="176">
+                        <label id="232">
+                            <text-property name="text">CIP</text-property>
+                        </label>
+                    </cell>
+                    <cell id="177">
+                        <label id="271">
+                            <text-property name="text">DESIGNATION</text-property>
+                        </label>
+                    </cell>
+                    <cell id="178">
+                        <label id="276">
+                            <text-property name="text">PRIX ACHAT</text-property>
+                        </label>
+                    </cell>
+                    <cell id="179">
+                        <label id="278">
+                            <text-property name="text">PRIX VENTE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="180">
+                        <label id="280">
+                            <text-property name="text">MARGE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="181">
+                        <label id="282">
+                            <text-property name="text">QTE STK</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <group id="253">
+                <property name="groupName">rayon</property>
+                <expression name="keyExpr" type="javascript">row["RAYON"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue" type="javascript">row["RAYON"]</expression>
+                </structure>
+                <property name="hideDetail">false</property>
+                <header>
+                    <row id="254">
+                        <property name="style">sub_header</property>
+                        <cell id="255">
+                            <data id="270">
+                                <property name="resultSetColumn">RAYON</property>
+                            </data>
+                        </cell>
+                        <cell id="256"/>
+                        <cell id="257"/>
+                        <cell id="258">
+                            <data id="363">
+                                <property name="resultSetColumn">TOTAL_PA</property>
+                            </data>
+                        </cell>
+                        <cell id="259">
+                            <data id="364">
+                                <property name="resultSetColumn">TOTAL_PV</property>
+                            </data>
+                        </cell>
+                        <cell id="260">
+                            <data id="362">
+                                <property name="resultSetColumn">TOTAL_MARGE</property>
+                            </data>
+                        </cell>
+                        <cell id="261">
+                            <data id="365">
+                                <property name="resultSetColumn">TOTAL_STOCK</property>
+                            </data>
+                        </cell>
+                    </row>
+                </header>
+                <footer>
+                    <row id="262">
+                        <cell id="263"/>
+                        <cell id="264"/>
+                        <cell id="265"/>
+                        <cell id="266"/>
+                        <cell id="267"/>
+                        <cell id="268"/>
+                        <cell id="269"/>
+                    </row>
+                </footer>
+            </group>
+            <detail>
+                <row id="182">
+                    <property name="style">details</property>
+                    <cell id="183">
+                        <data id="371">
+                            <property name="resultSetColumn">Aggregation</property>
+                        </data>
+                    </cell>
+                    <cell id="184">
+                        <data id="233">
+                            <property name="resultSetColumn">CIP</property>
+                        </data>
+                    </cell>
+                    <cell id="185">
+                        <data id="272">
+                            <property name="resultSetColumn">DESIGNATION</property>
+                        </data>
+                    </cell>
+                    <cell id="186">
+                        <data id="277">
+                            <property name="resultSetColumn">PA</property>
+                        </data>
+                    </cell>
+                    <cell id="187">
+                        <data id="279">
+                            <property name="resultSetColumn">PV</property>
+                        </data>
+                    </cell>
+                    <cell id="188">
+                        <data id="281">
+                            <property name="resultSetColumn">MARGE</property>
+                        </data>
+                    </cell>
+                    <cell id="189">
+                        <data id="283">
+                            <property name="resultSetColumn">STOCK</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="198">
+                    <property name="style">footer</property>
+                    <property name="backgroundColor">#729FCF</property>
+                    <property name="fontWeight">bold</property>
+                    <property name="color">#FCAF3E</property>
+                    <property name="textAlign">left</property>
+                    <property name="verticalAlign">middle</property>
+                    <property name="height">0.375in</property>
+                    <cell id="199"/>
+                    <cell id="200">
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <property name="verticalAlign">middle</property>
+                        <label id="373">
+                            <text-property name="text">TOTAUX:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="201"/>
+                    <cell id="202">
+                        <data id="372">
+                            <property name="resultSetColumn">TOTAL_PA</property>
+                        </data>
+                    </cell>
+                    <cell id="203">
+                        <data id="368">
+                            <property name="resultSetColumn">TOTAL_PV</property>
+                        </data>
+                    </cell>
+                    <cell id="204">
+                        <data id="366">
+                            <property name="resultSetColumn">TOTAL_MARGE</property>
+                        </data>
+                    </cell>
+                    <cell id="205">
+                        <data id="369">
+                            <property name="resultSetColumn">TOTAL_STOCK</property>
+                        </data>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

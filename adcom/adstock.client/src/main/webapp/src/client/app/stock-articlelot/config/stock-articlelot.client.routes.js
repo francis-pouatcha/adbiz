@@ -5,13 +5,15 @@
         .module('app.stockArticlelot')
         .run(appRun);
 
-    appRun.$inject = ['routerHelper','BASE_VIEW_STOCK'];
+    appRun.$inject = ['routerHelper','BASE_VIEW_STOCK','$translate'];
     /* @ngInject */
-    function appRun(routerHelper,BASE_VIEW_STOCK) {
-        routerHelper.configureStates(getStates(BASE_VIEW_STOCK));
+    function appRun(routerHelper,BASE_VIEW_STOCK,$translate) {
+        $translate('Stock-articlelots.title').then(function(StockArticlelots){
+            routerHelper.configureStates(getStates(BASE_VIEW_STOCK, StockArticlelots));
+        });
     }
 
-    function getStates(BASE_VIEW_STOCK) {
+    function getStates(BASE_VIEW_STOCK,StockArticlelots){
         return [
             {
                 state: 'Articlelot',
@@ -33,7 +35,7 @@
                     title: 'List Stock-articlelots',
                     settings: {
                         nav: 2,
-                        content: '<i class="fa fa-folder-open"></i> Stock-articlelots'
+                        content: '<i class="fa fa-folder-open"></i>'+StockArticlelots
                     }
                 }
             },

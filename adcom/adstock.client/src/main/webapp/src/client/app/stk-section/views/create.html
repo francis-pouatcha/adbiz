@@ -1,5 +1,5 @@
-<div class="panel-body" data-ng-init="vm.setFormFields()">
-
+<div class="panel-body" data-ng-init="vm.setFormFields(false,false)">
+<label class="label label-danger">{{vm.error}}</label>
 	<form data-ng-submit="vm.create()" novalidate>
         <formly-form model="vm.stkSection" fields="vm.formFields" form="vm.form"></formly-form>
         <hr/>

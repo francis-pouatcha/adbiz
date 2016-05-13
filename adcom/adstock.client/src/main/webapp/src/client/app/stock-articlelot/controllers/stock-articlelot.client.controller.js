@@ -11,7 +11,9 @@
         'StockArticlelot',
         'TableSettings',
         'StockArticlelotForm',
-        'utils'];
+        'utils',
+        'StkSection',
+    'fileExtractor'];
     /* @ngInject */
     function StockArticlelotController(logger,
         $stateParams,
@@ -19,7 +21,9 @@
         StockArticlelot,
         TableSettings,
         StockArticlelotForm,
-        utils) {
+        utils,
+        StkSection,
+        fileExtractor) {
 
         var vm = this;
         vm.data = {
@@ -90,13 +94,26 @@
             vm.stockArticlelot = StockArticlelot.get({stockArticlelotId: $stateParams.stockArticlelotId});
             vm.setFormFields(true);
             vm.setTabsFormFields(true, vm.stockArticlelot);
+
+            var searchInput = utils.searchInputInit().searchInput;
+            searchInput.className = 'org.adorsys.adstock.jpa.StkSectionSearchInput';
+            searchInput.entity.identif = vm.stockArticlelot.section;
+            searchInput.fieldNames.push('identif');
+            StkSection.findByLike(searchInput, function(response) {
+                    vm.stockArticlelot.section = response.resultList[0].name;
+                },
+                function(errorResponse) {
+                    vm.error = errorResponse;
+                    logger.warn(vm.error);
+                });
         };
 
         vm.toEditStockArticlelot = function() {
             vm.stockArticlelot = StockArticlelot.get({stockArticlelotId: $stateParams.stockArticlelotId});
             vm.setFormFields(false);
         };
-        
+
+
         initSearchInput();
         
         vm.callServer = function(tableState) {
