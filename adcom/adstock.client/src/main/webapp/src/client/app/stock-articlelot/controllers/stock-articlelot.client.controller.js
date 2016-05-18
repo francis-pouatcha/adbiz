@@ -13,7 +13,7 @@
         'StockArticlelotForm',
         'utils',
         'StkSection',
-    'fileExtractor'];
+    'fileExtractor','$translate'];
     /* @ngInject */
     function StockArticlelotController(logger,
         $stateParams,
@@ -23,12 +23,13 @@
         StockArticlelotForm,
         utils,
         StkSection,
-        fileExtractor) {
+        fileExtractor,$translate) {
 
         var vm = this;
         vm.data = {
             list: []
         };
+        var userLangIso2=$translate.use();
         
         function initSearchInput(){
             // Initialize Search input and pagination
@@ -123,11 +124,32 @@
         	
     	    StockArticlelot.findByLike(vm.searchInput, function(response) {
                 vm.data.list = response.resultList;
-                tableState.pagination.numberOfPages = Math.ceil(response.count / number)
-            },
+                tableState.pagination.numberOfPages = Math.ceil(response.count / number);
+                //copy the sections
+                    var identifs = [];
+                    angular.forEach(response.resultList, function(articleLot){
+                        this.push(articleLot.section);
+                    }, identifs);
+                    StkSection.findByIdentifIn({"list":identifs, "start":0, "max":10, "langIso2":userLangIso2}, function(sections){
+                        angular.forEach(response.resultList, function(articleLot){
+                            buildArtLotDisplay(articleLot, sections.resultList);
+                        }, this);
+                    }, function(errorResponse2){
+                        vm.error = errorResponse2.data.summary;
+                    });
+
+                },
             function(errorResponse) {
                 vm.error = errorResponse.data.summary;
             });
+        };
+
+        var buildArtLotDisplay = function(articleLot, sections){
+            angular.forEach(sections, function(section){
+                if(angular.equals(this.section, section.identif)){
+                    this.section=section.name;
+                }
+            }, articleLot);
         };
 
         function processSearch(start, searchObject) {

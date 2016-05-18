@@ -32,6 +32,10 @@
                     start: -1,
                     max: 20
                 }
+            },
+            findByIdentifIn: {
+                method: 'POST',
+                url: API_BASE_ADSTOCK_URL + '/stksections/findByIdentifIn'
             }
         };
 
