@@ -11,7 +11,9 @@
         'StockArticlelot',
         'TableSettings',
         'StockArticlelotForm',
-        'utils'];
+        'utils',
+        'StkSection',
+    'fileExtractor','$translate'];
     /* @ngInject */
     function StockArticlelotController(logger,
         $stateParams,
@@ -19,12 +21,15 @@
         StockArticlelot,
         TableSettings,
         StockArticlelotForm,
-        utils) {
+        utils,
+        StkSection,
+        fileExtractor,$translate) {
 
         var vm = this;
         vm.data = {
             list: []
         };
+        var userLangIso2=$translate.use();
         
         function initSearchInput(){
             // Initialize Search input and pagination
@@ -90,13 +95,26 @@
             vm.stockArticlelot = StockArticlelot.get({stockArticlelotId: $stateParams.stockArticlelotId});
             vm.setFormFields(true);
             vm.setTabsFormFields(true, vm.stockArticlelot);
+
+            var searchInput = utils.searchInputInit().searchInput;
+            searchInput.className = 'org.adorsys.adstock.jpa.StkSectionSearchInput';
+            searchInput.entity.identif = vm.stockArticlelot.section;
+            searchInput.fieldNames.push('identif');
+            StkSection.findByLike(searchInput, function(response) {
+                    vm.stockArticlelot.section = response.resultList[0].name;
+                },
+                function(errorResponse) {
+                    vm.error = errorResponse;
+                    logger.warn(vm.error);
+                });
         };
 
         vm.toEditStockArticlelot = function() {
             vm.stockArticlelot = StockArticlelot.get({stockArticlelotId: $stateParams.stockArticlelotId});
             vm.setFormFields(false);
         };
-        
+
+
         initSearchInput();
         
         vm.callServer = function(tableState) {
@@ -106,11 +124,32 @@
         	
     	    StockArticlelot.findByLike(vm.searchInput, function(response) {
                 vm.data.list = response.resultList;
-                tableState.pagination.numberOfPages = Math.ceil(response.count / number)
-            },
+                tableState.pagination.numberOfPages = Math.ceil(response.count / number);
+                //copy the sections
+                    var identifs = [];
+                    angular.forEach(response.resultList, function(articleLot){
+                        this.push(articleLot.section);
+                    }, identifs);
+                    StkSection.findByIdentifIn({"list":identifs, "start":0, "max":10, "langIso2":userLangIso2}, function(sections){
+                        angular.forEach(response.resultList, function(articleLot){
+                            buildArtLotDisplay(articleLot, sections.resultList);
+                        }, this);
+                    }, function(errorResponse2){
+                        vm.error = errorResponse2.data.summary;
+                    });
+
+                },
             function(errorResponse) {
                 vm.error = errorResponse.data.summary;
             });
+        };
+
+        var buildArtLotDisplay = function(articleLot, sections){
+            angular.forEach(sections, function(section){
+                if(angular.equals(this.section, section.identif)){
+                    this.section=section.name;
+                }
+            }, articleLot);
         };
 
         function processSearch(start, searchObject) {

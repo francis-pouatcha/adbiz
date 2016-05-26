@@ -5,8 +5,8 @@
         .module('app.stockArticlelot')
         .factory('StockArticlelotForm', factory);
 
-    factory.$inject = ['$translate'];
-    function factory($translate) {
+    factory.$inject = ['$translate','sectionUtil'];
+    function factory($translate,sectionUtil) {
 
         var getFormFields = function(disabled) {
 
@@ -20,7 +20,7 @@
                             key: 'lotPic',
                             templateOptions: {
                                 label: $translate.instant('StockArticlelot.lotPic.title'),
-                                disabled:disabled
+                                disabled:true
                             }
                         },
                         {
@@ -29,7 +29,7 @@
                             key: 'artPic',
                             templateOptions: {
                                 label: $translate.instant('StockArticlelot.artPic.title'),
-                                disabled:disabled
+                                disabled:true
                             }
                         },
                         {
@@ -38,10 +38,9 @@
                             key: 'section',
                             templateOptions: {
                                 label: $translate.instant('StockArticlelot.section.title'),
-                                disabled:disabled
+                                disabled:true
                             }
                         }
-
                     ]
                 },
                 {
@@ -53,7 +52,7 @@
                             key: 'acsngUser',
                             templateOptions: {
                                 label: $translate.instant('StockArticlelot.acsngUser.title'),
-                                disabled:disabled
+                                disabled:true
                             }
                         },
                         {
@@ -110,7 +109,7 @@
                                 datepickerPopup: 'dd-MM-yyyy',
                                 disabled:disabled
                             }
-                        },
+                        }
                     ]
                   }
                 

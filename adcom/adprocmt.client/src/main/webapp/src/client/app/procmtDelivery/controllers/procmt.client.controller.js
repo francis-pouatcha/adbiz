@@ -72,7 +72,7 @@
 
         $scope.create = function(){
             $scope.procmt.status='ONGOING';
-            $scope.procmt.login = $rootScope.username;
+            //$scope.procmt.login = $rootScope.username;
             procmtManagerResource.save($scope.procmt, function(response){
                     $scope.procmt = response;
                     procmtManagerResource.prepare({identif:$scope.procmt.identif}, function(data){});

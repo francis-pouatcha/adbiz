@@ -9,7 +9,7 @@
         <param-value>org.adorsys.adstock.boot.StkKeycloakConfigResolver</param-value>
     </context-param>
 
-    <security-constraint>
+   <!--  <security-constraint>
         <web-resource-collection>
         	<web-resource-name>all</web-resource-name>
             <url-pattern>/*</url-pattern>
@@ -25,6 +25,15 @@
     <security-role>
         <role-name>role.adstock.server</role-name>
     </security-role>
+ -->
+ <filter>
+	<filter-name>CORS</filter-name>
+	<filter-class>com.thetransactioncompany.cors.CORSFilter</filter-class>
+</filter>
+<filter-mapping>
+        <filter-name>CORS</filter-name>
+        <url-pattern>/*</url-pattern>
+</filter-mapping>
 
     <welcome-file-list>
         <welcome-file>/build/index.html</welcome-file>

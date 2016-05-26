@@ -25,6 +25,8 @@
         $scope.moveOut = function(mvnt){
             mvnt.acsngDt=new Date().getTime();
             mvnt.mvntType='OUT';
+            mvnt.origProcs='Stock OUT';
+            mvnt.origProcsNbr='StockOUT:XXX';
             //mvnt.acsngUser=$rootScope.username;
             mvnt.artPic=undefined;
             mvnt.artName=undefined;
@@ -40,6 +42,8 @@
         $scope.moveIn = function(mvnt){
             mvnt.acsngDt=new Date().getTime();
             mvnt.mvntType='IN';
+            mvnt.origProcs='Stock IN';
+            mvnt.origProcsNbr='StockIN:XXX';
             //mvnt.acsngUser=$rootScope.username;
             mvnt.artPic=undefined;
             mvnt.artName=undefined;
@@ -60,18 +64,18 @@
             mvntOut.section=mvnt.section;
             mvntOut.mvntTerminal=mvnt.mvntTerminal;
             mvntOut.trgtQty=mvnt.trgtQty;
-            mvntOut.origProcs=mvnt.origProcs;
-            mvntOut.origProcsNbr=mvnt.origProcsNbr;
+            mvntOut.origProcs="Stock OUT";
+            mvntOut.origProcsNbr="StockOUT:XXX";
 
             var mvntIn={};
             mvntIn.acsngDt=new Date().getTime();
-            mvntIn.mvntType='OUT';
-            mvntIn.lotPic=mvnt.lotPic;
+            mvntIn.mvntType='IN';
+            mvntIn.lotPic=mvnt.lotPic2;
             mvntIn.section=mvnt.tosection;
             mvntIn.mvntTerminal=mvnt.mvntTerminal;
             mvntIn.trgtQty=mvnt.trgtQty;
-            mvntIn.origProcs=mvnt.origProcs;
-            mvntIn.origProcsNbr=mvnt.origProcsNbr;
+            mvntIn.origProcs="Stock IN";
+            mvntIn.origProcsNbr="StockIN:XXX";
 
             $scope.display={};
             $scope.todisplay={};
@@ -154,6 +158,29 @@
                     $scope.display.identif = '';
                     $scope.display.section = '';
                     $scope.display.sectionName = '';
+                });
+        };
+
+        $scope.onArticleLotSectionSelectedInSearch2 = function(item,model,label){
+            var mvnt = {};
+            $scope.mvnt.lotPic2=item.lotPic;
+            //$scope.mvnt.artPic=item.artPic;
+            $scope.mvnt.tosection = item.section;
+
+            genericResource.findByLikePromissed(mvntUtils.stksectionsUrlBase, 'identif', $scope.mvnt.tosection)
+                .then(function(entitySearchResult){
+                    var resultList = entitySearchResult.resultList;
+                    if(angular.isDefined(resultList) && resultList.length>0){
+                        $scope.todisplay = {};
+                        $scope.todisplay.identif = resultList[0].identif;
+                        $scope.todisplay.section = resultList[0].identif;
+                        $scope.todisplay.sectionName = resultList[0].name;
+                    }
+
+                }, function(error){
+                    $scope.todisplay.identif = '';
+                    $scope.todisplay.section = '';
+                    $scope.todisplay.sectionName = '';
                 });
         };
 

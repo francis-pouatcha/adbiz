@@ -121,8 +121,18 @@
         $rootScope.username = vm.username;
         $rootScope.logout = vm.logout;
         $rootScope.appTitle = 'Catalogue';
+
+        // ARRAY OF REPORTS LINKS
+
+        $rootScope.reportLink = [
+            {
+                link: '/adreport.server/frameset?__report=catal.rptdesign',
+                name: 'Rapport du Catalogue'
+            }
+        ];
     });
     /* jshint ignore:end */
+
 
     appModule.run(function($rootScope, $translate, formlyConfig) {
         formlyConfig.setType({

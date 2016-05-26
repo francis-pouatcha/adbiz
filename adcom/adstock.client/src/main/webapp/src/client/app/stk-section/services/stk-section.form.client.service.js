@@ -8,7 +8,7 @@
     factory.$inject = ['$translate','sectionUtil'];
     function factory($translate,sectionUtil) {
 
-        var getFormFields = function(disabled) {
+        var getFormFields = function(disabled,disableOnEdit) {
             var fields = [
                 {
                     className: 'row',
@@ -19,7 +19,7 @@
                             key: 'identif',
                             templateOptions: {
                                 label: $translate.instant('StockSection.code.title'),
-                                disabled:disabled,
+                                disabled:disabled || disableOnEdit,
                                 required:true
                             }
                         },

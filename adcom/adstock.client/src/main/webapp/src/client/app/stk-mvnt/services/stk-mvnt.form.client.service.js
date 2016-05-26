@@ -29,7 +29,7 @@
                             key: 'artPic',
                             templateOptions: {
                                 label: $translate.instant('StkMvnt.artPic.title'),
-                                disabled:disabled,
+                                disabled:disabled
                             }
                         },
                         {

@@ -116,6 +116,14 @@
         $rootScope.logout = vm.logout;
         $rootScope.appTitle = 'Approvisionement';
 
+
+        $rootScope.reportLink = [
+            {
+                link: '/adreport.server/frameset?__report=procurement5.rptdesign',
+                name: 'Barcode Report'
+            }
+        ];
+
        /* $rootScope.reportLink = [
             {
                 link:genericResource.urlBase()+'/adreport.server/frameset?__report=invintry.rptdesign',

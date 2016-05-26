@@ -48,6 +48,9 @@
 	                      	<a class="btn btn-danger" title="Remove" data-ng-really-message="Are you sure ?" data-ng-really-click="vm.remove(catalProdFmly)" item="catalProdFmly">
 	                        	<span class="glyphicon glyphicon-remove-circle"></span>
 	                      	</a>
+                            <a class="btn btn-primary" title="Rapport du catalogue pour cette famille" ng-href="{{GlobalCtlr.BASE_SERVER}}/adreport.server/frameset?__report=catal2.rptdesign&famille={{catalProdFmly.identif}}" target="_blank" >
+                                <span class="glyphicon glyphicon-file" style="color: white" ></span>
+                            </a>
 	                 	</div>
 	              	</td>
 	          	</tr>

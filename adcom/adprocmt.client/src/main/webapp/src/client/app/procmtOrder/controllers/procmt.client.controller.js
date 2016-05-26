@@ -102,7 +102,7 @@
 
         $scope.create = function(){
             $scope.procmt.status='ONGOING';
-            $scope.procmt.login = $rootScope.username;
+            //$scope.procmt.login = $rootScope.username;
             procmtOrderManagerResource.save($scope.procmt, function(response){
                     $scope.procmt = response;
                     procmtOrderManagerResource.prepare({identif:$scope.procmt.identif}, function(data){});
@@ -282,8 +282,8 @@
             procmtItem.acsngDt=new Date().getTime();
             procmtItem.acsngUser=$rootScope.username;
             unsetEditing(procmtItem);
-            procmtOrderManagerResource.addItem({'identif':$scope.procmt.identif}, procmtItem ,function(procmtItem){
-                    itemsResultHandler.unshift(procmtItem);
+            procmtOrderManagerResource.addItem({'identif':$scope.procmt.identif}, procmtItem ,function(procmtItemResp){
+                    itemsResultHandler.unshift(procmtItemResp);
                     $scope.searchInput.entity.artPic=undefined;
                     $scope.searchInput.entity.artName=undefined;
                     $scope.searchInput.entity.expirDt=undefined;

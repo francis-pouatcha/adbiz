@@ -144,10 +144,8 @@
 		<subsystem xmlns="urn:jboss:domain:datasources:4.0">
 			<datasources>
 				<datasource jndi-name="java:jboss/datasources/ADH2DS"
-					pool-name="ADH2DS" enabled="${database.adh2ds.enabled}"
-					use-java-context="true">
-					<connection-url>jdbc:h2:mem:addb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-					</connection-url>
+					pool-name="ADH2DS" enabled="${database.adh2ds.enabled}" use-java-context="true">
+                    <connection-url>jdbc:h2:${jboss.server.data.dir}/adh2db;AUTO_SERVER=TRUE;MVCC=true</connection-url>
 					<driver>h2</driver>
 					<security>
 						<user-name>${database.username}</user-name>

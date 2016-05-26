@@ -5,13 +5,15 @@
         .module('app.mvnt')
         .run(appRun);
 
-    appRun.$inject = ['routerHelper'];
+    appRun.$inject = ['routerHelper','$translate'];
     /* @ngInject */
-    function appRun(routerHelper) {
-        routerHelper.configureStates(getStates());
+    function appRun(routerHelper,$translate) {
+        $translate(['Stock-Move-Out','Stock-Move-In','Stock-transfer']).then(function(StockMoveOut, StockMoveIn, StockTransfer){
+            routerHelper.configureStates(getStates(StockMoveOut,StockMoveIn,StockTransfer));
+        });
     }
 
-    function getStates() {
+    function getStates(StockMoveOut,StockMoveIn,StockTransfer) {
         return [
             {
                 state: 'moveOut',
@@ -47,7 +49,7 @@
                     title: 'Stock Transfer',
                     settings: {
                         nav: 6,
-                        content: '<i class="fa fa-folder-open"></i> Stock transfer'
+                        content: '<i class="fa fa-folder-open"></i> Stock Transfer'
                     }
                 }
             }

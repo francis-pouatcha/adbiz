@@ -120,6 +120,15 @@
         	// First initialize SearchInput-Object and then set Search-Params
         	vm.searchInput = utils.processSearch(vm.searchInput, searchObject.predicateObject);
         	vm.searchInput.start = start;
+            if(vm.searchInput.entity.acsngDtFrom){
+                vm.searchInput.acsngDtFrom = vm.searchInput.entity.acsngDtFrom;
+                delete vm.searchInput.entity.acsngDtFrom;
+            }
+            if(vm.searchInput.entity.acsngDtTo){
+                vm.searchInput.acsngDtTo = vm.searchInput.entity.acsngDtTo;
+                delete vm.searchInput.entity.acsngDtTo;
+            }
+
         }
     }
 

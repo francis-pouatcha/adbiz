@@ -5,13 +5,15 @@
         .module('app.stkSection')
         .run(appRun);
 
-    appRun.$inject = ['routerHelper', 'BASE_VIEW_STOCK'];
+    appRun.$inject = ['routerHelper', 'BASE_VIEW_STOCK','$translate'];
     /* @ngInject */
-    function appRun(routerHelper, BASE_VIEW_STOCK) {
-        routerHelper.configureStates(getStates(BASE_VIEW_STOCK));
+    function appRun(routerHelper, BASE_VIEW_STOCK,$translate) {
+        $translate('StkSections.title').then(function(StkSections){
+            routerHelper.configureStates(getStates(BASE_VIEW_STOCK, StkSections));
+        });
     }
 
-    function getStates(BASE_VIEW_STOCK) {
+    function getStates(BASE_VIEW_STOCK,StkSections) {
         return [
             {
                 state: 'listStkSection',
@@ -23,7 +25,7 @@
                     title: 'List StkSections',
                     settings: {
                         nav: 3,
-                        content: '<i class="fa fa-folder-open"></i> StkSections'
+                        content: '<i class="fa fa-folder-open"></i> '+StkSections
                     }
                 }
             },
