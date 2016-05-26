@@ -25,12 +25,14 @@
 		<module>adstock.lib</module>
 		<module>adinvtry.lib</module>
 		<module>adcshdwr.lib</module> 
+		<module>adbase.lib</module>
+		<module>adbase.server</module>
 		<module>adcatal.server</module>
 		<module>adstock.server</module>
 		<module>adinvtry.server</module>
 		<!-- 
-		<module>adcshdwr.server</module> 
 		 -->
+		<module>adcshdwr.server</module> 
 
 		<module>adprocmt.lib</module>
 		<module>adprocmt.server</module>
@@ -42,8 +44,6 @@
 		<module>addashboard.client</module>
 		<module>adcshdwr.client</module>
 		
-		<module>adbase.lib</module>
-		<module>adbase.server</module>
 		<!-- 
 		<module>adbnsptnr.client</module> 
 		<module>adbnsptnr.lib</module> 

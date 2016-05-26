@@ -110,6 +110,12 @@
 		</dependency>
 		<dependency>
 			<groupId>org.adorsys.adcom</groupId>
+			<artifactId>adbase.server</artifactId>
+			<type>war</type>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.adorsys.adcom</groupId>
 			<artifactId>adcatal.server</artifactId>
 			<type>war</type>
 			<version>${project.version}</version>
@@ -129,6 +135,18 @@
 		<dependency>
 			<groupId>org.adorsys.adcom</groupId>
 			<artifactId>adprocmt.server</artifactId>
+			<type>war</type>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.adorsys.adcom</groupId>
+			<artifactId>adcshdwr.server</artifactId>
+			<type>war</type>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.adorsys.adcom</groupId>
+			<artifactId>adcshdwr.client</artifactId>
 			<type>war</type>
 			<version>${project.version}</version>
 		</dependency>

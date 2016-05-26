@@ -5,6 +5,7 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 
+import org.adorsys.adbase.jpa.OrgContactRole;
 import org.adorsys.adbase.jpa.PermActionEnum;
 import org.adorsys.adcore.xls.XlsConverterFactory;
 
@@ -14,12 +15,14 @@ public class BaseConverterRegistration {
 
 	@Inject
 	private PermActionEnumConverter permActionEnumConverter;
-
 	@Inject
-	private XlsConverterFactory converterFactory;
+	private OrgContactRoleConverter contactRoleConverter;
+
+	private XlsConverterFactory converterFactory = XlsConverterFactory.singleton();
 	
 	@PostConstruct
 	public void postConstruct(){
 		converterFactory.registerConverter(PermActionEnum.class.getName(), permActionEnumConverter);
+		converterFactory.registerConverter(OrgContactRole.class.getName(), contactRoleConverter);
 	}
 }

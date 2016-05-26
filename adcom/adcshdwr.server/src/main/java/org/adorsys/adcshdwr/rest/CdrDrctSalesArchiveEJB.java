@@ -1,5 +1,6 @@
 package org.adorsys.adcshdwr.rest;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
@@ -7,6 +8,7 @@ import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 import org.adorsys.adcshdwr.jpa.CdrDrctSalesArchive;
 import org.adorsys.adcshdwr.repo.CdrDrctSalesArchiveRepo;
 
+@Stateless
 public class CdrDrctSalesArchiveEJB extends CoreAbstIdentifiedEJB<CdrDrctSalesArchive> {
 
 	@Inject

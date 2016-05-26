@@ -51,4 +51,8 @@ public final class AdcomUser {
 	public String getFullName(){
 		return fullName;
 	}
+	
+	public String getRealm(){
+		return getContext().getRealm();
+	}
 }

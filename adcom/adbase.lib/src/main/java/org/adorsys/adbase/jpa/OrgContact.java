@@ -2,6 +2,8 @@ package org.adorsys.adbase.jpa;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -9,6 +11,12 @@ import javax.validation.constraints.Size;
 import org.adorsys.adcore.annotation.Description;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 
+/**
+ * The org unit identifier is the container identifier.
+ * 
+ * @author fpo
+ *
+ */
 @Entity 
 @Table(name="BaseOrgContact")
 @Description("OrgContact_description")
@@ -17,14 +25,16 @@ public class OrgContact extends CoreAbstIdentifObject {
 	private static final long serialVersionUID = 8597854339966447440L;
 
 	@Column
-	@Description("OrgContact_ouIdentif_description")
 	@NotNull
-	private String ouIdentif;
-
-	@Column
 	@Description("OrgContact_contactIndex_description")
 	private String contactIndex;
 
+	@Column
+	@Description("OrgContact_contactRole_description")
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	private OrgContactRole contactRole;
+	
 	@Column
 	@Description("OrgContact_street_description")
 	private String street;
@@ -73,14 +83,6 @@ public class OrgContact extends CoreAbstIdentifObject {
 	@Description("OrgContact_contactPeople_description")
 	@Size(max = 256)
 	private String contactPeople;
-
-	public String getOuIdentif() {
-		return this.ouIdentif;
-	}
-
-	public void setOuIdentif(final String ouIdentif) {
-		this.ouIdentif = ouIdentif;
-	}
 
 	public String getContactIndex() {
 		return contactIndex;
@@ -186,9 +188,21 @@ public class OrgContact extends CoreAbstIdentifObject {
 		this.contactPeople = contactPeople;
 	}
 
+	public OrgContactRole getContactRole() {
+		return contactRole;
+	}
+
+	public void setContactRole(OrgContactRole contactRole) {
+		this.contactRole = contactRole;
+	}
+
 	@Override
 	protected String makeIdentif() {
-		return ouIdentif + contactIndex;
+		return makeIdentif(cntnrIdentif, (contactRole!=null?contactRole.name():""), contactIndex);
+	}
+	
+	public static final String makeIdentif(String cntnrIdentif, String contactRole, String contactIndex){
+		return cntnrIdentif +"_" +  contactRole + " "+contactIndex;
 	}
 	
 	// This method is used for construct an address from a Contact
@@ -198,8 +212,7 @@ public class OrgContact extends CoreAbstIdentifObject {
 
 	@Override
 	public String toString() {
-		return "OrgContact [ouIdentif=" + ouIdentif + ", contactIndex="
-				+ contactIndex + ", street=" + street + ", street2=" + street2
+		return "OrgContact [identif=" + identif + ", street=" + street + ", street2=" + street2
 				+ ", zipCode=" + zipCode + ", city=" + city + ", subdivision="
 				+ subdivision + ", division=" + division + ", region=" + region
 				+ ", country=" + country + ", phone=" + phone + ", fax=" + fax

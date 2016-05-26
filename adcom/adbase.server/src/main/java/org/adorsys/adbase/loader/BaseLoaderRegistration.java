@@ -84,6 +84,7 @@ public class BaseLoaderRegistration extends CoreAbstLoaderRegistration {
 	
 	@PostConstruct
 	public void postConstruct(){
+		super.postConstruct();
 		dataSheetLoader.registerLoader(RoleEntry.class.getSimpleName(), roleEntryLoader);
 		dataSheetLoader.registerLoader(PermEntry.class.getSimpleName(), permEntryLoader);
 		dataSheetLoader.registerLoader(Country.class.getSimpleName(), countryLoader);

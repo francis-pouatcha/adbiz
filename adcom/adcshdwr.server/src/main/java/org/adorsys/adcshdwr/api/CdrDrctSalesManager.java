@@ -11,9 +11,9 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import org.adorsys.adbase.jpa.OrgContact;
+import org.adorsys.adbase.jpa.OrgUnit;
 import org.adorsys.adbase.rest.OrgContactLookup;
 import org.adorsys.adbase.rest.OrgUnitLookup;
-import org.adorsys.adcore.api.Tenant;
 import org.adorsys.adcore.auth.AdcomUser;
 import org.adorsys.adcore.enums.CoreHistoryTypeEnum;
 import org.adorsys.adcore.exceptions.AdException;
@@ -99,8 +99,10 @@ public class CdrDrctSalesManager extends CoreAbstBsnsObjectManager<CdrDrctSales,
 		CdrPymnt pymnt = pymntLookup.findByIdentif(drctSales.getPymntNbr());
 		Long itemCount = injector.getItemLookup().countByCntnrIdentifAndDisabledDtIsNull(cdrDrctSalesIdentif);
 		int processed = 0;
-		orgUnitLookup.findBy(entity, start, max, attributes)
-		template.startPage(drctSales, pymnt, tenant, user);
+
+		OrgUnit tenant = orgUnitLookup.findTenant(user.getRealm());
+		OrgContact orgContact = orgContactLookup.findFirstMainContact(tenant.getIdentif());
+		template.startPage(drctSales, pymnt, tenant, orgContact, user);
 		List<CdrDrctSalesHstry> hstry = injector.getHstrLookup().findByEntIdentifAndEntStatusOrderByIdDesc(cdrDrctSalesIdentif, CoreHistoryTypeEnum.POSTED.name(), 0, 1);
 		if(hstry.isEmpty()){
 			hstry = injector.getHstrLookup().findByEntIdentifAndEntStatusOrderByIdDesc(cdrDrctSalesIdentif, CoreHistoryTypeEnum.CLOSED.name(), 0, 1);
@@ -135,8 +137,9 @@ public class CdrDrctSalesManager extends CoreAbstBsnsObjectManager<CdrDrctSales,
 	public CdrVoucherPrintTemplatePdf printVoucher(CdrVoucherprinterData printerData) throws IOException{
 		CdrVoucherPrintTemplatePdf template = new CdrVoucherPrintTemplatePdf(printerData);
 		CdrCstmrVchr cstmrVchr = cstmrVchrLookup.findByIdentif(printerData.getVoucherIdentif());
-		template.printPdfVoucher(cstmrVchr, tenant, user);
+		OrgUnit tenant = orgUnitLookup.findTenant(user.getRealm());
+		OrgContact orgContact = orgContactLookup.findFirstMainContact(tenant.getIdentif());
+		template.printPdfVoucher(cstmrVchr, tenant, orgContact, user);
 		return template;
 	}
-
 }
