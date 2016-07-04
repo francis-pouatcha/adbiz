@@ -1,0 +1,118 @@
+<div class="container mainbar">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <b>{{cdrSlsInvoicesUtils.translations['Entity_show.title']}}</b>
+                <b> {{cdrSlsInvoicesUtils.translations['SlsInvoice_description.title']}}</b> 
+            </div>
+            <div class="panel-body">
+                <form  name="slsInvoiceForm" class="form-horizontal" novalidate="">
+                    
+                       <div class="form-group">
+                           <label class="col-lg-2">{{cdrSlsInvoicesUtils.translations['SlsInvoice_invceNbr_description.title']}} :</label>
+                           <div class="col-lg-2">
+                               <input type="text" value="{{slsInvoice.invceNbr}}" name="invceNbr" class="form-control" disabled >
+                           </div>
+	                       <label class="col-lg-2">{{cdrSlsInvoicesUtils.translations['SlsInvoice_invceStatus_description.title']}}:</label>
+	                        <div class="col-lg-2">
+	                            <input type="text" value="{{cdrSlsInvoicesUtils.slsInvceStatusI18nMsgTitleValue(slsInvoice.invceStatus)}}" name="invceStatus" class="form-control" disabled >
+	                        </div>
+                            <label class="col-lg-2">{{cdrSlsInvoicesUtils.translations['SlsInvoice_invceDt_description.title']}}:</label>
+	                        <div class="col-lg-2">
+	                            <input type="text" value="{{cdrSlsInvoicesUtils.formatDate(slsInvoice.invceDt, null)}}" name="invceDt" class="form-control" disabled >
+	                        </div>
+                    	</div>
+                    
+	                    <div class="form-group">
+                            <label class="col-lg-2">{{cdrSlsInvoicesUtils.translations['SlsInvoice_invceCur_description.title']}} :</label>
+	                        <div class="col-lg-2">
+	                            <input type="text" value="{{slsInvoice.invceCur}}" name="invceCur" class="form-control" disabled>
+	                        </div>
+                            <label class="col-lg-2">{{cdrSlsInvoicesUtils.translations['SlsInvoice_grossSPPreTax_description.title']}} :</label>
+                            <div class="col-lg-2" >
+                                <input type="text" value="{{slsInvoice.grossSPPreTax}}" name="grossSPPreTax" class="form-control" disabled>
+                            </div>
+	                        <label class="col-lg-2">{{cdrSlsInvoicesUtils.translations['SlsInvoice_netSPPreTax_description.title']}} :</label>
+	                        <div class="col-lg-2">
+	                            <input type="text" value="{{slsInvoice.netSPPreTax}}" name="netSPPreTax" class="form-control" disabled>
+	                        </div>
+	                        
+	                    </div>
+                    
+                        <div class=" form-group ">
+                            <label class="col-lg-2 ">{{cdrSlsInvoicesUtils.translations['SlsInvoice_vatAmount_description.title']}} :</label>
+	                        <div class="col-lg-2" >
+	                            <input type="text" value="{{slsInvoice.vatAmount}}" name="vatAmount" class="form-control" disabled>
+	                        </div>
+                            <label class="col-lg-2 ">{{cdrSlsInvoicesUtils.translations['SlsInvoice_netSPTaxIncl_description.title']}} :</label>
+                            <div class="col-lg-2">
+                                <input type="text" value="{{slsInvoice.netSPTaxIncl}}" name="netSPTaxIncl" class="form-control" disabled>
+                            </div>
+                        
+                            <label class="col-lg-2 ">{{cdrSlsInvoicesUtils.translations['SlsInvoice_netSalesAmt_description.title']}} :</label>
+                            <div class="col-lg-2" >
+                                <input type="text" value="{{slsInvoice.netSalesAmt}}" name="netSalesAmt" class="form-control" disabled>
+                            </div>
+                             
+                        </div>
+                        <div class=" form-group ">
+                            <label class="col-lg-2 ">{{cdrSlsInvoicesUtils.translations['SlsInvoice_pymtDscntPct_description.title']}} :</label>
+                            <div class="col-lg-2" >
+                                <input type="text" value="{{slsInvoice.pymtDscntPct}}" name="pymtDscntPct" class="form-control" disabled>
+                            </div>
+                            <label class="col-lg-2">{{cdrSlsInvoicesUtils.translations['SlsInvoice_pymtDscntAmt_description.title']}} :</label>
+                            <div class="col-lg-2" >
+                                <input type="text" value="{{slsInvoice.pymtDscntAmt}}" name="pymtDscntAmt" class="form-control" disabled>
+                            </div>
+                            <label class="col-lg-2">{{cdrSlsInvoicesUtils.translations['SlsInvoice_rdngDscntAmt_description.title']}} :</label>
+                            <div class="col-lg-2" >
+                                <input type="text" value="{{slsInvoice.rdngDscntAmt}}" name="rdngDscntAmt" class="form-control" disabled>
+                            </div>
+                            
+                            
+                        </div>
+                    
+                         <div class=" form-group ">
+                            <label class="col-lg-2 ">{{cdrSlsInvoicesUtils.translations['SlsInvoice_rebate_description.title']}} :</label>
+                            <div class="col-lg-2" >
+                                <input type="text" value="{{slsInvoice.rebate}}" name="rebate" class="form-control" disabled>
+                            </div>
+                             <label class="col-lg-2">{{cdrSlsInvoicesUtils.translations['SlsInvoice_netAmtToPay_description.title']}} :</label>
+                            <div class="col-lg-2" >
+                                <input type="text" value="{{slsInvoice.netAmtToPay}}" name="netAmtToPay" class="form-control" disabled>
+                            </div>
+                            
+                            
+                          </div>
+                </form>
+                <br><br>
+                <div  class="row">
+                    <tabset justified="true">
+
+                        <tab heading="{{cdrSlsInvoicesUtils.translations['CdrPymnt_description.title']}}">
+                            <br/>
+                            <div ng-include="'views/SlsInvoice/SlsInvoicePymtTab.html'" />
+                        </tab>
+
+                        <tab heading="{{cdrSlsInvoicesUtils.translations['SlsInvceItems_description.title']}}">
+                            <br/>
+                            <div ng-include="'views/SlsInvoice/SlsInvoiceItemsTab.html'" />
+                        </tab>
+
+                        <tab heading="{{cdrSlsInvoicesUtils.translations['SlsInvcePtnrs_description.title']}}">
+                            <br/>
+                            <div ng-include="'views/SlsInvoice/SlsInvoicePtnrsTab.html'" />
+                        </tab>
+                    </tabset>
+                </div>
+                <div class="row">
+                    <div class="col-lg-offset-4 col-lg-4">
+                       <div class="text-center">
+                        <a class="btn btn-danger" href="#/SlsInvoices" >
+                         <i class="glyphicon glyphicon-list"><!-- --></i>{{cdrSlsInvoicesUtils.translations['Entity_list.title']}}
+                        </a>
+                       </div>        
+                    </div>
+                 </div>
+             </div>
+        </div>
+</div>

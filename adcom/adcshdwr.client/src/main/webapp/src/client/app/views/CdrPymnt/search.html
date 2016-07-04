@@ -1,0 +1,98 @@
+<div class="form-horizontal">
+    <h3>Create a new CdrPymnt</h3>
+    <div class="control-group">
+        <div class="controls">
+            <a id="Create" name="Create" class="btn btn-primary" href="#/CdrPymnts/new"><i class="icon-plus-sign icon-white"></i> Create</a>
+        </div>
+    </div>
+</div>
+<hr/>
+<div>
+    <h3>Search for CdrPymnts</h3>
+    <form id="CdrPymntSearch" class="form-horizontal">
+    <div class="control-group">
+        <label for="pymntNbr" class="control-label">Pymnt Nbr</label>
+        <div class="controls">
+            <input id="pymntNbr" name="pymntNbr" type="text" ng-model="search.pymntNbr" placeholder="Enter the CdrPymnt Pymnt Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="amt" class="control-label">Amt</label>
+        <div class="controls">
+            <input id="amt" name="amt" type="text" ng-model="search.amt" placeholder="Enter the CdrPymnt Amt"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="cashier" class="control-label">Cashier</label>
+        <div class="controls">
+            <input id="cashier" name="cashier" type="text" ng-model="search.cashier" placeholder="Enter the CdrPymnt Cashier"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="cdrNbr" class="control-label">Cdr Nbr</label>
+        <div class="controls">
+            <input id="cdrNbr" name="cdrNbr" type="text" ng-model="search.cdrNbr" placeholder="Enter the CdrPymnt Cdr Nbr"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="paidBy" class="control-label">Paid By</label>
+        <div class="controls">
+            <input id="paidBy" name="paidBy" type="text" ng-model="search.paidBy" placeholder="Enter the CdrPymnt Paid By"></input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="rcptNbr" class="control-label">Rcpt Nbr</label>
+        <div class="controls">
+            <input id="rcptNbr" name="rcptNbr" type="text" ng-model="search.rcptNbr" placeholder="Enter the CdrPymnt Rcpt Nbr"></input>
+        </div>
+    </div>
+        <div class="control-group">
+            <div class="controls">
+                <a id="Search" name="Search" class="btn btn-primary" ng-click="performSearch()"><i class="icon-search icon-white"></i> Search</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="search-results">
+    <table class="table table-bordered table-striped clearfix">
+        <thead>
+            <tr>
+                <th>Pymnt Nbr</th>
+                <th>Pymnt Dt</th>
+                <th>Value Dt</th>
+                <th>Amt</th>
+                <th>Cashier</th>
+                <th>Cdr Nbr</th>
+                <th>Paid By</th>
+                <th>Rcpt Nbr</th>
+                <th>Rcpt Prnt Dt</th>
+            </tr>
+        </thead>
+        <tbody id="search-results-body">
+            <tr ng-repeat="result in searchResults | searchFilter:searchResults | startFrom:currentPage*pageSize | limitTo:pageSize">
+                <td><a href="#/CdrPymnts/edit/{{result.id}}">{{result.pymntNbr}}</a></td>
+                <td><a href="#/CdrPymnts/edit/{{result.id}}">{{result.pymntDt| date:'yyyy-MM-dd HH:mm:ss Z'}}</a></td>
+                <td><a href="#/CdrPymnts/edit/{{result.id}}">{{result.valueDt| date:'yyyy-MM-dd HH:mm:ss Z'}}</a></td>
+                <td><a href="#/CdrPymnts/edit/{{result.id}}">{{result.amt}}</a></td>
+                <td><a href="#/CdrPymnts/edit/{{result.id}}">{{result.cashier}}</a></td>
+                <td><a href="#/CdrPymnts/edit/{{result.id}}">{{result.cdrNbr}}</a></td>
+                <td><a href="#/CdrPymnts/edit/{{result.id}}">{{result.paidBy}}</a></td>
+                <td><a href="#/CdrPymnts/edit/{{result.id}}">{{result.rcptNbr}}</a></td>
+                <td><a href="#/CdrPymnts/edit/{{result.id}}">{{result.rcptPrntDt| date:'yyyy-MM-dd HH:mm:ss Z'}}</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pagination pagination-centered">
+        <ul>
+            <li ng-class="{disabled:currentPage == 0}">
+                <a id="prev" href ng-click="previous()">«</a>
+            </li>
+            <li ng-repeat="n in pageRange" ng-class="{active:currentPage == n}" ng-click="setPage(n)">
+                <a href ng-bind="n + 1">1</a>
+            </li>
+            <li ng-class="{disabled: currentPage == (numberOfPages() - 1)}">
+                <a id="next" href ng-click="next()">»</a>
+            </li>
+        </ul>
+    </div>
+</div>

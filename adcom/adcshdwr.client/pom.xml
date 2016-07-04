@@ -10,8 +10,7 @@
 	<artifactId>adcshdwr.client</artifactId>
 	<packaging>war</packaging>
 	<name>adcshdwr.client</name>
-	<description>Ad Stock Client</description>
-
+	<description>Ad Invtry Client</description>
 	<build>
 		<finalName>adcshdwr.client</finalName>
 		<plugins>
@@ -19,7 +18,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<warSourceIncludes>src/**,WEB-INF/**</warSourceIncludes>
+                    <warSourceIncludes>src/**,WEB-INF/**</warSourceIncludes>
 				</configuration>
 			</plugin>
 		</plugins>

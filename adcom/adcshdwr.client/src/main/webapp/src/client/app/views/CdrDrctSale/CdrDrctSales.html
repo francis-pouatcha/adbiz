@@ -1,0 +1,130 @@
+<div class="mainbar" ng-cloak>
+    <h1>{{cdrDrctSalesUtils.translations['CdrDrctSales_description.title']}}</h1>
+    <div class="panel panel-default  ng-scope">
+        <div class="panel-heading no-collapse">
+            <div class="row">
+                <div class="col-lg-3">
+                    <b>{{cdrDrctSalesUtils.translations['Entity_search.title']}}</b>
+                    <b>{{cdrDrctSalesUtils.translations['CdrDrctSales_description.title']}}</b>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="">
+                <form role="form" class="">
+
+                    <div class="row" >
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class=" control-label" for="dsNbr">{{cdrDrctSalesUtils.translations['CdrDrctSales_dsNbr_description.title']}}</label>
+                                <div class="">
+                                    <input type="text" id="dsNbr" ng-model="searchInput.entity.dsNbr" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <label class=" control-label">Du</label>
+                            <div class="input-group" style="width:150px;">
+                                <input type="text" class="form-control" id="drctSalesDtFrom" name="drctSalesDtFrom"
+                                       data-datepicker-popup="dd.MM.yyyy" data-ng-model="searchInput.drctSalesDtFrom"
+                                       data-is-open="dateConfig.drctSalesDtFrom.opened"
+                                       data-show-button-bar="false" />
+				            <span class="input-group-btn">
+				                <button style="height:34px;" class="btn btn-default" data-ng-click="openDateComponent('drctSalesDtFrom', $event)">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+				            </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <label class=" control-label">Au</label>
+                            <div class="input-group" style="width:150px;">
+                                <input type="text" class="form-control" id="drctSalesDtTo" name="drctSalesDtTo"
+                                       data-datepicker-popup="dd.MM.yyyy" data-ng-model="searchInput.drctSalesDtTo"
+                                       data-is-open="dateConfig.drctSalesDtTo.opened"
+                                       data-show-button-bar="false" />
+				            <span class="input-group-btn">
+				                <button style="height:34px;" class="btn btn-default" data-ng-click="openDateComponent('drctSalesDtTo', $event)">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+				            </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <div class="form-group">
+                                <button  ng-click="processSearchInput()" class="btn btn-default " style="margin-top: 23px;" >
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="panel panel-default ">
+        <div class="panel-heading no-collapse"><b>{{cdrDrctSalesUtils.translations['CdrDrctSales_description.title']}}</b>
+        </div>
+        <div class="panel-body">
+            <div class="col-lg-12">
+                <div class="row">
+                    <a class="btn btn-primary pull-right margBott10" href="#/CdrDrctSales/new">
+                        <i class="glyphicon-plus"></i> {{cdrDrctSalesUtils.translations['Entity_create.title']}}
+                    </a>
+
+                </div>
+                <div class="table-overflow-middle row">
+                    <table class="table table-bordered  table-striped pointer-element">
+                        <thead>
+                            <tr>
+                                <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_cashier_description.title']}}</th>
+                                <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_dsCur_description.title']}}</th>
+                                <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_dsNbr_description.title']}}</th>
+                                <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_grossSPPreTax_description.title']}}</th>
+                                <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_netAmtToPay_description.title']}}</th>
+                                <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_netSPPreTax_description.title']}}</th>
+                                <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_netSPTaxIncl_description.title']}}</th>
+                                <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_netSalesAmt_description.title']}}</th>
+                                <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_pymtDscntAmt_description.title']}}</th>
+                                <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_pymtDscntPct_description.title']}}</th>
+                                <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_rcptNbr_description.title']}}</th>
+                                <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_rcptPrntDt_description.title']}}</th>
+                                <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_rdngDscntAmt_description.title']}}</th>
+                                <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_rebate_description.title']}}</th>
+                                <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_vatAmount_description.title']}}</th>
+                                <th></th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="cdrDrctSale in cdrDrctSales" ng-dblclick="editItem">
+                                <td>{{cdrDrctSale.cashier}}</td>
+                                <td>{{cdrDrctSale.dsCur}}</td>
+                                <td>{{cdrDrctSale.dsNbr}}</td>
+                                <td>{{cdrDrctSale.grossSPPreTax}}</td>
+                                <td>{{cdrDrctSale.netAmtToPay}}</td>
+                                <td>{{cdrDrctSale.netSPPreTax}}</td>
+                                <td>{{cdrDrctSale.netSPTaxIncl}}</td>
+                                <td>{{cdrDrctSale.netSalesAmt}}</td>
+                                <td>{{cdrDrctSale.pymtDscntAmt}}</td>
+                                <td>{{cdrDrctSale.pymtDscntPct}}</td>
+                                <td>{{cdrDrctSale.rcptNbr}}</td>
+                                <td>{{cdrDrctSale.rcptPrntDt  | date:'yyyy-MM-dd HH:mm'}}</td>
+                                <td>{{cdrDrctSale.rdngDscntAmt}}</td>
+                                <td>{{cdrDrctSale.rebate}}</td>
+                                <td>{{cdrDrctSale.vatAmount}}</td>
+                                <td><a href="#/CdrDrctSales/show/{{cdrDrctSale.id}}"><i class="glyphicon glyphicon-eye-open"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <ul class="pull-right">
+                    <pagination total-items="totalItems" items-per-page="itemPerPage" class="pagination-sm" ng-model="currentPage" ng-change="paginate()"></pagination>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
