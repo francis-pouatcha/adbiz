@@ -1,5 +1,7 @@
 package org.adorsys.adstock.rest;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -32,5 +34,9 @@ public class StkArticleLotEJB extends CoreAbstBsnsItemEJB<CoreAbstBsnsObject, St
 	@Override
 	protected CoreAbstBsnsItemRepo<StkArticleLot> getBsnsRepo() {
 		return repo;
+	}
+	
+	public List<StkArticleLot> findStkArticeLotByArtName(String artName){
+		return repo.findStkArticeLotByArtName(artName);
 	}
 }

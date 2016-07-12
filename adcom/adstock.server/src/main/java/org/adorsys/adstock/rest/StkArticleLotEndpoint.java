@@ -8,13 +8,16 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
+import javax.persistence.metamodel.SingularAttribute;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
+import javax.ws.rs.core.Response.Status;
 
+import org.adorsys.adcatal.jpa.CatalArtLangMappingSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchResult;
 import org.adorsys.adcore.props.AbstEntiyProps;
@@ -24,6 +27,7 @@ import org.adorsys.adstock.jpa.StkArticleLot;
 import org.adorsys.adstock.jpa.StkArticleLotSearchInput;
 import org.adorsys.adstock.jpa.StkArticleLotSearchResult;
 import org.adorsys.adstock.jpa.StkArticleLot_;
+import org.adorsys.adstock.repo.StkArticleLotRepository;
 
 /**
  * 
@@ -37,6 +41,8 @@ public class StkArticleLotEndpoint extends CoreAbstBsnsItemEndpoint<StkArticleLo
 	private StkArticleLotLookup lookup;
 	@Inject
 	private StkArticleLotProps entityProps;
+	@Inject
+	private StkArticleLotEJB ejb;
 	
 	@Override
 	protected CoreAbstBsnsItemLookup<StkArticleLot> getLookup() {
@@ -66,6 +72,14 @@ public class StkArticleLotEndpoint extends CoreAbstBsnsItemEndpoint<StkArticleLo
 			Long size, List<StkArticleLot> resultList,
 			CoreAbstBsnsItemSearchInput<StkArticleLot> searchInput) {
 		return new StkArticleLotSearchResult(size, null, resultList, searchInput);
+	}
+	
+	@GET
+	@Path("/getarticlelotsbyname/{artName}")
+	@Produces({ "application/json", "application/xml" })
+	public CoreAbstBsnsItemSearchResult<StkArticleLot> findStkArticeLotByArtName(@PathParam("artName") String artName) {
+		List<StkArticleLot> list = ejb.findStkArticeLotByArtName(artName);
+		return new StkArticleLotSearchResult(new Long(list.size()), null, list, newSearchInput());
 	}
 	
 }
