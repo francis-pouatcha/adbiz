@@ -7,88 +7,92 @@
                 <div class="control-group col-lg-3">
                     <label for="cdrNbr" class="control-label">{{cdrCshDrawerUtils.translations['CdrCshDrawer_cdrNbr_description.title']}}</label>
                     <div id="cdrNbrControls" class="controls">
-                        <input id="cdrNbr" name="cdrNbr" type="text" disabled ng-model="cdrCshDrawer.cdrNbr" class="form-control"></input>
+                        <input id="cdrNbr" name="cdrNbr" type="text" disabled ng-model="cdrCshDrawer.cdrNbr" class="form-control">
                     </div>
                 </div>
                 <div class="control-group col-lg-3" >
                     <label for="cashier" class="control-label">{{cdrCshDrawerUtils.translations['CdrCshDrawer_cashier_description.title']}}</label>
                     <div id="cashierControls" class="controls">
-                        <input id="cashier" name="cashier" type="text" disabled ng-model="cdrCshDrawer.cashier" class="form-control"></input>
+                        <input id="cashier" name="cashier" type="text" disabled ng-model="cdrCshDrawer.cashier" class="form-control">
                     </div>
                 </div>
                 <div class="control-group col-lg-3">
                     <label for="closedBy" class="control-label">{{cdrCshDrawerUtils.translations['CdrCshDrawer_closedBy_description.title']}}</label>
                     <div id="closedByControls" class="controls">
-                        <input id="closedBy" name="closedBy" type="text" disabled ng-model="cdrCshDrawer.closedBy" class="form-control"></input>
+                        <input id="closedBy" name="closedBy" type="text" disabled ng-model="cdrCshDrawer.closedBy" class="form-control">
                     </div>
                 </div>
                 <div class="control-group col-lg-3">
                     <label for="opngDt" class="control-label">{{cdrCshDrawerUtils.translations['CdrCshDrawer_opngDt_description.title']}}</label>
                     <div id="opngDtControls" class="controls">
-                        <input id="opngDt" name="opngDt" type="text" disabled value="{{cdrCshDrawer.opngDt | date:'yyyy-MM-dd'}}"  class="form-control"></input>
+                        <input id="opngDt" name="opngDt" type="text" disabled value="{{cdrCshDrawer.opngDt | date:'yyyy-MM-dd'}}"  class="form-control">
                     </div>
                 </div>
                 <div class="control-group col-lg-3" >
                     <label for="clsngDt" class="control-label">{{cdrCshDrawerUtils.translations['CdrCshDrawer_clsngDt_description.title']}}</label>
                     <div id="clsngDtControls" class="controls">
-                        <input id="clsngDt" name="clsngDt" type="text" disabled  value="{{cdrCshDrawer.clsngDt | date:'yyyy-MM-dd'}}"  class="form-control"></input>
+                        <input id="clsngDt" name="clsngDt" type="text" disabled  value="{{cdrCshDrawer.clsngDt | date:'yyyy-MM-dd'}}"  class="form-control">
                     </div>
                 </div>
                 <div class="control-group col-lg-3">
                     <label for="initialAmt" class="control-label">{{cdrCshDrawerUtils.translations['CdrCshDrawer_initialAmt_description.title']}}</label>
                     <div id="initialAmtControls" class="controls">
-                        <input id="initialAmt" name="initialAmt" type="text" disabled ng-model="cdrCshDrawer.initialAmt" class="form-control"></input>
+                        <input id="initialAmt" name="initialAmt" type="text" disabled ng-model="cdrCshDrawer.initialAmt" class="form-control">
                     </div>
                 </div>
-               <!-- <div class="control-group col-lg-3" >
+                <!--<div class="control-group col-lg-3" >
                     <label for="ttlCashIn" class="control-label">{{cdrCshDrawerUtils.translations['CdrCshDrawer_ttlCashIn_description.title']}}</label>
                     <div id="ttlCashInControls" class="controls">
-                        <input id="ttlCashIn" name="ttlCashIn" type="text" disabled ng-model="cdrCshDrawer.ttlCashIn" class="form-control"></input>
+                        <input id="ttlCashIn" name="ttlCashIn" type="text" disabled ng-model="cdrCshDrawer.ttlCashIn" class="form-control">
                     </div>
                 </div>
                 <div class="control-group col-lg-3">
                     <label for="ttlCashOut" class="control-label">{{cdrCshDrawerUtils.translations['CdrCshDrawer_ttlCashOut_description.title']}}</label>
                     <div id="ttlCashOutControls" class="controls">
-                        <input id="ttlCashOut" name="ttlCashOut" type="text" disabled ng-model="cdrCshDrawer.ttlCashOut" class="form-control"></input>
+                        <input id="ttlCashOut" name="ttlCashOut" type="text" disabled ng-model="cdrCshDrawer.ttlCashOut" class="form-control">
                     </div>
                 </div>
                 <div class="control-group col-lg-3">
                     <label for="ttlCash" class="control-label">{{cdrCshDrawerUtils.translations['CdrCshDrawer_ttlCash_description.title']}}</label>
                     <div id="ttlCashControls" class="controls">
-                        <input id="ttlCash" name="ttlCash" type="text" disabled ng-model="cdrCshDrawer.ttlCash" class="form-control"></input>
+                        <input id="ttlCash" name="ttlCash" type="text" disabled ng-model="cdrCshDrawer.ttlCash" class="form-control">
                     </div>
                 </div>
                 <div class="control-group col-lg-3">
                     <label for="ttlCheck" class="control-label">{{cdrCshDrawerUtils.translations['CdrCshDrawer_ttlCheck_description.title']}}</label>
                     <div id="ttlCheckControls" class="controls">
-                        <input id="ttlCheck" name="ttlCheck" type="text" disabled ng-model="cdrCshDrawer.ttlCheck" class="form-control"></input>
+                        <input id="ttlCheck" name="ttlCheck" type="text" disabled ng-model="cdrCshDrawer.ttlCheck" class="form-control">
                     </div>
                 </div>
                 <div class="control-group col-lg-3">
                     <label for="ttlCredCard" class="control-label">{{cdrCshDrawerUtils.translations['CdrCshDrawer_ttlCredCard_description.title']}}</label>
                     <div id="ttlCredCardControls" class="controls">
-                        <input id="ttlCredCard" name="ttlCredCard" disabled type="text" ng-model="cdrCshDrawer.ttlCredCard"class="form-control"></input>
+                        <input id="ttlCredCard" name="ttlCredCard" disabled type="text" ng-model="cdrCshDrawer.ttlCredCard"class="form-control">
                     </div>
                 </div>
                 <div class="control-group col-lg-3" >
                     <label for="ttlVchrIn" class="control-label">{{cdrCshDrawerUtils.translations['CdrCshDrawer_ttlVchrIn_description.title']}}</label>
                     <div id="ttlVchrInControls" class="controls">
-                        <input id="ttlVchrIn" name="ttlVchrIn" disabled type="text" ng-model="cdrCshDrawer.ttlVchrIn" class="form-control"></input>
+                        <input id="ttlVchrIn" name="ttlVchrIn" disabled type="text" ng-model="cdrCshDrawer.ttlVchrIn" class="form-control">
                     </div>
                 </div>
                 <div class="control-group col-lg-3">
                     <label for="ttlVchrOut" class="control-label">{{cdrCshDrawerUtils.translations['CdrCshDrawer_ttlVchrOut_description.title']}}</label>
                     <div id="ttlVchrOutControls" class="controls">
-                        <input id="ttlVchrOut" name="ttlVchrOut" disabled type="text" ng-model="cdrCshDrawer.ttlVchrOut" class="form-control"></input>
+                        <input id="ttlVchrOut" name="ttlVchrOut" disabled type="text" ng-model="cdrCshDrawer.ttlVchrOut" class="form-control">
                     </div>
                 </div>-->
                 <div class="control-group">
                     <div class="controls">
-                        <button style="margin-top: 27px" ng-show="cdrCshDrawer.clsngDt == null" id="saveCdrCshDrawer" name="saveCdrCshDrawer" class="btn btn-primary col-lg-offset-1" ng-click="close()"><i class="glyphicon glyphicon-ok"></i> {{cdrCshDrawerUtils.translations['CdrCshDrawer_close_description.title']}}</button>
-                        <a style="margin-top: 27px" class="btn btn-danger col-lg-offset-2" href="#/CdrCshDrawers"><i class="glyphicon glyphicon-chevron-left"></i> {{cdrCshDrawerUtils.translations['Entity_back.title']}}</a>
+                        <button style="margin-top: 27px" ng-show="cdrCshDrawer.clsngDt == null" id="saveCdrCshDrawer"
+                                name="saveCdrCshDrawer" class="btn btn-primary col-lg-offset-1" ng-click="close()">
+                            <i class="glyphicon glyphicon-ok"></i> {{cdrCshDrawerUtils.translations['CdrCshDrawer_close_description.title']}}</button>
+                        <a style="margin-top: 27px" class="btn btn-danger col-lg-offset-2" href="#/CdrCshDrawers">
+                            <i class="glyphicon glyphicon-chevron-left"></i> {{cdrCshDrawerUtils.translations['Entity_back.title']}}</a>
                         <!--<button style="margin-top: 27px"  class="btn btn-default" ng-show="cdrCshDrawer.clsngDt == null" ng-click="decaissUI()"><i class="glyphicon glyphicon-th"></i> Decaissement</button>-->
                     </div>
                 <div>
+
             </form>
             <br/>
             <div class="panel panel-warning col-lg-6" ng-show="decaissUIisOpen">
@@ -96,14 +100,14 @@
                 <div class="panel-body">
                     <div class="control-group col-lg-3">
                         <label for="cdrNbr" class="control-label">Montant</label>
-                        <div id="" class="controls">
-                            <input id="montant" name="montant" type="text" ng-model="cdr.montant" class="form-control"></input>
+                        <div class="controls">
+                            <input id="montant" name="montant" type="text" ng-model="cdr.montant" class="form-control">
                         </div>
                     </div>
                     <div class="control-group col-lg-3" >
                         <label for="cashier" class="control-label">Raison</label>
-                        <div id="" class="controls">
-                            <input id="raison" name="raison" type="text" ng-model="cdrCshDrawer.raison" class="form-control"></input>
+                        <div  class="controls">
+                            <input id="raison" name="raison" type="text" ng-model="cdrCshDrawer.raison" class="form-control">
                         </div>
                     </div>
                     <div class="control-group">

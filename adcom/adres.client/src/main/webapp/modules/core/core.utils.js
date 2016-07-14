@@ -202,6 +202,10 @@
                 return $http.put(urlBase+'/'+entity.id,entity);
             };
 
+            service.postObject = function(urlBase){
+                return $http.put(urlBase);
+            };
+
             service.findBy = function(urlBase, entitySearchInput){
                 return $http.post(urlBase+'/findBy',entitySearchInput);
             };
@@ -236,6 +240,18 @@
                         deferred.reject('No entity found');
                     });
                 return deferred.promise;
+            }
+            service.findByLikeWithParam = function (urlBase, fieldName, fieldValue){
+                if(angular.isUndefined(urlBase) || !urlBase ||
+                    angular.isUndefined(fieldName) || !fieldName ||
+                    angular.isUndefined(fieldValue) || !fieldValue) return;
+
+                var searchInput = {entity:{},fieldNames:[],start:0,max:10};
+                searchInput.entity[fieldName]= fieldValue;
+                if(searchInput.fieldNames.indexOf(fieldName)==-1)
+                    searchInput.fieldNames.push(fieldName);
+                return service.findByLike(urlBase, searchInput);
+
             }
             service.findByLikeWithSearchInputPromissed = function (urlBase, searchInput){
                 if(angular.isUndefined(urlBase) || !urlBase ||
@@ -310,6 +326,17 @@
             // execute a simple get
             service.get = function(urlBase) {
                 return $http.get(urlBase);
+            }
+            service.getWithPromise = function(urlBase) {
+                var deferred = $q.defer();
+                 $http.get(urlBase)
+                     .success(function(entitySearchResult) {
+                         deferred.resolve(entitySearchResult);
+                     })
+                     .error(function(error){
+                         deferred.reject('No entity found');
+                     });
+                return deferred.promise;
             }
             return service;
 

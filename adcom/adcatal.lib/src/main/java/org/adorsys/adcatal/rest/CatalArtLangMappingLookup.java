@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import org.adorsys.adcatal.jpa.CatalArtLangMapping;
+import org.adorsys.adcatal.jpa.CatalArtLangMappingSearchInput;
 import org.adorsys.adcatal.repo.CatalArtLangMappingRepository;
 import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 
@@ -32,6 +33,7 @@ public class CatalArtLangMappingLookup  extends CatalAbstArtLangMapLookup<CatalA
 		return findByCntnrIdentif(artPic, start, max);
 	}
 	
+		
 //	public Long countByArtNameLike(String artName, int start, int max){
 //
 //		CriteriaBuilder cb = repository.getCriteriaBuilder();

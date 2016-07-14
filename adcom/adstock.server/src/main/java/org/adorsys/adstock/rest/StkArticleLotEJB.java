@@ -37,6 +37,6 @@ public class StkArticleLotEJB extends CoreAbstBsnsItemEJB<CoreAbstBsnsObject, St
 	}
 	
 	public List<StkArticleLot> findStkArticeLotByArtName(String artName){
-		return repo.findStkArticeLotByArtName(artName);
+		return repo.findStkArticeLotByArtName("%"+artName+"%").firstResult(0).maxResults(10).getResultList();
 	}
 }

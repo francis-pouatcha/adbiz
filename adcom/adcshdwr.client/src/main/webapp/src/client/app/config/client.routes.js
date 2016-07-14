@@ -43,8 +43,8 @@
                         content: '<i class="fa fa-folder-open"></i> Vente'
                     }
                 }
-            },,
-            {
+            },
+            /*{
                 state: 'CdrPymnts',
                 config: {
                     url: '/CdrPymnts',
@@ -54,10 +54,10 @@
                     title: 'paiements',
                     settings: {
                         nav: 2,
-                        content: '<i class="fa fa-folder-open"></i> Payement'
+                        content: '<i class="fa fa-folder-open"></i> Paiement'
                     }
                 }
-            },
+            },*/
             {
                 state: 'newCdrPymnts',
                 config: {

@@ -120,12 +120,16 @@ public abstract class CoreAbstBsnsItemEJB<
 		// The section article lot index
 		String salIndex = entity.getSalIndex();
 		
+	
 		// Do we have this item counted
-		Long cnt = getInjector().getItemLookup().countByCntnrIdentifAndSalIndex(entity.getCntnrIdentif(), salIndex);
+		CoreAbstBsnsObjInjector<E, I, H, J, S, C> injector = getInjector();
+		CoreAbstBsnsItemLookup<I> itemLookup = injector.getItemLookup();
+		String cntnrIdentif = entity.getCntnrIdentif();
+		Long cnt = itemLookup.countByCntnrIdentifAndSalIndex(cntnrIdentif, salIndex);
 
 		List<I> found = null;
 		if(cnt>0){
-			found = getInjector().getItemLookup().findByCntnrIdentifAndSalIndex(entity.getCntnrIdentif(), salIndex, 0, cnt.intValue());
+			found = itemLookup.findByCntnrIdentifAndSalIndex(cntnrIdentif, salIndex, 0, cnt.intValue());
 		} else {
 			found = Collections.emptyList();
 		}

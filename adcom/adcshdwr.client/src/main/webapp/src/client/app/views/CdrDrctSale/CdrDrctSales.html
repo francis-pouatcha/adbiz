@@ -16,9 +16,9 @@
                     <div class="row" >
                         <div class="col-lg-3">
                             <div class="form-group">
-                                <label class=" control-label" for="dsNbr">{{cdrDrctSalesUtils.translations['CdrDrctSales_dsNbr_description.title']}}</label>
+                                <label class=" control-label" for="cdrNbr">{{cdrDrctSalesUtils.translations['CdrDrctSales_dsNbr_description.title']}}</label>
                                 <div class="">
-                                    <input type="text" id="dsNbr" ng-model="searchInput.entity.dsNbr" class="form-control">
+                                    <input type="text" id="cdrNbr" ng-model="searchInput.entity.cdrNbr" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -80,17 +80,18 @@
                     <table class="table table-bordered  table-striped pointer-element">
                         <thead>
                             <tr>
+                                <th>No</th>
                                 <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_cashier_description.title']}}</th>
                                 <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_dsCur_description.title']}}</th>
-                                <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_dsNbr_description.title']}}</th>
-                                <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_grossSPPreTax_description.title']}}</th>
+                                <!--<th>{{cdrDrctSalesUtils.translations['CdrDrctSales_cdrNbr_description.title']}}</th>-->
+                                <!--<th>{{cdrDrctSalesUtils.translations['CdrDrctSales_grossSPPreTax_description.title']}}</th>-->
                                 <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_netAmtToPay_description.title']}}</th>
                                 <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_netSPPreTax_description.title']}}</th>
                                 <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_netSPTaxIncl_description.title']}}</th>
                                 <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_netSalesAmt_description.title']}}</th>
                                 <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_pymtDscntAmt_description.title']}}</th>
                                 <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_pymtDscntPct_description.title']}}</th>
-                                <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_rcptNbr_description.title']}}</th>
+                                <!--<th>{{cdrDrctSalesUtils.translations['CdrDrctSales_rcptNbr_description.title']}}</th>-->
                                 <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_rcptPrntDt_description.title']}}</th>
                                 <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_rdngDscntAmt_description.title']}}</th>
                                 <th>{{cdrDrctSalesUtils.translations['CdrDrctSales_rebate_description.title']}}</th>
@@ -99,22 +100,21 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="cdrDrctSale in cdrDrctSales" ng-dblclick="editItem">
+                                <td>{{cdrDrctSale.identif}}</td>
                                 <td>{{cdrDrctSale.cashier}}</td>
-                                <td>{{cdrDrctSale.dsCur}}</td>
-                                <td>{{cdrDrctSale.dsNbr}}</td>
-                                <td>{{cdrDrctSale.grossSPPreTax}}</td>
-                                <td>{{cdrDrctSale.netAmtToPay}}</td>
-                                <td>{{cdrDrctSale.netSPPreTax}}</td>
-                                <td>{{cdrDrctSale.netSPTaxIncl}}</td>
-                                <td>{{cdrDrctSale.netSalesAmt}}</td>
-                                <td>{{cdrDrctSale.pymtDscntAmt}}</td>
-                                <td>{{cdrDrctSale.pymtDscntPct}}</td>
-                                <td>{{cdrDrctSale.rcptNbr}}</td>
-                                <td>{{cdrDrctSale.rcptPrntDt  | date:'yyyy-MM-dd HH:mm'}}</td>
-                                <td>{{cdrDrctSale.rdngDscntAmt}}</td>
-                                <td>{{cdrDrctSale.rebate}}</td>
-                                <td>{{cdrDrctSale.vatAmount}}</td>
-                                <td><a href="#/CdrDrctSales/show/{{cdrDrctSale.id}}"><i class="glyphicon glyphicon-eye-open"></i></a>
+                                <td>{{cdrDrctSale.slsPrcCur}}</td>
+                               <!-- <td>{{cdrDrctSale.slsGrossPrcPreTax}}</td>-->
+                                <td>{{cdrDrctSale.slsNetAmtToPay}}</td>
+                                <td>{{cdrDrctSale.slsNetPrcPreTax}}</td>
+                                <td>{{cdrDrctSale.slsNetPrcTaxIncl}}</td>
+                                <td>{{cdrDrctSale.slsNetPymtAmt}}</td>
+                                <td>{{cdrDrctSale.slsPymtDscntAmt}}</td>
+                                <td>{{cdrDrctSale.slsPymtDscntPct}}</td>
+                                <td>{{cdrDrctSale.valueDt  | date:'yyyy-MM-dd HH:mm'}}</td>
+                                <td>{{cdrDrctSale.slsRdngDscntAmt}}</td>
+                                <td>{{cdrDrctSale.slsRebateAmt}}</td>
+                                <td>{{cdrDrctSale.slsVatAmt}}</td>
+                                <td><a href="#/CdrDrctSales/show/{{cdrDrctSale.identif}}"><i class="glyphicon glyphicon-eye-open"></i></a>
                                 </td>
                             </tr>
                         </tbody>

@@ -20,6 +20,7 @@ import org.adorsys.adcshdwr.jpa.CdrDrctSalesHstry;
 import org.adorsys.adcshdwr.jpa.CdrDrctSalesItem;
 import org.adorsys.adcshdwr.jpa.CdrPymnt;
 import org.adorsys.adcshdwr.jpa.CdrPymntItem;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -95,7 +96,7 @@ public class CdrDirectSalesReceiptPrintTemplatePDF {
 			.withDesignation("E-Mail: "+ " " + orgContact.getEmail()).build(rdt);
 		
 		// compnyRegisterNumber
-		if(rpp.isDisplayRegisterNumber())
+		if(rpp.isDisplayRegisterNumber() && StringUtils.isNotEmpty(tenant.getRegisterNumber()))
 		new ReceiptDataOneColBuilder(receiptDataTableMetaData)
 			.withDesignation("RC:"+ " " + tenant.getRegisterNumber()).build(rdt);
 

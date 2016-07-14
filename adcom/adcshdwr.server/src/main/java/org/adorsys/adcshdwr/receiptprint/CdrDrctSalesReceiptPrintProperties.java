@@ -11,10 +11,10 @@ public class CdrDrctSalesReceiptPrintProperties extends ReceiptPrintProperties {
 	private boolean displaySlsPymtDscntPct;
 	private boolean displaySlsPymtDscntAmt;
 	private boolean displaySlsRdngDscntAmt;
-	private boolean displaySlsNetPymtAmt;
-	private boolean displayTicketMessage;
+	private boolean displaySlsNetPymtAmt=true;
+	private boolean displayTicketMessage=true;
 	private boolean displaySlsNetPrcTaxIncl;
-	private String ticketMessage;
+	private String ticketMessage="Les produits vendus ne sont ni échangés, ni retournés. Merci de votre confiance!";
 
 	public boolean isDisplayGrossPricePreTax() {
 		return displayGrossPricePreTax;

@@ -19,7 +19,7 @@ public final class AdcomUser {
 	}
 
 	public AdcomUser(String name, KeycloakSecurityContext context) {
-		this(name, null, null);
+		this(name, context, null);
 	}
 
 	public AdcomUser(String name, KeycloakSecurityContext context, String fullName) {
@@ -53,6 +53,8 @@ public final class AdcomUser {
 	}
 	
 	public String getRealm(){
+		if(getContext()==null)
+			return null;	
 		return getContext().getRealm();
 	}
 }

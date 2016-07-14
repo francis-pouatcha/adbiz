@@ -48,7 +48,7 @@
             <input id="initialAmt" name="initialAmt" type="text" ng-model="cdrCshDrawer.initialAmt" placeholder="Enter the CdrCshDrawer Initial Amt"></input>
         </div>
     </div>
-    <div class="control-group" ng-class="{error: CdrCshDrawerForm.ttlCashIn.$invalid}">
+    <!--<div class="control-group" ng-class="{error: CdrCshDrawerForm.ttlCashIn.$invalid}">
         <label for="ttlCashIn" class="control-label">Ttl Cash In</label>
         <div id="ttlCashInControls" class="controls">
             <input id="ttlCashIn" name="ttlCashIn" type="text" ng-model="cdrCshDrawer.ttlCashIn" placeholder="Enter the CdrCshDrawer Ttl Cash In"></input>
@@ -89,7 +89,7 @@
         <div id="ttlVchrOutControls" class="controls">
             <input id="ttlVchrOut" name="ttlVchrOut" type="text" ng-model="cdrCshDrawer.ttlVchrOut" placeholder="Enter the CdrCshDrawer Ttl Vchr Out"></input>
         </div>
-    </div>
+    </div>-->
     <div class="control-group">
         <div class="controls">
             <button id="saveCdrCshDrawer" name="saveCdrCshDrawer" class="btn btn-primary" ng-disabled="isClean() || CdrCshDrawerForm.$invalid" ng-click="save()"><i class="icon-ok-sign icon-white"></i> Save</button>

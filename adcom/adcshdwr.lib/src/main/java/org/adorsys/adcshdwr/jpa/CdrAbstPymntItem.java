@@ -107,6 +107,14 @@ public abstract class CdrAbstPymntItem extends CoreAbstIdentifObject{
 		return this.rcvdAmt;
 	}
 
+	public String getOrgUnit() {
+		return orgUnit;
+	}
+
+	public void setOrgUnit(String orgUnit) {
+		this.orgUnit = orgUnit;
+	}
+
 	public void setRcvdAmt(final BigDecimal rcvdAmt) {
 		this.rcvdAmt = rcvdAmt;
 	}

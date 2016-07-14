@@ -93,10 +93,11 @@
     });
 
     /* @ngInject */
-    appModule.config(function($httpProvider, $locationProvider) {
+    appModule.config(function($httpProvider, $locationProvider, $translateProvider) {
         $httpProvider.interceptors.push('errorInterceptor');
         $httpProvider.interceptors.push('authInterceptor');
         $locationProvider.html5Mode(false);
+        $translateProvider.preferredLanguage('fr');
     });
     /* jshint ignore:start */
     /* @ngInject */

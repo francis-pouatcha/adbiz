@@ -24,15 +24,18 @@ public class CdrDrctSalesItemEJB extends CoreAbstBsnsItemEJB<CdrDrctSales, CdrDr
 	private CdrDrctSalesItemLookup lookup;
 	@EJB
 	private CdrDrctSalesItemEJB ejb;
+	
+	@EJB
+	private CdrDrctSalesInjector injector;
 	@Override
 	protected CoreAbstBsnsObjInjector<CdrDrctSales, CdrDrctSalesItem, CdrDrctSalesHstry, CdrJob, CdrStep, CdrDrctSalesCstr> getInjector() {
 		// TODO Auto-generated method stub
-		return null;
+		return injector;
 	}
 	@Override
 	protected CoreAbstBsnsItemRepo<CdrDrctSalesItem> getBsnsRepo() {
 		// TODO Auto-generated method stub
-		return null;
+		return repository;
 	}
 
 }

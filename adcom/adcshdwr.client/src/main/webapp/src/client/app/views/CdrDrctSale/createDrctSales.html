@@ -6,55 +6,53 @@
         </div>
         <div class="panel-body">
             <div>
+                <div class="alert alert-danger" ng-show="error" role="alert">
+                    <strong>Warning!</strong> {{error}}
+                </div>
                 <form role="form" class="form-horizontal" name="cdrDsArtItemSearchForm" id="cdrDsArtItemSearchForm" novalidate>
 
 					<div class="form-group">
                         <div class="col-lg-2">
-                            <label class=" " for="searchArtPic">{{cdrDrctSalesUtils.translations['CdrDsArtItem_artPic_description.title']}}</label>
+                            <label class=" " for="searchArtPic">{{cdrDrctSalesUtils.translations['CdrDsArtItem_lotPic_description.title']}}</label>
                             <div ng-class="{ 'has-error' : cdrDsArtItemSearchForm.searchArtPic.$invalid }" >
-                                <input type="text" class="form-control" select-on-click focus  name="searchArtPic" id="searchArtPic" required autocomplete="off" ng-model="cdrDsArtItemHolder.item.artPic" typeahead="displayable as displayable.displayableStr for displayable in cdrDrctSalesUtils.loadArticleLotByPic($viewValue)" typeahead-loading="loading" typeahead-on-select='onArticleSelectedInSearch($item, $model, $label)'>
+                                <input type="text" class="form-control" select-on-click focus  name="searchArtPic" id="searchArtPic" required autocomplete="off" ng-model="cdrDsArtItemHolder.item.lotPic" typeahead="displayable as displayable.displayableStr for displayable in cdrDrctSalesUtils.loadArticleLotByPic($viewValue)" typeahead-loading="loading" typeahead-on-select='onArticleSelectedInSearch($item, $model, $label)'>
                             </div>
                          </div>
                         <div class="col-lg-3">
                             <label class=" " for="searchArtName">{{cdrDrctSalesUtils.translations['CdrDsArtItem_artName_description.title']}}</label>
                             <div ng-class="{ 'has-error' : cdrDsArtItemSearchForm.searchArtName.$invalid }" >
-                                <input type="text" select-on-click focus class="form-control" id="searchArtName" required  autocomplete="off" ng-model="cdrDsArtItemHolder.artName" typeahead="displayable as displayable.displayableStr for displayable in cdrDrctSalesUtils.loadArticlesByName($viewValue)" typeahead-loading="loading" typeahead-on-select='onArticleSelectedInSearch($item, $model, $label)' name="searchArtName">
+                                <input type="text" select-on-click focus class="form-control" id="searchArtName" required  autocomplete="off" ng-model="cdrDsArtItemHolder.artName" typeahead="displayable as displayable.displayableStr for displayable in cdrDrctSalesUtils.loadArticlesLotByName($viewValue)" typeahead-loading="loading" typeahead-on-select='onArticleSelectedInSearch($item, $model, $label)' name="searchArtName">
                             </div>
                         </div>
                         <div class="col-lg-2" ng-hide="cdrDsArtHolder.cdrDrctSales.origDsNbr">
-                            <label  class=" " for="soldQty">{{cdrDrctSalesUtils.translations['CdrDsArtItem_soldQty_description.title']}}</label>
-                            <div ng-class="{ 'has-error' : cdrDsArtItemSearchForm.soldQty.$invalid }" >
-                                <input type="text" class="form-control" name="soldQty" id="soldQty" ng-required={{!cdrDsArtHolder.cdrDrctSales.origDsNbr}} autocomplete="off" ng-model="cdrDsArtItemHolder.item.soldQty">
+                            <label  class=" " for="trgtQty">{{cdrDrctSalesUtils.translations['CdrDsArtItem_soldQty_description.title']}}</label>
+                            <div ng-class="{ 'has-error' : cdrDsArtItemSearchForm.trgtQty.$invalid }" >
+                                <input type="number" class="form-control" name="trgtQty" id="trgtQty" ng-change="evltSlsNetPrcPreTax()" ng-required={{!cdrDsArtHolder.cdrDrctSales.origDsNbr}} autocomplete="off" ng-model="cdrDsArtItemHolder.item.trgtQty">
                             </div>
                         </div>
-                        <div class="col-lg-2" ng-hide="!cdrDsArtHolder.cdrDrctSales.origDsNbr" >
-                            <label class=" " for="returnedQty">{{cdrDrctSalesUtils.translations['CdrDsArtItem_returnedQty_description.title']}}</label>
-                            <div ng-class="{ 'has-error' : cdrDsArtItemSearchForm.returnedQty.$invalid }" >
-                                <input type="text" class="form-control" name="returnedQty" id="returnedQty" ng-required="{{cdrDsArtHolder.cdrDrctSales.origDsNbr.length > 0}}"  autocomplete="off" ng-model="cdrDsArtItemHolder.item.returnedQty">
-                            </div>
-                        </div>
+
                         <div class="col-lg-2">
-                            <label class=" " for="sppuPreTax">Prix Vente U</label>
-                            <input type="text" class="form-control" name="sppuPreTax"  value="{{cdrDsArtItemHolder.item.sppuPreTax}}" disabled id="sppuPreTax" autocomplete="off">
+                            <label class=" " for="slsUnitPrcPreTax">Prix Vente U</label>
+                            <input type="text" class="form-control" name="slsUnitPrcPreTax"  value="{{cdrDsArtItemHolder.item.slsUnitPrcPreTax}}" disabled id="slsUnitPrcPreTax" autocomplete="off">
                         </div>
                         <div class="col-lg-2">
                             <label class=" " for="sppuPreTax">Montant Brut Vente</label>
-                            <input type="text" class="form-control" name="sppuPreTax" value="{{parseInt(cdrDsArtItemHolder.item.sppuPreTax * cdrDsArtItemHolder.item.soldQty)==NaN?0:parseInt(cdrDsArtItemHolder.item.sppuPreTax * cdrDsArtItemHolder.item.soldQty)}}" disabled  id="sppuPreTax" autocomplete="off" >
+                            <input type="text" class="form-control" name="slsNetPrcPreTax" disabled ng-model="cdrDsArtItemHolder.item.slsNetPrcPreTax" id="slsNetPrcPreTax" autocomplete="off" >
                         </div>
                     </div>
                      
                     <div class="form-group">
                         <div class="col-lg-2">
-                            <label class=" " for="vatPct">{{cdrDrctSalesUtils.translations['CdrDsArtItem_vatPct_description.title']}}</label>
-                            <input type="text" class="form-control" name="vatPct" id="vatPct" autocomplete="off" ng-model="cdrDsArtItemHolder.item.vatPct">
+                            <label class=" " for="slsVatPct">{{cdrDrctSalesUtils.translations['CdrDsArtItem_vatPct_description.title']}}</label>
+                            <input type="number" class="form-control" name="slsVatPct" id="slsVatPct" autocomplete="off" ng-model="cdrDsArtItemHolder.item.slsVatPct">
                         </div>
                         <div class="col-lg-2">
-                            <label class=" " for="rebate">{{cdrDrctSalesUtils.translations['CdrDsArtItem_rebate_description.title']}}</label>
-                            <input type="text" class="form-control" name="rebate" id="rebate" autocomplete="off" ng-model="cdrDsArtItemHolder.item.rebate" numeric>
+                            <label class=" " for="slsRebateAmt">{{cdrDrctSalesUtils.translations['CdrDsArtItem_rebate_description.title']}}</label>
+                            <input type="number" class="form-control" name="slsRebateAmt" id="slsRebateAmt" autocomplete="off" ng-model="cdrDsArtItemHolder.item.slsRebateAmt" numeric>
                         </div>
                         <div class="col-lg-2">
-                            <label class=" " for="restockgFees">{{cdrDrctSalesUtils.translations['CdrDsArtItem_restockgFees_description.title']}}</label>
-                            <input type="text" class="form-control" name="restockgFees" id="restockgFees" autocomplete="off" ng-model="cdrDsArtItemHolder.item.restockgFees" numeric>
+                            <label class=" " for="slsRstckgUnitFeesPreTax">{{cdrDrctSalesUtils.translations['CdrDsArtItem_restockgFees_description.title']}}</label>
+                            <input type="number" class="form-control" name="slsRstckgUnitFeesPreTax" id="slsRstckgUnitFeesPreTax" autocomplete="off" ng-model="cdrDsArtItemHolder.item.slsRstckgUnitFeesPreTax" numeric>
                         </div>
                         <div class="col-lg-2">
                             <label class=" " for="maxStockQty">Qte. En stock</label>
@@ -62,14 +60,19 @@
                         </div>
                         <div class="col-lg-1">
                             <button ng-click="addItem()" ng-enter="addItem()" ng-disabled="cdrDsArtItemSearchForm.$invalid" class="btn btn-default " style="margin-top: 29px;">
-                                <i class="glyphicon glyphicon-check"></i>
+                                <i class="glyphicon glyphicon-plus"></i> Ajouter
                             </button>
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-lg-1">
+                            <button ng-click="clear()"  class="btn btn-default " style="margin-top: 29px;">
+                                <i class="glyphicon glyphicon-trash"></i> Effacer
+                            </button>
+                        </div>
+                        <!--<div class="col-lg-2">
                             <button  ng-click="fetchCatalArticles()" class="btn btn-default " style="margin-top: 29px;" >
                                 <i class="glyphicon glyphicon-search"></i> {{cdrDrctSalesUtils.translations['Entity_search.title']}} Articles
                             </button>
-                        </div>
+                        </div>-->
                    </div>
 
                 </form>
@@ -81,11 +84,11 @@
         <div class="row">
 
                 <div class="row">
-                    <span class="col-lg-3" style="font-size:17px;">{{cdrDrctSalesUtils.translations['CdrDrctSales_netSPPreTax_description.title']}}: </span>
-                    <span class="col-lg-2" price-style="price-style">{{cdrDsArtHolder.cdrDrctSales.netSPPreTax}}</span>
+                    <span class="col-lg-2" style="font-size:17px;">{{cdrDrctSalesUtils.translations['CdrDrctSales_netSPPreTax_description.title']}}: </span>
+                    <span class="col-lg-1" price-style="price-style">{{cdrDsArtHolder.cdrDrctSales.slsNetPrcPreTax | number:0}}</span>
                     <span class="col-lg-2">
                     	<label>{{cdrDrctSalesUtils.translations['CdrDrctSales_pymtDscntPct_description.title']}} :</label>
-                    	<input price-black="price-black" ng-change="pymtDscntPctChanged()" type="text" ng-model="cdrDsArtHolder.cdrDrctSales.pymtDscntPct" class="form-control"  />
+                    	<input price-black="price-black" ng-change="pymtDscntPctChanged()" type="text" ng-model="cdrDsArtHolder.cdrDrctSales.slsPymtDscntPct" class="form-control"  />
                     </span>
                     <span class="col-lg-2 form">
                     	<label>{{cdrDrctSalesUtils.translations['CdrDrctSales_paidAmt_description.title']}} : </label>
@@ -95,22 +98,22 @@
                         <button ng-click="save()" ng-show="!showprint" class="btn btn-primary"><i class="glyphicon glyphicon-save" ></i> {{'Entity_save.title'|translate}}</button>
                         <!--<button ng-click=""  style="margin-top: 23px;" class="btn">{{commonTranslations.translations['Entity_save.title']}}</button>
                         <button ng-click="recompute()"  style="margin-top: 23px;" class="btn">{{cdrDrctSalesUtils.translations['Entity_recompute.title']}}</button>-->
-                        <a class="btn-default btn" ng-click="cancel()"><i class="glyphicon glyphicon-plus" ></i> Nouvelle vente</a>
+                        <button class="btn-default btn" ng-click="cancel()"><i class="glyphicon glyphicon-plus" ></i> Nouvelle vente</button>
                     </div>
                 </div>
 
                 <div class="row">
-                    <span class="col-lg-3" style="font-size:17px;">{{cdrDrctSalesUtils.translations['CdrDrctSales_vatAmount_description.title']}}: </span>
-                    <span class="col-lg-2" price-style="price-style">{{cdrDsArtHolder.cdrDrctSales.vatAmount}}</span>
+                    <span class="col-lg-2" style="font-size:17px;">{{cdrDrctSalesUtils.translations['CdrDrctSales_vatAmount_description.title']}}: </span>
+                    <span class="col-lg-1" price-style="price-style">{{cdrDsArtHolder.cdrDrctSales.slsVatAmt | number:0}}</span>
                     
                 </div>
 
                 <div class="row">
-                    <span class="col-lg-3" style="font-size:17px;">{{cdrDrctSalesUtils.translations['CdrDrctSales_netSPTaxIncl_description.title']}}: </span>
-                    <span class="col-lg-2" price-style="price-style">{{cdrDsArtHolder.cdrDrctSales.netSPTaxIncl}}</span>
+                    <span class="col-lg-2" style="font-size:17px;">{{cdrDrctSalesUtils.translations['CdrDrctSales_netSPTaxIncl_description.title']}}: </span>
+                    <span class="col-lg-1" price-style="price-style">{{cdrDsArtHolder.cdrDrctSales.slsNetPrcTaxIncl | number:0}}</span>
                     <span class="col-lg-2">
-                    	<label>{{cdrDrctSalesUtils.translations['CdrDrctSales_pymtDscntAmt_description.title']}} :</label>
-                    	<input type="text" price-black="price-black" ng-change="pymtDscntAmtChanged()" class="form-control" ng-model="cdrDsArtHolder.cdrDrctSales.pymtDscntAmt" numeric />
+                    	<label>{{cdrDrctSalesUtils.translations['CdrDrctSales_pymtDscntAmt_description.title']}}</label>
+                    	<input type="text" price-black="price-black" ng-change="pymtDscntAmtChanged()" class="form-control" ng-model="cdrDsArtHolder.cdrDrctSales.slsPymtDscntAmt" numeric />
                     </span>
                     <span class="col-lg-2">
                     	<label>{{cdrDrctSalesUtils.translations['CdrDrctSales_changeAmt_description.title']}} :</label>
@@ -125,16 +128,13 @@
                 </div>
 
                 <div class="row">
-                    <span class="col-lg-3" style="font-size:17px;">{{cdrDrctSalesUtils.translations['CdrDrctSales_netAmtToPay_description.title']}}: </span>
-                    <span class="col-lg-2" price-red="price-red">{{cdrDsArtHolder.cdrDrctSales.netAmtToPay}}</span>
-                  	<div class="col-lg-2">
-                        <select class="form-control" ng-model="cur" ng-options="cur for cur in conversionPrice.currency"></select>
-                    </div>
-                     <span class="col-lg-3 col-lg-offset-2">
+                    <span class="col-lg-2" style="font-size:17px;">{{cdrDrctSalesUtils.translations['CdrDrctSales_netAmtToPay_description.title']}}: </span>
+                    <span class="col-lg-2" price-red="price-red"><b>{{cdrDsArtHolder.cdrDrctSales.slsNetAmtToPay | number:0}}</b></span>
+                     <!--<span class="col-lg-3 col-lg-offset-2">
                         <div class="alert alert-danger" ng-show="error" role="alert">
 					        <strong>Warning!</strong> {{error}}
 					    </div>
-                    </span>
+                    </span>-->
                 </div>
 
         </div>
@@ -153,13 +153,15 @@
                         <th class="clo-lg-1">{{cdrDrctSalesUtils.translations['CdrDsArtItem_lotPic_description.title']}}</th>
                         <th class="clo-lg-1">{{cdrDrctSalesUtils.translations['CdrDsArtItem_soldQty_description.title']}}</th>
                         <th class="clo-lg-1">{{cdrDrctSalesUtils.translations['CdrDsArtItem_sppuPreTax_description.title']}}</th>
-                        <th class="col-lg-1">{{cdrDrctSalesUtils.translations['CdrDsArtItem_netSPPreTax_description.title']}}</th>
-                        <th class="col-lg-1">{{cdrDrctSalesUtils.translations['CdrDsArtItem_vatPct_description.title']}}</th>
                         <th class="col-lg-1">{{cdrDrctSalesUtils.translations['CdrDsArtItem_rebate_description.title']}}</th>
                         <th class="col-lg-1">{{cdrDrctSalesUtils.translations['CdrDsArtItem_restockgFees_description.title']}}</th>
+                        <th class="col-lg-1">{{cdrDrctSalesUtils.translations['CdrDsArtItem_netSPPreTax_description.title']}}</th>
+                        <th class="col-lg-1">{{cdrDrctSalesUtils.translations['CdrDsArtItem_vatPct_description.title']}}</th>
                         <th class="col-lg-1">{{cdrDrctSalesUtils.translations['CdrDsArtItem_vatAmount_description.title']}}</th>
                         <th class="col-lg-1">{{cdrDrctSalesUtils.translations['CdrDsArtItem_netSPTaxIncl_description.title']}}</th>
                         <th class="col-lg-1">{{cdrDrctSalesUtils.translations['CdrDsArtItem_sppuCur_description.title']}}</th>
+                        <th>
+                        </th>
                         <th>
                         </th>
                     </tr>
@@ -169,15 +171,15 @@
                         <td>{{cdrDsArtItem.artName}}</td>
                         <td>{{cdrDsArtItem.item.artPic}}</td>
                         <td>{{cdrDsArtItem.item.lotPic}}</td>
-                        <td>{{cdrDsArtItem.item.soldQty}}</td>
-                        <td>{{cdrDsArtItem.item.sppuPreTax}}</td>
-                        <td>{{cdrDsArtItem.item.netSPPreTax}}</td>
-                        <td>{{cdrDsArtItem.item.vatPct}}</td>
-                        <td>{{cdrDsArtItem.item.rebate}}</td>
-                        <td>{{cdrDsArtItem.item.restockgFees}}</td>
-                        <td>{{cdrDsArtItem.item.vatAmount}}</td>
-                        <td>{{cdrDsArtItem.item.netSPTaxIncl}}</td>
-                        <td>{{cdrDsArtItem.item.sppuCur}}</td>
+                        <td>{{cdrDsArtItem.item.trgtQty}}</td>
+                        <td>{{cdrDsArtItem.item.slsUnitPrcPreTax}}</td>
+                        <td>{{cdrDsArtItem.item.slsRebateAmt}}</td>
+                        <td>{{cdrDsArtItem.item.slsRstckgFeesPreTax}}</td>
+                        <td>{{cdrDsArtItem.item.slsNetPrcPreTax}}</td>
+                        <td>{{cdrDsArtItem.item.slsVatPct}}</td>
+                        <td>{{cdrDsArtItem.item.slsVatAmt}}</td>
+                        <td>{{cdrDsArtItem.item.slsNetPrcTaxIncl}}</td>
+                        <td>{{cdrDsArtItem.item.slsUnitPrcCur}}</td>
                         <td><button class="" ng-show="!showprint" ng-click="editItem($index)"><i class="glyphicon glyphicon-edit"></i></button></td>
                         <td><button class="" ng-show="!showprint" ng-click="deleteItem($index)"><i class="glyphicon glyphicon-trash"></i></button></td>
                     </tr>

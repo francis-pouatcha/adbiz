@@ -39,6 +39,7 @@ public class CdrCshDrawerManager {
 
 			cshDrawer.setCashier(loginName);
 			cshDrawer.setCdrNbr(sequence);
+			cshDrawer.setIdentif(sequence);
 			if(cshDrawer.getInitialAmt() == null || cshDrawer.getInitialAmt().intValueExact() < 0) {
 				cshDrawer.setInitialAmt(INITIAL_AMT);   
 			}

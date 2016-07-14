@@ -23,6 +23,7 @@ public class CdrPymntItemEJB extends CoreAbstIdentifiedEJB<CdrPymntItem>{
 		if (StringUtils.isBlank(entity.getPymntDocNbr())) {
 			entity.setPymntDocNbr(SequenceGenerator
 					.getSequence(SequenceGenerator.PAYMENT_SEQUENCE_PREFIX));
+			entity.setIdentif(entity.getPymntDocNbr());
 		}
 		entity.setPymntDt(new Date());
 

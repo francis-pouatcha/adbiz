@@ -57,7 +57,6 @@
                         <a class="btn btn-primary pull-right margBott10" ng-click="openCreateForm();">
                             <i class="glyphicon-plus"></i> {{cdrCshDrawerUtils.translations['Entity_create.title']}}
                         </a>
-
                     </div>
                     <div class="table-overflow-middle row">
                         <table class="table table-bordered  table-striped pointer-element" >
@@ -84,7 +83,7 @@
                                 <td>{{cdrCshDrawer.cdrNbr}}</td>
                                 <td>{{cdrCshDrawer.closedBy}}</td>
                                 <td>{{cdrCshDrawer.clsngDt | date:'yyyy-MM-dd HH:mm'}}</td>
-                                <td>{{cdrCshDrawer.initialAmt  | currencyAccounting:"XAF":"4"}}</td>
+                                <td>{{cdrCshDrawer.initialAmt}}</td>
                                 <td>{{cdrCshDrawer.opngDt | date:'yyyy-MM-dd HH:mm'}}</td>
                                <!-- <td>{{cdrCshDrawer.ttlCashIn}}</td>
                                 <td>{{cdrCshDrawer.ttlCashOut}}</td>
