@@ -66,6 +66,12 @@ public class CdrStkMvntCreateExecTask extends CoreAbstEntityJobExecutor<CdrJob, 
 			for (CdrDrctSalesItem item : list) {
 				StkMvnt stkMvnt = new StkMvnt();
 				item.copyTo(stkMvnt);
+				
+				// Suggestion Francis 19.07.2016: negate the item quantities in the stock movement
+				// and reevaluate.
+				stkMvnt.negate();
+				stkMvnt.evlte();
+				
 				stkMvnt.setCntnrIdentif(item.getCntnrIdentif());
 				stkMvnt.setValueDt(hstry.getHstryDt());
 				stkMvnt.setOrigDocNbrs(drtSale.getIdentif());

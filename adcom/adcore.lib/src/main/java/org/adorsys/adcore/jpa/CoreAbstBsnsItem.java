@@ -1106,6 +1106,74 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 		this.stredCostPreTax = BigDecimalUtils.zeroIfNull(this.stredCostPreTax);
 	}
 	
+	public void negate(){
+		normalize();
+		this.expectedQty = BigDecimalUtils.negate(this.expectedQty);
+		this.asseccedQty = BigDecimalUtils.negate(this.asseccedQty);
+		
+		this.trgtQty = BigDecimalUtils.negate(this.trgtQty);
+		
+//		this.qtyAfter = BigDecimalUtils.zeroIfNull(this.qtyAfter);
+//		this.qtyBefore = BigDecimalUtils.zeroIfNull(this.qtyBefore);
+//		this.prchVatPct=BigDecimalUtils.zeroIfNull(this.prchVatPct);
+//		this.prchVatAmt=BigDecimalUtils.zeroIfNull(this.prchVatAmt);
+//		this.prchUnitPrcPreTax = BigDecimalUtils.zeroIfNull(this.prchUnitPrcPreTax);
+//		this.prchRebatePct=BigDecimalUtils.zeroIfNull(this.prchRebatePct);
+//		this.prchRebateAmt = BigDecimalUtils.zeroIfNull(this.prchRebateAmt);
+//		this.prchVatUnitAmt = FinancialOps.amtFromPrct(this.prchUnitPrcPreTax, this.prchVatPct, this.prchUnitPrcCur);
+//		this.prchUnitPrcTaxIncl = FinancialOps.add(this.prchUnitPrcPreTax, this.prchVatUnitAmt, this.prchUnitPrcCur);
+//		if(this.prchRstckgFeesType==null){
+//			if(!BigDecimalUtils.isNullOrZero(this.prchRstckgFeesPrct)){
+//				this.prchRstckgFeesType=CoreRstkgFeesType.PERCENT_OF_UNIT;
+//			} else if (!BigDecimalUtils.isNullOrZero(this.prchRstckgUnitFeesPreTax)){
+//				this.prchRstckgFeesType=CoreRstkgFeesType.AMOUNT_PER_UNIT;
+//			} else {
+//				this.prchRstckgFeesType=CoreRstkgFeesType.PERCENT_OF_UNIT;
+//			}
+//		}
+//		this.prchRstckgFeesPrct=BigDecimalUtils.zeroIfNull(this.prchRstckgFeesPrct);
+//		this.prchRstckgUnitFeesPreTax=BigDecimalUtils.zeroIfNull(this.prchRstckgUnitFeesPreTax);
+//		if(CoreRstkgFeesType.PERCENT_OF_UNIT.equals(this.prchRstckgFeesType)){
+//			this.prchRstckgUnitFeesPreTax = FinancialOps.amtFromPrct(this.prchUnitPrcPreTax, this.prchRstckgFeesPrct, this.prchUnitPrcCur);
+//		} else {
+//			this.prchRstckgFeesPrct = FinancialOps.prctFromAmt(this.prchUnitPrcPreTax, this.prchRstckgUnitFeesPreTax, this.prchUnitPrcCur);
+//		}
+//
+//		this.slsVatPct=BigDecimalUtils.zeroIfNull(this.slsVatPct);
+//		this.prchVatAmt=BigDecimalUtils.zeroIfNull(this.prchVatAmt);
+//		this.slsUnitPrcPreTax = BigDecimalUtils.zeroIfNull(this.slsUnitPrcPreTax);
+//		this.slsRebatePct=BigDecimalUtils.zeroIfNull(this.slsRebatePct);
+//		this.slsRebateAmt = BigDecimalUtils.zeroIfNull(this.slsRebateAmt);
+//		this.slsVatUnitAmt = FinancialOps.amtFromPrct(this.slsUnitPrcPreTax, this.slsVatPct, this.slsUnitPrcCur);
+//		this.slsUnitPrcTaxIncl = FinancialOps.add(this.slsUnitPrcPreTax, this.slsVatUnitAmt, this.slsUnitPrcCur);
+//		
+//		if(this.slsRstckgFeesType==null){
+//			if(!BigDecimalUtils.isNullOrZero(this.slsRstckgFeesPrct)){
+//				this.slsRstckgFeesType=CoreRstkgFeesType.PERCENT_OF_UNIT;
+//			} else if (!BigDecimalUtils.isNullOrZero(this.slsRstckgUnitFeesPreTax)){
+//				this.slsRstckgFeesType=CoreRstkgFeesType.AMOUNT_PER_UNIT;
+//			} else {
+//				this.slsRstckgFeesType=CoreRstkgFeesType.PERCENT_OF_UNIT;
+//			}
+//		}
+//		this.slsRstckgFeesPrct=BigDecimalUtils.zeroIfNull(this.slsRstckgFeesPrct);
+//		this.slsRstckgUnitFeesPreTax=BigDecimalUtils.zeroIfNull(this.slsRstckgUnitFeesPreTax);
+//		if(CoreRstkgFeesType.PERCENT_OF_UNIT.equals(this.slsRstckgFeesType)){
+//			this.slsRstckgUnitFeesPreTax = FinancialOps.amtFromPrct(this.slsUnitPrcPreTax, this.slsRstckgFeesPrct, this.slsUnitPrcCur);
+//		} else {
+//			this.slsRstckgFeesPrct = FinancialOps.prctFromAmt(this.slsUnitPrcPreTax, this.slsRstckgUnitFeesPreTax, this.slsUnitPrcCur);
+//		}
+//
+//		this.stkUnitValPreTax = BigDecimalUtils.zeroIfNull(this.stkUnitValPreTax);
+//		this.stkValPreTax = BigDecimalUtils.zeroIfNull(this.stkValPreTax);
+//
+//		this.acqrdCostPuPreTax = BigDecimalUtils.zeroIfNull(this.acqrdCostPuPreTax);
+//		this.acqrdCostPreTax = BigDecimalUtils.zeroIfNull(this.acqrdCostPreTax);
+//		
+//		this.stredCostPuPreTax = BigDecimalUtils.zeroIfNull(this.stredCostPuPreTax);
+//		this.stredCostPreTax = BigDecimalUtils.zeroIfNull(this.stredCostPreTax);
+	}	
+	
 	protected void computeSlsNetPrcTaxIncl() {
 		if(CoreAmtOrPct.PERCENT.equals(getSlsRebateType())){
 			this.slsRebatePct = FinancialOps.amtFromPrct(this.slsGrossPrcPreTax, this.slsRebatePct, this.slsUnitPrcCur);
