@@ -17,6 +17,7 @@ angular.module('adcshdwr')
             service.catalarticlesfeatmappingsUrlBase = '/adcatal.server/rest/catalartfeatmappings';
             service.stkArtLotUrlBase = '/adstock.server/rest/stkarticlelots';
             service.stkArtlot2strgsctnsUrlBase = '/adstock.server/rest/stkarticlelot2strgsctns';
+            service.stkLotStockQtyUrl = '/adstock.server/rest/stkartstockqtys';
             service.pymtItemUrl='/adcshdwr.server/rest/cdrpymntitems';
             service.cdrPymtUrl='/adcshdwr.server/rest/cdrpymnts';
 
@@ -138,6 +139,13 @@ angular.module('adcshdwr')
                     });
             };
 
+            service.loadAStkLotStockQtyByPic = function (lotPic) {
+                return genericResource.findByLike(service.stkLotStockQtyUrl, 'lotPic', lotPic)
+                    .then(function (entitySearchResult) {
+                        return entitySearchResult.resultList;
+                    });
+            };
+
             service.loadArticleLotByArtPic = function (artPic) {
                 return genericResource.findByLikePromissed(service.stkArtLotUrlBase, 'artPic', artPic)
                     .then(function (entitySearchResult) {
@@ -160,8 +168,14 @@ angular.module('adcshdwr')
                     .then(function (resultList) {
                         return parseArticleSearchResult1(resultList);
                     });
+            };
 
-
+            service.loadArticlesLotQtyByLotPic = function (lotPic) {
+                lotPic=lotPic.toUpperCase();
+                return  genericResource.getWithPromise(service.stkArtLotUrlBase+"/findbylotpic/"+lotPic)
+                    .then(function (resultList) {
+                        return parseArticleSearchResult1(resultList);
+                    });
             };
 
 
@@ -169,14 +183,10 @@ angular.module('adcshdwr')
                 var displayDatas = [];
                 for	(var index = 0; index < resultList.length; index++) {
                     var item = resultList[index];
-                    if(!item.artName){
-                        var catalArticles = service.loadArticlesByPic(item.artPic);
-                        item.artName=catalArticles[0].artName;
-                    }
 
+                    if(angular.isUndefined(item)) continue;
                     var displayable = {};
                     var displayableStr = "";
-
                     displayableStr = item.artPic;
                     displayableStr += " - "+item.artName;
                     displayableStr += " - lot (" + item.lotPic + ")";
@@ -204,12 +214,8 @@ angular.module('adcshdwr')
             function parseArticleSearchResult1(resultList){
                 var displayDatas = [];
                 for	(var index = 0; index < resultList.length; index++) {
-                    var item = resultList[index][0];
-                    if(!item.artName){
-                        var catalArticles = service.loadArticlesByPic(item.artPic);
-                        item.artName=catalArticles[0].artName;
-                    }
-
+                    var item = resultList[index];
+                    if(angular.isUndefined(item)) continue;
                     var displayable = {};
                     var displayableStr = "";
 

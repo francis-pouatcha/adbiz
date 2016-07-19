@@ -15,7 +15,7 @@
                         <div class="col-lg-2">
                             <label class=" " for="searchArtPic">{{cdrDrctSalesUtils.translations['CdrDsArtItem_lotPic_description.title']}}</label>
                             <div ng-class="{ 'has-error' : cdrDsArtItemSearchForm.searchArtPic.$invalid }" >
-                                <input type="text" class="form-control" select-on-click focus  name="searchArtPic" id="searchArtPic" required autocomplete="off" ng-model="cdrDsArtItemHolder.item.lotPic" typeahead="displayable as displayable.displayableStr for displayable in cdrDrctSalesUtils.loadArticleLotByPic($viewValue)" typeahead-loading="loading" typeahead-on-select='onArticleSelectedInSearch($item, $model, $label)'>
+                                <input type="text" class="form-control" select-on-click focus  name="searchArtPic" id="searchArtPic" style="text-transform:uppercase" required autocomplete="off" ng-model="cdrDsArtItemHolder.item.lotPic" typeahead="displayable as displayable.displayableStr for displayable in cdrDrctSalesUtils.loadArticlesLotQtyByLotPic($viewValue)" typeahead-loading="loading" typeahead-on-select='onArticleSelectedInSearch($item, $model, $label)'>
                             </div>
                          </div>
                         <div class="col-lg-3">

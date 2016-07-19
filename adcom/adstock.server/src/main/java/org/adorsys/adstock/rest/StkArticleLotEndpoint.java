@@ -76,4 +76,12 @@ public class StkArticleLotEndpoint extends CoreAbstBsnsItemEndpoint<StkArticleLo
 		return Response.ok(list).build();
 	}
 	
+	@GET
+	@Path("/findbylotpic/{lotPic}")
+	@Produces({ "application/json", "application/xml" })
+	public Response findStkArticeLotByLotPic(@PathParam("lotPic") String lotPic) {
+		List<StkArticleLot> list = ejb.findStkArticeLotByLotPic(lotPic);
+		return Response.ok(list).build();
+	}
+	
 }
