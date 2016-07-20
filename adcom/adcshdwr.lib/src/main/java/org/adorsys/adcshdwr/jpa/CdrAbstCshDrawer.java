@@ -49,35 +49,35 @@ public abstract class CdrAbstCshDrawer extends CoreAbstIdentifObject {
 
 	@Column
 	@Description("CdrCshDrawer_initialAmt_description")
-	private BigDecimal initialAmt;
+	private BigDecimal initialAmt=BigDecimal.ZERO;;
 
 	@Column
 	@Description("CdrCshDrawer_ttlCashIn_description")
-	private BigDecimal ttlCashIn;
+	private BigDecimal ttlCashIn=BigDecimal.ZERO;
 
 	@Column
 	@Description("CdrCshDrawer_ttlCashOut_description")
-	private BigDecimal ttlCashOut;
+	private BigDecimal ttlCashOut=BigDecimal.ZERO;;
 
 	@Column
 	@Description("CdrCshDrawer_ttlCash_description")
-	private BigDecimal ttlCash;
+	private BigDecimal ttlCash=BigDecimal.ZERO;;
 
 	@Column
 	@Description("CdrCshDrawer_ttlCheck_description")
-	private BigDecimal ttlCheck;
+	private BigDecimal ttlCheck=BigDecimal.ZERO;;
 
 	@Column
 	@Description("CdrCshDrawer_ttlCredCard_description")
-	private BigDecimal ttlCredCard;
+	private BigDecimal ttlCredCard=BigDecimal.ZERO;;
 
 	@Column
 	@Description("CdrCshDrawer_ttlVchrIn_description")
-	private BigDecimal ttlVchrIn;
+	private BigDecimal ttlVchrIn=BigDecimal.ZERO;;
 
 	@Column
 	@Description("CdrCshDrawer_ttlVchrOut_description")
-	private BigDecimal ttlVchrOut;
+	private BigDecimal ttlVchrOut=BigDecimal.ZERO;;
 	
 	public String getCdrNbr() {
 		return this.cdrNbr;

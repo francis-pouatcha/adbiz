@@ -166,7 +166,7 @@ angular.module('adcshdwr')
 
                 return  genericResource.getWithPromise(service.stkArtLotUrlBase+"/findbyartname/"+artName)
                     .then(function (resultList) {
-                        return parseArticleSearchResult1(resultList);
+                        return parseArticleSearchResult(resultList);
                     });
             };
 
@@ -174,7 +174,7 @@ angular.module('adcshdwr')
                 lotPic=lotPic.toUpperCase();
                 return  genericResource.getWithPromise(service.stkArtLotUrlBase+"/findbylotpic/"+lotPic)
                     .then(function (resultList) {
-                        return parseArticleSearchResult1(resultList);
+                        return parseArticleSearchResult(resultList);
                     });
             };
 
@@ -187,38 +187,6 @@ angular.module('adcshdwr')
                     if(angular.isUndefined(item)) continue;
                     var displayable = {};
                     var displayableStr = "";
-                    displayableStr = item.artPic;
-                    displayableStr += " - "+item.artName;
-                    displayableStr += " - lot (" + item.lotPic + ")";
-                    displayableStr += " - section (" + item.section + ")";
-                    displayableStr += "- Qte (" + item.trgtQty + ")";
-                    displayableStr += " - puv (" + item.slsNetPrcTaxIncl +" "+item.slsUnitPrcCur+")";
-
-                    if(angular.isDefined(item.expirDt) && item.expirDt){
-                        displayableStr += " - dtExpir (" + dateFilter(item.expirDt, 'dd.MM.yyyy') + ")";
-                    }
-
-                    if(angular.isDefined(item.stkgDt) && item.stkgDt){
-                        displayableStr += " - dtStkg (" + dateFilter(item.stkgDt, 'dd.MM.yyyy') + ")";
-                    }
-
-
-                    displayable=item;
-                    displayable.displayableStr = displayableStr;
-
-                    displayDatas.push(displayable);
-                }
-                return displayDatas;
-            }
-
-            function parseArticleSearchResult1(resultList){
-                var displayDatas = [];
-                for	(var index = 0; index < resultList.length; index++) {
-                    var item = resultList[index];
-                    if(angular.isUndefined(item)) continue;
-                    var displayable = {};
-                    var displayableStr = "";
-
                     displayableStr = item.artPic;
                     displayableStr += " - "+item.artName;
                     displayableStr += " - lot (" + item.lotPic + ")";
@@ -498,8 +466,8 @@ angular.module('adcshdwr')
 
             function openCreateForm() {}
         }])
-    .controller('cdrDrctSalesCreateCtlr', ['$scope', 'cdrDrctSalesUtils', 'fileExtractor', '$translate', 'genericResource', '$location', 'cdrDrctSalesState', '$modal', '$http','$stateParams','cdrCshDrawerUtils','$q','$filter',
-        function ($scope, cdrDrctSalesUtils, fileExtractor, $translate, genericResource, $location, cdrDrctSalesState, $modal, $http,$stateParams,cdrCshDrawerUtils,$q,$filter) {
+    .controller('cdrDrctSalesCreateCtlr', ['$scope', 'cdrDrctSalesUtils', 'fileExtractor', '$translate', 'genericResource', '$location', 'cdrDrctSalesState', '$modal', '$http','$stateParams','cdrCshDrawerUtils','$q','$filter','logger',
+        function ($scope, cdrDrctSalesUtils, fileExtractor, $translate, genericResource, $location, cdrDrctSalesState, $modal, $http,$stateParams,cdrCshDrawerUtils,$q,$filter,logger) {
             $scope.cdrCshDrawer = {
                 cdrDrctSales: {}
             };
@@ -523,7 +491,8 @@ angular.module('adcshdwr')
                     if (result) {
                         cdrNber = result.identif;
                     } else {
-                        $location.path("/")
+                        $location.path("/");
+                        logger.warning("Ouvrez une caisse, avant de procéder a la vente.", {}, "Pas de caisse active!")
                     }
                 });
 

@@ -68,11 +68,12 @@
                                 <th>{{cdrCshDrawerUtils.translations['CdrCshDrawer_clsngDt_description.title']}}</th>
                                 <th>{{cdrCshDrawerUtils.translations['CdrCshDrawer_initialAmt_description.title']}}</th>
                                 <th>{{cdrCshDrawerUtils.translations['CdrCshDrawer_opngDt_description.title']}}</th>
-                               <!-- <th>{{cdrCshDrawerUtils.translations['CdrCshDrawer_ttlCashIn_description.title']}}</th>
-                                <th>{{cdrCshDrawerUtils.translations['CdrCshDrawer_ttlCashOut_description.title']}}</th>
+                                <th>{{cdrCshDrawerUtils.translations['CdrCshDrawer_ttlCashIn_description.title']}}</th>
                                 <th>{{cdrCshDrawerUtils.translations['CdrCshDrawer_ttlCash_description.title']}}</th>
                                 <th>{{cdrCshDrawerUtils.translations['CdrCshDrawer_ttlCheck_description.title']}}</th>
                                 <th>{{cdrCshDrawerUtils.translations['CdrCshDrawer_ttlCredCard_description.title']}}</th>
+                                <!--
+                                <th>{{cdrCshDrawerUtils.translations['CdrCshDrawer_ttlCashOut_description.title']}}</th>
                                 <th>{{cdrCshDrawerUtils.translations['CdrCshDrawer_ttlVchrIn_description.title']}}</th>
                                 <th>{{cdrCshDrawerUtils.translations['CdrCshDrawer_ttlVchrOut_description.title']}}</th>-->
                                 <th></th>
@@ -85,14 +86,15 @@
                                 <td>{{cdrCshDrawer.clsngDt | date:'yyyy-MM-dd HH:mm'}}</td>
                                 <td>{{cdrCshDrawer.initialAmt}}</td>
                                 <td>{{cdrCshDrawer.opngDt | date:'yyyy-MM-dd HH:mm'}}</td>
-                               <!-- <td>{{cdrCshDrawer.ttlCashIn}}</td>
-                                <td>{{cdrCshDrawer.ttlCashOut}}</td>
+                               <td>{{cdrCshDrawer.ttlCashIn}}</td>
                                 <td>{{cdrCshDrawer.ttlCash}}</td>
                                 <td>{{cdrCshDrawer.ttlCheck}}</td>
                                 <td>{{cdrCshDrawer.ttlCredCard}}</td>
-                                <td>{{cdrCshDrawer.ttlVchrIn}}</td>
-                                <td>{{cdrCshDrawer.ttlVchrOut  | currencyAccounting:"XAF":"4"}}</td>
-                                -->
+                                <!--
+                                <td>{{cdrCshDrawer.ttlCashOut}}</td>
+                               <td>{{cdrCshDrawer.ttlVchrIn}}</td>
+                               <td>{{cdrCshDrawer.ttlVchrOut  | currencyAccounting:"XAF":"4"}}</td>
+                               -->
                                 <td><a href="#/CdrCshDrawers/show/{{cdrCshDrawer.id}}" ><i class="glyphicon glyphicon-eye-open"></i></a></td>
                                  
                             </tr>

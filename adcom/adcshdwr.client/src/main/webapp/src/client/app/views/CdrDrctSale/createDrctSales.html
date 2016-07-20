@@ -173,12 +173,12 @@
                         <td>{{cdrDsArtItem.item.lotPic}}</td>
                         <td>{{cdrDsArtItem.item.trgtQty}}</td>
                         <td>{{cdrDsArtItem.item.slsUnitPrcPreTax}}</td>
-                        <td>{{cdrDsArtItem.item.slsRebateAmt}}</td>
+                        <td>{{cdrDsArtItem.item.slsRebateAmt | number:0}}</td>
                         <td>{{cdrDsArtItem.item.slsRstckgFeesPreTax}}</td>
-                        <td>{{cdrDsArtItem.item.slsNetPrcPreTax}}</td>
+                        <td>{{cdrDsArtItem.item.slsNetPrcPreTax | number:0}}</td>
                         <td>{{cdrDsArtItem.item.slsVatPct}}</td>
-                        <td>{{cdrDsArtItem.item.slsVatAmt}}</td>
-                        <td>{{cdrDsArtItem.item.slsNetPrcTaxIncl}}</td>
+                        <td>{{cdrDsArtItem.item.slsVatAmt | number:0}}</td>
+                        <td>{{cdrDsArtItem.item.slsNetPrcTaxIncl | number:0}}</td>
                         <td>{{cdrDsArtItem.item.slsUnitPrcCur}}</td>
                         <td><button class="" ng-show="!showprint" ng-click="editItem($index)"><i class="glyphicon glyphicon-edit"></i></button></td>
                         <td><button class="" ng-show="!showprint" ng-click="deleteItem($index)"><i class="glyphicon glyphicon-trash"></i></button></td>
