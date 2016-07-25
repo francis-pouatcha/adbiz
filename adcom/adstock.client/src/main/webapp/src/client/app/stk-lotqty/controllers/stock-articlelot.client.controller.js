@@ -3,26 +3,26 @@
 
     angular
         .module('app.stkLotStockQty')
-        .controller('StockArticlelotController', StockArticlelotController);
+        .controller('StockArticlelotQtyController', StockArticlelotQtyController);
 
-    StockArticlelotController.$inject = ['logger',
+    StockArticlelotQtyController.$inject = ['logger',
         '$stateParams',
         '$location',
-        'StockArticlelot',
+        'StockArticlelotQty',
         'TableSettings',
         'StockArticlelotForm',
         'utils',
-        'StkSection',
+        'CatalArtLangMapping',
     'fileExtractor','$translate'];
     /* @ngInject */
-    function StockArticlelotController(logger,
+    function StockArticlelotQtyController(logger,
         $stateParams,
         $location,
-        StockArticlelot,
+        StockArticlelotQty,
         TableSettings,
         StockArticlelotForm,
         utils,
-        StkSection,
+        CatalArtLangMapping,
         fileExtractor,$translate) {
 
         var vm = this;
@@ -52,7 +52,7 @@
         vm.create = function() {
 
             // Create new StockArticlelot object
-            var stockArticlelot = new StockArticlelot(vm.stockArticlelot);
+            var stockArticlelot = new StockArticlelotQty(vm.stockArticlelot);
             // Redirect after save
             stockArticlelot.$save(function(response) {
                 logger.success('StockArticlelot created');
@@ -65,7 +65,7 @@
         // Remove existing StockArticlelot
         vm.remove = function(stockArticlelot) {
             if (stockArticlelot) {
-                stockArticlelot = StockArticlelot.get({stockArticlelotId:stockArticlelot.id}, function() {
+                stockArticlelot = StockArticlelotQty.get({stockArticlelotId:stockArticlelot.id}, function() {
                     stockArticlelot.$remove(function() {
                         logger.success('StockArticlelot deleted');
                         vm.tableParams.reload();
@@ -92,7 +92,7 @@
         };
 
         vm.toViewStockArticlelot = function() {
-            vm.stockArticlelot = StockArticlelot.get({stockArticlelotId: $stateParams.stockArticlelotId});
+            vm.stockArticlelot = StockArticlelotQty.get({stockArticlelotId: $stateParams.stockArticlelotId});
             vm.setFormFields(true);
             vm.setTabsFormFields(true, vm.stockArticlelot);
 
@@ -100,17 +100,17 @@
             searchInput.className = 'org.adorsys.adstock.jpa.StkSectionSearchInput';
             searchInput.entity.identif = vm.stockArticlelot.section;
             searchInput.fieldNames.push('identif');
-            StkSection.findByLike(searchInput, function(response) {
+            /*StkSection.findByLike(searchInput, function(response) {
                     vm.stockArticlelot.section = response.resultList[0].name;
                 },
                 function(errorResponse) {
                     vm.error = errorResponse;
                     logger.warn(vm.error);
-                });
+                });*/
         };
 
         vm.toEditStockArticlelot = function() {
-            vm.stockArticlelot = StockArticlelot.get({stockArticlelotId: $stateParams.stockArticlelotId});
+            vm.stockArticlelot = StockArticlelotQty.get({stockArticlelotId: $stateParams.stockArticlelotId});
             vm.setFormFields(false);
         };
 
@@ -121,18 +121,18 @@
     	    var pagination = tableState.pagination;
     	    var start = pagination.start || 0, number = pagination.number || utils.searchInputInit().stPagination.number;
     	    processSearch(start, tableState.search);
-        	
-    	    StockArticlelot.findByLike(vm.searchInput, function(response) {
+
+            StockArticlelotQty.findByLike(vm.searchInput, function(response) {
                 vm.data.list = response.resultList;
                 tableState.pagination.numberOfPages = Math.ceil(response.count / number);
                 //copy the sections
                     var identifs = [];
                     angular.forEach(response.resultList, function(articleLot){
-                        this.push(articleLot.section);
+                        this.push(articleLot.cntnrIdentif);
                     }, identifs);
-                    StkSection.findByIdentifIn({"list":identifs, "start":0, "max":10, "langIso2":userLangIso2}, function(sections){
+                    CatalArtLangMapping.findByCntnrIdentifIn({"list":identifs, "start":0, "max":10, "langIso2":userLangIso2}, function(articlesLang){
                         angular.forEach(response.resultList, function(articleLot){
-                            buildArtLotDisplay(articleLot, sections.resultList);
+                            buildArtLotDisplay(articleLot, articlesLang.resultList);
                         }, this);
                     }, function(errorResponse2){
                         vm.error = errorResponse2.data.summary;
@@ -144,10 +144,10 @@
             });
         };
 
-        var buildArtLotDisplay = function(articleLot, sections){
-            angular.forEach(sections, function(section){
-                if(angular.equals(this.section, section.identif)){
-                    this.section=section.name;
+        var buildArtLotDisplay = function(articleLot, articlesLang){
+            angular.forEach(articlesLang, function(article){
+                if(angular.equals(this.cntnrIdentif, article.cntnrIdentif)){
+                    this.artName=article.artName;
                 }
             }, articleLot);
         };

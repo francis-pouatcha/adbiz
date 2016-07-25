@@ -130,7 +130,14 @@
                 "section_used":"Section already used in article lot!",
 
                 LANG_FR: 'French',
-                LANG_EN: 'English'
+                LANG_EN: 'English',
+
+                "StockArticlelot.prcdngStkQty.title":"Precedent Qty",
+                "StockArticlelot.stkMvntQty.title":"Mvnt Qty",
+                "StockArticlelot.stockQty.title":"Stock Qty",
+                "StockArticlelot.origProcs.title":"Origin Process",
+                "StockArticlelot.qtyDt.title":"Qty date"
+
             });
 
             //------------french----------------
@@ -257,7 +264,14 @@
                 "section_used":"Section deja utilise dans les lots d'articles",
 
             LANG_FR: 'Francais',
-                LANG_EN: 'Englais'
+                LANG_EN: 'Englais',
+
+
+                "StockArticlelot.prcdngStkQty.title":"Qte precedente",
+                "StockArticlelot.stkMvntQty.title":"Qte mouvemente",
+                "StockArticlelot.stockQty.title":"Qte en stock",
+                "StockArticlelot.origProcs.title":"Origine du processus",
+                "StockArticlelot.qtyDt.title":"Date"
             });
             $translateProvider.preferredLanguage('en');
         });

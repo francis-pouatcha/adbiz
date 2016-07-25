@@ -11,6 +11,7 @@
         $translate('StkSections.title').then(function(StkSections){
             routerHelper.configureStates(getStates(BASE_VIEW_STOCK, StkSections));
         });
+        console.log('configure section');
     }
 
     function getStates(BASE_VIEW_STOCK,StkSections) {
@@ -24,7 +25,7 @@
                     controllerAs: 'vm',
                     title: 'List StkSections',
                     settings: {
-                        nav: 3,
+                        nav: 4,
                         content: '<i class="fa fa-folder-open"></i> '+StkSections
                     }
                 }

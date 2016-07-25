@@ -3,11 +3,11 @@
 
     angular
         .module('app.stkLotStockQty')
-        .factory('StockArticlelot', StockArticlelot);
+        .factory('StockArticlelotQty', StockArticlelotQty);
 
-    StockArticlelot.$inject = ['$resource', 'API_BASE_ADSTOCK_URL'];
+    StockArticlelotQty.$inject = ['$resource', 'API_BASE_ADSTOCK_URL'];
     /* @ngInject */
-    function StockArticlelot($resource, API_BASE_ADSTOCK_URL) {
+    function StockArticlelotQty($resource, API_BASE_ADSTOCK_URL) {
 
         var params = {
             stockArticlelotId: '@id'
@@ -19,15 +19,15 @@
             },
             findCustom:{
                 method: 'POST',
-                url: API_BASE_ADSTOCK_URL + '/stkartstockqtys/findCustom'
+                url: API_BASE_ADSTOCK_URL + '/stklotstockqtys/findCustom'
             },
             findByLike:{
             	method: 'POST',
-            	url: API_BASE_ADSTOCK_URL + '/stkartstockqtys/findByLike'
+            	url: API_BASE_ADSTOCK_URL + '/stklotstockqtys/findByLike'
             },
             listAll:{
                 method: 'GET',
-                url: API_BASE_ADSTOCK_URL + '/stkartstockqtys',
+                url: API_BASE_ADSTOCK_URL + '/stklotstockqtys',
                 params:{
                     start: -1,
                     max: 20
@@ -35,7 +35,7 @@
             }
         };
 
-        var API_URL = API_BASE_ADSTOCK_URL + '/stkartstockqtys/:stockArticlelotId';
+        var API_URL = API_BASE_ADSTOCK_URL + '/stklotstockqtys/:stockArticlelotId';
 
         return $resource(API_URL, params, actions);
 
