@@ -143,7 +143,7 @@
                         </div>
                     </div>
                     <div class="form-group col-lg-2">
-                        <label class=" control-label" for="trgtQty"><span data-ng-bind="'PrcmtDlvryItem_freeQty_description.title' | translate"></span></label>
+                        <label class=" control-label" for="freeQty"><span data-ng-bind="'PrcmtDlvryItem_freeQty_description.title' | translate"></span></label>
                         <div data-ng-class="{ 'has-error' : procmtItemForm.freeQty.$invalid }">
                             <input type="text" class="form-control"  name="freeQty" id="freeQty"
                                    data-ng-model="searchInput.entity.freeQty">
@@ -160,8 +160,16 @@
                 <div class="row">
                     <div class="form-group col-lg-2">
                         <label class=" control-label" for="expirDt"><span data-ng-bind="'PrcmtDlvryItem_expirDt_description.title' | translate"></span></label>
-                        <input type="datetime" datetime data-ng-model="searchInput.entity.expirDt"  id="expirDt"
-                               name="expirDt" class="form-control">
+                        <div class="input-group">
+                            <input type="text" style="max-width:200px;" class="form-control" id="expirDt" name="expirDt"
+                                   data-datepicker-popup="dd-MM-yyyy" data-ng-model="searchInput.entity.expirDt"
+                                   data-is-open="dateConfig.expirDt.opened" data-show-button-bar="false" />
+			            <span class="input-group-btn">
+			                <button style="height:34px;" class="btn btn-default" data-ng-click="openDateComponent('expirDt', $event)">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+			            </span>
+                        </div>
                     </div>
                     <div class="form-group col-lg-2">
                         <label class=" control-label" for="prchNetPrcTaxIncl"><span data-ng-bind="'PrcmtDlvryItem_pppuPreTax_description.title' | translate"></span></label>
@@ -173,11 +181,11 @@
                         <input type="text" data-ng-model="searchInput.entity.slsNetPrcTaxIncl" id="slsNetPrcTaxIncl"
                                name="slsNetPrcTaxIncl" class="form-control">
                     </div>
-                    <div class="form-group col-lg-2">
+                    <div class="form-group col-lg-2" data-ng-class="{ 'has-error' : procmtItemForm.section.$invalid }">
                         <label class=" control-label" for="sectionCode"><span data-ng-bind="'PrcmtDlvryItem_section_description.title' | translate"></span></label>
                         <input type="text" data-ng-model="searchInput.entity.section" id="sectionCode" name="section"
                                class="form-control" required
-                               autocomplete="off"
+                               autocomplete="off" placeholder="ray-123"
                                typeahead="stkSection as (stkSection.identif + ' : ' + stkSection.name) for stkSection in prcmtUtils.loadStkSectionArticleLots($viewValue)"
                                typeahead-loading="loading" typeahead-min-length="4"
                                typeahead-on-select='onSectionSelectedInSearch($item, $model, $label)'>

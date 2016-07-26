@@ -146,6 +146,18 @@
 
         $scope.procmtChanged = procmtChangedFctn;
 
+        $scope.dateConfig = {
+            expirDt: {
+                opened : false
+            }
+        };
+
+        $scope.openDateComponent = function(componentId,$event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope.dateConfig[componentId].opened = true;
+        };
+
         function refreshDisplay(){
             $scope.procmtCopy = angular.copy($scope.procmt);
             $scope.procmtEditable = !prcmtOrderUtils.isInvtryPosted();
@@ -283,6 +295,7 @@
             procmtItem.acsngUser=$rootScope.username;
             unsetEditing(procmtItem);
             procmtOrderManagerResource.addItem({'identif':$scope.procmt.identif}, procmtItem ,function(procmtItemResp){
+                    console.log(procmtItemResp);
                     itemsResultHandler.unshift(procmtItemResp);
                     $scope.searchInput.entity.artPic=undefined;
                     $scope.searchInput.entity.artName=undefined;

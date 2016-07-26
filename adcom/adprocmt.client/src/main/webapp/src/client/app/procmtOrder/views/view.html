@@ -105,7 +105,7 @@
                                typeahead-loading="loading" typeahead-min-length="4"
                                typeahead-on-select='onArticleSelectedInSearchArtName($item, $model, $label)'>
                     </div>
-                    <div class="form-group col-lg-3">
+                    <div class="form-group col-lg-3" data-ng-class="{ 'has-error' : procmtItemForm.trgtQty.$invalid }">
                         <label class=" control-label" for="trgtQty"><span data-ng-bind="'PrcmtPOItem_qtyOrdered_description.title' | translate"></span></label>
 
                         <div data-ng-class="{ 'has-error' : procmtItemForm.qtyBilled.$invalid }">
@@ -115,11 +115,18 @@
                     </div>
                 </div>
                 <div class="row">
-
                     <div class="form-group col-lg-3">
                         <label class=" control-label" for="expirDt"><span data-ng-bind="'PrcmtPOItem_expirDt_description.title' | translate"></span></label>
-                        <input type="text" data-ng-model="searchInput.entity.expirDt" id="expirDt"
-                               name="expirDt" class="form-control">
+                        <div class="input-group">
+                            <input type="text" style="max-width:200px;" class="form-control" id="expirDt" name="expirDt"
+                                   data-datepicker-popup="dd-MM-yyyy" data-ng-model="searchInput.entity.expirDt"
+                                   data-is-open="dateConfig.expirDt.opened" data-show-button-bar="false" />
+			            <span class="input-group-btn">
+			                <button style="height:34px;" class="btn btn-default" data-ng-click="openDateComponent('expirDt', $event)">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+			            </span>
+                        </div>
                     </div>
                     <div class="form-group col-lg-3">
                         <label class=" control-label" for="supplier"><span data-ng-bind="'PrcmtPOItem_supplier_description.title' | translate"></span></label>

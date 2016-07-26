@@ -126,7 +126,10 @@
 			},
 			orderDt: {
 				opened : false
-			}
+			},
+            expirDt: {
+                opened : false
+            }
         };
 		$scope.openDateComponent = function(componentId,$event) {
 			$event.preventDefault();
