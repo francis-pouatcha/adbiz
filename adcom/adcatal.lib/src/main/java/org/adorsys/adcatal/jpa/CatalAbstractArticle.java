@@ -26,10 +26,19 @@ public abstract class CatalAbstractArticle extends CoreAbstIdentifObject {
 	@Column
 	@Description("CatalArticle_sppu_description")
 	private BigDecimal sppu;
+	
+	@Column
+	@Description("CatalArticle_pppu_description")
+	private BigDecimal pppu;
 
 	@Column
 	@Description("CatalArticle_sppuCurrIso3_description")
 	private String sppuCurrIso3;
+
+	@Column
+	@Description("CatalArticle_supplier_description")
+	private String supplier;
+	
 	
 	@Column
 	@Description("CatalArticle_maxDisctRate_description")
@@ -129,12 +138,28 @@ public abstract class CatalAbstractArticle extends CoreAbstIdentifObject {
 		this.lotMgtScheme = lotMgtScheme;
 	}
 
+	public BigDecimal getPppu() {
+		return pppu;
+	}
+
+	public void setPppu(BigDecimal pppu) {
+		this.pppu = pppu;
+	}
+
 	public Boolean getMngByLot() {
 		return mngByLot;
 	}
 
 	public void setMngByLot(Boolean mngByLot) {
 		this.mngByLot = mngByLot;
+	}
+
+	public String getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(String supplier) {
+		this.supplier = supplier;
 	}
 
 	@Override

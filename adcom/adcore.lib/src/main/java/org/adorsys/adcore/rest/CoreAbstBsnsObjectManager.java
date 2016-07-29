@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 
 import org.adorsys.adcore.auth.AdcomUser;
 import org.adorsys.adcore.enums.CoreHistoryTypeEnum;
+import org.adorsys.adcore.enums.CoreProcessStatusEnum;
 import org.adorsys.adcore.event.EntityClosingEvent;
 import org.adorsys.adcore.event.EntityPostingEvent;
 import org.adorsys.adcore.event.EntityUpdatingEvent;
@@ -87,7 +88,7 @@ public abstract class CoreAbstBsnsObjectManager<E extends CoreAbstBsnsObject, I 
 	public E close(String identif) throws AdRestException{
 		E entity = getInjector().getBsnsObjLookup().findByIdentif(identif);
 		if(entity==null) throw new AdRestException(Response.Status.NOT_FOUND);
-		
+		entity.setStatus(CoreProcessStatusEnum.CLOSED.toString());
 		entityClosingEvent.fire(entity);
 
 		entity = getInjector().getBsnsObjLookup().findById(entity.getId());
@@ -122,6 +123,7 @@ public abstract class CoreAbstBsnsObjectManager<E extends CoreAbstBsnsObject, I 
 		E entity = getInjector().getBsnsObjLookup().findByIdentif(identif);
 		if(entity==null) throw new AdRestException(Response.Status.NOT_FOUND);
 
+		entity.setStatus(CoreProcessStatusEnum.POSTED.toString());
 		entityPostingEvent.fire(entity);
 
 		Date conflictDt = entity.getConflictDt();

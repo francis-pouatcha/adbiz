@@ -183,14 +183,17 @@ public class StkMvntHstryListner {
 			stockQty.setParentRcrd(latestQty.getId());
 		}
 
-		BigDecimal reservedBeforeMe = latestQty==null?BigDecimal.ZERO:latestQty.getPrcdngRsvdQty();
+		/*BigDecimal reservedBeforeMe = latestQty==null?BigDecimal.ZERO:latestQty.getPrcdngRsvdQty();
 		BigDecimal stockBeforeMe = latestQty==null?BigDecimal.ZERO:latestQty.getPrcdngStkQty();
 		
 		for (StkAbstStockQty stkAbstStockQty : latestQties) {
 			reservedBeforeMe = BigDecimalUtils.sum(reservedBeforeMe,stkAbstStockQty.getRsvrdQty());
 			stockBeforeMe = BigDecimalUtils.sum(stockBeforeMe,stkAbstStockQty.getStockQty());
-		}		
+		}		*/
 		
+		BigDecimal reservedBeforeMe = latestQty==null?BigDecimal.ZERO:latestQty.getRsvrdQty();
+		BigDecimal stockBeforeMe = latestQty==null?BigDecimal.ZERO:latestQty.getStockQty();
+			
 		stockQty.setPrcdngStkQty(stockBeforeMe);
 		stockQty.setPrcdngRsvdQty(reservedBeforeMe);
 		stockQty.setSeqNbr(latestQty==null?0:latestQty.getSeqNbr()+1);

@@ -68,6 +68,10 @@ public class PrcmtOrderManager extends CoreAbstBsnsObjectManager<PrcmtProcOrder,
 		}
 		PrcmtDelivery delivery = new PrcmtDelivery();
 		delivery.fillDataFromOrder(procOrder);
+		delivery.setStatus(CoreProcessStatusEnum.ONGOING.toString());
+		delivery.setClosedDate(null);
+		delivery.setPostedDate(null);
+		delivery.setMergedDate(null);
 		delivery = deliveryManager.initiateBsnsObj(delivery);
 		
 		PrcmtDlvry2PO dlvry2Po = new PrcmtDlvry2PO();

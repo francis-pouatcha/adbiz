@@ -75,7 +75,7 @@
 
                     <div class="form-group col-lg-3">
                         <label><span data-ng-bind="'PrcmtDelivery_netAmtToPay_description.title' | translate"></span>:</label>
-                        <input class="form-control" id="prchNetAmtToPay" type="text" disabled data-ng-model="procmt.prchNetAmtToPay" >
+                        <input class="form-control" id="prchNetAmtToPay" type="text" data-ng-model="procmt.prchNetAmtToPay" >
                     </div>
                     <div class="form-group col-lg-3">
                         <label class=" control-label" for="bsnsPartner"><span data-ng-bind="'PrcmtDelivery_supplier_description.title' | translate"></span></label>
@@ -118,12 +118,15 @@
             <form name="procmtItemForm" id="procmtItemForm" novalidate>
                 <div class="row">
                     <div class="form-group col-lg-2" data-ng-class="{ 'has-error' : procmtItemForm.artPic.$invalid }">
-                        <label class=" control-label" for="artPic"><span data-ng-bind="'PrcmtDlvryItem_artPic_description.title' | translate"></span></label>
+                        <label class=" control-label" for="artPic">
+                            <span data-ng-bind="'PrcmtDlvryItem_artPic_description.title' | translate"></span>
+                            &nbsp;<a href="/adcatal.client" target="_blank"><i class="glyphicon glyphicon-plus"></i></a>
+                        </label>
                         <input type="text" data-ng- class="form-control" name="artPic" id="artPic" required
                                autocomplete="off"
                                data-ng-model="searchInput.entity.artPic"
                                typeahead="article.identif as article.identif for article in prcmtUtils.loadArticlesByPic($viewValue)"
-                               typeahead-min-length="5"
+                               typeahead-min-length="3"
                                typeahead-loading="loading"
                                typeahead-on-select='onArticleSelectedInSearch($item, $model, $label)'>
                     </div>
@@ -132,7 +135,7 @@
                         <input type="text" class="form-control" id="searchArtName" autocomplete="off"
                                data-ng-model="searchInput.entity.artName" name="searchArtName"
                                typeahead="article as article.artName for article in prcmtUtils.loadArticlesByName($viewValue)"
-                               typeahead-loading="loading" typeahead-min-length="4"
+                               typeahead-loading="loading" typeahead-min-length="3"
                                typeahead-on-select='onArticleSelectedInSearchArtName($item, $model, $label)'>
                     </div>
                     <div class="form-group col-lg-2" data-ng-class="{ 'has-error' : procmtItemForm.trgtQty.$invalid }">
@@ -150,15 +153,6 @@
                         </div>
                     </div>
                     <div class="form-group col-lg-2">
-                        <label class=" control-label" for="qtyBilled"><span data-ng-bind="'PrcmtDlvryItem_qtyBilled_description.title' | translate"></span></label>
-                        <div data-ng-class="{ 'has-error' : procmtItemForm.qtyBilled.$invalid }">
-                            <input type="text" class="form-control"  name="qtyBilled" id="qtyBilled"
-                                   data-ng-model="searchInput.entity.qtyBilled">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-lg-2">
                         <label class=" control-label" for="expirDt"><span data-ng-bind="'PrcmtDlvryItem_expirDt_description.title' | translate"></span></label>
                         <div class="input-group">
                             <input type="text" style="max-width:200px;" class="form-control" id="expirDt" name="expirDt"
@@ -171,14 +165,31 @@
 			            </span>
                         </div>
                     </div>
-                    <div class="form-group col-lg-2">
+                    <!--<div class="form-group col-lg-2">
+                        <label class=" control-label" for="qtyBilled"><span data-ng-bind="'PrcmtDlvryItem_qtyBilled_description.title' | translate"></span></label>
+                        <div data-ng-class="{ 'has-error' : procmtItemForm.qtyBilled.$invalid }">
+                            <input type="text" class="form-control"  name="qtyBilled" id="qtyBilled"
+                                   data-ng-model="searchInput.entity.qtyBilled">
+                        </div>
+                    </div>-->
+                </div>
+                <div class="row">
+
+                    <div class="form-group col-lg-2" data-ng-class="{ 'has-error' : procmtItemForm.prchNetPrcTaxIncl.$invalid }">
                         <label class=" control-label" for="prchNetPrcTaxIncl"><span data-ng-bind="'PrcmtDlvryItem_pppuPreTax_description.title' | translate"></span></label>
-                        <input type="text" data-ng-model="searchInput.entity.prchNetPrcTaxIncl" id="prchNetPrcTaxIncl"
+                        <input type="text" required data-ng-model="searchInput.entity.prchUnitPrcPreTax" id="prchNetPrcTaxIncl"
                                name="prchNetPrcTaxIncl" class="form-control">
                     </div>
-                    <div class="form-group col-lg-2">
+                  <div class="form-group col-lg-1">
+                    <label class=" control-label">
+                        <span>Taux Mult</span>
+                    </label>
+                    <input type="text" data-ng-model="tm" data-ng-change="changeTm()" id="tm" name="tm"
+                           class="form-control">
+                </div>
+                    <div class="form-group col-lg-2" data-ng-class="{ 'has-error' : procmtItemForm.slsNetPrcTaxIncl.$invalid }">
                         <label class=" control-label" for="prchNetPrcTaxIncl"><span data-ng-bind="'PrcmtDlvryItem_sppuPreTax_description.title' | translate"></span></label>
-                        <input type="text" data-ng-model="searchInput.entity.slsNetPrcTaxIncl" id="slsNetPrcTaxIncl"
+                        <input type="text" required data-ng-model="searchInput.entity.slsUnitPrcPreTax" id="slsNetPrcTaxIncl"
                                name="slsNetPrcTaxIncl" class="form-control">
                     </div>
                     <div class="form-group col-lg-2" data-ng-class="{ 'has-error' : procmtItemForm.section.$invalid }">
@@ -187,24 +198,18 @@
                                class="form-control" required
                                autocomplete="off" placeholder="ray-123"
                                typeahead="stkSection as (stkSection.identif + ' : ' + stkSection.name) for stkSection in prcmtUtils.loadStkSectionArticleLots($viewValue)"
-                               typeahead-loading="loading" typeahead-min-length="4"
+                               typeahead-loading="loading" typeahead-min-length="3"
                                typeahead-on-select='onSectionSelectedInSearch($item, $model, $label)'>
                     </div>
-                    <div class="form-group col-lg-2">
+                    <!--<div class="form-group col-lg-2">
                         <label class=" control-label" for="supplier">
                         	<span data-ng-bind="'PrcmtPOItem_supplier_description.title' | translate"></span>
                         </label>
                         <input type="text" data-ng-model="searchInput.entity.supplier" id="supplier" name="supplier"
                                class="form-control">
-                    </div>
-                    <div class="form-group col-lg-2">
-                        <button class="btn btn-default" data-ng-disabled="procmtItemForm.$invalid"
-                                data-ng-click="addItem(searchInput.entity)" style="margin-top: 30px;"
-                                data-ng-show="prcmtUtils.isInvtryOpen(procmt)">
-                            <i class="glyphicon glyphicon-plus"></i><span data-ng-bind="'Entity_add.title' | translate"></span>
-                        </button>
-                    </div>
-                    <div class="row pull-right form-group ">
+                    </div>-->
+
+                    <div class="form-group col-lg-offset-1">
                         <button data-ng-click="handleSearchRequestEvent()" class="btn btn-default" style="margin-top: 30px;">
                             <i class="glyphicon glyphicon-search"></i>
                         </button>
@@ -242,7 +247,7 @@
                 <th class="clo-lg-2"><span data-ng-bind="'PrcmtDlvryItem_articleName_description.title' | translate"></span></th>
                 <th class="clo-lg-1"><span data-ng-bind="'PrcmtDlvryItem_qtyDlvrd_description.title' | translate"></span></th>
                 <th class="clo-lg-1"><span data-ng-bind="'PrcmtDlvryItem_freeQty_description.title' | translate"></span></th>
-                <th class="clo-lg-1"><span data-ng-bind="'PrcmtDlvryItem_qtyBilled_description.title' | translate"></span></th>
+               <!-- <th class="clo-lg-1"><span data-ng-bind="'PrcmtDlvryItem_qtyBilled_description.title' | translate"></span></th>-->
                 <th class="col-lg-1"><span data-ng-bind="'PrcmtDlvryItem_expirDt_description.title' | translate"></span></th>
                 <th class="col-lg-1"><span data-ng-bind="'PrcmtDlvryItem_pppuPreTax_description.title' | translate"></span></th>
                 <th class="col-lg-1"><span data-ng-bind="'PrcmtDlvryItem_sppuPreTax_description.title' | translate"></span></th>
@@ -273,12 +278,12 @@
                      </span>
                      <span data-ng-show="!procmtItem.editing" data-ng-bind="procmtItem.freeQty"></span>
                 </td>
-                <td name="">
+                <!--<td name="">
                     <span class="" data-ng-show="procmtItem.editing">
                         <input data-ng-model="procmtItem.qtyBilled" class="form-control">
                     </span>
                     <span data-ng-show="!procmtItem.editing" data-ng-bind="procmtItem.qtyBilled"></span>
-                </td>
+                </td>-->
 
                 <td name="">
                     <span class="" data-ng-show="procmtItem.editing">
@@ -289,15 +294,15 @@
 
                 <td name="">
                     <span class="" data-ng-show="procmtItem.editing">
-                        <input data-ng-model="procmtItem.prchNetPrcTaxIncl" class="form-control">
+                        <input data-ng-model="procmtItem.prchUnitPrcPreTax" class="form-control">
                     </span>
-                    <span data-ng-show="!procmtItem.editing" data-ng-bind="procmtItem.prchNetPrcTaxIncl"></span>
+                    <span data-ng-show="!procmtItem.editing" data-ng-bind="procmtItem.prchUnitPrcPreTax"></span>
                 </td>
                 <td name="">
                     <span class="" data-ng-show="procmtItem.editing">
-                        <input data-ng-model="procmtItem.slsNetPrcPreTax" class="form-control">
+                        <input data-ng-model="procmtItem.slsUnitPrcPreTax" class="form-control">
                     </span>
-                    <span data-ng-show="!procmtItem.editing" data-ng-bind="procmtItem.slsNetPrcPreTax"></span>
+                    <span data-ng-show="!procmtItem.editing" data-ng-bind="procmtItem.slsUnitPrcPreTax"></span>
                 </td>
 
                 <td name="">
@@ -355,12 +360,12 @@
                            data-target="#procmtInfoToggle"><i class="glyphicon glyphicon-edit"></i>
                            <span data-ng-bind="'Entity_edit.title' | translate"></span></a>
                     </span>
-                <div class="col-lg-4">
+                <!--<div class="col-lg-4">
                 	<span class="pull-left">
                     	<button class="btn-default btn" data-ng-click="showConflict()" >
                     		<i class="glyphicon glyphicon-tasks"></i><span data-ng-bind="'show_conflict.title' | translate"></span></button>
 	                </span>
-                </div>
+                </div>-->
                 <div class="col-lg-2">
                 	<span class="pull-right">
                     	<button class="btn-default btn" data-ng-click="reload()" >

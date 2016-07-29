@@ -16,7 +16,7 @@
                     className: 'row',
                     fieldGroup: [
                         {
-                            className: 'col-xs-4',
+                            className: 'col-xs-3',
                             type: 'input',
                             key: 'identif',
                             templateOptions: {
@@ -26,7 +26,7 @@
                             }
                         },
                         {
-                            className: 'col-xs-4',
+                            className: 'col-xs-3',
                             type: 'input',
                             key: 'artName',
                             templateOptions: {
@@ -37,11 +37,21 @@
                             }
                         },
                         {
-                            className: 'col-xs-4',
+                            className: 'col-xs-3',
                             type: 'input',
                             key: 'shortName',
                             templateOptions: {
                                 label: $translate.instant('CatalArtFeatMapping.shortName'),
+                                //pattern: '\\d{5}',
+                                disabled:disabled
+                            }
+                        },
+                        {
+                            className: 'col-xs-3',
+                            type: 'input',
+                            key: 'supplier',
+                            templateOptions: {
+                                label: $translate.instant('CatalArticle.supplier'),
                                 //pattern: '\\d{5}',
                                 disabled:disabled
                             }
@@ -53,7 +63,16 @@
                 {
                     className: 'row',
                     fieldGroup: [
-
+                        {
+                            className: 'col-xs-2',
+                            type: 'input',
+                            key: 'pppu',
+                            templateOptions: {
+                                type:'number',
+                                label: $translate.instant('CatalArticle.pppu'),
+                                disabled:disabled
+                            }
+                        },
                         {
                             className: 'col-xs-2',
                             type: 'input',
@@ -74,7 +93,7 @@
                             }
                         },
                         {
-                            className: 'col-xs-2',
+                            className: 'col-xs-1',
                             type: 'input',
                             key: 'minStockQty',
                             templateOptions: {
@@ -87,7 +106,7 @@
                             }
                         },
                         {
-                            className: 'col-xs-2',
+                            className: 'col-xs-1',
                             type: 'input',
                             key: 'maxStockQty',
                             templateOptions: {
@@ -100,7 +119,7 @@
                             }
                         },
                         {
-                            className: 'col-xs-2',
+                            className: 'col-xs-1',
                             type: 'input',
                             key: 'vatRate',
                             templateOptions: {

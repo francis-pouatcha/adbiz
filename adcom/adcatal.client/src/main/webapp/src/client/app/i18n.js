@@ -34,6 +34,8 @@
                 'CatalArticle.view.title':'View',
                 'CatalArticle.back.title':'Back',
                 'CatalArticle.prodFmly': 'Family',
+                'CatalArticle.pppu':'Purchasse Price',
+                'CatalArticle.supplier':'Supplier',
 
                 //-------------CatalArt2ProductFamily---------
                 'CatalArt2ProductFamily.artPic': 'PIC',

@@ -16,7 +16,7 @@ import org.adorsys.adcore.jpa.CoreAbstBsnsObject;
 public abstract class PrcmtAbstractDelivery extends CoreAbstBsnsObject {
 	private static final long serialVersionUID = 6822137801850663249L;
 
-	@Column
+	@Column(unique=true)
 	@Description("PrcmtDelivery_dlvrySlipNbr_description")
 	//@NotNull(message = "PrcmtDelivery_dlvrySlipNbr_NotNull_validation")
 	private String dlvrySlipNbr;

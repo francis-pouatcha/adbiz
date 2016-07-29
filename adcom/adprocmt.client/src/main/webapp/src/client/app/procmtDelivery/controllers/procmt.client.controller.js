@@ -263,6 +263,10 @@
         }
 
         $scope.addItem = function(procmtItem){
+            if(procmtItem.prchUnitPrcPreTax > procmtItem.slsUnitPrcPreTax){
+                $scope.error = "Le prix d' achat est superieur au prix de vente!";
+                return;
+            }
             procmtItem.acsngDt=new Date().getTime();
             procmtItem.acsngUser=$rootScope.username;
             $scope.editing=undefined;
@@ -273,9 +277,11 @@
                     $scope.searchInput.entity.artName=undefined;
                     $scope.searchInput.entity.expirDt=undefined;
                     $scope.searchInput.entity.trgtQty=undefined;
+                    $scope.tm=undefined;
+                $scope.searchInput.entity.freeQty=undefined;
                 $scope.searchInput.entity.qtyBilled=undefined;
-                $scope.searchInput.entity.prchNetPrcTaxIncl=undefined;
-                $scope.searchInput.entity.slsNetPrcTaxIncl=undefined;
+                $scope.searchInput.entity.prchUnitPrcPreTax=undefined;
+                $scope.searchInput.entity.slsUnitPrcPreTax=undefined;
                 $scope.searchInput.entity.section=undefined;
                 }, function(error){
                     $scope.error = error;
@@ -477,6 +483,7 @@
             genericResource.findBy(prcmtUtils.catalartfeatmappingsUrlBase,searchInput)
                 .success(function(response){
                     $scope.searchInput.entity.artName=response.resultList[0].artName;
+                    searchArticleLot(item.identif);
                 })
                 .error(function(error){
                     $scope.error=error;
@@ -486,9 +493,36 @@
         $scope.onArticleSelectedInSearchArtName = function(item,model,label){
             $scope.searchInput.entity.artPic=item.cntnrIdentif;
             $scope.searchInput.entity.artName=item.artName;
-
+            searchArticleLot(item.cntnrIdentif);
 
         };
+
+        $scope.changeTm = function(){
+            $scope.searchInput.entity.slsUnitPrcPreTax = $scope.searchInput.entity.prchUnitPrcPreTax*1 + ($scope.searchInput.entity.prchUnitPrcPreTax*$scope.tm/100);
+        }
+
+        function searchArticleLot(artPic) {
+            var coreSearchInput = {};
+            coreSearchInput.entity = {};
+            coreSearchInput.entity.artPic = artPic;
+            coreSearchInput.fieldNames = [];
+            coreSearchInput.fieldNames.push('artPic');
+            coreSearchInput.sortFieldNames = [];
+            coreSearchInput.sortFieldNames.push({fieldName:'closedDt'});
+            coreSearchInput.className = 'org.adorsys.adstock.jpa.StkArticleLotSearchInput';
+            genericResource.findBy(prcmtUtils.stkarticlelotsUrlBase,coreSearchInput)
+                .success(function(response){
+                    if(response.resultList.length>0){
+                        $scope.searchInput.entity.prchUnitPrcPreTax=response.resultList[0].prchUnitPrcPreTax;
+                        $scope.searchInput.entity.slsUnitPrcPreTax=response.resultList[0].slsUnitPrcPreTax;
+                        $scope.searchInput.entity.section=response.resultList[0].section;
+
+                    }else{
+                        $scope.searchInput.entity.prchUnitPrcPreTax=response.resultList[0].pppu;
+                        $scope.searchInput.entity.slsUnitPrcPreTax=response.resultList[0].sppu;
+                    }
+                })
+        }
 
         function coreSearchInputInit(identif) {
             var coreSearchInput = {};

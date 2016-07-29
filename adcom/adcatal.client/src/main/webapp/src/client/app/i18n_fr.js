@@ -34,6 +34,8 @@
                 'CatalArticle.view.title':'Visualiser',
                 'CatalArticle.back.title':'Retour',
                 'CatalArticle.prodFmly': 'Famille',
+                'CatalArticle.pppu':'Prix Achat',
+                'CatalArticle.supplier':'Fabriquant',
 
                 //-------------CatalArt2ProductFamily---------
                 'CatalArt2ProductFamily.artPic': 'CIP',
