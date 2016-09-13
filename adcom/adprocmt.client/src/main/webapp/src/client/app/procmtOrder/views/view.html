@@ -97,7 +97,7 @@
                                typeahead-loading="loading"
                                typeahead-on-select='onArticleSelectedInSearch($item, $model, $label)'>
                     </div>
-                    <div class="form-group col-lg-5">
+                    <div class="form-group col-lg-4">
                         <label class=" control-label" for="searchArtName"><span data-ng-bind="'PrcmtPOItem_artName_description.title' | translate"></span></label>
                         <input type="text" class="form-control" id="searchArtName" autocomplete="off"
                                data-ng-model="searchInput.entity.artName" name="searchArtName"
@@ -105,20 +105,47 @@
                                typeahead-loading="loading" typeahead-min-length="3"
                                typeahead-on-select='onArticleSelectedInSearchArtName($item, $model, $label)'>
                     </div>
-                    <div class="form-group col-lg-3" data-ng-class="{ 'has-error' : procmtItemForm.trgtQty.$invalid }">
+                    <div class="form-group col-lg-2" data-ng-class="{ 'has-error' : procmtItemForm.trgtQty.$invalid }">
                         <label class=" control-label" for="trgtQty"><span data-ng-bind="'PrcmtPOItem_qtyOrdered_description.title' | translate"></span></label>
 
                         <div data-ng-class="{ 'has-error' : procmtItemForm.qtyBilled.$invalid }">
                             <input type="text" class="form-control" required name="trgtQty" id="trgtQty"
-                                   data-ng-model="searchInput.entity.trgtQty">
+                                   data-ng-model="searchInput.entity.trgtQty" autocomplete="off">
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="form-group col-lg-3">
                         <label class=" control-label" for="supplier"><span data-ng-bind="'PrcmtPOItem_supplier_description.title' | translate"></span></label>
                         <input type="text" data-ng-model="searchInput.entity.supplier" id="supplier" name="supplier"
                                class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="form-group col-lg-2" data-ng-class="{ 'has-error' : procmtItemForm.prchNetPrcTaxIncl.$invalid }">
+                        <label class=" control-label" for="prchNetPrcTaxIncl"><span data-ng-bind="'PrcmtDlvryItem_pppuPreTax_description.title' | translate"></span></label>
+                        <input type="text" required data-ng-model="searchInput.entity.prchUnitPrcPreTax" id="prchNetPrcTaxIncl"
+                               name="prchNetPrcTaxIncl" class="form-control">
+                    </div>
+                    <div class="form-group col-lg-1">
+                        <label class=" control-label">
+                            <span>Taux Mult</span>
+                        </label>
+                        <input type="text" data-ng-model="tm" data-ng-change="changeTm()" id="tm" name="tm"
+                               class="form-control">
+                    </div>
+                    <div class="form-group col-lg-2" data-ng-class="{ 'has-error' : procmtItemForm.slsNetPrcTaxIncl.$invalid }">
+                        <label class=" control-label" for="prchNetPrcTaxIncl"><span data-ng-bind="'PrcmtDlvryItem_sppuPreTax_description.title' | translate"></span></label>
+                        <input type="text" required data-ng-model="searchInput.entity.slsUnitPrcPreTax" id="slsNetPrcTaxIncl"
+                               name="slsNetPrcTaxIncl" class="form-control">
+                    </div>
+                    <div class="form-group col-lg-2" data-ng-class="{ 'has-error' : procmtItemForm.section.$invalid }">
+                        <label class=" control-label" for="sectionCode"><span data-ng-bind="'PrcmtDlvryItem_section_description.title' | translate"></span></label>
+                        <input type="text" data-ng-model="searchInput.entity.section" id="sectionCode" name="section"
+                               class="form-control" required
+                               autocomplete="off" placeholder="ray-123"
+                               typeahead="stkSection as (stkSection.identif + ' : ' + stkSection.name) for stkSection in prcmtOrderUtils.loadStkSectionArticleLots($viewValue)"
+                               typeahead-loading="loading" typeahead-min-length="3"
+                               typeahead-on-select='onSectionSelectedInSearch($item, $model, $label)'>
                     </div>
                     <div class="form-group col-lg-4" col-lg-offset-3>
                         <button data-ng-click="handleSearchRequestEvent()" class="btn btn-default "
@@ -156,9 +183,12 @@
             <thead>
             <tr>
                 <th class="clo-lg-1"><span data-ng-bind="'PrcmtPOItem_artPic_description.title' | translate"></span></th>
-                <th class="clo-lg-3"><span data-ng-bind="'PrcmtPOItem_artName_description.title' | translate"></span></th>
+                <th class="clo-lg-2"><span data-ng-bind="'PrcmtPOItem_artName_description.title' | translate"></span></th>
                 <th class="col-lg-1"><span data-ng-bind="'PrcmtPOItem_supplier_description.title' | translate"></span></th>
                 <th class="clo-lg-1"><span data-ng-bind="'PrcmtPOItem_qtyOrdered_description.title' | translate"></span></th>
+                <th class="col-lg-1"><span data-ng-bind="'PrcmtDlvryItem_pppuPreTax_description.title' | translate"></span></th>
+                <th class="col-lg-1"><span data-ng-bind="'PrcmtDlvryItem_sppuPreTax_description.title' | translate"></span></th>
+                <th class="col-lg-1"><span data-ng-bind="'PrcmtDlvryItem_section_description.title' | translate"></span></th>
 
                 <th class="col-lg-1">
                     <span data-ng-show="!procmt.conflictDt"><i class="glyphicon glyphicon-ok-circle" style="color:green"></i></span>
@@ -195,6 +225,25 @@
                            data-ng-blur="updatetrgtQty(procmtItem)">
                     <span data-ng-show="!procmtItem.editingTrgtQty && !procmtItem.disabledDt"><span data-ng-bind="procmtItem.trgtQty | number:0"></span></span>
                     <span data-ng-show="!procmtItem.editingTrgtQty && procmtItem.disabledDt" style="color: red; text-decoration: line-through;"><span data-ng-bind="procmtItem.trgtQty | number:0"></span></span>
+                </td>
+                <td name="">
+                    <span class="" data-ng-show="procmtItem.editing">
+                        <input data-ng-model="procmtItem.prchUnitPrcPreTax" class="form-control">
+                    </span>
+                    <span data-ng-show="!procmtItem.editing" data-ng-bind="procmtItem.prchUnitPrcPreTax"></span>
+                </td>
+                <td name="">
+                    <span class="" data-ng-show="procmtItem.editing">
+                        <input data-ng-model="procmtItem.slsUnitPrcPreTax" class="form-control">
+                    </span>
+                    <span data-ng-show="!procmtItem.editing" data-ng-bind="procmtItem.slsUnitPrcPreTax"></span>
+                </td>
+
+                <td name="">
+                    <span class="" data-ng-show="procmtItem.editing">
+                        <input data-ng-model="procmtItem.section" class="form-control">
+                    </span>
+                    <span data-ng-show="!procmtItem.editing" data-ng-bind="procmtItem.section"></span>
                 </td>
                 <td>
                     <div data-ng-show="prcmtOrderUtils.isInvtryOpen(procmt)">

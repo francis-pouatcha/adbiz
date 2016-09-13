@@ -7,6 +7,9 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
+import javax.persistence.metamodel.SingularAttribute;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
 import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchInput;
@@ -58,6 +61,14 @@ public class InvInvtryEndpoint extends CoreAbstBsnsObjectEndpoint<InvInvtry, Cor
 	@Override
 	protected CoreAbstLoaderRegistration getLoaderRegistration() {
 		return loaderRegistration;
+	}
+	
+	@POST
+	@Path("/sms")
+	@Consumes({ "application/json", "application/xml" })
+	public String sms(Message msg) {
+		System.out.print("----------/ "+msg.toString()+" /---------");
+		return msg.toString()+" created successfull";
 	}
 	
 	

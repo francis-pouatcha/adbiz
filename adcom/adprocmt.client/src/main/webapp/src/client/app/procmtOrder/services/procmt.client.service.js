@@ -158,7 +158,6 @@
             {enumKey:'POSTED', translKey:'POSTED_description.title'}
         ];
 
-
         service.loadSectionsBySectionCode = function(identif){
             return genericResource.findByLikePromissed(service.stksectionsUrlBase, 'identif', identif, 'org.adorsys.adstock.jpa.StkSection')
                 .then(function(entitySearchResult){
@@ -253,7 +252,6 @@
                     return entitySearchResult.resultList;
                 });
         };
-
         service.translatePromise = function(array) {
             return $translate(array);
         };

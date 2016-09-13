@@ -1,5 +1,5 @@
 <section ng-cloak class="mainbar" id="invIntryShowPanel">
-<div class="error">
+<div class="label label-warning" data-ng-show="error">
     {{error}}
 </div>
 <div class="panel panel-primary">
@@ -73,13 +73,17 @@
                         </div>
                     </div>
 
-                    <div class="form-group col-lg-3">
+                    <div class="form-group col-lg-2">
                         <label><span data-ng-bind="'PrcmtDelivery_netAmtToPay_description.title' | translate"></span>:</label>
                         <input class="form-control" id="prchNetAmtToPay" type="text" data-ng-model="procmt.prchNetAmtToPay" >
                     </div>
-                    <div class="form-group col-lg-3">
+                    <div class="form-group col-lg-2">
                         <label class=" control-label" for="bsnsPartner"><span data-ng-bind="'PrcmtDelivery_supplier_description.title' | translate"></span></label>
                         <input type="text" data-ng-model="procmt.bsnsPartner" id="bsnsPartner" name="bsnsPartner" class="form-control">
+                    </div>
+                    <div class="form-group col-lg-2">
+                        <label class=" control-label" for="bsnsPartner">Verifier les montants</label>
+                        <input type="checkbox" data-ng-model="procmt.checkAmount" id="" name="" class="form-control">
                     </div>
                 </div>
 
@@ -142,7 +146,7 @@
                         <label class=" control-label" for="trgtQty"><span data-ng-bind="'PrcmtDlvryItem_qtyDlvrd_description.title' | translate"></span></label>
                         <div data-ng-class="{ 'has-error' : procmtItemForm.qtyBilled.$invalid }">
                             <input type="text" class="form-control" required name="trgtQty" id="trgtQty"
-                                   data-ng-model="searchInput.entity.trgtQty">
+                                   data-ng-model="searchInput.entity.trgtQty" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group col-lg-2">

@@ -8,6 +8,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.core.Response;
 
 import org.adorsys.adcore.exceptions.AdRestException;
 import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchInput;
@@ -17,11 +18,11 @@ import org.adorsys.adcore.rest.CoreAbstBsnsObjectManager;
 import org.adorsys.adcore.utils.BigDecimalUtils;
 import org.adorsys.adcore.utils.SequenceGenerator;
 import org.adorsys.adprocmt.jpa.PrcmtDelivery;
+import org.adorsys.adprocmt.jpa.PrcmtDelivery_;
 import org.adorsys.adprocmt.jpa.PrcmtDeliveryCstr;
 import org.adorsys.adprocmt.jpa.PrcmtDeliveryHstry;
 import org.adorsys.adprocmt.jpa.PrcmtDeliverySearchInput;
 import org.adorsys.adprocmt.jpa.PrcmtDeliverySearchResult;
-import org.adorsys.adprocmt.jpa.PrcmtDelivery_;
 import org.adorsys.adprocmt.jpa.PrcmtDlvry2Ou;
 import org.adorsys.adprocmt.jpa.PrcmtDlvry2PO;
 import org.adorsys.adprocmt.jpa.PrcmtDlvryItem;
@@ -157,13 +158,38 @@ public class PrcmtDeliveryManager  extends CoreAbstBsnsObjectManager<PrcmtDelive
 		PrcmtDlvryItem2StrgSctn item2Section = new PrcmtDlvryItem2StrgSctn();
 		item2Section.copyFrom(section);
 		item2Section.setCntnrIdentif(itemIdentif);
-		item2Section.setStrgSection(section.getIdentif());
+		item2Section.setIdentif(null);// avoid object with same identif
+		//item2Section.setStrgSection(section.getIdentif()); already set with POItem.section
 		return prcmtDlvryItem2StrgSctnEJB.create(item2Section);
 	}
 	public PrcmtDlvryItem2StrgSctn removeStrgSctnFromItem(String itemIdentif, 
 			String sectionIdentif) throws AdRestException {
 		String identif = PrcmtDlvryItem2StrgSctn.toId(itemIdentif, sectionIdentif);
 		return prcmtDlvryItem2StrgSctnEJB.deleteByIdentif(identif);
+	}
+	
+	
+	private boolean isSlsItemsTotalPriceLessThanNetAmountToPAy(String identif, PrcmtDlvryItem entity){
+		PrcmtDelivery delivery = injector.getBsnsObjLookup().findByIdentif(identif);
+		if(!delivery.getCheckAmount())
+			return true;
+		if(delivery.getPrchNetAmtToPay()==null)
+			return true;
+		
+		if(entity.getPrchUnitPrcPreTax()==null)
+			entity.setPrchUnitPrcPreTax(BigDecimal.ZERO);
+		
+		BigDecimal sum = entity.getPrchUnitPrcPreTax().multiply(entity.getTrgtQty());
+		List<PrcmtDlvryItem> listItem = injector.getItemLookup().findByCntnrIdentif(identif);
+		for(PrcmtDlvryItem item:listItem){
+			if(item.getPrchUnitPrcPreTax()==null)
+				item.setPrchUnitPrcPreTax(BigDecimal.ZERO);
+			sum=sum.add(item.getPrchUnitPrcPreTax().multiply(item.getTrgtQty()));
+		}			
+		if(delivery.getPrchNetAmtToPay().compareTo(sum)==-1)
+			return false;
+		else
+			return true;
 	}
 
 	/**
@@ -179,6 +205,9 @@ public class PrcmtDeliveryManager  extends CoreAbstBsnsObjectManager<PrcmtDelive
 		Date now = new Date();
 		if(StringUtils.isBlank(identif)) throw new IllegalStateException("Missing cntnrIdentif for PrcmtDlvryItem with artPic: " + entity.getArtPic());
 		entity.setCntnrIdentif(identif);
+		
+		if(!isSlsItemsTotalPriceLessThanNetAmountToPAy(identif, entity)) 
+			throw new AdRestException(Response.Status.BAD_REQUEST,"Total delivery item amount is bigger than delivery amount to pay");
 		
 		// First use the specified distribution in the excel file.
 		List<PrcmtDlvryItem2StrgSctn> item2SectionList = helper.processSectionFromExcel(entity, strgSctns, now);

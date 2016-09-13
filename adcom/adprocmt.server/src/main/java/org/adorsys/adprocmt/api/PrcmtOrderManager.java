@@ -72,6 +72,7 @@ public class PrcmtOrderManager extends CoreAbstBsnsObjectManager<PrcmtProcOrder,
 		delivery.setClosedDate(null);
 		delivery.setPostedDate(null);
 		delivery.setMergedDate(null);
+		delivery.setIdentif(null); //@guymoyo, to avoid #Unique index or primary key violation, cause order.identif==delivery.identif
 		delivery = deliveryManager.initiateBsnsObj(delivery);
 		
 		PrcmtDlvry2PO dlvry2Po = new PrcmtDlvry2PO();
@@ -112,11 +113,13 @@ public class PrcmtOrderManager extends CoreAbstBsnsObjectManager<PrcmtProcOrder,
 					deliveryManager.addOu2Item(dlvryItem.getIdentif(), dlvryItem2Ou);
 				}
 				
-				if(StringUtils.isNotBlank(poItem.getSection())){
+				/*if(StringUtils.isNotBlank(poItem.getSection())){
 					PrcmtDlvryItem2StrgSctn item2ection = new PrcmtDlvryItem2StrgSctn();
 					item2ection.setCntnrIdentif(dlvryItem.getIdentif());
+					item2ection.setQtyStrd(poItem.getTrgtQty());//must be not null
+					item2ection.setStrgSection(poItem.getSection());//must be not null
 					deliveryManager.addStrgSctn2Item(dlvryItem.getIdentif(), item2ection);
-				}
+				}*/
 			}
 		}
 		return delivery;

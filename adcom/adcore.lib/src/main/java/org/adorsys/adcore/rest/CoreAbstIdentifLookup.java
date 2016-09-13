@@ -106,6 +106,10 @@ public abstract class CoreAbstIdentifLookup<E extends CoreAbstIdentifObject> {
 	public List<E> findByCntnrIdentif(String cntnrIdentif, int start, int max) {
 		return getRepo().findByCntnrIdentif(cntnrIdentif).firstResult(start).maxResults(max).getResultList();
 	}
+	
+	public List<E> findByCntnrIdentif(String cntnrIdentif) {
+		return getRepo().findByCntnrIdentif(cntnrIdentif).getResultList();
+	}
 	public List<E> findByCntnrIdentifAsc(String cntnrIdentif, int start, int max) {
 		return getRepo().findByCntnrIdentif(cntnrIdentif).orderAsc(cntnrIdentif).firstResult(start).maxResults(max).getResultList();
 	}

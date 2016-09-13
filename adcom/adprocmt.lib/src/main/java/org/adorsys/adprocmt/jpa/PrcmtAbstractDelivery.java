@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 
 import org.adorsys.adcore.annotation.Description;
 import org.adorsys.adcore.jpa.CoreAbstBsnsObject;
@@ -29,6 +28,20 @@ public abstract class PrcmtAbstractDelivery extends CoreAbstBsnsObject {
 	@Description("PrcmtDelivery_orderDt_description")
 	private Date orderDt;
 	
+	@Column
+	@Description("PrcmtDelivery_checkAmount_description")
+	private Boolean checkAmount=Boolean.FALSE;
+	
+	public Boolean getCheckAmount() {
+		return checkAmount;
+	}
+
+	public void setCheckAmount(Boolean checkAmount) {
+		this.checkAmount = checkAmount;
+	}
+
+	
+
 	public String getDlvrySlipNbr() {
 		return this.dlvrySlipNbr;
 	}

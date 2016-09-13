@@ -18,6 +18,8 @@ public class ExceptionHandler implements ExceptionMapper<AdException> {
   
         if (exception instanceof AdException)
             httpStatus = Response.Status.BAD_REQUEST;
+        if (exception instanceof AdRestException)
+            httpStatus = Response.Status.BAD_REQUEST;
   
         return Response.status(httpStatus).entity(exception.getMessage()).type("text/plain").build();
     }

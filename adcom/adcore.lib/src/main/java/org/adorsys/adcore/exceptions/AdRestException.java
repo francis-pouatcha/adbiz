@@ -11,8 +11,14 @@ public class AdRestException extends AdException {
 		super(""+status.getStatusCode());
 		this.status = status;
 	}
+	
+	public AdRestException(StatusType status, String msg) {
+		super(msg);
+		this.status = status;
+	}
 
 	public StatusType getStatus() {
 		return status;
 	}
+	
 }

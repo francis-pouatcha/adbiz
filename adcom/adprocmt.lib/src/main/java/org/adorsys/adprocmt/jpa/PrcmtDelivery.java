@@ -1,5 +1,6 @@
 package org.adorsys.adprocmt.jpa;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import org.adorsys.adcore.annotation.Description;
@@ -13,6 +14,6 @@ public class PrcmtDelivery extends PrcmtAbstractDelivery {
 		procOrder.copyTo(this);
 		resetHeader();
 	}
-
+	
 	
 }

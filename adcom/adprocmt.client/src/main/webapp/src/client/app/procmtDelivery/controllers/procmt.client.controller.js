@@ -98,10 +98,10 @@
         .controller('ProcmtDeliveryShowCtlr', procmtShowCtlr);
 
     procmtShowCtlr.$inject = ['$scope','procmtManagerResource','$location','prcmtUtils',
-        'procmtState','genericResource','searchResultHandler','utils','fileExtractor', '$stateParams', '$rootScope'];
+        'procmtState','genericResource','searchResultHandler','utils','fileExtractor', '$stateParams', '$rootScope','logger'];
     /* @ngInject */
     function procmtShowCtlr($scope,procmtManagerResource,$location,prcmtUtils,procmtState
-                            ,genericResource,searchResultHandler,utils,fileExtractor, $stateParams, $rootScope) {
+                            ,genericResource,searchResultHandler,utils,fileExtractor, $stateParams, $rootScope,logger) {
 
         $scope.procmtNbr = $stateParams.procmtNbr;
         $scope.error = "";
@@ -270,6 +270,7 @@
             procmtItem.acsngDt=new Date().getTime();
             procmtItem.acsngUser=$rootScope.username;
             $scope.editing=undefined;
+            console.log(procmtItem);
             unsetEditing(procmtItem);
             procmtManagerResource.addItem({'identif':$scope.procmt.identif}, procmtItem ,function(procmtItem){
                     itemsResultHandler.unshift(procmtItem);
@@ -284,9 +285,20 @@
                 $scope.searchInput.entity.slsUnitPrcPreTax=undefined;
                 $scope.searchInput.entity.section=undefined;
                 }, function(error){
-                    $scope.error = error;
+                    if(error.data){
+                        $scope.error = error.data;
+                        logger.warning(error.data, error, "Warning");
+                    }
+                    else
+                        $scope.error = error;
+
             });
         };
+
+        function checkTotalPrice(saleItemPrice){
+
+        }
+
         $scope.check = function(){
             procmtManagerResource.validate({identif:$scope.procmt.identif}, function(procmt){
                 $scope.procmt = procmt;
