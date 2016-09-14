@@ -86,7 +86,7 @@
             {
                 state: 'newCdrCshDrawers',
                 config: {
-                    url: '/CdrCshDrawers/new',
+                    url: '/CdrCshDrawers/new/',
                     templateUrl: '/adcshdwr.client/src/client/app/views/CdrCshDrawer/createCdrCshDrawer.html',
                     controller: 'cdrCshDrawersCreateCtlr',
                     //controllerAs: 'vm',
@@ -106,7 +106,7 @@
             {
                 state: 'newCdrDrctSales',
                 config: {
-                    url: '/CdrDrctSales/new',
+                    url: '/CdrDrctSales/new/:id',
                     templateUrl: '/adcshdwr.client/src/client/app/views/CdrDrctSale/createDrctSales.html',
                     controller: 'cdrDrctSalesCreateCtlr',
                     //controllerAs: 'vm',

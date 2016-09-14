@@ -13,6 +13,8 @@ angular.module('adcshdwr')
 
             service.urlBase = '/adcshdwr.server/rest/cdrdrctsaless';
             service.cdrdrctsalesmanager = '/adcshdwr.server/rest/directsales';
+            service.cdrdrctsales = '/adcshdwr.server/rest/cdrdrctsaless';
+            service.cdrdrctsalesItem = '/adcshdwr.server/rest/cdrdsartitems';
             service.catalarticlesUrlBase = '/adcatal.server/rest/catalarticles';
             service.catalarticlesfeatmappingsUrlBase = '/adcatal.server/rest/catalartfeatmappings';
             service.stkArtLotUrlBase = '/adstock.server/rest/stkarticlelots';
@@ -421,12 +423,17 @@ angular.module('adcshdwr')
                 };
                 if (angular.isDefined($scope.searchInput.entity.cdrNbr ) && $scope.searchInput.entity.cdrNbr ) {
                     searchInput.entity.cdrNbr = $scope.searchInput.entity.cdrNbr;
+                    searchInput.fieldNames.push('cdrNbr');
                 }
-                if($scope.searchInput.drctSalesDtFrom)
+                if($scope.searchInput.drctSalesDtFrom){
                     searchInput.drctSalesDtFrom = $scope.searchInput.drctSalesDtFrom;
+                    searchInput.fieldNames.push('drctSalesDtFrom');
+                }
 
-                if($scope.searchInput.drctSalesDtTo)
+                if($scope.searchInput.drctSalesDtTo){
                     searchInput.drctSalesDtTo = $scope.searchInput.drctSalesDtTo;
+                    searchInput.fieldNames.push('drctSalesDtTo');
+                }
 
                 findCustom(searchInput);
             }
@@ -495,6 +502,34 @@ angular.module('adcshdwr')
                         logger.warning("Ouvrez une caisse, avant de procéder a la vente.", {}, "Pas de caisse active!")
                     }
                 });
+
+                var slsIdentif = $stateParams.id;
+                if(slsIdentif){
+                    $scope.showprint = true;
+                    genericResource.findById(cdrDrctSalesUtils.cdrdrctsales, slsIdentif)
+                        .success(function (entitySearchResult) {
+                            $scope.cdrDsArtHolder.cdrDrctSales=entitySearchResult;
+                            var searchInput = {
+                                entity:{},
+                                fieldNames:[]
+                            };
+                            searchInput.entity.cntnrIdentif = slsIdentif;
+                            searchInput.fieldNames.push('cntnrIdentif');
+                            genericResource.findByLike(cdrDrctSalesUtils.cdrdrctsalesItem, searchInput)
+                                .success(function (data) {
+                                    var cdrDsArtItemHolder ={};
+                                    angular.forEach(data.resultList, function(item){
+                                        cdrDsArtItemHolder.artName=item.artName;
+                                        cdrDsArtItemHolder.item=item;
+                                        $scope.cdrDsArtHolder.items.push(cdrDsArtItemHolder);
+                                    });
+                                });
+                        })
+                        .error(function (error) {
+                            $scope.error = error;
+                        });
+
+                }
 
             }
 
@@ -1012,7 +1047,7 @@ angular.module('adcshdwr')
                 var id = $stateParams.id;
                 genericResource.findById(cdrDrctSalesUtils.cdrdrctsalesmanager, id)
                     .success(function (entitySearchResult) {
-                        $scope.cdrDsArtHolder=entitySearchResult;
+                        $scope.cdrDsArtHolder.cdrDrctSales=entitySearchResult;
                     })
                     .error(function (error) {
                         $scope.error = error;
