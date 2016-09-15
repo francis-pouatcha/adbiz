@@ -1,5 +1,7 @@
 package org.adorsys.adcore.jpa;
 
+import java.util.Date;
+
 
 /**
  * Holds an entity and corresponding field descriptions for a search by example
@@ -11,25 +13,25 @@ package org.adorsys.adcore.jpa;
 public class CoreAbstIdentifObjectSearchInput<E extends CoreAbstIdentifObject>
 		extends CoreSearchInput<E> {
 
-	private String valueDtFrom;
-	private String valueDtTo;
+	private Date valueDtFrom;
+	private Date valueDtTo;
 
 	private String identifFrom;
 	private String identifTo;
 	
-	public String getValueDtFrom() {
+	public Date getValueDtFrom() {
 		return valueDtFrom;
 	}
 
-	public void setValueDtFrom(String valueDtFrom) {
+	public void setValueDtFrom(Date valueDtFrom) {
 		this.valueDtFrom = valueDtFrom;
 	}
 
-	public String getValueDtTo() {
+	public Date getValueDtTo() {
 		return valueDtTo;
 	}
 
-	public void setValueDtTo(String valueDtTo) {
+	public void setValueDtTo(Date valueDtTo) {
 		this.valueDtTo = valueDtTo;
 	}
 

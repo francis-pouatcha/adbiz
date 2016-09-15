@@ -86,7 +86,7 @@
             {
                 state: 'newCdrCshDrawers',
                 config: {
-                    url: '/CdrCshDrawers/new/',
+                    url: '/CdrCshDrawers/new',
                     templateUrl: '/adcshdwr.client/src/client/app/views/CdrCshDrawer/createCdrCshDrawer.html',
                     controller: 'cdrCshDrawersCreateCtlr',
                     //controllerAs: 'vm',

@@ -18,7 +18,7 @@
                             <div class="form-group">
                                 <label class=" control-label" for="cdrNbr">{{cdrDrctSalesUtils.translations['CdrDrctSales_dsNbr_description.title']}}</label>
                                 <div class="">
-                                    <input type="text" id="cdrNbr" ng-model="searchInput.entity.cdrNbr" class="form-control">
+                                    <input type="text" id="cdrNbr" ng-model="searchInput.entity.identif" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -27,7 +27,7 @@
                             <label class=" control-label">Du</label>
                             <div class="input-group" style="width:150px;">
                                 <input type="text" class="form-control" id="drctSalesDtFrom" name="drctSalesDtFrom"
-                                       data-datepicker-popup="dd.MM.yyyy" data-ng-model="searchInput.drctSalesDtFrom"
+                                       data-datepicker-popup="dd-MM-yyyy" data-ng-model="searchInput.valueDtFrom"
                                        data-is-open="dateConfig.drctSalesDtFrom.opened"
                                        data-show-button-bar="false" />
 				            <span class="input-group-btn">
@@ -41,7 +41,7 @@
                             <label class=" control-label">Au</label>
                             <div class="input-group" style="width:150px;">
                                 <input type="text" class="form-control" id="drctSalesDtTo" name="drctSalesDtTo"
-                                       data-datepicker-popup="dd.MM.yyyy" data-ng-model="searchInput.drctSalesDtTo"
+                                       data-datepicker-popup="dd-MM-yyyy" data-ng-model="searchInput.valueDtTo"
                                        data-is-open="dateConfig.drctSalesDtTo.opened"
                                        data-show-button-bar="false" />
 				            <span class="input-group-btn">
@@ -71,7 +71,7 @@
         <div class="panel-body">
             <div class="col-lg-12">
                 <div class="row">
-                    <a class="btn btn-primary pull-right margBott10" href="#/CdrDrctSales/new">
+                    <a class="btn btn-primary pull-right margBott10" href="#/CdrDrctSales/new/">
                         <i class="glyphicon-plus"></i> {{cdrDrctSalesUtils.translations['Entity_create.title']}}
                     </a>
 
@@ -101,7 +101,7 @@
                         <tbody>
                             <tr ng-repeat="cdrDrctSale in cdrDrctSales" ng-dblclick="editItem">
                                 <td>{{cdrDrctSale.identif}}</td>
-                                <td>{{cdrDrctSale.cashier}}</td>
+                                <td>{{cdrDrctSale.cdrNbr}}</td>
                                 <td>{{cdrDrctSale.slsPrcCur}}</td>
                                <!-- <td>{{cdrDrctSale.slsGrossPrcPreTax}}</td>-->
                                 <td>{{cdrDrctSale.slsNetAmtToPay}}</td>

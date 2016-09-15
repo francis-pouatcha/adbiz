@@ -421,18 +421,18 @@ angular.module('adcshdwr')
                     start: 0,
                     max: 25
                 };
-                if (angular.isDefined($scope.searchInput.entity.cdrNbr ) && $scope.searchInput.entity.cdrNbr ) {
-                    searchInput.entity.cdrNbr = $scope.searchInput.entity.cdrNbr;
-                    searchInput.fieldNames.push('cdrNbr');
+                if (angular.isDefined($scope.searchInput.entity.identif ) && $scope.searchInput.entity.identif ) {
+                    searchInput.entity.identif = $scope.searchInput.entity.identif;
+                    searchInput.fieldNames.push('identif');
                 }
-                if($scope.searchInput.drctSalesDtFrom){
-                    searchInput.drctSalesDtFrom = $scope.searchInput.drctSalesDtFrom;
-                    searchInput.fieldNames.push('drctSalesDtFrom');
+                if($scope.searchInput.valueDtFrom){
+                    searchInput.valueDtFrom = $scope.searchInput.valueDtFrom;
+                    searchInput.fieldNames.push('valueDtFrom');
                 }
 
-                if($scope.searchInput.drctSalesDtTo){
-                    searchInput.drctSalesDtTo = $scope.searchInput.drctSalesDtTo;
-                    searchInput.fieldNames.push('drctSalesDtTo');
+                if($scope.searchInput.valueDtTo){
+                    searchInput.valueDtTo = $scope.searchInput.valueDtTo;
+                    searchInput.fieldNames.push('valueDtTo');
                 }
 
                 findCustom(searchInput);

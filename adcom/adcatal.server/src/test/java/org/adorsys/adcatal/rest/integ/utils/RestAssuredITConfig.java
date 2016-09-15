@@ -74,8 +74,8 @@ public class RestAssuredITConfig {
 		CatalArticleSearchInput catalArticleSearchInput = new CatalArticleSearchInput();
 		catalArticleSearchInput.setIdentifFrom(catalArticle.getIdentif());
 		catalArticleSearchInput.setIdentifTo(catalArticle.getIdentif());
-		catalArticleSearchInput.setValueDtFrom(DateUtil.format(catalArticle.getValueDt(), DateUtil.DATE_TIME_FORMAT));
-		catalArticleSearchInput.setValueDtTo(DateUtil.format(catalArticle.getValueDt(), DateUtil.DATE_TIME_FORMAT));
+		catalArticleSearchInput.setValueDtFrom(catalArticle.getValueDt());
+		catalArticleSearchInput.setValueDtTo(catalArticle.getValueDt());
 		catalArticleSearchInput.setClassName(CatalArticleSearchInput.class.getName());
 		catalArticleSearchInput.setStart(0);
 		catalArticleSearchInput.setMax(5);
@@ -92,8 +92,8 @@ public class RestAssuredITConfig {
 		CatalArtLangMappingSearchInput catalArtLangMappingSearchInput = new CatalArtLangMappingSearchInput();
 		catalArtLangMappingSearchInput.setIdentifFrom(catalArtLangMapping.getIdentif());
 		catalArtLangMappingSearchInput.setIdentifTo(catalArtLangMapping.getIdentif());
-		catalArtLangMappingSearchInput.setValueDtFrom(DateUtil.format(catalArtLangMapping.getValueDt(), DateUtil.DATE_TIME_FORMAT));
-		catalArtLangMappingSearchInput.setValueDtTo(DateUtil.format(catalArtLangMapping.getValueDt(), DateUtil.DATE_TIME_FORMAT));
+		catalArtLangMappingSearchInput.setValueDtFrom(catalArtLangMapping.getValueDt());
+		catalArtLangMappingSearchInput.setValueDtTo(catalArtLangMapping.getValueDt());
 		catalArtLangMappingSearchInput.setClassName(CatalArtLangMappingSearchInput.class.getName());
 		catalArtLangMappingSearchInput.setStart(0);
 		catalArtLangMappingSearchInput.setMax(5);
@@ -110,8 +110,8 @@ public class RestAssuredITConfig {
 		CatalArt2ProductFamilySearchInput catalArt2ProductFamilySearchInput = new CatalArt2ProductFamilySearchInput();
 		catalArt2ProductFamilySearchInput.setIdentifFrom(catalArt2ProductFamily.getIdentif());
 		catalArt2ProductFamilySearchInput.setIdentifTo(catalArt2ProductFamily.getIdentif());
-		catalArt2ProductFamilySearchInput.setValueDtFrom(DateUtil.format(catalArt2ProductFamily.getValueDt(), DateUtil.DATE_TIME_FORMAT));
-		catalArt2ProductFamilySearchInput.setValueDtTo(DateUtil.format(catalArt2ProductFamily.getValueDt(), DateUtil.DATE_TIME_FORMAT));
+		catalArt2ProductFamilySearchInput.setValueDtFrom(catalArt2ProductFamily.getValueDt());
+		catalArt2ProductFamilySearchInput.setValueDtTo(catalArt2ProductFamily.getValueDt());
 		catalArt2ProductFamilySearchInput.setClassName(CatalArt2ProductFamilySearchInput.class.getName());
 		catalArt2ProductFamilySearchInput.setStart(0);
 		catalArt2ProductFamilySearchInput.setMax(5);
@@ -128,8 +128,8 @@ public class RestAssuredITConfig {
 		CatalPicMappingSearchInput catalPicMappingSearchInput = new CatalPicMappingSearchInput();
 		catalPicMappingSearchInput.setIdentifFrom(catalPicMapping.getIdentif());
 		catalPicMappingSearchInput.setIdentifTo(catalPicMapping.getIdentif());
-		catalPicMappingSearchInput.setValueDtFrom(DateUtil.format(catalPicMapping.getValueDt(), DateUtil.DATE_TIME_FORMAT));
-		catalPicMappingSearchInput.setValueDtTo(DateUtil.format(catalPicMapping.getValueDt(), DateUtil.DATE_TIME_FORMAT));
+		catalPicMappingSearchInput.setValueDtFrom(catalPicMapping.getValueDt());
+		catalPicMappingSearchInput.setValueDtTo(catalPicMapping.getValueDt());
 		catalPicMappingSearchInput.setClassName(CatalPicMappingSearchInput.class.getName());
 		catalPicMappingSearchInput.setStart(0);
 		catalPicMappingSearchInput.setMax(5);
@@ -146,8 +146,8 @@ public class RestAssuredITConfig {
 		CatalProdFmlySearchInput catalProdFmlySearchInput = new CatalProdFmlySearchInput();
 		catalProdFmlySearchInput.setIdentifFrom(catalProdFmly.getIdentif());
 		catalProdFmlySearchInput.setIdentifTo(catalProdFmly.getIdentif());
-		catalProdFmlySearchInput.setValueDtFrom(DateUtil.format(catalProdFmly.getValueDt(), DateUtil.DATE_TIME_FORMAT));
-		catalProdFmlySearchInput.setValueDtTo(DateUtil.format(catalProdFmly.getValueDt(), DateUtil.DATE_TIME_FORMAT));
+		catalProdFmlySearchInput.setValueDtFrom(catalProdFmly.getValueDt());
+		catalProdFmlySearchInput.setValueDtTo(catalProdFmly.getValueDt());
 		catalProdFmlySearchInput.setClassName(CatalProdFmlySearchInput.class.getName());
 		catalProdFmlySearchInput.setStart(0);
 		catalProdFmlySearchInput.setMax(5);
@@ -164,8 +164,8 @@ public class RestAssuredITConfig {
 		CatalProdFmlyLangMapSearchInput catalProdFmlyLangMapSearchInput = new CatalProdFmlyLangMapSearchInput();
 		catalProdFmlyLangMapSearchInput.setIdentifFrom(catalProdFmlyLangMap.getIdentif()); 
 		catalProdFmlyLangMapSearchInput.setIdentifTo(catalProdFmlyLangMap.getIdentif());
-		catalProdFmlyLangMapSearchInput.setValueDtFrom(DateUtil.format(catalProdFmlyLangMap.getValueDt(), DateUtil.DATE_TIME_FORMAT));
-		catalProdFmlyLangMapSearchInput.setValueDtTo(DateUtil.format(catalProdFmlyLangMap.getValueDt(), DateUtil.DATE_TIME_FORMAT));
+		catalProdFmlyLangMapSearchInput.setValueDtFrom(catalProdFmlyLangMap.getValueDt());
+		catalProdFmlyLangMapSearchInput.setValueDtTo(catalProdFmlyLangMap.getValueDt());
 		catalProdFmlyLangMapSearchInput.setClassName(CatalProdFmlyLangMapSearchInput.class.getName());
 		catalProdFmlyLangMapSearchInput.setStart(0);
 		catalProdFmlyLangMapSearchInput.setMax(5);

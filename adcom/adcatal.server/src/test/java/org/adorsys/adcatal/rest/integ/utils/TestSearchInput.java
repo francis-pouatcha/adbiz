@@ -1,5 +1,6 @@
 package org.adorsys.adcatal.rest.integ.utils;
 
+import java.util.Date;
 import java.util.List;
 
 import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
@@ -13,7 +14,7 @@ public abstract class TestSearchInput<E extends CoreAbstIdentifObject, SI extend
 	
 	
 	
-	public CoreAbstIdentifObjectSearchInput<E> createTestSearchInput(List<String> fieldNames, Class<? extends E> clazz, String identif, String valueDt){
+	public CoreAbstIdentifObjectSearchInput<E> createTestSearchInput(List<String> fieldNames, Class<? extends E> clazz, String identif, Date valueDt){
 		
 		  CoreAbstIdentifObjectSearchInput<E> searchInput = newSearchInput();
 		  searchInput.setStart(0);
