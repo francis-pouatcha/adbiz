@@ -1,0 +1,113 @@
+<div class="mainbar" ng-cloak>
+        <div class="panel panel-default  ng-scope">
+            <div class="panel-heading no-collapse">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <b>{{commonTranslations.translations['Entity_search.title']}}</b>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="">
+                    <form role="form" class="">
+                        <div class="row" >
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class=" control-label" for="cdrNbr">{{cdrCshDrawerUtils.translations['CdrCshDrawer_cdrNbr_description.title']}}</label>
+                                    <div class="">
+                                        <input type="text" id="cdrNbr" ng-model="searchInput.entity.cdrNbr" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class=" control-label" for="cdrNbr">{{cdrCshDrawerUtils.translations['CdrCshDrawer_cashier_description.title']}}</label>
+                                    <div class="">
+                                        <input type="text" id="" ng-model="searchInput.entity.cashier" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label class=" control-label" for="cdrNbr">{{commonTranslations.translations['Entity_From.title']}}</label>
+                                    <div class="">
+                                        <input type="text"  ng-model="searchInput.valueDtFrom" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label class=" control-label" for="rcptNbr">{{commonTranslations.translations['Entity_To.title']}}</label>
+                                    <div class="">
+                                        <input type="text" id="rcptNbr" ng-model="searchInput.valueDtTo" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <button  ng-click="handleSearchRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <div class="panel panel-default ">
+            <div class="panel-heading no-collapse"><b>{{cdrCshDrawerUtils.translations['CdrCshDrawer_description.title']}}</b></div>
+            <div class="panel-body">
+                <div class="col-lg-12">
+                    <div class="table-overflow-middle row">
+                        <table class="table table-bordered  table-striped pointer-element" >
+                            <thead>
+                            <tr>
+                                <th>{{cdrCshDrawerUtils.translations['CdrCshDrawer_cashier_description.title']}}</th>
+                                <th>{{cdrCshDrawerUtils.translations['CdrCshDrawer_cdrNbr_description.title']}}</th>
+                                <th>{{cdrCshDrawerUtils.translations['CdrCshDrawer_closedBy_description.title']}}</th>
+                                <th>{{cdrCshDrawerUtils.translations['CdrCshDrawer_clsngDt_description.title']}}</th>
+                                <th>{{cdrCshDrawerUtils.translations['CdrCshDrawer_initialAmt_description.title']}}</th>
+                                <th>{{cdrCshDrawerUtils.translations['CdrCshDrawer_opngDt_description.title']}}</th>
+                                <th>{{cdrCshDrawerUtils.translations['CdrCshDrawer_ttlCashIn_description.title']}}</th>
+                                <th>{{cdrCshDrawerUtils.translations['CdrCshDrawer_ttlCash_description.title']}}</th>
+                                <th>{{cdrCshDrawerUtils.translations['CdrCshDrawer_ttlCheck_description.title']}}</th>
+                                <th>{{cdrCshDrawerUtils.translations['CdrCshDrawer_ttlCredCard_description.title']}}</th>
+                                <!--
+                                <th>{{cdrCshDrawerUtils.translations['CdrCshDrawer_ttlCashOut_description.title']}}</th>
+                                <th>{{cdrCshDrawerUtils.translations['CdrCshDrawer_ttlVchrIn_description.title']}}</th>
+                                <th>{{cdrCshDrawerUtils.translations['CdrCshDrawer_ttlVchrOut_description.title']}}</th>-->
+                                <th></th>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="cdrCshDrawer in cdrCshDrawers" ng-dblclick="editItem" >
+                                <td>{{cdrCshDrawer.cashier}}</td>
+                                <td>{{cdrCshDrawer.cdrNbr}}</td>
+                                <td>{{cdrCshDrawer.closedBy}}</td>
+                                <td>{{cdrCshDrawer.clsngDt | date:'yyyy-MM-dd HH:mm'}}</td>
+                                <td>{{cdrCshDrawer.initialAmt}}</td>
+                                <td>{{cdrCshDrawer.opngDt | date:'yyyy-MM-dd HH:mm'}}</td>
+                               <td>{{cdrCshDrawer.ttlCashIn}}</td>
+                                <td>{{cdrCshDrawer.ttlCash}}</td>
+                                <td>{{cdrCshDrawer.ttlCheck}}</td>
+                                <td>{{cdrCshDrawer.ttlCredCard}}</td>
+                                <!--
+                                <td>{{cdrCshDrawer.ttlCashOut}}</td>
+                               <td>{{cdrCshDrawer.ttlVchrIn}}</td>
+                               <td>{{cdrCshDrawer.ttlVchrOut  | currencyAccounting:"XAF":"4"}}</td>
+                               -->
+                                <td><a href="#/show/{{cdrCshDrawer.id}}" ><i class="glyphicon glyphicon-eye-open"></i></a></td>
+                                 
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul  class="pull-right">
+                        <pagination  total-items="totalItems" items-per-page="itemPerPage"  class="pagination-sm" ng-model="currentPage" ng-change="paginate()"></pagination>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+</div>

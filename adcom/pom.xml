@@ -43,6 +43,7 @@
 		<module>adprocmt.client</module>
 		<module>addashboard.client</module>
 		<module>adcshdwr.client</module>
+		<module>admanager.client</module>
 		
 		<!-- 
 		<module>adbnsptnr.client</module> 

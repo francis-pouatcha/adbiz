@@ -150,6 +150,12 @@
 			<type>war</type>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.adorsys.adcom</groupId>
+			<artifactId>admanager.client</artifactId>
+			<type>war</type>
+			<version>${project.version}</version>
+		</dependency>
 
 	</dependencies>
 </project>
