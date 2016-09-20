@@ -83,15 +83,29 @@ function ($scope, genericResource, cdrCshDrawerUtils, cdrCshDrawerState, $locati
             $scope.maxSize = cdrCshDrawerState.maxSize;
             $scope.cdrCshDrawers = cdrCshDrawerState.cdrCshDrawers;
             $scope.selectedIndex = cdrCshDrawerState.selectedIndex;
-            $scope.handleSearchRequestEvent = handleSearchRequestEvent;
-            $scope.handlePrintRequestEvent = handlePrintRequestEvent;
             $scope.paginate = paginate;
             $scope.error = "";
+            $scope.processSearchInput=processSearchInput;
             $scope.cdrCshDrawerUtils = cdrCshDrawerUtils;
-            $scope.openCreateForm = openCreateForm;
             var translateChangeSuccessHdl = $rootScope.$on('$translateChangeSuccess', function () {
                 cdrCshDrawerUtils.translate();
             });
+
+    $scope.openDateComponent = function(componentId,$event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.dateConfig[componentId].opened = true;
+    };
+
+    $scope.dateConfig = {
+        format: 'dd-MM-yyyy',
+        drctSalesDtFrom: {
+            opened : false
+        },
+        drctSalesDtTo: {
+            opened : false
+        }
+    };
 
             $scope.$on('$destroy', function () {
                 translateChangeSuccessHdl();
@@ -105,7 +119,7 @@ function ($scope, genericResource, cdrCshDrawerUtils, cdrCshDrawerState, $locati
                 // store search
                 cdrCshDrawerState.searchResult(entitySearchResult);
                 //$scope.searchInput = cdrDrctSalesState.searchResult().searchInput;
-                 $scope.cdrDrctSales = cdrCshDrawerState.searchResult().resultList;
+                 $scope.cdrCshDrawers = cdrCshDrawerState.searchResult().resultList;
             })
             .error(function (error) {
                 $scope.error = error;
@@ -113,20 +127,37 @@ function ($scope, genericResource, cdrCshDrawerUtils, cdrCshDrawerState, $locati
     }
 
 
-    function handleSearchRequestEvent() {
-                if ($scope.searchInput.acsngUser) {
-                    $scope.searchInput.entity.acsngUser = $scope.searchInput.acsngUser.loginName;
-                } else {
-                    $scope.searchInput.entity.acsngUser = '';
-                }
-                findCustom($scope.searchInput);
-            }
+    function processSearchInput() {
+        var searchInput = {
+            entity: {},
+            fieldNames: [],
+            start: 0,
+            max: 25
+        };
+        if (angular.isDefined($scope.searchInput.entity.cdrNbr ) && $scope.searchInput.entity.cdrNbr ) {
+            searchInput.entity.cdrNbr = $scope.searchInput.entity.cdrNbr;
+            searchInput.fieldNames.push('cdrNbr');
+        }
+        if (angular.isDefined($scope.searchInput.entity.cashier ) && $scope.searchInput.entity.cashier ) {
+            searchInput.entity.cashier = $scope.searchInput.entity.cashier;
+            searchInput.fieldNames.push('cashier');
+        }
+        if($scope.searchInput.valueDtFrom){
+            searchInput.valueDtFrom = $scope.searchInput.valueDtFrom;
+            searchInput.fieldNames.push('valueDtFrom');
+        }
 
-            function handlePrintRequestEvent() {
-                // To do
-            }
+        if($scope.searchInput.valueDtTo){
+            searchInput.valueDtTo = $scope.searchInput.valueDtTo;
+            searchInput.fieldNames.push('valueDtTo');
+        }
 
-            function paginate() {
+        findCustom(searchInput);
+    }
+
+
+
+    function paginate() {
                 $scope.searchInput = cdrCshDrawerState.paginate();
                 findCustom($scope.searchInput);
             };
@@ -137,35 +168,9 @@ function ($scope, genericResource, cdrCshDrawerUtils, cdrCshDrawerState, $locati
             }
 
             function init() {
-                //find previous cdr cshdrawers
-                loadPreviousCshDrws();
+                findCustom($scope.searchInput);
             }
 
-            function loadPreviousCshDrws() {
-                genericResource.get(cdrCshDrawerUtils.urlBase + "/findPreviousCdrCshDrawer").success(function (result) {
-                    $scope.cdrCshDrawers = result;
-                }).error(function (error) {
-                    $scope.error = error;
-                });
-            }
-
-
-            function checkOpenedCdrCshDrawer() {
-
-                cdrCshDrawerUtils.getActive().then(function (result) {
-                    if (result) {
-                        $location.path("/CdrCshDrawers/show/" + result.id); //go to the show if a cash drawer exist
-                    } else {
-                        $location.path("/CdrCshDrawers/new")
-                    }
-                }, function (error) {
-                    $scope.error = error;
-                });
-            }
-
-            function openCreateForm() {
-                checkOpenedCdrCshDrawer();
-            }
 }])
     .factory('cdrCshDrawerState', ['$rootScope', '$q', function ($rootScope, $q) {
 

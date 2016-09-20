@@ -28,24 +28,36 @@
                                 </div>
                             </div>
                             <div class="col-lg-2">
-                                <div class="form-group">
-                                    <label class=" control-label" for="cdrNbr">{{commonTranslations.translations['Entity_From.title']}}</label>
-                                    <div class="">
-                                        <input type="text"  ng-model="searchInput.valueDtFrom" class="form-control">
-                                    </div>
+                                <label class=" control-label">{{commonTranslations.translations['Entity_From.title']}}</label>
+                                <div class="input-group" style="width:150px;">
+                                    <input type="text" class="form-control" id="drctSalesDtFrom" name="drctSalesDtFrom"
+                                           data-datepicker-popup="dd-MM-yyyy" data-ng-model="searchInput.valueDtFrom"
+                                           data-is-open="dateConfig.drctSalesDtFrom.opened"
+                                           data-show-button-bar="false" />
+				            <span class="input-group-btn">
+				                <button style="height:34px;" class="btn btn-default" data-ng-click="openDateComponent('drctSalesDtFrom', $event)">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+				            </span>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <label class=" control-label">{{commonTranslations.translations['Entity_To.title']}}</label>
+                                <div class="input-group" style="width:150px;">
+                                    <input type="text" class="form-control" id="drctSalesDtTo" name="drctSalesDtTo"
+                                           data-datepicker-popup="dd-MM-yyyy" data-ng-model="searchInput.valueDtTo"
+                                           data-is-open="dateConfig.drctSalesDtTo.opened"
+                                           data-show-button-bar="false" />
+				            <span class="input-group-btn">
+				                <button style="height:34px;" class="btn btn-default" data-ng-click="openDateComponent('drctSalesDtTo', $event)">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+				            </span>
                                 </div>
                             </div>
                             <div class="col-lg-2">
                                 <div class="form-group">
-                                    <label class=" control-label" for="rcptNbr">{{commonTranslations.translations['Entity_To.title']}}</label>
-                                    <div class="">
-                                        <input type="text" id="rcptNbr" ng-model="searchInput.valueDtTo" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="form-group">
-                                    <button  ng-click="handleSearchRequestEvent()" class="btn btn-default " style="margin-top: 23px;" >
+                                    <button  ng-click="processSearchInput()" class="btn btn-default " style="margin-top: 23px;" >
                                         <i class="glyphicon glyphicon-search"></i>
                                     </button>
                                 </div>
