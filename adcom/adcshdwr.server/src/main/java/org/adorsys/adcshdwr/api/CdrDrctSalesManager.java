@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.List;
 
+import javax.annotation.Resource;
+import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -15,6 +17,7 @@ import org.adorsys.adbase.jpa.OrgUnit;
 import org.adorsys.adbase.rest.OrgContactLookup;
 import org.adorsys.adbase.rest.OrgUnitLookup;
 import org.adorsys.adcore.auth.AdcomUser;
+import org.adorsys.adcore.auth.AdcomUserFactory;
 import org.adorsys.adcore.enums.CoreHistoryTypeEnum;
 import org.adorsys.adcore.exceptions.AdException;
 import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchInput;
@@ -62,8 +65,11 @@ public class CdrDrctSalesManager extends CoreAbstBsnsObjectManager<CdrDrctSales,
 	@Inject
 	private CdrCstmrVchrLookup cstmrVchrLookup;
 	
-	@Inject
-	private AdcomUser user;
+/*	@Inject
+	private AdcomUser user;*/
+	
+	@Resource
+	private SessionContext context;
 	
 	@Inject
 	private OrgUnitLookup orgUnitLookup;
@@ -99,7 +105,8 @@ public class CdrDrctSalesManager extends CoreAbstBsnsObjectManager<CdrDrctSales,
 		CdrPymnt pymnt = pymntLookup.findByIdentif(drctSales.getPymntNbr());
 		Long itemCount = injector.getItemLookup().countByCntnrIdentifAndDisabledDtIsNull(cdrDrctSalesIdentif);
 		int processed = 0;
-
+		
+		AdcomUser user = AdcomUserFactory.getAdcomUser(context);
 		OrgUnit tenant = orgUnitLookup.findTenant(user.getRealm());
 		OrgContact orgContact = orgContactLookup.findFirstMainContact(tenant.getIdentif());
 		template.startPage(drctSales, pymnt, tenant, orgContact, user);
@@ -135,6 +142,7 @@ public class CdrDrctSalesManager extends CoreAbstBsnsObjectManager<CdrDrctSales,
 	}
 	
 	public CdrVoucherPrintTemplatePdf printVoucher(CdrVoucherprinterData printerData) throws IOException{
+		AdcomUser user = AdcomUserFactory.getAdcomUser(context);
 		CdrVoucherPrintTemplatePdf template = new CdrVoucherPrintTemplatePdf(printerData);
 		CdrCstmrVchr cstmrVchr = cstmrVchrLookup.findByIdentif(printerData.getVoucherIdentif());
 		OrgUnit tenant = orgUnitLookup.findTenant(user.getRealm());

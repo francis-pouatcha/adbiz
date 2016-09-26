@@ -2,10 +2,12 @@ package org.adorsys.adcshdwr.rest;
 
 import java.util.Date;
 
+import javax.annotation.Resource;
+import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import org.adorsys.adcore.auth.AdcomUser;
+import org.adorsys.adcore.auth.AdcomUserFactory;
 import org.adorsys.adcore.repo.CoreAbstIdentifRepo;
 import org.adorsys.adcore.rest.CoreAbstIdentifiedEJB;
 import org.adorsys.adcore.utils.SequenceGenerator;
@@ -18,8 +20,8 @@ public class CdrPymntEJB extends CoreAbstIdentifiedEJB<CdrPymnt>{
 
 	@Inject
 	private CdrPymntRepo repo;
-	@Inject
-	private AdcomUser userPrincipal;
+	@Resource
+	private SessionContext context;
 	
 	@Override
 	public CdrPymnt create(CdrPymnt entity)
@@ -29,7 +31,7 @@ public class CdrPymntEJB extends CoreAbstIdentifiedEJB<CdrPymnt>{
 			entity.setIdentif(SequenceGenerator
 					.getSequence(SequenceGenerator.PAYMENT_SEQUENCE_PREFIX));
 		}
-		entity.setCashier(userPrincipal.getLoginName());
+		entity.setCashier(AdcomUserFactory.getAdcomUser(context).getLoginName());
 		Date pymntDt = new Date();
 		entity.setValueDt(pymntDt);
 		if(StringUtils.isBlank(entity.getPaidBy())) {

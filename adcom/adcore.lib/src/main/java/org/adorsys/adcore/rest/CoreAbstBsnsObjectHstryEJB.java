@@ -3,10 +3,12 @@ package org.adorsys.adcore.rest;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
+import javax.ejb.SessionContext;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
-import org.adorsys.adcore.auth.AdcomUser;
+import org.adorsys.adcore.auth.AdcomUserFactory;
 import org.adorsys.adcore.event.EntityHstryEvent;
 import org.adorsys.adcore.jpa.CoreAbstBsnsItem;
 import org.adorsys.adcore.jpa.CoreAbstBsnsObject;
@@ -23,8 +25,8 @@ public abstract class CoreAbstBsnsObjectHstryEJB<E extends CoreAbstBsnsObject, I
 	@EntityHstryEvent
 	private Event<H> entityHistoryEvent;
 
-	@Inject
-	private AdcomUser callerPrincipal;
+	@Resource
+	private SessionContext context;
 
 	protected abstract CoreAbstBsnsObjInjector<E, I, H, J, S, C> getInjector();
 
@@ -71,9 +73,14 @@ public abstract class CoreAbstBsnsObjectHstryEJB<E extends CoreAbstBsnsObject, I
 		hstry.setHstryDt(new Date());
 		hstry.setHstryType(hstryType);
 
-		hstry.setOrignLogin(callerPrincipal.getLoginName());
-		hstry.setOriginUserName(StringUtils.isBlank(callerPrincipal.getFullName())?callerPrincipal.getLoginName():callerPrincipal.getFullName());
-		hstry.setOrignWrkspc(callerPrincipal.getWorkspaceId());
+		hstry.setOrignLogin(AdcomUserFactory.getAdcomUser(context)
+				.getLoginName());
+		hstry.setOriginUserName(StringUtils.isBlank(AdcomUserFactory
+				.getAdcomUser(context).getFullName()) ? AdcomUserFactory
+				.getAdcomUser(context).getLoginName() : AdcomUserFactory
+				.getAdcomUser(context).getFullName());
+		hstry.setOrignWrkspc(AdcomUserFactory.getAdcomUser(context)
+				.getWorkspaceId());
 		hstry.setProcStep(processingStep);
 		return create(hstry);
 	}

@@ -7,11 +7,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
+import javax.ejb.SessionContext;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 
-import org.adorsys.adcore.auth.AdcomUser;
+import org.adorsys.adcore.auth.AdcomUserFactory;
 import org.adorsys.adcore.enums.CoreHistoryTypeEnum;
 import org.adorsys.adcore.enums.CoreProcessStatusEnum;
 import org.adorsys.adcore.event.EntityClosingEvent;
@@ -54,8 +56,8 @@ public abstract class CoreAbstBsnsObjectManager<E extends CoreAbstBsnsObject, I 
 	@EntityUpdatingEvent
 	private Event<E> entityUpdatingEvent;
 	
-	@Inject
-	protected AdcomUser callerPrincipal;
+	@Resource
+	protected SessionContext context;
 	/**
 	 * New business processs. The object is created if necessary.
 	 * 
@@ -143,7 +145,7 @@ public abstract class CoreAbstBsnsObjectManager<E extends CoreAbstBsnsObject, I 
 		if(!StringUtils.equals(identif, item.getCntnrIdentif()))
 			throw new AdRestException(Response.Status.CONFLICT);
 		
-		item.setAcsngUser(callerPrincipal.getLoginName());
+		item.setAcsngUser(AdcomUserFactory.getAdcomUser(context).getLoginName());
 		
 		item.evlte();
 		
@@ -166,7 +168,7 @@ public abstract class CoreAbstBsnsObjectManager<E extends CoreAbstBsnsObject, I 
 		if(!DateUtils.truncatedEquals(existing.getAcsngDt(),acsngDt, Calendar.MINUTE)){
 			existing.setAcsngDt(acsngDt);
 		}
-		String currentLoginName = callerPrincipal.getLoginName();
+		String currentLoginName = AdcomUserFactory.getAdcomUser(context).getLoginName();
 		existing.setAcsngUser(currentLoginName);
 		existing.evlte();
 		

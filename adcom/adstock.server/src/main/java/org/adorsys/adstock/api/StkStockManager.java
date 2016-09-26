@@ -3,10 +3,13 @@ package org.adorsys.adstock.api;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.annotation.Resource;
+import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import org.adorsys.adcore.auth.AdcomUser;
+import org.adorsys.adcore.auth.AdcomUserFactory;
 import org.adorsys.adcore.exceptions.AdException;
 import org.adorsys.adcore.utils.BigDecimalUtils;
 import org.adorsys.adstock.jpa.StkArticleLot;
@@ -27,8 +30,8 @@ public class StkStockManager  {
 	@Inject
 	private StkMvntEJB stkMvntEJB;
 
-	@Inject
-	protected AdcomUser callerPrincipal;
+	@Resource
+	private SessionContext context;
 
 	@Inject
 	private StkArticleLotLookup articleLotLookup;
@@ -77,7 +80,7 @@ public class StkStockManager  {
 		
 		Date now = new Date();
 		perstMvnt.setValueDt(now);
-		String currentLoginName = callerPrincipal.getLoginName();
+		String currentLoginName = AdcomUserFactory.getAdcomUser(context).getLoginName();
 		perstMvnt.setAcsngUser(currentLoginName);
 		perstMvnt.setAcsngDt(now);
 		perstMvnt.setQtyBefore(expectedStockQty);

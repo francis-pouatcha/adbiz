@@ -6,6 +6,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+import javax.ejb.SessionContext;
 import javax.inject.Inject;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +23,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.adorsys.adcore.auth.AdcomUser;
+import org.adorsys.adcore.auth.AdcomUserFactory;
 import org.adorsys.adcore.exceptions.AdException;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObject;
 import org.adorsys.adcore.jpa.CoreAbstIdentifObjectSearchInput;
@@ -38,9 +41,8 @@ public abstract class CoreAbstIdentifReadEndpoint<E extends CoreAbstIdentifObjec
 	protected abstract Field[] getEntityFields();
 	protected abstract CoreAbstIdentifObjectSearchInput<E> newSearchInput();
 	protected abstract CoreAbstIdentifObjectSearchResult<E> newSearchResult(Long count, Long total, List<E> resultList, CoreAbstIdentifObjectSearchInput<E> searchInput);
-	@Inject
-	private AdcomUser userPrincipal;
-
+	@Resource
+	private SessionContext context;
 	/**
 	 * Override this to activate reporting.
 	 * 
@@ -268,7 +270,7 @@ public abstract class CoreAbstIdentifReadEndpoint<E extends CoreAbstIdentifObjec
 		
 		PdfReportProperties reportProperties = searchInput.getReportProperties();
 		if(reportProperties==null || reportProperties.getReportFields().isEmpty()) return Response.noContent().build();
-		reportProperties.setUsername(userPrincipal.getLoginName());
+		reportProperties.setUsername(AdcomUserFactory.getAdcomUser(context).getLoginName());
 
 		OutputStream os = null;
 		PdfReportTemplate reportTemplate = new PdfReportTemplate()

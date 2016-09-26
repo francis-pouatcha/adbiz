@@ -6,7 +6,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
+import javax.annotation.Resource;
+import javax.ejb.SessionContext;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -20,7 +21,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.adorsys.adcore.auth.AdcomUser;
+import org.adorsys.adcore.auth.AdcomUserFactory;
 import org.adorsys.adcore.exceptions.AdException;
 import org.adorsys.adcore.jpa.CoreAbstBsnsItem;
 import org.adorsys.adcore.jpa.CoreAbstBsnsItemSearchInput;
@@ -40,8 +41,8 @@ public abstract class CoreAbstBsnsItemEndpoint<E extends CoreAbstBsnsItem, SI ex
 	protected abstract SI newSearchInput();
 	protected abstract AbstEntiyProps getEntityProps();
 	
-	@Inject
-	private AdcomUser userPrincipal;
+	@Resource
+	private SessionContext context;
 
 	@GET
 	@Path("/{id}")
@@ -224,7 +225,7 @@ public abstract class CoreAbstBsnsItemEndpoint<E extends CoreAbstBsnsItem, SI ex
 		
 		PdfReportProperties reportProperties = searchInput.getReportProperties();
 		if(reportProperties==null || reportProperties.getReportFields().isEmpty()) return Response.noContent().build();
-		reportProperties.setUsername(userPrincipal.getLoginName());
+		reportProperties.setUsername(AdcomUserFactory.getAdcomUser(context).getLoginName());
 		
 		OutputStream os = null;
 		PdfReportTemplate reportTemplate = new PdfReportTemplate()

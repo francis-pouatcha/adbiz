@@ -2,26 +2,16 @@ package org.adorsys.adcore.auth;
 
 import java.security.Principal;
 
-import javax.annotation.Resource;
 import javax.ejb.SessionContext;
-import javax.ejb.Stateless;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
-import javax.enterprise.inject.Produces;
 
 import org.keycloak.KeycloakPrincipal;
 
-@Stateless
-public class AdcomUserProducer {
+public final class AdcomUserFactory {
 
-	@Resource
-	private SessionContext sessionContext;
+
+	private static AdcomUser unauthUser = new AdcomUser("nobody");
 	
-	private AdcomUser unauthUser = new AdcomUser("nobody");
-	
-	//@Produces
-	//@SessionScoped
-	public AdcomUser getCallerPrincipal() {
+	public static  AdcomUser getAdcomUser(SessionContext sessionContext){
 		Principal callerPrincipal = sessionContext.getCallerPrincipal();
 		if(callerPrincipal==null){
 			return unauthUser;
@@ -34,5 +24,5 @@ public class AdcomUserProducer {
 
 		return new AdcomUser(callerPrincipal.getName());
 	}
-
+	
 }

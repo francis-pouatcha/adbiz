@@ -4,10 +4,12 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
+import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import org.adorsys.adcore.auth.AdcomUser;
+import org.adorsys.adcore.auth.AdcomUserFactory;
 import org.adorsys.adcore.exceptions.AdException;
 import org.adorsys.adcore.utils.SequenceGenerator;
 import org.adorsys.adcshdwr.jpa.CdrCshDrawer;
@@ -17,8 +19,12 @@ import org.apache.commons.lang3.StringUtils;
 
 @Stateless
 public class CdrCshDrawerManager {
-	@Inject
-	private AdcomUser callerPrincipal;
+	/*@Inject
+	private AdcomUser callerPrincipal;*/
+	
+	
+	@Resource
+	private SessionContext context;
 	
 	@Inject
 	private CdrCshDrawerEJB ejb;
@@ -30,7 +36,7 @@ public class CdrCshDrawerManager {
 	private static final BigDecimal INITIAL_AMT = BigDecimal.ZERO;
 	
 	public CdrCshDrawer openCshDrawer(CdrCshDrawer cshDrawer) {
-		String loginName = callerPrincipal.getLoginName();
+		String loginName = AdcomUserFactory.getAdcomUser(context).getLoginName();
 		if(hasOpenedCshDrawer(loginName)) {
 			cshDrawer = findOpenedCshDrawerByCashier(loginName).iterator().next();
 		}else {
@@ -50,7 +56,7 @@ public class CdrCshDrawerManager {
 	}
 	
 	public CdrCshDrawer closeCshDrawer(CdrCshDrawer cshDrawer) throws AdException {
-		String loginName = callerPrincipal.getLoginName();
+		String loginName = AdcomUserFactory.getAdcomUser(context).getLoginName();
 		if(cshDrawer == null && !hasOpenedCshDrawer(loginName)) throw new AdException("No cash drawer to close.");
 		if(cshDrawer == null && hasOpenedCshDrawer(loginName)) {
 			cshDrawer = findOpenedCshDrawerByCashier(loginName).iterator().next();
@@ -68,7 +74,7 @@ public class CdrCshDrawerManager {
 	 */
 	 private boolean hasOpenedCshDrawer(String cashier) {
 		if(StringUtils.isBlank(cashier)) {
-			cashier = callerPrincipal.getLoginName();
+			cashier = AdcomUserFactory.getAdcomUser(context).getLoginName();
 		}
 		List<CdrCshDrawer> cshDrawersByCashier = findOpenedCshDrawerByCashier(cashier);
 		return !cshDrawersByCashier.isEmpty();
@@ -86,7 +92,7 @@ public class CdrCshDrawerManager {
 	 * @throws AdException 
 	 */
 	public CdrCshDrawer getActiveCshDrawer() throws AdException {
-		String loginName = callerPrincipal.getLoginName();
+		String loginName = AdcomUserFactory.getAdcomUser(context).getLoginName();
 		List<CdrCshDrawer> cshDrawers = findOpenedCshDrawerByCashier(loginName);
 		if(cshDrawers.isEmpty()) return null;
 		if(cshDrawers.size() > 1) throw new AdException("More than one active cash drawer for user "+loginName+"\r, the system"
@@ -95,7 +101,7 @@ public class CdrCshDrawerManager {
 	}
 	
 	public List<CdrCshDrawer> findPreviousCdrCshDrawer() {
-		String loginName = callerPrincipal.getLoginName();
+		String loginName = AdcomUserFactory.getAdcomUser(context).getLoginName();
 		List<CdrCshDrawer> previous = lookup.findPrevious(loginName);
 		return previous;
 	}

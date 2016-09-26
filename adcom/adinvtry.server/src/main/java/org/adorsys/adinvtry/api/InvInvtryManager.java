@@ -8,6 +8,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+import org.adorsys.adcore.auth.AdcomUserFactory;
 import org.adorsys.adcore.exceptions.AdRestException;
 import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchInput;
 import org.adorsys.adcore.jpa.CoreAbstBsnsObjectSearchResult;
@@ -70,7 +71,7 @@ public class InvInvtryManager  extends CoreAbstBsnsObjectManager<InvInvtry, InvI
 		loadExistingBsnsObject(identif); 
 		InvInvtryItem existing = loadExistingBsnsItem(identif, itemIdentif);
 		//do not work yet, get currentLoginName in frontend
-		String currentLoginName = callerPrincipal.getLoginName();
+		String currentLoginName = AdcomUserFactory.getAdcomUser(context).getLoginName();
 //		String currentLoginName = acsngUser;
 		
 		// In any case, it is important to read the stock quantity at the moment of the accessment.
