@@ -1,7 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.5.0.v201506092134 Build &lt;@BUILD@></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
     <text-property name="title">Catal Report</text-property>
+    <list-property name="propertyBindings">
+        <structure>
+            <property name="name">odaDriverClass</property>
+            <property name="id">39</property>
+        </structure>
+        <structure>
+            <property name="name">odaURL</property>
+            <property name="id">39</property>
+        </structure>
+        <structure>
+            <property name="name">odaUser</property>
+            <property name="id">39</property>
+        </structure>
+        <structure>
+            <property name="name">odaAutoCommit</property>
+            <property name="id">39</property>
+        </structure>
+        <structure>
+            <property name="name">odaIsolationMode</property>
+            <property name="id">39</property>
+        </structure>
+        <structure>
+            <property name="name">odaPassword</property>
+            <property name="id">39</property>
+        </structure>
+        <structure>
+            <property name="name">odaJndiName</property>
+            <property name="id">39</property>
+        </structure>
+        <structure>
+            <property name="name">OdaConnProfileName</property>
+            <property name="id">39</property>
+        </structure>
+        <structure>
+            <property name="name">OdaConnProfileStorePath</property>
+            <property name="id">39</property>
+        </structure>
+    </list-property>
     <property name="units">in</property>
     <property name="iconFile">/templates/grouped_listing.gif</property>
     <property name="cheatSheet">org.eclipse.birt.report.designer.ui.cheatsheet.groupedlisting</property>
@@ -28,11 +66,9 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">org.h2.Driver</property>
-            <property name="odaURL">jdbc:h2:~/tools/wildfly-10.0.0.Final/standalone/data/addb</property>
+            <property name="odaURL">jdbc:h2:~/tools/wildfly-10.0.0.Final/standalone/data/adh2db</property>
             <property name="odaUser">sa</property>
             <encrypted-property name="odaPassword" encryptionID="base64">c2E=</encrypted-property>
-            <property name="OdaConnProfileName">connectWilf9.0.2</property>
-            <property name="OdaConnProfileStorePath">connectWild9.0.2</property>
         </oda-data-source>
     </data-sources>
     <data-sets>

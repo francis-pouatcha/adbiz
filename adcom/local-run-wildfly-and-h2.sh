@@ -60,6 +60,8 @@ fi
 
 cd $JBOSS_HOME && tar xzf $DIST_HOME/adcom.deploy.tar.gz
 
+cp -r $CURRENT_DIR/adreport.server.war $JBOSS_HOME/standalone/deployments
+
 cp -r $DIST_HOME/appdata $JBOSS_HOME/standalone/appdata
 
 export H2_CONSOLE_WAR=$TOOLS_HOME/h2console.war

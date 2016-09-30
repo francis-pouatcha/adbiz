@@ -230,7 +230,7 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">org.h2.Driver</property>
-            <property name="odaURL">jdbc:h2:~/tools/wildfly-10.0.0.Final/standalone/data/addb</property>
+            <property name="odaURL">jdbc:h2:~/tools/wildfly-10.0.0.Final/standalone/data/adh2db</property>
             <property name="odaUser">sa</property>
             <encrypted-property name="odaPassword" encryptionID="base64">c2E=</encrypted-property>
             <property name="OdaConnProfileName">connectWilf9.0.2</property>
