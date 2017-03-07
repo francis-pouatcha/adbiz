@@ -48,11 +48,11 @@
                         </div>
                         <div class="col-lg-2">
                             <label class=" " for="slsRebateAmt">{{cdrDrctSalesUtils.translations['CdrDsArtItem_rebate_description.title']}}</label>
-                            <input type="number" class="form-control" name="slsRebateAmt" id="slsRebateAmt" autocomplete="off" ng-model="cdrDsArtItemHolder.item.slsRebateAmt" numeric>
+                            <input type="number" class="form-control" name="slsRebateAmt" id="slsRebateAmt" autocomplete="off" ng-model="cdrDsArtItemHolder.item.slsRebateAmt">
                         </div>
                         <div class="col-lg-2">
                             <label class=" " for="slsRstckgUnitFeesPreTax">{{cdrDrctSalesUtils.translations['CdrDsArtItem_restockgFees_description.title']}}</label>
-                            <input type="number" class="form-control" name="slsRstckgUnitFeesPreTax" id="slsRstckgUnitFeesPreTax" autocomplete="off" ng-model="cdrDsArtItemHolder.item.slsRstckgUnitFeesPreTax" numeric>
+                            <input type="number" class="form-control" name="slsRstckgUnitFeesPreTax" id="slsRstckgUnitFeesfPreTax" autocomplete="off" ng-model="cdrDsArtItemHolder.item.slsRstckgUnitFeesPreTax">
                         </div>
                         <div class="col-lg-2">
                             <label class=" " for="maxStockQty">Qte. En stock</label>
@@ -92,7 +92,7 @@
                     </span>
                     <span class="col-lg-2 form">
                     	<label>{{cdrDrctSalesUtils.translations['CdrDrctSales_paidAmt_description.title']}} : </label>
-                    	<input type="text" price-green="price-green" class="form-control" ng-model="cdrDsArtHolder.paidAmt" ng-change="paidAmtChanged()" numeric />
+                    	<input type="text" price-green="price-green" class="form-control" ng-model="cdrDsArtHolder.paidAmt" ng-change="paidAmtChanged()" />
                     </span>
                     <div class="col-lg-3 btn-group" style="margin-top: 25px;">
                         <button ng-click="save()" ng-show="!showprint" class="btn btn-primary"><i class="glyphicon glyphicon-save" ></i> {{'Entity_save.title'|translate}}</button>
@@ -113,11 +113,11 @@
                     <span class="col-lg-1" price-style="price-style">{{cdrDsArtHolder.cdrDrctSales.slsNetPrcTaxIncl | number:0}}</span>
                     <span class="col-lg-2">
                     	<label>{{cdrDrctSalesUtils.translations['CdrDrctSales_pymtDscntAmt_description.title']}}</label>
-                    	<input type="text" price-black="price-black" ng-change="pymtDscntAmtChanged()" class="form-control" ng-model="cdrDsArtHolder.cdrDrctSales.slsPymtDscntAmt" numeric />
+                    	<input type="text" price-black="price-black" ng-change="pymtDscntAmtChanged()" class="form-control" ng-model="cdrDsArtHolder.cdrDrctSales.slsPymtDscntAmt" />
                     </span>
                     <span class="col-lg-2">
                     	<label>{{cdrDrctSalesUtils.translations['CdrDrctSales_changeAmt_description.title']}} :</label>
-                    	<input type="text" price-red="price-red" class="form-control" ng-model="cdrDsArtHolder.changeAmt" numeric disabled />
+                    	<input type="text" price-red="price-red" class="form-control" ng-model="cdrDsArtHolder.changeAmt" disabled />
                     </span>
                     <span class="col-lg-2">
                         <a class="btn-default btn btn-large" ng-show="showprint" ng-click="printRequest()"><i class="glyphicon glyphicon-print" ></i>  {{'Entity_print.title' | translate}}</a>

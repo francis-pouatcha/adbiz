@@ -52,6 +52,7 @@ public abstract class CoreAbstBsnsItem extends CoreAbstBsnsItemHeader {
 	@Column
 	private String manufacturerPic;
 	
+
 	/*
 	 * The expiration date of this lot. This is decisive for the splitting in lots.
 	 * All articles in the same lot have the same expiration date.

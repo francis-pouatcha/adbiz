@@ -189,6 +189,10 @@ public abstract class CoreAbstBsnsObject extends CoreAbstBsnsObjectHeader {
 	
 	private String bsnsPtnrName;
 	
+	//we will change to put userIdentif later, the creator of this object
+	@Column
+	private String username;
+	
 	private String docNbr;
 	
 	public String getPrchPrcCur() {
@@ -549,6 +553,14 @@ public abstract class CoreAbstBsnsObject extends CoreAbstBsnsObjectHeader {
 
 	public void setBsnsPartner(String bsnsPartner) {
 		this.bsnsPartner = bsnsPartner;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getBsnsPrtnrOU() {

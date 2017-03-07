@@ -439,6 +439,8 @@ angular.module('adcshdwr')
             }
 
             function findCustom(searchInput) {
+                searchInput.entity.username = $rootScope.username;
+                searchInput.fieldNames.push('username');
                 genericResource.findCustom(cdrDrctSalesUtils.urlBase, searchInput)
                     .success(function (entitySearchResult) {
                         // store search
@@ -473,8 +475,8 @@ angular.module('adcshdwr')
 
             function openCreateForm() {}
         }])
-    .controller('cdrDrctSalesCreateCtlr', ['$scope', 'cdrDrctSalesUtils', 'fileExtractor', '$translate', 'genericResource', '$location', 'cdrDrctSalesState', '$modal', '$http','$stateParams','cdrCshDrawerUtils','$q','$filter','logger',
-        function ($scope, cdrDrctSalesUtils, fileExtractor, $translate, genericResource, $location, cdrDrctSalesState, $modal, $http,$stateParams,cdrCshDrawerUtils,$q,$filter,logger) {
+    .controller('cdrDrctSalesCreateCtlr', ['$scope', 'cdrDrctSalesUtils', 'fileExtractor', '$translate', 'genericResource', '$location', 'cdrDrctSalesState', '$modal', '$http','$stateParams','cdrCshDrawerUtils','$q','$filter','logger','$rootScope',
+        function ($scope, cdrDrctSalesUtils, fileExtractor, $translate, genericResource, $location, cdrDrctSalesState, $modal, $http,$stateParams,cdrCshDrawerUtils,$q,$filter,logger, $rootScope) {
             $scope.cdrCshDrawer = {
                 cdrDrctSales: {}
             };
@@ -571,7 +573,8 @@ angular.module('adcshdwr')
             };
 
             $scope.editItem = function (index) {
-                $scope.cdrDsArtItemHolder = angular.copy($scope.cdrDsArtHolder.items[index]);
+                if(!$scope.showprint)
+                    $scope.cdrDsArtItemHolder = angular.copy($scope.cdrDsArtHolder.items[index]);
             };
 
             $scope.deleteItem = function (index) {
@@ -640,6 +643,7 @@ angular.module('adcshdwr')
                 }
                 $scope.cdrDsArtHolder.cdrDrctSales.cdrNbr=cdrNber;
                 $scope.cdrDsArtHolder.cdrDrctSales.bsnsPtnrName="CLIENT DIVERS"
+                $scope.cdrDsArtHolder.cdrDrctSales.username=$rootScope.username;
 
                 genericResource.create(cdrDrctSalesUtils.cdrdrctsalesmanager, $scope.cdrDsArtHolder.cdrDrctSales).success(function (result) {
                     $scope.showprint = true;
