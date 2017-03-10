@@ -1,0 +1,84 @@
+<div ng-cloak class="panel-group mainbar">
+
+    <div ng-show="hasItem()" class="panel panel-default">
+        <div class="panel-body">
+        <div class="row">
+
+                <div class="row">
+                    <span class="col-lg-2" style="font-size:17px;">{{cdrDrctSalesUtils.translations['CdrDrctSales_vatAmount_description.title']}}: </span>
+                    <span class="col-lg-1" price-style="price-style">{{cdrDsArtHolder.cdrDrctSales.slsVatAmt | number:0}}</span>
+                    
+                </div>
+
+                <div class="row">
+                    <span class="col-lg-2" style="font-size:17px;">{{cdrDrctSalesUtils.translations['CdrDrctSales_netSPTaxIncl_description.title']}}: </span>
+                    <span class="col-lg-1" price-style="price-style">{{cdrDsArtHolder.cdrDrctSales.slsNetPrcTaxIncl | number:0}}</span>
+
+                    <span class="col-lg-2">
+                        <a class="btn-default btn btn-large" ng-show="showprint" ng-click="printRequest()"><i class="glyphicon glyphicon-print" ></i>  {{'Entity_print.title' | translate}}</a>
+                    </span>
+
+                </div>
+
+                <div class="row">
+                    <span class="col-lg-2" style="font-size:17px;">{{cdrDrctSalesUtils.translations['CdrDrctSales_netAmtToPay_description.title']}}: </span>
+                    <span class="col-lg-2" price-red="price-red"><b>{{cdrDsArtHolder.cdrDrctSales.slsNetAmtToPay | number:0}}</b></span>
+                     <!--<span class="col-lg-3 col-lg-offset-2">
+                        <div class="alert alert-danger" ng-show="error" role="alert">
+					        <strong>Warning!</strong> {{error}}
+					    </div>
+                    </span>-->
+                </div>
+
+        </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <b> {{cdrDrctSalesUtils.translations['CdrDsArtItem_description.title']}} </b>
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered  table-striped">
+                <thead>
+                    <tr>
+                        <th class="clo-lg-3">{{cdrDrctSalesUtils.translations['CdrDsArtItem_artName_description.title']}}</th>
+                        <th class="clo-lg-1">{{cdrDrctSalesUtils.translations['CdrDsArtItem_artPic_description.title']}}</th>
+                        <th class="clo-lg-1">{{cdrDrctSalesUtils.translations['CdrDsArtItem_lotPic_description.title']}}</th>
+                        <th class="clo-lg-1">{{cdrDrctSalesUtils.translations['CdrDsArtItem_soldQty_description.title']}}</th>
+                        <th class="clo-lg-1">{{cdrDrctSalesUtils.translations['CdrDsArtItem_sppuPreTax_description.title']}}</th>
+                        <th class="col-lg-1">{{cdrDrctSalesUtils.translations['CdrDsArtItem_rebate_description.title']}}</th>
+                        <th class="col-lg-1">{{cdrDrctSalesUtils.translations['CdrDsArtItem_restockgFees_description.title']}}</th>
+                        <th class="col-lg-1">{{cdrDrctSalesUtils.translations['CdrDsArtItem_netSPPreTax_description.title']}}</th>
+                        <th class="col-lg-1">{{cdrDrctSalesUtils.translations['CdrDsArtItem_vatPct_description.title']}}</th>
+                        <th class="col-lg-1">{{cdrDrctSalesUtils.translations['CdrDsArtItem_vatAmount_description.title']}}</th>
+                        <th class="col-lg-1">{{cdrDrctSalesUtils.translations['CdrDsArtItem_netSPTaxIncl_description.title']}}</th>
+                        <th class="col-lg-1">{{cdrDrctSalesUtils.translations['CdrDsArtItem_sppuCur_description.title']}}</th>
+                        <th>
+                        </th>
+                        <th>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="cdrDsArtItem in cdrDsArtHolder.items"  ng-dblclick="editItem($index)">
+                        <td>{{cdrDsArtItem.artName}}</td>
+                        <td>{{cdrDsArtItem.item.artPic}}</td>
+                        <td>{{cdrDsArtItem.item.lotPic}}</td>
+                        <td>{{cdrDsArtItem.item.trgtQty}}</td>
+                        <td>{{cdrDsArtItem.item.slsUnitPrcPreTax}}</td>
+                        <td>{{cdrDsArtItem.item.slsRebateAmt | number:0}}</td>
+                        <td>{{cdrDsArtItem.item.slsRstckgFeesPreTax}}</td>
+                        <td>{{cdrDsArtItem.item.slsNetPrcPreTax | number:0}}</td>
+                        <td>{{cdrDsArtItem.item.slsVatPct}}</td>
+                        <td>{{cdrDsArtItem.item.slsVatAmt | number:0}}</td>
+                        <td>{{cdrDsArtItem.item.slsNetPrcTaxIncl | number:0}}</td>
+                        <td>{{cdrDsArtItem.item.slsUnitPrcCur}}</td>
+                        <td><button class="" ng-show="!showprint" ng-click="editItem($index)"><i class="glyphicon glyphicon-edit"></i></button></td>
+                        <td><button class="" ng-show="!showprint" ng-click="deleteItem($index)"><i class="glyphicon glyphicon-trash"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <span class="col-lg-8" style="margin-top:-23px;"><pagination total-items="totalItems()" items-per-page="itemPerPage()" class="pagination-sm" ng-model="currentPage" ng-change="paginate()"></pagination></span>
+        </div>
+    </div>
+</div>

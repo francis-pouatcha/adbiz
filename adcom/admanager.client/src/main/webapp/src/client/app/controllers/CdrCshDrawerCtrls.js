@@ -172,6 +172,37 @@ function ($scope, genericResource, cdrCshDrawerUtils, cdrCshDrawerState, $locati
             }
 
 }])
+    .controller('cdrCshDrawersEditCtlr', ['$scope', 'genericResource', '$location', 'cdrCshDrawerUtils', 'cdrCshDrawerState',
+        function ($scope, genericResource, $location, cdrCshDrawerUtils, cdrCshDrawerState) {
+            $scope.cdrCshDrawer = cdrCshDrawerState.cdrCshDrawer;
+            $scope.error = "";
+            $scope.cdrCshDrawerUtils = cdrCshDrawerUtils;
+            $scope.decaissUIisOpen = false;
+
+            init();
+
+            function init() {
+                cdrCshDrawerUtils.getActive().then(function (result) {
+                    $scope.cdrCshDrawer = result;
+                }, function (error) {
+                    $scope.error = error;
+                });
+            }
+            $scope.close = function () {
+                genericResource.create(cdrCshDrawerUtils.urlBase + "/closeCshDrawer", $scope.cdrCshDrawer).success(function (result) {
+                    $scope.cdrCshDrawer = result;
+                    $location.path("/CdrCshDrawers/show/" + result.id);
+                }).error(function (error) {
+                    $scope.error = error;
+                });
+            };
+            $scope.decaissUI = function(){
+                if($scope.decaissUIisOpen == false)
+                    $scope.decaissUIisOpen =true;
+                else
+                    $scope.decaissUIisOpen = false;
+            }
+        }])
     .factory('cdrCshDrawerState', ['$rootScope', '$q', function ($rootScope, $q) {
 
         var service = {};

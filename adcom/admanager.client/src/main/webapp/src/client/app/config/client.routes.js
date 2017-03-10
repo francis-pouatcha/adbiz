@@ -24,8 +24,22 @@
                     //controllerAs: 'vm',
                     title: 'Caisse',
                     settings: {
-                        nav: 3,
+                        nav: 1,
                         content: '<i class="fa fa-folder-open"></i> Caisse'
+                    }
+                }
+            },
+            {
+                state: 'Vente',
+                config: {
+                    url: '/vente',
+                    templateUrl: '/admanager.client/src/client/app/views/CdrDrctSale/CdrDrctSales.html',
+                    controller: 'cdrDrctSalesCtlr',
+                    //controllerAs: 'vm',
+                    title: 'Ventes',
+                    settings: {
+                        nav: 2,
+                        content: '<i class="fa fa-folder-open"></i> Vente'
                     }
                 }
             },
@@ -38,6 +52,26 @@
                     controller: 'cdrCshDrawersEditCtlr',
                     //controllerAs: 'vm',
                     title: 'Etat de la caisse'
+                }
+            },
+            {
+                state: 'newCdrDrctSales',
+                config: {
+                    url: '/CdrDrctSales/new/:id',
+                    templateUrl: '/admanager.client/src/client/app/views/CdrDrctSale/createDrctSales.html',
+                    controller: 'cdrDrctSalesCreateCtlr',
+                    //controllerAs: 'vm',
+                    title: 'Nouvelle vente'
+                }
+            },
+            {
+                state: 'showCdrDrctSales',
+                config: {
+                    url: '/CdrDrctSales/show-vente/:id',
+                    templateUrl: '/admanager.client/src/client/app/views/CdrDrctSale/showDrctSales.html',
+                    controller: 'cdrDrctSalesShowCtlr',
+                    //controllerAs: 'vm',
+                    title: 'Vente'
                 }
             }
         ];
