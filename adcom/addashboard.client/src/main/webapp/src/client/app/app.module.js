@@ -11,8 +11,9 @@
     var logout = function () {
         console.log('*** LOGOUT');
         auth.loggedIn = false;
-        auth.authz = null;
-        window.location = auth.logoutUrl;
+        auth.authz.logout();
+        /*auth.authz = null;
+        window.location = auth.logoutUrl;*/
     };
 
     appModule.factory('Auth', function () {

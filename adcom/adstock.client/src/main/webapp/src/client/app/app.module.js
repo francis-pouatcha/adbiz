@@ -11,8 +11,9 @@
     var logout = function() {
         console.log('*** LOGOUT');
         auth.loggedIn = false;
-        auth.authz = null;
-        window.location = auth.logoutUrl;
+        auth.authz.logout();
+        /*auth.authz = null;
+        window.location = auth.logoutUrl;*/
     };
 
     /*appModule.factory('Auth', function() {
@@ -135,11 +136,11 @@
             }
         ];
     });
-    
+
     /* Runtime configuration */
     appModule.run(function(formlyConfig) {
-        
-       
+
+
         formlyConfig.setType({
             name: 'typeahead',
             template: '<input type="text" ng-model="model[options.key]" typeahead-min-length="2"' +
@@ -147,8 +148,8 @@
                 'class="form-control">',
             wrapper: ['bootstrapLabel', 'bootstrapHasError']
         });
-        
-/***************** Formly datePicker configuration *****************/         
+
+/***************** Formly datePicker configuration *****************/
         var attributes = [
             'date-disabled',
             'custom-class',
@@ -210,7 +211,7 @@
               }
             }
          });
-        
+
         function camelize(string) {
             string = string.replace(/[\-_\s]+(.)?/g, function(match, chr) {
               return chr ? chr.toUpperCase() : '';
@@ -221,7 +222,7 @@
             });
          }
       /***************** End Formly datePicker configuration *****************/
-        
+
     });
 
 })();
