@@ -23,7 +23,7 @@
                     title: 'ImportExports',
                     settings: {
                         nav: 2,
-                        content: '<i class="fa fa-folder-open"></i> Import'
+                        content: '<i class="fa fa-file-excel-o"></i> Import'
                     }
                 }
             }

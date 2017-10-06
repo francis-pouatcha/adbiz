@@ -8,53 +8,50 @@
 </style>
 <section class="mainbar" >
   <div class="panel panel-primary">
-    <div class="panel-heading">
-			ImportExport View
-    </div>
+    <div class="panel-heading">ImportExport View</div>
     <div class="panel-body">
         <div class="row panel-body" >
             <form>
-                <div class="col-lg-3">
-                    <h3 >
-                        <a name="basic-example" class="anchor"><span class="octicon octicon-link"></span></a>
-                        Upload xls file
-                    </h3>
-                </div>
-                <div class="col-lg-3 col-offset-3">
-                    <select class="form-control" ng-model="vm.xlsType" ng-change="vm.xlsChange()" >
-                        <option value="ADCATAL">CATALOGUE</option>
-                        <option value="ADPROCMT">POCUREMENT</option>
-                        <option value="ADINVTRY">INVENTORY</option>
-                        <option value="ADSTOCK">STOCK</option>
-                    </select>
-                </div>
-                <div class="col-lg-3">
-                    <a href="sample/{{vm.xlsType}}.xls" ng-show="vm.xlsType" class="btn btn-default" >Download sample</a>
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-12 col-md-3 control-label" >
+                            <a name="basic-example" class="anchor"><span class="octicon octicon-link"></span></a>
+                            Upload xls file
+                        </label>
+                        <div class="col-xs-12 col-sm-6 col-md-5">
+                            <select class="form-control" ng-model="vm.xlsType" ng-change="vm.xlsChange()" >
+                                <option value="">Please choose</option>
+                                <option value="ADCATAL">CATALOGUE</option>
+                                <option value="ADPROCMT">POCUREMENT</option>
+                                <option value="ADINVTRY">INVENTORY</option>
+                                <option value="ADSTOCK">STOCK</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <a href="sample/{{vm.xlsType}}.xls" ng-show="vm.xlsType" class="col-xs-12 btn btn-default pull-right" >Download sample</a>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
-        <div ng-show="vm.xlsType" class="alert alert-warning">drag and drop or select one or more xls file to upload</div>
-        <div ng-show="vm.xlsType" >
+     <!--   <div data-ng-if="vm.xlsType" class="alert alert-warning">drag and drop or select one or more xls file to upload</div>-->
+        <div data-ng-if="vm.xlsType" >
             <div flow-init="vm.params"
                  flow-files-submitted="$flow.upload()" flow-file-added="!!{xls:1}[$file.getExtension()]">
-                <div class="drop" flow-drop ng-class="dropClass">
+                <div class="form-group drop" flow-drop ng-class="dropClass">
                     <span class="btn btn-default" flow-btn>Upload File</span>
-                    <!--<span class="btn btn-default" flow-btn flow-directory ng-show="$flow.supportDirectory">Upload Folder</span>-->
                     <b>OR</b>
                     Drag And Drop your file here
                 </div>
 
-                <br/>
-
-                <div class="well">
-                    <a class="btn btn-small btn-success" ng-click="$flow.resume()">Resume all</a>
-                    <a class="btn btn-small btn-danger" ng-click="$flow.pause()">Pause all</a>
-                    <a class="btn btn-small btn-info" ng-click="$flow.cancel()">Cancel all</a>
-                    <span class="label label-info">Total Size: {{$flow.getSize()}}bytes</span>
+                <div class="btn-toolbar button-wrapper">
+                    <a class="btn btn-small btn-success col-xs-12 col-sm-6 col-md-3" ng-click="$flow.resume()"><i class="glyphicon glyphicon-ok-sign"></i>Resume all</a>
+                    <a class="btn btn-small btn-default col-xs-12 col-sm-6 col-md-3" ng-click="$flow.pause()"><i class="glyphicon glyphicon-minus-sign"></i>Pause all</a>
+                    <a class="btn btn-small btn-danger col-xs-12 col-sm-6 col-md-3" ng-click="$flow.cancel()"> <i class="glyphicon glyphicon-remove-sign"></i>Cancel all</a>
+                    <span class="label label-info pull-right">Total Size: {{$flow.getSize()}}bytes</span>
                 </div>
 
                 <div>
-
                     <div ng-repeat="file in $flow.files" class="transfer-box">
                         {{file.relativePath}} ({{file.size}}bytes)
                         <div class="progress progress-striped" ng-class="{active: file.isUploading()}">
@@ -68,16 +65,16 @@
                             </div>
                         </div>
                         <div class="btn-group">
-                            <a class="btn btn-xs btn-warning" ng-click="file.pause()" ng-show="!file.paused && file.isUploading()">
+                            <a class="btn btn-xs btn-warning" ng-click="file.pause()" data-ng-if="!file.paused && file.isUploading()">
                                 Pause
                             </a>
-                            <a class="btn btn-xs btn-warning" ng-click="file.resume()" ng-show="file.paused">
+                            <a class="btn btn-xs btn-warning" ng-click="file.resume()" data-ng-if="file.paused">
                                 Resume
                             </a>
                             <a class="btn btn-xs btn-danger" ng-click="file.cancel()">
                                 Cancel
                             </a>
-                            <a class="btn btn-xs btn-info" ng-click="file.retry()" ng-show="file.error">
+                            <a class="btn btn-xs btn-info" ng-click="file.retry()" data-ng-if="file.error">
                                 Retry
                             </a>
                         </div>

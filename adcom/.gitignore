@@ -28,6 +28,7 @@ node_modules/**/*
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 /managerAgent/.idea/
+.idea
 # Package Files #
 *.war
 *.jar

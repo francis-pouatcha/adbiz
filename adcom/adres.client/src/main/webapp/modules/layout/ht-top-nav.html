@@ -1,80 +1,79 @@
-<nav class="navbar navbar-fixed-top navbar-inverse">
-    <div class="navbar-header">
-        <a href="/addashboard.client" class="navbar-brand"><span class="brand-title">{{vm.appTitle}}</span></a>
-        <a class="btn navbar-btn navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </a>
-    </div>
-    <div class="navbar-collapse collapse">
-        <div class="pull-right navbar-logo">
-            <ul class="nav navbar-nav pull-right">
-                <li>
-                    <div class="dropdown" style="color: #808080;margin-right: 15px;margin-top: 15px">
-                        <span data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
-                            <i class="glyphicon glyphicon-list"></i> Module
-                            <span class="caret"></span>
-                        </span>
-                        <ul class="dropdown-menu" aria-labelledby="dLabel">
-                            <li ng-show="vm.hasWorkspace('addashboard.client')">
-                                <a ng-href="/addashboard.client" >
-                                    DASHBOARD
-                                </a>
-                            </li>
-                            <li ng-show="vm.hasWorkspace('adcatal.client')">
-                                <a ng-href="/adcatal.client">
-                                    CATALOGUE
-                                </a>
-                            </li>
-                            <li ng-show="vm.hasWorkspace('adstock.client')">
-                                <a ng-href="/adstock.client" >
-                                    STOCK
-                                </a>
-                            </li>
-                            <li ng-show="vm.hasWorkspace('adinvtry.client')">
-                                <a ng-href="/adinvtry.client" >
-                                    INVENTAIRE
-                                </a>
-                            </li>
-                            <li ng-show="vm.hasWorkspace('adprocmt.client')">
-                                <a ng-href="/adprocmt.client" >
-                                    APPROVISIONEMENT
-                                </a>
-                            </li>
-                            <li ng-show="vm.hasWorkspace('adcshdwr.client')">
-                                <a ng-href="/adcshdwr.client" >
-                                    VENTE
-                                </a>
-                            </li>
-                            <li ng-show="vm.hasWorkspace('admanager.client')">
-                                <a ng-href="/admanager.client" >
-                                    MANAGER
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+<nav class="navbar navbar-fixed-top navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <img id="adorsys-logo" class="navbar-brand" src="/adres.client/images/logo.png" width="160" height="20px"/>
+            <a class="btn navbar-btn navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+        </div>
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <a ui-sref="dashboard" class="navbar-brand">
+                    <i class="glyphicon glyphicon-dashboard"></i> <span class="brand-title">{{vm.appTitle}}</span></a>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a id="dropdown-module" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><i class="glyphicon glyphicon-list"></i> Module <span class="caret"></span></a>
+                    <ul class="dropdown-menu" aria-labelledby="dLabel">
+                        <li ng-show="vm.hasWorkspace('addashboard.client')">
+                            <a ng-href="/addashboard.client" >
+                                DASHBOARD
+                            </a>
+                        </li>
+                        <li ng-show="vm.hasWorkspace('adcatal.client')">
+                            <a ng-href="/adcatal.client">
+                                CATALOGUE
+                            </a>
+                        </li>
+                        <li ng-show="vm.hasWorkspace('adstock.client')">
+                            <a ng-href="/adstock.client" >
+                                STOCK
+                            </a>
+                        </li>
+                        <li ng-show="vm.hasWorkspace('adinvtry.client')">
+                            <a ng-href="/adinvtry.client" >
+                                INVENTAIRE
+                            </a>
+                        </li>
+                        <li ng-show="vm.hasWorkspace('adprocmt.client')">
+                            <a ng-href="/adprocmt.client" >
+                                APPROVISIONEMENT
+                            </a>
+                        </li>
+                        <li ng-show="vm.hasWorkspace('adcshdwr.client')">
+                            <a ng-href="/adcshdwr.client" >
+                                VENTE
+                            </a>
+                        </li>
+                        <li ng-show="vm.hasWorkspace('admanager.client')">
+                            <a ng-href="/admanager.client" >
+                                MANAGER
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-                <li>
-                    <div class="dropdown" style="color: #808080;margin-right: 15px;margin-top: 15px">
-                        <span data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
-                            <i class="glyphicon glyphicon-user" ></i> {{vm.username}}
-                            <span class="caret"></span>
-                        </span>
-                        <ul class="dropdown-menu" aria-labelledby="dLabel">
-                            <li><a href="/addashboard.client" ><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
-                            <li><a href="#" ng-click="vm.changeLang('fr')" ><i class="glyphicon glyphicon-flag"></i> {{'LANG_FR' | translate}}</a></li>
-                            <li><a href="#" ng-click="vm.changeLang('en')" ><i class="glyphicon glyphicon-flag"></i> {{'LANG_EN' | translate}}</a></li>
-                            <li><a ng-click="vm.logout()" ><i class="glyphicon glyphicon-log-out"></i> {{'logout' | translate}}</a></li>
-                        </ul>
-                    </div>
+                <li class="dropdown">
+                    <a id="dropdown-language" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><i class="glyphicon glyphicon-globe"></i> {{ 'LANGUAGE' | translate }} <span class="caret"></span></a>
+                    <ul class="dropdown-menu" aria-labelledby="dLabel">
+                        <li><a href="#" ng-click="vm.changeLang('fr')" ><img src="/adres.client/images/lang_fr.png" width="20"/> {{'LANG_FR' | translate}}</a></li>
+                        <li><a href="#" ng-click="vm.changeLang('en')" ><img src="/adres.client/images/lang_en.png" width="20"/> {{'LANG_EN' | translate}}</a></li>
+                    </ul>
                 </li>
-                <li class="dropdown dropdown-big">
-                    <a href="http://www.adorsys.cm" target="_blank">
-                        <img src="/adres.client/images/logo.png" />
-                    </a>
+                <li class="dropdown">
+                    <a id="dropdown-user" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><i class="glyphicon glyphicon-user"></i> {{vm.username}} <span class="caret"></span></a>
+                    <ul class="dropdown-menu" aria-labelledby="dLabel">
+                        <li><a ng-click="vm.logout()" ><i class="glyphicon glyphicon-log-out"></i> {{'logout' | translate}}</a></li>
+                    </ul>
                 </li>
             </ul>
+
         </div>
     </div>
 </nav>

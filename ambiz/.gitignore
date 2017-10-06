@@ -1,0 +1,16 @@
+# Add any directories, files, or patterns you don't want to be tracked by version control
+.project
+.classpath
+target/
+.settings/
+bin/
+
+# IDEs and editors
+.idea
+.c9/
+*.launch
+*.iml.DS_Store
+.DS_Store
+*.iml
+logs
+node_modules/

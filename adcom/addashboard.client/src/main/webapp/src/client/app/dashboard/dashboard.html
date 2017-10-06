@@ -1,81 +1,75 @@
-<section id="dashboard-view" class="mainbar">
-    <section class="matter">
+<section id="dashboard-view" class="mainbar dashboard">
+    <section class="col-xs-12 col-sm-12">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <ul class="today-datas">
-                    	 <li class="blightblue" ng-show="vm.hasWorkspace('adbnsptnr.client')"  >
-                            <a ng-href="/adbnsptnr.client" target="_self" >
-                                <div class="pull-left"><i class="glyphicon glyphicon-icon-group"></i></div>
-                                <div class="datas-text pull-right">
-                                    <span class="bold">Business Partner</span> Creation des fournisseurs, clients, assureurs
-                                </div>
-                                <div class="clearfix"></div>
-                            </a>
-                        </li>
-                        
-                        <li class="blightblue" ng-show="vm.hasWorkspace('adcatal.client')" >
-                            <a ng-href="/adcatal.client" target="_self" >
-                                <div class="pull-left"><i class="glyphicon glyphicon-icon-group"></i></div>
-                                <div class="datas-text pull-right">
-                                    <span class="bold">CATALOGUE</span> creer, editer, manager les articles
-                                </div>
-                                <div class="clearfix"></div>
-                            </a>
-                        </li>
+                <div class="dashboard-menu-card dashboard-card-bgBlue"
+                     data-ng-if="vm.hasWorkspace('adbnsptnr.client')">
+                    <a ng-href="/adbnsptnr.client" target="_self" >
+                        <div class="dashboard-icon">
+                            <i class="glyphicon glyphicon-user"></i> <br> <span class="bold">Business Partner</span>
+                        </div>
+                        <div class="dashboard-text">Creation des fournisseurs, clients, assureurs</div>
+                    </a>
+                </div>
 
-                        <li class="borange" ng-show="vm.hasWorkspace('adstock.client')"  >
-                            <a ng-href="/adstock.client" target="_self" >
-                                <div class="pull-left"><i class="glyphicon glyphicon-icon-inbox"></i></div>
-                                <div class="datas-text pull-right">
-                                    <span class="bold">STOCK</span> visualiser le stock par lot, rayon...
-                                </div>
-                                <div class="clearfix"></div>
-                            </a>
-                        </li>
-                        
-                         <li class="borange" ng-show="vm.hasWorkspace('adinvtry.client')"  >
-                            <a ng-href="/adinvtry.client" target="_self" >
-                                <div class="pull-left"><i class="glyphicon glyphicon-list"></i></div>
-                                <div class="datas-text pull-right">
-                                    <span class="bold">Inventaire</span> Mettre a jour le stock
-                                </div>
-                                <div class="clearfix"></div>
-                            </a>
-                        </li>
+                <div class="dashboard-menu-card dashboard-card-bgLightGreen"
+                     data-ng-if="vm.hasWorkspace('adcatal.client')">
+                    <a ng-href="/adcatal.client" target="_self" >
+                        <div class="dashboard-icon">
+                            <i class="glyphicon glyphicon-shopping-cart"></i> <br><span class="bold">CATALOGUE</span>
+                        </div>
+                        <div class="dashboard-text">creer, editer, manager les articles</div>
+                    </a>
+                </div>
 
-                        <li class="borange" ng-show="vm.hasWorkspace('adprocmt.client')"  >
-                            <a ng-href="/adprocmt.client" target="_self" >
-                                <div class="pull-left"><i class="glyphicon glyphicon-tags"></i></div>
-                                <div class="datas-text pull-right">
-                                    <span class="bold">Approvisionement</span> Commande fournisseur, reception
-                                </div>
-                                <div class="clearfix"></div>
-                            </a>
-                        </li>
-                        
-                        
-                        <li class="borange" ng-show="vm.hasWorkspace('adcshdwr.client')"  >
-                            <a ng-href="/adcshdwr.client" target="_self" >
-                                <div class="pull-left"><i class="glyphicon glyphicon-"></i></div>
-                                <div class="datas-text pull-right">
-                                    <span class="bold">Point de Vente</span>
-                                </div>
-                                <div class="clearfix"></div>
-                            </a>
-                        </li>
+                <div class="dashboard-menu-card dashboard-card-bgGreen"
+                     data-ng-if="vm.hasWorkspace('adstock.client')">
+                    <a ng-href="/adstock.client" target="_self" >
+                        <div class="dashboard-icon">
+                            <i class="glyphicon glyphicon-inbox"></i> <br><span class="bold">STOCK</span>
+                        </div>
+                        <div class="dashboard-text">visualiser le stock par lot, rayon...</div>
+                    </a>
+                </div>
 
-                        <li class="borange" ng-show="vm.hasWorkspace('admanager.client')"  >
-                            <a ng-href="/admanager.client" target="_self" >
-                                <div class="pull-left"><i class="glyphicon glyphicon-"></i></div>
-                                <div class="datas-text pull-right">
-                                    <span class="bold">Administration</span>
-                                </div>
-                                <div class="clearfix"></div>
-                            </a>
-                        </li>
+                <div class="dashboard-menu-card dashboard-card-bgLightGreen"
+                     data-ng-if="vm.hasWorkspace('adinvtry.client')">
+                    <a ng-href="/adinvtry.client" target="_self" >
+                        <div class="dashboard-icon">
+                            <i class="glyphicon glyphicon-list"></i> <br><span class="bold">Inventaire</span>
+                        </div>
+                        <div class="dashboard-text">Mettre a jour le stock</div>
+                    </a>
+                </div>
 
-                    </ul>
+                <div class="dashboard-menu-card dashboard-card-bgGreen"
+                     data-ng-if="vm.hasWorkspace('adprocmt.client')">
+                    <a ng-href="/adprocmt.client" target="_self" >
+                        <div class="dashboard-icon">
+                            <i class="glyphicon glyphicon-tags"></i> <br><span class="bold">Approvisionement</span>
+                        </div>
+                        <div class="dashboard-text">Commande fournisseur, reception</div>
+                    </a>
+                </div>
+
+                <div class="dashboard-menu-card dashboard-card-bgBlue"
+                     data-ng-if="vm.hasWorkspace('adcshdwr.client')">
+                    <a ng-href="/adcshdwr.client" target="_self" >
+                        <div class="dashboard-icon">
+                            <i class="glyphicon glyphicon-shopping-cart"></i> <br><span class="bold">Point de Vente</span>
+                        </div>
+                        <div class="dashboard-text">Gérer les ventes</div>
+                    </a>
+                </div>
+
+                <div class="dashboard-menu-card dashboard-card-bgGreen"
+                     data-ng-if="vm.hasWorkspace('admanager.client')">
+                    <a ng-href="/admanager.client" target="_self" >
+                        <div class="dashboard-icon">
+                            <i class="glyphicon glyphicon-asterisk"></i> <br><span class="bold">Administration</span>
+                        </div>
+                        <div class="dashboard-text">Gérer les ventes et la Caisse</div>
+                    </a>
                 </div>
             </div>
         </div>

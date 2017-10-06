@@ -7,8 +7,9 @@
         .config(function ($translateProvider) {
 
             $translateProvider.translations('en', {
-                LANG_FR: 'French',
+                LANG_FR: 'Français',
                 LANG_EN: 'English',
+                LANGUAGE: 'Language',
                 logout: 'logout',
 
                 "current_language":"en",
@@ -96,8 +97,9 @@
             });
 // francais --------------------------------------------------------------------------------
             $translateProvider.translations('fr', {
-                LANG_FR: 'Francais',
-                LANG_EN: 'Englais',
+                LANG_FR: 'Français',
+                LANG_EN: 'English',
+                LANGUAGE: 'Langue',
                 logout: 'deconnection',
                 "current_language":"fr",
 

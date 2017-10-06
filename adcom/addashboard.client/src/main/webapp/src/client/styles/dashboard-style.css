@@ -1,0 +1,61 @@
+
+/*********************
+    DASHBOARD-MENU
+*********************/
+.dashboard .dashboard-menu-card {
+    width: 22rem;
+    height: 22rem;
+    padding: 5rem 1rem;
+    border-radius: 50%;
+    background: #fff;
+    margin: 20px;
+    position: relative;
+    box-shadow: 1px 7px 6px rgba(50,50,50,0.1);
+    transition: box-shadow 0.2s ease-in-out, margin 0.2s ease-in-out;
+    overflow: hidden;
+    display: inline-block;
+}
+.dashboard .dashboard-menu-card a, .dashboard .dashboard-text {
+    color: #B25308;
+}
+.dashboard .dashboard-menu-card a:hover,
+.dashboard .dashboard-menu-card a:hover .dashboard-text {
+    font-weight: bold;
+}
+.dashboard .dashboard-card-bgBlue {
+    background-color: #3614CC;
+}
+.dashboard .dashboard-card-bgBlue a, .dashboard .dashboard-card-bgBlue > a > .dashboard-text,
+.dashboard .dashboard-card-bgGreen a, .dashboard .dashboard-card-bgGreen > a > .dashboard-text {
+    color: #fff;
+}
+.dashboard .dashboard-card-bgLightViolet {
+    background-color: #9740FF;
+}
+.dashboard .dashboard-card-bgLightGreen {
+    background-color: #B2FF00;
+}
+.dashboard .dashboard-card-bgGreen {
+    background-color: #3D993D;
+}
+.dashboard .dashboard-icon {
+    text-align: center;
+    font-size: 2.2rem;
+}
+.dashboard .dashboard-text {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+@media screen and (max-width: 1024px) {
+    .dashboard .row {
+        padding-left: 5rem;
+        padding-right: 5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .dashboard {
+        padding: 0;
+    }
+}
