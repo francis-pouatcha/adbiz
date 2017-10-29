@@ -12,65 +12,67 @@
 
   <div class="panel panel-default">
     <div class="panel-body">
-      <table data-st-table="vm.data.list" data-st-pipe="vm.callServer" class="table table-bordered  table-striped pointer-element">
-          <thead>
-          <tr>
-	          <th><span data-ng-bind="'StockSection.code.title' | translate"></span></th>
-	          <th><span data-ng-bind="'StockSection.name.title' | translate"></span></th>
-	          <th><span data-ng-bind="'StockSection.position.title' | translate"></span></th>
-	          <th><span data-ng-bind="'StockSection.geoCode.title' | translate"></span></th>
-	          <th><span data-ng-bind="'StockSection.wharehouse.title' | translate"></span></th>
-	          <th><span data-ng-bind="'Action.title' | translate"></span></th>
-          </tr>
-          <tr>
-				<th><input data-st-search="identif" class="input-sm form-control" type="search"/></th>
-				<th><input data-st-search="name" class="input-sm form-control" type="search"/></th>
-				<th><input data-st-search="position" class="input-sm form-control" type="search"/></th>
-				<th><input data-st-search="geoCode" class="input-sm form-control" type="search"/></th>
-				<th><input data-st-search="wharehouse" class="input-sm form-control" type="search"/></th>
-				<th></th><th></th>
-    		</tr>
-          </thead>
-          <tbody>
-	          <tr data-ng-repeat="stkSection in vm.data.list">
-	              <td><span data-ng-bind="stkSection.identif"></span></td>
-	              <td><span data-ng-bind="stkSection.name"></span></td>
-	              <td><span data-ng-bind="stkSection.position"></span></td>
-	              <td><span data-ng-bind="stkSection.geoCode"></span></td>
-	              <td><span data-ng-bind="stkSection.wharehouse"></span></td>
-	              <td>
-	                 <div class="table-actions">
-	                      <a class="btn btn-default" title="{{'app.core.view.title' | translate}}" href="#/stk-section/{{stkSection.id}}">
-	                        <span class="glyphicon glyphicon-eye-open"></span>
-	                      </a>
-	                      <a class="btn btn-default" title="{{'app.core.edit.title' | translate}}" href="#/stk-section/{{stkSection.id}}/edit">
-	                        <span class="glyphicon glyphicon-edit"></span>
-	                      </a>
-	                      <a class="btn btn-danger" title="{{'app.core.delete.title' | translate}}" 
-	                         data-ng-really-message="{{'app.core.delete.confirmation.title' | translate}} {{'StockSection.title' | translate}}" 
-	                         data-ng-really-click="vm.remove(stkSection)" item="stkSection">
-	                        <span class="glyphicon glyphicon-remove-circle"></span>
-	                      </a>
-	                  </div>
-	              </td> <td>
-                  <a ng-href="{{GlobalCtlr.BASE_SERVER}}/adreport.server/frameset?__report=stock2.rptdesign&rayon={{stkSection.identif}}&name={{stkSection.name}}" target="_blank" title="Fiche de suivi de stock pour ce rayon" class="btn btn-primary" >
-                      <i class="glyphicon glyphicon-file" style="color: white;"></i>
-                  </a>
+		<div class="table-responsive">
+      		<table data-st-table="vm.data.list" data-st-pipe="vm.callServer" class="table table-bordered  table-striped pointer-element">
+          		<thead>
+          			<tr>
+	          			<th><span data-ng-bind="'StockSection.code.title' | translate"></span></th>
+	          			<th><span data-ng-bind="'StockSection.name.title' | translate"></span></th>
+	          			<th class="hidden-xs"><span data-ng-bind="'StockSection.position.title' | translate"></span></th>
+	          			<th class="hidden-xs"><span data-ng-bind="'StockSection.wharehouse.title' | translate"></span></th>
+	          			<th><span data-ng-bind="'Action.title' | translate"></span></th>
+          			</tr>
+          			<tr>
+						<th><input data-st-search="identif" class="input-sm form-control" type="search"/></th>
+						<th><input data-st-search="name" class="input-sm form-control" type="search"/></th>
+						<th class="hidden-xs"><input data-st-search="position" class="input-sm form-control" type="search"/></th>
+						<th class="hidden-xs"><input data-st-search="wharehouse" class="input-sm form-control" type="search"/></th>
+						<th></th>
+    				</tr>
+          		</thead>
+          		<tbody>
+	          		<tr data-ng-repeat="stkSection in vm.data.list">
+	              		<td><span data-ng-bind="stkSection.identif"></span></td>
+	              		<td><span data-ng-bind="stkSection.name"></span></td>
+	              		<td class="hidden-xs"><span data-ng-bind="stkSection.position"></span></td>
+	              		<td class="hidden-xs"><span data-ng-bind="stkSection.wharehouse"></span></td>
+	              		<td>
+							<div class="table-actions">
+							  	<a class="btn btn-default" title="{{'app.core.view.title' | translate}}" href="#/stk-section/{{stkSection.id}}">
+									<span class="glyphicon glyphicon-eye-open"></span>
+							  	</a>
+							  	<a class="btn btn-default" title="{{'app.core.edit.title' | translate}}" href="#/stk-section/{{stkSection.id}}/edit">
+									<span class="glyphicon glyphicon-edit"></span>
+							  	</a>
+							  	<a class="btn btn-default" title="{{'app.core.delete.title' | translate}}"
+								   data-ng-really-message="{{'app.core.delete.confirmation.title' | translate}} {{'StockSection.title' | translate}}"
+								   data-ng-really-click="vm.remove(stkSection)" item="stkSection">
+									<span class="glyphicon glyphicon-remove-circle"></span>
+							  	</a>
+						  	</div> <hr>
+							<div class="table-actions">
+								<a ng-href="{{GlobalCtlr.BASE_SERVER}}/adreport.server/frameset?__report=stock2.rptdesign&rayon={{stkSection.identif}}&name={{stkSection.name}}"
+								   target="_blank" title="Fiche de suivi de stock pour ce rayon" class="btn btn-primary" >
+									<i class="glyphicon glyphicon-file" style="color: white;"></i>
+								</a>
 
-                  <a ng-href="{{GlobalCtlr.BASE_SERVER}}/adreport.server/frameset?__report=stock3.rptdesign&rayon={{stkSection.identif}}" target="_blank" title="Fiche de valorisation de stock pour ce rayon" class="btn btn-info" >
-                      <i class="glyphicon glyphicon-file " style="color: white;"></i>
-                  </a>
-              </td>
-	          </tr>
-          </tbody>
-         <tfoot>
-			<tr>
-				<td colspan="9" class="text-center">
-					<div data-st-pagination="" data-st-items-by-page="vm.itemsByPage"></div>
-				</td>
-			</tr>
-		</tfoot>
-      </table>
+								<a ng-href="{{GlobalCtlr.BASE_SERVER}}/adreport.server/frameset?__report=stock3.rptdesign&rayon={{stkSection.identif}}"
+								   target="_blank" title="Fiche de valorisation de stock pour ce rayon" class="btn btn-info" >
+									<i class="glyphicon glyphicon-file " style="color: white;"></i>
+								</a>
+							</div>
+	              		</td>
+	          		</tr>
+          		</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="9" class="text-center">
+							<div data-st-pagination="" data-st-items-by-page="vm.itemsByPage"></div>
+						</td>
+					</tr>
+				</tfoot>
+      		</table>
+		</div>
     </div>
   </div>
 

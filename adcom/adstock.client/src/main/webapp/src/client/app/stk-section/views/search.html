@@ -1,25 +1,22 @@
 <div data-ng-init="vm.setSearchFormFields()">
-      
-  <form data-ng-submit="vm.search()" novalidate>
-    <legend>{{'app.core.search.title' | translate}} {{'StockSections.title' | translate}}</legend>
-    <fieldset>  
-        <formly-form model="vm.stkSection" fields="vm.searchFormFields" form="vm.form">
-        </formly-form>
 
-        <div class="form-group">
-            <button type="submit" class="btn btn-success" ng-disabled="vm.form.$invalid">
-              <i class="glyphicon glyphicon-search"></i> {{'app.core.search.title' | translate}}
-            </button>
-            <a class="btn btn-danger" 
-               title="{{'app.core.clear.title' | translate}}" 
-               ng-click="vm.clear()" item="stkSection">
-               <span class="glyphicon glyphicon-trash"></span>
-                {{'app.core.clear.title' | translate}}
-            </a>
-        </div>
-    </fieldset>
-    <hr/>
+    <form data-ng-submit="vm.search()" novalidate>
+        <legend>{{'app.core.search.title' | translate}} {{'StockSections.title' | translate}}</legend>
+        <fieldset>
+            <formly-form model="vm.stkSection" fields="vm.searchFormFields" form="vm.form"></formly-form>
 
-  </form>
+            <div class="btn-toolbar button-wrapper">
+                <button type="submit" class="btn btn-success col-xs-12 col-sm-3" ng-disabled="vm.form.$invalid">
+                    <i class="glyphicon glyphicon-search"></i> <span
+                        data-ng-bind="'app.core.search.title' | translate"></span>
+                </button>
+                <a class="btn btn-danger col-xs-12 col-sm-3" title="{{'app.core.clear.title' | translate}}"
+                   data-ng-click="vm.clear()" item="stkSection">
+                    <span class="glyphicon glyphicon-trash"></span> <span
+                        data-ng-bind="'app.core.clear.title' | translate"></span>
+                </a>
+            </div>
+        </fieldset>
 
+    </form>
 </div>

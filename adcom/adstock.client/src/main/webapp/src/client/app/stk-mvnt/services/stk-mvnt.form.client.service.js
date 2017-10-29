@@ -15,7 +15,7 @@
                     className: 'row',
                     fieldGroup: [
                         {
-                            className: 'col-xs-4',
+                            className: 'col-xs-12 col-md-4',
                             type: 'input',
                             key: 'identif',
                             templateOptions: {
@@ -24,7 +24,7 @@
                             }
                         },
                         {
-                            className: 'col-xs-4',
+                            className: 'col-xs-12 col-md-4',
                             type: 'input',
                             key: 'artPic',
                             templateOptions: {
@@ -33,7 +33,7 @@
                             }
                         },
                         {
-                            className: 'col-xs-4',
+                            className: 'col-xs-12 col-md-4',
                             type: 'input',
                             key: 'lotPic',
                             templateOptions: {
@@ -47,7 +47,7 @@
                     className: 'row',
                     fieldGroup: [
                         {
-                            className: 'col-xs-4',
+                            className: 'col-xs-12 col-md-4',
                             type: 'input',
                             key: 'section',
                             templateOptions: {
@@ -56,7 +56,7 @@
                             }
                         },
                         {
-                            className: 'col-xs-4',
+                            className: 'col-xs-12 col-md-4',
                             type: 'input',
                             key: 'orgUnit',
                             templateOptions: {
@@ -65,7 +65,7 @@
                             }
                         },
                         {
-                            className: 'col-xs-4',
+                            className: 'col-xs-12 col-md-4',
                             type: 'input',
                             key: 'acsngUser',
                             templateOptions: {
@@ -79,7 +79,7 @@
                     className: 'row',
                     fieldGroup: [
                         {
-                            className: 'col-xs-4',
+                            className: 'col-xs-12 col-md-4',
                             type: 'input',
                             key: 'acsngDt',
                             templateOptions: {
@@ -88,7 +88,7 @@
                             }
                         },
                         {
-                            className: 'col-xs-4',
+                            className: 'col-xs-12 col-md-4',
                             type: 'input',
                             key: 'mvntType',
                             templateOptions: {
@@ -97,7 +97,7 @@
                             }
                         },
                         {
-                            className: 'col-xs-4',
+                            className: 'col-xs-12 col-md-4',
                             type: 'input',
                             key: 'mvntOrigin',
                             templateOptions: {
@@ -111,7 +111,7 @@
                     className: 'row',
                     fieldGroup: [
                         {
-                            className: 'col-xs-4',
+                            className: 'col-xs-12 col-md-4',
                             type: 'input',
                             key: 'mvntDest',
                             templateOptions: {
@@ -120,7 +120,7 @@
                             }
                         },
                         {
-                            className: 'col-xs-4',
+                            className: 'col-xs-12 col-md-4',
                             type: 'input',
                             key: 'origProcs',
                             templateOptions: {
@@ -129,7 +129,7 @@
                             }
                         },
                         {
-                            className: 'col-xs-4',
+                            className: 'col-xs-12 col-md-4',
                             type: 'input',
                             key: 'origProcsNbr',
                             templateOptions: {

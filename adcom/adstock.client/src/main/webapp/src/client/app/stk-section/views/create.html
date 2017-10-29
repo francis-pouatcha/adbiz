@@ -2,9 +2,9 @@
 <label class="label label-danger">{{vm.error}}</label>
 	<form data-ng-submit="vm.create()" novalidate>
         <formly-form model="vm.stkSection" fields="vm.formFields" form="vm.form"></formly-form>
-        <hr/>
-        <div class="form-group">
-            <button type="submit" class="btn btn-success" data-ng-disabled="vm.form.$invalid">
+
+        <div class="btn-toolbar button-wrapper">
+            <button type="submit" class="btn btn-success col-xs-12 col-sm-3" data-ng-disabled="vm.form.$invalid">
               <i class="glyphicon glyphicon-ok"></i><span data-ng-bind="'app.core.save.title' | translate"></span>
             </button>
         </div>

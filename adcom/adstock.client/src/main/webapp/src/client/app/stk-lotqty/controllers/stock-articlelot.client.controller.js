@@ -9,21 +9,19 @@
         '$stateParams',
         '$location',
         'StockArticlelotQty',
-        'TableSettings',
         'StockArticlelotForm',
         'utils',
         'CatalArtLangMapping',
-    'fileExtractor','$translate'];
+        '$translate'];
     /* @ngInject */
     function StockArticlelotQtyController(logger,
         $stateParams,
         $location,
         StockArticlelotQty,
-        TableSettings,
         StockArticlelotForm,
         utils,
         CatalArtLangMapping,
-        fileExtractor,$translate) {
+        $translate) {
 
         var vm = this;
         vm.data = {

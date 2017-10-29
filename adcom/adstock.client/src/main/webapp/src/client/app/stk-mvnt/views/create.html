@@ -1,33 +1,31 @@
 <section class="mainbar" data-ng-init="vm.setFormFields()">
 
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      New StkMvnt
-    </div>
-    <div class="panel-body">
-
-      <form data-ng-submit="vm.create()" novalidate>
-
-        <formly-form model="vm.stkMvnt" fields="vm.formFields" form="vm.form">
-        </formly-form>
-
-        <hr/>
-        <div class="form-group">
-            <button type="submit" class="btn btn-success" ng-disabled="vm.form.$invalid">
-              <i class="glyphicon glyphicon-ok"></i> Save
-            </button>
-            <a class="btn btn-danger" href="#/stk-mvnt">
-              <i class="glyphicon glyphicon-remove"></i> Cancel
-            </a>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            New StkMvnt
         </div>
+        <div class="panel-body">
 
-        <div data-ng-show="vm.error" class="alert alert-danger form-group">
-          <strong data-ng-bind="vm.error"></strong>
+            <form data-ng-submit="vm.create()" novalidate>
+
+                <formly-form model="vm.stkMvnt" fields="vm.formFields" form="vm.form"></formly-form>
+
+                <div class="btn-toolbar button-wrapper">
+                    <button type="submit" class="btn btn-success col-xs-12 col-sm-3" ng-disabled="vm.form.$invalid">
+                        <i class="glyphicon glyphicon-ok"></i> <span data-ng-bind="'app.core.save.title' | translate"></span>
+                    </button>
+                    <a class="btn btn-danger col-xs-12 col-sm-3" href="#/stk-mvnt">
+                        <i class="glyphicon glyphicon-remove"></i> <span data-ng-bind="'app.core.cancel.title' | translate"></span>
+                    </a>
+                </div>
+
+                <div data-ng-show="vm.error" class="alert alert-danger form-group">
+                    <strong data-ng-bind="vm.error"></strong>
+                </div>
+
+            </form>
+
         </div>
-
-      </form>
-
     </div>
-  </div>
 
 </section>

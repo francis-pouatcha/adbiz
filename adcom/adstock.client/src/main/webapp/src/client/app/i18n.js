@@ -77,6 +77,15 @@
                 'StockSections.title':'Sections',
                 'StkSection_parentCode_description.title':'Parent Section Code',
                 'StockSection_type.title':'Section Type',
+                'StockSection_type.site':'Site',
+                'StockSection_type.select':'Select a type',
+                'StockSection_type.building':'Building',
+                'StockSection_type.warehouse':'Warehouse',
+                'StockSection_type.hall':'Hall',
+                'StockSection_type.block':'Block',
+                'StockSection_type.aisle':'Aisle',
+                'StockSection_type.bin':'Bin',
+                'StockSection_type.position':'Position',
 
 
                 //--------------StkMvnt----------------//
@@ -213,6 +222,15 @@
                 'StockSections.title':'Sections',
                 'StkSection_parentCode_description.title':'Parent Code Rayon',
                 'StockSection_type.title':'Type Section',
+                'StockSection_type.site':'Site',
+                'StockSection_type.select':'Sélectionnez un type',
+                'StockSection_type.building':'Bâtiment',
+                'StockSection_type.warehouse':'Entrepôt',
+                'StockSection_type.hall':'Salle',
+                'StockSection_type.block':'Bloc',
+                'StockSection_type.aisle':'Rayon',
+                'StockSection_type.bin':'Boîte',
+                'StockSection_type.position':'Position',
 
                 //--------------StkMvnt----------------//
                 'StkMvnt.code.title':'Code Mvnt de Stock',

@@ -5,71 +5,68 @@
        <span data-ng-bind="'app.core.list.title' | translate"></span> <span data-ng-bind="'StkMvnts.title' | translate"></span>
     </div>
     <div class="panel-body">
-
-      <table data-st-table="vm.data.list" data-st-pipe="vm.callServer" class="table table-bordered  table-striped pointer-element">
-          <thead>
-			  <tr>
-                  <th><span data-ng-bind="'StkMvnt.lotPic.title' | translate"></span></th>
-                  <th><span data-ng-bind="'StkMvnt.artPic.title' | translate"></span></th>
-                  <th><span data-ng-bind="'StkMvnt.name.title' | translate"></span></th>
-                  <th><span data-ng-bind="'StkMvnt.acsngDt.title' | translate"></span></th>
-                  <th><span data-ng-bind="'StkMvnt.mvntType.title' | translate"></span></th>
-                  <th><span data-ng-bind="'StkMvnt.beforeQty.title' | translate"></span></th>
-                  <th><span data-ng-bind="'StkMvnt.trgtQty.title' | translate"></span></th>
-                  <th><span data-ng-bind="'StkMvnt.afterQty.title' | translate"></span></th>
-                  <th><span data-ng-bind="'StkMvnt.acsngUser.title' | translate"></span></th>
-                  <th><span data-ng-bind="'StkMvnt.mvntOrigin.title' | translate"></span></th>
-                  <th><span data-ng-bind="'StkMvnt.mvntDest.title' | translate"></span></th>
-                  <th><span data-ng-bind="'Action.title' | translate"></span></th>
-             </tr>
-             <tr>
-				<th><input data-st-search="lotPic" class="input-sm form-control" type="search"/></th>
-				<th><input data-st-search="artPic" class="input-sm form-control" type="search"/></th>
-				<th><input data-st-search="artName" class="input-sm form-control" type="search"/></th>
-				<th>
-                    <st-date-search predicate="acsngDtFrom" selected-date="query.acsngDtFrom"></st-date-search>
-                    <st-date-search predicate="acsngDtTo" selected-date="query.acsngDtTo"></st-date-search>
-                </th>
-				<th><input data-st-search="mvntType" class="input-sm form-control" type="search"/></th>
-				<th><input data-st-search="qtyBefore" class="input-sm form-control" type="search"/></th>
-				<th><input data-st-search="trgtQty" class="input-sm form-control" type="search"/></th>
-				<th><input data-st-search="qtyAfter" class="input-sm form-control" type="search"/></th>
-				<th><input data-st-search="acsngUser" class="input-sm form-control" type="search"/></th>
-				<th><input data-st-search="mvntOrigin" class="input-sm form-control" type="search"/></th>
-				<th><input data-st-search="mvntDest" class="input-sm form-control" type="search"/></th>
-				<th></th>
-             </tr>
-          </thead>
-          <tbody>
-	          <tr data-ng-repeat="stkMvnt in vm.data.list">
-	              <td><span data-ng-bind="stkMvnt.lotPic"></span></td>
-	              <td><span data-ng-bind="stkMvnt.artPic"></span></td>
-	              <td><span data-ng-bind="stkMvnt.artName"></span></td>
-	              <td><span data-ng-bind="stkMvnt.acsngDt | date:'dd-MM-yyyy'"></span></td>
-	              <td><span data-ng-bind="stkMvnt.mvntType"></span></td>
-	              <td><span data-ng-bind="stkMvnt.qtyBefore"></span></td>
-	              <td><span data-ng-bind="stkMvnt.trgtQty"></span></td>
-	              <td><span data-ng-bind="stkMvnt.qtyAfter"></span></td>
-	              <td><span data-ng-bind="stkMvnt.acsngUser"></span></td>
-	              <td><span data-ng-bind="stkMvnt.mvntOrigin"></span></td>
-	              <td><span data-ng-bind="stkMvnt.mvntDest"></span></td>
-	              <td>
-	                 <div class="table-actions">
-	                      <a class="btn btn-default" title="{{'app.core.view.title' | translate}}" href="#/stk-mvnt/{{stkMvnt.id}}">
-	                        <span class="glyphicon glyphicon-eye-open"></span>
-	                      </a>
-	                  </div>
-	              </td>
-	           </tr>
-           </tbody>
-           <tfoot>
-			 <tr>
-				<td colspan="10" class="text-center">
-					<div data-st-pagination="" data-st-items-by-page="vm.itemsByPage"></div>
-				</td>
-			 </tr>
-		  </tfoot>
-      </table>
+		<div class="table-responsive">
+			<table data-st-table="vm.data.list" data-st-pipe="vm.callServer"
+				   class="table table-bordered  table-striped pointer-element">
+				<thead>
+					<tr>
+						<th><span data-ng-bind="'StkMvnt.lotPic.title' | translate"></span></th>
+						<th class="hidden-xs hidden-sm"><span data-ng-bind="'StkMvnt.artPic.title' | translate"></span></th>
+						<th><span data-ng-bind="'StkMvnt.name.title' | translate"></span></th>
+						<th class="hidden-xs hidden-sm"><span data-ng-bind="'StkMvnt.mvntType.title' | translate"></span></th>
+						<th class="hidden-xs hidden-sm"><span data-ng-bind="'StkMvnt.beforeQty.title' | translate"></span></th>
+						<th><span data-ng-bind="'StkMvnt.trgtQty.title' | translate"></span></th>
+						<th><span data-ng-bind="'StkMvnt.afterQty.title' | translate"></span></th>
+						<th><span data-ng-bind="'StkMvnt.acsngUser.title' | translate"></span></th>
+						<th class="hidden-xs hidden-sm"><span data-ng-bind="'StkMvnt.mvntOrigin.title' | translate"></span></th>
+						<th class="hidden-xs hidden-sm"><span data-ng-bind="'StkMvnt.mvntDest.title' | translate"></span></th>
+						<th><span data-ng-bind="'Action.title' | translate"></span></th>
+					</tr>
+					<tr>
+						<th><input data-st-search="lotPic" class="input-sm form-control" type="search"/></th>
+						<th class="hidden-xs hidden-sm"><input data-st-search="artPic" class="input-sm form-control" type="search"/></th>
+						<th><input data-st-search="artName" class="input-sm form-control" type="search"/></th>
+						<th class="hidden-xs hidden-sm"><input data-st-search="mvntType" class="input-sm form-control" type="search"/></th>
+						<th class="hidden-xs hidden-sm"><input data-st-search="qtyBefore" class="input-sm form-control" type="search"/></th>
+						<th><input data-st-search="trgtQty" class="input-sm form-control" type="search"/></th>
+						<th><input data-st-search="qtyAfter" class="input-sm form-control" type="search"/></th>
+						<th><input data-st-search="acsngUser" class="input-sm form-control" type="search"/></th>
+						<th class="hidden-xs hidden-sm"><input data-st-search="mvntOrigin" class="input-sm form-control" type="search"/></th>
+						<th class="hidden-xs hidden-sm"><input data-st-search="mvntDest" class="input-sm form-control" type="search"/></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat="stkMvnt in vm.data.list">
+						<td><span data-ng-bind="stkMvnt.lotPic"></span></td>
+						<td class="hidden-xs hidden-sm"><span data-ng-bind="stkMvnt.artPic"></span></td>
+						<td><span data-ng-bind="stkMvnt.artName"></span></td>
+						<td class="hidden-xs hidden-sm"><span data-ng-bind="stkMvnt.mvntType"></span></td>
+						<td class="hidden-xs hidden-sm"><span data-ng-bind="stkMvnt.qtyBefore"></span></td>
+						<td><span data-ng-bind="stkMvnt.trgtQty"></span></td>
+						<td><span data-ng-bind="stkMvnt.qtyAfter"></span></td>
+						<td><span data-ng-bind="stkMvnt.acsngUser"></span></td>
+						<td class="hidden-xs hidden-sm"><span data-ng-bind="stkMvnt.mvntOrigin"></span></td>
+						<td class="hidden-xs hidden-sm"><span data-ng-bind="stkMvnt.mvntDest"></span></td>
+						<td>
+							<div class="table-actions">
+								<a class="btn btn-default" title="{{'app.core.view.title' | translate}}"
+								   href="#/stk-mvnt/{{stkMvnt.id}}">
+									<span class="glyphicon glyphicon-eye-open"></span>
+								</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="11" class="text-center">
+							<div data-st-pagination="" data-st-items-by-page="vm.itemsByPage"></div>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
     </div>
   </div>
 

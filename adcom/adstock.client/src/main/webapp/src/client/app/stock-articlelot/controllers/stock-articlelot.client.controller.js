@@ -9,27 +9,25 @@
         '$stateParams',
         '$location',
         'StockArticlelot',
-        'TableSettings',
         'StockArticlelotForm',
         'utils',
         'StkSection',
-    'fileExtractor','$translate'];
+        '$translate'];
     /* @ngInject */
     function StockArticlelotController(logger,
         $stateParams,
         $location,
         StockArticlelot,
-        TableSettings,
         StockArticlelotForm,
         utils,
         StkSection,
-        fileExtractor,$translate) {
+        $translate) {
 
         var vm = this;
         vm.data = {
             list: []
         };
-        var userLangIso2=$translate.use();
+        var userLangIso2 = $translate.use();
         
         function initSearchInput(){
             // Initialize Search input and pagination
@@ -101,12 +99,14 @@
             searchInput.entity.identif = vm.stockArticlelot.section;
             searchInput.fieldNames.push('identif');
             StkSection.findByLike(searchInput, function(response) {
+                if (response.resultList[0]) {
                     vm.stockArticlelot.section = response.resultList[0].name;
-                },
-                function(errorResponse) {
-                    vm.error = errorResponse;
-                    logger.warn(vm.error);
-                });
+                }
+            },
+            function(errorResponse) {
+                vm.error = errorResponse;
+                logger.warn(errorResponse);
+            });
         };
 
         vm.toEditStockArticlelot = function() {

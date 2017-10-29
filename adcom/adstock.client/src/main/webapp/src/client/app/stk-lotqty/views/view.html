@@ -1,46 +1,46 @@
 <section class="mainbar" data-ng-init="vm.toViewStockArticlelot()">
 
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-			{{'app.core.view.title' | translate}} {{'StockArticlelot.title' | translate}}
-    </div>
-    <div class="panel-body">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            {{'app.core.view.title' | translate}} {{'StockArticlelot.title' | translate}}
+        </div>
+        <div class="panel-body">
 
-      <form novalidate>
-        <formly-form model="vm.stockArticlelot" fields="vm.formFields">
-        </formly-form>
-      </form>
-        <hr/>
-      
-      <form name="vm.form" novalidate>
-        <tabset>
-          <tab ng-repeat="stockArticlelotTab in vm.tabs" heading="{{stockArticlelotTab.title}}" active="stockArticlelotTab.active" disable="stockArticlelotTab.disabled">
-              <br/>
-            <formly-form 
-                         model="stockArticlelotTab.form.model" 
-                         fields="stockArticlelotTab.form.fields" 
-                         form="vm.form" 
-                         options="stockArticlelotTab.form.options">
-            </formly-form>
-          </tab>
-        </tabset>
-      </form>
-      <br/> <br/>   
-      <div class="clearfix"> </div>
-        
-      <div>
-        <a class="btn btn-success" href="#/stock-articlelot/{{vm.stockArticlelot.id}}/edit">
-          <i class="glyphicon glyphicon-edit"></i> {{'app.core.edit.title' | translate}}
-        </a>
-        <a class="btn btn-danger" title="{{'app.core.delete.title' | translate}}" ng-really-message="Are you sure ?" ng-really-click="vm.remove()" item="vm.stockArticlelot">
-          <i class="glyphicon glyphicon-remove-circle"></i>  {{'app.core.delete.title' | translate}}
-        </a>
-        <a class="btn btn-primary" title="{{'app.core.list.title' | translate}}" href="#/stock-articlelot">
-          <i class="glyphicon glyphicon-list"></i> {{'app.core.list.title' | translate}} {{'StockArticlelots.title' | translate }}
-        </a>
-      </div>
+            <form novalidate>
+                <formly-form model="vm.stockArticlelot" fields="vm.formFields">
+                </formly-form>
+            </form>
+            <hr/>
 
+            <form name="vm.form" novalidate>
+                <tabset>
+                    <tab ng-repeat="stockArticlelotTab in vm.tabs" heading="{{stockArticlelotTab.title}}"
+                         active="stockArticlelotTab.active" disable="stockArticlelotTab.disabled">
+                        <br/>
+                        <formly-form model="stockArticlelotTab.form.model" fields="stockArticlelotTab.form.fields"
+                                     form="vm.form" options="stockArticlelotTab.form.options">
+                        </formly-form>
+                    </tab>
+                </tabset>
+            </form>
+            <br/> <br/>
+            <div class="clearfix"></div>
+
+            <div class="btn-toolbar button-wrapper">
+                <a class="btn btn-success col-xs-5 col-sm-2" href="#/stock-articlelot/{{vm.stockArticlelot.id}}/edit">
+                    <i class="glyphicon glyphicon-edit"></i> {{'app.core.edit.title' | translate}}
+                </a>
+                <a class="btn btn-danger col-xs-5 col-sm-3" title="{{'app.core.delete.title' | translate}}"
+                   ng-really-message="Are you sure ?" ng-really-click="vm.remove()" item="vm.stockArticlelot">
+                    <i class="glyphicon glyphicon-remove-circle"></i> {{'app.core.delete.title' | translate}}
+                </a>
+                <a class="btn btn-primary col-xs-12 col-sm-3" title="{{'app.core.list.title' | translate}}" href="#/stock-articlelot">
+                    <i class="glyphicon glyphicon-list"></i> {{'app.core.list.title' | translate}}
+                    {{'StockArticlelots.title' | translate }}
+                </a>
+            </div>
+
+        </div>
     </div>
-  </div>
 
 </section>

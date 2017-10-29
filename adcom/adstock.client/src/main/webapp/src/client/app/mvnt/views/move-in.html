@@ -9,7 +9,7 @@
             <div class="panel-body">
                 <form name="invInvtryItemForm" id="invInvtryItemForm" novalidate>
                     <div class="row">
-                        <div class="form-group col-lg-2" >
+                        <div class="form-group col-xs-12 col-sm-6 col-md-3" >
                             <label class=" control-label" for="artPic"><span data-ng-bind="'StkMvnt.artPic.title' | translate"></span></label>
                             <input type="text" class="form-control" name="artPic" id="artPic"
                                    autocomplete="off" data-ng-model="mvnt.artPic"
@@ -17,7 +17,7 @@
                                    typeahead-min-length="5" typeahead-loading="loading"
                                    typeahead-on-select='onArticleSelectedInSearch($item, $model, $label)' />
                         </div>
-                        <div class="form-group col-lg-2" ng-class="{ 'has-error' : invInvtryItemForm.lotPic.$invalid }">
+                        <div class="form-group col-xs-12 col-sm-6 col-md-3" ng-class="{ 'has-error' : invInvtryItemForm.lotPic.$invalid }">
                             <label class=" control-label" for="lotPic"><span data-ng-bind="'StkMvnt.lotPic.title' | translate"></span></label>
                             <input type="text" class="form-control" name="lotPic" id="lotPic" autocomplete="off"
                                    required data-ng-model="mvnt.lotPic" required
@@ -25,7 +25,7 @@
                                    typeahead-loading="loading" typeahead-min-length="1"
                                    typeahead-on-select='onArticleLotSectionSelectedInSearch($item, $model, $label)' />
                         </div>
-                        <div class="form-group col-lg-4">
+                        <div class="form-group col-xs-12 col-sm-6 col-md-3">
                             <label class=" control-label" for="searchArtName"><span data-ng-bind="'InvInvtryItem_artName_description.title' | translate"></span></label>
                             <input type="text" class="form-control" id="searchArtName" autocomplete="off"
                                    data-ng-model="mvnt.artName" name="searchArtName"
@@ -33,23 +33,22 @@
                                    typeahead-loading="loading" typeahead-min-length="4"
                                    typeahead-on-select='onArticleSelectedInSearchArtName($item, $model, $label)' />
                         </div>
-                        <div class="form-group col-lg-2" data-ng-class="{ 'has-error' : invInvtryItemForm.trgtQty.$invalid }">
+                        <div class="form-group col-xs-12 col-sm-6 col-md-3" data-ng-class="{ 'has-error' : invInvtryItemForm.trgtQty.$invalid }">
                             <label class=" control-label" for="trgtQty"><span data-ng-bind="'StkMvnt.trgtQty.title' | translate"></span></label>
                                 <input type="text" class="form-control" required name="trgtQty" id="trgtQty"
                                        data-ng-model="mvnt.trgtQty" />
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-lg-2" data-ng-class="{ 'has-error' : invInvtryItemForm.sectionCode.$invalid }">
+                        <div class="form-group col-xs-12 col-sm-6 col-md-3" data-ng-class="{ 'has-error' : invInvtryItemForm.sectionCode.$invalid }">
                             <label class=" control-label" for="sectionCode"><span data-ng-bind="'StkMvnt.section.title' | translate"></span></label>
                             <input type="text" data-ng-model="display.identif" id="sectionCode" name="sectionCode"
-                                   class="form-control" required
-                                   autocomplete="off"  disabled
+                                   class="form-control" required autocomplete="off"  disabled
                                    typeahead="stkSection as (stkSection.identif + ' : ' + stkSection.name) for stkSection in mvntUtils.loadStkSectionArticleLots($viewValue)"
                                    typeahead-loading="loading" typeahead-min-length="4"
                                    typeahead-on-select='onSectionSelectedInSearch($item, $model, $label)' />
                         </div>
-                        <div class="form-group col-lg-3">
+                        <div class="form-group col-xs-12 col-sm-6 col-md-3">
                             <label class=" control-label" for="searchSectionName"><span data-ng-bind="'StockArticlelot.sectionName.title' | translate"></span></label>
                             <input type="text" data-ng-model="display.sectionName" id="searchSectionName"
                                    name="searchSectionName" class="form-control"
@@ -58,21 +57,21 @@
                                    typeahead-loading="loading" typeahead-min-length="4"
                                    typeahead-on-select='onSectionSelectedInSearch($item, $model, $label)' />
                         </div>
-                        <div class="form-group col-lg-2">
+                        <div class="form-group col-xs-12 col-sm-6 col-md-3">
                             <label class=" control-label" ><span data-ng-bind="'StkMvnt.mvntOrigin.title' | translate"></span>:</label>
-                            <div>
-                                <select class="form-control" name="mvntTerminal" id="mvntTerminal" data-ng-model="mvnt.mvntTerminal"
-                                        data-ng-options="invInvtryStatus.enumKey as (invInvtryStatus.translKey | translate)
-                                        for invInvtryStatus in mvntUtils.invInvntrStati">
-                                </select>
-                            </div>
+                            <select class="form-control" name="mvntTerminal" id="mvntTerminal" data-ng-model="mvnt.mvntTerminal"
+                                    data-ng-options="invInvtryStatus.enumKey as (invInvtryStatus.translKey | translate)
+                                    for invInvtryStatus in mvntUtils.invInvntrStati">
+                            </select>
                         </div>
-                        <div class="form-group col-lg-3">
-                            <button class="btn btn-default" data-ng-disabled="invInvtryItemForm.$invalid"
-                                    data-ng-click="moveIn(mvnt)" style="margin-top: 30px;">
+                    </div>
+                    <div class="form-group">
+                        <div class="btn-toolbar button-wrapper">
+                            <button class="btn btn-default pull-right col-xs-12 col-sm-3" data-ng-disabled="invInvtryItemForm.$invalid"
+                                    data-ng-click="moveIn(mvnt)">
                                 <i class="glyphicon glyphicon-plus"></i><span data-ng-bind="'Entity_in.title' | translate"></span>
                             </button>
-                            <button data-ng-click="handleResetRequestEvent()" class="btn btn-default " style="margin-top: 30px;">
+                            <button data-ng-click="handleResetRequestEvent()" class="btn btn-default pull-right col-xs-12 col-sm-3">
                                 <i class="glyphicon glyphicon-flash"></i><span data-ng-bind="'Entity_reset.title' | translate"></span>
                             </button>
                         </div>
@@ -83,30 +82,32 @@
     </div>
     <div class="panel panel-default">
         <div class="panel-body">
-            <table  class="table table-bordered  table-striped pointer-element">
-                <thead>
-                <tr>
-                    <th><span data-ng-bind="'StkMvnt.lotPic.title' | translate"></span></th>
-                    <th><span data-ng-bind="'StkMvnt.section.title' | translate"></span></th>
-                    <th><span data-ng-bind="'StkMvnt.mvntOrigin.title' | translate"></span></th>
-                    <th><span data-ng-bind="'StkMvnt.trgtQty.title' | translate"></span></th>
-                    <th><span data-ng-bind="'StkMvnt.origProcs.title' | translate"></span></th>
-                    <th><span data-ng-bind="'StkMvnt.origProcsNbr.title' | translate"></span></th>
-                    <th><span data-ng-bind="'StkMvnt.mvntType.title' | translate"></span></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr data-ng-repeat="mvnt in listMvnts">
-                    <td><span data-ng-bind="mvnt.lotPic"></span></td>
-                    <td><span data-ng-bind="mvnt.section"></span></td>
-                    <td><span data-ng-bind="mvnt.mvntTerminal"></span></td>
-                    <td><span data-ng-bind="mvnt.trgtQty"></span></td>
-                    <td><span data-ng-bind="mvnt.origProcs"></span></td>
-                    <td><span data-ng-bind="mvnt.origProcsNbr"></span></td>
-                    <td><span data-ng-bind="mvnt.mvntType"></span></td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped pointer-element">
+                    <thead>
+                        <tr>
+                            <th><span data-ng-bind="'StkMvnt.lotPic.title' | translate"></span></th>
+                            <th><span data-ng-bind="'StkMvnt.section.title' | translate"></span></th>
+                            <th class="hidden-xs"><span data-ng-bind="'StkMvnt.mvntOrigin.title' | translate"></span></th>
+                            <th><span data-ng-bind="'StkMvnt.trgtQty.title' | translate"></span></th>
+                            <th class="hidden-xs"><span data-ng-bind="'StkMvnt.origProcs.title' | translate"></span></th>
+                            <th class="hidden-xs"><span data-ng-bind="'StkMvnt.origProcsNbr.title' | translate"></span></th>
+                            <th><span data-ng-bind="'StkMvnt.mvntType.title' | translate"></span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-ng-repeat="mvnt in listMvnts">
+                            <td><span data-ng-bind="mvnt.lotPic"></span></td>
+                            <td><span data-ng-bind="mvnt.section"></span></td>
+                            <td class="hidden-xs"><span data-ng-bind="mvnt.mvntTerminal"></span></td>
+                            <td><span data-ng-bind="mvnt.trgtQty"></span></td>
+                            <td class="hidden-xs"><span data-ng-bind="mvnt.origProcs"></span></td>
+                            <td class="hidden-xs"><span data-ng-bind="mvnt.origProcsNbr"></span></td>
+                            <td><span data-ng-bind="mvnt.mvntType"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </section>

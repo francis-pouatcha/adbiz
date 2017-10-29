@@ -20,8 +20,15 @@ ng-form.formly {
     margin-right: 0;
 }
 
-.table-actions {
-    width: 160px;
+.table > tbody > tr > td {
+    padding: 6px;
+}
+
+.table-actions .btn-default:not(:last-child) {
+    margin-right: 5px;
+}
+.table-actions > .btn > i {
+    margin-right: 0;
 }
 .drop {
     border: 2px dashed #f1f1f1;
@@ -466,8 +473,8 @@ form select {
 }
 .navbar .navbar-brand {
     /*background: url(../images/gg.png) no-repeat left top !important;*/
-    margin: 0 1em;
-    height: 45px;
+    /*margin: 0 1em;*/
+    height: 60px;
 }
 .navbar .brand-title {
     /*margin-left: 4em;*/
@@ -1227,8 +1234,8 @@ small {
     margin: 30px 10% !important;
 }
 .ngplus-overlay-background {
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     padding-left: 100px;
     position: absolute;
     z-index: 10000;
@@ -1421,6 +1428,9 @@ a {
     .sidebar .sidebar-inner {
         display: block !important;
     }
+    .table-actions {
+        width: 10rem;
+    }
 }
 @media (max-width: 767px) {
     .sidebar-filler {
@@ -1439,6 +1449,9 @@ a {
     .nav-collapse.collapse {
         height: 0;
         overflow: hidden;
+    }
+    .mainbar {
+        padding: 15px;
     }
     .page-splash-message {
         font-size: 200%;

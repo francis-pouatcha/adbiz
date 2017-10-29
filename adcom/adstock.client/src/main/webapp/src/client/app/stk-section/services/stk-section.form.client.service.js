@@ -14,7 +14,7 @@
                     className: 'row',
                     fieldGroup: [
                         {
-                            className: 'col-xs-6',
+                            className: 'col-xs-12 col-sm-6',
                             type: 'input',
                             key: 'identif',
                             templateOptions: {
@@ -24,7 +24,7 @@
                             }
                         },
                         {
-                            className: 'col-xs-6',
+                            className: 'col-xs-12 col-sm-6',
                             type: 'input',
                             key: 'name',
                             templateOptions: {
@@ -39,7 +39,7 @@
                     className: 'row',
                     fieldGroup: [
                         {
-                            className: 'col-xs-6',
+                            className: 'col-xs-12 col-sm-6',
                             type: 'typeahead',
                             key: 'cntnrIdentif',
                             templateOptions: {
@@ -51,21 +51,22 @@
                             }
                         },
                         {
-                            className: 'col-xs-6',
+                            className: 'col-xs-12 col-sm-6',
                             type: 'select',
                             key: 'sectionType',
                             templateOptions: {
                                 label: $translate.instant('StockSection_type.title'),
                                 disabled:disabled,
                                 options:[
-                                    {'name':'SITE','value':'SITE'},
-                                    {'name':'BUILDING','value':'BUILDING'},
-                                    {'name':'WHAREHOUSE','value':'WHAREHOUSE'},
-                                    {'name':'HALL','value':'HALL'},
-                                    {'name':'BLOCK','value':'BLOCK'},
-                                    {'name':'AISLE','value':'AISLE'},
-                                    {'name':'BIN','value':'BIN'},
-                                    {'name':'POSITION','value':'POSITION'}
+                                    {'name': $translate.instant('StockSection_type.select'),'value': ''},
+                                    {'name': $translate.instant('StockSection_type.site'),'value': 'SITE'},
+                                    {'name': $translate.instant('StockSection_type.building'),'value': 'BUILDING'},
+                                    {'name': $translate.instant('StockSection_type.warehouse'),'value': 'WAREHOUSE'},
+                                    {'name': $translate.instant('StockSection_type.hall'),'value': 'HALL'},
+                                    {'name': $translate.instant('StockSection_type.block'),'value': 'BLOCK'},
+                                    {'name': $translate.instant('StockSection_type.aisle'),'value': 'AISLE'},
+                                    {'name': $translate.instant('StockSection_type.bin'),'value': 'BIN'},
+                                    {'name': $translate.instant('StockSection_type.position'),'value': 'POSITION'}
                                 ]
                             }
 
@@ -76,7 +77,7 @@
                     className: 'row',
                     fieldGroup: [
                         {
-                            className: 'col-xs-6',
+                            className: 'col-xs-12 col-sm-6',
                             type: 'input',
                             key: 'geoCode',
                             templateOptions: {
@@ -85,7 +86,7 @@
                             }
                         },
                         {
-                            className: 'col-xs-6',
+                            className: 'col-xs-12 col-sm-6',
                             type: 'input',
                             key: 'wharehouse',
                             templateOptions: {
@@ -99,7 +100,7 @@
                     className: 'row',
                     fieldGroup: [
                         {
-                            className: 'col-xs-6',
+                            className: 'col-xs-12 col-sm-6',
                             type: 'input',
                             key: 'position',
                             templateOptions: {
@@ -108,7 +109,7 @@
                             }
                         },
                         {
-                            className: 'col-xs-6',
+                            className: 'col-xs-12 col-sm-6',
                             type: 'input',
                             key: 'path',
                             templateOptions: {
@@ -130,7 +131,7 @@
                     className: 'row',
                     fieldGroup: [
                         {
-                            className: 'col-xs-4',
+                            className: 'col-xs-12 col-sm-6 col-md-4',
                             type: 'input',
                             key: 'identif',
                             templateOptions: {
@@ -139,7 +140,7 @@
                             }
                         },
                         {
-                            className: 'col-xs-4',
+                            className: 'col-xs-12 col-sm-6 col-md-4',
                             type: 'input',
                             key: 'name',
                             templateOptions: {
@@ -148,7 +149,7 @@
                             }
                         },
                         {
-                            className: 'col-xs-4',
+                            className: 'col-xs-12 col-sm-6 col-md-4',
                             type: 'input',
                             key: 'geoCode',
                             templateOptions: {
@@ -164,7 +165,7 @@
                     fieldGroup: [
                         
                         {
-                            className: 'col-xs-4',
+                            className: 'col-xs-12 col-sm-6 col-md-4',
                             type: 'input',
                             key: 'wharehouse',
                             templateOptions: {
@@ -173,7 +174,7 @@
                             }
                         },
                         {
-                            className: 'col-xs-4',
+                            className: 'col-xs-12 col-sm-6 col-md-4',
                             type: 'input',
                             key: 'position',
                             templateOptions: {

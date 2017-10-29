@@ -1,9 +1,9 @@
 <div class="panel-body" data-ng-init="vm.setFormFields()">
 	<form data-ng-submit="vm.create()" novalidate>
         <formly-form model="vm.stockArticlelot" fields="vm.formFields" form="vm.form"></formly-form>
-        <hr/>
-        <div class="form-group">
-            <button type="submit" class="btn btn-success" ng-disabled="vm.form.$invalid">
+
+        <div class="btn-toolbar button-wrapper">
+            <button type="submit" class="btn btn-success col-xs-12 col-sm-3" ng-disabled="vm.form.$invalid">
               <i class="glyphicon glyphicon-ok"></i><span data-ng-bind="'app.core.save.title' | translate"></span>
             </button>
         </div>
